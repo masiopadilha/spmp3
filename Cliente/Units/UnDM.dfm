@@ -8212,7 +8212,7 @@ object DM: TDM
       '    AND `OPERANDO` = '#39'S'#39
       '    AND `CODEMPRESA` = :codempresa)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 918
+    Left = 963
     Top = 480
     ParamData = <
       item
@@ -8489,7 +8489,7 @@ object DM: TDM
         '    AND `ordemservico`.`DATAFIMREAL` >= STR_TO_DATE(:data1,'#39'%Y/%' +
         'm/%d'#39')    '
       ')')
-    Left = 939
+    Left = 984
     Top = 480
     ParamData = <
       item
@@ -8572,7 +8572,7 @@ object DM: TDM
       'WHERE (`pecasreposicaokit`.`CODEMPRESA` = :codempresa'
       '        AND `pecasreposicaokit`.`CODIGO` = :codigo)'
       'ORDER BY `pecasreposicaokit`.`DESCRICAO` ASC;')
-    Left = 991
+    Left = 1036
     Top = 480
     ParamData = <
       item
@@ -8684,7 +8684,7 @@ object DM: TDM
       'WHERE (`pecasreposicaokititens`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicaokititens`.`CODKIT` = :codigo)'
       'ORDER BY `pecasreposicao`.`DESCRICAO` ASC;')
-    Left = 1012
+    Left = 1057
     Top = 480
     ParamData = <
       item
@@ -8836,7 +8836,7 @@ object DM: TDM
         'permissoes_acesso`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usuario`' +
         '.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1218
+    Left = 1263
     Top = 480
     ParamData = <
       item
@@ -9942,7 +9942,7 @@ object DM: TDM
         'D `permissoes_alteracao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `us' +
         'uario`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1239
+    Left = 1284
     Top = 480
     ParamData = <
       item
@@ -11048,7 +11048,7 @@ object DM: TDM
         ' `permissoes_exclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1260
+    Left = 1305
     Top = 480
     ParamData = <
       item
@@ -12086,7 +12086,7 @@ object DM: TDM
         ' `permissoes_inclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1281
+    Left = 1326
     Top = 480
     ParamData = <
       item
@@ -13064,7 +13064,7 @@ object DM: TDM
         ')'
       'WHERE (`planotrabalho`.`CODIGO` = :codigo'
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 1332
+    Left = 1377
     Top = 480
     ParamData = <
       item
@@ -13231,7 +13231,7 @@ object DM: TDM
       'WHERE (`pneus`.`CODIGO` = :codigo'
       '    AND `pneus`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `pneus`.`DESCRICAO` DESC;')
-    Left = 1404
+    Left = 1449
     Top = 480
     ParamData = <
       item
@@ -33426,7 +33426,7 @@ object DM: TDM
         'io_1`.`CODIGO`)'
       'WHERE (`ordemservicotercfora`.`CODIGO` = :codigo)'
       'ORDER BY `ordemservicotercfora`.`CODIGO` DESC;')
-    Left = 556
+    Left = 601
     Top = 480
     ParamData = <
       item
@@ -33602,7 +33602,7 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoi`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 577
+    Left = 622
     Top = 480
     ParamData = <
       item
@@ -33672,7 +33672,7 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoc`'
       'WHERE (`CODORDEMSERVICO` = :codordemservico);')
-    Left = 598
+    Left = 643
     Top = 480
     ParamData = <
       item
@@ -33741,7 +33741,7 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoe`'
       'WHERE `CODORDEMSERVICO` = :codordemservico;')
-    Left = 619
+    Left = 664
     Top = 480
     ParamData = <
       item
@@ -33810,7 +33810,7 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaaditivos`'
       'WHERE (`CODORDEMSERVICO` = :codordemservico);')
-    Left = 640
+    Left = 685
     Top = 480
     ParamData = <
       item
@@ -36398,27 +36398,27 @@ object DM: TDM
   end
   object dsOrdemServicoTercFora: TDataSource
     DataSet = qryOrdemServicoTercFora
-    Left = 559
+    Left = 604
     Top = 530
   end
   object dsOrdemServicoTercForaOI: TDataSource
     DataSet = qryOrdemServicoTercForaOI
-    Left = 580
+    Left = 625
     Top = 530
   end
   object dsOrdemServicoTercForaOC: TDataSource
     DataSet = qryOrdemServicoTercForaOC
-    Left = 601
+    Left = 646
     Top = 530
   end
   object dsOrdemServicoTercForaOE: TDataSource
     DataSet = qryOrdemServicoTercForaOE
-    Left = 622
+    Left = 667
     Top = 530
   end
   object dsOrdemServicoTercForaAditivos: TDataSource
     DataSet = qryOrdemServicoTercForaAditivos
-    Left = 643
+    Left = 688
     Top = 530
   end
   object qryOrdemServicoTercUnid: TFDQuery
@@ -36474,7 +36474,7 @@ object DM: TDM
         '.`CODIGO`) AND (`ordemservicotercunid`.`CODEMPRESA` = `usuario_1' +
         '`.`CODEMPRESA`)'
       'WHERE (`ordemservicotercunid`.`CODIGO` = :codigo);')
-    Left = 696
+    Left = 741
     Top = 480
     ParamData = <
       item
@@ -36697,7 +36697,7 @@ object DM: TDM
         '       AND `ordemservicotercunidtarefas`.`CODORDEMSERVICO` = :co' +
         'dordemservico)'
       'ORDER BY `ordemservicotercunidtarefas`.`DATAPROGINI` ASC;')
-    Left = 718
+    Left = 763
     Top = 480
     ParamData = <
       item
@@ -36801,7 +36801,7 @@ object DM: TDM
         'WHERE (`ordemservicotercunidtarefpred`.`CODORDEMSERVICO` = :codo' +
         'rdemservico'
       '    );')
-    Left = 739
+    Left = 784
     Top = 480
     ParamData = <
       item
@@ -36875,7 +36875,7 @@ object DM: TDM
       '    `ordemservicotercunimedicoes`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DATAMEDICAO` DESC;')
-    Left = 760
+    Left = 805
     Top = 480
     ParamData = <
       item
@@ -36945,7 +36945,7 @@ object DM: TDM
         'WHERE (`ordemservicotercunidtarefas`.`CODORDEMSERVICO` = :codord' +
         'emservico)'
       'ORDER BY `ordemservicotercunidtarefas`.`DATAPROGINI` ASC;')
-    Left = 781
+    Left = 826
     Top = 480
     ParamData = <
       item
@@ -37038,7 +37038,7 @@ object DM: TDM
       '   `ordemservicotercunidaditivos`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `CODIGO` DESC;')
-    Left = 802
+    Left = 847
     Top = 480
     ParamData = <
       item
@@ -37116,7 +37116,7 @@ object DM: TDM
       '   `ordemservicotercunidmateriais`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 823
+    Left = 868
     Top = 480
     ParamData = <
       item
@@ -37188,7 +37188,7 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidrecursos`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 844
+    Left = 889
     Top = 480
     ParamData = <
       item
@@ -37259,7 +37259,7 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidpecasrep`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 865
+    Left = 910
     Top = 480
     ParamData = <
       item
@@ -37372,7 +37372,7 @@ object DM: TDM
         'A`)'
       'WHERE (`pecasreposicao`.`CODIGO` = :codigo'
       '    AND `pecasreposicao`.`CODEMPRESA` = :codempresa);')
-    Left = 1063
+    Left = 1108
     Top = 480
     ParamData = <
       item
@@ -37596,7 +37596,7 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAPECASREP = :CODFAMILIAPECASREP'
       'AND F.CODPECAREPOSICAO = :CODPECAREPOSICAO')
-    Left = 1084
+    Left = 1129
     Top = 480
     ParamData = <
       item
@@ -37749,7 +37749,7 @@ object DM: TDM
       'WHERE (`ordemservicopecasreputil`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicao`.`CODIGO` = :codigo)'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1105
+    Left = 1150
     Top = 480
     ParamData = <
       item
@@ -37840,7 +37840,7 @@ object DM: TDM
       '    AND `equipamentos`.`CODIGO` = :codigo'
       ')'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1126
+    Left = 1171
     Top = 480
     ParamData = <
       item
@@ -37920,7 +37920,7 @@ object DM: TDM
       'AND `equipamentospecasrep`.`codempresa` = :codempresa '
       ''
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1147
+    Left = 1192
     Top = 480
     ParamData = <
       item
@@ -37999,7 +37999,7 @@ object DM: TDM
         #9'`equipamentos`.`CODIGO` = :codigo AND `equipamentospecasrep`.`c' +
         'odempresa` = :codempresa '
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1168
+    Left = 1213
     Top = 480
     ParamData = <
       item
@@ -38062,7 +38062,7 @@ object DM: TDM
       '    `planotrabalho`'
       'WHERE (`planotrabalho`.`AUTOMATICO`= '#39'S'#39
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 1353
+    Left = 1398
     Top = 480
     ParamData = <
       item
@@ -38104,7 +38104,7 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAPNEUS = :CODFAMILIAPNEU'
       'AND F.CODPNEU = :CODPNEU')
-    Left = 1425
+    Left = 1470
     Top = 480
     ParamData = <
       item
@@ -38256,7 +38256,7 @@ object DM: TDM
       '    AND `pneus`.`CODIGO` = :codigo)'
       'ORDER BY `pneusmontagemchassipneus`.`ID` DESC;'
       '')
-    Left = 1446
+    Left = 1491
     Top = 480
     ParamData = <
       item
@@ -39345,142 +39345,142 @@ object DM: TDM
   end
   object dsOrdemServicoTercUnid: TDataSource
     DataSet = qryOrdemServicoTercUnid
-    Left = 696
+    Left = 741
     Top = 530
   end
   object dsOrdemServicoTercUnidTarefas: TDataSource
     DataSet = qryOrdemServicoTercUnidTarefas
-    Left = 718
+    Left = 763
     Top = 530
   end
   object dsOrdemServicoTercUnidTarefasPred: TDataSource
     DataSet = qryOrdemServicoTercUnidTarefasPred
-    Left = 739
+    Left = 784
     Top = 530
   end
   object dsOrdemServicoTercUnidMedicoes: TDataSource
     DataSet = qryOrdemServicoTercUnidMedicoes
-    Left = 760
+    Left = 805
     Top = 530
   end
   object dsOrdemServicoTercUnidGrafTarefas: TDataSource
     DataSet = qryOrdemServicoTercUnidGrafTarefas
-    Left = 781
+    Left = 826
     Top = 530
   end
   object dsOrdemServicoTercUnidAditivos: TDataSource
     DataSet = qryOrdemServicoTercUnidAditivos
-    Left = 802
+    Left = 847
     Top = 530
   end
   object dsOrdemServicoTercUnidMateriais: TDataSource
     DataSet = qryOrdemServicoTercUnidMateriais
-    Left = 823
+    Left = 868
     Top = 530
   end
   object dsOrdemServicoTercUnidRecurso: TDataSource
     DataSet = qryOrdemServicoTercUnidRecurso
-    Left = 844
+    Left = 889
     Top = 530
   end
   object dsOrdemServicoTercUnidPecas: TDataSource
     DataSet = qryOrdemServicoTercUnidPecas
-    Left = 865
+    Left = 910
     Top = 530
   end
   object dsParadasDiariasEquip: TDataSource
     DataSet = qryParadasDiariasEquip
-    Left = 918
+    Left = 963
     Top = 530
   end
   object dsParadasDiariasEquipParadas: TDataSource
     DataSet = qryParadasDiariasEquipParadas
-    Left = 939
+    Left = 984
     Top = 530
   end
   object dsPecaReposicaoKit: TDataSource
     DataSet = qryPecaReposicaoKit
-    Left = 991
+    Left = 1036
     Top = 530
   end
   object dsPecaReposicaoKitItens: TDataSource
     DataSet = qryPecaReposicaoKitItens
-    Left = 1012
+    Left = 1057
     Top = 530
   end
   object dsPecasReposicao: TDataSource
     DataSet = qryPecasReposicao
-    Left = 1063
+    Left = 1108
     Top = 530
   end
   object dsPecasReposicaoDados: TDataSource
     DataSet = qryPecasReposicaoDados
-    Left = 1084
+    Left = 1129
     Top = 530
   end
   object dsPecasReposicaoHistPecas: TDataSource
     DataSet = qryPecasReposicaoHistPecas
-    Left = 1105
+    Left = 1150
     Top = 530
   end
   object dsPecasReposicaoHistEquip: TDataSource
     DataSet = qryPecasReposicaoHistEquip
-    Left = 1126
+    Left = 1171
     Top = 530
   end
   object dsPecasReposicaoInstPecas: TDataSource
     DataSet = qryPecasReposicaoInstPecas
-    Left = 1147
+    Left = 1192
     Top = 530
   end
   object dsPecasReposicaoInstEquip: TDataSource
     DataSet = qryPecasReposicaoInstEquip
-    Left = 1168
+    Left = 1213
     Top = 530
   end
   object dsPermissoesAcesso: TDataSource
     DataSet = qryPermissoesAcesso
-    Left = 1218
+    Left = 1263
     Top = 530
   end
   object dsPermissoesAlteracao: TDataSource
     DataSet = qryPermissoesAlteracao
-    Left = 1239
+    Left = 1284
     Top = 530
   end
   object dsPermissoesExclusao: TDataSource
     DataSet = qryPermissoesExclusao
-    Left = 1260
+    Left = 1305
     Top = 530
   end
   object dsPermissoesInclusao: TDataSource
     DataSet = qryPermissoesInclusao
-    Left = 1281
+    Left = 1326
     Top = 530
   end
   object dsPlanoTrabalho: TDataSource
     DataSet = qryPlanoTrabalho
-    Left = 1332
+    Left = 1377
     Top = 530
   end
   object dsPlanoTrabalhoAut: TDataSource
     DataSet = qryPlanoTrabalhoAut
-    Left = 1353
+    Left = 1398
     Top = 530
   end
   object dsPneus: TDataSource
     DataSet = qryPneus
-    Left = 1404
+    Left = 1449
     Top = 530
   end
   object dsPneusDados: TDataSource
     DataSet = qryPneusDados
-    Left = 1425
+    Left = 1470
     Top = 530
   end
   object dsPneusIDs: TDataSource
     DataSet = qryPneusIDs
-    Left = 1446
+    Left = 1491
     Top = 530
   end
   object dsPneusChassi: TDataSource
@@ -52098,6 +52098,8 @@ object DM: TDM
       '    `ordemservico`.`CODIGO`'
       '    , `ordemservico`.`DESCRICAO`'
       '    , `ordemservico`.`DATACADASTRO`'
+      '    , `manutprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_M'
+      '    , `lubrificprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_L'
       '    , `ordemservico`.`DATAPROGINI`'
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
@@ -52139,6 +52141,14 @@ object DM: TDM
       
         '        ON (`ordemservico`.`CODEMPRESA` = `oficinas`.`CODEMPRESA' +
         '`) AND (`ordemservico`.`CODOFICINA` = `oficinas`.`CODIGO`)'
+      '    LEFT JOIN `manutprogequipamentohist`'
+      
+        '        ON (`ordemservico`.`CODIGO` = `manutprogequipamentohist`' +
+        '.`CODORDEMSERVICO`)'
+      '    LEFT JOIN `lubrificprogequipamentohist`'
+      
+        '        ON (`ordemservico`.`CODIGO` = `lubrificprogequipamentohi' +
+        'st`.`CODORDEMSERVICO`)'
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
       '       AND ('
@@ -52167,10 +52177,12 @@ object DM: TDM
       end
       item
         Name = 'DATA1'
+        DataType = ftString
         ParamType = ptInput
       end
       item
         Name = 'DATA2'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryOrdemServicoGerenciaRelatCODIGO: TFDAutoIncField
@@ -52191,6 +52203,22 @@ object DM: TDM
       FieldName = 'DESCRICAO'
       Origin = 'DESCRICAO'
       Size = 200
+    end
+    object qryOrdemServicoGerenciaRelatPLANEJADA_M: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'PLANEJADA_M'
+      Origin = 'DTAINICIO1'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yy'
+    end
+    object qryOrdemServicoGerenciaRelatPLANEJADA_L: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'PLANEJADA_L'
+      Origin = 'DTAINICIO1'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yy'
     end
     object qryOrdemServicoGerenciaRelatDATACADASTRO: TDateTimeField
       AutoGenerateValue = arDefault
@@ -52392,7 +52420,7 @@ object DM: TDM
       
         'ORDER BY `ordemservicoequipemobra`.`CODORDEMSERVICO` ASC, `ordem' +
         'servicoequipemobrafunc`.`NOME` ASC;')
-    Left = 413
+    Left = 458
     Top = 480
     ParamData = <
       item
@@ -52498,7 +52526,7 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraProg: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraProg
-    Left = 415
+    Left = 460
     Top = 530
   end
   object qryOrdemServicoGerenciaRelatMObraUtil: TFDQuery
@@ -52564,7 +52592,7 @@ object DM: TDM
       
         'ORDER BY `ordemservicoequipemobra`.`CODORDEMSERVICO` ASC, `ordem' +
         'servicoequipemobrautil`.`NOME`ASC;')
-    Left = 432
+    Left = 477
     Top = 480
     ParamData = <
       item
@@ -52671,7 +52699,7 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraUtil: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraUtil
-    Left = 434
+    Left = 479
     Top = 530
   end
   object qryOrdemServicoGerenciaRelatManut: TFDQuery
@@ -52713,7 +52741,7 @@ object DM: TDM
       ')'
       ''
       'ORDER BY  `ordemservico`.DATACADASTRO DESC')
-    Left = 481
+    Left = 526
     Top = 480
     ParamData = <
       item
@@ -52748,6 +52776,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object qryOrdemServicoGerenciaRelatManutREPROGRAMAR1: TStringField
       AutoGenerateValue = arDefault
@@ -52797,7 +52826,7 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatManut: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatManut
-    Left = 481
+    Left = 526
     Top = 530
   end
   object qryOrdemServicoGerenciaRelatLubrific: TFDQuery
@@ -52840,7 +52869,7 @@ object DM: TDM
       ''
       'ORDER BY  `ordemservico`.DATACADASTRO DESC'
       '')
-    Left = 501
+    Left = 546
     Top = 480
     ParamData = <
       item
@@ -52875,6 +52904,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object qryOrdemServicoGerenciaRelatLubrificREPROGRAMAR1: TStringField
       AutoGenerateValue = arDefault
@@ -52924,7 +52954,7 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatLubrific: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatLubrific
-    Left = 501
+    Left = 546
     Top = 530
   end
   object qryOrdemServicoLocalizaMObraOSExec: TFDQuery
@@ -53426,6 +53456,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object StringField63: TStringField
       AutoGenerateValue = arDefault
@@ -53558,6 +53589,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object StringField98: TStringField
       AutoGenerateValue = arDefault
@@ -53650,6 +53682,334 @@ object DM: TDM
   object DataSource1: TDataSource
     DataSet = qryOSGerenciaRelatObservacoes
     Left = 362
+    Top = 530
+  end
+  object qryOrdemServicoGerenciaRelatMObraProgOS: TFDQuery
+    IndexFieldNames = 'CODORDEMSERVICO'
+    MasterSource = dsOrdemServicoGerenciaRelat
+    MasterFields = 'CODIGO'
+    DetailFields = 'CODORDEMSERVICO'
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservicoequipemobra`.`CODORDEMSERVICO`'
+      '    , `ordemservicoequipe`.`CODEQUIPE`'
+      '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    , `cargos`.`DESCRICAO` AS `CARGO`'
+      '    , `ordemservicoequipemobrafunc`.`MATRICULA`'
+      '    , `ordemservicoequipemobrafunc`.`NOME`'
+      '    , `ordemservicoequipemobrafunc`.`TOTALHOMEMHORA`'
+      '    , `ordemservico`.`SITUACAO`'
+      '    , `equipamentos`.`CODFAMILIAEQUIP` AS CODFAMEQUIP'
+      '    , `ordemservico`.`CODOFICINA`'
+      '    , `ordemservico`.`CODMANUTENCAO`'
+      '    , `ordemservico`.`DATACADASTRO`'
+      '    '
+      'FROM'
+      '    `ordemservicoequipemobra`'
+      '    INNER JOIN `ordemservico` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODORDEMSERVICO` = `ordem' +
+        'servico`.`CODIGO`)            '
+      '    INNER JOIN `ordemservicoequipemobrafunc` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODEMPRESA` = `ordemservi' +
+        'coequipemobrafunc`.`CODEMPRESA`) AND (`ordemservicoequipemobra`.' +
+        '`CODORDEMSERVICO` = `ordemservicoequipemobrafunc`.`CODORDEMSERVI' +
+        'CO`)'
+      '    INNER JOIN `ordemservicoequipe`'
+      
+        '        ON (`ordemservicoequipemobrafunc`.`CODEQUIPE` = `ordemse' +
+        'rvicoequipe`.`CODIGO`)'
+      '    LEFT JOIN `equipamentos` '
+      
+        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
+        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
+        'RESA`)        '
+      '    INNER JOIN `calendario` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODEMPRESA` = `calendario' +
+        '`.`CODEMPRESA`) AND (`ordemservicoequipemobra`.`CODCALENDARIO` =' +
+        ' `calendario`.`CODIGO`)'
+      '    INNER JOIN `cargos` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODCARGO` = `cargos`.`COD' +
+        'IGO`) AND (`ordemservicoequipemobrafunc`.`CODCARGO` = `cargos`.`' +
+        'CODIGO`)        '
+      ''
+      'WHERE (`ordemservicoequipemobra`.`CODORDEMSERVICO` = :codigo)')
+    Left = 381
+    Top = 480
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    object IntegerField13: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODORDEMSERVICO'
+      Origin = 'CODORDEMSERVICO'
+      DisplayFormat = '#000000'
+    end
+    object StringField103: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPE'
+      Origin = 'CODEQUIPE'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField104: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CALENDARIO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object StringField105: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CARGO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object StringField106: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField107: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object BCDField3: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALHOMEMHORA'
+      Origin = 'TOTALHOMEMHORA'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 16
+      Size = 2
+    end
+    object StringField108: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object StringField109: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODFAMEQUIP'
+      Origin = 'CODFAMILIAEQUIP'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField110: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODOFICINA'
+      Origin = 'CODOFICINA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField111: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object DateTimeField15: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATACADASTRO'
+      Origin = 'DATACADASTRO'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy T'
+    end
+  end
+  object dsOrdemServicoGerenciaRelatMObraProgOS: TDataSource
+    DataSet = qryOrdemServicoGerenciaRelatMObraProgOS
+    Left = 383
+    Top = 530
+  end
+  object qryOrdemServicoGerenciaRelatMObraUtilOS: TFDQuery
+    IndexFieldNames = 'CODORDEMSERVICO'
+    MasterSource = dsOrdemServicoGerenciaRelat
+    MasterFields = 'CODIGO'
+    DetailFields = 'CODORDEMSERVICO'
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservicoequipemobra`.`CODORDEMSERVICO`'
+      '    , `ordemservicoequipe`.`CODEQUIPE`    '
+      '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    , `cargos`.`DESCRICAO` AS `CARGO`'
+      '    , `ordemservicoequipemobrautil`.`MATRICULA`'
+      '    , `ordemservicoequipemobrautil`.`NOME`'
+      '    , `ordemservicoequipemobrautil`.`TOTALHOMEMHORA`'
+      '    , `ordemservico`.`SITUACAO`'
+      '    , `equipamentos`.`CODFAMILIAEQUIP` AS CODFAMEQUIP'
+      '    , `ordemservico`.`CODOFICINA`'
+      '    , `ordemservico`.`CODMANUTENCAO`'
+      '    , `ordemservico`.`DATACADASTRO`'
+      ''
+      '    '
+      'FROM'
+      '    `ordemservicoequipemobra`'
+      '    INNER JOIN `ordemservico` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODORDEMSERVICO` = `ordem' +
+        'servico`.`CODIGO`)    '
+      '    INNER JOIN `ordemservicoequipemobrautil` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODEMPRESA` = `ordemservi' +
+        'coequipemobrautil`.`CODEMPRESA`) AND (`ordemservicoequipemobra`.' +
+        '`CODORDEMSERVICO` = `ordemservicoequipemobrautil`.`CODORDEMSERVI' +
+        'CO`)'
+      '    INNER JOIN `ordemservicoequipe`'
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODEQUIPE` = `ordemse' +
+        'rvicoequipe`.`CODIGO`)        '
+      '    LEFT JOIN `equipamentos` '
+      
+        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
+        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
+        'RESA`)'
+      '    INNER JOIN `calendario` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODEMPRESA` = `calendario' +
+        '`.`CODEMPRESA`) AND (`ordemservicoequipemobra`.`CODCALENDARIO` =' +
+        ' `calendario`.`CODIGO`)'
+      '    INNER JOIN `cargos` '
+      
+        '        ON (`ordemservicoequipemobra`.`CODCARGO` = `cargos`.`COD' +
+        'IGO`) AND (`ordemservicoequipemobrautil`.`CODCARGO` = `cargos`.`' +
+        'CODIGO`)'
+      '        '
+      'WHERE (`ordemservicoequipemobra`.`CODORDEMSERVICO` = :codigo)')
+    Left = 400
+    Top = 480
+    ParamData = <
+      item
+        Name = 'CODIGO'
+        DataType = ftAutoInc
+        ParamType = ptInput
+        Value = Null
+      end>
+    object IntegerField15: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODORDEMSERVICO'
+      Origin = 'CODORDEMSERVICO'
+      DisplayFormat = '#000000'
+    end
+    object StringField112: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPE'
+      Origin = 'CODEQUIPE'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField113: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CALENDARIO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object StringField114: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CARGO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object StringField115: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField116: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object BCDField7: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALHOMEMHORA'
+      Origin = 'TOTALHOMEMHORA'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object StringField117: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object StringField118: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODFAMEQUIP'
+      Origin = 'CODFAMILIAEQUIP'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField119: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODOFICINA'
+      Origin = 'CODOFICINA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object StringField120: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object DateTimeField16: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATACADASTRO'
+      Origin = 'DATACADASTRO'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy T'
+    end
+  end
+  object dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource
+    DataSet = qryOrdemServicoGerenciaRelatMObraUtilOS
+    Left = 402
     Top = 530
   end
 end

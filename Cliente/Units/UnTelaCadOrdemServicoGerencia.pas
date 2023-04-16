@@ -70,6 +70,8 @@ type
     Label4: TLabel;
     EdtData2: TJvDateTimePicker;
     BtnConsultar: TButton;
+    chbCanc: TCheckBox;
+    Simples1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -106,6 +108,7 @@ type
     procedure MaodeObra1Click(Sender: TObject);
     procedure Inspecoes1Click(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure Simples1Click(Sender: TObject);
   private
     { Private declarations }
     hora_futura: TDateTime;
@@ -116,7 +119,7 @@ type
 var
   FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia;
   LEquipamento, LCodOficina, LCodFamilia, LNProg, LProg, LExec,
-  LLib, LFec, LPar, LSolic, LRot : String;
+  LLib, LFec, LPar, LSolic, LRot, LCanc : String;
 
 implementation
 
@@ -861,10 +864,6 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.Completa1Click(Sender: TObject);
 begin
   inherited;
-//  DM.qryOrdemServicoGerenciaRelat.Close;
-//  DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryOrdemServicoGerenciaRelat.Open;
-
   DM.qryOrdemServicoGerenciaRelat.Close;
   DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
   DM.qryOrdemServicoGerenciaRelat.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
@@ -875,23 +874,16 @@ begin
       DM.qryOrdemServicoGerenciaRelat.Filter := DM.qryOrdemServicoGerencia.Filter;
       DM.qryOrdemServicoGerenciaRelat.Filtered := True;
     end;
-  DM.qryOSGerenciaRelatManut.Open;
 
-
-//  DM.qryOrdemServicoGerenciaRelatMObraProg.Open;
-//  DM.qryOrdemServicoGerenciaRelatMObraUtil.Open;
-//  DM.qryOrdemServicoGerenciaRelatManut.Open;
-//  DM.qryOrdemServicoGerenciaRelatLubrific.Open;
-
-  DmRelatorios.frxROrdemServicoGeral.ShowReport();
+  DmRelatorios.frxROrdemServicoGeralCompleta.ShowReport();
 
   DM.qryOrdemServicoGerenciaRelat.Filtered := False;
   DM.qryOrdemServicoGerenciaRelat.Close;
-//  DM.qryOrdemServicoGerenciaRelatMObraProg.Close;
-//  DM.qryOrdemServicoGerenciaRelatMObraUtil.Close;
-//  DM.qryOrdemServicoGerenciaRelatManut.Close;
-//  DM.qryOrdemServicoGerenciaRelatLubrific.Close;
-DM.qryOSGerenciaRelatManut.Close;
+
+  DM.qryOrdemServicoGerenciaRelatMObraProg.Close;
+  DM.qryOrdemServicoGerenciaRelatMObraUtil.Close;
+  DM.qryOrdemServicoGerenciaRelatManut.Close;
+  DM.qryOrdemServicoGerenciaRelatLubrific.Close;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.ConfigurarFiltros;
@@ -900,7 +892,7 @@ GrdOrdemServico.DataSource.DataSet.Filtered := False;
 GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
 DM.qryOrdemServicoGerencia.IndexDefs.Clear;
 
-LNProg := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := '';
+LNProg := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := '';
 
 if (chkNProg.Checked = True) then
   if GrdOrdemServico.DataSource.DataSet.Filter = '' then
@@ -973,6 +965,14 @@ if (chkRot.Checked = True) then
         GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
     end;
 GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LRot ;
+
+
+if (chbCanc.Checked = True) then
+  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    LCanc   := ' (SITUACAO = ''CANCELADA'')'
+  else
+    LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
+GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LCanc;
 
 if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
   GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
@@ -1547,6 +1547,26 @@ begin
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 ConfigurarFiltros;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.Simples1Click(Sender: TObject);
+begin
+  inherited;
+  DM.qryOrdemServicoGerenciaRelat.Close;
+  DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
+  DM.qryOrdemServicoGerenciaRelat.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
+  DM.qryOrdemServicoGerenciaRelat.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
+  DM.qryOrdemServicoGerenciaRelat.Open;
+  if DM.qryOrdemServicoGerencia.Filtered = True then
+    begin
+      DM.qryOrdemServicoGerenciaRelat.Filter := DM.qryOrdemServicoGerencia.Filter;
+      DM.qryOrdemServicoGerenciaRelat.Filtered := True;
+    end;
+
+  DmRelatorios.frxROrdemServicoGeral.ShowReport();
+
+  DM.qryOrdemServicoGerenciaRelat.Filtered := False;
+  DM.qryOrdemServicoGerenciaRelat.Close;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Timer1Timer(Sender: TObject);

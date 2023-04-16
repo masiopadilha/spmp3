@@ -266,6 +266,15 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
           Title.Font.Style = [fsBold]
           Width = 137
           Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SITUACAO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Situa'#231#227'o'
+          Width = 118
+          Visible = True
         end>
     end
   end

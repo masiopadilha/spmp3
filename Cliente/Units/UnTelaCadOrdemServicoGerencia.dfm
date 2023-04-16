@@ -415,7 +415,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkProg: TCheckBox
-        Left = 138
+        Left = 125
         Top = 5
         Width = 100
         Height = 18
@@ -430,7 +430,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkExec: TCheckBox
-        Left = 262
+        Left = 237
         Top = 5
         Width = 99
         Height = 18
@@ -445,7 +445,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkLib: TCheckBox
-        Left = 386
+        Left = 348
         Top = 5
         Width = 80
         Height = 18
@@ -460,7 +460,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkFec: TCheckBox
-        Left = 495
+        Left = 440
         Top = 5
         Width = 79
         Height = 18
@@ -475,7 +475,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkPar: TCheckBox
-        Left = 599
+        Left = 531
         Top = 5
         Width = 91
         Height = 18
@@ -490,7 +490,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkSolic: TCheckBox
-        Left = 714
+        Left = 634
         Top = 5
         Width = 112
         Height = 18
@@ -505,7 +505,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkRot: TCheckBox
-        Left = 844
+        Left = 758
         Top = 5
         Width = 60
         Height = 18
@@ -520,12 +520,22 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkParado: TCheckBox
-        Left = 919
+        Left = 830
         Top = 5
         Width = 62
         Height = 17
-        Caption = 'Parado:'
+        Caption = 'Parado'
         TabOrder = 8
+        OnClick = chkNProgClick
+      end
+      object chbCanc: TCheckBox
+        Left = 904
+        Top = 5
+        Width = 89
+        Height = 17
+        Caption = 'Canceladas'
+        TabOrder = 9
+        OnClick = chkNProgClick
       end
     end
     object Panel1: TPanel
@@ -748,6 +758,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     object Lista1: TMenuItem
       Caption = 'Lista'
+      object Simples1: TMenuItem
+        Caption = 'Simples'
+        OnClick = Simples1Click
+      end
       object Completa1: TMenuItem
         Caption = 'Completa'
         OnClick = Completa1Click

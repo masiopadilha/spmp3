@@ -1515,7 +1515,7 @@ begin
         if GrdManut.DataSource.DataSet.Filter = '' then
           GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
-          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
 
         GrdManut.DataSource.DataSet.Filtered := True;
 
@@ -1553,7 +1553,7 @@ begin
         if GrdLubrific.DataSource.DataSet.Filter = '' then
           GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
-          GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
 
         GrdLubrific.DataSource.DataSet.Filtered := True;
 
@@ -1575,7 +1575,7 @@ begin
         if DM.qryRotaCons.Filter = '' then
           DM.qryRotaCons.Filter := 'DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
-          DM.qryRotaCons.Filter := DM.qryRotaCons.Filter + ' DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          DM.qryRotaCons.Filter := DM.qryRotaCons.Filter + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
 
         GrdRota.DataSource.DataSet.Filtered := True;
 
