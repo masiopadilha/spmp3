@@ -40892,6 +40892,7 @@ object DM: TDM
       '    , `solictrabalho`.`PRAZOSOLIC`'
       '    , `solictrabalho`.`JUSTIFICATIVA`'
       '    , `solictrabalho`.`DATASOLIC`'
+      '    , `solictrabalho`.`PRIORIDADEPARADA`'
       '    , `solictrabalho`.`HORARIOSOLIC`'
       '    , `solictrabalho`.`VALORPROG`'
       '    , `solictrabalho`.`CODORDEMSERVICO`'
@@ -40992,16 +40993,22 @@ object DM: TDM
     end
     object qrySolicitacaoTrabJUSTIFICATIVA: TStringField
       AutoGenerateValue = arDefault
-      DisplayWidth = 200
+      DisplayWidth = 250
       FieldName = 'JUSTIFICATIVA'
       Origin = 'JUSTIFICATIVA'
-      Size = 200
+      Size = 250
     end
     object qrySolicitacaoTrabDATASOLIC: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATASOLIC'
       Origin = 'DATASOLIC'
       DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qrySolicitacaoTrabPRIORIDADEPARADA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRIORIDADEPARADA'
+      Origin = 'PRIORIDADEPARADA'
+      Size = 40
     end
     object qrySolicitacaoTrabHORARIOSOLIC: TDateTimeField
       AutoGenerateValue = arDefault

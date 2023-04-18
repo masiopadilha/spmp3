@@ -26,16 +26,7 @@ type
     LblCodOrdemServico: TDBText;
     Label8: TLabel;
     EdtServico: TDBEdit;
-    Label9: TLabel;
-    EdtTempo: TDBEdit;
-    Label10: TLabel;
-    EdtPrazo: TDBEdit;
     Label11: TLabel;
-    EdtJustificativa: TDBEdit;
-    Label12: TLabel;
-    EdtHorario: TJvDBMaskEdit;
-    Label13: TLabel;
-    EdtValor: TDBEdit;
     Chart1: TChart;
     Series1: TBarSeries;
     Series2: TBarSeries;
@@ -45,6 +36,22 @@ type
     PopupMenuCons: TPopupMenu;
     Codigo1: TMenuItem;
     Descricao1: TMenuItem;
+    Label14: TLabel;
+    MJustificativa: TDBMemo;
+    GroupBox1: TGroupBox;
+    Label9: TLabel;
+    EdtTempo: TDBEdit;
+    Label10: TLabel;
+    EdtPrazo: TDBEdit;
+    Label12: TLabel;
+    EdtHorario: TJvDBMaskEdit;
+    Label13: TLabel;
+    EdtValor: TDBEdit;
+    lblCaracteres: TLabel;
+    Label15: TLabel;
+    CBPrioridade: TDBComboBox;
+    Label16: TLabel;
+    EdtAquisicao: TJvDBDateEdit;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;
@@ -60,6 +67,7 @@ type
     procedure Codigo1Click(Sender: TObject);
     procedure Descricao1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure MJustificativaChange(Sender: TObject);
   private
     { Private declarations }
     LProgramadas: array[1..31] of Real;
@@ -258,6 +266,10 @@ if DM.qrySolicitacaoTrabSOLICITANTE.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DO SERVIÇO!'; EdtDescSolicitante.SetFocus; Exit;
   end;
+if DM.qrySolicitacaoTrabCODEQUIPAMENTO.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O EQUIPAMENTO DO SERVIÇO!'; EdtDescEquipamento.SetFocus; Exit;
+  end;
 if DM.qrySolicitacaoTrabDESCSERVICO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO SERVIÇO!'; EdtServico.SetFocus; Exit;
@@ -272,7 +284,7 @@ if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
 
     DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
                                                                             , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
-                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, 'Até 1 Mês', 'Para o Equipamento', EmptyStr, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString);
+                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', EmptyStr, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString);
     PSituacao.Caption    := 'CADASTRADA';
     PSituacao.Color      := clRed;
     PSituacao.Font.Color := clYellow;
@@ -403,6 +415,17 @@ DM.FDataSetRelat    := DmRelatorios.frxDBSolicTrabalhoIndividual;
 DM.FTabela_auxiliar := 401;
   inherited;
 
+end;
+
+procedure TFrmTelaCadSolicitacaoTrab.MJustificativaChange(Sender: TObject);
+var
+  MaxChars, CurrentChars, RemainingChars: Integer;
+begin
+  inherited;
+  MaxChars := 250;
+  CurrentChars := Length(MJustificativa.Text);
+  RemainingChars := MaxChars - CurrentChars;
+  lblCaracteres.Caption := IntToStr(RemainingChars) + ' caracteres restantes';
 end;
 
 function TFrmTelaCadSolicitacaoTrab.MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;

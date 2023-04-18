@@ -5390,6 +5390,7 @@ type
     StringField120: TStringField;
     DateTimeField16: TDateTimeField;
     dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource;
+    qrySolicitacaoTrabPRIORIDADEPARADA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

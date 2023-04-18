@@ -79,6 +79,20 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Font.Style = []
       ParentFont = False
     end
+    object Label14: TLabel
+      Left = 516
+      Top = 67
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object EdtCodSolicitante: TDBEdit
       Tag = 555
       Left = 127
@@ -185,63 +199,31 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
-    Height = 128
-    ExplicitHeight = 128
+    Height = 150
+    ExplicitHeight = 150
     inherited Label2: TLabel
       Width = 132
       Caption = 'PROGRAMA'#199#195'O'
       ExplicitWidth = 132
     end
     object Label8: TLabel
-      Left = 74
+      Left = 55
       Top = 32
-      Width = 47
+      Width = 66
       Height = 16
       Alignment = taRightJustify
-      Caption = 'Servi'#231'o:'
-    end
-    object Label9: TLabel
-      Left = 49
-      Top = 64
-      Width = 72
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Tempo (hs):'
-    end
-    object Label10: TLabel
-      Left = 63
-      Top = 95
-      Width = 58
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Prazo (d):'
+      Caption = 'Solicita'#231#227'o:'
     end
     object Label11: TLabel
       Left = 654
-      Top = 32
+      Top = 61
       Width = 70
       Height = 16
       Alignment = taRightJustify
       Caption = 'Justificativa:'
     end
-    object Label12: TLabel
-      Left = 590
-      Top = 64
-      Width = 134
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Hor'#225'rio para execu'#231#227'o:'
-    end
-    object Label13: TLabel
-      Left = 586
-      Top = 95
-      Width = 138
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Valor programado (R$):'
-    end
     object Label18: TLabel
-      Left = 485
+      Left = 516
       Top = 34
       Width = 6
       Height = 13
@@ -254,10 +236,31 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Font.Style = []
       ParentFont = False
     end
+    object lblCaracteres: TLabel
+      Left = 992
+      Top = 131
+      Width = 3
+      Height = 13
+      Alignment = taRightJustify
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 661
+      Top = 32
+      Width = 63
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Prioridade:'
+    end
     object EdtServico: TDBEdit
       Left = 127
       Top = 30
-      Width = 356
+      Width = 386
       Height = 24
       DataField = 'DESCSERVICO'
       DataSource = DM.dsSolicitacaoTrab
@@ -266,75 +269,167 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       OnKeyPress = FormKeyPress
       OnMouseMove = PIdentificacaoMouseMove
     end
-    object EdtTempo: TDBEdit
-      Left = 127
-      Top = 61
-      Width = 125
-      Height = 24
-      DataField = 'TEMPOESTIMADO'
-      DataSource = DM.dsSolicitacaoTrab
-      MaxLength = 9
-      TabOrder = 1
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-      OnMouseMove = PIdentificacaoMouseMove
-    end
-    object EdtPrazo: TDBEdit
-      Left = 127
-      Top = 92
-      Width = 125
-      Height = 24
-      DataField = 'PRAZOSOLIC'
-      DataSource = DM.dsSolicitacaoTrab
-      MaxLength = 9
-      TabOrder = 2
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-      OnMouseMove = PIdentificacaoMouseMove
-    end
-    object EdtJustificativa: TDBEdit
+    object MJustificativa: TDBMemo
       Left = 728
-      Top = 30
+      Top = 59
       Width = 267
-      Height = 24
+      Height = 71
       DataField = 'JUSTIFICATIVA'
       DataSource = DM.dsSolicitacaoTrab
+      MaxLength = 250
       TabOrder = 3
+      OnChange = MJustificativaChange
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
-      OnMouseMove = PIdentificacaoMouseMove
     end
-    object EdtHorario: TJvDBMaskEdit
-      Left = 728
-      Top = 61
-      Width = 100
-      Height = 24
-      DataField = 'HORARIOSOLIC'
-      DataSource = DM.dsSolicitacaoTrab
-      MaxLength = 8
-      TabOrder = 4
-      EditMask = '!90:00:00;1;_'
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-      OnMouseMove = PIdentificacaoMouseMove
+    object GroupBox1: TGroupBox
+      Left = 55
+      Top = 60
+      Width = 470
+      Height = 84
+      Caption = 'Sugest'#245'es:'
+      TabOrder = 1
+      object Label9: TLabel
+        Left = 316
+        Top = 24
+        Width = 71
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Tempo (hs):'
+      end
+      object Label10: TLabel
+        Left = 10
+        Top = 54
+        Width = 57
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Prazo (d):'
+      end
+      object Label12: TLabel
+        Left = 197
+        Top = 24
+        Width = 32
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Hora:'
+      end
+      object Label13: TLabel
+        Left = 165
+        Top = 54
+        Width = 64
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Valor (R$):'
+      end
+      object Label16: TLabel
+        Left = 36
+        Top = 24
+        Width = 31
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Data:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object EdtTempo: TDBEdit
+        Left = 393
+        Top = 22
+        Width = 65
+        Height = 24
+        DataField = 'TEMPOESTIMADO'
+        DataSource = DM.dsSolicitacaoTrab
+        MaxLength = 9
+        TabOrder = 2
+        OnExit = TabNextTab1AfterTabChange
+        OnKeyPress = FormKeyPress
+        OnMouseMove = PIdentificacaoMouseMove
+      end
+      object EdtPrazo: TDBEdit
+        Left = 73
+        Top = 52
+        Width = 78
+        Height = 24
+        DataField = 'PRAZOSOLIC'
+        DataSource = DM.dsSolicitacaoTrab
+        MaxLength = 9
+        TabOrder = 3
+        OnExit = TabNextTab1AfterTabChange
+        OnKeyPress = FormKeyPress
+        OnMouseMove = PIdentificacaoMouseMove
+      end
+      object EdtHorario: TJvDBMaskEdit
+        Left = 235
+        Top = 22
+        Width = 65
+        Height = 24
+        DataField = 'HORARIOSOLIC'
+        DataSource = DM.dsSolicitacaoTrab
+        MaxLength = 8
+        TabOrder = 1
+        EditMask = '!90:00:00;1;_'
+        OnExit = TabNextTab1AfterTabChange
+        OnKeyPress = FormKeyPress
+        OnMouseMove = PIdentificacaoMouseMove
+      end
+      object EdtValor: TDBEdit
+        Left = 235
+        Top = 52
+        Width = 65
+        Height = 24
+        DataField = 'VALORPROG'
+        DataSource = DM.dsSolicitacaoTrab
+        MaxLength = 16
+        TabOrder = 4
+        OnExit = TabNextTab1AfterTabChange
+        OnKeyPress = FormKeyPress
+        OnMouseMove = PIdentificacaoMouseMove
+      end
+      object EdtAquisicao: TJvDBDateEdit
+        Left = 73
+        Top = 22
+        Width = 106
+        Height = 24
+        DataField = 'DATASOLIC'
+        DataSource = DM.dsSolicitacaoTrab
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ButtonWidth = 27
+        ParentFont = False
+        ShowNullDate = False
+        TabOrder = 0
+        OnExit = TabNextTab1AfterTabChange
+        OnKeyPress = FormKeyPress
+      end
     end
-    object EdtValor: TDBEdit
+    object CBPrioridade: TDBComboBox
       Left = 728
-      Top = 92
-      Width = 100
-      Height = 24
-      DataField = 'VALORPROG'
+      Top = 30
+      Width = 155
+      Height = 22
+      Style = csOwnerDrawFixed
+      DataField = 'PRIORIDADEPARADA'
       DataSource = DM.dsSolicitacaoTrab
-      MaxLength = 16
-      TabOrder = 5
+      Items.Strings = (
+        'Emerg'#234'ncia'
+        'At'#233' 12 hs'
+        'At'#233' 72 hs'
+        'At'#233' 1 Semana'
+        'At'#233' 1 M'#234's'
+        'Acima de um m'#234's')
+      TabOrder = 2
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-      OnMouseMove = PIdentificacaoMouseMove
     end
   end
   inherited PDiversos: TPanel
-    Top = 283
-    Height = 259
+    Top = 305
+    Height = 237
     ExplicitTop = 283
     ExplicitHeight = 259
     inherited Label3: TLabel
@@ -347,7 +442,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Left = 5
       Top = 28
       Width = 994
-      Height = 226
+      Height = 204
       Margins.Left = 4
       Margins.Top = 27
       Margins.Right = 4
@@ -400,6 +495,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Align = alClient
       BevelOuter = bvLowered
       TabOrder = 0
+      ExplicitHeight = 226
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object Series1: TBarSeries
