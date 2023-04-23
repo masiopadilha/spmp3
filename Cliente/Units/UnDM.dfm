@@ -51434,7 +51434,7 @@ object DM: TDM
         'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
+      'ORDER BY `ordemservico`.`DATAPROGINI` DESC;')
     Left = 73
     Top = 480
     ParamData = <
@@ -53016,7 +53016,7 @@ object DM: TDM
       '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAINICIOREAL` ASC;')
+      'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;')
     Left = 92
     Top = 480
     ParamData = <
