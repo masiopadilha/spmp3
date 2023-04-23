@@ -51434,7 +51434,7 @@ object DM: TDM
         'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATACADASTRO` ASC;')
+      'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
     Left = 73
     Top = 480
     ParamData = <
@@ -51803,6 +51803,8 @@ object DM: TDM
         'EXECUCAO'#39')'
       '    AND `celulas`.`TIPO` LIKE :tipocelula'
       ')'
+      ''
+      'GROUP BY `ordemservico`.`CODIGO`'
       ''
       'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
     Left = 241
@@ -53014,7 +53016,7 @@ object DM: TDM
       '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATACADASTRO` ASC;')
+      'ORDER BY `ordemservico`.`DATAINICIOREAL` ASC;')
     Left = 92
     Top = 480
     ParamData = <
