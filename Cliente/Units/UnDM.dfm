@@ -7136,6 +7136,12 @@ object DM: TDM
       FieldName = 'C_PROXINSP'
       Calculated = True
     end
+    object qryLubrificProgEquipC_REIMPRESSAO: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'C_REIMPRESSAO'
+      Size = 1
+      Calculated = True
+    end
   end
   object qryLubrificProgEquipItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
@@ -21113,6 +21119,7 @@ object DM: TDM
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
+    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 56
@@ -30887,6 +30894,12 @@ object DM: TDM
     object qryManutProgEquipC_PROXINSP: TDateTimeField
       FieldKind = fkCalculated
       FieldName = 'C_PROXINSP'
+      Calculated = True
+    end
+    object qryManutProgEquipC_REIMPRESSAO: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'C_REIMPRESSAO'
+      Size = 1
       Calculated = True
     end
   end
@@ -49063,6 +49076,27 @@ object DM: TDM
       '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
       '    , `equipamentos`.`CODIGO` AS `CODEQUIPESP`'
       '    , `equipamentos`.`DESCRICAO` AS `EQUIPESP`'
+      '    , ('
+      ''
+      #9'SELECT '
+      #9'    SUM(`ordemservicoequipemobrafunc`.`TOTALHOMEMHORA`)'
+      #9'    '
+      #9'FROM `ordemservicoequipemobrafunc`'
+      #9'    INNER JOIN `ordemservico`'
+      
+        #9#9'ON (`ordemservico`.`CODIGO` = `ordemservicoequipemobrafunc`.`C' +
+        'ODORDEMSERVICO`) AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39')'
+      
+        #9#9'AND (`ordemservico`.`DATAPROGINI` >= STR_TO_DATE(:data1,'#39'%Y/%m' +
+        '/%d'#39') AND `ordemservico`.`DATAPROGINI` <= STR_TO_DATE(:data2,'#39'%Y' +
+        '/%m/%d %T'#39'))'
+      #9#9
+      
+        #9'WHERE `ordemservicoequipemobrafunc`.`MATRICULA` =  `funcionario' +
+        's`.`MATRICULA`'
+      ' '
+      '       ) AS HHProg'
+      '           '
       'FROM'
       '    `funcionarios`'
       '    INNER JOIN `cargos` '
@@ -49087,18 +49121,30 @@ object DM: TDM
       'AND `funcionarios`.`CODEMPRESA` = :codempresa'
       'AND `funcionarios`.`MOBRA` = :mobra'
       ''
+      'GROUP BY `funcionarios`.`MATRICULA`'
+      ''
       'ORDER BY `funcionarios`.`NOME` ASC;')
     Left = 1427
     Top = 375
     ParamData = <
       item
+        Name = 'DATA1'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
         Name = 'CODEMPRESA'
-        DataType = ftWideString
+        DataType = ftString
         ParamType = ptInput
       end
       item
         Name = 'MOBRA'
-        DataType = ftWideString
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryOrdemServicoMObraDispMATRICULA: TStringField
@@ -49187,6 +49233,16 @@ object DM: TDM
       Origin = 'DESCRICAO'
       ProviderFlags = []
       Size = 200
+    end
+    object qryOrdemServicoMObraDispHHPROG: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'HHPROG'
+      Origin = 'HHPROG'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00'
+      Precision = 38
+      Size = 2
     end
   end
   object dsOrdemServicoMObraDisp: TDataSource
@@ -54018,5 +54074,180 @@ object DM: TDM
     DataSet = qryOrdemServicoGerenciaRelatMObraUtilOS
     Left = 402
     Top = 530
+  end
+  object qryClonarManut: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    *'
+      'FROM'
+      '    `manutprogequipamento`'
+      'WHERE (`CODMANUTPROGFAMEQUIP` = :codmanutprogfamequip'
+      '    AND `FREQUENCIA1` <> :frequencia1'
+      '    AND `CODEQUIPAMENTO` <> :codequipamento'
+      '    AND `FREQUENCIA1` > 0'
+      ')'
+      ''
+      'GROUP BY `FREQUENCIA1`'
+      ''
+      'ORDER BY `FREQUENCIA1`')
+    Left = 1000
+    Top = 8
+    ParamData = <
+      item
+        Name = 'CODMANUTPROGFAMEQUIP'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'FREQUENCIA1'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEQUIPAMENTO'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryClonarManutCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object qryClonarManutCODEMPRESA: TStringField
+      FieldName = 'CODEMPRESA'
+      Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object qryClonarManutCODEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPAMENTO'
+      Origin = 'CODEQUIPAMENTO'
+    end
+    object qryClonarManutCODMANUTPROGFAMEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTPROGFAMEQUIP'
+      Origin = 'CODMANUTPROGFAMEQUIP'
+      Size = 9
+    end
+    object qryClonarManutCODMONITORAMENTO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMONITORAMENTO'
+      Origin = 'CODMONITORAMENTO'
+    end
+    object qryClonarManutMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      ProviderFlags = [pfInUpdate]
+      Size = 9
+    end
+    object qryClonarManutDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = [pfInUpdate]
+      Size = 80
+    end
+    object qryClonarManutCRITICIDADE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CRITICIDADE'
+      Origin = 'CRITICIDADE'
+      ProviderFlags = [pfInUpdate]
+      Size = 40
+    end
+    object qryClonarManutFREQUENCIA1: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA1'
+      Origin = 'FREQUENCIA1'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutDTAINICIO1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DTAINICIO1'
+      Origin = 'DTAINICIO1'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutREPROGRAMAR1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR1'
+      Origin = 'REPROGRAMAR1'
+      ProviderFlags = [pfInUpdate]
+      Size = 15
+    end
+    object qryClonarManutFREQUENCIA2: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA2'
+      Origin = 'FREQUENCIA2'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutREPROGRAMAR2: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR2'
+      Origin = 'REPROGRAMAR2'
+      ProviderFlags = [pfInUpdate]
+      Size = 15
+    end
+    object qryClonarManutLEITURA: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'LEITURA'
+      Origin = 'LEITURA'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutRELATORIO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RELATORIO'
+      Origin = 'RELATORIO'
+      ProviderFlags = [pfInUpdate]
+      Size = 1
+    end
+    object qryClonarManutGRUPOINSP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'GRUPOINSP'
+      Origin = 'GRUPOINSP'
+      ProviderFlags = [pfInUpdate]
+      Size = 1
+    end
+    object qryClonarManutDATACADASTRO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATACADASTRO'
+      Origin = 'DATACADASTRO'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutCODUSUARIOCAD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODUSUARIOCAD'
+      Origin = 'CODUSUARIOCAD'
+      ProviderFlags = [pfInUpdate]
+      Size = 9
+    end
+    object qryClonarManutDATAULTALT: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAULTALT'
+      Origin = 'DATAULTALT'
+      ProviderFlags = [pfInUpdate]
+    end
+    object qryClonarManutCODUSUARIOALT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODUSUARIOALT'
+      Origin = 'CODUSUARIOALT'
+      ProviderFlags = [pfInUpdate]
+      Size = 9
+    end
+    object qryClonarManutOBSERVACOES: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'OBSERVACOES'
+      Origin = 'OBSERVACOES'
+      ProviderFlags = [pfInUpdate]
+    end
+  end
+  object DSClonarManut: TDataSource
+    DataSet = qryClonarManut
+    Left = 1056
+    Top = 8
   end
 end

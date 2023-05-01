@@ -669,6 +669,15 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
                 Visible = True
               end>
           end
+          object Button7: TButton
+            Left = 336
+            Top = 80
+            Width = 75
+            Height = 25
+            Caption = 'Button7'
+            TabOrder = 1
+            OnClick = Button7Click
+          end
         end
       end
       object TSItensEsp: TTabSheet
@@ -757,6 +766,19 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
           end
         end
       end
+    end
+    object DBGrid1: TDBGrid
+      Left = 461
+      Top = 100
+      Width = 448
+      Height = 120
+      DataSource = DM.DSClonarManut
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
     end
   end
   inherited PBase: TPanel

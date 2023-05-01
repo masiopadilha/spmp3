@@ -775,6 +775,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = Inspecoes1Click
       end
     end
+    object Checklist1: TMenuItem
+      Caption = 'Checklist'
+      OnClick = Checklist1Click
+    end
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer

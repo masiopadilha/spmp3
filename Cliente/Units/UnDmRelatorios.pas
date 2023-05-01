@@ -216,9 +216,7 @@ type
     frxRLubrificFamEquipGeral: TfrxReport;
     frxRLubrificFamEquipIndividual: TfrxReport;
     frxRLubrificPeriodicas: TfrxReport;
-    frxRLubrificProgEquipGeral1: TfrxReport;
     frxRLubrificProgEquipGeral: TfrxReport;
-    frxRLubrificProgEquipIndividual1: TfrxReport;
     frxRLubrificProgEquipIndividual: TfrxReport;
     frxRLubrificantesGeral: TfrxReport;
     frxRLubrificantesIndividual: TfrxReport;
@@ -226,7 +224,6 @@ type
     frxRManutFamEquipGeral: TfrxReport;
     frxRManutFamEquipIndividual: TfrxReport;
     frxRManutPeriodicas: TfrxReport;
-    frxRManutProgEquipGeral1: TfrxReport;
     frxRManutProgEquipGeral: TfrxReport;
     frxRMonitoramento: TfrxReport;
     frxRMotivoParada: TfrxReport;

@@ -5391,6 +5391,32 @@ type
     DateTimeField16: TDateTimeField;
     dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource;
     qrySolicitacaoTrabPRIORIDADEPARADA: TStringField;
+    qryOrdemServicoMObraDispHHPROG: TFMTBCDField;
+    qryManutProgEquipC_REIMPRESSAO: TStringField;
+    qryLubrificProgEquipC_REIMPRESSAO: TStringField;
+    qryClonarManut: TFDQuery;
+    qryClonarManutCODIGO: TStringField;
+    qryClonarManutCODEMPRESA: TStringField;
+    qryClonarManutCODEQUIPAMENTO: TStringField;
+    qryClonarManutCODMANUTPROGFAMEQUIP: TStringField;
+    qryClonarManutCODMONITORAMENTO: TIntegerField;
+    qryClonarManutMATRICULA: TStringField;
+    qryClonarManutDESCRICAO: TStringField;
+    qryClonarManutCRITICIDADE: TStringField;
+    qryClonarManutFREQUENCIA1: TSmallintField;
+    qryClonarManutDTAINICIO1: TDateTimeField;
+    qryClonarManutREPROGRAMAR1: TStringField;
+    qryClonarManutFREQUENCIA2: TSmallintField;
+    qryClonarManutREPROGRAMAR2: TStringField;
+    qryClonarManutLEITURA: TIntegerField;
+    qryClonarManutRELATORIO: TStringField;
+    qryClonarManutGRUPOINSP: TStringField;
+    qryClonarManutDATACADASTRO: TDateTimeField;
+    qryClonarManutCODUSUARIOCAD: TStringField;
+    qryClonarManutDATAULTALT: TDateTimeField;
+    qryClonarManutCODUSUARIOALT: TStringField;
+    qryClonarManutOBSERVACOES: TBlobField;
+    DSClonarManut: TDataSource;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5549,7 +5575,7 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   UnTelaCadAbastecimentos, UnTelaInspConsulta, UnTelaInspFechamentoHist,
   UnTelaCadOrdemServicoHistorico, UnTelaCadPneusChassiRelat,
   UnTelaCadPneusChassi, UnTelaGerenciador, UnTelaCadFuncionariosHist,
-  UnTelaCadOrdemServicoFechamento;
+  UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia;
 
 {$R *.dfm}
 
@@ -6303,10 +6329,16 @@ begin
 if (FrmTelaInspVenc <> nil) or (FrmTelaInspConsulta <> nil) then
   begin
     qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryLubrificProgEquipC_REIMPRESSAO.AsString    := 'N';
   end;
 if qryLubrificProgEquipDTAINICIO1.AsString <> '' then
   qryLubrificProgEquipC_PROXINSP.AsDateTime := IncDay(qryLubrificProgEquipDTAINICIO1.AsDateTime, qryLubrificProgEquipFREQUENCIA1.AsInteger);
 
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryLubrificProgEquipC_REIMPRESSAO.AsString    := 'S';
+  end;
 end;
 
 procedure TDM.qryLubrificProgEquipItensEspAfterInsert(DataSet: TDataSet);
@@ -6449,9 +6481,16 @@ begin
 if (FrmTelaInspVenc <> nil) or (FrmTelaInspConsulta <> nil) then
   begin
     qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryManutProgEquipC_REIMPRESSAO.AsString    := 'N';
   end;
 if qryManutProgEquipDTAINICIO1.AsString <> '' then
   qryManutProgEquipC_PROXINSP.AsDateTime := IncDay(qryManutProgEquipDTAINICIO1.AsDateTime, qryManutProgEquipFREQUENCIA1.AsInteger);
+
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryManutProgEquipC_REIMPRESSAO.AsString    := 'S';
+  end;
 end;
 
 procedure TDM.qryManutProgEquipItensEspAfterInsert(DataSet: TDataSet);

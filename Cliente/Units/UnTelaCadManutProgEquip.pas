@@ -53,6 +53,8 @@ type
     EdtDescResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label21: TLabel;
+    DBGrid1: TDBGrid;
+    Button7: TButton;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -66,6 +68,7 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -417,6 +420,16 @@ begin
     DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
     DM.FTabela_auxiliar := 32;
   End;
+end;
+
+procedure TFrmTelaCadManutProgEquip.Button7Click(Sender: TObject);
+begin
+  inherited;
+  DM.qryClonarManut.Close;
+  DM.qryClonarManut.Params[0].AsString := DM.qryManutProgEquipCODMANUTPROGFAMEQUIP.AsString;
+  DM.qryClonarManut.Params[1].AsString := DM.qryManutProgEquipFREQUENCIA1.AsString;
+  DM.qryClonarManut.Params[2].AsString := DM.qryManutProgEquipCODEQUIPAMENTO.AsString;
+  DM.qryClonarManut.Open;
 end;
 
 procedure TFrmTelaCadManutProgEquip.Completo1Click(Sender: TObject);

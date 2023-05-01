@@ -378,11 +378,13 @@ DM.qryOrdemServicoMObraProg.Open;
 //DM.qryTotalHomemHoraSeqHora.Open;
 
 DM.qryOrdemServicoMObraDisp.Close;
-DM.qryOrdemServicoMObraDisp.Params[0].AsString := DM.FCodEmpresa;
+DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor);
+DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
+DM.qryOrdemServicoMObraDisp.Params[2].AsString := DM.FCodEmpresa;
 if DM.qryOrdemServicoEXECAUTONOMO.AsString = 'S' then
-  DM.qryOrdemServicoMObraDisp.Params[1].AsString := 'AUTÔNOMA'
+  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'AUTÔNOMA'
 else
-  DM.qryOrdemServicoMObraDisp.Params[1].AsString := 'OPERACIONAL';
+  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
 DM.qryOrdemServicoMObraDisp.Open;
 
 if DM.qryOrdemServicoDATAPROGINI.AsDateTime = 0 then

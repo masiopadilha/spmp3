@@ -1458,8 +1458,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         Left = 0
         Top = 0
         Caption = 'PrimTransf'
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object LblLinha: TLabel
           Left = 35
           Top = 8

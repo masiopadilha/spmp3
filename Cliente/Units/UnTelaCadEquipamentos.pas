@@ -573,16 +573,16 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryFamEquipamento.Open;
 
         DM.qryEquipamentosDados.Close;
-//        DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
-//        DM.qryEquipamentosDados.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
-//        DM.qryEquipamentosDados.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+        DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryEquipamentosDados.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+        DM.qryEquipamentosDados.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
         DM.qryEquipamentosDados.Open;
         DM.qryEquipamentosDados.Edit;
 
         DM.qryEquipamentosDadosR.Close;
-//        DM.qryEquipamentosDadosR.Params[0].AsString := DM.FCodEmpresa;
-//        DM.qryEquipamentosDadosR.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
-//        DM.qryEquipamentosDadosR.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+        DM.qryEquipamentosDadosR.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryEquipamentosDadosR.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+        DM.qryEquipamentosDadosR.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
         DM.qryEquipamentosDadosR.Open;
         DM.qryEquipamentosDadosR.Edit;
 
@@ -737,6 +737,9 @@ EdtCodEquip.ReadOnly := False;
 EdtCodEquip.SetFocus;
 
 LSequenciaAtual := 0;
+
+DM.qryEquipamentosDados.Close;
+DM.qryEquipamentosDadosR.Close;
 end;
 
 procedure TFrmTelaCadEquipamentos.BtnPrimarioClick(Sender: TObject);
