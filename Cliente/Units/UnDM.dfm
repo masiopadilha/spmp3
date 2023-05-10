@@ -26655,7 +26655,7 @@ object DM: TDM
       
         '     AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(:data2, ' +
         #39'%Y/%m/%d'#39')'
-      '     AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39
+      '     AND `ordemservico`.`SITUACAO` =  '#39'FECHADA'#39
       '     AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula)'
       '     '
       'ORDER BY `ordemservico`.`CODIGO` DESC;')
@@ -33140,6 +33140,8 @@ object DM: TDM
       '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
       '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
       '    , `ordemservico`.`TEMPOEXECUTADO`'
+      '    , `ordemservico`.`PRIORIDADEPARADA`'
+      '    , `equipamentos`.`CODFAMILIAEQUIP`'
       ''
       'FROM'
       '    `ordemservico`'
@@ -33379,6 +33381,13 @@ object DM: TDM
       DisplayFormat = ',0.00'
       Precision = 16
       Size = 2
+    end
+    object qryOrdemServicoGerenciaPRIORIDADEPARADA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRIORIDADEPARADA'
+      Origin = 'PRIORIDADEPARADA'
+      Visible = False
+      Size = 40
     end
   end
   object qryOrdemServicoTercFora: TFDQuery
@@ -51434,7 +51443,7 @@ object DM: TDM
         'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAPROGINI` DESC;')
+      'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
     Left = 73
     Top = 480
     ParamData = <
@@ -52100,28 +52109,38 @@ object DM: TDM
       '    `ordemservico`.`CODIGO`'
       '    , `ordemservico`.`DESCRICAO`'
       '    , `ordemservico`.`DATACADASTRO`'
-      '    , `manutprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_M'
-      '    , `lubrificprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_L'
       '    , `ordemservico`.`DATAPROGINI`'
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
       '    , `ordemservico`.`DATAFECHAMENTO`'
-      '    , `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
-      '    , `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`'
-      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `ordemservico`.`CODEQUIPAMENTO`'
       '    , `ordemservico`.`TEMPOPREVISTO`'
       '    , `ordemservico`.`TEMPOEXECUTADO`'
       '    , `ordemservico`.`SITUACAO`'
-      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
-      '    , `oficinas`.`DESCRICAO` AS `OFICINA`'
       '    , `ordemservico`.`SOLICTRAB`'
       '    , `ordemservico`.`ROTAEQUIP`'
       '    , `ordemservico`.`CODMANUTPROGEQUIP`'
       '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
       '    , `ordemservico`.`CODOFICINA`'
-      '    , `equipamentos`.`CODFAMILIAEQUIP` AS `CODFAMEQUIP`'
       '    , `ordemservico`.`CODMANUTENCAO`'
       '    , `ordemservico`.`OBSERVACOES`'
+      '    , `ordemservico`.`PRIORIDADEPARADA`'
+      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
+      '    , `oficinas`.`DESCRICAO` AS `OFICINA`'
+      '    , `equipamentos`.`CODFAMILIAEQUIP`'
+      '    , `manutprogequipamentohist`.`DESCRICAO` AS DESCMANUT'
+      '    , `manutprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_M'
+      '    , `manutprogequipamentohist`.`FREQUENCIA1` AS FREQUENCIA_M'
+      '    , `manutprogequipamentohist`.`REPROGRAMAR1` AS REPROGRAMAR_M'
+      '    , `lubrificprogequipamentohist`.`DESCRICAO` AS DESCLUBRIFIC'
+      '    , `lubrificprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_L'
+      
+        '    , `lubrificprogequipamentohist`.`FREQUENCIA1` AS FREQUENCIA_' +
+        'L    '
+      
+        '    , `lubrificprogequipamentohist`.`REPROGRAMAR1` AS REPROGRAMA' +
+        'R_L'
       ''
       ''
       'FROM'
@@ -52153,22 +52172,13 @@ object DM: TDM
         'st`.`CODORDEMSERVICO`)'
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      '       AND ('
       
-        '                -- (`ordemservico`.DATACADASTRO >= DATE_ADD(CURR' +
-        'ENT_TIMESTAMP(), INTERVAL -18 MONTH)) -- OR (`ordemservico`.`DAT' +
-        'AULTALT` >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
-      
-        '                (`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:d' +
-        'ata1,'#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_' +
-        'DATE(:data2,'#39'%Y/%m/%d %T'#39'))'
-      '       )'
-      '       -- AND `ordemservico`.SITUACAO <> '#39'CANCELADA'#39
-      '        '
-      '        )'
+        '    AND `ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%Y/' +
+        '%m/%d'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:data2,' +
+        #39'%Y/%m/%d %T'#39')'
+      '    )'
       ''
-      'ORDER BY  `ordemservico`.DATACADASTRO DESC'
-      '')
+      'ORDER BY  `ordemservico`.DATACADASTRO DESC')
     Left = 306
     Top = 480
     ParamData = <
@@ -52221,6 +52231,20 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       DisplayFormat = 'dd/mm/yy'
+    end
+    object qryOrdemServicoGerenciaRelatFREQUENCIA_M: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA_M'
+      Origin = 'FREQUENCIA1'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryOrdemServicoGerenciaRelatFREQUENCIA_L: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA_L'
+      Origin = 'FREQUENCIA1'
+      ProviderFlags = []
+      ReadOnly = True
     end
     object qryOrdemServicoGerenciaRelatDATACADASTRO: TDateTimeField
       AutoGenerateValue = arDefault
@@ -52305,14 +52329,6 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
     end
-    object qryOrdemServicoGerenciaRelatEQUIPAMENTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'EQUIPAMENTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 200
-    end
     object qryOrdemServicoGerenciaRelatCENTROCUSTO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CENTROCUSTO'
@@ -52343,14 +52359,6 @@ object DM: TDM
       Origin = 'CODOFICINA'
       Size = 9
     end
-    object qryOrdemServicoGerenciaRelatCODFAMEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODFAMEQUIP'
-      Origin = 'CODFAMILIAEQUIP'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
     object qryOrdemServicoGerenciaRelatCODMANUTENCAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODMANUTENCAO'
@@ -52361,6 +52369,52 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'OBSERVACOES'
       Origin = 'OBSERVACOES'
+    end
+    object qryOrdemServicoGerenciaRelatPRIORIDADEPARADA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRIORIDADEPARADA'
+      Origin = 'PRIORIDADEPARADA'
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaRelatCODFAMILIAEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODFAMILIAEQUIP'
+      Origin = 'CODFAMILIAEQUIP'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryOrdemServicoGerenciaRelatDESCMANUT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCMANUT'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOrdemServicoGerenciaRelatREPROGRAMAR_M: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR_M'
+      Origin = 'REPROGRAMAR1'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaRelatDESCLUBRIFIC: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCLUBRIFIC'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOrdemServicoGerenciaRelatREPROGRAMAR_L: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR_L'
+      Origin = 'REPROGRAMAR1'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
     end
   end
   object qryOrdemServicoGerenciaRelatMObraProg: TFDQuery
@@ -53016,7 +53070,7 @@ object DM: TDM
       '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;')
+      'ORDER BY `ordemservico`.`DATAINICIOREAL` ASC;')
     Left = 92
     Top = 480
     ParamData = <
@@ -53379,270 +53433,6 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
       end>
-  end
-  object qryOSGerenciaRelatManut: TFDQuery
-    IndexFieldNames = 'CODORDEMSERVICO'
-    MasterSource = dsOrdemServicoGerenciaRelat
-    MasterFields = 'CODIGO'
-    DetailFields = 'CODORDEMSERVICO'
-    Connection = FDConnSPMP3
-    SQL.Strings = (
-      'SELECT'
-      '    `manutprogequipamentohist`.`CODORDEMSERVICO`'
-      '    , `manutprogequipamentohist`.`CODIGO`'
-      '    , `manutprogequipamentohist`.`DESCRICAO`'
-      '    , `manutprogequipamentohist`.`FREQUENCIA1`'
-      '    , `manutprogequipamentohist`.`DTAINICIO1`'
-      '    , `manutprogequipamentohist`.`REPROGRAMAR1`'
-      '    , `ordemservico`.`DATACADASTRO`'
-      '    , `ordemservico`.`SITUACAO`'
-      '    , `equipamentos`.`CODFAMILIAEQUIP` AS CODFAMEQUIP'
-      '    , `ordemservico`.`CODOFICINA`'
-      '    , `ordemservico`.`CODMANUTENCAO`'
-      ''
-      '    '
-      'FROM'
-      '    `manutprogequipamentohist`'
-      '    INNER JOIN `ordemservico` '
-      
-        '        ON (`manutprogequipamentohist`.`CODORDEMSERVICO` = `orde' +
-        'mservico`.`CODIGO`)'
-      '    LEFT JOIN `equipamentos` '
-      
-        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
-        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
-        'RESA`)'
-      ''
-      ''
-      'WHERE (`manutprogequipamentohist`.`CODORDEMSERVICO` = :codigo'
-      
-        '       AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIME' +
-        'STAMP(), INTERVAL -18 MONTH) OR `ordemservico`.`DATAULTALT` >= D' +
-        'ATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
-      '      -- AND `ordemservico`.SITUACAO <> '#39'CANCELADA'#39
-      ')'
-      ''
-      'ORDER BY  `ordemservico`.DATACADASTRO DESC')
-    Left = 325
-    Top = 480
-    ParamData = <
-      item
-        Name = 'CODIGO'
-        DataType = ftString
-        ParamType = ptInput
-      end>
-    object IntegerField10: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODORDEMSERVICO'
-      Origin = 'CODORDEMSERVICO'
-      DisplayFormat = '#000000'
-    end
-    object StringField61: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      Size = 9
-    end
-    object StringField62: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      Size = 80
-    end
-    object SmallintField3: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'FREQUENCIA1'
-      Origin = 'FREQUENCIA1'
-    end
-    object DateTimeField11: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DTAINICIO1'
-      Origin = 'DTAINICIO1'
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object StringField63: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'REPROGRAMAR1'
-      Origin = 'REPROGRAMAR1'
-      Size = 40
-    end
-    object DateTimeField12: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATACADASTRO'
-      Origin = 'DATACADASTRO'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object StringField64: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SITUACAO'
-      Origin = 'SITUACAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-    object StringField65: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODFAMEQUIP'
-      Origin = 'CODFAMILIAEQUIP'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-    object StringField66: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODOFICINA'
-      Origin = 'CODOFICINA'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-    object StringField67: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTENCAO'
-      Origin = 'CODMANUTENCAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-  end
-  object dsOSGerenciaRelatManut: TDataSource
-    DataSet = qryOSGerenciaRelatManut
-    Left = 325
-    Top = 530
-  end
-  object qryOSGerenciaRelatLubrific: TFDQuery
-    OnCalcFields = qryManutConsCalcFields
-    IndexFieldNames = 'CODORDEMSERVICO'
-    MasterSource = dsOrdemServicoGerenciaRelat
-    MasterFields = 'CODIGO'
-    DetailFields = 'CODORDEMSERVICO'
-    Connection = FDConnSPMP3
-    SQL.Strings = (
-      'SELECT'
-      '    `lubrificprogequipamentohist`.`CODORDEMSERVICO`'
-      '    , `lubrificprogequipamentohist`.`CODIGO`'
-      '    , `lubrificprogequipamentohist`.`DESCRICAO`'
-      '    , `lubrificprogequipamentohist`.`FREQUENCIA1`'
-      '    , `lubrificprogequipamentohist`.`DTAINICIO1`'
-      '    , `lubrificprogequipamentohist`.`REPROGRAMAR1`'
-      '    , `ordemservico`.`DATACADASTRO`'
-      '    , `ordemservico`.`SITUACAO`'
-      '    , `equipamentos`.`CODFAMILIAEQUIP` AS CODFAMEQUIP'
-      '    , `ordemservico`.`CODOFICINA`'
-      '    , `ordemservico`.`CODMANUTENCAO`'
-      ''
-      '    '
-      'FROM'
-      '    `lubrificprogequipamentohist`'
-      '    INNER JOIN `ordemservico` '
-      
-        '        ON (`lubrificprogequipamentohist`.`CODORDEMSERVICO` = `o' +
-        'rdemservico`.`CODIGO`)'
-      '    LEFT JOIN `equipamentos` '
-      
-        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
-        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
-        'RESA`)'
-      ''
-      'WHERE (`lubrificprogequipamentohist`.`CODORDEMSERVICO` = :codigo'
-      
-        '       AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIME' +
-        'STAMP(), INTERVAL -18 MONTH) OR `ordemservico`.`DATAULTALT` >= D' +
-        'ATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
-      '      -- AND `ordemservico`.SITUACAO <> '#39'CANCELADA'#39
-      ')'
-      ''
-      'ORDER BY  `ordemservico`.DATACADASTRO DESC'
-      '')
-    Left = 343
-    Top = 480
-    ParamData = <
-      item
-        Name = 'CODIGO'
-        DataType = ftAutoInc
-        ParamType = ptInput
-        Value = Null
-      end>
-    object IntegerField11: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODORDEMSERVICO'
-      Origin = 'CODORDEMSERVICO'
-      DisplayFormat = '#000000'
-    end
-    object StringField96: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      Size = 9
-    end
-    object StringField97: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      Size = 80
-    end
-    object SmallintField4: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'FREQUENCIA1'
-      Origin = 'FREQUENCIA1'
-    end
-    object DateTimeField13: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DTAINICIO1'
-      Origin = 'DTAINICIO1'
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object StringField98: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'REPROGRAMAR1'
-      Origin = 'REPROGRAMAR1'
-      Size = 40
-    end
-    object DateTimeField14: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATACADASTRO'
-      Origin = 'DATACADASTRO'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object StringField99: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SITUACAO'
-      Origin = 'SITUACAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-    object StringField100: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODFAMEQUIP'
-      Origin = 'CODFAMILIAEQUIP'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-    object StringField101: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODOFICINA'
-      Origin = 'CODOFICINA'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-    object StringField102: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTENCAO'
-      Origin = 'CODMANUTENCAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-  end
-  object dsOSGerenciaRelatLubrific: TDataSource
-    DataSet = qryOSGerenciaRelatLubrific
-    Left = 343
-    Top = 530
   end
   object qryOSGerenciaRelatObservacoes: TFDQuery
     OnCalcFields = qryOrdemServicoGerenciaRelatCalcFields

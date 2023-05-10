@@ -44,6 +44,7 @@ type
     procedure EdtCelulaDblClick(Sender: TObject);
     procedure BtnCelulaClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1351,6 +1352,12 @@ if Key = #13 then
   begin
     BtnOK.OnClick(Sender);
   end;
+end;
+
+procedure TFrmTelaAuxiliar.FormShow(Sender: TObject);
+begin
+  inherited;
+EdtConsulta.SetFocus;
 end;
 
 procedure TFrmTelaAuxiliar.GrdAuxiliarDblClick(Sender: TObject);

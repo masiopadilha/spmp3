@@ -691,6 +691,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Height = 22
         Style = csOwnerDrawFixed
         TabOrder = 6
+        OnChange = CBPrioridadeChange
         Items.Strings = (
           ''
           'Emerg'#234'ncia'

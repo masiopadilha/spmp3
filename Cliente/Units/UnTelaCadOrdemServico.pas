@@ -72,6 +72,7 @@ type
     Label20: TLabel;
     EdtResponsavel: TDBEdit;
     BtnResponsavel: TButton;
+    Label28: TLabel;
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -626,6 +627,11 @@ if DM.qryOrdemServicoTEMPOPREVISTO.AsFloat <= 0 then
   end;
 
 if DM.qryOrdemServicoSOLICTRAB.IsNull then DM.qryOrdemServicoSOLICTRAB.AsString := 'N';
+
+if DM.qryOrdemServicoCODOFICINA.IsNull then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DA O.S.!'; EdtOficina.SetFocus; Exit;
+  end;
 
 if DM.qryOrdemServicoCODOFICINA.IsNull then DM.qryOrdemServicoLOCAL.AsString := 'LOCAL'
 else DM.qryOrdemServicoLOCAL.AsString := 'AREA';

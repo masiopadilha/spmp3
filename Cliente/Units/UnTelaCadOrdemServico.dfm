@@ -430,6 +430,21 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Alignment = taRightJustify
       Caption = 'Respons'#225'vel:'
     end
+    object Label28: TLabel
+      Left = 991
+      Top = 66
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
     object EdtManutencao: TDBEdit
       Left = 127
       Top = 30

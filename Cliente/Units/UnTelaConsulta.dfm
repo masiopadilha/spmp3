@@ -8,6 +8,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Constraints.MinWidth = 800
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
+  OnShow = FormShow
   ExplicitWidth = 800
   ExplicitHeight = 600
   PixelsPerInch = 96

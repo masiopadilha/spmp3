@@ -109,6 +109,7 @@ type
     procedure Inspecoes1Click(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure Simples1Click(Sender: TObject);
+    procedure CBPrioridadeChange(Sender: TObject);
   private
     { Private declarations }
     hora_futura: TDateTime;
@@ -838,6 +839,12 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADAS
         end;
 end;
 
+procedure TFrmTelaCadOrdemServicoGerencia.CBPrioridadeChange(Sender: TObject);
+begin
+  inherited;
+  ConfigurarFiltros;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.chkNProgClick(Sender: TObject);
 begin
   inherited;
@@ -1066,6 +1073,50 @@ if edtOficina.Text <> '' then
       GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODMANUTENCAO = ' + QuotedStr(LCodManutencao);
   end;
 
+case CBPrioridade.ItemIndex of
+  1:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Emergência'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Emergência''';
+    end;
+  2:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 12 hs'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 12 hs''';
+    end;
+  3:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 72 hs'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 72 hs''';
+    end;
+  4:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Semana'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Semana''';
+    end;
+  5:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Mês'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Mês''';
+    end;
+  6:
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Acima de um mês'''
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Acima de um mês''';
+    end;
+end;
 
 if LEquipamento <> EmptyStr then
   begin
