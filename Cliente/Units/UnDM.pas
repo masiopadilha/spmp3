@@ -5304,7 +5304,7 @@ type
     qryOSGerenciaRelatObservacoes: TFDQuery;
     FDAutoIncField6: TFDAutoIncField;
     BlobField1: TBlobField;
-    DataSource1: TDataSource;
+    dsqryOSGerenciaRelatObservacoes: TDataSource;
     qryOrdemServicoHistoricoOBSERVACOES: TBlobField;
     qryOrdemServicoGerenciaRelatMObraProgOS: TFDQuery;
     IntegerField13: TIntegerField;

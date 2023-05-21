@@ -53223,7 +53223,7 @@ object DM: TDM
       Origin = 'OBSERVACOES'
     end
   end
-  object DataSource1: TDataSource
+  object dsqryOSGerenciaRelatObservacoes: TDataSource
     DataSet = qryOSGerenciaRelatObservacoes
     Left = 362
     Top = 530

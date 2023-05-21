@@ -10,7 +10,6 @@ uses
 type
   TFrmTelaCadEquipamentosConf = class(TFrmTelaPaiOkCancel)
     ChbAtivado: TDBCheckBox;
-    RGPeriodo: TDBRadioGroup;
     GBEmissaoOS: TGroupBox;
     EdtEmissaoOS: TDBEdit;
     GroupBox1: TGroupBox;
@@ -19,11 +18,13 @@ type
     LblParada1: TDBText;
     Label28: TLabel;
     LblUltParada: TDBText;
+    RGPeriodo: TRadioGroup;
     procedure BtnFecharClick(Sender: TObject);
     procedure BtnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RGPeriodoChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure RGPeriodoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,12 +63,18 @@ begin
       else
         begin
           if qryEquipamentosPERIODOCONF.AsString = '3 meses' then
+          begin
             LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 90))
+          end
           else
           if qryEquipamentosPERIODOCONF.AsString = '6 meses' then
+          begin
             LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 180))
+          end
           else
+          begin
             LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 365));
+          end;
           qryEquipamentosDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
         end;
       qryEquipamentos.Post;
@@ -92,12 +99,49 @@ begin
       qryEquipamentosDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
       if Trim(qryEquipamentosCALCULARCONF.AsString) <> 'N' then
         begin
-          if qryEquipamentosPERIODOCONF.AsString = '6 meses' then
-            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(4383/24)))
+          if qryEquipamentosPERIODOCONF.AsString = '3 meses' then
+          begin
+            RGPeriodo.ItemIndex := 0;
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 90))
+          end
           else
-            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(8766/24)));
+          if qryEquipamentosPERIODOCONF.AsString = '6 meses' then
+          begin
+            RGPeriodo.ItemIndex := 1;
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 180))
+          end
+          else
+          begin
+            RGPeriodo.ItemIndex := 2;
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 365));
+          end;
         end;
     end;
+end;
+
+procedure TFrmTelaCadEquipamentosConf.RGPeriodoClick(Sender: TObject);
+begin
+  inherited;
+      case RGPeriodo.ItemIndex of
+        0:
+          begin
+            DM.qryEquipamentos.Edit;
+            DM.qryEquipamentosPERIODOCONF.AsString := '3 meses';
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(DM.qryEquipamentosDATAINICIOCONF.AsDateTime, 90));
+          end;
+        1:
+          begin
+            DM.qryEquipamentos.Edit;
+            DM.qryEquipamentosPERIODOCONF.AsString := '6 meses';
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(DM.qryEquipamentosDATAINICIOCONF.AsDateTime, 180));
+          end;
+        2:
+          begin
+            DM.qryEquipamentos.Edit;
+            DM.qryEquipamentosPERIODOCONF.AsString := '12 meses';
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(DM.qryEquipamentosDATAINICIOCONF.AsDateTime, 365));
+          end;
+      end;
 end;
 
 procedure TFrmTelaCadEquipamentosConf.RGPeriodoChange(Sender: TObject);

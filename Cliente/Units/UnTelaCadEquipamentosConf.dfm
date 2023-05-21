@@ -53,7 +53,9 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       Margins.Top = 3
       Margins.Right = 3
       Margins.Bottom = 3
-      TabOrder = 4
+      TabOrder = 3
+      ExplicitLeft = 0
+      ExplicitTop = 3
       ExplicitWidth = 354
       ExplicitHeight = 192
     end
@@ -70,32 +72,13 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       ValueChecked = 'S'
       ValueUnchecked = 'N'
     end
-    object RGPeriodo: TDBRadioGroup
-      Left = 39
-      Top = 33
-      Width = 290
-      Height = 56
-      Caption = 'Per'#237'odo:'
-      Columns = 3
-      DataField = 'PERIODOCONF'
-      DataSource = DM.dsEquipamentos
-      Items.Strings = (
-        '3 meses '
-        '6 meses'
-        '12 meses')
-      TabOrder = 1
-      Values.Strings = (
-        '6 meses'
-        '12 meses')
-      OnChange = RGPeriodoChange
-    end
     object GBEmissaoOS: TGroupBox
-      Left = 39
-      Top = 87
+      Left = 27
+      Top = 81
       Width = 103
       Height = 50
       Caption = 'Emitir OS (d):'
-      TabOrder = 3
+      TabOrder = 2
       object EdtEmissaoOS: TDBEdit
         Left = 9
         Top = 19
@@ -107,12 +90,12 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       end
     end
     object GroupBox1: TGroupBox
-      Left = 144
-      Top = 87
+      Left = 136
+      Top = 81
       Width = 185
       Height = 50
       Caption = 'Fator de marcha admiss'#237'vel:'
-      TabOrder = 2
+      TabOrder = 1
       object EdtFtrMarcha: TDBEdit
         Left = 9
         Top = 19
@@ -125,12 +108,12 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       end
     end
     object GroupBox2: TGroupBox
-      Left = 39
-      Top = 137
+      Left = 31
+      Top = 140
       Width = 290
-      Height = 50
+      Height = 45
       Caption = 'Per'#237'odo:'
-      TabOrder = 5
+      TabOrder = 4
       object LblParada1: TDBText
         Left = 62
         Top = 21
@@ -176,6 +159,20 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
         ParentFont = False
         StyleElements = [seFont, seBorder]
       end
+    end
+    object RGPeriodo: TRadioGroup
+      Left = 31
+      Top = 33
+      Width = 290
+      Height = 45
+      Caption = 'Per'#237'odo:'
+      Columns = 3
+      Items.Strings = (
+        '3 meses'
+        '6 meses'
+        '12 meses')
+      TabOrder = 5
+      OnClick = RGPeriodoClick
     end
   end
   inherited PAuxiliares: TPanel
