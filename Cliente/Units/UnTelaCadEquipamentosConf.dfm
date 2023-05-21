@@ -21,7 +21,7 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     Margins.Bottom = 3
     ExplicitLeft = 3
     ExplicitTop = 3
-    ExplicitWidth = 498
+    ExplicitWidth = 358
     inherited Image1: TImage
       Margins.Left = 4
       Margins.Top = 4
@@ -30,6 +30,7 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     end
     inherited BtnAjuda: TButton
       Left = 324
+      ExplicitLeft = 324
     end
   end
   inherited PCentro: TPanel
@@ -43,8 +44,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     Margins.Bottom = 4
     ExplicitLeft = 4
     ExplicitTop = 70
-    ExplicitWidth = 496
-    ExplicitHeight = 154
+    ExplicitWidth = 356
+    ExplicitHeight = 194
     inherited RGTelas: TRadioGroup
       Width = 354
       Height = 192
@@ -53,8 +54,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       Margins.Right = 3
       Margins.Bottom = 3
       TabOrder = 4
-      ExplicitWidth = 494
-      ExplicitHeight = 152
+      ExplicitWidth = 354
+      ExplicitHeight = 192
     end
     object ChbAtivado: TDBCheckBox
       Left = 39
@@ -73,7 +74,7 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       Left = 39
       Top = 33
       Width = 290
-      Height = 47
+      Height = 56
       Caption = 'Per'#237'odo:'
       Columns = 3
       DataField = 'PERIODOCONF'
@@ -186,8 +187,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     Margins.Right = 3
     Margins.Bottom = 3
     ExplicitLeft = 3
-    ExplicitTop = 231
-    ExplicitWidth = 498
+    ExplicitTop = 271
+    ExplicitWidth = 358
   end
   inherited PBotoes: TPanel
     Left = 3
@@ -198,8 +199,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     Margins.Right = 3
     Margins.Bottom = 3
     ExplicitLeft = 3
-    ExplicitTop = 260
-    ExplicitWidth = 498
+    ExplicitTop = 300
+    ExplicitWidth = 358
     inherited BtnOK: TButton
       Left = 106
       Margins.Left = 4

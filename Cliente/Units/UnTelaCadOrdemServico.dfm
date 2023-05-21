@@ -443,7 +443,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      Visible = False
     end
     object EdtManutencao: TDBEdit
       Left = 127

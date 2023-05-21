@@ -26551,7 +26551,7 @@ object DM: TDM
       
         '    AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(:data1, '#39 +
         '%Y/%m/%d'#39') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(:d' +
-        'ata2, '#39'%Y/%m/%d'#39')'
+        'ata2, '#39'%Y/%m/%d %T'#39')'
       '    AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39') '
       '    '
       'GROUP BY `MANUTENCAO` '
@@ -26654,7 +26654,7 @@ object DM: TDM
         #39'%Y/%m/%d'#39') '
       
         '     AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(:data2, ' +
-        #39'%Y/%m/%d'#39')'
+        #39'%Y/%m/%d %T'#39')'
       '     AND `ordemservico`.`SITUACAO` =  '#39'FECHADA'#39
       '     AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula)'
       '     '
@@ -33112,7 +33112,6 @@ object DM: TDM
     end
   end
   object qryOrdemServicoGerencia: TFDQuery
-    OnCalcFields = qryOrdemServicoGerenciaCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -33123,26 +33122,53 @@ object DM: TDM
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
       '    , `ordemservico`.`DATAFECHAMENTO`'
-      '    , `ordemservico`.`CODMANUTENCAO`'
-      '    , `ordemservico`.`ROTAEQUIP`'
-      '    , `ordemservico`.`SOLICTRAB`'
-      '    , `ordemservico`.`SITUACAO`'
-      '    , `ordemservico`.`MATRICULA`'
-      '    , `ordemservico`.`IMPORTANCIA`'
+      '    , `ordemservico`.`CODEQUIPAMENTO`'
       '    , `ordemservico`.`TEMPOPREVISTO`'
-      '    , `ordemservico`.`CODOFICINA`'
-      '    , `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
-      '    , `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`'
-      '    , `ordemservico`.`CODEMPRESA`'
-      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
-      '    , `familiaequipamento`.`CODIGO` AS `CODFAMEQUIP`'
+      '    , `ordemservico`.`TEMPOEXECUTADO`'
+      '    , `ordemservico`.`SITUACAO`'
+      '    , `ordemservico`.`SOLICTRAB`'
+      '    , `ordemservico`.`ROTAEQUIP`'
       '    , `ordemservico`.`CODMANUTPROGEQUIP`'
       '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
-      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
-      '    , `ordemservico`.`TEMPOEXECUTADO`'
+      '    , `ordemservico`.`CODOFICINA`'
+      '    , `ordemservico`.`CODMANUTENCAO`'
+      '    , `ordemservico`.`OBSERVACOES`'
       '    , `ordemservico`.`PRIORIDADEPARADA`'
+      '    , `ordemservico`.`MATRICULA`'
+      '    , `ordemservico`.`IMPORTANCIA`'
+      '    , `ordemservico`.`CODEMPRESA`'
+      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
+      '    , `oficinas`.`DESCRICAO` AS `OFICINA`'
       '    , `equipamentos`.`CODFAMILIAEQUIP`'
-      ''
+      '    , `equipamentos`.`DESCRICAO` AS EQUIPAMENTO'
+      
+        '    , IF(`ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39', `manutprogequ' +
+        'ipamentohist`.`DESCRICAO`, `lubrificprogequipamentohist`.`DESCRI' +
+        'CAO`) AS DESCINSPECAO'
+      
+        '    , IF(`ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39', `manutprogequ' +
+        'ipamentohist`.`DTAINICIO1`, `lubrificprogequipamentohist`.`DTAIN' +
+        'ICIO1`) AS PLANEJADA'
+      
+        '    , IF(`ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39', `manutprogequ' +
+        'ipamentohist`.`FREQUENCIA1`, `lubrificprogequipamentohist`.`FREQ' +
+        'UENCIA1`) AS FREQUENCIA'
+      
+        '    , IF(`ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39', `manutprogequ' +
+        'ipamentohist`.`REPROGRAMAR1`, `lubrificprogequipamentohist`.`REP' +
+        'ROGRAMAR1`) AS REPROGRAMAR'
+      '    , ('
+      #9'CASE '
+      #9'    WHEN `ordemservico`.`SOLICTRAB` = '#39'ST'#39' THEN '#39'ST'#39
+      
+        '            WHEN `ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39' THEN '#39 +
+        'MP'#39
+      
+        '            WHEN `ordemservico`.`CODLUBRIFICPROGEQUIP` <> '#39#39' THE' +
+        'N '#39'LP'#39
+      '            ELSE '#39'MN'#39
+      #9'END) AS ORIGEM'
       'FROM'
       '    `ordemservico`'
       '    LEFT JOIN `equipamentos` '
@@ -33162,25 +33188,27 @@ object DM: TDM
       
         '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
         'IGO`)'
-      ''
+      '    LEFT JOIN `oficinas`'
+      
+        '        ON (`ordemservico`.`CODEMPRESA` = `oficinas`.`CODEMPRESA' +
+        '`) AND (`ordemservico`.`CODOFICINA` = `oficinas`.`CODIGO`)'
+      '    LEFT JOIN `manutprogequipamentohist`'
+      
+        '        ON (`ordemservico`.`CODIGO` = `manutprogequipamentohist`' +
+        '.`CODORDEMSERVICO`)'
+      '    LEFT JOIN `lubrificprogequipamentohist`'
+      
+        '        ON (`ordemservico`.`CODIGO` = `lubrificprogequipamentohi' +
+        'st`.`CODORDEMSERVICO`)'
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      '       AND ('
       
-        '                -- (`ordemservico`.DATACADASTRO >= DATE_ADD(CURR' +
-        'ENT_TIMESTAMP(), INTERVAL -18 MONTH)) -- OR (`ordemservico`.`DAT' +
-        'AULTALT` >= DATE_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
-      
-        '                (`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:d' +
-        'ata1,'#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_' +
-        'DATE(:data2,'#39'%Y/%m/%d %T'#39'))'
-      '               )'
-      '       -- AND `ordemservico`.SITUACAO <> '#39'CANCELADA'#39
-      '        '
-      '        )'
+        '       AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1' +
+        ','#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE' +
+        '(:data2,'#39'%Y/%m/%d %T'#39')))        '
+      '       )'
       ''
-      'ORDER BY `ordemservico`.DATACADASTRO DESC;'
-      '')
+      'ORDER BY `ordemservico`.DATACADASTRO DESC;')
     Left = 254
     Top = 480
     ParamData = <
@@ -33306,18 +33334,17 @@ object DM: TDM
       FieldName = 'TEMPOPREVISTO'
       Origin = 'TEMPOPREVISTO'
       ProviderFlags = []
-      Visible = False
       DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
-    object qryOrdemServicoGerenciaCALC_ORIGEM: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'CALC_ORIGEM'
-      ProviderFlags = [pfInWhere]
-      Visible = False
-      Size = 80
-      Calculated = True
+    object qryOrdemServicoGerenciaTIPOMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPOMANUTENCAO'
+      Origin = 'TIPOMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
     end
     object qryOrdemServicoGerenciaCODOFICINA: TStringField
       AutoGenerateValue = arDefault
@@ -33332,22 +33359,6 @@ object DM: TDM
       Origin = 'CODEMPRESA'
       Required = True
       Visible = False
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaTIPOMANUTENCAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'TIPOMANUTENCAO'
-      Origin = 'TIPOMANUTENCAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-    object qryOrdemServicoGerenciaCODFAMEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODFAMEQUIP'
-      Origin = 'CODIGO'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 9
     end
     object qryOrdemServicoGerenciaCODMANUTPROGEQUIP: TStringField
@@ -33388,6 +33399,68 @@ object DM: TDM
       Origin = 'PRIORIDADEPARADA'
       Visible = False
       Size = 40
+    end
+    object qryOrdemServicoGerenciaOBSERVACOES: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'OBSERVACOES'
+      Origin = 'OBSERVACOES'
+      Visible = False
+    end
+    object qryOrdemServicoGerenciaOFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OFICINA'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 80
+    end
+    object qryOrdemServicoGerenciaCODFAMILIAEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODFAMILIAEQUIP'
+      Origin = 'CODFAMILIAEQUIP'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 9
+    end
+    object qryOrdemServicoGerenciaDESCINSPECAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCINSPECAO'
+      Origin = 'DESCINSPECAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOrdemServicoGerenciaPLANEJADA: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'PLANEJADA'
+      Origin = 'PLANEJADA'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryOrdemServicoGerenciaFREQUENCIA: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA'
+      Origin = 'FREQUENCIA'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryOrdemServicoGerenciaREPROGRAMAR: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR'
+      Origin = 'REPROGRAMAR'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaORIGEM: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ORIGEM'
+      Origin = 'ORIGEM'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 2
     end
   end
   object qryOrdemServicoTercFora: TFDQuery
@@ -52096,328 +52169,8 @@ object DM: TDM
     Left = 258
     Top = 742
   end
-  object dsOrdemServicoGerenciaRelat: TDataSource
-    DataSet = qryOrdemServicoGerenciaRelat
-    Left = 306
-    Top = 530
-  end
-  object qryOrdemServicoGerenciaRelat: TFDQuery
-    OnCalcFields = qryOrdemServicoGerenciaRelatCalcFields
-    Connection = FDConnSPMP3
-    SQL.Strings = (
-      'SELECT'
-      '    `ordemservico`.`CODIGO`'
-      '    , `ordemservico`.`DESCRICAO`'
-      '    , `ordemservico`.`DATACADASTRO`'
-      '    , `ordemservico`.`DATAPROGINI`'
-      '    , `ordemservico`.`DATAINICIOREAL`'
-      '    , `ordemservico`.`DATAFIMREAL`'
-      '    , `ordemservico`.`DATAFECHAMENTO`'
-      '    , `ordemservico`.`CODEQUIPAMENTO`'
-      '    , `ordemservico`.`TEMPOPREVISTO`'
-      '    , `ordemservico`.`TEMPOEXECUTADO`'
-      '    , `ordemservico`.`SITUACAO`'
-      '    , `ordemservico`.`SOLICTRAB`'
-      '    , `ordemservico`.`ROTAEQUIP`'
-      '    , `ordemservico`.`CODMANUTPROGEQUIP`'
-      '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
-      '    , `ordemservico`.`CODOFICINA`'
-      '    , `ordemservico`.`CODMANUTENCAO`'
-      '    , `ordemservico`.`OBSERVACOES`'
-      '    , `ordemservico`.`PRIORIDADEPARADA`'
-      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
-      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
-      '    , `oficinas`.`DESCRICAO` AS `OFICINA`'
-      '    , `equipamentos`.`CODFAMILIAEQUIP`'
-      '    , `manutprogequipamentohist`.`DESCRICAO` AS DESCMANUT'
-      '    , `manutprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_M'
-      '    , `manutprogequipamentohist`.`FREQUENCIA1` AS FREQUENCIA_M'
-      '    , `manutprogequipamentohist`.`REPROGRAMAR1` AS REPROGRAMAR_M'
-      '    , `lubrificprogequipamentohist`.`DESCRICAO` AS DESCLUBRIFIC'
-      '    , `lubrificprogequipamentohist`.`DTAINICIO1` AS PLANEJADA_L'
-      
-        '    , `lubrificprogequipamentohist`.`FREQUENCIA1` AS FREQUENCIA_' +
-        'L    '
-      
-        '    , `lubrificprogequipamentohist`.`REPROGRAMAR1` AS REPROGRAMA' +
-        'R_L'
-      ''
-      ''
-      'FROM'
-      '    `ordemservico`'
-      '    LEFT JOIN `equipamentos` '
-      
-        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
-        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
-        'RESA`)'
-      '    LEFT JOIN `centrocusto`'
-      
-        '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
-        'IGO`)'
-      '    LEFT JOIN `tipomanutencao`'
-      
-        '        ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`C' +
-        'ODIGO`)'
-      '    LEFT JOIN `oficinas`'
-      
-        '        ON (`ordemservico`.`CODEMPRESA` = `oficinas`.`CODEMPRESA' +
-        '`) AND (`ordemservico`.`CODOFICINA` = `oficinas`.`CODIGO`)'
-      '    LEFT JOIN `manutprogequipamentohist`'
-      
-        '        ON (`ordemservico`.`CODIGO` = `manutprogequipamentohist`' +
-        '.`CODORDEMSERVICO`)'
-      '    LEFT JOIN `lubrificprogequipamentohist`'
-      
-        '        ON (`ordemservico`.`CODIGO` = `lubrificprogequipamentohi' +
-        'st`.`CODORDEMSERVICO`)'
-      ''
-      'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      
-        '    AND `ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%Y/' +
-        '%m/%d'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:data2,' +
-        #39'%Y/%m/%d %T'#39')'
-      '    )'
-      ''
-      'ORDER BY  `ordemservico`.DATACADASTRO DESC')
-    Left = 306
-    Top = 480
-    ParamData = <
-      item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'DATA1'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'DATA2'
-        DataType = ftString
-        ParamType = ptInput
-      end>
-    object qryOrdemServicoGerenciaRelatCODIGO: TFDAutoIncField
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      DisplayFormat = '#000000'
-    end
-    object qryOrdemServicoGerenciaRelatCALC_ORIGEM: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'CALC_ORIGEM'
-      Size = 100
-      Calculated = True
-    end
-    object qryOrdemServicoGerenciaRelatDESCRICAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      Size = 200
-    end
-    object qryOrdemServicoGerenciaRelatPLANEJADA_M: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'PLANEJADA_M'
-      Origin = 'DTAINICIO1'
-      ProviderFlags = []
-      ReadOnly = True
-      DisplayFormat = 'dd/mm/yy'
-    end
-    object qryOrdemServicoGerenciaRelatPLANEJADA_L: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'PLANEJADA_L'
-      Origin = 'DTAINICIO1'
-      ProviderFlags = []
-      ReadOnly = True
-      DisplayFormat = 'dd/mm/yy'
-    end
-    object qryOrdemServicoGerenciaRelatFREQUENCIA_M: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'FREQUENCIA_M'
-      Origin = 'FREQUENCIA1'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qryOrdemServicoGerenciaRelatFREQUENCIA_L: TSmallintField
-      AutoGenerateValue = arDefault
-      FieldName = 'FREQUENCIA_L'
-      Origin = 'FREQUENCIA1'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qryOrdemServicoGerenciaRelatDATACADASTRO: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATACADASTRO'
-      Origin = 'DATACADASTRO'
-      DisplayFormat = 'dd/mm/yyyy T'
-    end
-    object qryOrdemServicoGerenciaRelatDATAPROGINI: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATAPROGINI'
-      Origin = 'DATAPROGINI'
-      DisplayFormat = 'dd/mm/yyyy T'
-    end
-    object qryOrdemServicoGerenciaRelatDATAINICIOREAL: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATAINICIOREAL'
-      Origin = 'DATAINICIOREAL'
-      DisplayFormat = 'dd/mm/yyyy T'
-    end
-    object qryOrdemServicoGerenciaRelatDATAFIMREAL: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATAFIMREAL'
-      Origin = 'DATAFIMREAL'
-      DisplayFormat = 'dd/mm/yyyy T'
-    end
-    object qryOrdemServicoGerenciaRelatDATAFECHAMENTO: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'DATAFECHAMENTO'
-      Origin = 'DATAFECHAMENTO'
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object qryOrdemServicoGerenciaRelatTEMPOPREVISTO: TBCDField
-      AutoGenerateValue = arDefault
-      FieldName = 'TEMPOPREVISTO'
-      Origin = 'TEMPOPREVISTO'
-      DisplayFormat = ',0.00'
-      Precision = 16
-      Size = 2
-    end
-    object qryOrdemServicoGerenciaRelatTEMPOEXECUTADO: TBCDField
-      AutoGenerateValue = arDefault
-      FieldName = 'TEMPOEXECUTADO'
-      Origin = 'TEMPOEXECUTADO'
-      DisplayFormat = ',0.00'
-      Precision = 16
-      Size = 2
-    end
-    object qryOrdemServicoGerenciaRelatSITUACAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SITUACAO'
-      Origin = 'SITUACAO'
-      Size = 40
-    end
-    object qryOrdemServicoGerenciaRelatSOLICTRAB: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SOLICTRAB'
-      Origin = 'SOLICTRAB'
-      Size = 1
-    end
-    object qryOrdemServicoGerenciaRelatROTAEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ROTAEQUIP'
-      Origin = 'ROTAEQUIP'
-      Size = 1
-    end
-    object qryOrdemServicoGerenciaRelatCODMANUTPROGEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTPROGEQUIP'
-      Origin = 'CODMANUTPROGEQUIP'
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaRelatCODLUBRIFICPROGEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODLUBRIFICPROGEQUIP'
-      Origin = 'CODLUBRIFICPROGEQUIP'
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaRelatCODEQUIPAMENTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODEQUIPAMENTO'
-      Origin = 'CODIGO'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qryOrdemServicoGerenciaRelatCENTROCUSTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CENTROCUSTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoGerenciaRelatTIPOMANUTENCAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'TIPOMANUTENCAO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoGerenciaRelatOFICINA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'OFICINA'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoGerenciaRelatCODOFICINA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODOFICINA'
-      Origin = 'CODOFICINA'
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaRelatCODMANUTENCAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTENCAO'
-      Origin = 'CODMANUTENCAO'
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaRelatOBSERVACOES: TBlobField
-      AutoGenerateValue = arDefault
-      FieldName = 'OBSERVACOES'
-      Origin = 'OBSERVACOES'
-    end
-    object qryOrdemServicoGerenciaRelatPRIORIDADEPARADA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'PRIORIDADEPARADA'
-      Origin = 'PRIORIDADEPARADA'
-      Size = 40
-    end
-    object qryOrdemServicoGerenciaRelatCODFAMILIAEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODFAMILIAEQUIP'
-      Origin = 'CODFAMILIAEQUIP'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 9
-    end
-    object qryOrdemServicoGerenciaRelatDESCMANUT: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'DESCMANUT'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoGerenciaRelatREPROGRAMAR_M: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'REPROGRAMAR_M'
-      Origin = 'REPROGRAMAR1'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-    object qryOrdemServicoGerenciaRelatDESCLUBRIFIC: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'DESCLUBRIFIC'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoGerenciaRelatREPROGRAMAR_L: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'REPROGRAMAR_L'
-      Origin = 'REPROGRAMAR1'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-  end
   object qryOrdemServicoGerenciaRelatMObraProg: TFDQuery
+    MasterSource = DSOrdemServicoGerenciaRelat
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -53435,9 +53188,8 @@ object DM: TDM
       end>
   end
   object qryOSGerenciaRelatObservacoes: TFDQuery
-    OnCalcFields = qryOrdemServicoGerenciaRelatCalcFields
     IndexFieldNames = 'CODIGO'
-    MasterSource = dsOrdemServicoGerenciaRelat
+    MasterSource = DSOrdemServicoGerenciaRelat
     MasterFields = 'CODIGO'
     DetailFields = 'CODIGO'
     Connection = FDConnSPMP3
@@ -53478,7 +53230,7 @@ object DM: TDM
   end
   object qryOrdemServicoGerenciaRelatMObraProgOS: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
-    MasterSource = dsOrdemServicoGerenciaRelat
+    MasterSource = DSOrdemServicoGerenciaRelat
     MasterFields = 'CODIGO'
     DetailFields = 'CODORDEMSERVICO'
     Connection = FDConnSPMP3
@@ -53640,7 +53392,7 @@ object DM: TDM
   end
   object qryOrdemServicoGerenciaRelatMObraUtilOS: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
-    MasterSource = dsOrdemServicoGerenciaRelat
+    MasterSource = DSOrdemServicoGerenciaRelat
     MasterFields = 'CODIGO'
     DetailFields = 'CODORDEMSERVICO'
     Connection = FDConnSPMP3
@@ -53802,6 +53554,22 @@ object DM: TDM
   object dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraUtilOS
     Left = 402
+    Top = 530
+  end
+  object FDMTOrdemServicoGerenciaRelat: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 336
+    Top = 480
+  end
+  object DSOrdemServicoGerenciaRelat: TDataSource
+    DataSet = FDMTOrdemServicoGerenciaRelat
+    Left = 336
     Top = 530
   end
 end

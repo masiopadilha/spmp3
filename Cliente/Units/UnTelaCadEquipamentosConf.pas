@@ -62,12 +62,12 @@ begin
       else
         begin
           if qryEquipamentosPERIODOCONF.AsString = '3 meses' then
-            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(4383/24)))
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 90))
           else
           if qryEquipamentosPERIODOCONF.AsString = '6 meses' then
-            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(4383/24)))
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 180))
           else
-            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(8766/24)));
+            LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 365));
           qryEquipamentosDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
         end;
       qryEquipamentos.Post;
@@ -106,9 +106,9 @@ begin
   with DM do
     begin
       case RGPeriodo.ItemIndex of
-        0: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(4383/24)));
-        1: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(8766/24)));
-        2: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, Round(8766/24)));
+        0: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 90));
+        1: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 180));
+        2: LblUltParada.Caption := FormatDateTime('dd/mm/yyyy', IncDay(qryEquipamentosDATAINICIOCONF.AsDateTime, 365));
       end;
     end;
 end;

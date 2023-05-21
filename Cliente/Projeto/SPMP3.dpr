@@ -1,5 +1,4 @@
 program SPMP3;
-
 uses
   Vcl.Forms,
   Midas,
@@ -173,7 +172,6 @@ begin
 //  Application.Terminate;
 //End;
 
-
 if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Inspeções Vencidas')) > 0)
   or (FindWindow(nil, PChar('SPMP - Sistema do Plano de Manutenção Programada')) > 0) then
     begin
@@ -190,16 +188,12 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
   FrmTelaAcesso.ShowModal;
-
   if DM.FAcessoLiberado = True then
     begin
       FreeAndNil(FrmTelaAcesso);
-
       FrmTelaSplash := TFrmTelaSplash.Create(Application);
       FrmTelaSplash.ShowModal;
-
       FreeAndNil(FrmTelaSplash);
-
       Try
         Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
         if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade')
@@ -214,6 +208,5 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
         FreeAndNil(FrmTelaPrincipal);
       End;
   end;
-
 Application.Run;
 end.

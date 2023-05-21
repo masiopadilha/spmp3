@@ -871,21 +871,11 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.Completa1Click(Sender: TObject);
 begin
   inherited;
-  DM.qryOrdemServicoGerenciaRelat.Close;
-  DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
-  DM.qryOrdemServicoGerenciaRelat.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
-  DM.qryOrdemServicoGerenciaRelat.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
-  DM.qryOrdemServicoGerenciaRelat.Open;
-  if DM.qryOrdemServicoGerencia.Filtered = True then
-    begin
-      DM.qryOrdemServicoGerenciaRelat.Filter := DM.qryOrdemServicoGerencia.Filter;
-      DM.qryOrdemServicoGerenciaRelat.Filtered := True;
-    end;
+  Dm.FDMTOrdemServicoGerenciaRelat.Close;
+  Dm.FDMTOrdemServicoGerenciaRelat.CopyFields(DM.qryOrdemServicoGerencia);
+  Dm.FDMTOrdemServicoGerenciaRelat.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
 
   DmRelatorios.frxROrdemServicoGeralCompleta.ShowReport();
-
-  DM.qryOrdemServicoGerenciaRelat.Filtered := False;
-  DM.qryOrdemServicoGerenciaRelat.Close;
 
   DM.qryOrdemServicoGerenciaRelatMObraProg.Close;
   DM.qryOrdemServicoGerenciaRelatMObraUtil.Close;
@@ -1052,9 +1042,9 @@ if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
 if EdtFamiliaEquip.Text <> '' then
   begin
     if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-      GrdOrdemServico.DataSource.DataSet.Filter := 'CODFAMEQUIP = ' + QuotedStr(LCodFamilia)
+      GrdOrdemServico.DataSource.DataSet.Filter := 'CODFAMILIAEQUIP = ' + QuotedStr(LCodFamilia)
     else
-      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODFAMEQUIP = '+QuotedStr(LCodFamilia);
+      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODFAMILIAEQUIP = '+QuotedStr(LCodFamilia);
   end;
 
 if edtOficina.Text <> '' then
@@ -1603,21 +1593,29 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.Simples1Click(Sender: TObject);
 begin
   inherited;
-  DM.qryOrdemServicoGerenciaRelat.Close;
-  DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
-  DM.qryOrdemServicoGerenciaRelat.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
-  DM.qryOrdemServicoGerenciaRelat.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
-  DM.qryOrdemServicoGerenciaRelat.Open;
-  if DM.qryOrdemServicoGerencia.Filtered = True then
-    begin
-      DM.qryOrdemServicoGerenciaRelat.Filter := DM.qryOrdemServicoGerencia.Filter;
-      DM.qryOrdemServicoGerenciaRelat.Filtered := True;
-    end;
+//  DM.qryOrdemServicoGerenciaRelat.Close;
+//  DM.qryOrdemServicoGerenciaRelat.Params[0].AsString := DM.FCodEmpresa;
+//  DM.qryOrdemServicoGerenciaRelat.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
+//  DM.qryOrdemServicoGerenciaRelat.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
+//  DM.qryOrdemServicoGerenciaRelat.Open;
+//  if DM.qryOrdemServicoGerencia.Filtered = True then
+//    begin
+//      DM.qryOrdemServicoGerenciaRelat.Filter := DM.qryOrdemServicoGerencia.Filter;
+//      DM.qryOrdemServicoGerenciaRelat.Filtered := True;
+//    end;
+//
+//  DmRelatorios.frxROrdemServicoGeral.ShowReport();
+//
+//  DM.qryOrdemServicoGerenciaRelat.Filtered := False;
+//  DM.qryOrdemServicoGerenciaRelat.Close;
 
+
+
+  Dm.FDMTOrdemServicoGerenciaRelat.Close;
+  Dm.FDMTOrdemServicoGerenciaRelat.CopyFields(DM.qryOrdemServicoGerencia);
+  Dm.FDMTOrdemServicoGerenciaRelat.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
   DmRelatorios.frxROrdemServicoGeral.ShowReport();
-
-  DM.qryOrdemServicoGerenciaRelat.Filtered := False;
-  DM.qryOrdemServicoGerenciaRelat.Close;
+//  DmRelatorios2.FDMemTOrdemServicoGerencia.EmptyDataSet;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Timer1Timer(Sender: TObject);

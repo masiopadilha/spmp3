@@ -1,13 +1,10 @@
 unit UnTelaConsulta;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, UnTelaPaiOkCancel,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param;
-
 type
   TFrmTelaAuxiliar = class(TFrmTelaPaiOKCancel)
     BtnConsultar: TButton;
@@ -50,18 +47,12 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaAuxiliar: TFrmTelaAuxiliar;
 
-
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaCadMonitMedicoes, UnDM;
-
 
 procedure TFrmTelaAuxiliar.BtnAreaClick(Sender: TObject);
 begin
@@ -84,7 +75,6 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Equipamentos';
   end;
 end;
-
 procedure TFrmTelaAuxiliar.BtnCelulaClick(Sender: TObject);
 begin
   inherited;
@@ -112,7 +102,6 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Equipamentos';
   end;
 end;
-
 procedure TFrmTelaAuxiliar.BtnConsultarClick(Sender: TObject);
 begin
   inherited;
@@ -240,29 +229,22 @@ begin
       begin
         if (DM.FParamAuxiliar[1] <> 'CODIGO') and (DM.FParamAuxiliar[1] <> 'DESCRICAO') then
           DM.FParamAuxiliar[1] := 'DESCRICAO';
-
         DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA ,`equipamentos`.`SEQUENCIA`'
                                 + ' FROM `equipamentos` INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
                                 + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
                                 + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
                                 + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` =  `linhas`.`CODIGO`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`) AND (`linhas`.`CODAREA` = `areas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
                                 + ' WHERE (`equipamentos`.'+DM.FParamAuxiliar[1]+' like :descricao and `equipamentos`.`codempresa` = '+QuotedStr(DM.FCodEmpresa) + '');
-
         if DM.FTabela_auxiliar = 250 then
                                   DM.qryAuxiliar.SQL.Add(' AND `OPERANDO` = ''S''');
-
         if DM.FCodFamilia <> '' then
                                   DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODFAMILIAEQUIP` = '+QuotedStr(DM.FCodFamilia));
-
         if DM.FCodArea <> '' then
                                   DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODLOCALIZACAO` = '+QuotedStr(DM.FCodArea));
-
         if DM.FCodCelula <> '' then
                                   DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODCELULA` = '+QuotedStr(DM.FCodCelula));
-
         if DM.FCodLinha <> '' then
                                   DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODLINHA` = '+QuotedStr(DM.FCodLinha));
-
           DM.qryAuxiliar.SQL.Add(' ) order by `equipamentos`.`DESCRICAO`');
       end;
     26://Imagens
@@ -289,7 +271,6 @@ begin
           DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
         else
           DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
-
       end;
     31://Equipamentos Primários
       begin
@@ -635,7 +616,6 @@ begin
                                 +  ' , `pneusmontagemchassipneuscons`.`RODAGEM`, `pneusmontagemchassipneuscons`.`SERVICO`, `fornecedor`.`DESCRICAO` AS `FORNECEDOR`, `pneusmontagemchassipneuscons`.`CUSTO` FROM `pneusmontagemchassipneuscons`'
                                 +  '  INNER JOIN `pneus` ON (`pneusmontagemchassipneuscons`.`CODPNEU` = `pneus`.`CODIGO`) AND (`pneusmontagemchassipneuscons`.`CODEMPRESA` = `pneus`.`CODEMPRESA`) INNER JOIN `fornecedor`'
                                 +  ' ON (`pneusmontagemchassipneuscons`.`CODFORNECEDOR` = `fornecedor`.`CODIGO`) WHERE (`pneus`.`DESCRICAO` LIKE :descricao AND `pneusmontagemchassipneuscons`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `pneusmontagemchassipneuscons`.`ENVIO` ASC');
-
       end;
     93://ID de Pneus
       begin
@@ -659,9 +639,7 @@ begin
   end;
   DM.qryAuxiliar.Params[0].AsString := '%' + EdtConsulta.Text + '%';
   DM.qryAuxiliar.Open;
-
   GrdAuxiliar.Columns[0].Title.Alignment  := taCenter;
-
   if (DM.FTabela_auxiliar <> 18) and (DM.FTabela_auxiliar <> 180) and (DM.FTabela_auxiliar <> 94) and (DM.FTabela_auxiliar <> 95) then
     begin
       GrdAuxiliar.Columns[0].Title.Alignment  := taCenter;
@@ -680,7 +658,6 @@ begin
       DM.qryAuxiliar.Fields[1].DisplayLabel := 'Equipamento Atual';
       DM.qryAuxiliar.Fields[1].DisplayWidth := 50;
     end;
-
   case DM.FTabela_auxiliar of
     12, 19, 120, 20, 200://
       begin
@@ -781,7 +758,6 @@ begin
       begin
           DM.qryAuxiliar.Fields[6].DisplayLabel := 'Descrição';
           DM.qryAuxiliar.Fields[6].DisplayWidth := 50;
-
 //        DM.qryAuxiliar.Fields[2].DisplayLabel := 'Início';
 //        GrdAuxiliar.Columns[2].Title.Alignment  := taCenter;
 //        DM.qryAuxiliar.Fields[2].DisplayWidth := 5;
@@ -794,7 +770,6 @@ begin
 //
 //        DM.qryAuxiliar.Fields[4].DisplayLabel := 'Família';
 //        DM.qryAuxiliar.Fields[4].DisplayWidth := 25;
-
         DM.qryAuxiliar.Fields[1].Visible := False;
         DM.qryAuxiliar.Fields[2].Visible := False;
         DM.qryAuxiliar.Fields[3].Visible := False;
@@ -830,16 +805,13 @@ begin
           GrdAuxiliar.Columns[2].Title.Font.Style := [fsBold];
         if DM.FParamAuxiliar[1] = 'DESCRICAO' then
           GrdAuxiliar.Columns[1].Title.Font.Style := [fsBold];
-
         DM.qryAuxiliar.Fields[1].DisplayWidth := 35;
         DM.qryAuxiliar.Fields[2].Alignment    := taCenter;
         GrdAuxiliar.Columns[2].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[2].DisplayLabel := 'Referência';
         DM.qryAuxiliar.Fields[2].DisplayWidth := 5;
-
         DM.qryAuxiliar.Fields[3].DisplayLabel := 'Família';
         DM.qryAuxiliar.Fields[3].DisplayWidth := 25;
-
         DM.qryAuxiliar.Fields[4].DisplayLabel := 'Qtde';
         GrdAuxiliar.Columns[4].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[4].DisplayWidth := 5;
@@ -847,7 +819,6 @@ begin
     37://Arquivos Técnicos
       begin
         DM.qryAuxiliar.Fields[1].DisplayWidth := 40;
-
         DM.qryAuxiliar.Fields[2].DisplayLabel := 'Tipo';
         GrdAuxiliar.Columns[2].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[2].DisplayWidth := 10;
@@ -876,7 +847,6 @@ begin
           GrdAuxiliar.Columns[1].Title.Font.Style := [fsBold];
         DM.qryAuxiliar.Fields[2].DisplayWidth := 15;
         DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
-
         DM.qryAuxiliar.Filter   := 'CARGO = '+ QuotedStr(DM.FParamAuxiliar[2]);
         DM.qryAuxiliar.Filtered := True;
       end;
@@ -891,26 +861,20 @@ begin
       begin
         DM.qryAuxiliar.Edit;
         DM.qryAuxiliar.Fields[0].DisplayLabel := 'Ordem de Serviço';
-
         DM.qryAuxiliar.Fields[1].DisplayLabel := 'Serviço';
         DM.qryAuxiliar.Fields[1].DisplayWidth := 30;
-
         GrdAuxiliar.Columns[2].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[2].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cadastro';
         DM.qryAuxiliar.Fields[2].DisplayWidth := 18;
-
         DM.qryAuxiliar.Fields[3].DisplayLabel := 'Solicitante';
         DM.qryAuxiliar.Fields[3].DisplayWidth := 22;
-
         GrdAuxiliar.Columns[4].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[4].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[4].DisplayLabel := 'Cód. Equip.';
         DM.qryAuxiliar.Fields[4].DisplayWidth := 15;
-
         DM.qryAuxiliar.Fields[5].DisplayLabel := 'Equipamento';
         DM.qryAuxiliar.Fields[5].DisplayWidth := 30;
-
 //        if  DM.FTabela_auxiliar = 40 then
 //          DM.qryAuxiliar.Fields[6].Visible := False;
       end;
@@ -1177,13 +1141,11 @@ begin
         DM.qryAuxiliar.Fields[3].DisplayWidth := 15;
       end;
   end;
-
 DM.FParamAuxiliar[3] := '';
 DM.FParamAuxiliar[4] := '';
 DM.FParamAuxiliar[5] := '';
 DM.FParamAuxiliar[6] := '';
 end;
-
 procedure TFrmTelaAuxiliar.BtnFamiliaEquipClick(Sender: TObject);
 begin
   inherited;
@@ -1207,14 +1169,12 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Equipamentos';
   end;
 end;
-
 procedure TFrmTelaAuxiliar.BtnFecharClick(Sender: TObject);
 begin
   inherited;
 DM.FCodCombo := EmptyStr;
 DM.FValorCombo := EmptyStr;
 end;
-
 procedure TFrmTelaAuxiliar.BtnLinhaClick(Sender: TObject);
 begin
   inherited;
@@ -1228,7 +1188,6 @@ if EdtCelula.Text = '' then
     EdtCelula.SetFocus;
     Exit;
   end;
-
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FParamAuxiliar[1] := DM.FCodArea;
@@ -1249,72 +1208,58 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Equipamentos';
   end;
 end;
-
 procedure TFrmTelaAuxiliar.edtAreaDblClick(Sender: TObject);
 begin
   inherited;
   DM.FCodArea  := '';
   edtArea.Text := '';
   DM.FCodArea  := '';
-
   DM.FCodCelula  := '';
   edtCelula.Text := '';
   DM.FCodCelula  := '';
-
   DM.FCodLinha  := '';
   edtLinha.Text := '';
   DM.FCodLinha  := '';
-
   BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaAuxiliar.EdtCelulaDblClick(Sender: TObject);
 begin
   inherited;
   DM.FCodCelula  := '';
   edtCelula.Text := '';
   DM.FCodCelula  := '';
-
   DM.FCodLinha  := '';
   edtLinha.Text := '';
   DM.FCodLinha  := '';
-
   BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaAuxiliar.EdtConsultaKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
 if Key = #13 then
   BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaAuxiliar.EdtFamiliaEquipDblClick(Sender: TObject);
 begin
   inherited;
   DM.FCodFamilia  := '';
   EdtFamiliaEquip.Text := '';
-
   BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaAuxiliar.edtLinhaDblClick(Sender: TObject);
 begin
   inherited;
   DM.FCodLinha  := '';
   edtLinha.Text := '';
   DM.FCodLinha  := '';
-
   BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaAuxiliar.FormActivate(Sender: TObject);
 begin
   inherited;
   DM.qryAuxiliar.Close;
   DM.qryAuxiliar.SQL.Clear;
 end;
-
 procedure TFrmTelaAuxiliar.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -1323,7 +1268,6 @@ begin
 DM.FNomeConsulta := EmptyStr;
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaAuxiliar.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -1333,18 +1277,14 @@ DM.FCodFamilia := EmptyStr;
 DM.FCodArea    := EmptyStr;
 DM.FCodCelula  := EmptyStr;
 DM.FCodLinha   := EmptyStr;
-
 if DM.FNomeConsulta <> '' then
   FrmTelaAuxiliar.Caption := DM.FNomeConsulta;
 DM.qryAuxiliar.Close;
-
 if FrmTelaAuxiliar.Caption = 'Equipamentos' then
   begin
     PFiltroEquip.Visible := True;
   end;
-
 end;
-
 procedure TFrmTelaAuxiliar.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
@@ -1353,7 +1293,6 @@ if Key = #13 then
     BtnOK.OnClick(Sender);
   end;
 end;
-
 procedure TFrmTelaAuxiliar.FormShow(Sender: TObject);
 begin
   inherited;
@@ -1365,7 +1304,6 @@ begin
   inherited;
   if DM.DSAuxiliar.DataSet.Active = False then Exit;
   if EdtConsulta.Focused = True then Exit;
-
 
   case DM.FTabela_auxiliar of
     28, 31, 87, 100, 110, 120, 130, 150, 160, 170, 200, 210, 220, 230, 240, 300, 301, 320, 330, 370, 380, 400, 420, 430, 440, 450, 460, 470, 490, 500, 5000, 600, 700, 800, 900, 6400, 7000, 7900, 8000, 8301, 8100, 9000, 9500://Combos e outras consultas
@@ -2275,7 +2213,6 @@ DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 Close;
 end;
-
 procedure TFrmTelaAuxiliar.GrdAuxiliarDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
@@ -2285,9 +2222,7 @@ begin
           begin
           GrdAuxiliar.Canvas.Brush.Color := $00F7F8F9;
         end;
-
   GrdAuxiliar.Canvas.FillRect(Rect);
   GrdAuxiliar.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
-
 end.
