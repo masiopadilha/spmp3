@@ -920,7 +920,7 @@ case PCInspecoes.TabIndex of
               //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
               if DM.qryManutConsREPROGRAMAR1.AsString = 'Execução' then
                 begin
-                  DM.qryManutConsRELATORIO.AsString    := 'S';
+                  DM.qryManutConsRELATORIO.AsString  := 'S';
                   if (DM.qryManutConsREPROGRAMAR2.AsString = 'Programação') and (DM.qryManutConsRELATORIO.AsString = 'S') then
                     DM.qryManutConsLEITURA.AsInteger := DM.qryManutConsLEITURA.AsInteger + DM.qryManutConsFREQUENCIA2.AsInteger;
                 end;
