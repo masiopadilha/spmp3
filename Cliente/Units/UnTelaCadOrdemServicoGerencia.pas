@@ -61,7 +61,6 @@ type
     Completa1: TMenuItem;
     Label11: TLabel;
     CBPrioridade: TComboBox;
-    chkParado: TCheckBox;
     Label3: TLabel;
     EdtData1: TJvDateTimePicker;
     Label4: TLabel;
@@ -70,6 +69,8 @@ type
     chbCanc: TCheckBox;
     Simples1: TMenuItem;
     Checklist1: TMenuItem;
+    chkParado: TCheckBox;
+    chkDetalhad: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -117,7 +118,7 @@ type
   end;
 var
   FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia;
-  LEquipamento, LCodOficina, LCodFamilia, LNProg, LProg, LExec,
+  LEquipamento, LCodOficina, LCodFamilia, LNProg, LDet, LProg, LExec,
   LLib, LFec, LPar, LSolic, LRot, LCanc : String;
 implementation
 {$R *.dfm}
@@ -845,13 +846,20 @@ GrdOrdemServico.DataSource.DataSet.Filtered := False;
 GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
 DM.qryOrdemServicoGerencia.IndexDefs.Clear;
 
-LNProg := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := '';
+LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := '';
 
 if (chkNProg.Checked = True) then
   if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LNProg := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
+    LDet := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
   else
-    LNProg := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
+    LDet := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
+GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LDet;
+
+if (chkDetalhad.Checked = True) then
+  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    LNProg := ' (SITUACAO = ''DETALHADA'')'
+  else
+    LNProg := ' OR (SITUACAO = ''DETALHADA'')';
 GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LNProg;
 
 if (chkProg.Checked = True) then

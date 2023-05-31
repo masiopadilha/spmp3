@@ -8,8 +8,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   OnShow = FormShow
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
@@ -403,7 +401,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TabOrder = 1
       ExplicitWidth = 992
       object chkNProg: TCheckBox
-        Left = 18
+        Left = 6
         Top = 5
         Width = 95
         Height = 18
@@ -418,7 +416,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkProg: TCheckBox
-        Left = 125
+        Left = 210
         Top = 5
         Width = 100
         Height = 18
@@ -429,11 +427,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         OnClick = chkNProgClick
       end
       object chkExec: TCheckBox
-        Left = 237
+        Left = 320
         Top = 5
         Width = 99
         Height = 18
@@ -444,11 +442,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
         OnClick = chkNProgClick
       end
       object chkLib: TCheckBox
-        Left = 348
+        Left = 429
         Top = 5
         Width = 80
         Height = 18
@@ -459,11 +457,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         OnClick = chkNProgClick
       end
       object chkFec: TCheckBox
-        Left = 440
+        Left = 519
         Top = 5
         Width = 79
         Height = 18
@@ -474,11 +472,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         OnClick = chkNProgClick
       end
       object chkPar: TCheckBox
-        Left = 531
+        Left = 608
         Top = 5
         Width = 91
         Height = 18
@@ -489,11 +487,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
         OnClick = chkNProgClick
       end
       object chkSolic: TCheckBox
-        Left = 634
+        Left = 709
         Top = 5
         Width = 112
         Height = 18
@@ -504,11 +502,11 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
         OnClick = chkNProgClick
       end
       object chkRot: TCheckBox
-        Left = 758
+        Left = 831
         Top = 5
         Width = 60
         Height = 18
@@ -519,25 +517,31 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 7
-        OnClick = chkNProgClick
-      end
-      object chkParado: TCheckBox
-        Left = 830
-        Top = 5
-        Width = 62
-        Height = 17
-        Caption = 'Parado'
         TabOrder = 8
         OnClick = chkNProgClick
       end
       object chbCanc: TCheckBox
-        Left = 904
+        Left = 901
         Top = 5
         Width = 89
         Height = 17
         Caption = 'Canceladas'
         TabOrder = 9
+        OnClick = chkNProgClick
+      end
+      object chkDetalhad: TCheckBox
+        Left = 111
+        Top = 5
+        Width = 89
+        Height = 18
+        Caption = 'Detalhadas'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
         OnClick = chkNProgClick
       end
     end
@@ -555,7 +559,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TabOrder = 2
       ExplicitWidth = 992
       object Label6: TLabel
-        Left = 17
+        Left = 6
         Top = 5
         Width = 142
         Height = 16
@@ -569,7 +573,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 271
+        Left = 260
         Top = 5
         Width = 44
         Height = 16
@@ -583,7 +587,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
       end
       object Label1: TLabel
-        Left = 524
+        Left = 515
         Top = 5
         Width = 74
         Height = 16
@@ -597,7 +601,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
       end
       object Label11: TLabel
-        Left = 777
+        Left = 769
         Top = 5
         Width = 63
         Height = 16
@@ -605,7 +609,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Caption = 'Prioridade:'
       end
       object BtnFamiliaEquip: TButton
-        Left = 226
+        Left = 217
         Top = 22
         Width = 28
         Height = 29
@@ -620,7 +624,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnFamiliaEquipClick
       end
       object BtnOficina: TButton
-        Left = 480
+        Left = 471
         Top = 22
         Width = 28
         Height = 29
@@ -635,7 +639,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnOficinaClick
       end
       object edtOficina: TEdit
-        Left = 271
+        Left = 260
         Top = 24
         Width = 205
         Height = 24
@@ -648,7 +652,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnDblClick = EdtOficinaDblClick
       end
       object EdtFamiliaEquip: TEdit
-        Left = 18
+        Left = 7
         Top = 24
         Width = 205
         Height = 24
@@ -661,7 +665,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnDblClick = EdtFamiliaEquipDblClick
       end
       object edtManutencao: TEdit
-        Left = 524
+        Left = 515
         Top = 24
         Width = 205
         Height = 24
@@ -674,7 +678,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnDblClick = edtManutencaoDblClick
       end
       object BtnManutencao: TButton
-        Left = 733
+        Left = 726
         Top = 22
         Width = 28
         Height = 29
@@ -689,9 +693,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnManutencaoClick
       end
       object CBPrioridade: TComboBox
-        Left = 777
+        Left = 769
         Top = 24
-        Width = 205
+        Width = 137
         Height = 22
         Style = csOwnerDrawFixed
         TabOrder = 6
@@ -704,6 +708,15 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           'At'#233' 1 Semana'
           'At'#233' 1 M'#234's'
           'Acima de um m'#234's')
+      end
+      object chkParado: TCheckBox
+        Left = 922
+        Top = 26
+        Width = 62
+        Height = 17
+        Caption = 'Parado'
+        TabOrder = 7
+        OnClick = chkNProgClick
       end
     end
   end
@@ -743,8 +756,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   object PopupMenuLiberar: TPopupMenu
-    Left = 421
-    Top = 109
+    Left = 397
+    Top = 65533
     object Total: TMenuItem
       Caption = 'Libera'#231#227'o total'
       OnClick = TotalClick
@@ -756,7 +769,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   object PopupMenuRelat: TPopupMenu
     Left = 756
-    Top = 112
+    Top = 16
     object Ficha1: TMenuItem
       Caption = 'Ficha'
       OnClick = Ficha1Click
@@ -791,8 +804,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     Top = 18
   end
   object PopupMenuExecutar: TPopupMenu
-    Left = 293
-    Top = 117
+    Left = 301
+    Top = 65533
     object MenuItem1: TMenuItem
       Caption = 'Executar'
       OnClick = TotalClick

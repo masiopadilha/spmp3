@@ -306,7 +306,7 @@ type
     frxRFuncionariosHist: TfrxReport;
     frxDBOrdemServicoLocalizaMObra: TfrxDBDataset;
     frxDBOrdemServicoLocalizaMObraOSProg: TfrxDBDataset;
-    luc: TfrxReport;
+    frxROrdemServicoLocalizaMObra: TfrxReport;
     frxReport2: TfrxReport;
     frxROrdemServicoMObra: TfrxReport;
     frxROrdemServicoInsp: TfrxReport;
