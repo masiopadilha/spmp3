@@ -1,6 +1,7 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
-  PixelsPerInch = 96
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -109,6 +110,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PIdentificacao: TPanel
+    ExplicitWidth = 1008
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -342,6 +344,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PProgramacao: TPanel
     Height = 122
+    ExplicitWidth = 1008
     ExplicitHeight = 122
     inherited Label2: TLabel
       Width = 132
@@ -567,9 +570,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 277
-    Height = 265
+    Height = 261
     ExplicitTop = 277
-    ExplicitHeight = 265
+    ExplicitHeight = 252
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -583,26 +586,30 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       AlignWithMargins = True
       Left = 4
       Top = 26
-      Width = 996
-      Height = 235
+      Width = 1000
+      Height = 231
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 994
+      ExplicitHeight = 222
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
-          Width = 988
-          Height = 204
+          Width = 992
+          Height = 200
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 986
+          ExplicitHeight = 191
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
-            Width = 986
-            Height = 202
+            Width = 990
+            Height = 198
             Align = alClient
             Color = 14671839
             DataSource = DM.dsManutProgEquipItens
@@ -677,15 +684,15 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
         object PEspecificos: TPanel
           Left = 0
           Top = 0
-          Width = 988
-          Height = 204
+          Width = 992
+          Height = 200
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
-            Width = 986
-            Height = 202
+            Width = 990
+            Height = 198
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839

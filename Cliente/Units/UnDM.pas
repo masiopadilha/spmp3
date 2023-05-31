@@ -5261,29 +5261,7 @@ type
     qryOrdemServicoLocalizaMObraCALENDARIO: TStringField;
     qryOrdemServicoLocalizaMObraCARGO: TStringField;
     qryOrdemServicoLocalizaMObraCODEMPRESA: TStringField;
-    qryOrdemServicoLocalizaMObraOSExec: TFDQuery;
     dsOrdemServicoLocalizaMObraOSExec: TDataSource;
-    qryOrdemServicoLocalizaMObraOSExecCODIGO: TFDAutoIncField;
-    qryOrdemServicoLocalizaMObraOSExecCODEMPRESA: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecDESCRICAO: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecSITUACAO: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecDATACADASTRO: TDateTimeField;
-    qryOrdemServicoLocalizaMObraOSExecDATAPROGINI: TDateTimeField;
-    qryOrdemServicoLocalizaMObraOSExecDATAINICIOREAL: TDateTimeField;
-    qryOrdemServicoLocalizaMObraOSExecDATAFIMREAL: TDateTimeField;
-    qryOrdemServicoLocalizaMObraOSExecDATAFECHAMENTO: TDateTimeField;
-    qryOrdemServicoLocalizaMObraOSExecTEMPOPREVISTO: TBCDField;
-    qryOrdemServicoLocalizaMObraOSExecTEMPOEXECUTADO: TBCDField;
-    qryOrdemServicoLocalizaMObraOSExecCODEQUIPAMENTO: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecSOLICTRAB: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecPROGMANUAL: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecROTAEQUIP: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecCODMANUTPROGEQUIP: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecCODLUBRIFICPROGEQUIP: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecSOLICITANTE: TStringField;
-    qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
     qryProgramadasExecucaoMObraCELULA: TStringField;
     qryProgramadasExecucaoMObraTIPOCELULA: TStringField;
     FDQuery1: TFDQuery;
@@ -5334,17 +5312,52 @@ type
     StringField120: TStringField;
     DateTimeField16: TDateTimeField;
     dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource;
-    qryOrdemServicoGerenciaPRIORIDADEPARADA: TStringField;
-    qryOrdemServicoGerenciaOBSERVACOES: TBlobField;
-    qryOrdemServicoGerenciaOFICINA: TStringField;
-    qryOrdemServicoGerenciaCODFAMILIAEQUIP: TStringField;
+    qrySolicitacaoTrabPRIORIDADEPARADA: TStringField;
+    qryOrdemServicoMObraDispHHPROG: TFMTBCDField;
+    qryManutProgEquipC_REIMPRESSAO: TStringField;
+    qryLubrificProgEquipC_REIMPRESSAO: TStringField;
     FDMTOrdemServicoGerenciaRelat: TFDMemTable;
-    DSOrdemServicoGerenciaRelat: TDataSource;
-    qryOrdemServicoGerenciaDESCINSPECAO: TStringField;
-    qryOrdemServicoGerenciaPLANEJADA: TDateTimeField;
-    qryOrdemServicoGerenciaFREQUENCIA: TSmallintField;
-    qryOrdemServicoGerenciaREPROGRAMAR: TStringField;
-    qryOrdemServicoGerenciaORIGEM: TStringField;
+    qryClonarManut: TFDQuery;
+    dsClonarManut: TDataSource;
+    qryClonarManutCODMANUTPROGFAMEQUIP: TStringField;
+    qryClonarManutDESCRICAO: TStringField;
+    qryClonarManutCRITICIDADE: TStringField;
+    qryClonarManutFREQUENCIA1: TSmallintField;
+    qryClonarManutREPROGRAMAR1: TStringField;
+    qryManutProgEquipFAMEQUIPAMENTO: TStringField;
+    qryClonarManutGRUPOINSP: TStringField;
+    qryAuxiliar2: TFDQuery;
+    qryClonarLubrific: TFDQuery;
+    dsClonarLubrific: TDataSource;
+    qryClonarLubrificCODLUBRIFICPROGFAMEQUIP: TStringField;
+    qryClonarLubrificDESCRICAO: TStringField;
+    qryClonarLubrificCRITICIDADE: TStringField;
+    qryClonarLubrificFREQUENCIA1: TSmallintField;
+    qryClonarLubrificREPROGRAMAR1: TStringField;
+    qryClonarLubrificGRUPOINSP: TStringField;
+    qryOrdemServicoGerenciaOBSERVACOES: TBlobField;
+    qryOrdemServicoLocalizaMObraOSExec: TFDQuery;
+    qryOrdemServicoLocalizaMObraOSExecCODIGO: TIntegerField;
+    qryOrdemServicoLocalizaMObraOSExecCODEMPRESA: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecDESCRICAO: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecSOLICTRAB: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecPROGMANUAL: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecROTAEQUIP: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecCODMANUTPROGEQUIP: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecCODLUBRIFICPROGEQUIP: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecSOLICITANTE: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecSITUACAO: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecDATACADASTRO: TDateTimeField;
+    qryOrdemServicoLocalizaMObraOSExecDATAPROGINI: TDateTimeField;
+    qryOrdemServicoLocalizaMObraOSExecDATAINICIOREAL: TDateTimeField;
+    qryOrdemServicoLocalizaMObraOSExecDATAFIMREAL: TDateTimeField;
+    qryOrdemServicoLocalizaMObraOSExecDATAFECHAMENTO: TDateTimeField;
+    qryOrdemServicoLocalizaMObraOSExecTEMPOPREVISTO: TBCDField;
+    qryOrdemServicoLocalizaMObraOSExecTEMPOEXECUTADO: TBCDField;
+    qryOrdemServicoLocalizaMObraOSExecCODEQUIPAMENTO: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField;
+    qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5501,7 +5514,7 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   UnTelaCadAbastecimentos, UnTelaInspConsulta, UnTelaInspFechamentoHist,
   UnTelaCadOrdemServicoHistorico, UnTelaCadPneusChassiRelat,
   UnTelaCadPneusChassi, UnTelaGerenciador, UnTelaCadFuncionariosHist,
-  UnTelaCadOrdemServicoFechamento;
+  UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia;
 
 {$R *.dfm}
 
@@ -6010,7 +6023,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
@@ -6027,7 +6039,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Mecânica'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6045,7 +6056,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Elétrica'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6063,7 +6073,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Civil'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6081,7 +6090,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Apoio Técnico'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6099,7 +6107,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Produtiva'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6117,7 +6124,6 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ', ''%Y/%m/%d'') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2) + ' 23:59:59') + ', ''%Y/%m/%d %T'')'
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Administrativa'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6255,10 +6261,16 @@ begin
 if (FrmTelaInspVenc <> nil) or (FrmTelaInspConsulta <> nil) then
   begin
     qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryLubrificProgEquipC_REIMPRESSAO.AsString    := 'N';
   end;
 if qryLubrificProgEquipDTAINICIO1.AsString <> '' then
   qryLubrificProgEquipC_PROXINSP.AsDateTime := IncDay(qryLubrificProgEquipDTAINICIO1.AsDateTime, qryLubrificProgEquipFREQUENCIA1.AsInteger);
 
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryLubrificProgEquipC_REIMPRESSAO.AsString    := 'S';
+  end;
 end;
 
 procedure TDM.qryLubrificProgEquipItensEspAfterInsert(DataSet: TDataSet);
@@ -6401,9 +6413,16 @@ begin
 if (FrmTelaInspVenc <> nil) or (FrmTelaInspConsulta <> nil) then
   begin
     qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryManutProgEquipC_REIMPRESSAO.AsString    := 'N';
   end;
 if qryManutProgEquipDTAINICIO1.AsString <> '' then
   qryManutProgEquipC_PROXINSP.AsDateTime := IncDay(qryManutProgEquipDTAINICIO1.AsDateTime, qryManutProgEquipFREQUENCIA1.AsInteger);
+
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+    qryManutProgEquipC_REIMPRESSAO.AsString    := 'S';
+  end;
 end;
 
 procedure TDM.qryManutProgEquipItensEspAfterInsert(DataSet: TDataSet);
@@ -8503,10 +8522,13 @@ begin
   LDataClicada := Data;
   LTotal       := 0;
 
-  DM.qryTotalHomemHora.Close;
-  DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
-  DM.qryTotalHomemHora.Open;
-  DM.qryTotalHomemHoraSeqHora.Open;
+  if DM.qryTotalHomemHora.Active = False then
+  begin
+    DM.qryTotalHomemHora.Close;
+    DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryTotalHomemHora.Open;
+    DM.qryTotalHomemHoraSeqHora.Open;
+  end;
 
   if Matricula <> EmptyStr then
     begin
@@ -8557,8 +8579,8 @@ begin
     end;
 
 
-  DM.qryTotalHomemHora.Close;
-  DM.qryTotalHomemHoraSeqHora.Close;
+//  DM.qryTotalHomemHora.Close;
+//  DM.qryTotalHomemHoraSeqHora.Close;
 
   Result := LTotal;
 end;

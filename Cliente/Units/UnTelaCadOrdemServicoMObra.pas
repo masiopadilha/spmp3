@@ -30,7 +30,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnTelaConsulta, UnDM;
+uses UnTelaConsulta, UnDM, UnTelaCadOrdemServico;
 
 procedure TFrmTelaCadOrdemServicoMObra.BtnFecharClick(Sender: TObject);
 begin
@@ -58,6 +58,27 @@ begin
           DM.qryOrdemServicoEquipe.Next;
         end;
     end;
+
+    if (DM.qryOrdemServicoEquipeMObra.RecordCount > 0) and (DM.qryOrdemServicoCODMANUTENCAO.AsString <> '')
+      and ((DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA')) then
+        begin
+          DM.qryOrdemServico.Edit;
+          DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+          DM.qryOrdemServico.Post;
+
+          if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+            begin
+              DM.qryOrdemServicoGerencia.Edit;
+              DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+              DM.qryOrdemServicoGerencia.Post;
+            end;
+
+          FrmTelaCadOrdemServico.PSituacao.Caption := 'DETALHADA';
+          FrmTelaCadOrdemServico.PSituacao.Color := clYellow;
+          FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
+        end;
+
+  DM.qryOrdemServico.Edit;
   DM.qryOrdemServico.Post;
   inherited;
 end;

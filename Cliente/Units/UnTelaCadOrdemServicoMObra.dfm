@@ -1,28 +1,34 @@
 inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
   Caption = 'M'#227'o de Obra da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PTop: TPanel
+    ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 473
+      ExplicitLeft = 473
     end
   end
   inherited PCentro: TPanel
+    ExplicitWidth = 502
+    ExplicitHeight = 163
     inherited RGTelas: TRadioGroup
       Left = 158
       Width = 0
+      Height = 152
       TabOrder = 1
       ExplicitLeft = 158
       ExplicitWidth = 0
+      ExplicitHeight = 152
     end
     object GrdEquipe: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 151
-      Height = 154
+      Height = 146
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alLeft
       Ctl3D = False
@@ -65,10 +71,10 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
     end
     object GrdEquipeMObra: TDBGrid
       AlignWithMargins = True
-      Left = 157
+      Left = 161
       Top = 4
       Width = 337
-      Height = 154
+      Height = 146
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -118,7 +124,13 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    ExplicitTop = 235
+    ExplicitWidth = 498
+  end
   inherited PBotoes: TPanel
+    ExplicitTop = 262
+    ExplicitWidth = 498
     inherited BtnOK: TButton
       Left = 100
       Visible = False

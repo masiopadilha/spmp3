@@ -126,7 +126,10 @@ begin
       end;
     4, 400://Centro de Custo
       begin
-        DM.qryAuxiliar.SQL.Add('select codigo, descricao from centrocusto where descricao like :descricao order by descricao');
+        if DM.FTabela_auxiliar = 400 then
+          DM.qryAuxiliar.SQL.Add('select codigo, descricao from centrocusto where visivel = ''S'' and descricao like :descricao order by descricao')
+        else
+          DM.qryAuxiliar.SQL.Add('select codigo, descricao from centrocusto where descricao like :descricao order by descricao')
       end;
     5, 500://Classes
       begin

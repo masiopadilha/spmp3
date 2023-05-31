@@ -573,16 +573,16 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryFamEquipamento.Open;
 
         DM.qryEquipamentosDados.Close;
-//        DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
-//        DM.qryEquipamentosDados.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
-//        DM.qryEquipamentosDados.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+        DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryEquipamentosDados.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+        DM.qryEquipamentosDados.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
         DM.qryEquipamentosDados.Open;
         DM.qryEquipamentosDados.Edit;
 
         DM.qryEquipamentosDadosR.Close;
-//        DM.qryEquipamentosDadosR.Params[0].AsString := DM.FCodEmpresa;
-//        DM.qryEquipamentosDadosR.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
-//        DM.qryEquipamentosDadosR.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+        DM.qryEquipamentosDadosR.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryEquipamentosDadosR.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+        DM.qryEquipamentosDadosR.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
         DM.qryEquipamentosDadosR.Open;
         DM.qryEquipamentosDadosR.Edit;
 
@@ -737,6 +737,9 @@ EdtCodEquip.ReadOnly := False;
 EdtCodEquip.SetFocus;
 
 LSequenciaAtual := 0;
+
+DM.qryEquipamentosDados.Close;
+DM.qryEquipamentosDadosR.Close;
 end;
 
 procedure TFrmTelaCadEquipamentos.BtnPrimarioClick(Sender: TObject);
@@ -769,6 +772,8 @@ DM.FTabela_auxiliar := 25;
 end;
 
 procedure TFrmTelaCadEquipamentos.BtnSalvarClick(Sender: TObject);
+var
+ randomNum: Integer;
 begin
 //inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
@@ -972,6 +977,99 @@ DM.MSGAguarde('');
 
 DM.FDataSetParam.Params[0].AsString := EdtCodEquip.Text;
 DM.FDataSetParam.Params[1].AsString := DM.FCodEmpresa;
+
+// Clonar inspeções dos equipamentos de mesma família
+if DM.FAlterando = False then
+begin
+  DM.qryClonarManut.Close;
+  DM.qryClonarManut.Params[0].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+  DM.qryClonarManut.Params[1].AsString := DM.FCodEmpresa;
+  DM.qryClonarManut.Open; DM.qryClonarManut.First;
+
+  if DM.qryClonarManut.RecordCount > 0 then
+    DM.qryEquipamentos.Post;
+
+  DM.qryAuxiliar2.Close;
+  DM.qryAuxiliar2.SQL.Clear;
+  DM.qryAuxiliar2.SQL.Text := 'SELECT * FROM manutprogequipamento WHERE codigo = -1';
+  DM.qryAuxiliar2.Open;
+
+  while not DM.qryClonarManut.Eof = True do
+  begin
+    DM.qryAuxiliar2.Append;
+    Randomize;
+    randomNum := Random(9000) + 1000;
+
+    DM.FTabela_auxiliar  := 32;
+    while DM.VerificaDuplo('MPC.' + IntToStr(randomNum)) = True do
+      begin
+        Randomize;
+        randomNum := Random(9000) + 1000;
+      end;
+
+    DM.qryAuxiliar2.FieldByName('CODIGO').AsString               := 'MPC.' + IntToStr(randomNum);
+    DM.qryAuxiliar2.FieldByName('CODEMPRESA').AsString           := DM.FCodEmpresa;
+    DM.qryAuxiliar2.FieldByName('CODEQUIPAMENTO').AsString       := DM.qryEquipamentosCODIGO.AsString;
+    DM.qryAuxiliar2.FieldByName('CODMANUTPROGFAMEQUIP').AsString := DM.qryClonarManutCODMANUTPROGFAMEQUIP.AsString;
+    DM.qryAuxiliar2.FieldByName('DESCRICAO').AsString            := DM.qryClonarManutDESCRICAO.AsString;
+    DM.qryAuxiliar2.FieldByName('CRITICIDADE').AsString          := DM.qryClonarManutCRITICIDADE.AsString;
+    DM.qryAuxiliar2.FieldByName('FREQUENCIA1').AsString          := DM.qryClonarManutFREQUENCIA1.AsString;
+    DM.qryAuxiliar2.FieldByName('REPROGRAMAR1').AsString         := DM.qryClonarManutREPROGRAMAR1.AsString;
+    DM.qryAuxiliar2.FieldByName('RELATORIO').AsString            := 'N';
+    DM.qryAuxiliar2.FieldByName('GRUPOINSP').AsString            := DM.qryClonarManutGRUPOINSP.AsString;
+    DM.qryAuxiliar2.FieldByName('DATACADASTRO').AsDateTime       := DM.FDataHoraServidor;
+    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodEmpresa;
+    DM.qryAuxiliar2.Post;
+
+    DM.qryClonarManut.Next;
+  end;
+
+  DM.qryAuxiliar2.Close;
+
+  DM.qryClonarLubrific.Close;
+  DM.qryClonarLubrific.Params[0].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+  DM.qryClonarLubrific.Params[1].AsString := DM.FCodEmpresa;
+  DM.qryClonarLubrific.Open; DM.qryClonarLubrific.First;
+
+  DM.qryAuxiliar2.Close;
+  DM.qryAuxiliar2.SQL.Clear;
+  DM.qryAuxiliar2.SQL.Text := 'SELECT * FROM lubrificprogequipamento WHERE codigo = -1';
+  DM.qryAuxiliar2.Open;
+
+  while not DM.qryClonarLubrific.Eof = True do
+  begin
+    DM.qryAuxiliar2.Append;
+    Randomize;
+    randomNum := Random(9000) + 1000;
+
+    DM.FTabela_auxiliar  := 32;
+    while DM.VerificaDuplo('MPC.' + IntToStr(randomNum)) = True do
+      begin
+        Randomize;
+        randomNum := Random(9000) + 1000;
+      end;
+
+    DM.qryAuxiliar2.FieldByName('CODIGO').AsString               := 'MPC.' + IntToStr(randomNum);
+    DM.qryAuxiliar2.FieldByName('CODEMPRESA').AsString           := DM.FCodEmpresa;
+    DM.qryAuxiliar2.FieldByName('CODEQUIPAMENTO').AsString       := DM.qryEquipamentosCODIGO.AsString;
+    DM.qryAuxiliar2.FieldByName('CODLUBRIFICPROGFAMEQUIP').AsString := DM.qryClonarLubrificCODLUBRIFICPROGFAMEQUIP.AsString;
+    DM.qryAuxiliar2.FieldByName('DESCRICAO').AsString            := DM.qryClonarLubrificDESCRICAO.AsString;
+    DM.qryAuxiliar2.FieldByName('CRITICIDADE').AsString          := DM.qryClonarLubrificCRITICIDADE.AsString;
+    DM.qryAuxiliar2.FieldByName('FREQUENCIA1').AsString          := DM.qryClonarLubrificFREQUENCIA1.AsString;
+    DM.qryAuxiliar2.FieldByName('REPROGRAMAR1').AsString         := DM.qryClonarLubrificREPROGRAMAR1.AsString;
+    DM.qryAuxiliar2.FieldByName('RELATORIO').AsString            := 'N';
+    DM.qryAuxiliar2.FieldByName('GRUPOINSP').AsString            := DM.qryClonarLubrificGRUPOINSP.AsString;
+    DM.qryAuxiliar2.FieldByName('DATACADASTRO').AsDateTime       := DM.FDataHoraServidor;
+    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodEmpresa;
+    DM.qryAuxiliar2.Post;
+
+    DM.qryClonarLubrific.Next;
+  end;
+
+  DM.qryAuxiliar2.Close;
+
+  DM.qryEquipamentos.Edit;
+end;
   inherited;
 if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 

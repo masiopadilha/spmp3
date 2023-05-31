@@ -1,7 +1,7 @@
 inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Caption = 'Consulta'
-  ClientHeight = 561
-  ClientWidth = 784
+  ClientHeight = 562
+  ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -11,19 +11,18 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   OnShow = FormShow
   ExplicitWidth = 800
   ExplicitHeight = 600
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 4
     Top = 4
-    Width = 776
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     ExplicitLeft = 4
     ExplicitTop = 4
-    ExplicitWidth = 776
+    ExplicitWidth = 774
     inherited Image1: TImage
       Margins.Left = 4
       Margins.Top = 4
@@ -31,15 +30,15 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 740
+      Left = 746
       ExplicitLeft = 740
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 147
-    Width = 776
-    Height = 333
+    Width = 780
+    Height = 334
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -47,8 +46,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     TabOrder = 2
     ExplicitLeft = 4
     ExplicitTop = 147
-    ExplicitWidth = 776
-    ExplicitHeight = 333
+    ExplicitWidth = 774
+    ExplicitHeight = 325
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -86,8 +85,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       AlignWithMargins = True
       Left = 5
       Top = 35
-      Width = 766
-      Height = 293
+      Width = 770
+      Height = 294
       Hint = 'D'#234' duplo-clique para confirmar a consulta'
       Margins.Left = 4
       Margins.Top = 34
@@ -110,29 +109,29 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PAuxiliares: TPanel
     Left = 4
-    Top = 488
-    Width = 776
+    Top = 489
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     TabOrder = 3
     ExplicitLeft = 4
-    ExplicitTop = 488
-    ExplicitWidth = 776
+    ExplicitTop = 480
+    ExplicitWidth = 774
   end
   inherited PBotoes: TPanel
     Left = 4
-    Top = 519
-    Width = 776
+    Top = 520
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     TabOrder = 4
     ExplicitLeft = 4
-    ExplicitTop = 519
-    ExplicitWidth = 776
+    ExplicitTop = 511
+    ExplicitWidth = 774
     inherited BtnOK: TButton
       Left = 310
       Margins.Left = 4
@@ -156,7 +155,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     AlignWithMargins = True
     Left = 4
     Top = 72
-    Width = 776
+    Width = 780
     Height = 67
     Margins.Left = 4
     Margins.Top = 4
@@ -165,6 +164,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Align = alTop
     TabOrder = 1
     Visible = False
+    ExplicitWidth = 774
     object Label6: TLabel
       Left = 17
       Top = 8

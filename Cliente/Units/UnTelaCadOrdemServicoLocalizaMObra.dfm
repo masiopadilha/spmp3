@@ -1,7 +1,7 @@
 inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMObra
   Caption = 'Localizar M'#227'o de Obra'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 642
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -10,16 +10,15 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
   OnShow = FormShow
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
-    ExplicitWidth = 1004
+    Width = 1008
+    ExplicitWidth = 1002
     DesignSize = (
-      1004
+      1008
       60)
     inherited BtnAjuda: TButton
-      Left = 971
+      Left = 977
       ExplicitLeft = 971
     end
     object BtnImprimir: TButton
@@ -39,25 +38,25 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
-    ExplicitWidth = 1002
-    ExplicitHeight = 247
+    Width = 1006
+    Height = 503
+    ExplicitWidth = 1000
+    ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
       Left = 307
-      Width = 0
-      Height = 500
+      Width = 1
+      Height = 501
       TabOrder = 1
       ExplicitLeft = 307
       ExplicitWidth = 0
-      ExplicitHeight = 245
+      ExplicitHeight = 492
     end
     object GrdMObra: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 300
-      Height = 494
+      Height = 495
       Align = alLeft
       Color = 14671839
       DataSource = DM.dsOrdemServicoLocalizaMObra
@@ -98,13 +97,15 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
         end>
     end
     object POS: TPanel
-      Left = 304
+      Left = 308
       Top = 1
       Width = 697
-      Height = 500
+      Height = 501
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitLeft = 302
+      ExplicitHeight = 492
       object GrdMObraOSProg: TDBGrid
         AlignWithMargins = True
         Left = 3
@@ -146,16 +147,16 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
-    ExplicitTop = 319
-    ExplicitWidth = 1004
+    Top = 575
+    Width = 1008
+    ExplicitTop = 566
+    ExplicitWidth = 1002
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
-    ExplicitTop = 346
-    ExplicitWidth = 1004
+    Top = 602
+    Width = 1008
+    ExplicitTop = 593
+    ExplicitWidth = 1002
     inherited BtnOK: TButton
       Left = 100
       Visible = False

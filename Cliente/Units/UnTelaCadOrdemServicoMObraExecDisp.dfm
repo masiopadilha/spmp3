@@ -37,7 +37,7 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
       DrawingStyle = gdsClassic
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -57,11 +57,16 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
           Alignment = taCenter
           Expanded = False
           FieldName = 'MATRICULA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Matr'#237'cula'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
-          Title.Font.Height = -12
+          Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
           Width = 62
@@ -70,10 +75,15 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
         item
           Expanded = False
           FieldName = 'NOME'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Caption = 'Nome'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
-          Title.Font.Height = -12
+          Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
           Width = 127
@@ -83,6 +93,11 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
           Alignment = taCenter
           Expanded = False
           FieldName = 'OCUPADO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Ocupado'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -96,6 +111,11 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
           Alignment = taCenter
           Expanded = False
           FieldName = 'PROGRAMADO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Programado'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -108,14 +128,36 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
         end
         item
           Expanded = False
+          FieldName = 'HHPROG'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Title.Caption = 'HH Prog.'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = []
+          Width = 51
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'EQUIPESP'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Caption = 'Especialista'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
-          Width = 121
+          Width = 81
           Visible = True
         end>
     end

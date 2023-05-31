@@ -1,8 +1,10 @@
 inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
-  PixelsPerInch = 96
+  ClientHeight = 617
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -44,6 +46,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 124
     ExplicitHeight = 124
     object Label5: TLabel
@@ -226,6 +229,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PProgramacao: TPanel
     Top = 179
+    Width = 1008
     ExplicitTop = 179
     inherited Label2: TLabel
       Width = 132
@@ -713,9 +717,10 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PDiversos: TPanel
     Top = 373
-    Height = 169
+    Width = 1008
+    Height = 165
     ExplicitTop = 373
-    ExplicitHeight = 169
+    ExplicitHeight = 156
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -725,8 +730,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       AlignWithMargins = True
       Left = 5
       Top = 26
-      Width = 994
-      Height = 138
+      Width = 998
+      Height = 134
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -789,7 +794,17 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
         end>
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 598
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 582
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 542
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

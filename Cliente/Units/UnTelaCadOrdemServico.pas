@@ -230,6 +230,7 @@ else
   end;
 
 if DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA'    then begin PSituacao.Caption := 'SOLICITADA';    PSituacao.Color := clWhite;  PSituacao.Font.Color := clBlack;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA'     then begin PSituacao.Caption := 'DETALHADA';     PSituacao.Color := clYellow; PSituacao.Font.Color := clGreen;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
@@ -582,7 +583,7 @@ if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'PROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA')
-    and (DM.qryOrdemServicoSITUACAO.AsString <> 'REPROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') then Exit;
+    and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'REPROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') then Exit;
 
 if DM.qryOrdemServicoDESCRICAO.IsNull = True then
   begin
@@ -645,20 +646,68 @@ DM.qryOrdemServicoIMPORTANCIA.AsInteger := DM.AnalisarImportancia;
 
 if (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA') then
   begin
-    DM.qryOrdemServico.Edit;
-    DM.qryOrdemServicoSITUACAO.AsString := 'CADASTRADA';
+    DM.qryOrdemServicoEquipe.Open;
+    DM.qryOrdemServicoEquipeMObra.Open;
+    if DM.qryOrdemServicoEquipeMObra.RecordCount > 0 then
+    begin
+      DM.qryOrdemServico.Edit;
+      DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+      DM.qryOrdemServico.Post;
 
-    PSituacao.Caption := 'CADASTRADA';
-    PSituacao.Color := clYellow;
-    PSituacao.Font.Color := clRed;
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+          DM.qryOrdemServicoGerencia.Post;
+        end;
 
-    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-      begin
-        DM.qryOrdemServicoGerencia.Edit;
-        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
-        DM.qryOrdemServicoGerencia.Post;
-      end;
+      PSituacao.Caption := 'DETALHADA';
+      PSituacao.Color := clYellow;
+      PSituacao.Font.Color := clGreen;
+    end
+    else
+    begin
+      DM.qryOrdemServico.Edit;
+      DM.qryOrdemServicoSITUACAO.AsString := 'CADASTRADA';
 
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
+          DM.qryOrdemServicoGerencia.Post;
+        end;
+
+      PSituacao.Caption := 'CADASTRADA';
+      PSituacao.Color := clYellow;
+      PSituacao.Font.Color := clRed;
+    end;
+
+    DM.qryOrdemServicoEquipe.Close;
+    DM.qryOrdemServicoEquipeMObra.Close;
+  end
+else
+  begin
+    DM.qryOrdemServicoEquipe.Open;
+    DM.qryOrdemServicoEquipeMObra.Open;
+    if DM.qryOrdemServicoEquipeMObra.RecordCount > 0 then
+    begin
+      DM.qryOrdemServico.Edit;
+      DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+      DM.qryOrdemServico.Post;
+
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+          DM.qryOrdemServicoGerencia.Post;
+        end;
+
+      PSituacao.Caption := 'DETALHADA';
+      PSituacao.Color := clYellow;
+      PSituacao.Font.Color := clGreen;
+    end;
+    DM.qryOrdemServicoEquipe.Close;
+    DM.qryOrdemServicoEquipeMObra.Close;
   end;
 
 DM.MSGAguarde('');

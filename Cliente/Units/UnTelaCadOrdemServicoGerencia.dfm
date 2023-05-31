@@ -1,20 +1,21 @@
 inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Caption = 'Ordens de Servi'#231'o'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 642
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   OnShow = FormShow
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
-    ExplicitWidth = 1004
+    Width = 1008
+    ExplicitWidth = 1002
     object Label9: TLabel [1]
       Left = 679
       Top = 22
@@ -52,7 +53,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     inherited BtnAjuda: TButton
       Left = 965
-      ExplicitLeft = 965
+      ExplicitLeft = 959
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -114,10 +115,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
-    ExplicitWidth = 1002
-    ExplicitHeight = 502
+    Width = 1006
+    Height = 503
+    ExplicitWidth = 1000
+    ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -130,13 +131,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 994
+      Width = 998
       Height = 39
       Margins.Bottom = 0
       Align = alTop
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 0
+      ExplicitWidth = 992
       object BtnCadastro: TButton
         Left = 6
         Top = 7
@@ -362,8 +364,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       AlignWithMargins = True
       Left = 4
       Top = 134
-      Width = 994
-      Height = 364
+      Width = 998
+      Height = 365
       Hint = 'D'#234' duplo-clique para visualizar as informa'#231#245'es da O.S.'
       Align = alClient
       DataSource = DM.dsOrdemServicoGerencia
@@ -391,7 +393,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       AlignWithMargins = True
       Left = 4
       Top = 45
-      Width = 994
+      Width = 998
       Height = 27
       Margins.Top = 2
       Margins.Bottom = 0
@@ -399,6 +401,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 992
       object chkNProg: TCheckBox
         Left = 18
         Top = 5
@@ -542,7 +545,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       AlignWithMargins = True
       Left = 4
       Top = 74
-      Width = 994
+      Width = 998
       Height = 57
       Margins.Top = 2
       Margins.Bottom = 0
@@ -550,6 +553,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
+      ExplicitWidth = 992
       object Label6: TLabel
         Left = 17
         Top = 5
@@ -704,10 +708,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    Top = 575
+    Width = 1008
+    ExplicitTop = 566
+    ExplicitWidth = 1002
     object Label2: TLabel
       Left = 919
       Top = 4
@@ -724,10 +728,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    Top = 602
+    Width = 1008
+    ExplicitTop = 593
+    ExplicitWidth = 1002
     inherited BtnOK: TButton
       Left = 100
       Visible = False
@@ -740,7 +744,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   object PopupMenuLiberar: TPopupMenu
     Left = 421
-    Top = 53
+    Top = 109
     object Total: TMenuItem
       Caption = 'Libera'#231#227'o total'
       OnClick = TotalClick
@@ -752,7 +756,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   object PopupMenuRelat: TPopupMenu
     Left = 756
-    Top = 56
+    Top = 112
     object Ficha1: TMenuItem
       Caption = 'Ficha'
       OnClick = Ficha1Click
@@ -776,6 +780,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = Inspecoes1Click
       end
     end
+    object Checklist1: TMenuItem
+      Caption = 'Checklist'
+      OnClick = Checklist1Click
+    end
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
@@ -784,7 +792,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   object PopupMenuExecutar: TPopupMenu
     Left = 293
-    Top = 53
+    Top = 117
     object MenuItem1: TMenuItem
       Caption = 'Executar'
       OnClick = TotalClick

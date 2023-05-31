@@ -2,8 +2,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 621
-  ClientWidth = 1008
+  ClientHeight = 617
+  ClientWidth = 1012
   Color = 14671839
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -11582,7 +11582,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     00000000000000000000000000000000000000000000}
   KeyPreview = True
   Menu = MainMenuPadrao
-  OldCreateOrder = False
   Position = poScreenCenter
   OnActivate = FormActivate
   OnClose = FormClose
@@ -11590,13 +11589,12 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnMouseMove = FormMouseMove
-  PixelsPerInch = 96
   TextHeight = 16
   object PControle: TPanel
     AlignWithMargins = True
     Left = 2
     Top = 2
-    Width = 1004
+    Width = 1008
     Height = 45
     Margins.Left = 2
     Margins.Top = 2
@@ -11606,8 +11604,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1002
     DesignSize = (
-      1004
+      1008
       45)
     object LCadastro: TLabel
       Left = 722
@@ -11875,7 +11874,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 51
-    Width = 1004
+    Width = 1008
     Height = 96
     Margins.Left = 2
     Margins.Top = 2
@@ -11886,6 +11885,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 1
     OnMouseMove = PIdentificacaoMouseMove
+    ExplicitWidth = 1004
     object Label1: TLabel
       Left = 7
       Top = 3
@@ -11908,7 +11908,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 151
-    Width = 1004
+    Width = 1008
     Height = 190
     Margins.Left = 2
     Margins.Top = 2
@@ -11919,6 +11919,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 2
     OnMouseMove = PIdentificacaoMouseMove
+    ExplicitWidth = 1004
     object Label2: TLabel
       Left = 7
       Top = 3
@@ -11941,8 +11942,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 345
-    Width = 1004
-    Height = 197
+    Width = 1008
+    Height = 193
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -11952,6 +11953,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 3
     OnMouseMove = PIdentificacaoMouseMove
+    ExplicitWidth = 1004
+    ExplicitHeight = 197
     object Label3: TLabel
       Left = 7
       Top = 3
@@ -11972,8 +11975,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 602
-    Width = 1008
+    Top = 598
+    Width = 1012
     Height = 19
     Color = 14671839
     Panels = <
@@ -11992,11 +11995,13 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
         Text = ' Grupo:'
         Width = 310
       end>
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 586
-    Width = 1008
+    Top = 582
+    Width = 1012
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
     Margins.Left = 2
@@ -12017,6 +12022,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ShowHint = True
     TabOrder = 5
     OnDblClick = PAlertasDblClick
+    ExplicitTop = 586
+    ExplicitWidth = 1008
     object LblAlertas: TLabel
       Left = 1005
       Top = 1
@@ -12028,8 +12035,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   object PBase: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 546
-    Width = 1004
+    Top = 542
+    Width = 1008
     Height = 38
     Margins.Left = 2
     Margins.Top = 2
@@ -12039,6 +12046,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 4
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     object BtnMais: TButton
       Left = 4
       Top = 4

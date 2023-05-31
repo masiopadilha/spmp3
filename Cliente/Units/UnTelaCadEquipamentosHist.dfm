@@ -1,7 +1,7 @@
 inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   Caption = 'Hist'#243'rico'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 642
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -9,10 +9,9 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     object Label3: TLabel [1]
       Left = 125
@@ -98,13 +97,13 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
+    Width = 1006
+    Height = 503
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1000
-      Height = 500
+      Width = 1004
+      Height = 501
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -112,12 +111,14 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 994
-      Height = 494
+      Width = 998
+      Height = 495
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 994
+      ExplicitHeight = 494
       object Label8: TLabel
         Left = 515
         Top = 38
@@ -293,12 +294,13 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         AlignWithMargins = True
         Left = 5
         Top = 72
-        Width = 984
+        Width = 988
         Height = 218
         Margins.Top = 70
         ActivePage = TSManutencoes
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 984
         object TSManutencoes: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencoes: TDBGrid
@@ -451,7 +453,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         AlignWithMargins = True
         Left = 5
         Top = 293
-        Width = 984
+        Width = 988
         Height = 195
         Margins.Top = 0
         Align = alTop
@@ -587,14 +589,14 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 575
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 602
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

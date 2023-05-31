@@ -201,7 +201,8 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA' then
   end;
 
 if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
-if DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA'     then begin PSituacao.Caption := 'DETALHADA';     PSituacao.Color := clYellow; PSituacao.Font.Color := clGreen;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'EXECUCAO'      then begin PSituacao.Caption := 'EXECUÇÃO';      PSituacao.Color := clInfoBk; PSituacao.Font.Color := clGreen;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Caption := 'LIBERADA';      PSituacao.Color := clGreen;  PSituacao.Font.Color := clWhite;  end;
@@ -403,11 +404,13 @@ DM.qryOrdemServicoEquipeMObraMovim.Open;
 DM.qryOrdemServicoEquipeMObraUtil.Open;
 
 DM.qryOrdemServicoMObraDisp.Close;
-DM.qryOrdemServicoMObraDisp.Params[0].AsString := DM.FCodEmpresa;
+DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor);
+DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
+DM.qryOrdemServicoMObraDisp.Params[2].AsString := DM.FCodEmpresa;
 if DM.qryOrdemServicoEXECAUTONOMO.AsString = 'S' then
-  DM.qryOrdemServicoMObraDisp.Params[1].AsString := 'AUTÔNOMA'
+  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'AUTÔNOMA'
 else
-  DM.qryOrdemServicoMObraDisp.Params[1].AsString := 'OPERACIONAL';
+  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
 DM.qryOrdemServicoMObraDisp.Open;
 
 if DM.qryOrdemServicoEquipeMObra.Active = True then

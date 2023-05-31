@@ -1,8 +1,8 @@
 object DM: TDM
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 799
-  Width = 1559
+  Height = 999
+  Width = 2033
+  PixelsPerInch = 120
   object qryAcesso: TFDQuery
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -23,8 +23,8 @@ object DM: TDM
       
         '    AND `CODIGO` =  (SELECT MAX(A2.`CODIGO`) FROM `acessos` as A' +
         '2 WHERE A2.USUARIO = :usuario));')
-    Left = 448
-    Top = 60
+    Left = 560
+    Top = 75
     ParamData = <
       item
         Name = 'USUARIO'
@@ -124,8 +124,8 @@ object DM: TDM
       'WHERE (`almoxarifado`.`CODIGO` = :codigo'
       '    AND `almoxarifado`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 508
-    Top = 60
+    Left = 635
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -273,8 +273,8 @@ object DM: TDM
       'WHERE (`areas`.`CODIGO` = :codigo'
       '    AND `areas`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 566
-    Top = 60
+    Left = 708
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -463,8 +463,8 @@ object DM: TDM
       '    AND `arquivotecnico`.`TIPO` = :tipo'
       '    );'
       '')
-    Left = 666
-    Top = 60
+    Left = 833
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -758,8 +758,8 @@ object DM: TDM
       '    AND `arquivotecnicoparam`.`TIPO` = :tipo)'
       'ORDER BY `arquivotecnicoparam`.`DESCRICAO` DESC;'
       '')
-    Left = 687
-    Top = 60
+    Left = 859
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -888,8 +888,8 @@ object DM: TDM
       ''
       'ORDER BY'
       '    `areas`.`DESCRICAO`, `equipamentos`.`DESCRICAO`')
-    Left = 272
-    Top = 8
+    Left = 340
+    Top = 10
   end
   object qryCalendEquip: TFDQuery
     Connection = FDConnSPMP3
@@ -923,8 +923,8 @@ object DM: TDM
         '               AND `calendarioequip`.`CODEMPRESA` = :codempresa)' +
         ';'
       '')
-    Left = 744
-    Top = 60
+    Left = 930
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1059,8 +1059,8 @@ object DM: TDM
         '    AND `calendarioequipseqhora`.`CODCALENDARIOEQUIP` = :codigo)' +
         ';'
       '')
-    Left = 765
-    Top = 60
+    Left = 956
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -1187,8 +1187,8 @@ object DM: TDM
       'WHERE (`calendario`.`CODIGO` = :codigo'
       '    AND `calendario`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 824
-    Top = 60
+    Left = 1030
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1344,8 +1344,8 @@ object DM: TDM
       '    AND `calendarioseqhora`.`CODCALENDARIO` = :codigo);'
       ''
       '')
-    Left = 845
-    Top = 60
+    Left = 1056
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -1455,8 +1455,8 @@ object DM: TDM
       '        ON (`cargos`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`cargos`.`CODIGO` = :codigo);'
       '')
-    Left = 904
-    Top = 60
+    Left = 1130
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1544,8 +1544,8 @@ object DM: TDM
         ')'
       'WHERE (`causasfalha`.`CODIGO` = :codigo);'
       '')
-    Left = 961
-    Top = 60
+    Left = 1201
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1652,8 +1652,8 @@ object DM: TDM
       '    AND `celulas`.`CODEMPRESA` = :codempresa'
       '    AND `celulas`. `CODAREA` = :codarea);'
       '')
-    Left = 587
-    Top = 60
+    Left = 734
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1786,8 +1786,8 @@ object DM: TDM
         ')'
       'WHERE (`centrocusto`.`CODIGO` = :codigo);'
       '')
-    Left = 1017
-    Top = 60
+    Left = 1271
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1887,8 +1887,8 @@ object DM: TDM
       '        ON (`classes`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`classes`.`CODIGO` = :codigo);'
       '')
-    Left = 1072
-    Top = 60
+    Left = 1340
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -1972,8 +1972,8 @@ object DM: TDM
     FetchOptions.AssignedValues = [evUnidirectional]
     SQL.Strings = (
       'select now() as datahoraservidor;')
-    Left = 184
-    Top = 8
+    Left = 230
+    Top = 10
     object qryDataHoraServidordatahoraservidor: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'datahoraservidor'
@@ -1999,8 +1999,8 @@ object DM: TDM
       '   `despmeninfdiversas`'
       'WHERE (`CODIGO` = :codigo);'
       '')
-    Left = 1445
-    Top = 162
+    Left = 1806
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2087,8 +2087,8 @@ object DM: TDM
       'WHERE (`CODIGO` = :codigo)'
       'ORDER BY `MES` ASC, `ANO` ASC;'
       '')
-    Left = 56
-    Top = 269
+    Left = 70
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2145,8 +2145,8 @@ object DM: TDM
       'FROM'
       '    `despmendespmanut`'
       'WHERE (`CODIGO` = :codigo);')
-    Left = 135
-    Top = 269
+    Left = 169
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2288,8 +2288,8 @@ object DM: TDM
       ''
       'WHERE E.CODIGO = :CODEMPRESA'
       '')
-    Left = 150
-    Top = 269
+    Left = 188
+    Top = 336
     ParamData = <
       item
         Name = 'MES'
@@ -2369,8 +2369,8 @@ object DM: TDM
       'WHERE (`despmenprodmensal`.`CODIGO` = :codigo'
       '    AND `despmenprodmensal`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 1309
-    Top = 60
+    Left = 1636
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2458,8 +2458,8 @@ object DM: TDM
       '    `despmentaxas`'
       'WHERE (`CODDESPTAXAPER` = :coddesptaxaper)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 1386
-    Top = 60
+    Left = 1733
+    Top = 75
     ParamData = <
       item
         Name = 'CODDESPTAXAPER'
@@ -2513,8 +2513,8 @@ object DM: TDM
       'WHERE (`CODIGO` = :codigo )'
       'ORDER BY `MES` ASC, `ANO` ASC;'
       '')
-    Left = 1368
-    Top = 60
+    Left = 1710
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2598,8 +2598,8 @@ object DM: TDM
       'WHERE (`disponibilidade`.`CODIGO` = :codigo'
       '    AND `disponibilidade`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 1445
-    Top = 60
+    Left = 1806
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -2705,8 +2705,8 @@ object DM: TDM
   end
   object qryEquipamentosReservas: TFDQuery
     Connection = FDConnSPMP3
-    Left = 441
-    Top = 161
+    Left = 551
+    Top = 201
   end
   object qryEquipamentosSubst: TFDQuery
     Connection = FDConnSPMP3
@@ -2722,8 +2722,8 @@ object DM: TDM
         'secundario'
       'WHERE `equipamentos`.`CODIGO` = :codequipamento'
       'AND `equipamentos`.`CODEMPRESA` = :codempresa')
-    Left = 665
-    Top = 162
+    Left = 831
+    Top = 203
     ParamData = <
       item
         Name = 'CODAREA'
@@ -2814,8 +2814,8 @@ object DM: TDM
       'WHERE (`equipamentosreserva`.`CODEMPRESA` = :codempresa'
       '    )'
       'ORDER BY `equipamentosreserva`.`DATAINSTALACAO` DESC;')
-    Left = 686
-    Top = 162
+    Left = 858
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -2950,8 +2950,8 @@ object DM: TDM
       '        ON (`fabricante`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`fabricante`.`CODIGO` = :codigo'
       '    AND `fabricante`.`CODEMPRESA` = :codempresa);')
-    Left = 746
-    Top = 162
+    Left = 933
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -3123,8 +3123,8 @@ object DM: TDM
         '        ON (`familiaequipamento`.`CODUSUARIOALT` = `usuario_1`.`' +
         'CODIGO`)'
       'WHERE (`familiaequipamento`.`CODIGO` = :codigo);')
-    Left = 802
-    Top = 162
+    Left = 1003
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -3407,8 +3407,8 @@ object DM: TDM
         '        ON (`familiapecasreposicao`.`CODUSUARIOALT` = `usuario_1' +
         '`.`CODIGO`)'
       'WHERE (`familiapecasreposicao`.`CODIGO` = :codigo);')
-    Left = 859
-    Top = 162
+    Left = 1074
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -3605,8 +3605,8 @@ object DM: TDM
         '        ON (`familiapneus`.`CODUSUARIOALT` = `usuario_1`.`CODIGO' +
         '`)'
       'WHERE (`familiapneus`.`CODIGO` = :codigo);')
-    Left = 915
-    Top = 162
+    Left = 1144
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -3805,8 +3805,8 @@ object DM: TDM
         '        ON (`familiarecursos`.`CODUSUARIOALT` = `usuario_1`.`COD' +
         'IGO`)'
       'WHERE (`familiarecursos`.`CODIGO` = :codigo);')
-    Left = 972
-    Top = 162
+    Left = 1215
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -3990,8 +3990,8 @@ object DM: TDM
       '        ON (`feriados`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`feriados`.`CODIGO` = :codigo'
       '    AND `feriados`.`CODEMPRESA` = :codempresa);')
-    Left = 1029
-    Top = 162
+    Left = 1286
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -4100,8 +4100,8 @@ object DM: TDM
         ')'
       'WHERE (`ferramentaria`.`CODIGO` = :codigo'
       '    AND `ferramentaria`.`CODEMPRESA` = :codempresa);')
-    Left = 1086
-    Top = 162
+    Left = 1358
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -4203,8 +4203,8 @@ object DM: TDM
       'WHERE (`ferramentariaitens`.`CODEMPRESA` = :codempresa'
       '    AND `ferramentariaitens`.`CODFERRAMEM` = :codigo)'
       'ORDER BY `RECURSO` ASC;')
-    Left = 1107
-    Top = 162
+    Left = 1384
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -4313,8 +4313,8 @@ object DM: TDM
       '    , `TIPOMANUTENCAO`'
       'FROM'
       '    `formatocodigo`;')
-    Left = 1165
-    Top = 162
+    Left = 1456
+    Top = 203
     object qryFormatoCodigoCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -4614,8 +4614,8 @@ object DM: TDM
       '        ON (`fornecedor`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`fornecedor`.`CODIGO` = :codigo'
       '    AND `fornecedor`.`CODEMPRESA` = :codempresa);')
-    Left = 1222
-    Top = 162
+    Left = 1528
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -4780,8 +4780,8 @@ object DM: TDM
       'FROM'
       '    `ordemservico`'
       'WHERE (`CODIGO` = :codigo);')
-    Left = 556
-    Top = 8
+    Left = 695
+    Top = 10
     ParamData = <
       item
         Name = 'CODIGO'
@@ -5070,8 +5070,8 @@ object DM: TDM
       '        ON (`imagens`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`imagens`.`CODIGO` = :codigo'
       '    AND `imagens`.`CODEMPRESA` = :codempresa);')
-    Left = 446
-    Top = 269
+    Left = 558
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -5245,8 +5245,8 @@ object DM: TDM
       '    `inddesempenho`'
       'WHERE (`CODIGO` = :codigo);'
       '')
-    Left = 501
-    Top = 269
+    Left = 626
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -5658,8 +5658,8 @@ object DM: TDM
       '    `empresa`'
       'WHERE `empresa`.`CODIGO` = :codempresa'
       '')
-    Left = 522
-    Top = 269
+    Left = 653
+    Top = 336
     ParamData = <
       item
         Name = 'DATA1'
@@ -5829,8 +5829,8 @@ object DM: TDM
       ''
       'WHERE e.`CODIGO` = :codempresa'
       '')
-    Left = 543
-    Top = 269
+    Left = 679
+    Top = 336
     ParamData = <
       item
         Name = 'DATA1'
@@ -5925,8 +5925,8 @@ object DM: TDM
       '    AND `linhas`. `CODAREA` = :codarea'
       '     AND `linhas`. `CODCELULA` = :codcelula);'
       '')
-    Left = 608
-    Top = 60
+    Left = 760
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -6054,8 +6054,8 @@ object DM: TDM
       '    LEFT JOIN `acessos` '
       '        ON (`usuario`.`NOME` = `acessos`.`USUARIO`)'
       'WHERE (`usuario`.`NOME` = :usuario);')
-    Left = 398
-    Top = 8
+    Left = 498
+    Top = 10
     ParamData = <
       item
         Name = 'USUARIO'
@@ -6183,8 +6183,8 @@ object DM: TDM
         ')'
       'WHERE (`lubrificantes`.`CODIGO` = :codigo'
       '    AND `lubrificantes`.`CODEMPRESA` = :codempresa);')
-    Left = 599
-    Top = 269
+    Left = 749
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -6597,8 +6597,8 @@ object DM: TDM
       
         'ORDER BY `lubrificprogequipamentohist`.`DTAINICIO1` DESC, `EQUIP' +
         'AMENTO` DESC;')
-    Left = 148
-    Top = 376
+    Left = 185
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -6913,8 +6913,8 @@ object DM: TDM
       
         '    AND `lubrificprogequipamento`.`CODEQUIPAMENTO` = :codequipam' +
         'ento);')
-    Left = 653
-    Top = 269
+    Left = 816
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -7136,6 +7136,12 @@ object DM: TDM
       FieldName = 'C_PROXINSP'
       Calculated = True
     end
+    object qryLubrificProgEquipC_REIMPRESSAO: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'C_REIMPRESSAO'
+      Size = 1
+      Calculated = True
+    end
   end
   object qryLubrificProgEquipItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
@@ -7165,8 +7171,8 @@ object DM: TDM
         '    AND `lubrificprogfamequipitens`.`CODLUBRIFICPROGFAMEQUIP` = ' +
         ':codlubrificprogfamequip)'
       'ORDER BY `PARTE` ASC, `lubrificprogfamequipitens`.`ITEM`;')
-    Left = 694
-    Top = 269
+    Left = 868
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -7279,8 +7285,8 @@ object DM: TDM
         '    AND `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP` = :co' +
         'digo)'
       'ORDER BY `PARTE`;')
-    Left = 715
-    Top = 269
+    Left = 894
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -7399,8 +7405,8 @@ object DM: TDM
         'AND `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP` = :codlub' +
         'rificprogequip'
       'AND `lubrificprogequipitensesp`.`CODEMPRESA` = :codempresa;')
-    Left = 736
-    Top = 269
+    Left = 920
+    Top = 336
     ParamData = <
       item
         Name = 'CODLUBRIFICPROGEQUIP'
@@ -7482,8 +7488,8 @@ object DM: TDM
       
         'ORDER BY `manutprogequipamentohist`.`DTAINICIO1` DESC, `EQUIPAME' +
         'NTO` DESC;')
-    Left = 55
-    Top = 376
+    Left = 69
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -7748,8 +7754,8 @@ object DM: TDM
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'N'#39
       ')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 571
-    Top = 376
+    Left = 796
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -7839,8 +7845,8 @@ object DM: TDM
         '        ON (`motivoparada`.`CODUSUARIOALT` = `usuario_1`.`CODIGO' +
         '`)'
       'WHERE (`motivoparada`.`CODIGO` = :codigo);')
-    Left = 777
-    Top = 376
+    Left = 1049
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -7922,8 +7928,8 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT * FROM nivelacesso')
-    Left = 828
-    Top = 376
+    Left = 1113
+    Top = 470
     object qryNivelAcessoCODIGO: TStringField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -8001,8 +8007,8 @@ object DM: TDM
       '        ON (`oficinas`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`oficinas`.`CODIGO` = :codigo'
       '                 AND `oficinas`.`CODEMPRESA` = :codempresa);')
-    Left = 969
-    Top = 376
+    Left = 1285
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -8212,8 +8218,8 @@ object DM: TDM
       '    AND `OPERANDO` = '#39'S'#39
       '    AND `CODEMPRESA` = :codempresa)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 963
-    Top = 480
+    Left = 1204
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -8489,8 +8495,8 @@ object DM: TDM
         '    AND `ordemservico`.`DATAFIMREAL` >= STR_TO_DATE(:data1,'#39'%Y/%' +
         'm/%d'#39')    '
       ')')
-    Left = 984
-    Top = 480
+    Left = 1230
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -8572,8 +8578,8 @@ object DM: TDM
       'WHERE (`pecasreposicaokit`.`CODEMPRESA` = :codempresa'
       '        AND `pecasreposicaokit`.`CODIGO` = :codigo)'
       'ORDER BY `pecasreposicaokit`.`DESCRICAO` ASC;')
-    Left = 1036
-    Top = 480
+    Left = 1295
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -8684,8 +8690,8 @@ object DM: TDM
       'WHERE (`pecasreposicaokititens`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicaokititens`.`CODKIT` = :codigo)'
       'ORDER BY `pecasreposicao`.`DESCRICAO` ASC;')
-    Left = 1057
-    Top = 480
+    Left = 1321
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -8836,8 +8842,8 @@ object DM: TDM
         'permissoes_acesso`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usuario`' +
         '.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1263
-    Top = 480
+    Left = 1579
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -9360,8 +9366,8 @@ object DM: TDM
       'SELECT * FROM permissoes_acesso'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 849
-    Top = 376
+    Left = 1139
+    Top = 470
     ParamData = <
       item
         Name = 'CODNIVELACESSO'
@@ -9942,8 +9948,8 @@ object DM: TDM
         'D `permissoes_alteracao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `us' +
         'uario`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1284
-    Top = 480
+    Left = 1605
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -10466,8 +10472,8 @@ object DM: TDM
       'SELECT * FROM permissoes_alteracao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 870
-    Top = 376
+    Left = 1166
+    Top = 470
     ParamData = <
       item
         Name = 'CODNIVELACESSO'
@@ -11048,8 +11054,8 @@ object DM: TDM
         ' `permissoes_exclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1305
-    Top = 480
+    Left = 1631
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -11572,8 +11578,8 @@ object DM: TDM
       'SELECT * FROM permissoes_exclusao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 891
-    Top = 376
+    Left = 1193
+    Top = 470
     ParamData = <
       item
         Name = 'CODNIVELACESSO'
@@ -12086,8 +12092,8 @@ object DM: TDM
         ' `permissoes_inclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1326
-    Top = 480
+    Left = 1658
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -12610,8 +12616,8 @@ object DM: TDM
       'SELECT * FROM permissoes_inclusao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 912
-    Top = 376
+    Left = 1218
+    Top = 470
     ParamData = <
       item
         Name = 'CODNIVELACESSO'
@@ -13064,8 +13070,8 @@ object DM: TDM
         ')'
       'WHERE (`planotrabalho`.`CODIGO` = :codigo'
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 1377
-    Top = 480
+    Left = 1721
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -13231,8 +13237,8 @@ object DM: TDM
       'WHERE (`pneus`.`CODIGO` = :codigo'
       '    AND `pneus`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `pneus`.`DESCRICAO` DESC;')
-    Left = 1449
-    Top = 480
+    Left = 1811
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -13450,8 +13456,8 @@ object DM: TDM
         '_1`.`CODIGO`)'
       'WHERE (`pneusmontagemchassi`.`CODEQUIPAMENTO`= :codequipamento'
       '    AND `pneusmontagemchassi`.`CODEMPRESA` = :codempresa);')
-    Left = 56
-    Top = 585
+    Left = 70
+    Top = 731
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -13667,8 +13673,8 @@ object DM: TDM
         'quipamentos_3`.`CODEMPRESA`)'
       'WHERE (`pneusmontagemchassiatrelamento`.`CODCHASSI` = :codigo)'
       'ORDER BY `DESCEQUIPCAVALO` ASC;')
-    Left = 199
-    Top = 585
+    Left = 249
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -13855,8 +13861,8 @@ object DM: TDM
       
         'ORDER BY `pneusmontagemchassiatrelamhist`.`DATA` DESC, `CAVALO` ' +
         'DESC;')
-    Left = 220
-    Top = 585
+    Left = 275
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -13985,8 +13991,8 @@ object DM: TDM
         'a'
       '    AND `pneusmontagemchassipneushist`.`ID` = :id)'
       'ORDER BY `pneusmontagemchassipneushist`.`DATA` DESC;')
-    Left = 178
-    Top = 585
+    Left = 223
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -14114,8 +14120,8 @@ object DM: TDM
     SQL.Strings = (
       'select * from pneusimagens'
       'WHERE `pneusimagens`.`DESCRICAO` = :descricao')
-    Left = 77
-    Top = 585
+    Left = 96
+    Top = 731
     ParamData = <
       item
         Name = 'DESCRICAO'
@@ -14184,8 +14190,8 @@ object DM: TDM
         'entos`.`CODEMPRESA`)'
       'WHERE (`pneusmontagemchassipneus`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `pneusmontagemchassipneus`.`CODIGO` DESC;')
-    Left = 119
-    Top = 585
+    Left = 149
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -14339,8 +14345,8 @@ object DM: TDM
         'a'
       '    )'
       'ORDER BY `pneusmontagemchassipneushist`.`CODIGO` DESC;')
-    Left = 241
-    Top = 585
+    Left = 301
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -14509,8 +14515,8 @@ object DM: TDM
         'D` = `pneusmontagemchassipneus`.`ID`)'#9
       'WHERE (`pneusmontagemchassiposicoes`.`CODCHASSI` = :codigo)'
       'ORDER BY `pneusmontagemchassiposicoes`.`CODIGO`;')
-    Left = 98
-    Top = 585
+    Left = 123
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -14638,8 +14644,8 @@ object DM: TDM
         'Y-%m-%d'#39')'
       '    AND `rotasequipamento`.`RELATORIO` = '#39'N'#39')'
       'ORDER BY `rotasequipamento`.`DATAINICIO` ASC;')
-    Left = 1005
-    Top = 584
+    Left = 1256
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -14762,8 +14768,8 @@ object DM: TDM
       '    AND `rotasequipamentoseq`.`CODROTA` = :codrota'
       '    )'
       'ORDER BY `rotasequipamentoseq`.`CODIGO` ASC;')
-    Left = 1026
-    Top = 584
+    Left = 1283
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -14900,8 +14906,8 @@ object DM: TDM
       '    AND `manutprogequipamento`.`FREQUENCIA1` = :frequencia'
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'S'#39')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1047
-    Top = 584
+    Left = 1309
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -15020,8 +15026,8 @@ object DM: TDM
       
         'ORDER BY `rotasequipamento`.`DESCRICAO` DESC, `manutprogequipame' +
         'ntohist`.`DTAINICIO1` DESC;')
-    Left = 1103
-    Top = 584
+    Left = 1379
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -15154,8 +15160,8 @@ object DM: TDM
       '    AND `manutprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA'#39')'
       ''
       'ORDER BY `manutprogequipamentohist`.`CODORDEMSERVICO`')
-    Left = 1124
-    Top = 584
+    Left = 1405
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -15352,8 +15358,8 @@ object DM: TDM
       
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO`, `manutprogequiph' +
         'istitens`.`ITEM`')
-    Left = 1145
-    Top = 584
+    Left = 1431
+    Top = 730
     ParamData = <
       item
         Name = 'HISTORICO'
@@ -15550,8 +15556,8 @@ object DM: TDM
       
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC, `manutprogeq' +
         'uiphistitensesp`.`DESCINSPECAO` ASC;')
-    Left = 1166
-    Top = 584
+    Left = 1458
+    Top = 730
     ParamData = <
       item
         Name = 'HISTORICO'
@@ -15736,8 +15742,8 @@ object DM: TDM
         'ODIGO`)'
       'WHERE (`rotasequipamento`.`CODIGO` = :codigo'
       '    AND `rotasequipamento`.`CODEMPRESA` = :codempresa);')
-    Left = 1224
-    Top = 584
+    Left = 1530
+    Top = 730
     ParamData = <
       item
         Name = 'CODIGO'
@@ -15913,8 +15919,8 @@ object DM: TDM
       ' WHERE (`rotasequipamentoseq`.`CODEMPRESA` = :codempresa'
       '     AND `rotasequipamentoseq`.`CODROTA` = :codigo)'
       'ORDER BY `rotasequipamentoseq`.`CODIGO` ASC;')
-    Left = 1245
-    Top = 584
+    Left = 1556
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16047,8 +16053,8 @@ object DM: TDM
       'WHERE (`CODEMPRESA` = :codempresa'
       'AND `CODEQUIPAMENTO` = :codequipatual)'
       'ORDER BY `DESCRICAO` DESC;')
-    Left = 1266
-    Top = 584
+    Left = 1583
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16162,8 +16168,8 @@ object DM: TDM
       
         '    AND `manutprogfamequipitens`.`CODMANUTPROGFAMEQUIP` = :codma' +
         'nutprogfamequip);')
-    Left = 1287
-    Top = 584
+    Left = 1609
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16272,8 +16278,8 @@ object DM: TDM
         '` = `manutprogequipitensesp`.`CODEMPRESA`)'
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo);')
-    Left = 1308
-    Top = 584
+    Left = 1635
+    Top = 730
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16393,8 +16399,8 @@ object DM: TDM
       'FROM'
       '    `sam`'
       'ORDER BY `CODIGO` DESC;')
-    Left = 346
-    Top = 8
+    Left = 433
+    Top = 10
     object qrySAMCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -16432,8 +16438,8 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT GENERATOR(:NOME_SEQUENCIA) AS NEXT_SEQUENCE')
-    Left = 1365
-    Top = 584
+    Left = 1706
+    Top = 730
     ParamData = <
       item
         Name = 'NOME_SEQUENCIA'
@@ -16471,8 +16477,8 @@ object DM: TDM
         '        ON (`tipomanutencao`.`CODUSUARIOALT` = `usuario_1`.`CODI' +
         'GO`)'
       'WHERE (`tipomanutencao`.`CODIGO` = :codigo);')
-    Left = 306
-    Top = 691
+    Left = 383
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -16583,8 +16589,8 @@ object DM: TDM
         '        ON (`tipoprogramacao`.`CODUSUARIOALT` = `usuario_1`.`COD' +
         'IGO`)'
       'WHERE (`tipoprogramacao`.`CODIGO` = :codigo);')
-    Left = 365
-    Top = 691
+    Left = 456
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -16694,8 +16700,8 @@ object DM: TDM
       '   -- AND `equipamentos`.`SECUNDARIO` = '#39'N'#39
       '    )'
       'ORDER BY `equipamentos`.`DESCRICAO` ASC;')
-    Left = 566
-    Top = 692
+    Left = 708
+    Top = 865
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16814,8 +16820,8 @@ object DM: TDM
       
         '    AND `calendarioequipseqhora`.`CODCALENDARIOEQUIP` = :codcale' +
         'ndarioequip);')
-    Left = 587
-    Top = 692
+    Left = 734
+    Top = 865
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -16962,8 +16968,8 @@ object DM: TDM
       '    AND `funcionarios`.`ATIVO` = '#39'S'#39
       '    AND `funcionarios`.`MOBRA` = '#39'OPERACIONAL'#39')'
       'ORDER BY `funcionarios`.`NOME`;')
-    Left = 425
-    Top = 691
+    Left = 531
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -17083,8 +17089,8 @@ object DM: TDM
       ''
       'FROM `empresa`'
       'WHERE `empresa`.`CODIGO` = :codempresa')
-    Left = 504
-    Top = 691
+    Left = 630
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -17172,8 +17178,8 @@ object DM: TDM
       ''
       'WHERE (`calendarioseqhora`.`CODEMPRESA` = :codempresa'
       '    AND `calendarioseqhora`.`CODCALENDARIO` = :codcalendario);')
-    Left = 446
-    Top = 691
+    Left = 558
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -17377,8 +17383,8 @@ object DM: TDM
       ''
       'FROM `grupos`'
       'Where `CODIGO`= :codigo')
-    Left = 643
-    Top = 692
+    Left = 804
+    Top = 865
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -17651,8 +17657,8 @@ object DM: TDM
       '        ON (`empresa`.`CODGRUPO` = `grupos`.`CODIGO`)'
       ' WHERE `usuario`.`NOME`= :login   '
       '')
-    Left = 867
-    Top = 693
+    Left = 1084
+    Top = 866
     ParamData = <
       item
         Name = 'LOGIN'
@@ -17903,8 +17909,8 @@ object DM: TDM
         '        ON (`permissoes_acesso`.`CODNIVELACESSO` = `nivelacesso`' +
         '.`CODIGO`)'
       'WHERE (`permissoes_acesso`.`CODIGO` = :codigo)')
-    Left = 888
-    Top = 693
+    Left = 1110
+    Top = 866
     ParamData = <
       item
         Name = 'CODIGO'
@@ -18510,8 +18516,8 @@ object DM: TDM
         '        ON (`permissoes_alteracao`.`CODNIVELACESSO` = `nivelaces' +
         'so`.`CODIGO`)'
       'WHERE (`permissoes_alteracao`.`CODIGO` = :codigo)')
-    Left = 909
-    Top = 693
+    Left = 1136
+    Top = 866
     ParamData = <
       item
         Name = 'CODIGO'
@@ -19117,8 +19123,8 @@ object DM: TDM
         '        ON (`permissoes_exclusao`.`CODNIVELACESSO` = `nivelacess' +
         'o`.`CODIGO`)'
       'WHERE (`permissoes_exclusao`.`CODIGO` = :codigo)')
-    Left = 930
-    Top = 693
+    Left = 1163
+    Top = 866
     ParamData = <
       item
         Name = 'CODIGO'
@@ -19724,8 +19730,8 @@ object DM: TDM
         '        ON (`permissoes_inclusao`.`CODNIVELACESSO` = `nivelacess' +
         'o`.`CODIGO`)'
       'WHERE (`permissoes_inclusao`.`CODIGO` = :codigo)')
-    Left = 951
-    Top = 693
+    Left = 1189
+    Top = 866
     ParamData = <
       item
         Name = 'CODIGO'
@@ -20327,8 +20333,8 @@ object DM: TDM
       'WHERE (`controlecombustivelviagens`.`CODEMPRESA` = :codempresa'
       'AND `controlecombustivelviagens`.`CODIGO` = :codigo)'
       'ORDER BY `controlecombustivelviagens`.`DATAPARTIDA` DESC;')
-    Left = 723
-    Top = 692
+    Left = 904
+    Top = 865
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -20576,8 +20582,8 @@ object DM: TDM
       '    `controlecombustivelc`'
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODEQUIPAMENTO` = :codequipamento);')
-    Left = 744
-    Top = 692
+    Left = 930
+    Top = 865
     ParamData = <
       item
         Name = 'codempresa'
@@ -20675,8 +20681,8 @@ object DM: TDM
       'ORDER BY `controlecombustivelcabast`.`CODIGO` DESC'
       ''
       '')
-    Left = 765
-    Top = 692
+    Left = 956
+    Top = 865
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -20843,8 +20849,8 @@ object DM: TDM
         'to);'
       ''
       '')
-    Left = 786
-    Top = 692
+    Left = 983
+    Top = 865
     ParamData = <
       item
         Name = 'codempresa'
@@ -20958,8 +20964,8 @@ object DM: TDM
         'olecombustivellabast`.`ODOMETROLUBRIFIC` DESC;'
       ''
       '')
-    Left = 807
-    Top = 692
+    Left = 1009
+    Top = 865
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -21115,188 +21121,188 @@ object DM: TDM
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
-    Left = 56
-    Top = 8
+    Left = 70
+    Top = 10
   end
   object FDTransaction1: TFDTransaction
     Connection = FDConnSPMP3
-    Left = 93
-    Top = 8
+    Left = 116
+    Top = 10
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 109
-    Top = 8
+    Left = 136
+    Top = 10
   end
   object FDPhysMySQLDriverLink1: TFDPhysMySQLDriverLink
     VendorLib = 'C:\SPMP3\libmysql.dll'
-    Left = 125
-    Top = 8
+    Left = 156
+    Top = 10
   end
   object dsAbastecimentos: TDataSource
     DataSet = qryAbastecimentos
-    Left = 54
-    Top = 108
+    Left = 68
+    Top = 135
   end
   object dsAbastecimentosCombust: TDataSource
     DataSet = qryAbastecimentosCombust
-    Left = 75
-    Top = 108
+    Left = 94
+    Top = 135
   end
   object dsAbastecimentosCombustAbast: TDataSource
     DataSet = qryAbastecimentosCombustAbast
-    Left = 96
-    Top = 108
+    Left = 120
+    Top = 135
   end
   object dsAbastecimentosRotas: TDataSource
     DataSet = qryAbastecimentosRotas
-    Left = 117
-    Top = 108
+    Left = 146
+    Top = 135
   end
   object dsAbastecimentosLubrific: TDataSource
     DataSet = qryAbastecimentosLubrific
-    Left = 138
-    Top = 108
+    Left = 173
+    Top = 135
   end
   object dsAbastecimentosLubrificAbast: TDataSource
     DataSet = qryAbastecimentosLubrificAbast
-    Left = 159
-    Top = 108
+    Left = 199
+    Top = 135
   end
   object dsAbastecimentosLeitor: TDataSource
     DataSet = qryAbastecimentosLeitor
-    Left = 180
-    Top = 108
+    Left = 225
+    Top = 135
   end
   object dsAbastecimentosManutInsp: TDataSource
     DataSet = qryAbastecimentosManutInsp
-    Left = 201
-    Top = 108
+    Left = 251
+    Top = 135
   end
   object dsAbastecimentosLubrificInsp: TDataSource
     DataSet = qryAbastecimentosLubrificInsp
-    Left = 222
-    Top = 108
+    Left = 278
+    Top = 135
   end
   object dsAlertas: TDataSource
     DataSet = qryAlertas
-    Left = 309
-    Top = 108
+    Left = 386
+    Top = 135
   end
   object dsAlertasOS: TDataSource
     DataSet = qryAlertasOS
-    Left = 330
-    Top = 108
+    Left = 413
+    Top = 135
   end
   object dsAlertasManut: TDataSource
     DataSet = qryAlertasManut
-    Left = 351
-    Top = 108
+    Left = 439
+    Top = 135
   end
   object dsAlertasLubrific: TDataSource
     DataSet = qryAlertasLubrific
-    Left = 372
-    Top = 108
+    Left = 465
+    Top = 135
   end
   object dsAlertasRotas: TDataSource
     DataSet = qryAlertasRotas
-    Left = 393
-    Top = 108
+    Left = 491
+    Top = 135
   end
   object dsAcesso: TDataSource
     DataSet = qryAcesso
-    Left = 448
-    Top = 108
+    Left = 560
+    Top = 135
   end
   object dsAlmoxarifado: TDataSource
     DataSet = qryAlmoxarifado
-    Left = 508
-    Top = 108
+    Left = 635
+    Top = 135
   end
   object dsAreas: TDataSource
     DataSet = qryAreas
-    Left = 566
-    Top = 108
+    Left = 708
+    Top = 135
   end
   object dsCelulas: TDataSource
     DataSet = qryCelulas
-    Left = 587
-    Top = 108
+    Left = 734
+    Top = 135
   end
   object dsLinhas: TDataSource
     DataSet = qryLinhas
-    Left = 608
-    Top = 108
+    Left = 760
+    Top = 135
   end
   object dsArquivoTecnico: TDataSource
     DataSet = qryArquivoTecnico
-    Left = 666
-    Top = 108
+    Left = 833
+    Top = 135
   end
   object dsArquivoTecnicoParam: TDataSource
     DataSet = qryArquivoTecnicoParam
-    Left = 687
-    Top = 108
+    Left = 859
+    Top = 135
   end
   object dsCalendEquip: TDataSource
     DataSet = qryCalendEquip
-    Left = 744
-    Top = 108
+    Left = 930
+    Top = 135
   end
   object dsCalendMObra: TDataSource
     DataSet = qryCalendMObra
-    Left = 824
-    Top = 108
+    Left = 1030
+    Top = 135
   end
   object dsCargos: TDataSource
     DataSet = qryCargos
-    Left = 904
-    Top = 108
+    Left = 1130
+    Top = 135
   end
   object dsCalendEquipSeqHora: TDataSource
     DataSet = qryCalendEquipSeqHora
-    Left = 765
-    Top = 108
+    Left = 956
+    Top = 135
   end
   object dsCalendMObraSeqHora: TDataSource
     DataSet = qryCalendMObraSeqHora
-    Left = 845
-    Top = 108
+    Left = 1056
+    Top = 135
   end
   object dsCausaFalha: TDataSource
     DataSet = qryCausaFalha
-    Left = 961
-    Top = 108
+    Left = 1201
+    Top = 135
   end
   object dsCentroCusto: TDataSource
     DataSet = qryCentroCusto
-    Left = 1017
-    Top = 108
+    Left = 1271
+    Top = 135
   end
   object dsClasses: TDataSource
     DataSet = qryClasses
-    Left = 1072
-    Top = 108
+    Left = 1340
+    Top = 135
   end
   object dsCustosMesMObra: TDataSource
     DataSet = qryCustosMesMObra
-    Left = 1127
-    Top = 108
+    Left = 1409
+    Top = 135
   end
   object dsCustosMesPecas: TDataSource
     DataSet = qryCustosMesPecas
-    Left = 1148
-    Top = 108
+    Left = 1435
+    Top = 135
   end
   object dsCustosMesRecursos: TDataSource
     DataSet = qryCustosMesRecursos
-    Left = 1169
-    Top = 108
+    Left = 1461
+    Top = 135
   end
   object dsCustosMesExtras: TDataSource
     DataSet = qryCustosMesExtras
-    Left = 1190
-    Top = 108
+    Left = 1488
+    Top = 135
   end
   object qryAbastecimentos: TFDQuery
     OnCalcFields = qryAbastecimentosCalcFields
@@ -21363,8 +21369,8 @@ object DM: TDM
       'WHERE (`controlecombustivel`.`CODEQUIPAMENTO`= :codequipamento'
       '    AND `controlecombustivel`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 54
-    Top = 60
+    Left = 68
+    Top = 75
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -21574,8 +21580,8 @@ object DM: TDM
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODEQUIPAMENTO` = :codequipamento);'
       '')
-    Left = 75
-    Top = 60
+    Left = 94
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -21673,8 +21679,8 @@ object DM: TDM
       ' )'
       'ORDER BY `controlecombustivelcabast`.`CODIGO` DESC'
       '')
-    Left = 96
-    Top = 60
+    Left = 120
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -21834,8 +21840,8 @@ object DM: TDM
       '    AND `CODIGO` = :codigo)'
       'ORDER BY `DESCRICAO` ASC;'
       '')
-    Left = 117
-    Top = 60
+    Left = 146
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -21926,8 +21932,8 @@ object DM: TDM
         '     AND `controlecombustivell`.`CODEQUIPAMENTO` = :codequipamen' +
         'to);'
       '')
-    Left = 138
-    Top = 60
+    Left = 173
+    Top = 75
     ParamData = <
       item
         Name = 'codempresa'
@@ -22045,8 +22051,8 @@ object DM: TDM
         'ORDER BY `controlecombustivellabast`.`DATALUBRIFIC` DESC, `contr' +
         'olecombustivellabast`.`ODOMETROLUBRIFIC` DESC;'
       '')
-    Left = 159
-    Top = 60
+    Left = 199
+    Top = 75
     ParamData = <
       item
         Name = 'CODIGO'
@@ -22205,8 +22211,8 @@ object DM: TDM
       
         'WHERE CODEQUIPAMENTO = :CODEQUIPAMENTO AND CODEMPRESA = :CODEMPR' +
         'ESA;')
-    Left = 180
-    Top = 60
+    Left = 225
+    Top = 75
     ParamData = <
       item
         Name = 'ULTLEITURACOMBUST'
@@ -22254,8 +22260,8 @@ object DM: TDM
         '    AND `manutprogfamequipamento`.`PROGRAMARPOR2` = :codprograma' +
         'cao2'
       '    AND `manutprogequipamento`.`LEITURA` <= :ultleitura )')
-    Left = 201
-    Top = 60
+    Left = 251
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22311,8 +22317,8 @@ object DM: TDM
         '    AND `lubrificprogfamequipamento`.`PROGRAMARPOR2` = :codprogr' +
         'amacao2'
       '    AND `lubrificprogequipamento`.`LEITURA` <= :ultleitura )')
-    Left = 222
-    Top = 60
+    Left = 278
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22358,8 +22364,8 @@ object DM: TDM
       '    `alertas`'
       'WHERE '
       '    `CODEMPRESA`= :codempresa')
-    Left = 309
-    Top = 60
+    Left = 386
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22441,8 +22447,8 @@ object DM: TDM
       '    `empresa`'
       ' WHERE (`empresa`.`CODIGO` = :codempresa'
       '     );')
-    Left = 330
-    Top = 60
+    Left = 413
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22489,8 +22495,8 @@ object DM: TDM
         'AND `manutprogequipamento`.`DTAINICIO1` <= DATE_FORMAT(:DATA, '#39'%' +
         'Y-%m-%d'#39') AND `manutprogequipamento`.`RELATORIO` = '#39'N'#39' AND `manu' +
         'tprogequipamento`.`GRUPOINSP` = '#39'N'#39')')
-    Left = 351
-    Top = 60
+    Left = 439
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22520,8 +22526,8 @@ object DM: TDM
         'AND `manutprogequipamento`.`DTAINICIO1` <= DATE_FORMAT(:DATA, '#39'%' +
         'Y-%m-%d'#39') AND `manutprogequipamento`.`RELATORIO` = '#39'N'#39' AND `manu' +
         'tprogequipamento`.`GRUPOINSP` = '#39'N'#39')')
-    Left = 372
-    Top = 60
+    Left = 465
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22550,8 +22556,8 @@ object DM: TDM
         '    AND `rotasequipamento`.`DATAINICIO` <= DATE_FORMAT(:DATA, '#39'%' +
         'Y-%m-%d'#39') '
       '    AND `rotasequipamento`.`RELATORIO` = '#39'N'#39')')
-    Left = 393
-    Top = 60
+    Left = 491
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22613,8 +22619,8 @@ object DM: TDM
       '       AND `ordemservico`.`SITUACAO` <> '#39'PROGRAMADA'#39
       '       AND `ordemservico`.`SITUACAO` <> '#39'REPROGRAMADA'#39');'
       '')
-    Left = 1127
-    Top = 60
+    Left = 1409
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22721,8 +22727,8 @@ object DM: TDM
         ':data2,'#39'%Y/%m/%d %T'#39')'
       '       );'
       '')
-    Left = 1148
-    Top = 60
+    Left = 1435
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22774,8 +22780,8 @@ object DM: TDM
         '_DATE(:data2,'#39'%Y/%m/%d %T'#39')'
       '       );'
       '')
-    Left = 1169
-    Top = 60
+    Left = 1461
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22816,8 +22822,8 @@ object DM: TDM
       '       AND `DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d %T'#39')'
       '       );'
       '')
-    Left = 1190
-    Top = 60
+    Left = 1488
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22864,8 +22870,8 @@ object DM: TDM
       '    AND `DATA` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d %T'#39')'
       '       );'
       '')
-    Left = 1211
-    Top = 60
+    Left = 1514
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22922,8 +22928,8 @@ object DM: TDM
         'ta2,'#39'%Y/%m/%d %T'#39')'
       ');'
       '')
-    Left = 1232
-    Top = 60
+    Left = 1540
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22967,8 +22973,8 @@ object DM: TDM
         'data2,'#39'%Y/%m/%d %T'#39')'
       ');'
       '')
-    Left = 1253
-    Top = 60
+    Left = 1566
+    Top = 75
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -22997,198 +23003,198 @@ object DM: TDM
   end
   object dsCustosMesPneusNovos: TDataSource
     DataSet = qryCustosMesPneusNovos
-    Left = 1211
-    Top = 108
+    Left = 1514
+    Top = 135
   end
   object dsCustosMesPneusUsados: TDataSource
     DataSet = qryCustosMesPneusUsados
-    Left = 1232
-    Top = 108
+    Left = 1540
+    Top = 135
   end
   object dsCustosMesTercUnid: TDataSource
     DataSet = qryCustosMesTercUnid
-    Left = 1253
-    Top = 108
+    Left = 1566
+    Top = 135
   end
   object dsDespMensalProdMensal: TDataSource
     DataSet = qryDespMensalProdMensal
-    Left = 1309
-    Top = 108
+    Left = 1636
+    Top = 135
   end
   object dsDespMensalTaxasPer: TDataSource
     DataSet = qryDespMensalTaxasPer
-    Left = 1368
-    Top = 108
+    Left = 1710
+    Top = 135
   end
   object dsDespMensalTaxas: TDataSource
     DataSet = qryDespMensalTaxas
-    Left = 1385
-    Top = 108
+    Left = 1731
+    Top = 135
   end
   object dsDispAdmissiveis: TDataSource
     DataSet = qryDispAdmissiveis
-    Left = 1445
-    Top = 108
+    Left = 1806
+    Top = 135
   end
   object dsEquipamentos: TDataSource
     DataSet = qryEquipamentos
-    Left = 55
-    Top = 209
+    Left = 69
+    Top = 261
   end
   object dsEquipamentosDados: TDataSource
     DataSet = qryEquipamentosDados
-    Left = 76
-    Top = 209
+    Left = 95
+    Top = 261
   end
   object dsEquipamentosPecas: TDataSource
     DataSet = qryEquipamentosPecas
-    Left = 97
-    Top = 209
+    Left = 121
+    Top = 261
   end
   object dsEquipamentosEsp: TDataSource
     DataSet = qryEquipamentosEsp
-    Left = 118
-    Top = 209
+    Left = 148
+    Top = 261
   end
   object dsEquipamentosArqTec: TDataSource
     DataSet = qryEquipamentosArqTec
-    Left = 139
-    Top = 209
+    Left = 174
+    Top = 261
   end
   object dsEquipamentosPontosInsp: TDataSource
     DataSet = qryEquipamentosPontosInsp
-    Left = 160
-    Top = 209
+    Left = 200
+    Top = 261
   end
   object dsEquipamentosContadores: TDataSource
     DataSet = qryEquipamentosContadores
-    Left = 181
-    Top = 209
+    Left = 226
+    Top = 261
   end
   object dsEquipamentosDadosR: TDataSource
     DataSet = qryEquipamentosDadosR
-    Left = 202
-    Top = 209
+    Left = 253
+    Top = 261
   end
   object dsEquipamentosChecaLocal: TDataSource
     DataSet = qryEquipamentosChecaLocal
-    Left = 223
-    Top = 209
+    Left = 279
+    Top = 261
   end
   object dsEquipamentosArvore: TDataSource
     DataSet = qryEquipamentosArvore
-    Left = 244
-    Top = 209
+    Left = 305
+    Top = 261
   end
   object dsEquipamentosArvoreSec: TDataSource
     DataSet = qryEquipamentosArvoreSec
-    Left = 265
-    Top = 209
+    Left = 331
+    Top = 261
   end
   object dsEquipamentosImagens: TDataSource
     DataSet = qryEquipamentosImagens
-    Left = 286
-    Top = 209
+    Left = 358
+    Top = 261
   end
   object dsEquipamentosReservas: TDataSource
     DataSet = qryEquipamentosReservas
-    Left = 441
-    Top = 209
+    Left = 551
+    Top = 261
   end
   object dsEquipamentosHist: TDataSource
     DataSet = qryEquipamentosHist
-    Left = 496
-    Top = 210
+    Left = 620
+    Top = 263
   end
   object dsEquipamentoTipoManutHist: TDataSource
     DataSet = qryEquipamentoTipoManutHist
-    Left = 547
-    Top = 210
+    Left = 684
+    Top = 263
   end
   object dsEquipamentoManutHist: TDataSource
     DataSet = qryEquipamentoManutHist
-    Left = 568
-    Top = 210
+    Left = 710
+    Top = 263
   end
   object dsEquipamentoLubrificHist: TDataSource
     DataSet = qryEquipamentoLubrificHist
-    Left = 589
-    Top = 210
+    Left = 736
+    Top = 263
   end
   object dsEquipamentosHistTercFora: TDataSource
     DataSet = qryEquipamentosHistTercFora
-    Left = 610
-    Top = 210
+    Left = 763
+    Top = 263
   end
   object dsEquipamentosSubst: TDataSource
     DataSet = qryEquipamentosSubst
-    Left = 665
-    Top = 210
+    Left = 831
+    Top = 263
   end
   object dsEquipamentosSubstHist: TDataSource
     DataSet = qryEquipamentosSubstHist
-    Left = 686
-    Top = 210
+    Left = 858
+    Top = 263
   end
   object dsFabricantes: TDataSource
     DataSet = qryFabricantes
-    Left = 746
-    Top = 210
+    Left = 933
+    Top = 263
   end
   object dsFamEquipamento: TDataSource
     DataSet = qryFamEquipamento
-    Left = 802
-    Top = 210
+    Left = 1003
+    Top = 263
   end
   object dsFamPecasRep: TDataSource
     DataSet = qryFamPecasRep
-    Left = 859
-    Top = 210
+    Left = 1074
+    Top = 263
   end
   object dsFamPneus: TDataSource
     DataSet = qryFamPneus
-    Left = 915
-    Top = 210
+    Left = 1144
+    Top = 263
   end
   object dsFamRecursos: TDataSource
     DataSet = qryFamRecursos
-    Left = 972
-    Top = 210
+    Left = 1215
+    Top = 263
   end
   object dsFeriados: TDataSource
     DataSet = qryFeriados
-    Left = 1029
-    Top = 210
+    Left = 1286
+    Top = 263
   end
   object dsFerramentaria: TDataSource
     DataSet = qryFerramentaria
-    Left = 1086
-    Top = 210
+    Left = 1358
+    Top = 263
   end
   object dsFerramentariaItens: TDataSource
     DataSet = qryFerramentariaItens
-    Left = 1107
-    Top = 210
+    Left = 1384
+    Top = 263
   end
   object dsFormatoCodigo: TDataSource
     DataSet = qryFormatoCodigo
-    Left = 1165
-    Top = 210
+    Left = 1456
+    Top = 263
   end
   object dsFornecedores: TDataSource
     DataSet = qryFornecedores
-    Left = 1222
-    Top = 210
+    Left = 1528
+    Top = 263
   end
   object dsFuncionarios: TDataSource
     DataSet = qryFuncionarios
-    Left = 1281
-    Top = 210
+    Left = 1601
+    Top = 263
   end
   object dsFuncionariosCxaFerram: TDataSource
     DataSet = qryFuncionariosCxaFerram
-    Left = 1302
-    Top = 210
+    Left = 1628
+    Top = 263
   end
   object qryDespMensalFunc: TFDQuery
     IndexFieldNames = 'CODDESPINFOFUNCPER'
@@ -23223,8 +23229,8 @@ object DM: TDM
       'WHERE (`despmeninfofunc`.`CODDESPINFOFUNCPER` = :codigo)'
       'ORDER BY `funcionarios`.`NOME` DESC;'
       '')
-    Left = 77
-    Top = 269
+    Left = 96
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -23440,8 +23446,8 @@ object DM: TDM
         'to`.`CODIGO`)'
       'WHERE (`equipamentos`.`CODIGO` = :codigo '
       '    AND `equipamentos`.`CODEMPRESA` = :codempresa);')
-    Left = 55
-    Top = 161
+    Left = 69
+    Top = 201
     ParamData = <
       item
         Name = 'CODIGO'
@@ -23804,8 +23810,8 @@ object DM: TDM
         '    AND `familiaequipamentodados`.`CODFAMILIAEQUIP` = :codfamili' +
         'aequip'
       '    AND `familiaequipamentodados`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 76
-    Top = 161
+    Left = 95
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -23969,8 +23975,8 @@ object DM: TDM
         'amentos`.`CODEMPRESA`)'
       'WHERE (`equipamentospecasrep`.`CODEMPRESA` = :codempresa'
       '    AND `equipamentospecasrep`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 97
-    Top = 161
+    Left = 121
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24075,8 +24081,8 @@ object DM: TDM
         'CODEMPRESA`)'
       'WHERE (`equipamentosesp`.`CODEMPRESA` = :codempresa'
       '    AND `equipamentosesp`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 118
-    Top = 161
+    Left = 148
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24152,8 +24158,8 @@ object DM: TDM
         'tos`.`CODEMPRESA`)'
       'WHERE (`equipamentosarqtec`.`CODEMPRESA` = :codempresa'
       '    AND `equipamentosarqtec`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 139
-    Top = 161
+    Left = 174
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24238,8 +24244,8 @@ object DM: TDM
         'ontosinspecao`.`CODEMPRESA`)'
       'WHERE (`equipamentosptosinsp`.`CODEMPRESA` = :codempresa'
       '    AND `equipamentosptosinsp`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 160
-    Top = 161
+    Left = 200
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24325,8 +24331,8 @@ object DM: TDM
         'ODIGO`)'
       'WHERE (`equipamentoscont`.`CODEMPRESA` = :codempresa'
       '    AND `equipamentoscont`.`CODEQUIPAMENTO` = :codigo);')
-    Left = 181
-    Top = 161
+    Left = 226
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24401,8 +24407,8 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAEQUIP = :CODFAMILIAEQUIP '
       'AND F.CODEQUIPAMENTO = :CODEQUIPAMENTO')
-    Left = 202
-    Top = 161
+    Left = 253
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24546,8 +24552,8 @@ object DM: TDM
       '    AND `CODCELULA` = :codcelula'
       '    AND `CODLINHA` = :codlinha'
       '    AND `SEQUENCIA` = :sequencia);')
-    Left = 223
-    Top = 161
+    Left = 279
+    Top = 201
     ParamData = <
       item
         Name = 'CODAREA'
@@ -24590,8 +24596,8 @@ object DM: TDM
   end
   object qryEquipamentosArvore: TFDQuery
     Connection = FDConnSPMP3
-    Left = 244
-    Top = 161
+    Left = 305
+    Top = 201
     object qryEquipamentosArvoreCODIGO: TStringField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -24656,8 +24662,8 @@ object DM: TDM
       'AND `equipamentos`.`CODEQUIPAMENTOPAI` = :codigo'
       ')'
       'ORDER BY  `equipamentos`.`SEQUENCIA`;')
-    Left = 265
-    Top = 161
+    Left = 331
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24719,8 +24725,8 @@ object DM: TDM
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODEQUIPAMENTO` = :codigo)'
       'ORDER BY `DESCRICAO` DESC;')
-    Left = 286
-    Top = 161
+    Left = 358
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -24867,8 +24873,8 @@ object DM: TDM
         '(:data2,'#39'%Y/%m/%d'#39')'
       ')'
       'order by `ordemservico`.`CODIGO` desc')
-    Left = 496
-    Top = 162
+    Left = 620
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -25090,8 +25096,8 @@ object DM: TDM
         'O'#39')'
       '    )'
       ' GROUP BY `ordemservico`.`CODMANUTENCAO`')
-    Left = 547
-    Top = 162
+    Left = 684
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -25172,8 +25178,8 @@ object DM: TDM
         '    AND (`ordemservico`.`SITUACAO` = '#39'LIBERADA'#39' OR `ordemservico' +
         '`.`SITUACAO` = '#39'FECHADA'#39' OR `ordemservico`.`SITUACAO` = '#39'EXECUCA' +
         'O'#39'));')
-    Left = 568
-    Top = 162
+    Left = 710
+    Top = 203
     ParamData = <
       item
         Name = 'DATA1'
@@ -25281,8 +25287,8 @@ object DM: TDM
         '    AND (`ordemservico`.`SITUACAO` = '#39'LIBERADA'#39' OR `ordemservico' +
         '`.`SITUACAO` = '#39'FECHADA'#39' OR `ordemservico`.`SITUACAO` = '#39'EXECUCA' +
         'O'#39'));')
-    Left = 589
-    Top = 162
+    Left = 736
+    Top = 203
     ParamData = <
       item
         Name = 'DATA1'
@@ -25372,8 +25378,8 @@ object DM: TDM
         ':data1,'#39'%Y/%m/%d'#39') AND `ordemservicotercfora`.`DATACONTRATOFIN` ' +
         '<= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
       ')')
-    Left = 610
-    Top = 162
+    Left = 763
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -25481,8 +25487,8 @@ object DM: TDM
         '`) AND (`funcionarios`.`CODEMPRESA` = `usuario_1`.`CODEMPRESA`)'
       'WHERE (`funcionarios`.`MATRICULA` = :matricula'
       '    AND `funcionarios`.`CODEMPRESA` = :codempresa);')
-    Left = 1281
-    Top = 162
+    Left = 1601
+    Top = 203
     ParamData = <
       item
         Name = 'MATRICULA'
@@ -25826,8 +25832,8 @@ object DM: TDM
       'WHERE (`funcionarioscxaferram`.`CODEMPRESA` = :codempresa'
       'AND`funcionarioscxaferram`.`MATRICULA` = :matricula'
       '  );')
-    Left = 1302
-    Top = 162
+    Left = 1628
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -25923,8 +25929,8 @@ object DM: TDM
       'WHERE (`funcionariosinventario`.`CODEMPRESA` = :codempresa'
       '    AND `funcionariosinventario`.`MATRICULA` = :matricula)'
       'ORDER BY `funcionariosinventario`.`CODIGO` DESC;')
-    Left = 1323
-    Top = 162
+    Left = 1654
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26013,8 +26019,8 @@ object DM: TDM
         '` = `funcionarioscxaferram`.`MATRICULA`) AND (`funcionariosinvfe' +
         'rram`.`CODITEM` = `funcionarioscxaferram`.`CODITEM`)'
       'WHERE (`funcionariosinvferram`.`CODINVENTARIO` = :codigo);')
-    Left = 1344
-    Top = 162
+    Left = 1680
+    Top = 203
     ParamData = <
       item
         Name = 'CODIGO'
@@ -26119,8 +26125,8 @@ object DM: TDM
       'WHERE (`funcionariosausencia`.`CODEMPRESA` = :codempresa'
       '    AND `funcionariosausencia`.`MATRICULA` = :matricula)'
       'ORDER BY `funcionariosausencia`.`INICIO` DESC;')
-    Left = 1365
-    Top = 162
+    Left = 1706
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26260,8 +26266,8 @@ object DM: TDM
       
         'ORDER BY `ferramentariaitensemp`.`DATAEMPRESTIMO` DESC, `NOME` D' +
         'ESC;')
-    Left = 1386
-    Top = 162
+    Left = 1733
+    Top = 203
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26349,63 +26355,63 @@ object DM: TDM
   end
   object dsFuncionariosCxaFerramInv: TDataSource
     DataSet = qryFuncionariosCxaFerramInv
-    Left = 1323
-    Top = 210
+    Left = 1654
+    Top = 263
   end
   object dsFuncionariosCxaFerramInvItens: TDataSource
     DataSet = qryFuncionariosCxaFerramInvItens
-    Left = 1344
-    Top = 210
+    Left = 1680
+    Top = 263
   end
   object dsFuncionariosAusencias: TDataSource
     DataSet = qryFuncionariosAusencias
-    Left = 1365
-    Top = 210
+    Left = 1706
+    Top = 263
   end
   object dsFuncionariosFerramentaria: TDataSource
     DataSet = qryFuncionariosFerramentaria
-    Left = 1386
-    Top = 210
+    Left = 1733
+    Top = 263
   end
   object dsDespMensalDiversas: TDataSource
     DataSet = qryDespMensalDiversas
-    Left = 1445
-    Top = 210
+    Left = 1806
+    Top = 263
   end
   object dsDespMensalFuncPer: TDataSource
     DataSet = qryDespMensalFuncPer
-    Left = 56
-    Top = 317
+    Left = 70
+    Top = 396
   end
   object dsDespMensalFunc: TDataSource
     DataSet = qryDespMensalFunc
-    Left = 77
-    Top = 317
+    Left = 96
+    Top = 396
   end
   object dsDespMensalManutencao: TDataSource
     DataSet = qryDespMensalManutencao
-    Left = 135
-    Top = 317
+    Left = 169
+    Top = 396
   end
   object dsDespMensalManutencaoCustos: TDataSource
     DataSet = qryDespMensalManutencaoCustos
-    Left = 150
-    Top = 317
+    Left = 188
+    Top = 396
   end
   object dsFuncionariosHist: TDataSource
     DataSet = qryFuncionariosHist
-    Left = 205
-    Top = 317
+    Left = 256
+    Top = 396
   end
   object dsFuncionariosTipoManutHist: TDataSource
     DataSet = qryFuncionariosTipoManutHist
-    Left = 229
-    Top = 317
+    Left = 286
+    Top = 396
   end
   object dsFuncionariosHistServicos: TDataSource
     DataSet = qryFuncionariosHistServicos
-    Left = 247
-    Top = 317
+    Left = 309
+    Top = 396
   end
   object qryFuncionariosHist: TFDQuery
     AfterOpen = qryFuncionariosHistAfterScroll
@@ -26446,8 +26452,8 @@ object DM: TDM
       'WHERE (`funcionarios`.`CODEMPRESA` = :codempresa)'
       ''
       'ORDER BY `funcionarios`.`NOME` ASC;')
-    Left = 205
-    Top = 269
+    Left = 256
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26557,8 +26563,8 @@ object DM: TDM
       'GROUP BY `MANUTENCAO` '
       ''
       'ORDER BY `MANUTENCAO` ASC;')
-    Left = 226
-    Top = 269
+    Left = 283
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26659,8 +26665,8 @@ object DM: TDM
       '     AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula)'
       '     '
       'ORDER BY `ordemservico`.`CODIGO` DESC;')
-    Left = 247
-    Top = 269
+    Left = 309
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26738,8 +26744,8 @@ object DM: TDM
         '    AND `funcionariosausencia`.FIM <= DATE_FORMAT(:data2,'#39'%Y-%m-' +
         '%d'#39'))'
       'ORDER BY `funcionariosausencia`.`FIM` DESC;')
-    Left = 268
-    Top = 269
+    Left = 335
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -26774,148 +26780,148 @@ object DM: TDM
   end
   object dsFuncionariosHistAusencias: TDataSource
     DataSet = qryFuncionariosHistAusencias
-    Left = 268
-    Top = 317
+    Left = 335
+    Top = 396
   end
   object dsGrupos: TDataSource
     DataSet = qryGrupos
-    Left = 324
-    Top = 317
+    Left = 405
+    Top = 396
   end
   object dsUnidades: TDataSource
     DataSet = qryUnidades
-    Left = 345
-    Top = 317
+    Left = 431
+    Top = 396
   end
   object dsAdmCorp: TDataSource
     DataSet = qryAdmCorp
-    Left = 366
-    Top = 317
+    Left = 458
+    Top = 396
   end
   object dsAdmUnid: TDataSource
     DataSet = qryAdmUnid
-    Left = 387
-    Top = 317
+    Left = 484
+    Top = 396
   end
   object dsImagens: TDataSource
     DataSet = qryImagens
-    Left = 446
-    Top = 317
+    Left = 558
+    Top = 396
   end
   object dsIndDesempenho: TDataSource
     DataSet = qryIndDesempenho
-    Left = 501
-    Top = 317
+    Left = 626
+    Top = 396
   end
   object dsIndDesempPercParadas: TDataSource
     DataSet = qryIndDesempPercParadas
-    Left = 522
-    Top = 317
+    Left = 653
+    Top = 396
   end
   object dsIndDesempTotalHE: TDataSource
     DataSet = qryIndDesempTotalHE
-    Left = 543
-    Top = 317
+    Left = 679
+    Top = 396
   end
   object dsLubrificantes: TDataSource
     DataSet = qryLubrificantes
-    Left = 599
-    Top = 317
+    Left = 749
+    Top = 396
   end
   object dsLubrificProgEquip: TDataSource
     DataSet = qryLubrificProgEquip
-    Left = 653
-    Top = 317
+    Left = 816
+    Top = 396
   end
   object dsLubrificProgEquipItens: TDataSource
     DataSet = qryLubrificProgEquipItens
-    Left = 694
-    Top = 317
+    Left = 868
+    Top = 396
   end
   object dsLubrificProgEquipItensEsp: TDataSource
     DataSet = qryLubrificProgEquipItensEsp
-    Left = 715
-    Top = 317
+    Left = 894
+    Top = 396
   end
   object dsLubrificProgEquipItensEspApagar: TDataSource
     DataSet = qryLubrificProgEquipItensEspApagar
-    Left = 736
-    Top = 317
+    Left = 920
+    Top = 396
   end
   object dsLubrificProgFamEquip: TDataSource
     DataSet = qryLubrificProgFamEquip
-    Left = 808
-    Top = 317
+    Left = 1010
+    Top = 396
   end
   object dsLubrificProgFamEquipPlanoTrab: TDataSource
     DataSet = qryLubrificProgFamEquipPlanoTrab
-    Left = 829
-    Top = 317
+    Left = 1036
+    Top = 396
   end
   object dsLubrificProgFamEquipPartes: TDataSource
     DataSet = qryLubrificProgFamEquipPartes
-    Left = 850
-    Top = 317
+    Left = 1063
+    Top = 396
   end
   object dsLubrificProgFamEquipItens: TDataSource
     DataSet = qryLubrificProgFamEquipItens
-    Left = 871
-    Top = 317
+    Left = 1089
+    Top = 396
   end
   object dsLubrificProgFamEquipItensApagar: TDataSource
     DataSet = qryLubrificProgFamEquipItensApagar
-    Left = 892
-    Top = 317
+    Left = 1115
+    Top = 396
   end
   object dsLubrificProgFamEquipItensTodos: TDataSource
     DataSet = qryLubrificProgFamEquipItensTodos
-    Left = 912
-    Top = 317
+    Left = 1140
+    Top = 396
   end
   object dsManutCons: TDataSource
     DataSet = qryManutCons
-    Left = 959
-    Top = 317
+    Left = 1199
+    Top = 396
   end
   object dsLubrificCons: TDataSource
     DataSet = qryLubrificCons
-    Left = 1077
-    Top = 317
+    Left = 1346
+    Top = 396
   end
   object dsRotaCons: TDataSource
     DataSet = qryRotaCons
-    Left = 1193
-    Top = 317
+    Left = 1491
+    Top = 396
   end
   object dsManutPeriodicas: TDataSource
     DataSet = qryManutPeriodicas
-    Left = 1339
-    Top = 316
+    Left = 1674
+    Top = 395
   end
   object dsManutPeriodicasItens: TDataSource
     DataSet = qryManutPeriodicasItens
-    Left = 1360
-    Top = 316
+    Left = 1700
+    Top = 395
   end
   object dsManutPeriodicasItensEsp: TDataSource
     DataSet = qryManutPeriodicasItensEsp
-    Left = 1381
-    Top = 316
+    Left = 1726
+    Top = 395
   end
   object dsLubrificPeriodicas: TDataSource
     DataSet = qryLubrificPeriodicas
-    Left = 1402
-    Top = 316
+    Left = 1753
+    Top = 395
   end
   object dsLubrificPeriodicasItens: TDataSource
     DataSet = qryLubrificPeriodicasItens
-    Left = 1423
-    Top = 316
+    Left = 1779
+    Top = 395
   end
   object dsLubrificPeriodicasItensEsp: TDataSource
     DataSet = qryLubrificPeriodicasItensEsp
-    Left = 1444
-    Top = 316
+    Left = 1805
+    Top = 395
   end
   object qryGrupos: TFDQuery
     Connection = FDConnSPMP3
@@ -26939,8 +26945,8 @@ object DM: TDM
       '        ON (`grupos`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`grupos`.`CODIGO` = :codigo);'
       '')
-    Left = 324
-    Top = 269
+    Left = 405
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -27047,8 +27053,8 @@ object DM: TDM
       'WHERE (`empresa`.`CODIGO` = :codigo'
       '    AND `empresa`.`CODGRUPO` = :codgrupo);'
       '')
-    Left = 345
-    Top = 269
+    Left = 431
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -27215,8 +27221,8 @@ object DM: TDM
       '    AND `usuario`.`CODNIVELACESSO` = '#39'ADC-00001'#39')'
       '    OR (`usuario`.`CODNIVELACESSO` = '#39'USC-00001'#39');'
       '')
-    Left = 366
-    Top = 269
+    Left = 458
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -27468,8 +27474,8 @@ object DM: TDM
       '    AND `usuario`.`CODEMPRESA` = :codempresa'
       '    AND `usuario`.`CODNIVELACESSO` = '#39'ADU-00001'#39');'
       '')
-    Left = 387
-    Top = 269
+    Left = 484
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -27721,8 +27727,8 @@ object DM: TDM
       
         '    AND `lubrificprogfamequipamento`.`CODEMPRESA` = :codempresa)' +
         ';')
-    Left = 808
-    Top = 269
+    Left = 1010
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -27898,8 +27904,8 @@ object DM: TDM
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
         ' = :codigo)'
       'order by `planotrabalho`.`DESCRICAO`;')
-    Left = 829
-    Top = 269
+    Left = 1036
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -27981,8 +27987,8 @@ object DM: TDM
         '    AND `lubrificprogfamequippartes`.`CODLUBRIFICPROGFAMEQUIP` =' +
         ' :codigo)'
       'order by `lubrificprogfamequippartes`.`DESCRICAO`;')
-    Left = 850
-    Top = 269
+    Left = 1063
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -28071,8 +28077,8 @@ object DM: TDM
       'WHERE (`lubrificprogfamequipitens`.`CODPARTE`= :codigo'
       ')'
       'ORDER BY `PARTE`;')
-    Left = 871
-    Top = 269
+    Left = 1089
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -28190,8 +28196,8 @@ object DM: TDM
         'CINSPECAO` = '#39#39'))'
       'AND `lubrificprogfamequipitens`.`CODIGO` = :codigo'
       'AND `lubrificprogfamequipitens`.`CODEMPRESA` = :codempresa;')
-    Left = 892
-    Top = 269
+    Left = 1115
+    Top = 336
     ParamData = <
       item
         Name = 'CODIGO'
@@ -28248,8 +28254,8 @@ object DM: TDM
         ':codigo'
       ')'
       'ORDER BY `PARTE`;')
-    Left = 912
-    Top = 269
+    Left = 1140
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -28440,8 +28446,8 @@ object DM: TDM
       '    AND `manutprogequipamento`.`DTAINICIO1` IS NOT NULL'
       ')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 959
-    Top = 269
+    Left = 1199
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -28768,8 +28774,8 @@ object DM: TDM
       ''
       ')'
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1077
-    Top = 269
+    Left = 1346
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -29028,8 +29034,8 @@ object DM: TDM
       '                AND `rotasequipamento`.`RELATORIO` = '#39'N'#39
       '              )'
       'ORDER BY `rotasequipamento`.`DATAINICIO` ASC;')
-    Left = 1193
-    Top = 269
+    Left = 1491
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -29179,8 +29185,8 @@ object DM: TDM
       
         'ORDER BY `manutprogequipamentohist`.`CODORDEMSERVICO` DESC, `EQU' +
         'IPAMENTO` DESC;')
-    Left = 1339
-    Top = 268
+    Left = 1674
+    Top = 335
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -29485,8 +29491,8 @@ object DM: TDM
         'ORDER BY  `manutprogfamequippartes`.`DESCRICAO` ASC, `manutproge' +
         'quiphistitens`.`ITEM`, `manutprogequiphistitens`.`DESCINSPECAO` ' +
         'ASC;')
-    Left = 1360
-    Top = 268
+    Left = 1700
+    Top = 335
     ParamData = <
       item
         Name = 'INDICE'
@@ -29687,8 +29693,8 @@ object DM: TDM
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC , `manutproge' +
         'quiphistitensesp`.`ITEM`, `manutprogequiphistitensesp`.`DESCINSP' +
         'ECAO` ASC;')
-    Left = 1381
-    Top = 268
+    Left = 1726
+    Top = 335
     ParamData = <
       item
         Name = 'INDICE'
@@ -29911,8 +29917,8 @@ object DM: TDM
       
         'ORDER BY `lubrificprogequipamentohist`.`CODORDEMSERVICO` DESC, `' +
         'EQUIPAMENTO` DESC;')
-    Left = 1402
-    Top = 268
+    Left = 1753
+    Top = 335
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -30215,8 +30221,8 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitens`.`ITEM`, `lubrificprogequiphistitens`.`DESCI' +
         'NSPECAO` ASC;')
-    Left = 1423
-    Top = 268
+    Left = 1779
+    Top = 335
     ParamData = <
       item
         Name = 'INDICE'
@@ -30419,8 +30425,8 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitensesp`.`ITEM`, `lubrificprogequiphistitensesp`.' +
         '`DESCINSPECAO` ASC;')
-    Left = 1444
-    Top = 268
+    Left = 1805
+    Top = 335
     ParamData = <
       item
         Name = 'INDICE'
@@ -30573,13 +30579,13 @@ object DM: TDM
   end
   object dsManutPeriodicasHist: TDataSource
     DataSet = qryManutPeriodicasHist
-    Left = 55
-    Top = 424
+    Left = 69
+    Top = 530
   end
   object dsLubrificPeriodicasHist: TDataSource
     DataSet = qryLubrificPeriodicasHist
-    Left = 148
-    Top = 424
+    Left = 185
+    Top = 530
   end
   object qryManutProgEquip: TFDQuery
     OnCalcFields = qryManutProgEquipCalcFields
@@ -30615,6 +30621,7 @@ object DM: TDM
       '    , `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2` '
       '    , `equipamentos`.`DESCRICAO` EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
+      '    , `equipamentos`.`CODFAMILIAEQUIP` AS FAMEQUIPAMENTO'
       '    , `funcionarios`.`NOME` RESPONSAVEL'
       '    , `rotasequipamento`.`DESCRICAO` AS `ROTA`'
       'FROM'
@@ -30668,8 +30675,8 @@ object DM: TDM
       
         '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipament' +
         'o);')
-    Left = 243
-    Top = 376
+    Left = 304
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -30858,6 +30865,14 @@ object DM: TDM
       ProviderFlags = []
       Size = 200
     end
+    object qryManutProgEquipFAMEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'FAMEQUIPAMENTO'
+      Origin = 'CODFAMILIAEQUIP'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
     object qryManutProgEquipCODCENTROCUSTO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODCENTROCUSTO'
@@ -30887,6 +30902,12 @@ object DM: TDM
     object qryManutProgEquipC_PROXINSP: TDateTimeField
       FieldKind = fkCalculated
       FieldName = 'C_PROXINSP'
+      Calculated = True
+    end
+    object qryManutProgEquipC_REIMPRESSAO: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'C_REIMPRESSAO'
+      Size = 1
       Calculated = True
     end
   end
@@ -30919,8 +30940,8 @@ object DM: TDM
         'tprogfamequip'
       ')'
       'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
-    Left = 275
-    Top = 376
+    Left = 344
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -31033,8 +31054,8 @@ object DM: TDM
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
       'ORDER BY `PARTE` ASC;')
-    Left = 296
-    Top = 376
+    Left = 370
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -31167,8 +31188,8 @@ object DM: TDM
       '    AND `rotasequipamentoseq`.`CODLINHA` = :codlinha'
       '    AND `rotasequipamentoseq`.`SEQUENCIA` = :sequencia'
       '    AND `rotasequipamento`.`FREQUENCIA` = :frequencia);')
-    Left = 317
-    Top = 376
+    Left = 396
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -31277,8 +31298,8 @@ object DM: TDM
         'AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codmanutprog' +
         'equip'
       'AND `manutprogequipitensesp`.`CODEMPRESA` = :codempresa;')
-    Left = 338
-    Top = 376
+    Left = 423
+    Top = 470
     ParamData = <
       item
         Name = 'CODMANUTPROGEQUIP'
@@ -31340,8 +31361,8 @@ object DM: TDM
         'ario_1`.`CODEMPRESA`)'
       'WHERE (`manutprogfamequipamento`.`CODIGO` = :codigo'
       '    AND `manutprogfamequipamento`.`CODEMPRESA` = :codempresa);')
-    Left = 411
-    Top = 376
+    Left = 596
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -31518,8 +31539,8 @@ object DM: TDM
         '    AND `manutprogfamequipplantrab`.`CODMANUTPROGFAMEQUIP` = :co' +
         'digo)'
       'order by `planotrabalho`.`DESCRICAO`;')
-    Left = 432
-    Top = 376
+    Left = 623
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -31598,8 +31619,8 @@ object DM: TDM
         '    AND `manutprogfamequippartes`.`CODMANUTPROGFAMEQUIP` = :codi' +
         'go)'
       'order by `manutprogfamequippartes`.`DESCRICAO`;')
-    Left = 453
-    Top = 376
+    Left = 648
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -31682,8 +31703,8 @@ object DM: TDM
         'ARTE`)'
       'WHERE (`manutprogfamequipitens`.`CODPARTE`= :codigo)'
       'ORDER BY `manutprogfamequipitens`.`ITEM`;')
-    Left = 474
-    Top = 376
+    Left = 675
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -31801,8 +31822,8 @@ object DM: TDM
         ' '#39#39'))'
       'AND `manutprogfamequipitens`.`CODIGO` = :codigo'
       'AND `manutprogfamequipitens`.`CODEMPRESA` = :codempresa;')
-    Left = 495
-    Top = 376
+    Left = 701
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -31857,8 +31878,8 @@ object DM: TDM
         'o'
       ')'
       'ORDER BY `manutprogfamequipitens`.`ITEM`;')
-    Left = 516
-    Top = 376
+    Left = 728
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -32000,8 +32021,8 @@ object DM: TDM
       '    AND `lubrificprogequipamento`.`RELATORIO` = '#39'N'#39
       '    AND `lubrificprogequipamento`.`GRUPOINSP` = '#39'N'#39')'
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 586
-    Top = 376
+    Left = 815
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -32070,213 +32091,213 @@ object DM: TDM
   end
   object dsManutProgEquip: TDataSource
     DataSet = qryManutProgEquip
-    Left = 245
-    Top = 424
+    Left = 306
+    Top = 530
   end
   object dsManutProgEquipItens: TDataSource
     DataSet = qryManutProgEquipItens
-    Left = 277
-    Top = 424
+    Left = 346
+    Top = 530
   end
   object dsManutProgEquipItensEsp: TDataSource
     DataSet = qryManutProgEquipItensEsp
-    Left = 298
-    Top = 424
+    Left = 373
+    Top = 530
   end
   object dsEquipEmRota: TDataSource
     DataSet = qryEquipEmRota
-    Left = 319
-    Top = 424
+    Left = 399
+    Top = 530
   end
   object dsManutProgEquipItensEspApagar: TDataSource
     DataSet = qryManutProgEquipItensEspApagar
-    Left = 340
-    Top = 424
+    Left = 425
+    Top = 530
   end
   object dsManutProgFamEquip: TDataSource
     DataSet = qryManutProgFamEquip
-    Left = 413
-    Top = 424
+    Left = 598
+    Top = 530
   end
   object dsManutProgFamEquipPlanoTrab: TDataSource
     DataSet = qryManutProgFamEquipPlanoTrab
-    Left = 434
-    Top = 424
+    Left = 625
+    Top = 530
   end
   object dsManutProgFamEquipPartes: TDataSource
     DataSet = qryManutProgFamEquipPartes
-    Left = 455
-    Top = 424
+    Left = 651
+    Top = 530
   end
   object dsManutProgFamEquipItens: TDataSource
     DataSet = qryManutProgFamEquipItens
-    Left = 476
-    Top = 424
+    Left = 678
+    Top = 530
   end
   object dsManutProgFamEquipItensApagar: TDataSource
     DataSet = qryManutProgFamEquipItensApagar
-    Left = 497
-    Top = 424
+    Left = 703
+    Top = 530
   end
   object dsManutProgFamEquipItensTodos: TDataSource
     DataSet = qryManutProgFamEquipItensTodos
-    Left = 518
-    Top = 424
+    Left = 730
+    Top = 530
   end
   object dsManutVenc: TDataSource
     DataSet = qryManutVenc
-    Left = 573
-    Top = 424
+    Left = 798
+    Top = 530
   end
   object dsLubrificVenc: TDataSource
     DataSet = qryLubrificVenc
-    Left = 588
-    Top = 424
+    Left = 818
+    Top = 530
   end
   object dsMonitoramento: TDataSource
     DataSet = qryMonitoramento
-    Left = 644
-    Top = 424
+    Left = 883
+    Top = 530
   end
   object dsMonitMedicoesPtosInsp: TDataSource
     DataSet = qryMonitMedicoesPtosInsp
-    Left = 665
-    Top = 424
+    Left = 909
+    Top = 530
   end
   object dsMonitMedicoesCont: TDataSource
     DataSet = qryMonitMedicoesCont
-    Left = 686
-    Top = 424
+    Left = 936
+    Top = 530
   end
   object dsMonitMedicoesContManut: TDataSource
     DataSet = qryMonitMedicoesContManut
-    Left = 707
-    Top = 424
+    Left = 963
+    Top = 530
   end
   object dsMotivoParada: TDataSource
     DataSet = qryMotivoParada
-    Left = 779
-    Top = 424
+    Left = 1053
+    Top = 530
   end
   object dsNvelAcesso: TDataSource
     DataSet = qryNivelAcesso
-    Left = 830
-    Top = 424
+    Left = 1116
+    Top = 530
   end
   object dsPermissoesAcessoPadrao: TDataSource
     DataSet = qryPermissoesAcessoPadrao
-    Left = 851
-    Top = 424
+    Left = 1143
+    Top = 530
   end
   object dsPermissoesAlteracaoPadrao: TDataSource
     DataSet = qryPermissoesAlteracaoPadrao
-    Left = 872
-    Top = 424
+    Left = 1168
+    Top = 530
   end
   object dsPermissoesExclusaoPadrao: TDataSource
     DataSet = qryPermissoesExclusaoPadrao
-    Left = 893
-    Top = 424
+    Left = 1194
+    Top = 530
   end
   object dsPermissoesInclusaoPadrao: TDataSource
     DataSet = qryPermissoesInclusaoPadrao
-    Left = 914
-    Top = 424
+    Left = 1221
+    Top = 530
   end
   object dsOficinas: TDataSource
     DataSet = qryOficinas
-    Left = 971
-    Top = 424
+    Left = 1288
+    Top = 530
   end
   object dsOrdemServico: TDataSource
     DataSet = qryOrdemServico
-    Left = 1031
-    Top = 424
+    Left = 1354
+    Top = 530
   end
   object dsOrdemServicoServSolic: TDataSource
     DataSet = qryOrdemServicoServSolic
-    Left = 1052
-    Top = 424
+    Left = 1380
+    Top = 530
   end
   object dsOrdemServicoEquipe: TDataSource
     DataSet = qryOrdemServicoEquipe
-    Left = 1077
-    Top = 424
+    Left = 1411
+    Top = 530
   end
   object dsOrdemServicoEquipeMObra: TDataSource
     DataSet = qryOrdemServicoEquipeMObra
-    Left = 1100
-    Top = 424
+    Left = 1440
+    Top = 530
   end
   object dsOrdemServicoEquipePecas: TDataSource
     DataSet = qryOrdemServicoEquipePecas
-    Left = 1123
-    Top = 424
+    Left = 1469
+    Top = 530
   end
   object dsOrdemServicoEquipeRecursos: TDataSource
     DataSet = qryOrdemServicoEquipeRecursos
-    Left = 1146
-    Top = 424
+    Left = 1498
+    Top = 530
   end
   object dsOrdemServicoEquipePlanoTrab: TDataSource
     DataSet = qryOrdemServicoEquipePlanoTrab
-    Left = 1169
-    Top = 424
+    Left = 1526
+    Top = 530
   end
   object dsOrdemServicoEquipeMObraUtil: TDataSource
     DataSet = qryOrdemServicoEquipeMObraUtil
-    Left = 1192
-    Top = 424
+    Left = 1555
+    Top = 530
   end
   object dsOrdemServicoEquipePecasUtil: TDataSource
     DataSet = qryOrdemServicoEquipePecasUtil
-    Left = 1215
-    Top = 424
+    Left = 1584
+    Top = 530
   end
   object dsOrdemServicoEquipeRecursosUtil: TDataSource
     DataSet = qryOrdemServicoEquipeRecursosUtil
-    Left = 1238
-    Top = 424
+    Left = 1613
+    Top = 530
   end
   object dsOrdemServicoServExec: TDataSource
     DataSet = qryOrdemServicoServExec
-    Left = 1261
-    Top = 424
+    Left = 1641
+    Top = 530
   end
   object dsOrdemServicoHistorico: TDataSource
     DataSet = qryOrdemServicoHistorico
-    Left = 1281
-    Top = 424
+    Left = 1666
+    Top = 530
   end
   object dsOrdemServicoHistoricoServExec: TDataSource
     DataSet = qryOrdemServicoHistoricoServExec
-    Left = 1304
-    Top = 424
+    Left = 1695
+    Top = 530
   end
   object dsOrdemServicoParalisacoes: TDataSource
     DataSet = qryOrdemServicoParalisacoes
-    Left = 1327
-    Top = 424
+    Left = 1724
+    Top = 530
   end
   object dsOrdemServicoLocalizaMObra: TDataSource
     DataSet = qryOrdemServicoLocalizaMObra
-    Left = 55
-    Top = 530
+    Left = 69
+    Top = 663
   end
   object dsOrdemServicoMObraExec: TDataSource
     DataSet = qryOrdemServicoMObraExec
-    Left = 1385
-    Top = 423
+    Left = 1788
+    Top = 529
   end
   object dsOrdemServicoMObraProg: TDataSource
     DataSet = qryOrdemServicoMObraProg
-    Left = 1407
-    Top = 423
+    Left = 1816
+    Top = 529
   end
   object dsOrdemServicoGerencia: TDataSource
     DataSet = qryOrdemServicoGerencia
-    Left = 254
-    Top = 530
+    Left = 318
+    Top = 663
   end
   object qryMonitoramento: TFDQuery
     Connection = FDConnSPMP3
@@ -32343,8 +32364,8 @@ object DM: TDM
         '`pontosinspecaoloc`.`CODEMPRESA`)'
       ' WHERE (`monitoramento`.`CODIGO` = :codigo'
       '    AND `monitoramento`.`CODEMPRESA` = :codempresa);')
-    Left = 642
-    Top = 376
+    Left = 881
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -32584,8 +32605,8 @@ object DM: TDM
         '    AND `monitoramentomedicoes`.`CODMONITORAMENTO` = :codmonitor' +
         'amento)'
       'ORDER BY `monitoramentomedicoes`.`CODIGO` DESC LIMIT 50;')
-    Left = 663
-    Top = 376
+    Left = 908
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -32840,8 +32861,8 @@ object DM: TDM
         '    AND `monitoramentomedicoes`.`CODMONITORAMENTO` = :codmonitor' +
         'amento)'
       'ORDER BY `monitoramentomedicoes`.`CODIGO` DESC LIMIT 50;')
-    Left = 684
-    Top = 376
+    Left = 933
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -33019,8 +33040,8 @@ object DM: TDM
       '    AND `manutprogequipamento`.`FREQUENCIA2` <> '#39#39
       '    AND `manutprogequipamento`.`FREQUENCIA2` IS NOT NULL)'
       'ORDER BY `MANUTENCAO` DESC;')
-    Left = 705
-    Top = 376
+    Left = 959
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -33205,12 +33226,12 @@ object DM: TDM
       
         '       AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1' +
         ','#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE' +
-        '(:data2,'#39'%Y/%m/%d %T'#39')))        '
+        '(:data2,'#39'%Y/%m/%d %T'#39')))'
       '       )'
       ''
       'ORDER BY `ordemservico`.DATACADASTRO DESC;')
-    Left = 254
-    Top = 480
+    Left = 318
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -33508,8 +33529,8 @@ object DM: TDM
         'io_1`.`CODIGO`)'
       'WHERE (`ordemservicotercfora`.`CODIGO` = :codigo)'
       'ORDER BY `ordemservicotercfora`.`CODIGO` DESC;')
-    Left = 601
-    Top = 480
+    Left = 751
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -33684,8 +33705,8 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoi`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 622
-    Top = 480
+    Left = 778
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -33754,8 +33775,8 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoc`'
       'WHERE (`CODORDEMSERVICO` = :codordemservico);')
-    Left = 643
-    Top = 480
+    Left = 804
+    Top = 600
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -33823,8 +33844,8 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaoe`'
       'WHERE `CODORDEMSERVICO` = :codordemservico;')
-    Left = 664
-    Top = 480
+    Left = 830
+    Top = 600
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -33892,8 +33913,8 @@ object DM: TDM
       'FROM'
       '   `ordemservicotercforaaditivos`'
       'WHERE (`CODORDEMSERVICO` = :codordemservico);')
-    Left = 685
-    Top = 480
+    Left = 856
+    Top = 600
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -34105,8 +34126,8 @@ object DM: TDM
         '`) AND (`ordemservico`.`CODEMPRESA` = `usuario_1`.`CODEMPRESA`)'
       ' WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
       'AND `ordemservico`.CODIGO = :codigo);')
-    Left = 1029
-    Top = 376
+    Left = 1351
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -34675,8 +34696,8 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservsolic`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1052
-    Top = 376
+    Left = 1380
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -34753,8 +34774,8 @@ object DM: TDM
       'FROM'
       '    `ordemservicoequipe`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1075
-    Top = 376
+    Left = 1409
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -34823,8 +34844,8 @@ object DM: TDM
         'lendario`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequipemobra`.`CODEQUIPE` = :codigo'
       ');')
-    Left = 1098
-    Top = 376
+    Left = 1438
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -34915,8 +34936,8 @@ object DM: TDM
         'eposicao`.`CODIGO`) AND (`ordemservicopecasrep`.`CODEMPRESA` = `' +
         'pecasreposicao`.`CODEMPRESA`)'
       'WHERE (`ordemservicopecasrep`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1121
-    Top = 376
+    Left = 1466
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35012,8 +35033,8 @@ object DM: TDM
         's`.`CODIGO`) AND (`ordemservicoequiperecursos`.`CODEMPRESA` = `r' +
         'ecursos`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequiperecursos`.`CODEQUIPE`= :codigo);')
-    Left = 1144
-    Top = 376
+    Left = 1495
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35103,8 +35124,8 @@ object DM: TDM
         'abalho`.`CODIGO`) AND (`ordemservicoplantrab`.`CODEMPRESA` = `pl' +
         'anotrabalho`.`CODEMPRESA`)'
       'WHERE (`ordemservicoplantrab`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1167
-    Top = 376
+    Left = 1524
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35201,8 +35222,8 @@ object DM: TDM
         'SA` = `funcionarios`.`CODEMPRESA`)'
       ' WHERE (`ordemservicoequipemobrautil`.`CODEQUIPE` = :codequipe'
       'AND `ordemservicoequipemobrautil`.`CODCARGO` = :codcargo);')
-    Left = 1190
-    Top = 376
+    Left = 1553
+    Top = 470
     ParamData = <
       item
         Name = 'CODEQUIPE'
@@ -35378,8 +35399,8 @@ object DM: TDM
         'casreposicao`.`CODIGO`) AND (`ordemservicopecasreputil`.`CODEMPR' +
         'ESA` = `pecasreposicao`.`CODEMPRESA`)'
       'WHERE (`ordemservicopecasreputil`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1213
-    Top = 376
+    Left = 1581
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35485,8 +35506,8 @@ object DM: TDM
         'ursos`.`CODIGO`) AND (`ordemservicoequiperecursosutil`.`CODEMPRE' +
         'SA` = `recursos`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequiperecursosutil`.`CODEQUIPE` = :codigo);')
-    Left = 1236
-    Top = 376
+    Left = 1610
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35581,8 +35602,8 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservexec`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1259
-    Top = 376
+    Left = 1639
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -35745,8 +35766,8 @@ object DM: TDM
       '    )'
       ''
       'ORDER BY `ordemservico`.`DATACADASTRO` DESC;')
-    Left = 1279
-    Top = 376
+    Left = 1664
+    Top = 470
     ParamData = <
       item
         Name = 'DATA1'
@@ -35983,8 +36004,8 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservexec`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1302
-    Top = 376
+    Left = 1693
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -36063,8 +36084,8 @@ object DM: TDM
       '    `ordemservicoparalisacao`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DATAPARALISACAO` ASC;')
-    Left = 1325
-    Top = 376
+    Left = 1721
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -36128,8 +36149,8 @@ object DM: TDM
       '    AND `funcionarios`.`ATIVO` = '#39'S'#39
       '    AND `funcionarios`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `funcionarios`.`NOME` ASC;')
-    Left = 55
-    Top = 480
+    Left = 69
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -36218,8 +36239,8 @@ object DM: TDM
       
         '    AND `ordemservicoequipemobrahoras`.`MATRICULA` = :matricula)' +
         ';')
-    Left = 1383
-    Top = 375
+    Left = 1786
+    Top = 469
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -36357,8 +36378,8 @@ object DM: TDM
         'SA` = `funcionarios`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequipemobrafunc`.`CODEQUIPE` = :codequipe'
       '    AND `ordemservicoequipemobrafunc`.`CODCARGO` = :codcargo);')
-    Left = 1405
-    Top = 375
+    Left = 1813
+    Top = 469
     ParamData = <
       item
         Name = 'CODEQUIPE'
@@ -36480,28 +36501,28 @@ object DM: TDM
   end
   object dsOrdemServicoTercFora: TDataSource
     DataSet = qryOrdemServicoTercFora
-    Left = 604
-    Top = 530
+    Left = 755
+    Top = 663
   end
   object dsOrdemServicoTercForaOI: TDataSource
     DataSet = qryOrdemServicoTercForaOI
-    Left = 625
-    Top = 530
+    Left = 781
+    Top = 663
   end
   object dsOrdemServicoTercForaOC: TDataSource
     DataSet = qryOrdemServicoTercForaOC
-    Left = 646
-    Top = 530
+    Left = 808
+    Top = 663
   end
   object dsOrdemServicoTercForaOE: TDataSource
     DataSet = qryOrdemServicoTercForaOE
-    Left = 667
-    Top = 530
+    Left = 834
+    Top = 663
   end
   object dsOrdemServicoTercForaAditivos: TDataSource
     DataSet = qryOrdemServicoTercForaAditivos
-    Left = 688
-    Top = 530
+    Left = 860
+    Top = 663
   end
   object qryOrdemServicoTercUnid: TFDQuery
     Connection = FDConnSPMP3
@@ -36556,8 +36577,8 @@ object DM: TDM
         '.`CODIGO`) AND (`ordemservicotercunid`.`CODEMPRESA` = `usuario_1' +
         '`.`CODEMPRESA`)'
       'WHERE (`ordemservicotercunid`.`CODIGO` = :codigo);')
-    Left = 741
-    Top = 480
+    Left = 926
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -36779,8 +36800,8 @@ object DM: TDM
         '       AND `ordemservicotercunidtarefas`.`CODORDEMSERVICO` = :co' +
         'dordemservico)'
       'ORDER BY `ordemservicotercunidtarefas`.`DATAPROGINI` ASC;')
-    Left = 763
-    Top = 480
+    Left = 954
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -36883,8 +36904,8 @@ object DM: TDM
         'WHERE (`ordemservicotercunidtarefpred`.`CODORDEMSERVICO` = :codo' +
         'rdemservico'
       '    );')
-    Left = 784
-    Top = 480
+    Left = 980
+    Top = 600
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -36957,8 +36978,8 @@ object DM: TDM
       '    `ordemservicotercunimedicoes`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DATAMEDICAO` DESC;')
-    Left = 805
-    Top = 480
+    Left = 1006
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37027,8 +37048,8 @@ object DM: TDM
         'WHERE (`ordemservicotercunidtarefas`.`CODORDEMSERVICO` = :codord' +
         'emservico)'
       'ORDER BY `ordemservicotercunidtarefas`.`DATAPROGINI` ASC;')
-    Left = 826
-    Top = 480
+    Left = 1033
+    Top = 600
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -37120,8 +37141,8 @@ object DM: TDM
       '   `ordemservicotercunidaditivos`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `CODIGO` DESC;')
-    Left = 847
-    Top = 480
+    Left = 1059
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37198,8 +37219,8 @@ object DM: TDM
       '   `ordemservicotercunidmateriais`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 868
-    Top = 480
+    Left = 1085
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37270,8 +37291,8 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidrecursos`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 889
-    Top = 480
+    Left = 1111
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37341,8 +37362,8 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidpecasrep`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 910
-    Top = 480
+    Left = 1138
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37454,8 +37475,8 @@ object DM: TDM
         'A`)'
       'WHERE (`pecasreposicao`.`CODIGO` = :codigo'
       '    AND `pecasreposicao`.`CODEMPRESA` = :codempresa);')
-    Left = 1108
-    Top = 480
+    Left = 1385
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -37678,8 +37699,8 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAPECASREP = :CODFAMILIAPECASREP'
       'AND F.CODPECAREPOSICAO = :CODPECAREPOSICAO')
-    Left = 1129
-    Top = 480
+    Left = 1411
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -37831,8 +37852,8 @@ object DM: TDM
       'WHERE (`ordemservicopecasreputil`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicao`.`CODIGO` = :codigo)'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1150
-    Top = 480
+    Left = 1438
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -37922,8 +37943,8 @@ object DM: TDM
       '    AND `equipamentos`.`CODIGO` = :codigo'
       ')'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1171
-    Top = 480
+    Left = 1464
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38002,8 +38023,8 @@ object DM: TDM
       'AND `equipamentospecasrep`.`codempresa` = :codempresa '
       ''
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1192
-    Top = 480
+    Left = 1490
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -38081,8 +38102,8 @@ object DM: TDM
         #9'`equipamentos`.`CODIGO` = :codigo AND `equipamentospecasrep`.`c' +
         'odempresa` = :codempresa '
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1213
-    Top = 480
+    Left = 1516
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -38144,8 +38165,8 @@ object DM: TDM
       '    `planotrabalho`'
       'WHERE (`planotrabalho`.`AUTOMATICO`= '#39'S'#39
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 1398
-    Top = 480
+    Left = 1748
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38186,8 +38207,8 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAPNEUS = :CODFAMILIAPNEU'
       'AND F.CODPNEU = :CODPNEU')
-    Left = 1470
-    Top = 480
+    Left = 1838
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38338,8 +38359,8 @@ object DM: TDM
       '    AND `pneus`.`CODIGO` = :codigo)'
       'ORDER BY `pneusmontagemchassipneus`.`ID` DESC;'
       '')
-    Left = 1491
-    Top = 480
+    Left = 1864
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38429,8 +38450,8 @@ object DM: TDM
       'WHERE (`recursoskit`.`CODEMPRESA` = :codempresa'
       '        AND `recursoskit`.`CODIGO` = :codigo)'
       'ORDER BY `recursoskit`.`DESCRICAO` ASC;')
-    Left = 567
-    Top = 585
+    Left = 709
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38539,8 +38560,8 @@ object DM: TDM
       'WHERE (`recursoskititens`.`CODEMPRESA` = :codempresa'
       '    AND `recursoskititens`.`CODKIT` = :codigo)'
       'ORDER BY `recursos`.`DESCRICAO` ASC;')
-    Left = 588
-    Top = 585
+    Left = 735
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -38663,8 +38684,8 @@ object DM: TDM
         'ND (`recursos`.`CODEMPRESA` = `usuario_1`.`CODEMPRESA`)'
       'WHERE (`recursos`.`CODIGO` = :codigo'
       '    AND `recursos`.`CODEMPRESA` = :codempresa);')
-    Left = 639
-    Top = 585
+    Left = 799
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -38923,8 +38944,8 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIARECURSOS = :CODFAMILIARECURSOS'
       'AND F.CODRECURSO = :codigo')
-    Left = 660
-    Top = 585
+    Left = 825
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -39078,8 +39099,8 @@ object DM: TDM
         'A`)'
       'WHERE (`pontosinspecao`.`CODIGO` = :codigo'
       '    AND `pontosinspecao`.`CODEMPRESA` = :codempresa);')
-    Left = 466
-    Top = 585
+    Left = 583
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -39194,8 +39215,8 @@ object DM: TDM
       'WHERE (`pontosinspecaoloc`.`CODIGO` = :codigo'
       '    AND `pontosinspecaoloc`.`CODEMPRESA` = :codempresa'
       '    AND `pontosinspecaoloc`.`CODPONTOINSP` = :codpontoinsp);')
-    Left = 488
-    Top = 585
+    Left = 610
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -39334,8 +39355,8 @@ object DM: TDM
         ' AND (`contadores`.`CODEMPRESA` = `usuario_1`.`CODEMPRESA`)'
       'WHERE (`contadores`.`CODIGO` = :codigo'
       '    AND `contadores`.`CODEMPRESA` = :codempresa);')
-    Left = 509
-    Top = 585
+    Left = 636
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -39427,218 +39448,218 @@ object DM: TDM
   end
   object dsOrdemServicoTercUnid: TDataSource
     DataSet = qryOrdemServicoTercUnid
-    Left = 741
-    Top = 530
+    Left = 926
+    Top = 663
   end
   object dsOrdemServicoTercUnidTarefas: TDataSource
     DataSet = qryOrdemServicoTercUnidTarefas
-    Left = 763
-    Top = 530
+    Left = 954
+    Top = 663
   end
   object dsOrdemServicoTercUnidTarefasPred: TDataSource
     DataSet = qryOrdemServicoTercUnidTarefasPred
-    Left = 784
-    Top = 530
+    Left = 980
+    Top = 663
   end
   object dsOrdemServicoTercUnidMedicoes: TDataSource
     DataSet = qryOrdemServicoTercUnidMedicoes
-    Left = 805
-    Top = 530
+    Left = 1006
+    Top = 663
   end
   object dsOrdemServicoTercUnidGrafTarefas: TDataSource
     DataSet = qryOrdemServicoTercUnidGrafTarefas
-    Left = 826
-    Top = 530
+    Left = 1033
+    Top = 663
   end
   object dsOrdemServicoTercUnidAditivos: TDataSource
     DataSet = qryOrdemServicoTercUnidAditivos
-    Left = 847
-    Top = 530
+    Left = 1059
+    Top = 663
   end
   object dsOrdemServicoTercUnidMateriais: TDataSource
     DataSet = qryOrdemServicoTercUnidMateriais
-    Left = 868
-    Top = 530
+    Left = 1085
+    Top = 663
   end
   object dsOrdemServicoTercUnidRecurso: TDataSource
     DataSet = qryOrdemServicoTercUnidRecurso
-    Left = 889
-    Top = 530
+    Left = 1111
+    Top = 663
   end
   object dsOrdemServicoTercUnidPecas: TDataSource
     DataSet = qryOrdemServicoTercUnidPecas
-    Left = 910
-    Top = 530
+    Left = 1138
+    Top = 663
   end
   object dsParadasDiariasEquip: TDataSource
     DataSet = qryParadasDiariasEquip
-    Left = 963
-    Top = 530
+    Left = 1204
+    Top = 663
   end
   object dsParadasDiariasEquipParadas: TDataSource
     DataSet = qryParadasDiariasEquipParadas
-    Left = 984
-    Top = 530
+    Left = 1230
+    Top = 663
   end
   object dsPecaReposicaoKit: TDataSource
     DataSet = qryPecaReposicaoKit
-    Left = 1036
-    Top = 530
+    Left = 1295
+    Top = 663
   end
   object dsPecaReposicaoKitItens: TDataSource
     DataSet = qryPecaReposicaoKitItens
-    Left = 1057
-    Top = 530
+    Left = 1321
+    Top = 663
   end
   object dsPecasReposicao: TDataSource
     DataSet = qryPecasReposicao
-    Left = 1108
-    Top = 530
+    Left = 1385
+    Top = 663
   end
   object dsPecasReposicaoDados: TDataSource
     DataSet = qryPecasReposicaoDados
-    Left = 1129
-    Top = 530
+    Left = 1411
+    Top = 663
   end
   object dsPecasReposicaoHistPecas: TDataSource
     DataSet = qryPecasReposicaoHistPecas
-    Left = 1150
-    Top = 530
+    Left = 1438
+    Top = 663
   end
   object dsPecasReposicaoHistEquip: TDataSource
     DataSet = qryPecasReposicaoHistEquip
-    Left = 1171
-    Top = 530
+    Left = 1464
+    Top = 663
   end
   object dsPecasReposicaoInstPecas: TDataSource
     DataSet = qryPecasReposicaoInstPecas
-    Left = 1192
-    Top = 530
+    Left = 1490
+    Top = 663
   end
   object dsPecasReposicaoInstEquip: TDataSource
     DataSet = qryPecasReposicaoInstEquip
-    Left = 1213
-    Top = 530
+    Left = 1516
+    Top = 663
   end
   object dsPermissoesAcesso: TDataSource
     DataSet = qryPermissoesAcesso
-    Left = 1263
-    Top = 530
+    Left = 1579
+    Top = 663
   end
   object dsPermissoesAlteracao: TDataSource
     DataSet = qryPermissoesAlteracao
-    Left = 1284
-    Top = 530
+    Left = 1605
+    Top = 663
   end
   object dsPermissoesExclusao: TDataSource
     DataSet = qryPermissoesExclusao
-    Left = 1305
-    Top = 530
+    Left = 1631
+    Top = 663
   end
   object dsPermissoesInclusao: TDataSource
     DataSet = qryPermissoesInclusao
-    Left = 1326
-    Top = 530
+    Left = 1658
+    Top = 663
   end
   object dsPlanoTrabalho: TDataSource
     DataSet = qryPlanoTrabalho
-    Left = 1377
-    Top = 530
+    Left = 1721
+    Top = 663
   end
   object dsPlanoTrabalhoAut: TDataSource
     DataSet = qryPlanoTrabalhoAut
-    Left = 1398
-    Top = 530
+    Left = 1748
+    Top = 663
   end
   object dsPneus: TDataSource
     DataSet = qryPneus
-    Left = 1449
-    Top = 530
+    Left = 1811
+    Top = 663
   end
   object dsPneusDados: TDataSource
     DataSet = qryPneusDados
-    Left = 1470
-    Top = 530
+    Left = 1838
+    Top = 663
   end
   object dsPneusIDs: TDataSource
     DataSet = qryPneusIDs
-    Left = 1491
-    Top = 530
+    Left = 1864
+    Top = 663
   end
   object dsPneusChassi: TDataSource
     DataSet = qryPneusChassi
-    Left = 56
-    Top = 635
+    Left = 70
+    Top = 794
   end
   object dsPneusChassiImagens: TDataSource
     DataSet = qryPneusChassiImagens
-    Left = 77
-    Top = 635
+    Left = 96
+    Top = 794
   end
   object dsPneusChassiPosicoes: TDataSource
     DataSet = qryPneusChassiPosicoes
-    Left = 98
-    Top = 635
+    Left = 123
+    Top = 794
   end
   object dsPneusChassiPneus: TDataSource
     DataSet = qryPneusChassiPneus
-    Left = 119
-    Top = 635
+    Left = 149
+    Top = 794
   end
   object dsPneusChassiHistorico: TDataSource
     DataSet = qryPneusChassiHistorico
-    Left = 178
-    Top = 635
+    Left = 223
+    Top = 794
   end
   object dsPneusChassiAtrelamento: TDataSource
     DataSet = qryPneusChassiAtrelamento
-    Left = 199
-    Top = 635
+    Left = 249
+    Top = 794
   end
   object dsPneusChassiAtrelamentoHist: TDataSource
     DataSet = qryPneusChassiAtrelamentoHist
-    Left = 220
-    Top = 635
+    Left = 275
+    Top = 794
   end
   object dsPneusChassiPneusHist: TDataSource
     DataSet = qryPneusChassiPneusHist
-    Left = 241
-    Top = 635
+    Left = 301
+    Top = 794
   end
   object dsPontosInspecao: TDataSource
     DataSet = qryPontosInspecao
-    Left = 466
-    Top = 635
+    Left = 583
+    Top = 794
   end
   object dsPontosInspecaoLoc: TDataSource
     DataSet = qryPontosInspecaoLoc
-    Left = 488
-    Top = 635
+    Left = 610
+    Top = 794
   end
   object dsContadores: TDataSource
     DataSet = qryContadores
-    Left = 509
-    Top = 635
+    Left = 636
+    Top = 794
   end
   object dsRecursoKit: TDataSource
     DataSet = qryRecursoKit
-    Left = 567
-    Top = 635
+    Left = 709
+    Top = 794
   end
   object dsRecursoKitItens: TDataSource
     DataSet = qryRecursoKitItens
-    Left = 588
-    Top = 635
+    Left = 735
+    Top = 794
   end
   object dsRecursos: TDataSource
     DataSet = qryRecursos
-    Left = 639
-    Top = 635
+    Left = 799
+    Top = 794
   end
   object dsRecursosDados: TDataSource
     DataSet = qryRecursosDados
-    Left = 660
-    Top = 635
+    Left = 825
+    Top = 794
   end
   object qryRelatGerencOS: TFDQuery
     Connection = FDConnSPMP3
@@ -39728,8 +39749,8 @@ object DM: TDM
         '%m/%d'#39')'
       ' )'
       ' ORDER BY `ordemservico`.`CODIGO` ASC')
-    Left = 720
-    Top = 585
+    Left = 900
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40019,8 +40040,8 @@ object DM: TDM
         '_DATE(:data1,'#39'%Y/%m/%d'#39') AND `ordemservico`.DATAFECHAMENTO <= ST' +
         'R_TO_DATE(:data2,'#39'%Y/%m/%d'#39')))PROD FROM `empresa` WHERE `empresa' +
         '`.`CODIGO` = :codempresa')
-    Left = 741
-    Top = 585
+    Left = 926
+    Top = 731
     ParamData = <
       item
         Name = 'DATA1'
@@ -40106,8 +40127,8 @@ object DM: TDM
         'o.DATAFECHAMENTO <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
       ' );'
       '')
-    Left = 762
-    Top = 585
+    Left = 953
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40224,8 +40245,8 @@ object DM: TDM
       '    )'
       'GROUP BY `equipamentos`.`CODIGO`'
       'ORDER BY `equipamentos`.`DESCRICAO` ASC;')
-    Left = 783
-    Top = 585
+    Left = 979
+    Top = 731
     ParamData = <
       item
         Name = 'DATA1'
@@ -40332,8 +40353,8 @@ object DM: TDM
       #9'AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39')'
       'GROUP BY `equipamentos`.`CODIGO`'
       'ORDER BY `equipamentos`.`DESCRICAO` DESC;')
-    Left = 804
-    Top = 585
+    Left = 1005
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40479,8 +40500,8 @@ object DM: TDM
       '    AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39')    '
       '      '
       'GROUP BY `tipomanutencao`.`TIPOMANUTENCAO`')
-    Left = 865
-    Top = 585
+    Left = 1081
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40586,8 +40607,8 @@ object DM: TDM
         'TUACAO` <> '#39'CANCELADA'#39') PERCENTOUTROS'
       ''
       'FROM empresa E WHERE E.CODIGO = :codempresa')
-    Left = 886
-    Top = 585
+    Left = 1108
+    Top = 731
     ParamData = <
       item
         Name = 'DATA1'
@@ -40694,8 +40715,8 @@ object DM: TDM
       '   AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39
       '   )'
       'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;')
-    Left = 907
-    Top = 585
+    Left = 1134
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40798,8 +40819,8 @@ object DM: TDM
         '    AND `ordemservico`.DATAFECHAMENTO <= STR_TO_DATE(:data2,'#39'%Y/' +
         '%m/%d'#39'))'
       'ORDER BY `ordemservico`.`DATAFECHAMENTO` DESC;')
-    Left = 928
-    Top = 585
+    Left = 1160
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40932,8 +40953,8 @@ object DM: TDM
         '    AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(:data1,'#39'%' +
         'Y/%m/%d %T'#39') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(' +
         ':data2,'#39'%Y/%m/%d %T'#39'))')
-    Left = 949
-    Top = 585
+    Left = 1186
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -40974,6 +40995,7 @@ object DM: TDM
       '    , `solictrabalho`.`PRAZOSOLIC`'
       '    , `solictrabalho`.`JUSTIFICATIVA`'
       '    , `solictrabalho`.`DATASOLIC`'
+      '    , `solictrabalho`.`PRIORIDADEPARADA`'
       '    , `solictrabalho`.`HORARIOSOLIC`'
       '    , `solictrabalho`.`VALORPROG`'
       '    , `solictrabalho`.`CODORDEMSERVICO`'
@@ -41017,8 +41039,8 @@ object DM: TDM
         ')'
       'WHERE (`solictrabalho`.`CODIGO` = :codigo'
       '    AND `solictrabalho`.`CODEMPRESA` = :codempresa);')
-    Left = 55
-    Top = 691
+    Left = 69
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -41074,16 +41096,22 @@ object DM: TDM
     end
     object qrySolicitacaoTrabJUSTIFICATIVA: TStringField
       AutoGenerateValue = arDefault
-      DisplayWidth = 200
+      DisplayWidth = 250
       FieldName = 'JUSTIFICATIVA'
       Origin = 'JUSTIFICATIVA'
-      Size = 200
+      Size = 250
     end
     object qrySolicitacaoTrabDATASOLIC: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATASOLIC'
       Origin = 'DATASOLIC'
       DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qrySolicitacaoTrabPRIORIDADEPARADA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PRIORIDADEPARADA'
+      Origin = 'PRIORIDADEPARADA'
+      Size = 40
     end
     object qrySolicitacaoTrabHORARIOSOLIC: TDateTimeField
       AutoGenerateValue = arDefault
@@ -41233,8 +41261,8 @@ object DM: TDM
         'o`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       ''
       'ORDER BY `ordemservico`.`DATAPROGINI` ASC;   ')
-    Left = 116
-    Top = 691
+    Left = 145
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -41345,8 +41373,8 @@ object DM: TDM
       '`grupos`'
       'WHERE '
       '`CODIGO` = :codigo')
-    Left = 664
-    Top = 692
+    Left = 830
+    Top = 865
     ParamData = <
       item
         Name = 'CODFAMILIA'
@@ -41385,248 +41413,248 @@ object DM: TDM
   end
   object dsRelatGerencOS: TDataSource
     DataSet = qryRelatGerencOS
-    Left = 722
-    Top = 635
+    Left = 903
+    Top = 794
   end
   object dsRelatGerencProdMObra: TDataSource
     DataSet = qryRelatGerencProdMObra
-    Left = 741
-    Top = 635
+    Left = 926
+    Top = 794
   end
   object dsRelatGerencCustoPrev: TDataSource
     DataSet = qryRelatGerencCustoPrev
-    Left = 762
-    Top = 635
+    Left = 953
+    Top = 794
   end
   object dsRelatGerencDispEquip: TDataSource
     DataSet = qryRelatGerencDispEquip
-    Left = 783
-    Top = 635
+    Left = 979
+    Top = 794
   end
   object dsRelatGerencDespEquip: TDataSource
     DataSet = qryRelatGerencDespEquip
-    Left = 804
-    Top = 635
+    Left = 1005
+    Top = 794
   end
   object dsRelatGerencNumParadas: TDataSource
     DataSet = qryRelatGerencNumParadas
-    Left = 865
-    Top = 635
+    Left = 1081
+    Top = 794
   end
   object dsRelatGerencPercParadas: TDataSource
     DataSet = qryRelatGerencPercParadas
-    Left = 886
-    Top = 635
+    Left = 1108
+    Top = 794
   end
   object dsRelatGerencHorasParadas: TDataSource
     DataSet = qryRelatGerencHorasParadas
-    Left = 907
-    Top = 635
+    Left = 1134
+    Top = 794
   end
   object dsRelatGerencCustos: TDataSource
     DataSet = qryRelatGerencCustos
-    Left = 928
-    Top = 635
+    Left = 1160
+    Top = 794
   end
   object dsRelatGerencHE: TDataSource
     DataSet = qryRelatGerencHE
-    Left = 949
-    Top = 635
+    Left = 1186
+    Top = 794
   end
   object dsRotaEquipVenc: TDataSource
     DataSet = qryRotaEquipVenc
-    Left = 1005
-    Top = 635
+    Left = 1256
+    Top = 794
   end
   object dsRotaEquipVencSeq: TDataSource
     DataSet = qryRotaEquipVencSeq
-    Left = 1026
-    Top = 635
+    Left = 1283
+    Top = 794
   end
   object dsRotaEquipVencSeqManut: TDataSource
     DataSet = qryRotaEquipVencSeqManut
-    Left = 1047
-    Top = 635
+    Left = 1309
+    Top = 794
   end
   object dsRotaPeriodicas: TDataSource
     DataSet = qryRotaPeriodicas
-    Left = 1103
-    Top = 635
+    Left = 1379
+    Top = 794
   end
   object dsRotaPeriodicasManut: TDataSource
     DataSet = qryRotaPeriodicasManut
-    Left = 1124
-    Top = 635
+    Left = 1405
+    Top = 794
   end
   object dsRotaPeriodicasManutItens: TDataSource
     DataSet = qryRotaPeriodicasManutItens
-    Left = 1145
-    Top = 635
+    Left = 1431
+    Top = 794
   end
   object dsRotaPeriodicasManutItensEsp: TDataSource
     DataSet = qryRotaPeriodicasManutItensEsp
-    Left = 1166
-    Top = 635
+    Left = 1458
+    Top = 794
   end
   object dsRotas: TDataSource
     DataSet = qryRotas
-    Left = 1224
-    Top = 635
+    Left = 1530
+    Top = 794
   end
   object dsRotasSequencia: TDataSource
     DataSet = qryRotasSequencia
-    Left = 1245
-    Top = 635
+    Left = 1556
+    Top = 794
   end
   object dsRotasSequenciaInsp: TDataSource
     DataSet = qryRotasSequenciaInsp
-    Left = 1266
-    Top = 635
+    Left = 1583
+    Top = 794
   end
   object dsRotasSequenciaInspItens: TDataSource
     DataSet = qryRotasSequenciaInspItens
-    Left = 1287
-    Top = 635
+    Left = 1609
+    Top = 794
   end
   object dsRotasSequenciaInspItensEsp: TDataSource
     DataSet = qryRotasSequenciaInspItensEsp
-    Left = 1308
-    Top = 635
+    Left = 1635
+    Top = 794
   end
   object dsSequencia: TDataSource
     DataSet = qrySequencia
-    Left = 1365
-    Top = 635
+    Left = 1706
+    Top = 794
   end
   object dsSolicitacaoTrab: TDataSource
     DataSet = qrySolicitacaoTrab
-    Left = 55
-    Top = 742
+    Left = 69
+    Top = 928
   end
   object dsCalendarioOSProgramadas: TDataSource
     DataSet = qryCalendarioOSProgramadas
-    Left = 116
-    Top = 742
+    Left = 145
+    Top = 928
   end
   object dsTipoManutencao: TDataSource
     DataSet = qryTipoManutencao
-    Left = 306
-    Top = 742
+    Left = 383
+    Top = 928
   end
   object dsTipoProgramacao: TDataSource
     DataSet = qryTipoProgramacao
-    Left = 365
-    Top = 742
+    Left = 456
+    Top = 928
   end
   object dsTotalHomemHora: TDataSource
     DataSet = qryTotalHomemHora
-    Left = 425
-    Top = 742
+    Left = 531
+    Top = 928
   end
   object dsTotalHomemHoraSeqHora: TDataSource
     DataSet = qryTotalHomemHoraSeqHora
-    Left = 446
-    Top = 742
+    Left = 558
+    Top = 928
   end
   object dsTotalHomemHoraProgExec: TDataSource
     DataSet = qryTotalHomemHoraProgExec
-    Left = 504
-    Top = 742
+    Left = 630
+    Top = 928
   end
   object dsTotalEquipHora: TDataSource
     DataSet = qryTotalEquipHora
-    Left = 566
-    Top = 743
+    Left = 708
+    Top = 929
   end
   object dsTotalEquipHoraSeqHora: TDataSource
     DataSet = qryTotalEquipHoraSeqHora
-    Left = 587
-    Top = 743
+    Left = 734
+    Top = 929
   end
   object dsTotalTabelas: TDataSource
     DataSet = qryTotalTabelas
-    Left = 643
-    Top = 743
+    Left = 804
+    Top = 929
   end
   object dsTotalFamilias: TDataSource
     DataSet = qryTotalFamilias
-    Left = 664
-    Top = 743
+    Left = 830
+    Top = 929
   end
   object dsViagens: TDataSource
     DataSet = qryViagens
-    Left = 723
-    Top = 742
+    Left = 904
+    Top = 928
   end
   object dsViagensCombust: TDataSource
     DataSet = qryViagensCombust
-    Left = 744
-    Top = 742
+    Left = 930
+    Top = 928
   end
   object dsViagensCombustAbast: TDataSource
     DataSet = qryViagensCombustAbast
-    Left = 765
-    Top = 742
+    Left = 956
+    Top = 928
   end
   object dsViagensLubrific: TDataSource
     DataSet = qryViagensLubrific
-    Left = 786
-    Top = 742
+    Left = 983
+    Top = 928
   end
   object dsViagensLubrificAbast: TDataSource
     DataSet = qryViagensLubrificAbast
-    Left = 807
-    Top = 742
+    Left = 1009
+    Top = 928
   end
   object dsUsuario: TDataSource
     DataSet = qryUsuario
-    Left = 867
-    Top = 742
+    Left = 1084
+    Top = 928
   end
   object dsUsuarioPAcesso: TDataSource
     DataSet = qryUsuarioPAcesso
-    Left = 888
-    Top = 742
+    Left = 1110
+    Top = 928
   end
   object dsUsuarioPAlteracao: TDataSource
     DataSet = qryUsuarioPAlteracao
-    Left = 909
-    Top = 742
+    Left = 1136
+    Top = 928
   end
   object dsUsuarioPExclusao: TDataSource
     DataSet = qryUsuarioPExclusao
-    Left = 930
-    Top = 742
+    Left = 1163
+    Top = 928
   end
   object dsUsuarioPInclusao: TDataSource
     DataSet = qryUsuarioPInclusao
-    Left = 951
-    Top = 742
+    Left = 1189
+    Top = 928
   end
   object dsUsuarios: TDataSource
     DataSet = qryUsuarios
-    Left = 1011
-    Top = 742
+    Left = 1264
+    Top = 928
   end
   object dsUsuarioAcessos: TDataSource
     DataSet = qryUsuarioAcessos
-    Left = 1032
-    Top = 742
+    Left = 1290
+    Top = 928
   end
   object dsUsuariosAtivos: TDataSource
     DataSet = qryUsuariosAtivos
-    Left = 1053
-    Top = 742
+    Left = 1316
+    Top = 928
   end
   object dsUsuarioUnidades: TDataSource
     DataSet = qryUsuarioUnidades
-    Left = 1113
-    Top = 742
+    Left = 1391
+    Top = 928
   end
   object dsUnidadesCorp: TDataSource
     DataSet = qryUnidadesCorp
-    Left = 1134
-    Top = 742
+    Left = 1418
+    Top = 928
   end
   object qryUsuarios: TFDQuery
     Connection = FDConnSPMP3
@@ -41674,8 +41702,8 @@ object DM: TDM
       'WHERE (`usuario`.`CODIGO` = :codigo'
       '    AND `usuario`.`CODEMPRESA` = :codempresa);'
       '')
-    Left = 1011
-    Top = 693
+    Left = 1264
+    Top = 866
     ParamData = <
       item
         Name = 'CODIGO'
@@ -41881,8 +41909,8 @@ object DM: TDM
       '    AND `DATAACESSO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d %T'#39')'
       '    AND `DATAACESSO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d %T'#39'))'
       'ORDER BY `DATAACESSO` DESC;')
-    Left = 1032
-    Top = 693
+    Left = 1290
+    Top = 866
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -41954,8 +41982,8 @@ object DM: TDM
       'FROM INFORMATION_SCHEMA.PROCESSLIST '
       'WHERE '
       '    DB = "spmpma_spmp" AND USER = '#39'spmpma_spmp'#39';')
-    Left = 1053
-    Top = 693
+    Left = 1316
+    Top = 866
     object qryUsuariosAtivosHOST: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'HOST'
@@ -41985,8 +42013,8 @@ object DM: TDM
       '        ON (`grupos`.`CODIGO` = `empresa`.`CODGRUPO`)'
       'WHERE (`usuarioempresascad`.`CODEMPRESAS` = :codempresas)'
       'ORDER BY `EMPRESA` ASC;')
-    Left = 1113
-    Top = 693
+    Left = 1391
+    Top = 866
     ParamData = <
       item
         Name = 'CODEMPRESAS'
@@ -42067,8 +42095,8 @@ object DM: TDM
       'WHERE (`usuarioempresascad`.`CODEMPRESAS` = :codempresas)'
       'GROUP BY `usuarioempresascad`.`CODEMPRESA`'
       'ORDER BY `EMPRESA` ASC;')
-    Left = 1134
-    Top = 693
+    Left = 1418
+    Top = 866
     ParamData = <
       item
         Name = 'CODEMPRESAS'
@@ -42115,8 +42143,8 @@ object DM: TDM
   end
   object dsAuxiliar: TDataSource
     DataSet = qryAuxiliar
-    Left = 293
-    Top = 8
+    Left = 366
+    Top = 10
   end
   object qryMonitoramentoPlanoTrab: TFDQuery
     Connection = FDConnSPMP3
@@ -42150,8 +42178,8 @@ object DM: TDM
         ')'
       'WHERE (`planotrabalho`.`CODIGO` = :codigo'
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 725
-    Top = 376
+    Left = 984
+    Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
@@ -42269,8 +42297,8 @@ object DM: TDM
   end
   object dsMonitoramentoPlanoTrab: TDataSource
     DataSet = qryMonitoramentoPlanoTrab
-    Left = 727
-    Top = 424
+    Left = 988
+    Top = 530
   end
   object qryManutProgEquipPlanoTrab: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -42297,8 +42325,8 @@ object DM: TDM
         '    AND `manutprogfamequipplantrab`.`CODMANUTPROGFAMEQUIP` = :CO' +
         'DMANUTPROGFAMEQUIP'
       '    );')
-    Left = 358
-    Top = 376
+    Left = 448
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -42351,8 +42379,8 @@ object DM: TDM
   end
   object dsManutProgEquipPlanoTrab: TDataSource
     DataSet = qryManutProgEquipPlanoTrab
-    Left = 360
-    Top = 424
+    Left = 450
+    Top = 530
   end
   object qryLubrificProgEquipPlanoTrab: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
@@ -42379,8 +42407,8 @@ object DM: TDM
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
         ' = :CODLUBRIFICPROGFAMEQUIP'
       '    );')
-    Left = 757
-    Top = 269
+    Left = 946
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -42433,8 +42461,8 @@ object DM: TDM
   end
   object dsLubrificProgEquipPlanoTrab: TDataSource
     DataSet = qryLubrificProgEquipPlanoTrab
-    Left = 757
-    Top = 317
+    Left = 946
+    Top = 396
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -42442,6 +42470,7 @@ object DM: TDM
     ShowProgress = True
     OverwritePrompt = False
     DataOnly = False
+    EmbedFontsIfProtected = False
     InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
     OpenAfterExport = False
     PrintOptimized = False
@@ -42452,6 +42481,7 @@ object DM: TDM
     Transparency = False
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
+    Creator = 'FastReport'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
     HideToolbar = False
     HideMenubar = False
@@ -42462,12 +42492,12 @@ object DM: TDM
     PdfA = False
     PDFStandard = psNone
     PDFVersion = pv17
-    Left = 647
-    Top = 7
+    Left = 809
+    Top = 9
   end
   object ImageListBotoes: TImageList
-    Left = 669
-    Top = 7
+    Left = 836
+    Top = 9
     Bitmap = {
       494C01017C000007040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000000002000001002000000000000000
@@ -46702,8 +46732,8 @@ object DM: TDM
   end
   object ApplicationEventsSPMP: TApplicationEvents
     OnException = ApplicationEventsSPMPException
-    Left = 691
-    Top = 7
+    Left = 864
+    Top = 9
   end
   object qryManutProgEquipPartes: TFDQuery
     AfterOpen = qryManutProgEquipPartesAfterScroll
@@ -46731,8 +46761,8 @@ object DM: TDM
         '    AND `manutprogfamequippartes`.`CODMANUTPROGFAMEQUIP` = :CODM' +
         'ANUTPROGFAMEQUIP)'
       'order by `manutprogfamequippartes`.`DESCRICAO`;')
-    Left = 261
-    Top = 376
+    Left = 326
+    Top = 470
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -46776,8 +46806,8 @@ object DM: TDM
   end
   object dsManutProgEquipPartes: TDataSource
     DataSet = qryManutProgEquipPartes
-    Left = 263
-    Top = 424
+    Left = 329
+    Top = 530
   end
   object qryLubrificProgEquipPartes: TFDQuery
     AfterOpen = qryLubrificProgEquipPartesAfterScroll
@@ -46806,8 +46836,8 @@ object DM: TDM
         '    AND `lubrificprogfamequippartes`.`CODLUBRIFICPROGFAMEQUIP` =' +
         ' :CODLUBRIFICPROGFAMEQUIP)'
       'order by `lubrificprogfamequippartes`.`DESCRICAO`;')
-    Left = 674
-    Top = 269
+    Left = 843
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -46853,8 +46883,8 @@ object DM: TDM
   end
   object dsLubrificProgEquipPartes: TDataSource
     DataSet = qryLubrificProgEquipPartes
-    Left = 673
-    Top = 317
+    Left = 841
+    Top = 396
   end
   object qryAbastecimentosCombustTodos: TFDQuery
     IndexFieldNames = 'CODEQUIPAMENTO'
@@ -46901,8 +46931,8 @@ object DM: TDM
       ')'
       'ORDER BY `controlecombustivelcabast`.`CODIGO` DESC'
       '')
-    Left = 240
-    Top = 60
+    Left = 300
+    Top = 75
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -47040,8 +47070,8 @@ object DM: TDM
   end
   object dsAbastecimentosCombustTodos: TDataSource
     DataSet = qryAbastecimentosCombustTodos
-    Left = 240
-    Top = 108
+    Left = 300
+    Top = 135
   end
   object qryAbastecimentosLubrificTodos: TFDQuery
     IndexFieldNames = 'CODEQUIPAMENTO'
@@ -47098,8 +47128,8 @@ object DM: TDM
         'ORDER BY `controlecombustivellabast`.`DATALUBRIFIC` DESC, `contr' +
         'olecombustivellabast`.`ODOMETROLUBRIFIC` DESC;'
       '')
-    Left = 261
-    Top = 60
+    Left = 326
+    Top = 75
     ParamData = <
       item
         Name = 'CODEQUIPAMENTO'
@@ -47235,8 +47265,8 @@ object DM: TDM
   end
   object dsAbastecimentosLubrificTodos: TDataSource
     DataSet = qryAbastecimentosLubrificTodos
-    Left = 261
-    Top = 108
+    Left = 326
+    Top = 135
   end
   object qryConfigs: TFDQuery
     Connection = FDConnSPMP3
@@ -47252,8 +47282,8 @@ object DM: TDM
       '    , `codusuarioalt`'
       'FROM'
       '    `configs`')
-    Left = 453
-    Top = 8
+    Left = 566
+    Top = 10
     object qryConfigsid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -47303,8 +47333,8 @@ object DM: TDM
   end
   object dsConfigs: TDataSource
     DataSet = qryConfigs
-    Left = 493
-    Top = 8
+    Left = 616
+    Top = 10
   end
   object qryUsuariosAudit: TFDQuery
     Connection = FDConnSPMP3
@@ -47321,8 +47351,8 @@ object DM: TDM
       'WHERE (`usuario`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME` DESC'
       '')
-    Left = 1193
-    Top = 693
+    Left = 1491
+    Top = 866
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -47368,13 +47398,13 @@ object DM: TDM
   end
   object dsUsuariosAudit: TDataSource
     DataSet = qryUsuariosAudit
-    Left = 1193
-    Top = 742
+    Left = 1491
+    Top = 928
   end
   object dsEquipamentosConf: TDataSource
     DataSet = qryEquipamentosConf
-    Left = 344
-    Top = 209
+    Left = 430
+    Top = 261
   end
   object qryEquipamentosConf: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODIGO'
@@ -47398,8 +47428,8 @@ object DM: TDM
       '    AND `CALCULARCONF` = '#39'S'#39
       '    AND `OPERANDO` = '#39'S'#39')'
       'ORDER BY `DESCRICAO` DESC;')
-    Left = 344
-    Top = 161
+    Left = 430
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -47463,8 +47493,8 @@ object DM: TDM
   end
   object dsEquipamentosConfOS: TDataSource
     DataSet = qryEquipamentosConfOS
-    Left = 365
-    Top = 209
+    Left = 456
+    Top = 261
   end
   object qryEquipamentosConfOS: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODEQUIPAMENTO'
@@ -47508,8 +47538,8 @@ object DM: TDM
       
         'ORDER BY `ordemservico`.`CODEQUIPAMENTO`, `ordemservico`.`DATAFE' +
         'CHAMENTO` DESC;')
-    Left = 365
-    Top = 161
+    Left = 456
+    Top = 201
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -47578,8 +47608,8 @@ object DM: TDM
   end
   object qryHorasParadasEquip: TFDQuery
     Connection = FDConnSPMP3
-    Left = 872
-    Top = 7
+    Left = 1090
+    Top = 9
   end
   object qryManutPeriodicasHistItens: TFDQuery
     OnCalcFields = qryManutPeriodicasHistItensCalcFields
@@ -47631,8 +47661,8 @@ object DM: TDM
         'ORDER BY  `manutprogfamequippartes`.`DESCRICAO` ASC, `manutproge' +
         'quiphistitens`.`ITEM`, `manutprogequiphistitens`.`DESCINSPECAO` ' +
         'ASC;')
-    Left = 74
-    Top = 376
+    Left = 93
+    Top = 470
     ParamData = <
       item
         Name = 'INDICE'
@@ -47769,8 +47799,8 @@ object DM: TDM
   end
   object dsManutPeriodicasHistItens: TDataSource
     DataSet = qryManutPeriodicasHistItens
-    Left = 74
-    Top = 424
+    Left = 93
+    Top = 530
   end
   object qryManutPeriodicasHistItensEsp: TFDQuery
     OnCalcFields = qryManutPeriodicasHistItensEspCalcFields
@@ -47822,8 +47852,8 @@ object DM: TDM
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC , `manutproge' +
         'quiphistitensesp`.`ITEM`, `manutprogequiphistitensesp`.`DESCINSP' +
         'ECAO` ASC;')
-    Left = 94
-    Top = 376
+    Left = 118
+    Top = 470
     ParamData = <
       item
         Name = 'INDICE'
@@ -47960,8 +47990,8 @@ object DM: TDM
   end
   object dsManutPeriodicasHistItensEsp: TDataSource
     DataSet = qryManutPeriodicasHistItensEsp
-    Left = 94
-    Top = 424
+    Left = 118
+    Top = 530
   end
   object qryLubrificPeriodicasHistItens: TFDQuery
     OnCalcFields = qryLubrificPeriodicasHistItensCalcFields
@@ -48014,8 +48044,8 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitens`.`ITEM`, `lubrificprogequiphistitens`.`DESCI' +
         'NSPECAO` ASC;')
-    Left = 169
-    Top = 376
+    Left = 211
+    Top = 470
     ParamData = <
       item
         Name = 'INDICE'
@@ -48152,8 +48182,8 @@ object DM: TDM
   end
   object dsLubrificPeriodicasHistItens: TDataSource
     DataSet = qryLubrificPeriodicasHistItens
-    Left = 169
-    Top = 424
+    Left = 211
+    Top = 530
   end
   object qryLubrificPeriodicasHistItensEsp: TFDQuery
     OnCalcFields = qryLubrificPeriodicasHistItensEspCalcFields
@@ -48207,8 +48237,8 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitensesp`.`ITEM`, `lubrificprogequiphistitensesp`.' +
         '`DESCINSPECAO` ASC;')
-    Left = 190
-    Top = 376
+    Left = 238
+    Top = 470
     ParamData = <
       item
         Name = 'INDICE'
@@ -48345,8 +48375,8 @@ object DM: TDM
   end
   object dsLubrificPeriodicasHistItensEsp: TDataSource
     DataSet = qryLubrificPeriodicasHistItensEsp
-    Left = 190
-    Top = 424
+    Left = 238
+    Top = 530
   end
   object qryEquipamentosConfOSServ: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -48367,8 +48397,8 @@ object DM: TDM
       '    `ordemservicoservexec`'
       'WHERE (`CODORDEMSERVICO` = :codigo);'
       '')
-    Left = 387
-    Top = 161
+    Left = 484
+    Top = 201
     ParamData = <
       item
         Name = 'CODIGO'
@@ -48427,8 +48457,8 @@ object DM: TDM
   end
   object dsEquipamentosConfOSServ: TDataSource
     DataSet = qryEquipamentosConfOSServ
-    Left = 387
-    Top = 209
+    Left = 484
+    Top = 261
   end
   object qryManutConsItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -48462,8 +48492,8 @@ object DM: TDM
         'tprogfamequip'
       ')'
       'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
-    Left = 980
-    Top = 269
+    Left = 1225
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -48543,8 +48573,8 @@ object DM: TDM
   end
   object dsManutConsItens: TDataSource
     DataSet = qryManutConsItens
-    Left = 980
-    Top = 317
+    Left = 1225
+    Top = 396
   end
   object qryLubrificConsItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
@@ -48575,8 +48605,8 @@ object DM: TDM
         ':codlubrificprogfamequip)'
       'ORDER BY `PARTE` ASC, `lubrificprogfamequipitens`.`ITEM`;'
       '')
-    Left = 1096
-    Top = 269
+    Left = 1370
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -48653,8 +48683,8 @@ object DM: TDM
   end
   object dsLubrificConsItens: TDataSource
     DataSet = qryLubrificConsItens
-    Left = 1096
-    Top = 317
+    Left = 1370
+    Top = 396
   end
   object qryManutConsItensEsp: TFDQuery
     AfterInsert = qryManutProgEquipItensEspAfterInsert
@@ -48691,8 +48721,8 @@ object DM: TDM
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
       'ORDER BY `PARTE` ASC;')
-    Left = 1002
-    Top = 269
+    Left = 1253
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -48802,8 +48832,8 @@ object DM: TDM
   end
   object dsManutConsItensEsp: TDataSource
     DataSet = qryManutConsItensEsp
-    Left = 1002
-    Top = 317
+    Left = 1253
+    Top = 396
   end
   object qryManutConsPlanoTrab: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -48830,8 +48860,8 @@ object DM: TDM
         '    AND `manutprogfamequipplantrab`.`CODMANUTPROGFAMEQUIP` = :CO' +
         'DMANUTPROGFAMEQUIP'
       '    );')
-    Left = 1024
-    Top = 269
+    Left = 1280
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -48886,8 +48916,8 @@ object DM: TDM
   end
   object dsManutConsPlanoTrab: TDataSource
     DataSet = qryManutConsPlanoTrab
-    Left = 1024
-    Top = 317
+    Left = 1280
+    Top = 396
   end
   object qryLubrificConsItensEsp: TFDQuery
     AfterInsert = qryLubrificProgEquipItensEspAfterInsert
@@ -48923,8 +48953,8 @@ object DM: TDM
         '    AND `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP` = :co' +
         'digo)'
       'ORDER BY `PARTE`;')
-    Left = 1115
-    Top = 269
+    Left = 1394
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -49034,8 +49064,8 @@ object DM: TDM
   end
   object dsLubrificConsItensEsp: TDataSource
     DataSet = qryLubrificConsItensEsp
-    Left = 1115
-    Top = 317
+    Left = 1394
+    Top = 396
   end
   object qryLubrificConsPlanoTrab: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
@@ -49062,8 +49092,8 @@ object DM: TDM
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
         ' = :CODLUBRIFICPROGFAMEQUIP'
       '    );')
-    Left = 1135
-    Top = 269
+    Left = 1419
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -49118,8 +49148,8 @@ object DM: TDM
   end
   object dsLubrificConsPlanoTrab: TDataSource
     DataSet = qryLubrificConsPlanoTrab
-    Left = 1135
-    Top = 317
+    Left = 1419
+    Top = 396
   end
   object qryOrdemServicoMObraDisp: TFDQuery
     Connection = FDConnSPMP3
@@ -49138,6 +49168,27 @@ object DM: TDM
       '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
       '    , `equipamentos`.`CODIGO` AS `CODEQUIPESP`'
       '    , `equipamentos`.`DESCRICAO` AS `EQUIPESP`'
+      '    , ('
+      ''
+      #9'SELECT '
+      #9'    SUM(`ordemservicoequipemobrafunc`.`TOTALHOMEMHORA`)'
+      #9'    '
+      #9'FROM `ordemservicoequipemobrafunc`'
+      #9'    INNER JOIN `ordemservico`'
+      
+        #9#9'ON (`ordemservico`.`CODIGO` = `ordemservicoequipemobrafunc`.`C' +
+        'ODORDEMSERVICO`) AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39')'
+      
+        #9#9'AND (`ordemservico`.`DATAPROGINI` >= STR_TO_DATE(:data1,'#39'%Y/%m' +
+        '/%d'#39') AND `ordemservico`.`DATAPROGINI` <= STR_TO_DATE(:data2,'#39'%Y' +
+        '/%m/%d %T'#39'))'
+      #9#9
+      
+        #9'WHERE `ordemservicoequipemobrafunc`.`MATRICULA` =  `funcionario' +
+        's`.`MATRICULA`'
+      ' '
+      '       ) AS HHProg'
+      '           '
       'FROM'
       '    `funcionarios`'
       '    INNER JOIN `cargos` '
@@ -49162,18 +49213,30 @@ object DM: TDM
       'AND `funcionarios`.`CODEMPRESA` = :codempresa'
       'AND `funcionarios`.`MOBRA` = :mobra'
       ''
+      'GROUP BY `funcionarios`.`MATRICULA`'
+      ''
       'ORDER BY `funcionarios`.`NOME` ASC;')
-    Left = 1427
-    Top = 375
+    Left = 1841
+    Top = 469
     ParamData = <
       item
+        Name = 'DATA1'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
         Name = 'CODEMPRESA'
-        DataType = ftWideString
+        DataType = ftString
         ParamType = ptInput
       end
       item
         Name = 'MOBRA'
-        DataType = ftWideString
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryOrdemServicoMObraDispMATRICULA: TStringField
@@ -49263,11 +49326,21 @@ object DM: TDM
       ProviderFlags = []
       Size = 200
     end
+    object qryOrdemServicoMObraDispHHPROG: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'HHPROG'
+      Origin = 'HHPROG'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00'
+      Precision = 38
+      Size = 2
+    end
   end
   object dsOrdemServicoMObraDisp: TDataSource
     DataSet = qryOrdemServicoMObraDisp
-    Left = 1429
-    Top = 423
+    Left = 1843
+    Top = 529
   end
   object qryPneusChassiAtrelamentoStatus: TFDQuery
     Connection = FDConnSPMP3
@@ -49278,8 +49351,8 @@ object DM: TDM
         'si`.`CONTADOR` = :contador'
       'WHERE `pneusmontagemchassi`.`CODEMPRESA` = :codempresa'
       'AND `pneusmontagemchassi`.`CODIGO` = :codigo')
-    Left = 299
-    Top = 585
+    Left = 374
+    Top = 731
     ParamData = <
       item
         Name = 'STATUS'
@@ -49304,8 +49377,8 @@ object DM: TDM
   end
   object dsPneusChassiAtrelamentoStatus: TDataSource
     DataSet = qryPneusChassiAtrelamentoStatus
-    Left = 299
-    Top = 635
+    Left = 374
+    Top = 794
   end
   object qryPneusChassiAtrelamentoRelat: TFDQuery
     Connection = FDConnSPMP3
@@ -49369,8 +49442,8 @@ object DM: TDM
         'sa)'
       'ORDER BY `DESCCAVALO` ASC;'
       '')
-    Left = 320
-    Top = 585
+    Left = 400
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -49463,8 +49536,8 @@ object DM: TDM
   end
   object dsPneusChassiAtrelamentoRelat: TDataSource
     DataSet = qryPneusChassiAtrelamentoRelat
-    Left = 320
-    Top = 635
+    Left = 400
+    Top = 794
   end
   object qryPneusChassiPneusConsertos: TFDQuery
     Connection = FDConnSPMP3
@@ -49517,8 +49590,8 @@ object DM: TDM
         '    AND `pneusmontagemchassipneuscons`.`CODEMPRESA` = :codempres' +
         'a);'
       '')
-    Left = 341
-    Top = 585
+    Left = 426
+    Top = 731
     ParamData = <
       item
         Name = 'CODIGO'
@@ -49670,8 +49743,8 @@ object DM: TDM
   end
   object dsPneusChassiPneusConsertos: TDataSource
     DataSet = qryPneusChassiPneusConsertos
-    Left = 341
-    Top = 635
+    Left = 426
+    Top = 794
   end
   object qryPneusChassiPosicoesHist: TFDQuery
     OnCalcFields = qryPneusChassiPosicoesHistCalcFields
@@ -49718,8 +49791,8 @@ object DM: TDM
         '    AND `pneusmontagemchassipneushist`.`DATA` <= STR_TO_DATE(:da' +
         'ta2,'#39'%Y/%m/%d'#39')'
       '    );')
-    Left = 362
-    Top = 585
+    Left = 453
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -49835,8 +49908,8 @@ object DM: TDM
   end
   object dsPneusChassiPosicoesHist: TDataSource
     DataSet = qryPneusChassiPosicoesHist
-    Left = 362
-    Top = 635
+    Left = 453
+    Top = 794
   end
   object qryPneusChassiCusto: TFDQuery
     OnCalcFields = qryPneusChassiCustoCalcFields
@@ -49878,8 +49951,8 @@ object DM: TDM
       ')'
       'GROUP BY `pneusmontagemchassipneushist`.`ID`'
       'ORDER BY `pneusmontagemchassipneushist`.`ID` ASC;')
-    Left = 383
-    Top = 585
+    Left = 479
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -49956,8 +50029,8 @@ object DM: TDM
   end
   object dsPneusChassiCusto: TDataSource
     DataSet = qryPneusChassiCusto
-    Left = 383
-    Top = 635
+    Left = 479
+    Top = 794
   end
   object qryPneusChassiIDCusto: TFDQuery
     OnCalcFields = qryPneusChassiIDCustoCalcFields
@@ -49997,8 +50070,8 @@ object DM: TDM
       ' )'
       ''
       'ORDER BY `equipamentos`.`DESCRICAO` ASC;')
-    Left = 404
-    Top = 585
+    Left = 505
+    Top = 731
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -50074,8 +50147,8 @@ object DM: TDM
   end
   object dsPneusChassiIDCusto: TDataSource
     DataSet = qryPneusChassiIDCusto
-    Left = 404
-    Top = 635
+    Left = 505
+    Top = 794
   end
   object qryOrdemServicoEquipeMObraMovim: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO;MATRICULA'
@@ -50105,8 +50178,8 @@ object DM: TDM
         'rdemservico'
       '    AND `ordemservicoequipemobrahoras`.`MATRICULA` = :matricula)'
       'ORDER BY `ordemservicoequipemobrahoras`.ENTRADA ASC;')
-    Left = 1446
-    Top = 375
+    Left = 1865
+    Top = 469
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
@@ -50182,8 +50255,8 @@ object DM: TDM
   end
   object dsOrdemServicoMObraMovim: TDataSource
     DataSet = qryOrdemServicoEquipeMObraMovim
-    Left = 1448
-    Top = 423
+    Left = 1868
+    Top = 529
   end
   object qryOrdemServicoCustoSec: TFDQuery
     Connection = FDConnSPMP3
@@ -50195,8 +50268,8 @@ object DM: TDM
       ''
       'FROM '
       '    `ordemservico` WHERE (`CODOSPRINCIPAL` = :codosprincipal);')
-    Left = 135
-    Top = 480
+    Left = 169
+    Top = 600
     ParamData = <
       item
         Name = 'CODOSPRINCIPAL'
@@ -50215,8 +50288,8 @@ object DM: TDM
   end
   object dsOrdemServicoCustoSec: TDataSource
     DataSet = qryOrdemServicoCustoSec
-    Left = 137
-    Top = 530
+    Left = 171
+    Top = 663
   end
   object qryOrdemServicoEquipeLubrificantes: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -50243,8 +50316,8 @@ object DM: TDM
       'WHERE (`ordemservicolubrificantes`.`CODORDEMSERVICO` = :codigo'
       ');'
       '')
-    Left = 158
-    Top = 480
+    Left = 198
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -50306,8 +50379,8 @@ object DM: TDM
   end
   object dsOrdemServicoEquipeLubrificantes: TDataSource
     DataSet = qryOrdemServicoEquipeLubrificantes
-    Left = 160
-    Top = 530
+    Left = 200
+    Top = 663
   end
   object qryOrdemServicoEquipeLubrificantesUtil: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -50337,8 +50410,8 @@ object DM: TDM
         'go'
       ');'
       '')
-    Left = 182
-    Top = 480
+    Left = 228
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -50408,8 +50481,8 @@ object DM: TDM
   end
   object dsOrdemServicoEquipeLubrificantesUtil: TDataSource
     DataSet = qryOrdemServicoEquipeLubrificantesUtil
-    Left = 184
-    Top = 530
+    Left = 230
+    Top = 663
   end
   object qryOrdemServicoEquipeImagens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODEQUIPAMENTO'
@@ -50431,8 +50504,8 @@ object DM: TDM
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODEQUIPAMENTO` = :codequipamento)'
       'ORDER BY `DESCRICAO` DESC;')
-    Left = 204
-    Top = 480
+    Left = 255
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -50491,8 +50564,8 @@ object DM: TDM
   end
   object dsOrdemServicoEquipeImagens: TDataSource
     DataSet = qryOrdemServicoEquipeImagens
-    Left = 206
-    Top = 530
+    Left = 258
+    Top = 663
   end
   object qryRotaConsSeq: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODROTA'
@@ -50556,8 +50629,8 @@ object DM: TDM
       '    AND `rotasequipamentoseq`.`CODROTA` = :codigo'
       '    )'
       'ORDER BY `rotasequipamentoseq`.`CODIGO` ASC;')
-    Left = 1213
-    Top = 269
+    Left = 1516
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -50674,8 +50747,8 @@ object DM: TDM
   end
   object dsRotaConsSeq: TDataSource
     DataSet = qryRotaConsSeq
-    Left = 1213
-    Top = 317
+    Left = 1516
+    Top = 396
   end
   object qryRotaConsSeqManut: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODEQUIPAMENTO'
@@ -50706,8 +50779,8 @@ object DM: TDM
       '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipatual'
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'S'#39')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1234
-    Top = 269
+    Left = 1543
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -50771,8 +50844,8 @@ object DM: TDM
   end
   object dsRotaConsSeqManut: TDataSource
     DataSet = qryRotaConsSeqManut
-    Left = 1234
-    Top = 317
+    Left = 1543
+    Top = 396
   end
   object qryRotaConsSeqManutItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -50803,8 +50876,8 @@ object DM: TDM
         'tprogfamequip'
       ')'
       'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
-    Left = 1255
-    Top = 269
+    Left = 1569
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -50883,8 +50956,8 @@ object DM: TDM
   end
   object dsRotaConsSeqManutItens: TDataSource
     DataSet = qryRotaConsSeqManutItens
-    Left = 1255
-    Top = 317
+    Left = 1569
+    Top = 396
   end
   object qryRotaConsSeqManutItensEsp: TFDQuery
     AfterInsert = qryManutProgEquipItensEspAfterInsert
@@ -50918,8 +50991,8 @@ object DM: TDM
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
       'ORDER BY `PARTE` ASC;')
-    Left = 1277
-    Top = 269
+    Left = 1596
+    Top = 336
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -51020,8 +51093,8 @@ object DM: TDM
   end
   object dsRotaConsSeqManutItensEsp: TDataSource
     DataSet = qryRotaConsSeqManutItensEsp
-    Left = 1277
-    Top = 317
+    Left = 1596
+    Top = 396
   end
   object qryCalendarioOSProgramadasMObra: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -51071,8 +51144,8 @@ object DM: TDM
       
         'ORDER BY `cargos`.`DESCRICAO`, `ordemservicoequipemobrafunc`.`NO' +
         'ME`;')
-    Left = 136
-    Top = 691
+    Left = 170
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -51157,8 +51230,8 @@ object DM: TDM
   end
   object dsCalendarioOSProgramadasMObra: TDataSource
     DataSet = qryCalendarioOSProgramadasMObra
-    Left = 138
-    Top = 742
+    Left = 173
+    Top = 928
   end
   object qryCalendarioOSExecucao: TFDQuery
     Connection = FDConnSPMP3
@@ -51210,8 +51283,8 @@ object DM: TDM
       '    AND `ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
       ''
       'ORDER BY `ordemservico`.`DATAINICIOREAL` ASC;   ')
-    Left = 157
-    Top = 691
+    Left = 196
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -51308,8 +51381,8 @@ object DM: TDM
   end
   object dsCalendarioOSExecucao: TDataSource
     DataSet = qryCalendarioOSExecucao
-    Left = 157
-    Top = 742
+    Left = 196
+    Top = 928
   end
   object qryCalendarioOSExecucaoMObra: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -51363,8 +51436,8 @@ object DM: TDM
       
         'ORDER BY `cargos`.`DESCRICAO`, `ordemservicoequipemobrafunc`.`NO' +
         'ME`;')
-    Left = 177
-    Top = 691
+    Left = 221
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -51449,19 +51522,19 @@ object DM: TDM
   end
   object dsCalendarioOSExecucaoMObra: TDataSource
     DataSet = qryCalendarioOSExecucaoMObra
-    Left = 177
-    Top = 742
+    Left = 221
+    Top = 928
   end
   object dsOrdemServicoLocalizaMObraOSProg: TDataSource
     DataSet = qryOrdemServicoLocalizaMObraOSProg
-    Left = 73
-    Top = 530
+    Left = 91
+    Top = 663
   end
   object qryOrdemServicoLocalizaMObraOSProg: TFDQuery
-    IndexFieldNames = 'CODEMPRESA;MATRICULA'
+    IndexFieldNames = 'MATRICULA'
     MasterSource = dsOrdemServicoLocalizaMObra
-    MasterFields = 'CODEMPRESA;MATRICULA'
-    DetailFields = 'CODEMPRESA;MATRICULA'
+    MasterFields = 'MATRICULA'
+    DetailFields = 'MATRICULA'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -51506,19 +51579,27 @@ object DM: TDM
       ''
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      '    AND `ordemservicoequipemobrafunc`.`MATRICULA` = :matricula'
       
-        '    AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIMESTA' +
-        'MP(), INTERVAL -18 MONTH) OR `ordemservico`.`DATAULTALT` >= DATE' +
-        '_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
+        '    -- AND `ordemservicoequipemobrafunc`.`MATRICULA` = :matricul' +
+        'a'
+      
+        '    -- AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIME' +
+        'STAMP(), INTERVAL -18 MONTH) '
+      
+        '       -- OR `ordemservico`.`DATAULTALT` >= DATE_ADD(CURRENT_TIM' +
+        'ESTAMP(), INTERVAL -18 MONTH))'
+      
+        '    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%' +
+        'Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:d' +
+        'ata2,'#39'%Y/%m/%d %T'#39')))'
       
         '    AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39' OR `ordemservi' +
         'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
-    Left = 73
-    Top = 480
+      'ORDER BY `ordemservico`.`DATAPROGINI` DESC;')
+    Left = 91
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -51527,10 +51608,14 @@ object DM: TDM
         Size = 9
       end
       item
-        Name = 'MATRICULA'
+        Name = 'DATA1'
         DataType = ftString
         ParamType = ptInput
-        Size = 9
+      end
+      item
+        Name = 'DATA2'
+        DataType = ftString
+        ParamType = ptInput
       end>
     object qryOrdemServicoLocalizaMObraOSProgCODIGO: TFDAutoIncField
       Alignment = taCenter
@@ -51718,8 +51803,8 @@ object DM: TDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 1251
-    Top = 693
+    Left = 1564
+    Top = 866
     object FDMemTRelatGerencMTBFCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 9
@@ -51748,8 +51833,8 @@ object DM: TDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 1270
-    Top = 693
+    Left = 1588
+    Top = 866
     object FDMemTRelatGerencMTTRCODIGO: TStringField
       FieldName = 'CODIGO'
     end
@@ -51777,8 +51862,8 @@ object DM: TDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 1290
-    Top = 693
+    Left = 1613
+    Top = 866
     object FDMemTRelatGerencBacklogCODIGO: TStringField
       FieldName = 'CODIGO'
     end
@@ -51806,8 +51891,8 @@ object DM: TDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 1310
-    Top = 693
+    Left = 1638
+    Top = 866
     object FDMemTCustoMesPneusCODIGO: TStringField
       FieldName = 'CODIGO'
     end
@@ -51889,8 +51974,8 @@ object DM: TDM
       'GROUP BY `ordemservico`.`CODIGO`'
       ''
       'ORDER BY `ordemservico`.`DATAPROGINI` ASC;')
-    Left = 241
-    Top = 691
+    Left = 301
+    Top = 864
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -51999,8 +52084,8 @@ object DM: TDM
   end
   object dsProgramadasExecucao: TDataSource
     DataSet = qryProgramadasExecucao
-    Left = 241
-    Top = 742
+    Left = 301
+    Top = 928
   end
   object qryProgramadasExecucaoMObra: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -52064,8 +52149,8 @@ object DM: TDM
       
         'ORDER BY `ordemservicoequipemobra`.`CODORDEMSERVICO` desc, `carg' +
         'os`.`DESCRICAO`, `ordemservicoequipemobrafunc`.`NOME`;')
-    Left = 256
-    Top = 691
+    Left = 320
+    Top = 864
     ParamData = <
       item
         Name = 'CODIGO'
@@ -52166,8 +52251,8 @@ object DM: TDM
   end
   object dsProgramadasExecucaoMObora: TDataSource
     DataSet = qryProgramadasExecucaoMObra
-    Left = 258
-    Top = 742
+    Left = 323
+    Top = 928
   end
   object qryOrdemServicoGerenciaRelatMObraProg: TFDQuery
     MasterSource = DSOrdemServicoGerenciaRelat
@@ -52229,8 +52314,8 @@ object DM: TDM
       
         'ORDER BY `ordemservicoequipemobra`.`CODORDEMSERVICO` ASC, `ordem' +
         'servicoequipemobrafunc`.`NOME` ASC;')
-    Left = 458
-    Top = 480
+    Left = 573
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -52335,8 +52420,8 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraProg: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraProg
-    Left = 460
-    Top = 530
+    Left = 575
+    Top = 663
   end
   object qryOrdemServicoGerenciaRelatMObraUtil: TFDQuery
     Connection = FDConnSPMP3
@@ -52401,8 +52486,8 @@ object DM: TDM
       
         'ORDER BY `ordemservicoequipemobra`.`CODORDEMSERVICO` ASC, `ordem' +
         'servicoequipemobrautil`.`NOME`ASC;')
-    Left = 477
-    Top = 480
+    Left = 596
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -52508,8 +52593,8 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraUtil: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraUtil
-    Left = 479
-    Top = 530
+    Left = 599
+    Top = 663
   end
   object qryOrdemServicoGerenciaRelatManut: TFDQuery
     Connection = FDConnSPMP3
@@ -52550,8 +52635,8 @@ object DM: TDM
       ')'
       ''
       'ORDER BY  `ordemservico`.DATACADASTRO DESC')
-    Left = 526
-    Top = 480
+    Left = 658
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -52635,8 +52720,8 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatManut: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatManut
-    Left = 526
-    Top = 530
+    Left = 658
+    Top = 663
   end
   object qryOrdemServicoGerenciaRelatLubrific: TFDQuery
     OnCalcFields = qryManutConsCalcFields
@@ -52678,8 +52763,8 @@ object DM: TDM
       ''
       'ORDER BY  `ordemservico`.DATACADASTRO DESC'
       '')
-    Left = 546
-    Top = 480
+    Left = 683
+    Top = 600
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -52763,264 +52848,13 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatLubrific: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatLubrific
-    Left = 546
-    Top = 530
-  end
-  object qryOrdemServicoLocalizaMObraOSExec: TFDQuery
-    IndexFieldNames = 'CODEMPRESA;MATRICULA'
-    MasterSource = dsOrdemServicoLocalizaMObra
-    MasterFields = 'CODEMPRESA;MATRICULA'
-    DetailFields = 'CODEMPRESA;MATRICULA'
-    Connection = FDConnSPMP3
-    SQL.Strings = (
-      'SELECT'
-      '    `ordemservico`.`CODIGO`'
-      '    , `ordemservico`.`CODEMPRESA`'
-      '    , `ordemservico`.`DESCRICAO`'
-      '    , `ordemservico`.`SOLICTRAB`'
-      '    , `ordemservico`.`PROGMANUAL`'
-      '    , `ordemservico`.`ROTAEQUIP`'
-      '    , `ordemservico`.`CODMANUTPROGEQUIP`'
-      '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
-      '    , `ordemservico`.`MATRICULA` AS `SOLICITANTE`'
-      '    , `ordemservico`.`SITUACAO`'
-      '    , `ordemservico`.`DATACADASTRO`'
-      '    , `ordemservico`.`DATAPROGINI`'
-      '    , `ordemservico`.`DATAINICIOREAL`'
-      '    , `ordemservico`.`DATAFIMREAL`'
-      '    , `ordemservico`.`DATAFECHAMENTO`'
-      '    , `ordemservico`.`TEMPOPREVISTO`'
-      '    , `ordemservico`.`TEMPOEXECUTADO`'
-      '    , `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
-      '    , `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`'
-      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
-      '    , `ordemservicoequipemobrautil`.`MATRICULA`'
-      ''
-      ''
-      'FROM'
-      '    `spmpma_spmp`.`ordemservico`'
-      '    LEFT JOIN `spmpma_spmp`.`equipamentos` '
-      
-        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
-        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
-        'RESA`)'
-      '    LEFT JOIN `spmpma_spmp`.`ordemservicoequipemobrautil` '
-      
-        '        ON (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = `o' +
-        'rdemservico`.`CODIGO`)'
-      '    LEFT JOIN `spmpma_spmp`.`centrocusto` '
-      
-        '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
-        'IGO`)'
-      ''
-      ''
-      'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      '    AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula'
-      
-        '    AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIMESTA' +
-        'MP(), INTERVAL -18 MONTH) OR `ordemservico`.`DATAULTALT` >= DATE' +
-        '_ADD(CURRENT_TIMESTAMP(), INTERVAL -18 MONTH))'
-      '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
-      '    )'
-      ''
-      'ORDER BY `ordemservico`.`DATAINICIOREAL` ASC;')
-    Left = 92
-    Top = 480
-    ParamData = <
-      item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 9
-      end
-      item
-        Name = 'MATRICULA'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 9
-      end>
-    object qryOrdemServicoLocalizaMObraOSExecCODIGO: TFDAutoIncField
-      Alignment = taCenter
-      DisplayLabel = 'Ordem de Servi'#231'o'
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      DisplayFormat = '#000000'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecCODEMPRESA: TStringField
-      FieldName = 'CODEMPRESA'
-      Origin = 'CODEMPRESA'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-      Visible = False
-      Size = 9
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDESCRICAO: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Descri'#231#227'o'
-      DisplayWidth = 40
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      Size = 200
-    end
-    object qryOrdemServicoLocalizaMObraOSExecSITUACAO: TStringField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Situa'#231#227'o'
-      DisplayWidth = 20
-      FieldName = 'SITUACAO'
-      Origin = 'SITUACAO'
-      Size = 40
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDATACADASTRO: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Cadastro'
-      DisplayWidth = 15
-      FieldName = 'DATACADASTRO'
-      Origin = 'DATACADASTRO'
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDATAPROGINI: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Programada'
-      DisplayWidth = 15
-      FieldName = 'DATAPROGINI'
-      Origin = 'DATAPROGINI'
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDATAINICIOREAL: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'In'#237'cio'
-      DisplayWidth = 15
-      FieldName = 'DATAINICIOREAL'
-      Origin = 'DATAINICIOREAL'
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDATAFIMREAL: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Fim'
-      DisplayWidth = 15
-      FieldName = 'DATAFIMREAL'
-      Origin = 'DATAFIMREAL'
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDATAFECHAMENTO: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Fechamento'
-      DisplayWidth = 15
-      FieldName = 'DATAFECHAMENTO'
-      Origin = 'DATAFECHAMENTO'
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object qryOrdemServicoLocalizaMObraOSExecTEMPOPREVISTO: TBCDField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Previsto (h)'
-      DisplayWidth = 10
-      FieldName = 'TEMPOPREVISTO'
-      Origin = 'TEMPOPREVISTO'
-      DisplayFormat = ',0.00'
-      Precision = 16
-      Size = 2
-    end
-    object qryOrdemServicoLocalizaMObraOSExecTEMPOEXECUTADO: TBCDField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Executado (h)'
-      DisplayWidth = 10
-      FieldName = 'TEMPOEXECUTADO'
-      Origin = 'TEMPOEXECUTADO'
-      DisplayFormat = ',0.00'
-      Precision = 16
-      Size = 2
-    end
-    object qryOrdemServicoLocalizaMObraOSExecCODEQUIPAMENTO: TStringField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'C'#243'd. Equipamento'
-      FieldName = 'CODEQUIPAMENTO'
-      Origin = 'CODIGO'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Equipamento'
-      DisplayWidth = 40
-      FieldName = 'DESCEQUIPAMENTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 200
-    end
-    object qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CENTROCUSTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoLocalizaMObraOSExecSOLICTRAB: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SOLICTRAB'
-      Origin = 'SOLICTRAB'
-      Visible = False
-      Size = 1
-    end
-    object qryOrdemServicoLocalizaMObraOSExecPROGMANUAL: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'PROGMANUAL'
-      Origin = 'PROGMANUAL'
-      Visible = False
-      Size = 1
-    end
-    object qryOrdemServicoLocalizaMObraOSExecROTAEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ROTAEQUIP'
-      Origin = 'ROTAEQUIP'
-      Visible = False
-      Size = 1
-    end
-    object qryOrdemServicoLocalizaMObraOSExecCODMANUTPROGEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTPROGEQUIP'
-      Origin = 'CODMANUTPROGEQUIP'
-      Visible = False
-      Size = 9
-    end
-    object qryOrdemServicoLocalizaMObraOSExecCODLUBRIFICPROGEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODLUBRIFICPROGEQUIP'
-      Origin = 'CODLUBRIFICPROGEQUIP'
-      Visible = False
-      Size = 9
-    end
-    object qryOrdemServicoLocalizaMObraOSExecSOLICITANTE: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SOLICITANTE'
-      Origin = 'MATRICULA'
-      Visible = False
-      Size = 9
-    end
-    object qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'MATRICULA'
-      Origin = 'MATRICULA'
-      ProviderFlags = []
-      ReadOnly = True
-      Visible = False
-      Size = 9
-    end
+    Left = 683
+    Top = 663
   end
   object dsOrdemServicoLocalizaMObraOSExec: TDataSource
     DataSet = qryOrdemServicoLocalizaMObraOSExec
-    Left = 92
-    Top = 530
+    Left = 115
+    Top = 663
   end
   object FDQuery1: TFDQuery
     Connection = FDConnSPMP3
@@ -53173,8 +53007,8 @@ object DM: TDM
       ''
       ''
       'SET FOREIGN_KEY_CHECKS = 1;')
-    Left = 1440
-    Top = 720
+    Left = 1800
+    Top = 900
     ParamData = <
       item
         Name = 'NEWCODE'
@@ -53202,8 +53036,8 @@ object DM: TDM
       'FROM'
       '    `ordemservico`'
       'WHERE (`ordemservico`.`CODIGO` = :codigo )')
-    Left = 362
-    Top = 480
+    Left = 453
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -53225,8 +53059,8 @@ object DM: TDM
   end
   object dsqryOSGerenciaRelatObservacoes: TDataSource
     DataSet = qryOSGerenciaRelatObservacoes
-    Left = 362
-    Top = 530
+    Left = 453
+    Top = 663
   end
   object qryOrdemServicoGerenciaRelatMObraProgOS: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
@@ -53282,8 +53116,8 @@ object DM: TDM
         'CODIGO`)        '
       ''
       'WHERE (`ordemservicoequipemobra`.`CODORDEMSERVICO` = :codigo)')
-    Left = 381
-    Top = 480
+    Left = 476
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -53387,12 +53221,11 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraProgOS: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraProgOS
-    Left = 383
-    Top = 530
+    Left = 479
+    Top = 663
   end
   object qryOrdemServicoGerenciaRelatMObraUtilOS: TFDQuery
     IndexFieldNames = 'CODORDEMSERVICO'
-    MasterSource = DSOrdemServicoGerenciaRelat
     MasterFields = 'CODIGO'
     DetailFields = 'CODORDEMSERVICO'
     Connection = FDConnSPMP3
@@ -53445,8 +53278,8 @@ object DM: TDM
         'CODIGO`)'
       '        '
       'WHERE (`ordemservicoequipemobra`.`CODORDEMSERVICO` = :codigo)')
-    Left = 400
-    Top = 480
+    Left = 500
+    Top = 600
     ParamData = <
       item
         Name = 'CODIGO'
@@ -53553,8 +53386,13 @@ object DM: TDM
   end
   object dsOrdemServicoGerenciaRelatMObraUtilOS: TDataSource
     DataSet = qryOrdemServicoGerenciaRelatMObraUtilOS
-    Left = 402
-    Top = 530
+    Left = 503
+    Top = 663
+  end
+  object DSOrdemServicoGerenciaRelat: TDataSource
+    DataSet = FDMTOrdemServicoGerenciaRelat
+    Left = 420
+    Top = 663
   end
   object FDMTOrdemServicoGerenciaRelat: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -53564,12 +53402,428 @@ object DM: TDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 336
-    Top = 480
+    Left = 420
+    Top = 600
   end
-  object DSOrdemServicoGerenciaRelat: TDataSource
-    DataSet = FDMTOrdemServicoGerenciaRelat
-    Left = 336
+  object qryClonarManut: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+      '    , `manutprogequipamento`.`DESCRICAO`'
+      '    , `manutprogequipamento`.`CRITICIDADE`'
+      '    , `manutprogequipamento`.`FREQUENCIA1`'
+      '    , `manutprogequipamento`.`REPROGRAMAR1`'
+      '    , `manutprogequipamento`.`GRUPOINSP`'
+      '    '
+      'FROM'
+      '    `manutprogequipamento`'
+      '    INNER JOIN `equipamentos` '
+      
+        '        ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamen' +
+        'tos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equip' +
+        'amentos`.`CODEMPRESA`)'
+      '    INNER JOIN `familiaequipamento` '
+      
+        '        ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamen' +
+        'to`.`CODIGO`)'
+      'WHERE (`equipamentos`.`CODFAMILIAEQUIP` = :codfamiliaequip'
+      '    AND `manutprogequipamento`.`CODEMPRESA` = :codempresa'
+      '    )'
+      'GROUP BY `manutprogequipamento`.`FREQUENCIA1`'
+      ''
+      'ORDER BY `manutprogequipamento`.`FREQUENCIA1`')
+    Left = 508
+    Top = 470
+    ParamData = <
+      item
+        Name = 'CODFAMILIAEQUIP'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryClonarManutCODMANUTPROGFAMEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTPROGFAMEQUIP'
+      Origin = 'CODMANUTPROGFAMEQUIP'
+      Size = 9
+    end
+    object qryClonarManutDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 80
+    end
+    object qryClonarManutCRITICIDADE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CRITICIDADE'
+      Origin = 'CRITICIDADE'
+      Size = 40
+    end
+    object qryClonarManutFREQUENCIA1: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA1'
+      Origin = 'FREQUENCIA1'
+    end
+    object qryClonarManutREPROGRAMAR1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR1'
+      Origin = 'REPROGRAMAR1'
+      Size = 15
+    end
+    object qryClonarManutGRUPOINSP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'GRUPOINSP'
+      Origin = 'GRUPOINSP'
+      Size = 1
+    end
+  end
+  object dsClonarManut: TDataSource
+    DataSet = qryClonarManut
+    Left = 508
     Top = 530
+  end
+  object qryAuxiliar2: TFDQuery
+    Connection = FDConnSPMP3
+    Left = 1248
+    Top = 16
+  end
+  object qryClonarLubrific: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
+      '    , `lubrificprogequipamento`.`DESCRICAO`'
+      '    , `lubrificprogequipamento`.`CRITICIDADE`'
+      '    , `lubrificprogequipamento`.`FREQUENCIA1`'
+      '    , `lubrificprogequipamento`.`REPROGRAMAR1`'
+      '    , `lubrificprogequipamento`.`GRUPOINSP`'
+      ''
+      'FROM'
+      '    `lubrificprogequipamento`'
+      '    INNER JOIN `equipamentos`'
+      
+        '        ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipa' +
+        'mentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = ' +
+        '`equipamentos`.`CODEMPRESA`)'
+      '    INNER JOIN `familiaequipamento`'
+      
+        '        ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamen' +
+        'to`.`CODIGO`)'
+      'WHERE (`equipamentos`.`CODFAMILIAEQUIP` = :codfamiliaequip'
+      '    AND `lubrificprogequipamento`.`CODEMPRESA` = :codempresa'
+      '    )'
+      'GROUP BY `lubrificprogequipamento`.`FREQUENCIA1`'
+      ''
+      'ORDER BY `lubrificprogequipamento`.`FREQUENCIA1`')
+    Left = 533
+    Top = 470
+    ParamData = <
+      item
+        Name = 'CODFAMILIAEQUIP'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryClonarLubrificCODLUBRIFICPROGFAMEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODLUBRIFICPROGFAMEQUIP'
+      Origin = 'CODLUBRIFICPROGFAMEQUIP'
+      Size = 9
+    end
+    object qryClonarLubrificDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 80
+    end
+    object qryClonarLubrificCRITICIDADE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CRITICIDADE'
+      Origin = 'CRITICIDADE'
+      Size = 40
+    end
+    object qryClonarLubrificFREQUENCIA1: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'FREQUENCIA1'
+      Origin = 'FREQUENCIA1'
+    end
+    object qryClonarLubrificREPROGRAMAR1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REPROGRAMAR1'
+      Origin = 'REPROGRAMAR1'
+      Size = 15
+    end
+    object qryClonarLubrificGRUPOINSP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'GRUPOINSP'
+      Origin = 'GRUPOINSP'
+      Size = 1
+    end
+  end
+  object dsClonarLubrific: TDataSource
+    DataSet = qryClonarLubrific
+    Left = 533
+    Top = 530
+  end
+  object qryOrdemServicoLocalizaMObraOSExec: TFDQuery
+    IndexFieldNames = 'MATRICULA'
+    MasterSource = dsOrdemServicoLocalizaMObra
+    MasterFields = 'MATRICULA'
+    DetailFields = 'MATRICULA'
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservico`.`CODIGO`'
+      '    , `ordemservico`.`CODEMPRESA`'
+      '    , `ordemservico`.`DESCRICAO`'
+      '    , `ordemservico`.`SOLICTRAB`'
+      '    , `ordemservico`.`PROGMANUAL`'
+      '    , `ordemservico`.`ROTAEQUIP`'
+      '    , `ordemservico`.`CODMANUTPROGEQUIP`'
+      '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
+      '    , `ordemservico`.`MATRICULA` AS `SOLICITANTE`'
+      '    , `ordemservico`.`SITUACAO`'
+      '    , `ordemservico`.`DATACADASTRO`'
+      '    , `ordemservico`.`DATAPROGINI`'
+      '    , `ordemservico`.`DATAINICIOREAL`'
+      '    , `ordemservico`.`DATAFIMREAL`'
+      '    , `ordemservico`.`DATAFECHAMENTO`'
+      '    , `ordemservico`.`TEMPOPREVISTO`'
+      '    , `ordemservico`.`TEMPOEXECUTADO`'
+      '    , `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
+      '    , `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`'
+      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `ordemservicoequipemobrautil`.`MATRICULA`'
+      ''
+      ''
+      'FROM'
+      '    `spmpma_spmp`.`ordemservico`'
+      '    LEFT JOIN `spmpma_spmp`.`equipamentos` '
+      
+        '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
+        'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
+        'RESA`)'
+      '    LEFT JOIN `spmpma_spmp`.`ordemservicoequipemobrautil` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = `o' +
+        'rdemservico`.`CODIGO`)'
+      '    LEFT JOIN `spmpma_spmp`.`centrocusto` '
+      
+        '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
+        'IGO`)'
+      ''
+      ''
+      ' WHERE ( `ordemservico`.`CODEMPRESA` = :codempresa'
+      
+        '    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%' +
+        'Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:d' +
+        'ata2,'#39'%Y/%m/%d %T'#39')))'
+      '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
+      '   )'
+      ''
+      'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;'
+      '')
+    Left = 115
+    Top = 600
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA1'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        ParamType = ptInput
+      end>
+    object qryOrdemServicoLocalizaMObraOSExecCODIGO: TIntegerField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Ordem de Servi'#231'o'
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      DisplayFormat = '#000000'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecCODEMPRESA: TStringField
+      FieldName = 'CODEMPRESA'
+      Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Visible = False
+      Size = 9
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDESCRICAO: TStringField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Descri'#231#227'o'
+      DisplayWidth = 40
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 200
+    end
+    object qryOrdemServicoLocalizaMObraOSExecSITUACAO: TStringField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Situa'#231#227'o'
+      DisplayWidth = 20
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+      Size = 40
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDATACADASTRO: TDateTimeField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Cadastro'
+      DisplayWidth = 15
+      FieldName = 'DATACADASTRO'
+      Origin = 'DATACADASTRO'
+      DisplayFormat = 'dd/mm/yyyy t'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDATAPROGINI: TDateTimeField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Programada'
+      DisplayWidth = 15
+      FieldName = 'DATAPROGINI'
+      Origin = 'DATAPROGINI'
+      DisplayFormat = 'dd/mm/yyyy t'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDATAINICIOREAL: TDateTimeField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'In'#237'cio'
+      FieldName = 'DATAINICIOREAL'
+      Origin = 'DATAINICIOREAL'
+      DisplayFormat = 'dd/mm/yyyy t'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDATAFIMREAL: TDateTimeField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Fim'
+      DisplayWidth = 15
+      FieldName = 'DATAFIMREAL'
+      Origin = 'DATAFIMREAL'
+      DisplayFormat = 'dd/mm/yyyy t'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDATAFECHAMENTO: TDateTimeField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Fechamento'
+      DisplayWidth = 15
+      FieldName = 'DATAFECHAMENTO'
+      Origin = 'DATAFECHAMENTO'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qryOrdemServicoLocalizaMObraOSExecTEMPOPREVISTO: TBCDField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Previsto (h)'
+      DisplayWidth = 10
+      FieldName = 'TEMPOPREVISTO'
+      Origin = 'TEMPOPREVISTO'
+      Visible = False
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object qryOrdemServicoLocalizaMObraOSExecTEMPOEXECUTADO: TBCDField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Executado (h)'
+      FieldName = 'TEMPOEXECUTADO'
+      Origin = 'TEMPOEXECUTADO'
+      Visible = False
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object qryOrdemServicoLocalizaMObraOSExecCODEQUIPAMENTO: TStringField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'C'#243'd. Equipamento'
+      FieldName = 'CODEQUIPAMENTO'
+      Origin = 'CODIGO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Equipamento'
+      DisplayWidth = 40
+      FieldName = 'DESCEQUIPAMENTO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
+    object qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CENTROCUSTO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOrdemServicoLocalizaMObraOSExecSOLICTRAB: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SOLICTRAB'
+      Origin = 'SOLICTRAB'
+      Visible = False
+      Size = 1
+    end
+    object qryOrdemServicoLocalizaMObraOSExecPROGMANUAL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PROGMANUAL'
+      Origin = 'PROGMANUAL'
+      Visible = False
+      Size = 1
+    end
+    object qryOrdemServicoLocalizaMObraOSExecROTAEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ROTAEQUIP'
+      Origin = 'ROTAEQUIP'
+      Visible = False
+      Size = 1
+    end
+    object qryOrdemServicoLocalizaMObraOSExecCODMANUTPROGEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTPROGEQUIP'
+      Origin = 'CODMANUTPROGEQUIP'
+      Visible = False
+      Size = 9
+    end
+    object qryOrdemServicoLocalizaMObraOSExecCODLUBRIFICPROGEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODLUBRIFICPROGEQUIP'
+      Origin = 'CODLUBRIFICPROGEQUIP'
+      Visible = False
+      Size = 9
+    end
+    object qryOrdemServicoLocalizaMObraOSExecSOLICITANTE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SOLICITANTE'
+      Origin = 'MATRICULA'
+      Visible = False
+      Size = 9
+    end
+    object qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 9
+    end
   end
 end

@@ -6,9 +6,7 @@ uses
   System.SysUtils, System.Classes, frxClass, frxDBSet, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, frxRich, frxDMPExport, frxExportDOCX,
-  frxExportBaseDialog, frxExportXLSX, frxExportDBF, frxExportCSV, frxExportText,
-  frxExportXML;
+  FireDAC.Comp.Client, frxRich, frxDMPExport,  frxExportBaseDialog, frxExportCSV, frxExportText;
 
 type
   TDmRelatorios = class(TDataModule)
@@ -216,9 +214,7 @@ type
     frxRLubrificFamEquipGeral: TfrxReport;
     frxRLubrificFamEquipIndividual: TfrxReport;
     frxRLubrificPeriodicas: TfrxReport;
-    frxRLubrificProgEquipGeral1: TfrxReport;
     frxRLubrificProgEquipGeral: TfrxReport;
-    frxRLubrificProgEquipIndividual1: TfrxReport;
     frxRLubrificProgEquipIndividual: TfrxReport;
     frxRLubrificantesGeral: TfrxReport;
     frxRLubrificantesIndividual: TfrxReport;
@@ -226,7 +222,6 @@ type
     frxRManutFamEquipGeral: TfrxReport;
     frxRManutFamEquipIndividual: TfrxReport;
     frxRManutPeriodicas: TfrxReport;
-    frxRManutProgEquipGeral1: TfrxReport;
     frxRManutProgEquipGeral: TfrxReport;
     frxRMonitoramento: TfrxReport;
     frxRMotivoParada: TfrxReport;
@@ -278,7 +273,6 @@ type
     frxDBOrdemServicoEquipeRecursos: TfrxDBDataset;
     frxDBOrdemServicoPecas: TfrxDBDataset;
     frxDBOrdemServicoPlanoTrab: TfrxDBDataset;
-    frxXLSXExport1: TfrxXLSXExport;
     frxDBInspConsManutItens: TfrxDBDataset;
     frxDBInspConsLubrificItens: TfrxDBDataset;
     frxRInspConsLubrific: TfrxReport;
@@ -312,7 +306,7 @@ type
     frxRFuncionariosHist: TfrxReport;
     frxDBOrdemServicoLocalizaMObra: TfrxDBDataset;
     frxDBOrdemServicoLocalizaMObraOSProg: TfrxDBDataset;
-    frxROrdemServicoLocalizaMObra: TfrxReport;
+    luc: TfrxReport;
     frxReport2: TfrxReport;
     frxROrdemServicoMObra: TfrxReport;
     frxROrdemServicoInsp: TfrxReport;
@@ -324,7 +318,6 @@ type
     frxROrdemServicoGeralCompleta: TfrxReport;
     frxReport1: TfrxReport;
     frxROrdemServicoGeral: TfrxReport;
-    frxReport3: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

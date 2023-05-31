@@ -42,7 +42,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM, UnDmRelatorios;
+uses UnDM, UnDmRelatorios, UnTelaCadOrdemServicoGerencia;
 
 procedure TFrmTelaCadOrdemServicoLocalizaMObra.BtnImprimirClick(
   Sender: TObject);
@@ -77,9 +77,18 @@ begin
   inherited;
 DM.qryOrdemServicoLocalizaMObra.Close;
 DM.qryOrdemServicoLocalizaMObra.Params[0].AsString := DM.FCodEmpresa;
-//DM.qryOrdemServicoLocalizaMObra.Params[1].AsString := EdtConsulta.Text + '%';
 DM.qryOrdemServicoLocalizaMObra.Open;
+
+DM.qryOrdemServicoLocalizaMObraOSProg.Close;
+DM.qryOrdemServicoLocalizaMObraOSProg.Params[0].AsString := DM.FCodEmpresa;
+DM.qryOrdemServicoLocalizaMObraOSProg.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
+DM.qryOrdemServicoLocalizaMObraOSProg.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
 DM.qryOrdemServicoLocalizaMObraOSProg.Open;
+
+DM.qryOrdemServicoLocalizaMObraOSExec.Close;
+DM.qryOrdemServicoLocalizaMObraOSExec.Params[0].AsString := DM.FCodEmpresa;
+DM.qryOrdemServicoLocalizaMObraOSExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
+DM.qryOrdemServicoLocalizaMObraOSExec.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
 DM.qryOrdemServicoLocalizaMObraOSExec.Open;
 end;
 

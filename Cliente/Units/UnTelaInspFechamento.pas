@@ -1103,6 +1103,10 @@ if (Column.Field.FieldName = 'SITUACAOOS') then
         else
           begin GrdManutencao.Canvas.Brush.Color := $00BBFFFF; GrdManutencao.Canvas.Font.Color := clRed end;
       end;
+    if (GrdManutencao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DETALHADA')then
+      begin
+        GrdManutencao.Canvas.Brush.Color := clYellow; GrdManutencao.Canvas.Font.Color := clGreen;
+      end;
     if (GrdManutencao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PROGRAMADA')then
       begin
         GrdManutencao.Canvas.Brush.Color := clBlue; GrdManutencao.Canvas.Font.Color := clWhite;
@@ -1243,6 +1247,10 @@ if (Column.Field.FieldName = 'SITUACAOOS') then
           begin GrdRota.Canvas.Brush.Color := clYellow; GrdRota.Canvas.Font.Color := clRed end
         else
           begin GrdRota.Canvas.Brush.Color := $00BBFFFF; GrdRota.Canvas.Font.Color := clRed end;
+      end;
+    if (GrdRota.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DETALHADA')then
+      begin
+        GrdRota.Canvas.Brush.Color := clYellow; GrdRota.Canvas.Font.Color := clGreen;
       end;
     if (GrdRota.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PROGRAMADA')then
       begin
@@ -1865,6 +1873,10 @@ if (Column.Field.FieldName = 'SITUACAOOS') then
           begin GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clRed end
         else
           begin GrdLubrificacao.Canvas.Brush.Color := $00BBFFFF; GrdLubrificacao.Canvas.Font.Color := clRed end;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DETALHADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clGreen;
       end;
     if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PROGRAMADA')then
       begin
