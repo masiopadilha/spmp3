@@ -181,7 +181,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   //Application.Title := '';
-  TStyleManager.TrySetStyle('Windows10');
+  TStyleManager.TrySetStyle('Puerto Rico');
   Application.Title := 'SPMP - Sistema do Plano de Manutenção LTDA.';
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmRelatorios, DmRelatorios);

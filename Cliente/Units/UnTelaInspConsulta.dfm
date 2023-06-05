@@ -12,7 +12,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1002
+    ExplicitWidth = 1004
     object Label9: TLabel [1]
       Left = 133
       Top = 36
@@ -69,8 +69,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   inherited PCentro: TPanel
     Width = 1006
     Height = 503
-    ExplicitWidth = 1000
-    ExplicitHeight = 494
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
@@ -426,7 +426,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 992
+      ExplicitWidth = 994
       object Label10: TLabel
         Left = 8
         Top = 8

@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, frxClass, frxDBSet, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, frxRich, frxDMPExport,  frxExportBaseDialog, frxExportCSV, frxExportText;
+  FireDAC.Comp.Client, frxRich, frxDMPExport,  frxExportBaseDialog, frxExportCSV, frxExportText,
+  frxExportXLSX, frxExportPDF;
 
 type
   TDmRelatorios = class(TDataModule)
@@ -302,7 +303,6 @@ type
     frxDBOSProgramada: TfrxDBDataset;
     frxRPrevistoRealizado: TfrxReport;
     frxDBOSProgramadasExecucaoMObra: TfrxDBDataset;
-    frxSimpleTextExport1: TfrxSimpleTextExport;
     frxRFuncionariosHist: TfrxReport;
     frxDBOrdemServicoLocalizaMObra: TfrxDBDataset;
     frxDBOrdemServicoLocalizaMObraOSProg: TfrxDBDataset;
@@ -314,10 +314,11 @@ type
     frxDBOServicoGeralObservacoes: TfrxDBDataset;
     frxDBOrdemServicoGerenciaRelatMObraProgOS: TfrxDBDataset;
     frxDBOrdemServicoGerenciaRelatMObraUtilOS: TfrxDBDataset;
-    frxCSVExport1: TfrxCSVExport;
     frxROrdemServicoGeralCompleta: TfrxReport;
     frxReport1: TfrxReport;
     frxROrdemServicoGeral: TfrxReport;
+    frxXLSXExport1: TfrxXLSXExport;
+    frxCSVExport1: TfrxCSVExport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

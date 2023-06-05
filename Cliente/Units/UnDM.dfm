@@ -31702,12 +31702,14 @@ object DM: TDM
         'nutprogfamequippartes`.`CODIGO` = `manutprogfamequipitens`.`CODP' +
         'ARTE`)'
       'WHERE (`manutprogfamequipitens`.`CODPARTE`= :codigo)'
-      'ORDER BY `manutprogfamequipitens`.`ITEM`;')
+      '-- ORDER BY `manutprogfamequipitens`.`ITEM`;'
+      'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
     Left = 675
     Top = 470
     ParamData = <
       item
         Name = 'CODIGO'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryManutProgFamEquipItensCODIGO: TFDAutoIncField

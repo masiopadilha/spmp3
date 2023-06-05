@@ -2,8 +2,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 302
-  ClientWidth = 508
+  ClientHeight = 305
+  ClientWidth = 510
   Color = 14671839
   Constraints.MaxHeight = 340
   Constraints.MaxWidth = 520
@@ -11590,7 +11590,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     AlignWithMargins = True
     Left = 2
     Top = 2
-    Width = 504
+    Width = 506
     Height = 60
     Margins.Left = 2
     Margins.Top = 2
@@ -11602,7 +11602,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     TabOrder = 0
     ExplicitWidth = 498
     DesignSize = (
-      504
+      506
       60)
     object Image1: TImage
       Left = 0
@@ -12053,39 +12053,40 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
       ShowHint = True
       TabOrder = 0
       OnClick = BtnAjudaClick
-      ExplicitLeft = 464
     end
   end
   object PCentro: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 67
-    Width = 502
-    Height = 163
+    Width = 504
+    Height = 166
     Align = alClient
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 498
-    ExplicitHeight = 162
+    ExplicitWidth = 496
+    ExplicitHeight = 154
     object RGTelas: TRadioGroup
       Left = 1
       Top = 1
-      Width = 496
-      Height = 160
+      Width = 502
+      Height = 164
       Margins.Left = 2
       Margins.Top = 2
       Margins.Right = 2
       Margins.Bottom = 2
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 494
+      ExplicitHeight = 152
     end
   end
   object PAuxiliares: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 235
-    Width = 504
+    Top = 238
+    Width = 506
     Height = 23
     Margins.Left = 2
     Margins.Top = 2
@@ -12101,14 +12102,14 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 234
-    ExplicitWidth = 500
+    ExplicitTop = 226
+    ExplicitWidth = 498
   end
   object PBotoes: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 262
-    Width = 504
+    Top = 265
+    Width = 506
     Height = 38
     Margins.Left = 2
     Margins.Top = 2
@@ -12122,8 +12123,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Font.Style = []
     ParentFont = False
     TabOrder = 3
-    ExplicitTop = 261
-    ExplicitWidth = 500
+    ExplicitTop = 253
+    ExplicitWidth = 498
     object BtnOK: TButton
       Left = 171
       Top = 6

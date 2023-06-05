@@ -12,7 +12,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1002
+    ExplicitWidth = 1004
     object Label1: TLabel [1]
       Left = 218
       Top = 36
