@@ -220,6 +220,7 @@ type
     N7: TMenuItem;
     N9: TMenuItem;
     N10: TMenuItem;
+    AlterarCodigo1: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -374,6 +375,7 @@ type
     procedure Auditoria1Click(Sender: TObject);
     procedure DespesasdaManutencao1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure AlterarCodigo1Click(Sender: TObject);
   private
 
     procedure CheckUpdateVersion;
@@ -432,7 +434,7 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadPneusChassiPneusConsertos, UnDmRelatorios,
   UnTelaConsultaPeriodo, UnTelaCadPneusChassiRelat, UnTelaImpDadosSatelite,
   UnTelaImpPedidos, UnTelaCadAbastecimentosViagens, UnTelaOpcoes, UnDM,
-  UnTelaAuditoria, UnDmAlertas;
+  UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod;
 
 procedure TFrmTelaPrincipal.CheckUpdateVersion;
 var
@@ -493,6 +495,17 @@ DM.qryAuxiliar.SQL.Add('SELECT `almoxarifado`.`CODIGO`, `almoxarifado`.`DESCRICA
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRAlmoxarifado.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+
+procedure TFrmTelaPrincipal.AlterarCodigo1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    Application.CreateForm(TFrmTelaCadEquipamentosAltCod, FrmTelaCadEquipamentosAltCod);
+    FrmTelaCadEquipamentosAltCod.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadEquipamentosAltCod);
+  End;
 end;
 
 procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
