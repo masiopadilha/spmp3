@@ -5358,6 +5358,7 @@ type
     qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField;
     qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField;
     qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
+    ImgListNewButtons: TImageList;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

@@ -1,7 +1,7 @@
 inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Caption = 'Consulta'
-  ClientHeight = 565
-  ClientWidth = 790
+  ClientHeight = 562
+  ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -15,7 +15,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   inherited PTop: TPanel
     Left = 4
     Top = 4
-    Width = 782
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -30,15 +30,15 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 749
-      ExplicitLeft = 749
+      Left = 744
+      ExplicitLeft = 744
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 147
-    Width = 782
-    Height = 337
+    Width = 780
+    Height = 334
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -58,6 +58,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Align = alNone
       TabOrder = 3
       ExplicitTop = 0
+      ExplicitWidth = 500
       ExplicitHeight = 0
     end
     object EdtConsulta: TEdit
@@ -85,8 +86,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       AlignWithMargins = True
       Left = 5
       Top = 35
-      Width = 772
-      Height = 297
+      Width = 770
+      Height = 294
       Hint = 'D'#234' duplo-clique para confirmar a consulta'
       Margins.Left = 4
       Margins.Top = 34
@@ -109,8 +110,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PAuxiliares: TPanel
     Left = 4
-    Top = 492
-    Width = 782
+    Top = 489
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -122,8 +123,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PBotoes: TPanel
     Left = 4
-    Top = 523
-    Width = 782
+    Top = 520
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -155,7 +156,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     AlignWithMargins = True
     Left = 4
     Top = 72
-    Width = 782
+    Width = 780
     Height = 67
     Margins.Left = 4
     Margins.Top = 4

@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.DateUtils, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Vcl.DBCtrls,
   Vcl.StdCtrls, Data.DB, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, JvExMask, JvToolEdit,
-  JvDBControls, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  JvDBControls, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadEquipamentos = class(TFrmTelaPaiCadastros)
@@ -118,6 +119,12 @@ type
     Famlia1: TMenuItem;
     PFundoDadosTecnicos: TPanel;
     Label32: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);

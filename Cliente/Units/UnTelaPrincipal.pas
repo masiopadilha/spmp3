@@ -1,7 +1,5 @@
 unit UnTelaPrincipal;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
@@ -10,7 +8,6 @@ uses
   Vcl.Buttons, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Error, Winapi.ShellAPI,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdFTP;
-
 type
   TFrmTelaPrincipal = class(TForm)
     Image1: TImage;
@@ -220,6 +217,7 @@ type
     N7: TMenuItem;
     N9: TMenuItem;
     N10: TMenuItem;
+    AlterarCodigo1: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -374,26 +372,21 @@ type
     procedure Auditoria1Click(Sender: TObject);
     procedure DespesasdaManutencao1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure AlterarCodigo1Click(Sender: TObject);
   private
-
     procedure CheckUpdateVersion;
     { Private declarations }
 //    procedure AppIdle(Sender: TObject; var Done: Boolean);
 //    procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
-
   public
     { Public declarations }
     procedure AppIdle(Sender: TObject; var Done: Boolean);
     procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
   end;
-
 var
   FrmTelaPrincipal: TFrmTelaPrincipal;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadEquipamentos, UnTelaCadFormatoCodigo, UnTelaCadGrupoIndustrial,
   UnTelaCadClasses, UnTelaCadCargos, UnTelaCadCausaFalha,
@@ -432,8 +425,7 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadPneusChassiPneusConsertos, UnDmRelatorios,
   UnTelaConsultaPeriodo, UnTelaCadPneusChassiRelat, UnTelaImpDadosSatelite,
   UnTelaImpPedidos, UnTelaCadAbastecimentosViagens, UnTelaOpcoes, UnDM,
-  UnTelaAuditoria, UnDmAlertas;
-
+  UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod;
 procedure TFrmTelaPrincipal.CheckUpdateVersion;
 var
   LLocalDir: String;
@@ -444,23 +436,18 @@ begin
   //Se a pasta local não existir, então criar.
   LLocalDir          := 'c:\SPMP3';
   LLocalUpdateFile   := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
-
   //Checar a versão do programa no servidor e comparar com a atual.
 //  LFileVersionLocal  := DM.GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
 //  LFileVersionServer := DM.GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
-
   //Checar a versão do programa no servidor e comparar com a atual.
   LFileVersionLocal  := StrToCurr(DM.getVersion(Application.ExeName));
   LFileVersionServer := StrToCurr(DM.getVersion(DM.FServerPathExeVersion));
-
   if LFileVersionServer > LFileVersionLocal then
     begin
       MessageDlg('Há uma nova versão no servidor.' + #13 + 'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
-
       ShellExecute(Handle, 'open', LLocalUpdateFile, nil, nil, SW_HIDE);
     end;
 end;
-
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
   Try
@@ -470,7 +457,6 @@ begin
     FreeAndNil(FrmTelaCadAlertas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Almoxarifados1Click(Sender: TObject);
 begin
   Try
@@ -482,7 +468,6 @@ begin
     FreeAndNil(FrmTelaCadAlmoxarifados);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Almoxarifados2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBAlmoxarifado.DataSet := DM.qryAuxiliar;
@@ -494,19 +479,27 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRAlmoxarifado.ShowReport();
 DM.qryAuxiliar.Close;
 end;
+procedure TFrmTelaPrincipal.AlterarCodigo1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    Application.CreateForm(TFrmTelaCadEquipamentosAltCod, FrmTelaCadEquipamentosAltCod);
+    FrmTelaCadEquipamentosAltCod.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadEquipamentosAltCod);
+  End;
+end;
 
 procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
 begin
   TimerOscioso.Enabled := True;
 end;
-
 procedure TFrmTelaPrincipal.AppMessage(var Msg: TMsg; var Handled: Boolean);
 begin
   case Msg.message of
     WM_LBUTTONDOWN, WM_RBUTTONDOWN,WM_KEYDOWN: TimerOscioso.Enabled := False;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Area1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 150;
@@ -525,7 +518,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Area2Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 150;
@@ -544,7 +536,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Area3Click(Sender: TObject);
 begin
   inherited;
@@ -564,7 +555,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Assunto1Click(Sender: TObject);
 begin
   Try
@@ -577,7 +567,6 @@ begin
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Auditoria1Click(Sender: TObject);
 begin
   Try
@@ -588,12 +577,10 @@ begin
     FreeAndNil(FrmTelaAuditoria);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Ausncias1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 300;
@@ -607,7 +594,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadFuncionariosAusencias, FrmTelaCadFuncionariosAusencias);
     FrmTelaCadFuncionariosAusencias.Caption := 'Ausências de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosAusencias.ShowModal;
@@ -615,7 +601,6 @@ begin
     FreeAndNil(FrmTelaCadFuncionariosAusencias);
   End;
 end;
-
 procedure TFrmTelaPrincipal.axas1Click(Sender: TObject);
 begin
   Try
@@ -626,7 +611,6 @@ begin
     FreeAndNil(FrmTelaCadInfMensalTaxas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Backlog1Click(Sender: TObject);
 begin
   inherited;
@@ -638,7 +622,6 @@ Finally
   FreeAndNil(FrmTelaConsultaPeriodo);
 End;
 end;
-
 procedure TFrmTelaPrincipal.Button1Click(Sender: TObject);
 //var
 //  amount1 : Currency;
@@ -654,9 +637,7 @@ begin
 //  ShowMessage('Using 2 digits = '+CurrToStrF(amount1, ffCurrency, 2));
 //  ShowMessage('Using 0 digits = '+CurrToStrF(amount1, ffCurrency, 0));
 //  ShellExecute(Handle, 'open', 'c:\spmp3', nil, nil, SW_HIDE);
-
 //  DMAlertas.TrayIcon1.ShowBalloonHint();
-
 
 //Direc := 'C:\SPMP3\Backup';
 //name := 'SPMP3.exe';
@@ -703,13 +684,11 @@ begin
 //    end;
 //   end;
 // END;
-
 //DM.FDQuery1.Close;
 //DM.FDQuery1.Params.ParamByName('NEWCODE').AsString := Edit1.Text;
 //DM.FDQuery1.Params.ParamByName('OLDCODE').AsString := Edit2.Text;
 //DM.FDQuery1.Execute();
 end;
-
 procedure TFrmTelaPrincipal.Cadastro11Click(Sender: TObject);
 begin
   Try
@@ -721,7 +700,6 @@ begin
     FreeAndNil(FrmTelaCadPneus);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro16Click(Sender: TObject);
 begin
   Try
@@ -733,7 +711,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro17Click(Sender: TObject);
 begin
   Try
@@ -745,7 +722,6 @@ begin
     FreeAndNil(FrmTelaCadAbastecimentos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro1Click(Sender: TObject);
 begin
   Try
@@ -756,7 +732,6 @@ begin
     FreeAndNil(FrmTelaCadFuncionarios);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro2Click(Sender: TObject);
 begin
   Try
@@ -768,7 +743,6 @@ begin
     FreeAndNil(FrmTelaCadRecursos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro3Click(Sender: TObject);
 begin
   Try
@@ -780,7 +754,6 @@ begin
     FreeAndNil(FrmTelaCadPecasReposicao);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro4Click(Sender: TObject);
 begin
   Try
@@ -790,9 +763,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadOrdemServico);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Cadastro5Click(Sender: TObject);
 begin
   Try
@@ -804,7 +775,6 @@ begin
     FreeAndNil(FrmTelaCadArqTecnicoLiteratura);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Cadastro6Click(Sender: TObject);
 begin
   Try
@@ -815,14 +785,11 @@ begin
   Finally
     FreeAndNil(FrmTelaCadArqTecnicoDesenho);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Cadastro8Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 300;
@@ -836,7 +803,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramentas, FrmTelaCadFuncionariosCxaFerramentas);
     FrmTelaCadFuncionariosCxaFerramentas.Caption := 'Caixa de Ferramentas de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosCxaFerramentas.ShowModal;
@@ -844,7 +810,6 @@ begin
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramentas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CadastrodeUsurios1Click(Sender: TObject);
 begin
   Try
@@ -856,7 +821,6 @@ begin
     FreeAndNil(FrmTelaCadUsuarios);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Calendrio1Click(Sender: TObject);
 begin
   Try
@@ -867,7 +831,6 @@ begin
     FreeAndNil(FrmTelaCadCalendarioOS);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CalendriodeEquipamentos1Click(Sender: TObject);
 begin
   Try
@@ -879,7 +842,6 @@ begin
     FreeAndNil(FrmTelaCadCalendEquip);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CalendriodeEquipamentos2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBCalendEquip.DataSet := DM.qryAuxiliar;
@@ -890,7 +852,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCalendEquip.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.CalendriodeModeObra1Click(Sender: TObject);
 begin
   Try
@@ -902,7 +863,6 @@ begin
     FreeAndNil(FrmTelaCadCalendMObra);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CalendriodeModeObra2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBCalendMObra.DataSet := DM.qryAuxiliar;
@@ -913,7 +873,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCalendMObra.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Cargos1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBCargos.DataSet := DM.qryAuxiliar;
@@ -924,7 +883,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCargos.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Cargos2Click(Sender: TObject);
 begin
   Try
@@ -936,7 +894,6 @@ begin
     FreeAndNil(FrmTelaCadCargos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CausasdeFalhas1Click(Sender: TObject);
 begin
   Try
@@ -948,7 +905,6 @@ begin
     FreeAndNil(FrmTelaCadCausaFalha);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CausasdeFalhas2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBCausaFalha.DataSet := DM.qryAuxiliar;
@@ -959,7 +915,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCausaFalha.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.CentrodeCusto1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 400;
@@ -978,7 +933,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.CentrosdeCustos1Click(Sender: TObject);
 begin
   Try
@@ -991,7 +945,6 @@ begin
     FreeAndNil(FrmTelaCadCentroCusto);
   End;
 end;
-
 procedure TFrmTelaPrincipal.CentrosdeCustos2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBCentroCusto.DataSet := DM.qryAuxiliar;
@@ -1002,7 +955,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCentroCusto.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.ClassesdeEquipamentos1Click(Sender: TObject);
 begin
   Try
@@ -1014,7 +966,6 @@ begin
     FreeAndNil(FrmTelaCadClasses);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ClassesdeEquipamentos2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBClasses.DataSet := DM.qryAuxiliar;
@@ -1025,17 +976,14 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRClasses.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Confiabilidade2Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADMANUTPROGEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
         DM.FParamAuxiliar[1] := 'DESCRICAO';
-
         Try
           Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
           FrmTelaAuxiliar.ShowModal;
@@ -1045,7 +993,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosConf, FrmTelaCadEquipamentosConf);
     FrmTelaCadEquipamentosConf.Caption := 'Confiabilidade do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosConf.ShowModal;
@@ -1054,7 +1001,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosConf);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Consertos1Click(Sender: TObject);
 begin
   Try
@@ -1065,7 +1011,6 @@ begin
     FreeAndNil(FrmTelaCadPneusChassiPneusConsertos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Consulta1Click(Sender: TObject);
 begin
   Try
@@ -1076,7 +1021,6 @@ begin
     FreeAndNil(FrmTelaInspConsulta);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ConsultadeAcessos1Click(Sender: TObject);
 begin
 Try
@@ -1086,7 +1030,6 @@ Finally
   FreeAndNil(FrmTelaUsuarioAcessos);
 End;
 end;
-
 procedure TFrmTelaPrincipal.ConsultadeEquipamentosParados2Click(
   Sender: TObject);
 begin
@@ -1098,7 +1041,6 @@ begin
     FreeAndNil(FrmTelaParadasDiarias);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Contadores1Click(Sender: TObject);
 begin
   Try
@@ -1110,12 +1052,10 @@ begin
     FreeAndNil(FrmTelaCadContadores);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Contadores4Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -1129,7 +1069,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosContadores, FrmTelaCadEquipamentosContadores);
     FrmTelaCadEquipamentosContadores.Caption := 'Contadores do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosContadores.ShowModal;
@@ -1137,14 +1076,11 @@ begin
     DM.FParamAuxiliar[0] := EmptyStr;
     FreeAndNil(FrmTelaCadEquipamentosContadores);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Contedoendice2Click(Sender: TObject);
 begin
 HtmlHelp(0, Pchar(ExtractFilePath(Application.ExeName) + 'Ajuda.chm' + '::/C/SPMP-Fontes/SPMP3/Manual/HTML/Introdução/Introduo.html'), $0000,0);
 end;
-
 procedure TFrmTelaPrincipal.CustosdoMes1Click(Sender: TObject);
 begin
   Try
@@ -1155,7 +1091,6 @@ begin
     FreeAndNil(FrmTelaCustosMes);
   End;
 end;
-
 procedure TFrmTelaPrincipal.DespesasdaManutencao1Click(Sender: TObject);
 begin
   Try
@@ -1165,9 +1100,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadInfMensalDespesasMensais);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.DespesasdeFuncionarios1Click(Sender: TObject);
 begin
   Try
@@ -1178,7 +1111,6 @@ begin
     FreeAndNil(FrmTelaCadInfMensalFuncionarios);
   End;
 end;
-
 procedure TFrmTelaPrincipal.DisponibilidadedoEquipamento1Click(Sender: TObject);
 begin
 FrmTelaPrincipal.Tag := 2;
@@ -1189,7 +1121,6 @@ Finally
   FreeAndNil(FrmTelaConsultaPeriodo);
 End;
 end;
-
 procedure TFrmTelaPrincipal.DisponibilidadesAdmissveis1Click(Sender: TObject);
 begin
   Try
@@ -1200,7 +1131,6 @@ begin
     FreeAndNil(FrmTelaCadDisponibilidade);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Diversos1Click(Sender: TObject);
 begin
   Try
@@ -1210,9 +1140,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadInfMensalDiversas);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Editora1Click(Sender: TObject);
 begin
   Try
@@ -1224,9 +1152,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.ema1Click(Sender: TObject);
 begin
   Try
@@ -1239,12 +1165,10 @@ begin
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Equipamento1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar  := 250;
@@ -1257,12 +1181,10 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     DM.qryPecasReposicaoHistEquip.Close;
     DM.qryPecasReposicaoHistEquip.Params[0].AsString := DM.FCodEmpresa;
     DM.qryPecasReposicaoHistEquip.Params[1].AsString := DM.FParamAuxiliar[0];
     DM.qryPecasReposicaoHistEquip.Open;
-
     Application.CreateForm(TFrmTelaCadPecasReposicaoHist, FrmTelaCadPecasReposicaoHist);
     FrmTelaCadPecasReposicaoHist.GrdOS.DataSource := DM.dsPecasReposicaoHistEquip;
     FrmTelaCadPecasReposicaoHist.Caption := 'Histórico do Equipamento: '+ DM.FValorCombo;
@@ -1270,9 +1192,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadPecasReposicaoHist);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Equipamentos2Click(Sender: TObject);
 begin
   Try
@@ -1284,7 +1204,6 @@ begin
     FreeAndNil(FrmTelaCadFamiliaEquipamento);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Equipamentos4Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFamEquipamento.DataSet := DM.qryAuxiliar;
@@ -1295,11 +1214,9 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFamEquipamento.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Equipamentos5Click(Sender: TObject);
 begin
 DmRelatorios.frxDBLubrificEquipGeral.DataSet := DM.qryAuxiliar;
-
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
@@ -1314,11 +1231,8 @@ DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprog
                        + ' ORDER BY `equipamentos`.`DESCRICAO`');
 //                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
-
 DmRelatorios.frxRLubrificEquipGeral.ShowReport();
-
 end;
-
 procedure TFrmTelaPrincipal.EquipamentosReservas2Click(Sender: TObject);
 begin
   Try
@@ -1328,13 +1242,10 @@ begin
   Finally
     FreeAndNil(FrmTelaCadEquipamentoReserva);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Equpamentos1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBManutEquipGeral.DataSet := DM.qryAuxiliar;
-
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
@@ -1349,10 +1260,8 @@ DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipa
                        + ' ORDER BY `equipamentos`.`DESCRICAO`');
 //                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
-
 DmRelatorios.frxRManutEquipGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.Fabricantes1Click(Sender: TObject);
 begin
   Try
@@ -1364,7 +1273,6 @@ begin
     FreeAndNil(FrmTelaCadFabricantes);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Fabricantes2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFabricantes.DataSet := DM.qryAuxiliar;
@@ -1375,7 +1283,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRfabricantes.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Familia1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 600;
@@ -1394,7 +1301,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Familia2Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 600;
@@ -1410,22 +1316,17 @@ if DM.ConsultarCombo <> '' then
     DmRelatorios.frxREquipGeral.ShowReport();
   end;
 end;
-
 procedure TFrmTelaPrincipal.FamliadeEquipamentos1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBManutFamEquipGeral.DataSet := DM.qryAuxiliar;
-
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
                        + ' FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
                        + ' WHERE (`manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `manutprogfamequipamento`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
-
 DmRelatorios.frxRManutFamEquipGeral.ShowReport();
-
 end;
-
 procedure TFrmTelaPrincipal.FamliadeEquipamentos2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBLubrificFamEquipGeral.DataSet := DM.qryAuxiliar;
@@ -1437,7 +1338,6 @@ DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificp
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRLubrificFamEquipGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.FamliadePneus2Click(Sender: TObject);
 begin
   Try
@@ -1449,7 +1349,6 @@ begin
     FreeAndNil(FrmTelaCadFamiliaPneus);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Fechamento1Click(Sender: TObject);
 begin
   Try
@@ -1460,7 +1359,6 @@ begin
     FreeAndNil(FrmTelaInspFechamento);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Feriados1Click(Sender: TObject);
 begin
   Try
@@ -1472,7 +1370,6 @@ begin
     FreeAndNil(FrmTelaCadFeriados);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Feriados2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFeriados.DataSet := DM.qryAuxiliar;
@@ -1483,12 +1380,10 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFeriados.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Ferramentaria2Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 300;
@@ -1503,14 +1398,12 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadFuncionariosFerramentaria, FrmTelaCadFuncionariosFerramentaria);
     FrmTelaCadFuncionariosFerramentaria.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosFerramentaria);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Ferramentaria3Click(Sender: TObject);
 begin
   Try
@@ -1522,7 +1415,6 @@ begin
     FreeAndNil(FrmTelaCadRecursosFerram);
   End;
 end;
-
 procedure TFrmTelaPrincipal.FormatodeCdigos1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADFORMATOCODIGO.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
@@ -1533,7 +1425,6 @@ if (DM.qryUsuarioPAcessoCADFORMATOCODIGO.AsString = 'S') or (LowerCase(DM.FNomeU
     FreeAndNil(FrmTelaCadFormatoCodigo);
   End;
 end;
-
 procedure TFrmTelaPrincipal.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -1541,18 +1432,15 @@ begin
     if DM.FNomeUsuario <> 'sam_spmp' then
       begin
         DM.RetornaDataHoraServidor;
-
         DM.qryAcesso.Close;
         DM.qryAcesso.Params[0].AsString := DM.FNomeUsuario;
         DM.qryAcesso.Open;
-
         DM.qryAcesso.Edit;
         DM.qryAcessoDATASAIDA.AsDateTime  := DateOf(DM.FDataHoraServidor);
         DM.qryAcessoHORASAIDA.AsDateTime  := DM.FDataHoraServidor;
         DM.qryAcessoATIVO.AsString        := 'N';
         DM.qryAcessoPERIODO.AsString      := IntToStr(MinutesBetween(DM.qryAcessoHORAENTRADA.AsDateTime, DM.qryAcessoHORASAIDA.AsDateTime));
         DM.qryAcesso.Post;
-
         DM.qryUsuario.Edit;
         DM.qryUsuarioLOGADO.AsString       := 'N';
         DM.qryUsuarioQUEDAENERGIA.AsString := 'N';
@@ -1564,14 +1452,12 @@ begin
       Application.Terminate;
       raise;
     end;
-
     on E: EFDDBEngineException do begin
       DM.FDConnSPMP3.Rollback;
       Application.Terminate;
       raise;
     end;
   end;
-
   DM.qryUsuario.Close;
   DM.qryFormatoCodigo.Close;
   DM.qryUsuarioAcessos.Close;
@@ -1580,28 +1466,22 @@ begin
       DM.FDConnSPMP3.Connected := False;
       Application.MessageBox('Sistema será encerrado por inatividade!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
     end;
-
   Application.Terminate;
 end;
-
 procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
 begin
 //CheckUpdateVersion;
-
 StatusBar1.Font.Size := 9;
 StatusBar1.Panels[0].Text := DM.FNomeUsuario;
 StatusBar1.Panels[1].Text := DM.FNivelAcesso;
 StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
 StatusBar1.Panels[3].Text := DM.FNomeGrupo;
 StatusBar1.Panels[4].Text := DM.FVersao + ' beta';
-
 if DM.FDiasRestantes < 36500 then
   lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
 else
   lblLicenca.Caption :=  'Licença: Ilimitada';
-
 LblAlertas.Caption := DM.FAlerta;
-
 if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     ConsultadeAcessos1.Enabled := False;
@@ -1612,15 +1492,12 @@ if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Adm
     Auditoria1.Enabled := False;
     Opcoes1.Enabled := False;
   end;
-
 RotasdeManuteno1.Visible := DM.FEmpTransf;
-
 DM.FFecharForms := False;
 TimerOscioso.Interval := DM.FMinutosInativo * 60000;
 Application.OnMessage := AppMessage;
 Application.OnIdle := AppIdle;
 end;
-
 procedure TFrmTelaPrincipal.Fornecedores1Click(Sender: TObject);
 begin
   Try
@@ -1631,9 +1508,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadFornecedores);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Fornecedores2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFornecedores.DataSet := DM.qryAuxiliar;
@@ -1644,7 +1519,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFornecedores.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Gerenciamento1Click(Sender: TObject);
 begin
   Try
@@ -1655,7 +1529,6 @@ begin
     FreeAndNil(FrmTelaCadOrdemServicoGerencia);
   End;
 end;
-
 procedure TFrmTelaPrincipal.GrupoIndustrial1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADGRUPOINDUSTRIAL.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
@@ -1669,7 +1542,6 @@ if (DM.qryUsuarioPAcessoCADGRUPOINDUSTRIAL.AsString = 'S') or (LowerCase(DM.FNom
     FreeAndNil(FrmTelaCadGrupoIndustrial);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Historico1Click(Sender: TObject);
 begin
   Try
@@ -1681,12 +1553,10 @@ begin
     FreeAndNil(FrmTelaInspFechamentoHist);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Histrico1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
 //    if DM.FParamAuxiliar[0] = EmptyStr then
 //      begin
 //        DM.FTabela_auxiliar := 300;
@@ -1700,7 +1570,6 @@ begin
 //        End;
 //        if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 //      end;
-
     Application.CreateForm(TFrmTelaCadFuncionariosHist, FrmTelaCadFuncionariosHist);
     FrmTelaCadFuncionariosHist.Caption := 'Histórico de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosHist.ShowModal;
@@ -1708,13 +1577,11 @@ begin
     FreeAndNil(FrmTelaCadFuncionariosHist);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Histrico5Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADMANUTPROGEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
     if DM.AplicarMascara(DM.qryManutProgEquipCODIGO, DM.qryFormatoCodigoMANUTPROGEQUIPAMENTO, FrmTelaCadManutProgEquip) = False then exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -1728,7 +1595,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     with DM.dsEquipamentoS.DataSet as TFDQuery do
       begin
         Close;
@@ -1737,16 +1603,13 @@ begin
         Open;
         Edit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosHist, FrmTelaCadEquipamentosHist);
-
     FrmTelaCadEquipamentosHist.ShowModal;
   Finally
     DM.FParamAuxiliar[0] := EmptyStr;
     FreeAndNil(FrmTelaCadEquipamentosHist);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Imagens1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBImagens.DataSet := DM.qryAuxiliar;
@@ -1758,7 +1621,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRImagens.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Imagens2Click(Sender: TObject);
 begin
   Try
@@ -1769,7 +1631,6 @@ begin
     FreeAndNil(FrmTelaCadImagens);
   End;
 end;
-
 procedure TFrmTelaPrincipal.IndicadoresdeDesempenho2Click(Sender: TObject);
 begin
   Try
@@ -1779,9 +1640,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadIndDesempenho);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.InformaesGerenciaisCorporativas2Click(
   Sender: TObject);
 begin
@@ -1793,12 +1652,10 @@ begin
     FreeAndNil(FrmTelaInfGerenciais);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Inventario1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 300;
@@ -1812,7 +1669,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramInv, FrmTelaCadFuncionariosCxaFerramInv);
     FrmTelaCadFuncionariosCxaFerramInv.Caption := 'Caixa de Ferramentas de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosCxaFerramInv.ShowModal;
@@ -1820,7 +1676,6 @@ begin
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramInv);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ipodeManuteno1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 100;
@@ -1839,7 +1694,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.iposdeManuteno1Click(Sender: TObject);
 begin
   Try
@@ -1851,7 +1705,6 @@ begin
     FreeAndNil(FrmTelaCadTipoManutencao);
   End;
 end;
-
 procedure TFrmTelaPrincipal.iposdeManuteno2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBTipoManutencao.DataSet := DM.qryAuxiliar;
@@ -1862,7 +1715,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRTipoManutencao.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.iposdeProgramao1Click(Sender: TObject);
 begin
   Try
@@ -1874,7 +1726,6 @@ begin
     FreeAndNil(FrmTelaCadTipoProgramacao);
   End;
 end;
-
 procedure TFrmTelaPrincipal.iposdeProgramao2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBTipoProgramacao.DataSet := DM.qryAuxiliar;
@@ -1885,7 +1736,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRTipoProgramacao.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.KitdePeasdeReposio2Click(Sender: TObject);
 begin
   Try
@@ -1897,7 +1747,6 @@ begin
     FreeAndNil(FrmTelaCadPecasReposicaoKit);
   End;
 end;
-
 procedure TFrmTelaPrincipal.KitdeRecursos1Click(Sender: TObject);
 begin
   Try
@@ -1909,7 +1758,6 @@ begin
     FreeAndNil(FrmTelaCadRecursosKit);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Literatura1Click(Sender: TObject);
 begin
   Try
@@ -1922,12 +1770,10 @@ begin
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
 end;
-
 procedure TFrmTelaPrincipal.LiteraturasTcnicas1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADARQUIVOTECNICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -1941,7 +1787,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosArqTec, FrmTelaCadEquipamentosArqTec);
     FrmTelaCadEquipamentosArqTec.Caption := 'Literaturas Técnicas do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosArqTec.ShowModal;
@@ -1950,7 +1795,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosArqTec);
   End;
 end;
-
 procedure TFrmTelaPrincipal.LocalizarFuncionrio2Click(Sender: TObject);
 begin
   Try
@@ -1961,7 +1805,6 @@ begin
     FreeAndNil(FrmTelaCadOrdemServicoLocalizaMObra);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Lubrificantes1Click(Sender: TObject);
 begin
   Try
@@ -1973,7 +1816,6 @@ begin
     FreeAndNil(FrmTelaCadLubrificantes);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Lubrificantes2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBLubrificantesGeral.DataSet := DM.qryAuxiliar;
@@ -1983,13 +1825,11 @@ DM.qryAuxiliar.SQL.Add('select codigo, descricao from lubrificantes where codemp
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRLubrificantesGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.LubrificaoProgramada2Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADLUBRIFICPROGEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
     if DM.AplicarMascara(DM.qryLubrificProgEquipCODIGO, DM.qryFormatoCodigoLUBRIFICPROGEQUIPAMENTO, FrmTelaCadLubrificProgEquip) = False then exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -2003,7 +1843,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadLubrificProgEquip, FrmTelaCadLubrificProgEquip);
     FrmTelaCadLubrificProgEquip.Caption := 'Lubrificação Programada do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadLubrificProgEquip.ShowModal;
@@ -2011,9 +1850,7 @@ begin
     DM.FParamAuxiliar[0] := EmptyStr;
     FreeAndNil(FrmTelaCadLubrificProgEquip);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.LubrificaoProgramadadeFamlias1Click(
   Sender: TObject);
 begin
@@ -2026,7 +1863,6 @@ begin
     FreeAndNil(FrmTelaCadLubrificProgFamEquip);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ManutencaoProgramadadeFamilias1Click(
   Sender: TObject);
 begin
@@ -2039,13 +1875,11 @@ begin
     FreeAndNil(FrmTelaCadManutProgFamEquip);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ManutenoProgramada2Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADMANUTPROGEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
     if DM.AplicarMascara(DM.qryManutProgEquipCODIGO, DM.qryFormatoCodigoMANUTPROGEQUIPAMENTO, FrmTelaCadManutProgEquip) = False then exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -2059,7 +1893,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadManutProgEquip, FrmTelaCadManutProgEquip);
     FrmTelaCadManutProgEquip.Caption := 'Manutenção Programada do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadManutProgEquip.ShowModal;
@@ -2067,9 +1900,7 @@ begin
     DM.FParamAuxiliar[0] := EmptyStr;
     FreeAndNil(FrmTelaCadManutProgEquip);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.MenudeParmetros1Click(Sender: TObject);
 begin
   Try
@@ -2079,7 +1910,6 @@ begin
     FreeAndNil(FrmTelaMenuParametros);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ModeObra2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFuncionariosGeral.DataSet := DM.qryAuxiliar;
@@ -2089,12 +1919,10 @@ DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRFuncionariosGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.ModeObraEspecializada1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADMAODEOBRAESP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -2108,7 +1936,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosEsp, FrmTelaCadEquipamentosEsp);
     FrmTelaCadEquipamentosEsp.Caption := 'Especialistas do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosEsp.ShowModal;
@@ -2117,7 +1944,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosEsp);
   End;
 end;
-
 procedure TFrmTelaPrincipal.MonitoramentodeCondiesOperacionais1Click(
   Sender: TObject);
 begin
@@ -2129,7 +1955,6 @@ begin
     FreeAndNil(FrmTelaCadMonitoramento);
   End;
 end;
-
 procedure TFrmTelaPrincipal.MontagemdeVeculos1Click(Sender: TObject);
 begin
   Try
@@ -2140,7 +1965,6 @@ begin
     FreeAndNil(FrmTelaCadPneusChassi);
   End;
 end;
-
 procedure TFrmTelaPrincipal.MotivodeParada1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 110;
@@ -2159,7 +1983,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.MotivosdeParadas1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBMotivoParada.DataSet := DM.qryAuxiliar;
@@ -2170,7 +1993,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRMotivoParada.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.MotivosdeParadas2Click(Sender: TObject);
 begin
   Try
@@ -2182,7 +2004,6 @@ begin
     FreeAndNil(FrmTelaCadMotivoParada);
   End;
 end;
-
 procedure TFrmTelaPrincipal.NavegaoGrfica1Click(Sender: TObject);
 begin
   Try
@@ -2199,7 +2020,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadNavegacaoGrafica, FrmTelaCadNavegacaoGrafica);
     FrmTelaCadNavegacaoGrafica.ShowModal;
   Finally
@@ -2207,7 +2027,6 @@ begin
     FreeAndNil(FrmTelaCadNavegacaoGrafica);
   End;
 end;
-
 procedure TFrmTelaPrincipal.odas2Click(Sender: TObject);
 begin
 FrmTelaPrincipal.Tag := 1;
@@ -2218,7 +2037,6 @@ Finally
   FreeAndNil(FrmTelaConsultaPeriodo);
 End;
 end;
-
 procedure TFrmTelaPrincipal.odas4Click(Sender: TObject);
 begin
 FrmTelaPrincipal.Tag := 3;
@@ -2229,7 +2047,6 @@ Finally
   FreeAndNil(FrmTelaConsultaPeriodo);
 End;
 end;
-
 procedure TFrmTelaPrincipal.odos1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
@@ -2240,7 +2057,6 @@ DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICA
 DM.qryAuxiliar.Open;
 DmRelatorios.frxREquipGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.Oficina1Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 200;
@@ -2259,7 +2075,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.Oficinas1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBOficina.DataSet := DM.qryAuxiliar;
@@ -2271,7 +2086,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxROficina.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Oficinas2Click(Sender: TObject);
 begin
   Try
@@ -2283,7 +2097,6 @@ begin
     FreeAndNil(FrmTelaCadOficinas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Opcoes1Click(Sender: TObject);
 begin
   Try
@@ -2294,7 +2107,6 @@ begin
     FreeAndNil(FrmTelaOpcoes);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PAlertasDblClick(Sender: TObject);
 begin
 //LblAlertas.Left := PAlertas.Width;
@@ -2310,7 +2122,6 @@ begin
 //    DM.ConsultarAlertas;
 //  end;
 end;
-
 procedure TFrmTelaPrincipal.PeasdeReposio1Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFamPecasRep.DataSet := DM.qryAuxiliar;
@@ -2321,7 +2132,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFamPecasRep.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.PeasdeReposio2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBPecasRepGeral.DataSet := DM.qryAuxiliar;
@@ -2332,7 +2142,6 @@ DM.qryAuxiliar.SQL.Add('SELECT `pecasreposicao`.`CODIGO`, `pecasreposicao`.`DESC
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRPecasRepGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.PeasdeReposio3Click(Sender: TObject);
 begin
   Try
@@ -2344,12 +2153,10 @@ begin
     FreeAndNil(FrmTelaCadFamiliaPecasRep);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PecadeReposicao1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -2363,12 +2170,10 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     DM.qryPecasReposicaoHistPecas.Close;
     DM.qryPecasReposicaoHistPecas.Params[0].AsString := DM.FCodEmpresa;
     DM.qryPecasReposicaoHistPecas.Params[1].AsString := DM.FParamAuxiliar[0];
     DM.qryPecasReposicaoHistPecas.Open;
-
     Application.CreateForm(TFrmTelaCadPecasReposicaoHist, FrmTelaCadPecasReposicaoHist);
     FrmTelaCadPecasReposicaoHist.GrdOS.DataSource := DM.dsPecasReposicaoHistPecas;
     FrmTelaCadPecasReposicaoHist.Caption := 'Histórico da Peça: '+ DM.FValorCombo;
@@ -2377,12 +2182,10 @@ begin
     FreeAndNil(FrmTelaCadPecasReposicaoHist);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PecasdeReposio1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADPECASREPOSICAOEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -2397,7 +2200,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosPecas, FrmTelaCadEquipamentosPecas);
     FrmTelaCadEquipamentosPecas.Caption := 'Peças do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosPecas.ShowModal;
@@ -2406,7 +2208,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosPecas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Pedidos1Click(Sender: TObject);
 begin
   Try
@@ -2416,7 +2217,6 @@ begin
     FreeAndNil(FrmTelaImpPedidos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Permissoes1Click(Sender: TObject);
 begin
   Try
@@ -2427,7 +2227,6 @@ begin
     FreeAndNil(FrmTelaPermissoes);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PlanodeTrabalho1Click(Sender: TObject);
 begin
   Try
@@ -2439,7 +2238,6 @@ begin
     FreeAndNil(FrmTelaCadPlanoTrabalho);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Pneus1Click(Sender: TObject);
 begin
 Try
@@ -2449,7 +2247,6 @@ Finally
   FreeAndNil(FrmTelaCadPneusChassiRelat);
 End;
 end;
-
 procedure TFrmTelaPrincipal.PontosdeInspecao1Click(Sender: TObject);
 begin
   Try
@@ -2461,12 +2258,10 @@ begin
     FreeAndNil(FrmTelaCadPontoInspecao);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PontosdeInspeo2Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 250;
@@ -2480,7 +2275,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadEquipamentosPontosInsp, FrmTelaCadEquipamentosPontosInsp);
     FrmTelaCadEquipamentosPontosInsp.Caption := 'Pontos de Inspeção do Equipamento: '+ DM.FValorCombo;
     FrmTelaCadEquipamentosPontosInsp.ShowModal;
@@ -2489,7 +2283,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosPontosInsp);
   End;
 end;
-
 procedure TFrmTelaPrincipal.PorEquipamento1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
@@ -2505,7 +2298,6 @@ if DM.FParamAuxiliar[0] = EmptyStr then
     End;
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
   end;
-
 DM.qryPecasReposicaoInstEquip.Close;
 DM.qryPecasReposicaoInstEquip.Params[0].AsString := DM.FParamAuxiliar[0];
 DM.qryPecasReposicaoInstEquip.Params[1].AsString := DM.FCodEmpresa;
@@ -2519,7 +2311,6 @@ DM.qryPecasReposicaoInstEquip.Close;
 DM.FParamAuxiliar[0] := EmptyStr;
 DM.FParamAuxiliar[1] := EmptyStr;
 end;
-
 procedure TFrmTelaPrincipal.PorPeca1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
@@ -2536,7 +2327,6 @@ if DM.FParamAuxiliar[0] = EmptyStr then
     End;
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
   end;
-
 DM.qryPecasReposicaoInstPecas.Close;
 DM.qryPecasReposicaoInstPecas.Params[0].AsString := DM.FParamAuxiliar[0];
 DM.qryPecasReposicaoInstPecas.Params[1].AsString := DM.FCodEmpresa;
@@ -2545,13 +2335,10 @@ if DM.qryPecasReposicaoInstPecas.IsEmpty = False then
   begin
     DmRelatorios.frxRPecasRepInstPeca.ShowReport();
   end;
-
 DM.qryPecasReposicaoInstPecas.Close;
-
 DM.FParamAuxiliar[0] := EmptyStr;
 DM.FParamAuxiliar[1] := EmptyStr;
 end;
-
 procedure TFrmTelaPrincipal.Producao1Click(Sender: TObject);
 begin
   Try
@@ -2562,7 +2349,6 @@ begin
     FreeAndNil(FrmTelaCadInfMensalProducaoMensal);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Projeto1Click(Sender: TObject);
 begin
   Try
@@ -2574,14 +2360,11 @@ begin
   Finally
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Viagens1Click(Sender: TObject);
 begin
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-
     if DM.FParamAuxiliar[0] = EmptyStr then
       begin
         DM.FTabela_auxiliar := 780;
@@ -2595,7 +2378,6 @@ begin
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
       end;
-
     Application.CreateForm(TFrmTelaCadAbastecimentosViagens, FrmTelaCadAbastecimentosViagens);
     FrmTelaCadAbastecimentosViagens.Position := poScreenCenter;
     FrmTelaCadAbastecimentosViagens.ShowModal;
@@ -2604,7 +2386,6 @@ begin
     FreeAndNil(FrmTelaCadAbastecimentosViagens);
   End;
 end;
-
 procedure TFrmTelaPrincipal.rea2Click(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 150;
@@ -2623,7 +2404,6 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
-
 procedure TFrmTelaPrincipal.reas1Click(Sender: TObject);
 begin
   Try
@@ -2637,7 +2417,6 @@ begin
     FreeAndNil(FrmTelaCadAreas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.reas2Click(Sender: TObject);
 begin
 DmRelatorios.frxDBAreas.DataSet := DM.qryAuxiliar;
@@ -2652,7 +2431,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRAreas.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Recursos3Click(Sender: TObject);
 begin
 DmRelatorios.frxDBFamRecursos.DataSet := DM.qryAuxiliar;
@@ -2663,7 +2441,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFamRecursos.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-
 procedure TFrmTelaPrincipal.Recursos4Click(Sender: TObject);
 begin
 DmRelatorios.frxDBRecursosGeral.DataSet := DM.qryAuxiliar;
@@ -2674,7 +2451,6 @@ DM.qryAuxiliar.SQL.Add('SELECT `recursos`.`CODIGO`, `recursos`.`DESCRICAO`, `rec
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRRecursosGeral.ShowReport();
 end;
-
 procedure TFrmTelaPrincipal.Recursos7Click(Sender: TObject);
 begin
   Try
@@ -2686,7 +2462,6 @@ begin
     FreeAndNil(FrmTelaCadFamiliaRecursos);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Rotas2Click(Sender: TObject);
 begin
   Try
@@ -2698,7 +2473,6 @@ begin
     FreeAndNil(FrmTelaCadAbastecimentosRotas);
   End;
 end;
-
 procedure TFrmTelaPrincipal.RotasdeManuteno1Click(Sender: TObject);
 begin
   Try
@@ -2709,9 +2483,7 @@ begin
   Finally
     FreeAndNil(FrmTelaCadRotaProgEquip);
   End;
-
 end;
-
 procedure TFrmTelaPrincipal.Sair1Click(Sender: TObject);
 var
   X: Integer;
@@ -2721,7 +2493,6 @@ begin
 //      for X := 1 to Screen.FormCount -1 do
 //        Screen.Forms[X].Close;
 //    end;
-
   if DM.FFecharForms = True then
     begin
       for X := 0 to Application.ComponentCount-1 do
@@ -2729,10 +2500,8 @@ begin
         if not(TForm(Application.Components[X]) = Application.MainForm) then
           if TForm(Application.Components[X]).Showing then TForm(Application.Components[X]).Close;
     end;
-
   Close;
 end;
-
 procedure TFrmTelaPrincipal.Satelite1Click(Sender: TObject);
 begin
   Try
@@ -2742,7 +2511,6 @@ begin
     FreeAndNil(FrmTelaImpDadosSatelite);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ServiosExecutadosporTerceirizadosforadaUnidade2Click(
   Sender: TObject);
 begin
@@ -2754,7 +2522,6 @@ begin
     FreeAndNil(FrmTelaCadOrdemServicoTercFora);
   End;
 end;
-
 procedure TFrmTelaPrincipal.ServiosExecutadosporTerceirizadosnaUnidade2Click(
   Sender: TObject);
 begin
@@ -2766,7 +2533,6 @@ begin
     FreeAndNil(FrmTelaCadOrdemServicoTercUnid);
   End;
 end;
-
 procedure TFrmTelaPrincipal.SolicitaodeTrabalho1Click(Sender: TObject);
 begin
   Try
@@ -2777,7 +2543,6 @@ begin
     FreeAndNil(FrmTelaCadSolicitacaoTrab);
   End;
 end;
-
 procedure TFrmTelaPrincipal.SpeedButton1Click(Sender: TObject);
 var
 sWindowsDir:String;
@@ -2785,7 +2550,6 @@ begin
   sWindowsDir := GetEnvironmentVariable('LOCALAPPDATA');
   ShowMessage(sWindowsDir);
 end;
-
 procedure TFrmTelaPrincipal.TimerOsciosoTimer(Sender: TObject);
 begin
 //Se oscioso por um tempo determinado, fechar o sistema
@@ -2793,7 +2557,6 @@ begin
   DM.FFecharForms := True;
   Sair1Click(Sender);
 end;
-
 procedure TFrmTelaPrincipal.UsuariosAtivos1Click(Sender: TObject);
 begin
 Try
@@ -2803,7 +2566,6 @@ Finally
   FreeAndNil(FrmTelaUsuariosAtivos);
 End;
 end;
-
 procedure TFrmTelaPrincipal.TimerAlertasTimer(Sender: TObject);
 begin
 //if DM.SQLConnSPMP3Web.ConnectionState = csStateClosed then
@@ -2812,14 +2574,12 @@ begin
 //  Except
 //    Exit;
 //  End;
-
   try
     DM.ConsultarAlertas;
   except
     TimerAlertas.Enabled := False;
   end;
 end;
-
 procedure TFrmTelaPrincipal.TimerLetreiroTimer(Sender: TObject);
 begin
 LblAlertas.Caption := DM.FAlerta;
@@ -2828,6 +2588,4 @@ if LblAlertas.left >= -(LblAlertas.Width) then
 else
   LblAlertas.left := PAlertas.width;
 end;
-
 end.
-

@@ -1,7 +1,7 @@
 inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMObra
   Caption = 'Localizar M'#227'o de Obra'
-  ClientHeight = 642
-  ClientWidth = 1012
+  ClientHeight = 633
+  ClientWidth = 1006
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,10 +12,10 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1002
     ExplicitWidth = 1002
     DesignSize = (
-      1008
+      1002
       60)
     inherited BtnAjuda: TButton
       Left = 977
@@ -38,8 +38,8 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 503
+    Width = 1000
+    Height = 494
     ExplicitWidth = 1000
     ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
@@ -147,14 +147,14 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 575
-    Width = 1008
+    Top = 566
+    Width = 1002
     ExplicitTop = 566
     ExplicitWidth = 1002
   end
   inherited PBotoes: TPanel
-    Top = 602
-    Width = 1008
+    Top = 593
+    Width = 1002
     ExplicitTop = 593
     ExplicitWidth = 1002
     inherited BtnOK: TButton

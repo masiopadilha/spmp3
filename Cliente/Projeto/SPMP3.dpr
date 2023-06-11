@@ -158,7 +158,8 @@ uses
   UnTelaCadLubrificProgEquipPartesItensEsp in '..\Units\UnTelaCadLubrificProgEquipPartesItensEsp.pas' {FrmTelaCadLubrificProgEquipPartesItensEsp},
   UnTelaAuditoria in '..\Units\UnTelaAuditoria.pas' {FrmTelaAuditoria},
   UnTelaGerenciador in '..\Units\UnTelaGerenciador.pas' {FrmTelaGerenciador},
-  UnDmAlertas in '..\Units\UnDmAlertas.pas' {DMAlertas: TDataModule};
+  UnDmAlertas in '..\Units\UnDmAlertas.pas' {DMAlertas: TDataModule},
+  UnTelaCadEquipamentosAltCod in '..\Units\UnTelaCadEquipamentosAltCod.pas' {FrmTelaCadEquipamentosAltCod};
 
 {$R *.res}
 begin
@@ -181,7 +182,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   //Application.Title := '';
-  TStyleManager.TrySetStyle('Puerto Rico');
+  TStyleManager.TrySetStyle('Windows10 Malibu');
   Application.Title := 'SPMP - Sistema do Plano de Manutenção LTDA.';
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDmRelatorios, DmRelatorios);
