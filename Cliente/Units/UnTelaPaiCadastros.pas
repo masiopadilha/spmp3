@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.DateUtils, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Data.DB, DataSnap.DBClient,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, Data.SqlExpr, FireDAC.Comp.Client;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, Data.SqlExpr, FireDAC.Comp.Client,
+  Vcl.Buttons;
 
 type
   TFrmTelaPaiCadastros = class(TForm)
@@ -81,6 +82,14 @@ type
     ActionList1: TActionList;
     TabNextTab1: TNextTab;
     BtnImagem: TButton;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
+    BitBtn5: TBitBtn;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    BitBtn8: TBitBtn;
     procedure MostrarValorHint;
     procedure ControleBotoes(Indice: SmallInt);
 

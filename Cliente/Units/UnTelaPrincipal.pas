@@ -426,10 +426,7 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaConsultaPeriodo, UnTelaCadPneusChassiRelat, UnTelaImpDadosSatelite,
   UnTelaImpPedidos, UnTelaCadAbastecimentosViagens, UnTelaOpcoes, UnDM,
   UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod;
-<<<<<<< HEAD
-=======
 
->>>>>>> 9fc83d4de422e7bd99b5661f22446a77ecb02431
 procedure TFrmTelaPrincipal.CheckUpdateVersion;
 var
   LLocalDir: String;
@@ -483,17 +480,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRAlmoxarifado.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-procedure TFrmTelaPrincipal.AlterarCodigo1Click(Sender: TObject);
-begin
-  Try
-    if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-    Application.CreateForm(TFrmTelaCadEquipamentosAltCod, FrmTelaCadEquipamentosAltCod);
-    FrmTelaCadEquipamentosAltCod.ShowModal;
-  Finally
-    FreeAndNil(FrmTelaCadEquipamentosAltCod);
-  End;
-end;
-
 procedure TFrmTelaPrincipal.AlterarCodigo1Click(Sender: TObject);
 begin
   Try

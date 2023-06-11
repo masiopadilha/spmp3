@@ -119,12 +119,6 @@ type
     Famlia1: TMenuItem;
     PFundoDadosTecnicos: TPanel;
     Label32: TLabel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
-    BitBtn6: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
