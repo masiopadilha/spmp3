@@ -33159,6 +33159,7 @@ object DM: TDM
       '    , `ordemservico`.`PRIORIDADEPARADA`'
       '    , `ordemservico`.`MATRICULA`'
       '    , `ordemservico`.`IMPORTANCIA`'
+      '    , `ordemservico`.`EQUIPPARADO`'
       '    , `ordemservico`.`CODEMPRESA`'
       '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
       '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
@@ -33383,6 +33384,13 @@ object DM: TDM
       Required = True
       Visible = False
       Size = 9
+    end
+    object qryOrdemServicoGerenciaEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      Visible = False
+      Size = 1
     end
     object qryOrdemServicoGerenciaCODMANUTPROGEQUIP: TStringField
       AutoGenerateValue = arDefault
@@ -42465,37 +42473,6 @@ object DM: TDM
     DataSet = qryLubrificProgEquipPlanoTrab
     Left = 946
     Top = 396
-  end
-  object frxPDFExport1: TfrxPDFExport
-    UseFileCache = True
-    DefaultPath = 'C:\SPMP3Web'
-    ShowProgress = True
-    OverwritePrompt = False
-    DataOnly = False
-    EmbedFontsIfProtected = False
-    InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
-    OpenAfterExport = False
-    PrintOptimized = False
-    Outline = False
-    Background = False
-    HTMLTags = True
-    Quality = 95
-    Transparency = False
-    Author = 'FastReport'
-    Subject = 'FastReport PDF export'
-    Creator = 'FastReport'
-    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
-    HideToolbar = False
-    HideMenubar = False
-    HideWindowUI = False
-    FitWindow = False
-    CenterWindow = False
-    PrintScaling = False
-    PdfA = False
-    PDFStandard = psNone
-    PDFVersion = pv17
-    Left = 809
-    Top = 9
   end
   object ImageListBotoes: TImageList
     Left = 836

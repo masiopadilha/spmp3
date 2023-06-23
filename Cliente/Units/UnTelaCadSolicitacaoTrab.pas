@@ -9,7 +9,7 @@ uses
   JvToolEdit, JvMaskEdit, JvDBControls, VclTee.TeeGDIPlus, VCLTee.TeEngine,
   VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, System.DateUtils, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, Datasnap.DBClient, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  Vcl.Grids, Vcl.DBGrids;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons;
 
 type
   TFrmTelaCadSolicitacaoTrab = class(TFrmTelaPaiCadastros)
@@ -52,6 +52,7 @@ type
     CBPrioridade: TDBComboBox;
     Label16: TLabel;
     EdtAquisicao: TJvDBDateEdit;
+    Label19: TLabel;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;
@@ -274,6 +275,10 @@ if DM.qrySolicitacaoTrabCODEQUIPAMENTO.IsNull = True then
 if DM.qrySolicitacaoTrabDESCSERVICO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO SERVIÇO!'; EdtServico.SetFocus; Exit;
+  end;
+if DM.qrySolicitacaoTrabPRIORIDADEPARADA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DO SERVIÇO!'; CBPrioridade.SetFocus; Exit;
   end;
 
 

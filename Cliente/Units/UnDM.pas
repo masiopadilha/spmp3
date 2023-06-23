@@ -4123,7 +4123,6 @@ type
     qryRotaEquipVencDATAINICIO: TDateTimeField;
     qryRotaEquipVencREPROGRAMAR: TStringField;
     qryRotaEquipVencRELATORIO: TStringField;
-    frxPDFExport1: TfrxPDFExport;
     ImageListBotoes: TImageList;
     ApplicationEventsSPMP: TApplicationEvents;
     qryCalendMObraCODIGO: TStringField;
@@ -5359,6 +5358,7 @@ type
     qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField;
     qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
     ImgListNewButtons: TImageList;
+    qryOrdemServicoGerenciaEQUIPPARADO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

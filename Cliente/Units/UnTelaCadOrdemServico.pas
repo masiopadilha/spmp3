@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids,
   Vcl.DBGrids, Data.DB, System.DateUtils, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadOrdemServico = class(TFrmTelaPaiCadastros)

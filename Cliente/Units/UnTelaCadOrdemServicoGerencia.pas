@@ -119,7 +119,7 @@ type
 var
   FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia;
   LEquipamento, LCodOficina, LCodFamilia, LNProg, LDet, LProg, LExec,
-  LLib, LFec, LPar, LSolic, LRot, LCanc : String;
+  LLib, LFec, LPar, LSolic, LRot, LCanc, LParado : String;
 implementation
 {$R *.dfm}
 uses UnTelaConsulta, UnTelaCadOrdemServico,
@@ -846,7 +846,7 @@ GrdOrdemServico.DataSource.DataSet.Filtered := False;
 GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
 DM.qryOrdemServicoGerencia.IndexDefs.Clear;
 
-LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := '';
+LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := ''; LParado := '';
 
 if (chkNProg.Checked = True) then
   if GrdOrdemServico.DataSource.DataSet.Filter = '' then
@@ -934,6 +934,14 @@ if (chbCanc.Checked = True) then
   else
     LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
 GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LCanc;
+
+if (chkParado.Checked = True) then
+  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    LParado   := ' (EQUIPPARADO = ''S'')'
+  else
+    LParado   := ' AND (EQUIPPARADO = ''S'')';
+GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LParado;
+
 
 if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
   GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
