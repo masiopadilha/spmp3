@@ -21119,6 +21119,7 @@ object DM: TDM
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
+    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 70
@@ -53394,6 +53395,7 @@ object DM: TDM
       '    , `manutprogequipamento`.`FREQUENCIA1`'
       '    , `manutprogequipamento`.`REPROGRAMAR1`'
       '    , `manutprogequipamento`.`GRUPOINSP`'
+      '    , `manutprogequipamento`.`DTAINICIO1`'
       '    '
       'FROM'
       '    `manutprogequipamento`'
@@ -53408,10 +53410,14 @@ object DM: TDM
         'to`.`CODIGO`)'
       'WHERE (`equipamentos`.`CODFAMILIAEQUIP` = :codfamiliaequip'
       '    AND `manutprogequipamento`.`CODEMPRESA` = :codempresa'
+      '    AND `manutprogequipamento`.`DTAINICIO1` IS NOT NULL'
       '    )'
-      'GROUP BY `manutprogequipamento`.`FREQUENCIA1`'
       ''
-      'ORDER BY `manutprogequipamento`.`FREQUENCIA1`')
+      'GROUP BY `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+      ''
+      
+        'ORDER BY `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipam' +
+        'ento`.`DESCRICAO`')
     Left = 508
     Top = 470
     ParamData = <
@@ -53496,9 +53502,12 @@ object DM: TDM
       'WHERE (`equipamentos`.`CODFAMILIAEQUIP` = :codfamiliaequip'
       '    AND `lubrificprogequipamento`.`CODEMPRESA` = :codempresa'
       '    )'
-      'GROUP BY `lubrificprogequipamento`.`FREQUENCIA1`'
+      'GROUP BY `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
       ''
-      'ORDER BY `lubrificprogequipamento`.`FREQUENCIA1`')
+      
+        'ORDER BY `lubrificprogequipamento`.`FREQUENCIA1`,  `lubrificprog' +
+        'equipamento`.`DESCRICAO`'
+      '')
     Left = 533
     Top = 470
     ParamData = <
