@@ -1,20 +1,29 @@
 inherited FrmTelaCadOrdemServicoMObraProgHHDisp: TFrmTelaCadOrdemServicoMObraProgHHDisp
   Caption = 'Homem/Hora Dispon'#237'vel'
-  PixelsPerInch = 96
+  ClientHeight = 304
+  ClientWidth = 508
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     inherited BtnAjuda: TButton
-      Left = 467
+      Left = 473
       ExplicitLeft = 467
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
+    inherited RGTelas: TRadioGroup
+      Height = 163
+    end
     object GrdHHDisp: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Align = alClient
       DrawingStyle = gdsClassic
       Font.Charset = DEFAULT_CHARSET
@@ -59,11 +68,18 @@ inherited FrmTelaCadOrdemServicoMObraProgHHDisp: TFrmTelaCadOrdemServicoMObraPro
           FieldName = 'TOTALHHDISP'
           Title.Alignment = taCenter
           Title.Caption = 'HH Disp.'
+          Width = 71
           Visible = True
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 504
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 504
     inherited BtnOK: TButton
       Visible = False
     end

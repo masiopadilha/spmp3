@@ -1,58 +1,61 @@
 inherited FrmTelaInspVenc: TFrmTelaInspVenc
   BorderIcons = []
   Caption = 'Inspe'#231#245'es Vencidas'
-  ClientHeight = 561
-  ClientWidth = 924
+  ClientHeight = 564
+  ClientWidth = 928
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 940
   Constraints.MinHeight = 600
   Constraints.MinWidth = 940
   OnCreate = FormCreate
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 940
   ExplicitHeight = 600
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 920
+    Width = 924
     TabOrder = 1
-    ExplicitWidth = 920
+    ExplicitWidth = 914
     inherited BtnAjuda: TButton
       Left = 887
       Visible = False
-      ExplicitLeft = 887
+      ExplicitLeft = 877
     end
   end
   inherited PCentro: TPanel
-    Width = 918
-    Height = 422
+    Width = 922
+    Height = 425
     TabOrder = 2
-    ExplicitWidth = 918
-    ExplicitHeight = 422
+    ExplicitWidth = 912
+    ExplicitHeight = 405
     inherited RGTelas: TRadioGroup
       Top = 40
-      Width = 916
-      Height = 381
+      Width = 920
+      Height = 384
       ExplicitTop = 40
-      ExplicitWidth = 916
-      ExplicitHeight = 381
+      ExplicitWidth = 910
+      ExplicitHeight = 364
     end
     object PCInspecoes: TPageControl
       AlignWithMargins = True
       Left = 4
       Top = 43
-      Width = 910
-      Height = 375
+      Width = 914
+      Height = 378
       ActivePage = TSManut
       Align = alClient
       TabOrder = 1
+      ExplicitWidth = 904
+      ExplicitHeight = 358
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
         object GrdManut: TDBGrid
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 896
-          Height = 338
+          Width = 900
+          Height = 341
           Align = alClient
           DataSource = DM.dsManutVenc
           DrawingStyle = gdsClassic
@@ -81,8 +84,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 896
-          Height = 338
+          Width = 900
+          Height = 341
           Align = alClient
           DataSource = DM.dsLubrificVenc
           DrawingStyle = gdsClassic
@@ -111,8 +114,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           AlignWithMargins = True
           Left = 3
           Top = 3
-          Width = 896
-          Height = 338
+          Width = 900
+          Height = 341
           Align = alClient
           DataSource = DM.dsRotaEquipVenc
           DrawingStyle = gdsClassic
@@ -139,7 +142,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       AlignWithMargins = True
       Left = 4
       Top = 3
-      Width = 910
+      Width = 914
       Height = 37
       Margins.Top = 2
       Margins.Bottom = 0
@@ -147,6 +150,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
+      ExplicitWidth = 904
       object Label6: TLabel
         Left = 7
         Top = 9
@@ -186,18 +190,18 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 494
-    Width = 920
+    Top = 497
+    Width = 924
     TabOrder = 3
-    ExplicitTop = 494
-    ExplicitWidth = 920
+    ExplicitTop = 477
+    ExplicitWidth = 914
   end
   inherited PBotoes: TPanel
-    Top = 521
-    Width = 920
+    Top = 524
+    Width = 924
     TabOrder = 0
-    ExplicitTop = 521
-    ExplicitWidth = 920
+    ExplicitTop = 504
+    ExplicitWidth = 914
     inherited BtnOK: TButton
       Left = 381
       Caption = 'Executar'

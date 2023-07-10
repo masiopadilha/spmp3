@@ -8,7 +8,8 @@ uses
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
   VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs,
   VCLTee.Chart, VCLTee.DBChart, Vcl.Grids, Vcl.DBGrids, Data.DB,
-  Datasnap.DBClient, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  Datasnap.DBClient, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadMonitoramento = class(TFrmTelaPaiCadastros)
@@ -213,7 +214,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
      if DM.AplicarMascara(DM.qryPlanoTrabalhoCODIGO, DM.qryFormatoCodigoPLANOTRABALHO, FrmTelaCadPlanoTrabalho) = False then exit;
      Application.CreateForm(TFrmTelaCadPlanoTrabalho, FrmTelaCadPlanoTrabalho);
      FrmTelaCadPlanoTrabalho.ShowModal;
@@ -249,7 +254,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+     if (DM.qryUsuarioPAcessoCADPONTOSINSPECAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
      if DM.AplicarMascara(DM.qryPontosInspecaoCODIGO, DM.qryFormatoCodigoPONTOSINSPECAO, FrmTelaCadPontoInspecao) = False then exit;
      Application.CreateForm(TFrmTelaCadPontoInspecao, FrmTelaCadPontoInspecao);
      FrmTelaCadPontoInspecao.ShowModal;
@@ -483,7 +492,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-     if (DM.qryUsuarioPAcessoCADFORNECEDORES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+     if (DM.qryUsuarioPAcessoCADFORNECEDORES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
      if DM.AplicarMascara(DM.qryContadoresCODIGO, DM.qryFormatoCodigoPONTOSINSPECAO, FrmTelaCadContadores) = False then exit;
      Application.CreateForm(TFrmTelaCadContadores, FrmTelaCadContadores);
      FrmTelaCadContadores.ShowModal;
@@ -667,7 +680,11 @@ if (GrdCadastro.SelectedIndex = 2) and (GrdCadastro.DataSource.DataSet.FieldByNa
       end;
 
     Try
-      if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
       FrmTelaCadOrdemServico.ShowModal;
     Finally

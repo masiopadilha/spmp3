@@ -1,6 +1,5 @@
 inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   Caption = 'Funcion'#225'rios'
-  PixelsPerInch = 96
   TextHeight = 16
   object ImgFotoFunc: TImage [0]
     Left = 769
@@ -42,7 +41,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 766
+    Width = 764
     Height = 128
     Margins.Right = 240
     ExplicitWidth = 766
@@ -215,7 +214,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   end
   inherited PProgramacao: TPanel
     Top = 183
-    Width = 766
+    Width = 764
     Height = 158
     Margins.Right = 240
     ExplicitTop = 183

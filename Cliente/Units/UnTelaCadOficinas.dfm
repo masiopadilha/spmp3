@@ -1,6 +1,5 @@
 inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
   Caption = 'Oficinas'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel

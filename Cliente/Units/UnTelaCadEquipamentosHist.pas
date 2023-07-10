@@ -55,17 +55,6 @@ type
     CDAuxiliarCODIGO: TWideStringField;
     CDAuxiliarDESCRICAO: TWideStringField;
     BtnImprimir: TButton;
-    CDEquipamentoHist: TClientDataSet;
-    CDEquipamentoHistCODIGO: TStringField;
-    CDEquipamentoHistDESCRICAO: TStringField;
-    CDEquipamentoHistNUMPARADAS: TStringField;
-    CDEquipamentoHistHORASPARADAS: TStringField;
-    CDEquipamentoHistCUSTOTERCEIROS: TStringField;
-    CDEquipamentoHistCUSTOALTERACOES: TStringField;
-    CDEquipamentoHistCUSTOEQUIPAMENTO: TStringField;
-    CDEquipamentoHistCUSTOTOTAL: TStringField;
-    CDEquipamentoHistDATACONSULTAINI: TStringField;
-    CDEquipamentoHistDATACONSULTAFIN: TStringField;
     Label3: TLabel;
     EdtData1: TJvDateTimePicker;
     Label5: TLabel;
@@ -559,20 +548,23 @@ end;
 procedure TFrmTelaCadEquipamentosHist.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
-  CDEquipamentoHist.Close;
-  CDEquipamentoHist.CreateDataSet;
-  CDEquipamentoHist.Append;
-  CDEquipamentoHistCODIGO.AsString           := lblCodigo.Caption;
-  CDEquipamentoHistDESCRICAO.AsString        := LblDescricao.Caption;
-  CDEquipamentoHistNUMPARADAS.AsString       := LblTotalParadas.Caption;
-  CDEquipamentoHistHORASPARADAS.AsString     := LblHorasParadas.Caption;
-  CDEquipamentoHistCUSTOTERCEIROS.AsString   := LblCustoTerc.Caption;
-  CDEquipamentoHistCUSTOALTERACOES.AsString  := LblCustoAlt.Caption;
-  CDEquipamentoHistCUSTOEQUIPAMENTO.AsString := LblCusto.Caption;
-  CDEquipamentoHistCUSTOTOTAL.AsString       := LblCustoTotal.Caption;
-  CDEquipamentoHistDATACONSULTAINI.AsString  := FormatDateTime('dd/mm/yyyy', EdtData1.DateTime);
-  CDEquipamentoHistDATACONSULTAFIN.AsString  := FormatDateTime('dd/mm/yyyy', EdtData2.DateTime);
-  CDEquipamentoHist.Post;
+  with DM do
+  begin
+    CDEquipamentoHist.Close;
+    CDEquipamentoHist.CreateDataSet;
+    CDEquipamentoHist.Append;
+    CDEquipamentoHistCODIGO.AsString           := lblCodigo.Caption;
+    CDEquipamentoHistDESCRICAO.AsString        := LblDescricao.Caption;
+    CDEquipamentoHistNUMPARADAS.AsString       := LblTotalParadas.Caption;
+    CDEquipamentoHistHORASPARADAS.AsString     := LblHorasParadas.Caption;
+    CDEquipamentoHistCUSTOTERCEIROS.AsString   := LblCustoTerc.Caption;
+    CDEquipamentoHistCUSTOALTERACOES.AsString  := LblCustoAlt.Caption;
+    CDEquipamentoHistCUSTOEQUIPAMENTO.AsString := LblCusto.Caption;
+    CDEquipamentoHistCUSTOTOTAL.AsString       := LblCustoTotal.Caption;
+    CDEquipamentoHistDATACONSULTAINI.AsString  := FormatDateTime('dd/mm/yyyy', EdtData1.DateTime);
+    CDEquipamentoHistDATACONSULTAFIN.AsString  := FormatDateTime('dd/mm/yyyy', EdtData2.DateTime);
+    CDEquipamentoHist.Post;
+  end;
 
   DmRelatorios.frxREquipamentosHist.ShowReport();
 end;

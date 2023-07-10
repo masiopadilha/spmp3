@@ -1,6 +1,5 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataCad: TDBText
@@ -280,6 +279,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     Height = 145
     Align = alTop
     ExplicitTop = 220
+    ExplicitWidth = 1008
     ExplicitHeight = 145
     inherited Label3: TLabel
       Width = 179
@@ -330,7 +330,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object REDetalhes: TJvDBRichEdit
       AlignWithMargins = True
-      Left = 330
+      Left = 334
       Top = 21
       Width = 670
       Height = 120
@@ -371,10 +371,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     AlignWithMargins = True
     Left = 3
     Top = 370
-    Width = 1002
+    Width = 1000
     Height = 171
     Align = alTop
     TabOrder = 4
+    ExplicitWidth = 1002
     object Label7: TLabel
       Left = 7
       Top = 3

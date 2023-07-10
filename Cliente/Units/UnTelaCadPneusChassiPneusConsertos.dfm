@@ -1,6 +1,5 @@
 inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConsertos
   Caption = 'Conserto de Pneus'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText

@@ -133,7 +133,11 @@ begin
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
   Try
-    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Timer1.Enabled := False;
     Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
     FrmTelaCadOrdemServico.ShowModal;
@@ -147,7 +151,11 @@ var
 LMotivo : String;
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
@@ -209,7 +217,11 @@ LPecas : String;
 LSemEstoque : Boolean;
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICOEXECUTAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICOEXECUTAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
   begin
     BtnParalisacao.OnClick(Sender);
@@ -612,7 +624,11 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnFechamentoClick(Sender: TObject);
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICOFECHAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICOFECHAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
@@ -662,7 +678,11 @@ procedure TFrmTelaCadOrdemServicoGerencia.BtnLiberacaoClick(Sender: TObject);
 begin
   inherited;
 if GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO' Then Exit;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICOLIBERAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICOLIBERAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 PopupMenuLiberar.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
@@ -704,7 +724,11 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnParalisacaoClick(Sender: TObject);
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICOPARALISAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICOPARALISAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
@@ -732,7 +756,11 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnProgramacaoClick(Sender: TObject);
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
@@ -755,7 +783,11 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADAS
                 begin
                   PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'MÃO DE OBRA NÃO CADASTRADA!'; Exit;
                 end;
-              if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+              if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
               Timer1.Enabled := False;
               Application.CreateForm(TFrmTelaCadOrdemServicoMObraProg, FrmTelaCadOrdemServicoMObraProg);
               FrmTelaCadOrdemServicoMObraProg.ShowModal;
@@ -780,15 +812,12 @@ begin
   inherited;
   if DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '' then
   begin
-    DM.qryManutProgEquip.Close;
-    DM.qryManutProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString;
-    DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
-    DM.qryManutProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
-    DM.qryManutProgEquip.Open;
-    if DM.qryManutProgEquip.IsEmpty = False then
+    DM.qryChecklistManut.Close;
+    DM.qryChecklistManut.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+    DM.qryChecklistManut.Open;
+    if DM.qryChecklistManut.IsEmpty = False then
     begin
-      DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-      DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
+      DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
     end;
   end;
   if DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '' then
@@ -817,7 +846,11 @@ procedure TFrmTelaCadOrdemServicoGerencia.btnMObraClick(Sender: TObject);
 begin
   inherited;
   Try
-    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Timer1.Enabled := False;
     Application.CreateForm(TFrmTelaCadOrdemServicoLocalizaMObra, FrmTelaCadOrdemServicoLocalizaMObra);
     FrmTelaCadOrdemServicoLocalizaMObra.ShowModal;
@@ -1158,6 +1191,11 @@ if Key = 116 then
         DM.qryOrdemServicoGerencia.Open;
         ConfigurarFiltros;
         DM.MSGAguarde('', False);
+      end
+    else
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
       end;
   end;
  if (Shift = [ssCtrl, ssAlt]) then
@@ -1187,6 +1225,11 @@ begin
       DM.qryOrdemServicoGerencia.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
       DM.qryOrdemServicoGerencia.Open;
       ConfigurarFiltros;
+    end
+  else
+    begin
+      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
     end;
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDblClick(

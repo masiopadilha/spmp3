@@ -1,6 +1,5 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataCad: TDBText
@@ -320,7 +319,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Height = 193
+    Height = 166
     ExplicitTop = 349
     ExplicitHeight = 193
     inherited Label3: TLabel

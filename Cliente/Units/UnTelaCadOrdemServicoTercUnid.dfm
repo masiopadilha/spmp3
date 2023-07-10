@@ -1,6 +1,5 @@
 inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   Caption = 'Servi'#231'os Terceirizados na Unidade'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -252,6 +251,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
         39)
       ColorPaletteIndex = 13
       object Series1: TGanttSeries
+        HoverElement = [heCurrent]
         ClickableLine = False
         Pointer.Brush.Gradient.EndColor = 10708548
         Pointer.Gradient.EndColor = 10708548
@@ -276,9 +276,10 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   end
   inherited PDiversos: TPanel
     Top = 366
-    Height = 176
+    Height = 163
     ExplicitTop = 366
-    ExplicitHeight = 176
+    ExplicitWidth = 1008
+    ExplicitHeight = 174
     inherited Label3: TLabel
       Width = 93
       Caption = 'CONTRATO'

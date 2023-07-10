@@ -195,7 +195,6 @@ type
     frxRDispAdmissiveis: TfrxReport;
     frxREquipGeral: TfrxReport;
     frxREquipIndividual: TfrxReport;
-    frxREquipamentosHist: TfrxReport;
     frxRFamEquipamento: TfrxReport;
     frxRFamPecasRep: TfrxReport;
     frxRFamPneus: TfrxReport;
@@ -319,6 +318,17 @@ type
     frxROrdemServicoGeral: TfrxReport;
     frxCSVExport1: TfrxCSVExport;
     frxXLSXExport1: TfrxXLSXExport;
+    frxDBChecklistManut: TfrxDBDataset;
+    frxDBChecklistManutItens: TfrxDBDataset;
+    frxDBChecklistManutItensEsp: TfrxDBDataset;
+    frxDBChecklistManutPlanoTrab: TfrxDBDataset;
+    frxRChecklistManutProgEquip: TfrxReport;
+    frxDBChecklistLubrific: TfrxDBDataset;
+    frxDBChecklistLubrificItens: TfrxDBDataset;
+    frxDBChecklistLubrificItensEsp: TfrxDBDataset;
+    frxDBChecklistLubrificPlanoTrab: TfrxDBDataset;
+    frxRChecklistLubrificProgEquip: TfrxReport;
+    frxREquipamentosHist: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

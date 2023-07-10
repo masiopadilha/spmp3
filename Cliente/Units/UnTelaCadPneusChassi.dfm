@@ -1,6 +1,5 @@
 inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel

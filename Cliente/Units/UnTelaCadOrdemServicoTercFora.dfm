@@ -1,6 +1,5 @@
 inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   Caption = 'Servi'#231'os Terceirizados fora da Unidade'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -41,6 +40,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     end
   end
   inherited PIdentificacao: TPanel
+    ExplicitWidth = 1008
     object Label4: TLabel
       Left = 91
       Top = 31

@@ -1,20 +1,18 @@
 inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   Caption = 'Fechamento das Inspe'#231#245'es'
-  ClientHeight = 642
-  ClientWidth = 1012
+  ClientHeight = 624
+  ClientWidth = 1002
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   Font.Height = -9
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 11
   inherited PTop: TPanel
-    Width = 1008
+    Width = 998
     ExplicitWidth = 1002
     inherited BtnAjuda: TButton
       Left = 971
@@ -44,13 +42,13 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 503
+    Width = 996
+    Height = 485
     ExplicitWidth = 1000
     ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 501
+      Height = 503
       ExplicitWidth = 998
       ExplicitHeight = 492
     end
@@ -59,7 +57,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       Left = 4
       Top = 4
       Width = 998
-      Height = 495
+      Height = 497
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
@@ -128,7 +126,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Left = 5
         Top = 32
         Width = 988
-        Height = 458
+        Height = 460
         Margins.Top = 30
         ActivePage = TSManut
         Align = alClient
@@ -516,8 +514,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 575
-    Width = 1008
+    Top = 557
+    Width = 998
     ExplicitTop = 566
     ExplicitWidth = 1002
     object Label1: TLabel
@@ -530,8 +528,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PBotoes: TPanel
-    Top = 602
-    Width = 1008
+    Top = 584
+    Width = 998
     ExplicitTop = 593
     ExplicitWidth = 1002
     inherited BtnOK: TButton

@@ -1,6 +1,5 @@
 inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
   Caption = 'Literatura T'#233'cnica'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText

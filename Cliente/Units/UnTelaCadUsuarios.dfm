@@ -1,6 +1,5 @@
 inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
   Caption = 'Usu'#225'rios'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
@@ -57,6 +56,8 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
     end
   end
   inherited PCentro: TPanel
+    ExplicitWidth = 618
+    ExplicitHeight = 332
     object Label1: TLabel
       Left = 172
       Top = 62

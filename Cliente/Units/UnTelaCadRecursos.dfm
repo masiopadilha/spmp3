@@ -1,6 +1,5 @@
 inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   Caption = 'Recursos'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -1131,14 +1130,16 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   object PImagem: TPanel [7]
-    Left = 785
+    Left = 783
     Top = 343
     Width = 223
-    Height = 201
+    Height = 188
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 7
+    ExplicitLeft = 785
+    ExplicitHeight = 201
     object ImgFotoRecurso: TImage
       Left = 25
       Top = 10

@@ -1,6 +1,5 @@
 inherited FrmTelaCadPneus: TFrmTelaCadPneus
   Caption = 'Pneus'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataCad: TDBText

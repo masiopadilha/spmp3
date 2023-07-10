@@ -3,6 +3,7 @@ unit UnDmAlertas;
 interface
 
 uses
+  Winapi.Windows,
   System.SysUtils,
   System.Classes,
   System.DateUtils,
@@ -70,7 +71,11 @@ uses UnDM, UnTelaCadOrdemServicoGerencia, UnTelaInspFechamento,
 
 procedure TDMAlertas.AuditoriaClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+  if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
   if FrmTelaAuditoria = nil then
     Try
       Application.CreateForm(TFrmTelaAuditoria, FrmTelaAuditoria);
@@ -87,7 +92,11 @@ end;
 
 procedure TDMAlertas.FechamInspClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+  if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
   if FrmTelaInspFechamento = nil then
     Try
       Application.CreateForm(TFrmTelaInspFechamento, FrmTelaInspFechamento);
@@ -99,7 +108,11 @@ end;
 
 procedure TDMAlertas.GerencOrdemServicoClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
   if FrmTelaCadOrdemServicoGerencia = nil then
     Try
       Application.CreateForm(TFrmTelaCadOrdemServicoGerencia, FrmTelaCadOrdemServicoGerencia);
@@ -111,7 +124,11 @@ end;
 
 procedure TDMAlertas.MaodeObraServClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then Exit;
+  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
   if FrmTelaCadOrdemServicoLocalizaMObra = nil then
     Try
       Application.CreateForm(TFrmTelaCadOrdemServicoLocalizaMObra, FrmTelaCadOrdemServicoLocalizaMObra);
@@ -123,7 +140,11 @@ end;
 
 procedure TDMAlertas.OpcoesClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+  if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
   if FrmTelaOpcoes = nil then
     Try
       Application.CreateForm(TFrmTelaOpcoes, FrmTelaOpcoes);
@@ -162,7 +183,7 @@ begin
                                   TThread.Synchronize(TThread.CurrentThread,
                                           procedure
                                           begin
-                                             if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
+                                             if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario <> 'sam_spmp') then
                                                begin
                                                  Try
                                                    if not (DMAlertas.qryOrdemServico.State in [dsBrowse]) then

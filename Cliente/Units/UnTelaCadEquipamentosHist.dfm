@@ -1,6 +1,6 @@
 inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   Caption = 'Hist'#243'rico'
-  ClientHeight = 642
+  ClientHeight = 644
   ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -12,7 +12,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1004
+    ExplicitWidth = 998
     object Label3: TLabel [1]
       Left = 125
       Top = 33
@@ -38,7 +38,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       Left = 971
       Top = 15
       TabOrder = 3
-      ExplicitLeft = 971
+      ExplicitLeft = 961
       ExplicitTop = 15
     end
     object BtnConsultar: TButton
@@ -98,27 +98,27 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 503
-    ExplicitWidth = 1002
-    ExplicitHeight = 502
+    Height = 505
+    ExplicitWidth = 996
+    ExplicitHeight = 485
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 501
-      ExplicitWidth = 1000
-      ExplicitHeight = 500
+      Height = 503
+      ExplicitWidth = 994
+      ExplicitHeight = 483
     end
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 998
-      Height = 495
+      Height = 497
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 994
-      ExplicitHeight = 494
+      ExplicitWidth = 988
+      ExplicitHeight = 477
       object Label8: TLabel
         Left = 515
         Top = 38
@@ -300,7 +300,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ActivePage = TSManutencoes
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 984
+        ExplicitWidth = 978
         object TSManutencoes: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencoes: TDBGrid
@@ -589,16 +589,16 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 575
+    Top = 577
     Width = 1008
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    ExplicitTop = 557
+    ExplicitWidth = 998
   end
   inherited PBotoes: TPanel
-    Top = 602
+    Top = 604
     Width = 1008
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    ExplicitTop = 584
+    ExplicitWidth = 998
     inherited BtnOK: TButton
       Left = 313
       Visible = False
@@ -824,51 +824,6 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
     object CDEquipEAuxiliaresDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 80
-    end
-  end
-  object CDEquipamentoHist: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 530
-    Top = 18
-    object CDEquipamentoHistCODIGO: TStringField
-      FieldName = 'CODIGO'
-    end
-    object CDEquipamentoHistDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-      Size = 200
-    end
-    object CDEquipamentoHistNUMPARADAS: TStringField
-      FieldName = 'NUMPARADAS'
-      Size = 9
-    end
-    object CDEquipamentoHistHORASPARADAS: TStringField
-      FieldName = 'HORASPARADAS'
-      Size = 9
-    end
-    object CDEquipamentoHistCUSTOTERCEIROS: TStringField
-      FieldName = 'CUSTOTERCEIROS'
-      Size = 9
-    end
-    object CDEquipamentoHistCUSTOALTERACOES: TStringField
-      FieldName = 'CUSTOALTERACOES'
-      Size = 9
-    end
-    object CDEquipamentoHistCUSTOEQUIPAMENTO: TStringField
-      FieldName = 'CUSTOEQUIPAMENTO'
-      Size = 9
-    end
-    object CDEquipamentoHistCUSTOTOTAL: TStringField
-      FieldName = 'CUSTOTOTAL'
-      Size = 9
-    end
-    object CDEquipamentoHistDATACONSULTAINI: TStringField
-      FieldName = 'DATACONSULTAINI'
-      Size = 10
-    end
-    object CDEquipamentoHistDATACONSULTAFIN: TStringField
-      FieldName = 'DATACONSULTAFIN'
-      Size = 10
     end
   end
 end

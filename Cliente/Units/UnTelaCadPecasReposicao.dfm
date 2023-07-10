@@ -1,6 +1,5 @@
 inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   Caption = 'Pe'#231'as de Reposi'#231#227'o'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -982,14 +981,16 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   object PImagem: TPanel [7]
-    Left = 785
+    Left = 783
     Top = 343
     Width = 223
-    Height = 201
+    Height = 188
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 7
+    ExplicitLeft = 785
+    ExplicitHeight = 201
     object ImgFotoPeca: TImage
       Left = 25
       Top = 10

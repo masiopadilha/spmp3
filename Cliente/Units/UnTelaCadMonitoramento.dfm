@@ -1,6 +1,5 @@
 inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   Caption = 'Monitoramento'
-  PixelsPerInch = 96
   TextHeight = 16
   object Label9: TLabel [0]
     Left = 33
@@ -612,7 +611,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   end
   inherited PDiversos: TPanel
     Top = 348
-    Height = 194
+    Height = 181
     ExplicitTop = 348
     ExplicitHeight = 194
     inherited Label3: TLabel
@@ -691,6 +690,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
         39)
       ColorPaletteIndex = 13
       object Series1: TBarSeries
+        HoverElement = []
         Marks.Visible = False
         SeriesColor = 4227072
         MultiBar = mbStacked

@@ -731,8 +731,6 @@ type
     IntegerField2: TIntegerField;
     StringField5: TStringField;
     StringField6: TStringField;
-    SmallintField1: TSmallintField;
-    DateTimeField1: TDateTimeField;
     StringField7: TStringField;
     IntegerField3: TIntegerField;
     StringField8: TStringField;
@@ -5359,6 +5357,169 @@ type
     qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
     ImgListNewButtons: TImageList;
     qryOrdemServicoGerenciaEQUIPPARADO: TStringField;
+    qryManutPeriodicasHistCRITICIDADE: TStringField;
+    qryManutPeriodicasHistFREQUENCIA2: TIntegerField;
+    qryManutPeriodicasHistREPROGRAMAR2: TStringField;
+    qryManutPeriodicasHistDESCMANUTPROGFAMEQUIP: TStringField;
+    qryManutPeriodicasHistC_PROXINSP: TDateTimeField;
+    qryManutPeriodicasHistC_REIMPRESSAO: TStringField;
+    qryManutPeriodicasHistDTAINICIO1: TDateTimeField;
+    qryManutPeriodicasHistFREQUENCIA1: TSmallintField;
+    qryManutProgEquiptempototal: TFMTBCDField;
+    qryLubrificProgEquiptempototal: TFMTBCDField;
+    qryChecklistManut: TFDQuery;
+    dsChecklistManut: TDataSource;
+    qryChecklistManutPartes: TFDQuery;
+    FDAutoIncField10: TFDAutoIncField;
+    StringField130: TStringField;
+    StringField131: TStringField;
+    StringField132: TStringField;
+    StringField133: TStringField;
+    dsChecklistManutPartes: TDataSource;
+    qryChecklistManutItens: TFDQuery;
+    IntegerField18: TIntegerField;
+    StringField134: TStringField;
+    StringField135: TStringField;
+    IntegerField19: TIntegerField;
+    StringField136: TStringField;
+    StringField137: TStringField;
+    StringField138: TStringField;
+    BCDField8: TBCDField;
+    StringField139: TStringField;
+    StringField140: TStringField;
+    dsChecklistManutItens: TDataSource;
+    qryChecklistManutItensEsp: TFDQuery;
+    FDAutoIncField11: TFDAutoIncField;
+    StringField141: TStringField;
+    StringField142: TStringField;
+    IntegerField20: TIntegerField;
+    StringField143: TStringField;
+    StringField144: TStringField;
+    StringField145: TStringField;
+    BCDField9: TBCDField;
+    StringField146: TStringField;
+    StringField147: TStringField;
+    StringField148: TStringField;
+    StringField149: TStringField;
+    StringField150: TStringField;
+    StringField151: TStringField;
+    dsChecklistManutItensEsp: TDataSource;
+    qryChecklistManutPlanoTrab: TFDQuery;
+    FDAutoIncField12: TFDAutoIncField;
+    StringField152: TStringField;
+    StringField153: TStringField;
+    StringField154: TStringField;
+    StringField155: TStringField;
+    BlobField3: TBlobField;
+    dsChecklistManutPlanoTrab: TDataSource;
+    qryChecklistManutCODIGO: TStringField;
+    qryChecklistManutCODEMPRESA: TStringField;
+    qryChecklistManutCODEQUIPAMENTO: TStringField;
+    qryChecklistManutCODMANUTPROGFAMEQUIP: TStringField;
+    qryChecklistManutCODMONITORAMENTO: TIntegerField;
+    qryChecklistManutMATRICULA: TStringField;
+    qryChecklistManutDESCRICAO: TStringField;
+    qryChecklistManutCRITICIDADE: TStringField;
+    qryChecklistManutFREQUENCIA1: TSmallintField;
+    qryChecklistManutDTAINICIO1: TDateTimeField;
+    qryChecklistManutREPROGRAMAR1: TStringField;
+    qryChecklistManutFREQUENCIA2: TIntegerField;
+    qryChecklistManutREPROGRAMAR2: TStringField;
+    qryChecklistManutLEITURA: TIntegerField;
+    qryChecklistManutRELATORIO: TStringField;
+    qryChecklistManutGRUPOINSP: TStringField;
+    qryChecklistManutDESCMANUTPROGFAMEQUIP: TStringField;
+    qryChecklistManutPROGRAMACAO2: TStringField;
+    qryChecklistManutEQUIPAMENTO: TStringField;
+    qryChecklistManutCODCENTROCUSTO: TStringField;
+    qryChecklistManutFAMEQUIPAMENTO: TStringField;
+    qryChecklistManutRESPONSAVEL: TStringField;
+    qryChecklistManutPROXINSP: TDateTimeField;
+    qryChecklistManutREMIPRESSAO: TStringField;
+    qryChecklistManutCODORDEMSERVICO: TIntegerField;
+    qryChecklistLubrific: TFDQuery;
+    dsChecklistLubrific: TDataSource;
+    qryChecklistLubrificPartes: TFDQuery;
+    FDAutoIncField13: TFDAutoIncField;
+    StringField129: TStringField;
+    StringField156: TStringField;
+    StringField157: TStringField;
+    StringField158: TStringField;
+    dsChecklistLubrificPartes: TDataSource;
+    qryChecklistLubrificItens: TFDQuery;
+    IntegerField21: TIntegerField;
+    StringField159: TStringField;
+    StringField160: TStringField;
+    IntegerField22: TIntegerField;
+    StringField161: TStringField;
+    StringField162: TStringField;
+    StringField163: TStringField;
+    BCDField10: TBCDField;
+    StringField164: TStringField;
+    StringField165: TStringField;
+    dsChecklistLubrificItens: TDataSource;
+    qryChecklistLubrificItensEsp: TFDQuery;
+    FDAutoIncField14: TFDAutoIncField;
+    StringField166: TStringField;
+    StringField167: TStringField;
+    IntegerField23: TIntegerField;
+    StringField168: TStringField;
+    StringField169: TStringField;
+    StringField170: TStringField;
+    BCDField11: TBCDField;
+    StringField171: TStringField;
+    StringField172: TStringField;
+    StringField173: TStringField;
+    StringField174: TStringField;
+    StringField175: TStringField;
+    StringField176: TStringField;
+    dsChecklistLubrificItensEsp: TDataSource;
+    qryChecklistLubrificPlanoTrab: TFDQuery;
+    FDAutoIncField15: TFDAutoIncField;
+    StringField177: TStringField;
+    StringField178: TStringField;
+    StringField179: TStringField;
+    StringField180: TStringField;
+    BlobField4: TBlobField;
+    dsChecklistLubrificPlanoTrab: TDataSource;
+    qryChecklistLubrificCODIGO: TStringField;
+    qryChecklistLubrificCODEMPRESA: TStringField;
+    qryChecklistLubrificCODEQUIPAMENTO: TStringField;
+    qryChecklistLubrificCODLUBRIFICPROGFAMEQUIP: TStringField;
+    qryChecklistLubrificCODMONITORAMENTO: TIntegerField;
+    qryChecklistLubrificCODORDEMSERVICO: TIntegerField;
+    qryChecklistLubrificMATRICULA: TStringField;
+    qryChecklistLubrificDESCRICAO: TStringField;
+    qryChecklistLubrificCRITICIDADE: TStringField;
+    qryChecklistLubrificFREQUENCIA1: TSmallintField;
+    qryChecklistLubrificDTAINICIO1: TDateTimeField;
+    qryChecklistLubrificREPROGRAMAR1: TStringField;
+    qryChecklistLubrificFREQUENCIA2: TIntegerField;
+    qryChecklistLubrificREPROGRAMAR2: TStringField;
+    qryChecklistLubrificLEITURA: TIntegerField;
+    qryChecklistLubrificRELATORIO: TStringField;
+    qryChecklistLubrificGRUPOINSP: TStringField;
+    qryChecklistLubrificDESCLUBRIFICPROGFAMEQUIP: TStringField;
+    qryChecklistLubrificPROGRAMACAO2: TStringField;
+    qryChecklistLubrificEQUIPAMENTO: TStringField;
+    qryChecklistLubrificCODCENTROCUSTO: TStringField;
+    qryChecklistLubrificFAMEQUIPAMENTO: TStringField;
+    qryChecklistLubrificRESPONSAVEL: TStringField;
+    qryChecklistLubrificPROXINSP: TDateTimeField;
+    qryChecklistLubrificREMIPRESSAO: TStringField;
+    CDEquipamentoHist: TClientDataSet;
+    CDEquipamentoHistCODIGO: TStringField;
+    CDEquipamentoHistDESCRICAO: TStringField;
+    CDEquipamentoHistNUMPARADAS: TStringField;
+    CDEquipamentoHistHORASPARADAS: TStringField;
+    CDEquipamentoHistCUSTOTERCEIROS: TStringField;
+    CDEquipamentoHistCUSTOALTERACOES: TStringField;
+    CDEquipamentoHistCUSTOEQUIPAMENTO: TStringField;
+    CDEquipamentoHistCUSTOTOTAL: TStringField;
+    CDEquipamentoHistDATACONSULTAINI: TStringField;
+    CDEquipamentoHistDATACONSULTAFIN: TStringField;
+    qryClonarManutDTAINICIO1: TDateTimeField;
+    qryClonarLubrificDTAINICIO1: TDateTimeField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5463,7 +5624,7 @@ type
     function PasswordInputBox(const ACaption, APrompt:string): string;
     function VerificaPrimeiroAcesso:Boolean;
     function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao, Lubrificacao, Rota, SolicTrab, Matricula,
-                      Prioridade, Criticidade, CentroCusto, Observacoes: String): Integer;
+                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
@@ -6358,7 +6519,6 @@ begin
           qryManutPeriodicasHistPERIODOCONSULTA.AsString := FormatDateTime('dd/mm/yyyy', EdtData1.Date) + ' a ' + FormatDateTime('dd/mm/yyyy', EdtData2.Date);
         end;
     end;
-
 end;
 
 procedure TDM.qryManutPeriodicasHistItensCalcFields(DataSet: TDataSet);
@@ -7364,7 +7524,7 @@ end;
 
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
-  Criticidade, CentroCusto, Observacoes: String): Integer;
+  Criticidade, CentroCusto, Observacoes, tempototal: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -7381,13 +7541,13 @@ if Criticidade  <> EmptyStr          then qryGerarOSCRITICIDADE.AsString        
 if Rota         <> EmptyStr          then qryGerarOSROTAEQUIP.AsString            := Rota;
 if CentroCusto  <> EmptyStr          then qryGerarOSCODCENTROCUSTO.AsString       := CentroCusto;
 if Observacoes  <> EmptyStr          then qryGerarOSOBSERVACOES.AsString          := Observacoes;
+if tempototal   <> EmptyStr          then qryGerarOSTEMPOPREVISTO.AsFloat         := StrToFloat(tempototal);
 qryGerarOSCODEMPRESA.AsString        := CodEmpresa;
 qryGerarOSDESCRICAO.AsString         := Descricao;
 qryGerarOSEQUIPPARADO.AsString       := 'S';
 qryGerarOSATIVO.AsString             := 'S';
 qryGerarOSVISIVEL.AsString           := 'S';
 qryGerarOSEXECAUTONOMO.AsString      := 'N';
-qryGerarOSTEMPOPREVISTO.AsFloat      := 0;
 qryGerarOSSOLICTRAB.AsString         := SolicTrab;
 if SolicTrab = 'S' then qryGerarOSSITUACAO.AsString := 'SOLICITADA'
 else qryGerarOSSITUACAO.AsString     := 'CADASTRADA';
@@ -7401,7 +7561,7 @@ qryGerarOSCUSTOPECAS.AsFloat         := 0;
 qryGerarOSCUSTOEXTRA.AsFloat         := 0;
 qryGerarOSCUSTOSECUNDARIOS.AsFloat   := 0;
 qryGerarOSQTDEREPROG.AsFloat         := 0;
-qryGerarOSTEMPOPREVISTO.AsFloat      := 1;
+//qryGerarOSTEMPOPREVISTO.AsFloat      := 1;
 qryGerarOSTEMPOHOMEMHORA.AsFloat     := 0;
 qryGerarOSTEMPOEXECUTADO.AsFloat     := 0;
 qryGerarOSTEMPOHOMEMHORAEXEC.AsFloat := 0;
@@ -8998,7 +9158,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                               , DM.qryManutProgEquipEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString);
 
                 if DM.qryManutProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -9052,7 +9212,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                               , DM.qryLubrificProgEquipEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString);
 
                 if DM.qryLubrificProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -9524,7 +9684,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9569,7 +9729,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9614,7 +9774,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9662,3 +9822,4 @@ begin
 end;
 
 end.
+

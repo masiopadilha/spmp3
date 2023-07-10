@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param;
+  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadLubrificProgEquip = class(TFrmTelaPaiCadastros)
@@ -162,7 +162,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryLubrificProgFamEquipCODIGO, DM.qryFormatoCodigoLubrificPROGFAMEQUIPAMENTO, FrmTelaCadLubrificProgFamEquip) = False then exit;
       Application.CreateForm(TFrmTelaCadLubrificProgFamEquip, FrmTelaCadLubrificProgFamEquip);
       FrmTelaCadLubrificProgFamEquip.ShowModal;
@@ -214,7 +218,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
       FrmTelaCadFuncionarios.ShowModal;
     Finally
@@ -401,7 +409,11 @@ begin
       end;
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadLubrificProgEquipPartesItensEsp, FrmTelaCadLubrificProgEquipPartesItensEsp);
     FrmTelaCadLubrificProgEquipPartesItensEsp.Caption := 'Itens Específicos da Lubrificação: '+ DM.qryLubrificProgEquipDESCRICAO.AsString;
     FrmTelaCadLubrificProgEquipPartesItensEsp.ShowModal;

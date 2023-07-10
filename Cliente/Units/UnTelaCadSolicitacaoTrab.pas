@@ -148,12 +148,17 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
       begin
         DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString := DM.FCodCombo;
         DM.qrySolicitacaoTrabEQUIPAMENTO.AsString    := DM.FValorCombo;
+        DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString := DM.FParamAuxiliar[5]
       end;
   end
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryEquipamentosCODIGO, DM.qryFormatoCodigoEQUIPAMENTOS, FrmTelaCadEquipamentos) = False then exit;
       Application.CreateForm(TFrmTelaCadEquipamentos, FrmTelaCadEquipamentos);
       FrmTelaCadEquipamentos.ShowModal;
@@ -290,7 +295,7 @@ if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
 
     DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
                                                                             , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
-                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', EmptyStr, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString);
+                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString, DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString);
     PSituacao.Caption    := 'CADASTRADA';
     PSituacao.Color      := clRed;
     PSituacao.Font.Color := clYellow;
@@ -323,7 +328,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
       FrmTelaCadFuncionarios.ShowModal;
     Finally

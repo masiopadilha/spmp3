@@ -9,7 +9,7 @@ uses
   VclTee.TeeGDIPlus, Data.DB, Datasnap.DBClient, VCLTee.TeEngine, VCLTee.Series,
   VCLTee.GanttCh, VCLTee.TeeProcs, VCLTee.Chart, JvExMask, JvToolEdit,
   JvDBControls, Vcl.Grids, Vcl.DBGrids, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param;
+  Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadOrdemServicoTercUnid = class(TFrmTelaPaiCadastros)
@@ -101,7 +101,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADCENTROCUSTO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADCENTROCUSTO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryCentroCustoCODIGO, DM.qryFormatoCodigoCENTROCUSTO, FrmTelaCadCentroCusto) = False then exit;
       Application.CreateForm(TFrmTelaCadCentroCusto, FrmTelaCadCentroCusto);
       FrmTelaCadCentroCusto.ShowModal;
@@ -205,7 +209,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
       FrmTelaCadFuncionarios.ShowModal;
     Finally

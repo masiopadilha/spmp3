@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, JvDialogs, Vcl.Imaging.Jpeg, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, JvDialogs, Vcl.Imaging.Jpeg, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPecasReposicao = class(TFrmTelaPaiCadastros)
@@ -240,7 +241,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFABRICANTES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFABRICANTES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryFabricantesCODIGO, DM.qryFormatoCodigoFABRICANTE, FrmTelaCadFabricantes) = False then exit;
       Application.CreateForm(TFrmTelaCadFabricantes, FrmTelaCadFabricantes);
       FrmTelaCadFabricantes.ShowModal;
@@ -301,7 +306,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFAMILIAPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFAMILIAPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryFamPecasRepCODIGO, DM.qryFormatoCodigoFAMILIAPECASREPOSICAO, FrmTelaCadFamiliaPecasRep) = False then exit;
       Application.CreateForm(TFrmTelaCadFamiliaPecasRep, FrmTelaCadFamiliaPecasRep);
       FrmTelaCadFamiliaPecasRep.ShowModal;
@@ -335,7 +344,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFORNECEDORES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFORNECEDORES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryFornecedoresCODIGO, DM.qryFormatoCodigoFORNECEDOR, FrmTelaCadFornecedores) = False then exit;
       Application.CreateForm(TFrmTelaCadFornecedores, FrmTelaCadFornecedores);
       FrmTelaCadFornecedores.ShowModal;
@@ -449,7 +462,11 @@ procedure TFrmTelaCadPecasReposicao.Button1Click(Sender: TObject);
 begin
   inherited;
   Try
-    if (DM.qryUsuarioPAcessoCADPECASREPKIT.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADPECASREPKIT.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     if DM.AplicarMascara(DM.qryPecaReposicaoKitCODIGO, DM.qryFormatoCodigoPECASREPOSICAOKIT, FrmTelaCadPecasReposicaoKit) = False then exit;
     Application.CreateForm(TFrmTelaCadPecasReposicaoKit, FrmTelaCadPecasReposicaoKit);
     FrmTelaCadPecasReposicaoKit.Caption := 'Kit de Peças de Reposição';
@@ -489,7 +506,11 @@ end;
 procedure TFrmTelaCadPecasReposicao.Button3Click(Sender: TObject);
 begin
   Try
-    if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
 
     DM.FParamAuxiliar[0] := DM.qryPecasReposicaoCODIGO.AsString;
 

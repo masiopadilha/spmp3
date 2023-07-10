@@ -1,6 +1,5 @@
 inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
   Caption = 'Lubrificantes'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataCad: TDBText
@@ -235,7 +234,7 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
       AlignWithMargins = True
       Left = 4
       Top = 21
-      Width = 996
+      Width = 1000
       Height = 165
       Margins.Top = 20
       ActivePage = TSGraxa

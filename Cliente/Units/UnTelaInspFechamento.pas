@@ -258,7 +258,7 @@ PAuxiliares.Font.Color := clBlack;
                 begin
                   LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (Retorno)'
                                                                 , DM.qryManutPeriodicasCODEQUIPAMENTO.AsString, DM.qryManutPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0');
 
 
                   DM.qryManutPeriodicas.Edit;
@@ -413,7 +413,7 @@ PAuxiliares.Font.Color := clBlack;
               begin
                 LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (Retorno)'
                                                               , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0');
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
@@ -584,7 +584,7 @@ PAuxiliares.Font.Color := clBlack;
                     begin
                       LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (Retorno)'
                                                                     , DM.qryRotaPeriodicasManutCODEQUIPAMENTO.AsString, DM.qryRotaPeriodicasManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr);
+                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0');
 
 
                       DM.qryRotaPeriodicasManut.Edit;
@@ -646,7 +646,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
       FrmTelaCadFuncionarios.ShowModal;
     Finally
@@ -660,7 +664,11 @@ procedure TFrmTelaInspFechamento.Button6Click(Sender: TObject);
 begin
   inherited;
   Try
-    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaInspFechamentoHist, FrmTelaInspFechamentoHist);
     FrmTelaInspFechamentoHist.Caption := DM.FValorCombo;
     FrmTelaInspFechamentoHist.ShowModal;

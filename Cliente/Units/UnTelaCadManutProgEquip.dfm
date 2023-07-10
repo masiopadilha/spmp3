@@ -1,7 +1,5 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -570,7 +568,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 277
-    Height = 261
+    Height = 252
     ExplicitTop = 277
     ExplicitHeight = 252
     inherited Label3: TLabel
@@ -587,7 +585,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 231
+      Height = 233
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient

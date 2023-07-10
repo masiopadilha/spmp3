@@ -1,6 +1,5 @@
 inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
   Caption = 'Pontos de Inspe'#231#227'o'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText
@@ -21,13 +20,15 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 612
-      Height = 312
+      Width = 610
+      Height = 324
       ActivePage = TSPontos
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PCPontosChange
+      ExplicitWidth = 612
+      ExplicitHeight = 312
       object TSPontos: TTabSheet
         Caption = 'Pontos de Inspe'#231#227'o'
         object Label1: TLabel

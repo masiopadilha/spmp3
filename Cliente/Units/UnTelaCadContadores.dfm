@@ -1,6 +1,5 @@
 inherited FrmTelaCadContadores: TFrmTelaCadContadores
   Caption = 'Contadores'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText

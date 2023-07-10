@@ -1,14 +1,11 @@
 unit UnTelaCadAbastecimentos;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Menus, Vcl.ExtCtrls,
   Vcl.ComCtrls, Data.DB, System.DateUtils, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, JvExMask, JvToolEdit, FireDAC.Stan.Param;
-
+  Vcl.ExtActns, JvExMask, JvToolEdit, FireDAC.Stan.Param, Vcl.Buttons;
 type
   TFrmTelaCadAbastecimentos = class(TFrmTelaPaiCadastros)
     Label5: TLabel;
@@ -75,27 +72,21 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos;
   LOdometro: Integer;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaCadAbastecimentosCombustivel,
   UnTelaCadAbastecimentosLubrificante, UnTelaCadContadores,
   UnTelaCadEquipamentos, UnTelaCadAbastecimentosRotas, UnDmRelatorios,
   UnTelaCadAbastecimentosViagens, UnDM;
-
 procedure TFrmTelaCadAbastecimentos.aaaaaa1Click(Sender: TObject);
 begin
   inherited;
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnCancelarClick(Sender: TObject);
 begin
   inherited;
@@ -110,7 +101,6 @@ if DM.qryAbastecimentos.Active = True then
     LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
   end;
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnConsultarClick(Sender: TObject);
 begin
 if DM.FParamAuxiliar[1] = '' then
@@ -125,13 +115,10 @@ if DM.qryAbastecimentosCODEQUIPAMENTO.AsString <> EmptyStr then
   begin
     DM.qryAbastecimentosCombustTodos.Close;
     DM.qryAbastecimentosCombustTodos.Open;
-
     DM.qryAbastecimentosLubrificTodos.Close;
     DM.qryAbastecimentosLubrificTodos.Open;
 
-
     DM.qryAbastecimentosCombust.Open;
-
     DM.qryAbastecimentosCombustAbast.Close;
 //    DM.qryAbastecimentosCombustAbast.Params[0].AsString := DM.qryAbastecimentosCombustCODEQUIPAMENTO.AsString;
 //    DM.qryAbastecimentosCombustAbast.Params[0].AsString := DM.qryAbastecimentosCombustCODIGO.AsString;
@@ -140,9 +127,7 @@ if DM.qryAbastecimentosCODEQUIPAMENTO.AsString <> EmptyStr then
     DM.qryAbastecimentosCombustAbast.Open;
 //
 
-
     DM.qryAbastecimentosLubrific.Open;
-
     DM.qryAbastecimentosLubrificAbast.Close;
 //    DM.qryAbastecimentosLubrificAbast.Params[0].AsString := DM.qryAbastecimentosLubrificCODEQUIPAMENTO.AsString;
     DM.qryAbastecimentosLubrificAbast.Params[0].AsInteger := DM.qryAbastecimentosLubrificCODIGO.AsInteger;
@@ -150,14 +135,11 @@ if DM.qryAbastecimentosCODEQUIPAMENTO.AsString <> EmptyStr then
 //    DM.qryAbastecimentosLubrificAbast.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
     DM.qryAbastecimentosLubrificAbast.Open;
 
-
     LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
-
     CBPeriodo.OnChange(Sender);
   end;
 DM.FParamAuxiliar[1] := '';
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnContadorClick(Sender: TObject);
 begin
   inherited;
@@ -186,7 +168,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryContadoresCODIGO, DM.qryFormatoCodigoPONTOSINSPECAO, FrmTelaCadContadores) = False then exit;
       Application.CreateForm(TFrmTelaCadContadores, FrmTelaCadContadores);
       FrmTelaCadContadores.ShowModal;
@@ -199,7 +185,6 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela            := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnEquipamentoClick(Sender: TObject);
 begin
   inherited;
@@ -225,7 +210,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryEquipamentosCODIGO, DM.qryFormatoCodigoEQUIPAMENTOS, FrmTelaCadEquipamentos) = False then exit;
       Application.CreateForm(TFrmTelaCadEquipamentos, FrmTelaCadEquipamentos);
       FrmTelaCadEquipamentos.ShowModal;
@@ -239,28 +228,21 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela            := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
 LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnNovoClick(Sender: TObject);
 begin
   inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-
 DM.qryAbastecimentosCombust.Open;
 DM.qryAbastecimentosCombustAbast.Open;
-
 DM.qryAbastecimentosLubrific.Open;
 DM.qryAbastecimentosLubrificAbast.Open;
-
 DM.qryAbastecimentosCombustTodos.Open;
-
 DM.qryAbastecimentosLubrificTodos.Open;
-
 DM.qryAbastecimentosCODEMPRESA.AsString     := DM.FCodEmpresa;
 DM.qryAbastecimentosDATACADASTRO.AsDateTime := DM.FDataHoraServidor;
 DM.qryAbastecimentosDATAULTALT.AsDateTime   := DM.FDataHoraServidor;
@@ -271,37 +253,29 @@ DM.qryAbastecimentosURBANO.AsFloat          := 0;
 DM.qryAbastecimentosRODOVIARIO.AsFloat      := 0;
 DM.qryAbastecimentosCARREGADO.AsFloat       := 0;
 DM.qryAbastecimentosCONTADORATUAL.AsFloat   := 0;
-
 LOdometro := 0;
-
 EdtDescEquipamento.SetFocus;
 end;
-
 procedure TFrmTelaCadAbastecimentos.BtnSalvarClick(Sender: TObject);
 begin
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
-
 if DM.qryAbastecimentosCODEQUIPAMENTO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O EQUIPAMENTO!'; EdtDescEquipamento.SetFocus; Exit;
   end;
-
 if DM.qryAbastecimentosTIPO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O TIPO DO EQUIPAMENTO!'; CBTipo.SetFocus; Exit;
   end;
-
 if DM.qryAbastecimentosCODCONTADOR.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CONTADOR DO EQUIPAMENTO!'; EdtMedidor.SetFocus; Exit;
   end;
-
 if DM.qryAbastecimentosVOLUMETANQUE.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O VOLUME DO TANQUE DO EQUIPAMENTO!'; EdtTanque.SetFocus; Exit;
   end;
-
 DM.FTabela_auxiliar := 78;
 if (DM.VerificaDuplo(DM.qryAbastecimentosCODEQUIPAMENTO.AsString) = True) and (DM.FAlterando = False) then
   begin
@@ -310,14 +284,11 @@ if (DM.VerificaDuplo(DM.qryAbastecimentosCODEQUIPAMENTO.AsString) = True) and (D
     PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
     Exit;
   end;
-
 DM.MSGAguarde('');
-
 if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'CONTADOR DO EQUIPAMENTO INFERIOR PREVIAMENTE CADASTRADO!'; EdtValor.SetFocus; Exit;
   end;
-
 //Sempre checar se tem inspeção programada com o contador atual
 //if LOdometro < DM.qryAbastecimentosCONTADORATUAL.AsInteger then
   begin
@@ -335,16 +306,12 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
         DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
         DM.qryManutProgEquip.Params[2].AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
         DM.qryManutProgEquip.Open;
-
         DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                       , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr);
-
+                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString);
         if DM.qryManutProgEquip.IsEmpty = False then
           DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
-
         DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
-
         //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
         if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
           begin
@@ -354,7 +321,6 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryManutProgEquipLEITURA.AsFloat       := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryManutProgEquipFREQUENCIA2.AsFloat;
             DM.qryManutProgEquip.Post;
           end;
-
         //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
         //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
         if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
@@ -364,18 +330,14 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryManutProgEquipLEITURA.AsFloat    := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
             DM.qryManutProgEquip.Post;
           end;
-
         DM.qryManutProgEquip.Post;
-
         DM.qryManutProgEquip.Close;
         DM.qryManutProgEquipItens.Close;
         DM.qryManutProgEquipItensEsp.Close;
         DM.qryManutProgEquipPlanoTrab.Close;
-
         DM.qryAbastecimentosManutInsp.Next;
       end;
     DM.qryAbastecimentosManutInsp.Close;
-
 
     DM.qryAbastecimentosLubrificInsp.Close;
     DM.qryAbastecimentosLubrificInsp.Params[0].AsString := DM.FCodEmpresa;
@@ -391,16 +353,12 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
         DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
         DM.qryLubrificProgEquip.Params[2].AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
         DM.qryLubrificProgEquip.Open;
-
         DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                       , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr);
-
+                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString);
         if DM.qryLubrificProgEquip.IsEmpty = False then
           DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
-
         DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-
         //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a Lubrificenção foi fechada ou não.
         if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
           begin
@@ -410,7 +368,6 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryLubrificProgEquipLEITURA.AsFloat       := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryLubrificProgEquipFREQUENCIA2.AsFloat;
             DM.qryLubrificProgEquip.Post;
           end;
-
         //Sendo a inspeção reprogramada pela execução, definir como Lubrificenção em aberto até ser efetuado o fechamento, portanto não permitindo
         //a geração de outra Lubrificação mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra Lubrificação até ser fechada.
         if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução' then
@@ -420,41 +377,36 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryLubrificProgEquipLEITURA.AsFloat    := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryLubrificProgEquipFREQUENCIA2.AsInteger;
             DM.qryLubrificProgEquip.Post;
           end;
-
         DM.qryLubrificProgEquip.Post;
-
         DM.qryLubrificProgEquip.Close;
         DM.qryLubrificProgEquipItens.Close;
         DM.qryLubrificProgEquipItensEsp.Close;
-
         DM.qryAbastecimentosLubrificInsp.Next;
       end;
     DM.qryAbastecimentosLubrificInsp.Close;
   end;
-
 if DM.qryAbastecimentosCODIGO.AsInteger = 0 then
   begin
     DM.qryAbastecimentos.Params[0].AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
     DM.qryAbastecimentos.Params[1].AsString := DM.FCodEmpresa;
   end;
   inherited;
-
 if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
-
 LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
-
 DM.MSGAguarde('', False);
 end;
-
 procedure TFrmTelaCadAbastecimentos.Button1Click(Sender: TObject);
 begin
   inherited;
   DM.FParamAuxiliar[0] := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
   if DM.FParamAuxiliar[0] = '' then BtnConsultar.OnClick(Sender);
   if DM.FParamAuxiliar[0] = '' then Exit;
-
   Try
-    if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadAbastecimentosCombustivel, FrmTelaCadAbastecimentosCombustivel);
     FrmTelaCadAbastecimentosCombustivel.Caption := 'Abastecimentos do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
     FrmTelaCadAbastecimentosCombustivel.ShowModal;
@@ -464,7 +416,6 @@ begin
     DM.FDataSourceParam := DM.dsAbastecimentos;
     DM.FTela            := 'CADCONTROLEPNEUS';
     DM.FTabela_auxiliar := 78;
-
     DM.qryAbastecimentosCombustAbast.First;
     if DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
@@ -477,13 +428,10 @@ begin
             BtnSalvar.OnClick(Sender);
           end;
       end;
-
     DM.qryAbastecimentosCombustAbast.Close;
     DM.qryAbastecimentosCombust.Close;
-
     DM.qryAbastecimentosCombustTodos.Close;
     DM.qryAbastecimentosCombustTodos.Open;
-
     CBPeriodo.OnChange(Sender);
   End;
 DM.FDataSetParam    := DM.qryAbastecimentos;
@@ -491,16 +439,18 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Button2Click(Sender: TObject);
 begin
   inherited;
   DM.FParamAuxiliar[0] := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
   if DM.FParamAuxiliar[0] = '' then BtnConsultar.OnClick(Sender);;
   if DM.FParamAuxiliar[0] = '' then Exit;
-
   Try
-    if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadAbastecimentosLubrificante, FrmTelaCadAbastecimentosLubrificante);
     FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrificações do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
     FrmTelaCadAbastecimentosLubrificante.ShowModal;
@@ -510,7 +460,6 @@ begin
     DM.FDataSourceParam := DM.dsAbastecimentos;
     DM.FTela            := 'CADCONTROLEPNEUS';
     DM.FTabela_auxiliar := 78;
-
     DM.qryAbastecimentosLubrificAbast.First;
     if DM.qryAbastecimentosLubrificAbastODOMETROLubrific.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
@@ -520,17 +469,13 @@ begin
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosLubrificAbastODOMETROLUBRIFIC.AsFloat;
             DM.qryAbastecimentos.Post;
             DM.qryAbastecimentos.Edit;
-
             FrmTelaCadAbastecimentos.BtnSalvar.OnClick(Sender);
           end;
       end;
-
     DM.qryAbastecimentosLubrificAbast.Close;
     DM.qryAbastecimentosLubrific.Close;
-
     DM.qryAbastecimentosLubrificTodos.Close;
     DM.qryAbastecimentosLubrificTodos.Open;
-
     CBPeriodo.OnChange(Sender);
   End;
 DM.FDataSetParam    := DM.qryAbastecimentos;
@@ -538,38 +483,31 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Button3Click(Sender: TObject);
 begin
   inherited;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryAbastecimentosCombustAbast.IsEmpty = True then Exit;
-
 if Application.MessageBox('Deseja realmente efetuar a troca do medidor?', 'SPMP3', MB_YESNO + MB_ICONINFORMATION) = IDNo then Exit;
-
 DM.qryAbastecimentosLeitor.Close;
 DM.qryAbastecimentosLeitor.Params.ParamByName('ULTLEITURACOMBUST').AsString  := DM.qryAbastecimentosCombustAbastMAX_ODOM.AsString;
 DM.qryAbastecimentosLeitor.Params.ParamByName('ULTLEITURALUBRIFIC').AsString := DM.qryAbastecimentosLubrificAbastMAX_ODOM.AsString;
 DM.qryAbastecimentosLeitor.Params.ParamByName('CODEQUIPAMENTO').AsString     := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
 DM.qryAbastecimentosLeitor.Params.ParamByName('CODEMPRESA').AsString         := DM.FCodEmpresa;
 DM.qryAbastecimentosLeitor.Execute;
-
 PAuxiliares.Font.Color := clGreen; PAuxiliares.Caption := 'TROCA DO MEDIDOR EFETUADA!';
-
 DM.qryAbastecimentosLeitor.Close;
 DM.qryAbastecimentosCombustAbast.Close;
 DM.qryAbastecimentosCombustAbast.Open;
 DM.qryAbastecimentosLubrificAbast.Close;
 DM.qryAbastecimentosLubrificAbast.Open;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Button4Click(Sender: TObject);
 begin
   inherited;
   DM.FParamAuxiliar[0] := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
   if DM.FParamAuxiliar[0] = '' then BtnConsultar.OnClick(Sender);
   if DM.FParamAuxiliar[0] = '' then Exit;
-
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then Exit;
     Application.CreateForm(TFrmTelaCadAbastecimentosViagens,FrmTelaCadAbastecimentosViagens);
@@ -583,7 +521,6 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.CBPeriodoChange(Sender: TObject);
 begin
   inherited;
@@ -601,7 +538,6 @@ case CBPeriodo.ItemIndex of
   8: DM.qryAbastecimentosCombustAbast.Filter := 'DATACOMBUST >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncDay(DM.FDataHoraServidor, -365)));
 end;
 DM.qryAbastecimentosCombustAbast.Filtered := True;
-
 DM.qryAbastecimentosLubrificAbast.Filtered := False;
 DM.qryAbastecimentosLubrificAbast.Filter := EmptyStr;
 case CBPeriodo.ItemIndex of
@@ -617,7 +553,6 @@ case CBPeriodo.ItemIndex of
 end;
 DM.qryAbastecimentosLubrificAbast.Filtered := True;
 end;
-
 procedure TFrmTelaCadAbastecimentos.CBTipoChange(Sender: TObject);
 begin
   inherited;
@@ -637,7 +572,6 @@ if CBTipo.Text = 'Veículo' then
     GrdAbastLubrific.Columns[8].Title.Caption := 'l/km';
   end;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Codigo1AdvancedDrawItem(Sender: TObject;
   ACanvas: TCanvas; ARect: TRect; State: TOwnerDrawState);
 begin
@@ -645,7 +579,6 @@ begin
 DM.FParamAuxiliar[1] := 'CODIGO';
 BtnEquipamento.OnClick(Sender);
 end;
-
 procedure TFrmTelaCadAbastecimentos.Completo1Click(Sender: TObject);
 begin
 DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -653,14 +586,12 @@ DM.FDataSetRelat     := DmRelatorios.frxDBAbastecimentosGeral;
 DM.FTabela_auxiliar  := 78;
   inherited;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Descricao1Click(Sender: TObject);
 begin
   inherited;
 DM.FParamAuxiliar[1] := 'CODIGO';
 BtnConsultar.OnClick(Sender);
 end;
-
 procedure TFrmTelaCadAbastecimentos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -672,7 +603,6 @@ DM.qryAbastecimentosLubrificAbast.Close;
 DM.qryAbastecimentosLubrific.Close;
 DM.qryAbastecimentos.Close;
 end;
-
 procedure TFrmTelaCadAbastecimentos.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -681,7 +611,6 @@ DM.FDataSourceParam := DM.dsAbastecimentos;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 78;
 end;
-
 procedure TFrmTelaCadAbastecimentos.GrdAbastCombustDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
@@ -697,7 +626,6 @@ with GrdAbastCombust do
     GrdAbastCombust.Columns[6].Visible := False;
     GrdAbastCombust.Columns[7].Visible := False;
     GrdAbastCombust.Columns[8].Visible := False;
-
     GrdAbastCombust.Columns[9].Title.Caption    := 'Combustível';
     GrdAbastCombust.Columns[10].Title.Caption   := 'Data';
     GrdAbastCombust.Columns[10].Title.Alignment := taCenter;
@@ -724,7 +652,6 @@ with GrdAbastCombust do
     GrdAbastCombust.Columns[16].Title.Caption   := 'Rota';
     GrdAbastCombust.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastCombust.Columns[17].Title.Alignment := taCenter;
-
     if (Column.Field.FieldName = 'CONSUMO') then
       begin
         if DM.qryAbastecimentosCombustTodosCONSUMO.AsFloat > DM.qryAbastecimentosCombustCONSPOTENCIAL.AsFloat then
@@ -736,7 +663,6 @@ with GrdAbastCombust do
       end;
   end;
 end;
-
 procedure TFrmTelaCadAbastecimentos.GrdAbastCombustKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
@@ -744,7 +670,6 @@ begin
 if (Shift = [ssCtrl]) and (Key = 46) then
   Key := 0;
 end;
-
 procedure TFrmTelaCadAbastecimentos.GrdAbastLubrificDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
@@ -761,7 +686,6 @@ with GrdAbastLubrific do
     GrdAbastLubrific.Columns[6].Visible := False;
     GrdAbastLubrific.Columns[7].Visible := False;
     GrdAbastLubrific.Columns[8].Visible := False;
-
     GrdAbastLubrific.Columns[9].Title.Caption    := 'Lubrificante';
     GrdAbastLubrific.Columns[10].Title.Caption   := 'Data';
     GrdAbastLubrific.Columns[10].Title.Alignment := taCenter;
@@ -788,7 +712,6 @@ with GrdAbastLubrific do
     GrdAbastLubrific.Columns[16].Title.Caption   := 'Rota';
     GrdAbastLubrific.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastLubrific.Columns[17].Title.Alignment := taCenter;
-
     if (Column.Field.FieldName = 'CONSUMO') then
       begin
         if DM.qryAbastecimentosLubrificTodosCONSUMO.AsFloat > DM.qryAbastecimentosLubrificCONSPOTENCIAL.AsFloat then
@@ -800,28 +723,23 @@ with GrdAbastLubrific do
       end;
   end;
 end;
-
 procedure TFrmTelaCadAbastecimentos.Individual1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBAbastecimentosIndividual;
 DM.FTabela_auxiliar := 781;
   inherited;
 end;
-
 procedure TFrmTelaCadAbastecimentos.MenuItem1Click(Sender: TObject);
 begin
   inherited;
 DM.FParamAuxiliar[1] := 'CODIGO';
 BtnEquipamento.OnClick(Sender);
 end;
-
 procedure TFrmTelaCadAbastecimentos.MenuItem2Click(Sender: TObject);
 begin
   inherited;
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 BtnEquipamento.OnClick(Sender);
 end;
-
 end.
-
 

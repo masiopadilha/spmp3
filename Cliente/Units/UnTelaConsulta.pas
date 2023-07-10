@@ -233,7 +233,8 @@ begin
         if (DM.FParamAuxiliar[1] <> 'CODIGO') and (DM.FParamAuxiliar[1] <> 'DESCRICAO') then
           DM.FParamAuxiliar[1] := 'DESCRICAO';
         DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA ,`equipamentos`.`SEQUENCIA`'
-                                + ' FROM `equipamentos` INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                                + ' , `centrocusto`.`DESCRICAO` CENTROCUSTO, `centrocusto`.`CODIGO` CODCENTROCUSTO FROM `equipamentos` INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                                + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                 + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
                                 + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
                                 + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` =  `linhas`.`CODIGO`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`) AND (`linhas`.`CODAREA` = `areas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
@@ -705,6 +706,9 @@ begin
         DM.qryAuxiliar.Fields[5].DisplayWidth := 20;
         DM.qryAuxiliar.Fields[6].DisplayLabel := 'Sequência';
         DM.qryAuxiliar.Fields[6].DisplayWidth := 10;
+        DM.qryAuxiliar.Fields[7].DisplayLabel := 'Centro de Custo';
+        DM.qryAuxiliar.Fields[7].DisplayWidth := 30;
+        DM.qryAuxiliar.Fields[8].Visible      := False;
       end;
     34, 340, 35, 350://Inspeções de Família
       begin
@@ -1597,6 +1601,7 @@ begin
         DM.FParamAuxiliar[2] := DM.DSAuxiliar.DataSet.Fields[3].AsString;
         DM.FParamAuxiliar[3] := DM.DSAuxiliar.DataSet.Fields[4].AsString;
         DM.FParamAuxiliar[4] := DM.DSAuxiliar.DataSet.Fields[5].AsString;
+        DM.FParamAuxiliar[5] := DM.DSAuxiliar.DataSet.Fields[8].AsString;
       end;
     26://Imagens
       begin

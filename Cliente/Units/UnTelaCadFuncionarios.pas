@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Data.DB, Vcl.Mask,
   JvExMask, JvToolEdit, JvDBControls, JvMaskEdit, JvDialogs, Vcl.Imaging.Jpeg, Vcl.Clipbrd,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 Type
  TRGBArray = array[Word] of TRGBTriple;
@@ -165,7 +165,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADCALENDMOBRA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADCALENDMOBRA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryCalendMObraCODIGO, DM.qryFormatoCodigoCALENDARIO, FrmTelaCadCalendMObra) = False then exit;
       Application.CreateForm(TFrmTelaCadCalendMObra, FrmTelaCadCalendMObra);
       FrmTelaCadCalendMObra.ShowModal;
@@ -206,7 +210,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADCARGOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADCARGOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryCargosCODIGO, DM.qryFormatoCodigoCARGOS, FrmTelaCadCargos) = False then exit;
       Application.CreateForm(TFrmTelaCadCargos, FrmTelaCadCargos);
       FrmTelaCadCargos.ShowModal;
@@ -241,7 +249,11 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 else
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADAREAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+      if (DM.qryUsuarioPAcessoCADAREAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
       if DM.AplicarMascara(DM.qryAreasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
       if DM.AplicarMascara(DM.qryCelulasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
       if DM.AplicarMascara(DM.qryLinhasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
@@ -387,7 +399,11 @@ begin
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadFuncionariosAusencias, FrmTelaCadFuncionariosAusencias);
     //FrmTelaCadFuncionariosAusencias.Caption := 'Ausências de: '+ DM.qryFuncionariosNOME.AsString;
     FrmTelaCadFuncionariosAusencias.ShowModal;
@@ -406,7 +422,11 @@ begin
 //    if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
 //    if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadFuncionariosHist, FrmTelaCadFuncionariosHist);
     //FrmTelaCadFuncionariosHist.Caption := 'Histórico de: '+ DM.qryFuncionariosNOME.AsString;
     FrmTelaCadFuncionariosHist.ShowModal;
@@ -450,7 +470,11 @@ begin
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadFuncionariosFerramentaria, FrmTelaCadFuncionariosFerramentaria);
     FrmTelaCadFuncionariosFerramentaria.ShowModal;
   Finally
@@ -492,7 +516,11 @@ begin
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramInv, FrmTelaCadFuncionariosCxaFerramInv);
     //FrmTelaCadFuncionariosCxaFerramInv.Caption := 'Inventário da Caixa de Ferramentas de: '+ DM.qryFuncionariosNOME.AsString;
     FrmTelaCadFuncionariosCxaFerramInv.ShowModal;
@@ -509,7 +537,11 @@ begin
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
-    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
+    if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramentas, FrmTelaCadFuncionariosCxaFerramentas);
     //FrmTelaCadFuncionariosCxaFerramentas.Caption := 'Caixa de Ferramentas de: '+ DM.qryFuncionariosNOME.AsString;
     FrmTelaCadFuncionariosCxaFerramentas.ShowModal;

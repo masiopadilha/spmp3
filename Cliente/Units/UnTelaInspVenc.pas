@@ -136,7 +136,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                                 , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString);
 
 
               if DM.qryManutProgEquip.IsEmpty = False then
@@ -226,7 +226,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                                 , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString);
 
 
               if DM.qryLubrificProgEquip.IsEmpty = False then
@@ -300,7 +300,7 @@ case PCInspecoes.ActivePageIndex of
 
              DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                                                , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr);
+                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0');
 
              if DM.qryRotaEquipVenc.IsEmpty = False then
                DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaEquipVencCODIGO.AsString, DM.FCodOrdemServico);

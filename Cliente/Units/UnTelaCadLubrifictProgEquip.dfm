@@ -1,6 +1,5 @@
 inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   Caption = 'Lubrifica'#231#227'o Programada do Equipamento'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
@@ -556,7 +555,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PDiversos: TPanel
     Top = 277
-    Height = 265
+    Height = 252
     ExplicitTop = 277
     ExplicitHeight = 265
     inherited Label3: TLabel
@@ -572,12 +571,14 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       AlignWithMargins = True
       Left = 4
       Top = 26
-      Width = 996
-      Height = 235
+      Width = 1000
+      Height = 233
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 996
+      ExplicitHeight = 235
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel

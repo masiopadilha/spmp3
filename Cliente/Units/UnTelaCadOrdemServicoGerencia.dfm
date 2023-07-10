@@ -1,6 +1,6 @@
 inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Caption = 'Ordens de Servi'#231'o'
-  ClientHeight = 642
+  ClientHeight = 644
   ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -13,7 +13,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1002
+    ExplicitWidth = 998
     object Label9: TLabel [1]
       Left = 679
       Top = 22
@@ -51,7 +51,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     inherited BtnAjuda: TButton
       Left = 965
-      ExplicitLeft = 959
+      ExplicitLeft = 955
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -114,9 +114,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 503
-    ExplicitWidth = 1000
-    ExplicitHeight = 494
+    Height = 505
+    ExplicitWidth = 996
+    ExplicitHeight = 485
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -136,7 +136,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 0
-      ExplicitWidth = 992
+      ExplicitWidth = 988
       object BtnCadastro: TButton
         Left = 6
         Top = 7
@@ -363,7 +363,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Left = 4
       Top = 134
       Width = 998
-      Height = 365
+      Height = 367
       Hint = 'D'#234' duplo-clique para visualizar as informa'#231#245'es da O.S.'
       Align = alClient
       DataSource = DM.dsOrdemServicoGerencia
@@ -399,7 +399,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 992
+      ExplicitWidth = 988
       object chkNProg: TCheckBox
         Left = 6
         Top = 5
@@ -557,7 +557,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 992
+      ExplicitWidth = 988
       object Label6: TLabel
         Left = 6
         Top = 5
@@ -721,10 +721,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 575
+    Top = 577
     Width = 1008
-    ExplicitTop = 566
-    ExplicitWidth = 1002
+    ExplicitTop = 557
+    ExplicitWidth = 998
     object Label2: TLabel
       Left = 919
       Top = 4
@@ -741,10 +741,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PBotoes: TPanel
-    Top = 602
+    Top = 604
     Width = 1008
-    ExplicitTop = 593
-    ExplicitWidth = 1002
+    ExplicitTop = 584
+    ExplicitWidth = 998
     inherited BtnOK: TButton
       Left = 100
       Visible = False

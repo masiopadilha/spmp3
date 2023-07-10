@@ -1,6 +1,5 @@
 inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
   Caption = 'Viagens'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     ParentFont = False

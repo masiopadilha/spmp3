@@ -1,8 +1,8 @@
 inherited FrmTelaCadImagens: TFrmTelaCadImagens
   Caption = 'Imagens'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
+    ExplicitWidth = 620
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4

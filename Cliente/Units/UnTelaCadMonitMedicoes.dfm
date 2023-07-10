@@ -1,7 +1,7 @@
 inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   Caption = 'Medi'#231#245'es do Equipamento'
-  ClientHeight = 341
-  ClientWidth = 514
+  ClientHeight = 324
+  ClientWidth = 508
   Constraints.MaxHeight = 380
   Constraints.MaxWidth = 530
   Constraints.MinHeight = 380
@@ -9,10 +9,9 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   OnCreate = FormCreate
   ExplicitWidth = 530
   ExplicitHeight = 380
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 510
+    Width = 504
     ExplicitWidth = 510
     inherited BtnAjuda: TButton
       Left = 477
@@ -20,8 +19,8 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
     end
   end
   inherited PCentro: TPanel
-    Width = 508
-    Height = 202
+    Width = 502
+    Height = 185
     ExplicitWidth = 508
     ExplicitHeight = 202
     inherited RGTelas: TRadioGroup
@@ -149,14 +148,14 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 274
-    Width = 510
+    Top = 257
+    Width = 504
     ExplicitTop = 274
     ExplicitWidth = 510
   end
   inherited PBotoes: TPanel
-    Top = 301
-    Width = 510
+    Top = 284
+    Width = 504
     ExplicitTop = 301
     ExplicitWidth = 510
     inherited BtnOK: TButton

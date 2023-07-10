@@ -1,6 +1,6 @@
 inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Caption = 'Consulta'
-  ClientHeight = 562
+  ClientHeight = 564
   ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
@@ -30,7 +30,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 744
+      Left = 750
       ExplicitLeft = 744
     end
   end
@@ -38,7 +38,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Left = 4
     Top = 147
     Width = 780
-    Height = 334
+    Height = 336
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -87,7 +87,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Left = 5
       Top = 35
       Width = 770
-      Height = 294
+      Height = 296
       Hint = 'D'#234' duplo-clique para confirmar a consulta'
       Margins.Left = 4
       Margins.Top = 34
@@ -110,7 +110,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PAuxiliares: TPanel
     Left = 4
-    Top = 489
+    Top = 491
     Width = 780
     Margins.Left = 4
     Margins.Top = 4
@@ -123,7 +123,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PBotoes: TPanel
     Left = 4
-    Top = 520
+    Top = 522
     Width = 780
     Margins.Left = 4
     Margins.Top = 4

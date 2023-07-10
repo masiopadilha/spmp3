@@ -1,6 +1,5 @@
 inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
   Caption = 'Desenho T'#233'cnico'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText

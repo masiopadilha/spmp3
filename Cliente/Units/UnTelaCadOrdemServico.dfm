@@ -1,10 +1,8 @@
 inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   Caption = 'Cadastro de Ordem de Servi'#231'o'
-  ClientHeight = 619
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -43,7 +41,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     object Label4: TLabel
       Left = 91
       Top = 32
@@ -200,8 +198,8 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 160
+    ExplicitWidth = 1008
     ExplicitHeight = 160
     inherited Label2: TLabel
       Width = 132
@@ -766,9 +764,9 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   end
   inherited PDiversos: TPanel
     Top = 315
-    Width = 1008
-    Height = 225
+    Height = 214
     ExplicitTop = 315
+    ExplicitWidth = 1008
     ExplicitHeight = 214
     inherited Label3: TLabel
       Top = 2
@@ -846,16 +844,16 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 600
-    Width = 1012
+    ExplicitTop = 600
+    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
-    Top = 584
-    Width = 1012
+    ExplicitTop = 584
+    ExplicitWidth = 1012
   end
   inherited PBase: TPanel
-    Top = 544
-    Width = 1008
+    ExplicitTop = 544
+    ExplicitWidth = 1008
     inherited Button1: TButton
       Hint = 'M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28
