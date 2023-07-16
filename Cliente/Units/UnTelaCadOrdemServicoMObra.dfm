@@ -1,10 +1,11 @@
 inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
   Caption = 'M'#227'o de Obra da O.S.'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     ExplicitWidth = 504
     inherited BtnAjuda: TButton
       Left = 473
@@ -12,8 +13,10 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
     ExplicitWidth = 502
-    ExplicitHeight = 163
+    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
       Left = 158
       Width = 0
@@ -21,7 +24,6 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
       TabOrder = 1
       ExplicitLeft = 158
       ExplicitWidth = 0
-      ExplicitHeight = 152
     end
     object GrdEquipe: TDBGrid
       AlignWithMargins = True
@@ -125,12 +127,14 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
     end
   end
   inherited PAuxiliares: TPanel
-    ExplicitTop = 235
-    ExplicitWidth = 498
+    Top = 237
+    Width = 504
+    ExplicitTop = 237
   end
   inherited PBotoes: TPanel
-    ExplicitTop = 262
-    ExplicitWidth = 498
+    Top = 264
+    Width = 504
+    ExplicitTop = 264
     inherited BtnOK: TButton
       Left = 100
       Visible = False

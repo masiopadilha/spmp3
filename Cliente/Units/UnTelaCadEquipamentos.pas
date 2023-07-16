@@ -583,6 +583,35 @@ begin
   inherited;
   if (DM.FAlterando = True) then
   begin
+    DM.qryAuxiliar2.Close;
+    DM.qryAuxiliar2.SQL.Clear;
+    DM.qryAuxiliar2.SQL.Text := 'SELECT mh.`INDICE` FROM `manutprogequipamentohist` AS mh ';
+    DM.qryAuxiliar2.SQL.Text := DM.qryAuxiliar2.SQL.Text + 'INNER JOIN `equipamentos` ON (mh.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (mh.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) ';
+    DM.qryAuxiliar2.SQL.Text := DM.qryAuxiliar2.SQL.Text + 'WHERE (mh.`CODEQUIPAMENTO` = '+QuotedStr(DM.qryEquipamentosCODIGO.AsString)+' AND mh.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') LIMIT 1';
+    DM.qryAuxiliar2.Open;
+    if DM.qryAuxiliar2.IsEmpty = False then
+    begin
+      Application.MessageBox('Alteração não permitida, foram encontrados dados no histórico do equipamento.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      DM.qryAuxiliar2.Close;
+      Exit;
+    end;
+
+
+    DM.qryAuxiliar2.Close;
+    DM.qryAuxiliar2.SQL.Clear;
+    DM.qryAuxiliar2.SQL.Text := 'SELECT mh.`INDICE` FROM `lubrificprogequipamentohist` AS mh ';
+    DM.qryAuxiliar2.SQL.Text := DM.qryAuxiliar2.SQL.Text + 'INNER JOIN `equipamentos` ON (mh.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (mh.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) ' ;
+    DM.qryAuxiliar2.SQL.Text := DM.qryAuxiliar2.SQL.Text + 'WHERE (mh.`CODEQUIPAMENTO` = '+QuotedStr(DM.qryEquipamentosCODIGO.AsString)+' AND mh.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') LIMIT 1';
+    DM.qryAuxiliar2.Open;
+    if DM.qryAuxiliar2.IsEmpty = False then
+    begin
+      Application.MessageBox('Alteração não permitida, foram encontrados dados no histórico do equipamento.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      DM.qryAuxiliar2.Close;
+      Exit;
+    end;
+
+    DM.qryAuxiliar2.Close;
+
     if  (DM.qryEquipamentosDadosREGISTRO1.AsString <> '') or (DM.qryEquipamentosDadosREGISTRO2.AsString <> '')
      or (DM.qryEquipamentosDadosREGISTRO3.AsString <> '') or (DM.qryEquipamentosDadosREGISTRO4.AsString <> '')
      or (DM.qryEquipamentosDadosREGISTRO5.AsString <> '') or (DM.qryEquipamentosDadosREGISTRO6.AsString <> '')

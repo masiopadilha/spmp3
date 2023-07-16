@@ -5520,6 +5520,10 @@ type
     CDEquipamentoHistDATACONSULTAFIN: TStringField;
     qryClonarManutDTAINICIO1: TDateTimeField;
     qryClonarLubrificDTAINICIO1: TDateTimeField;
+    qryManutConstempototal: TFMTBCDField;
+    qryLubrificConstempototal: TFMTBCDField;
+    qryManutProgFamEquipCLONAVEL: TStringField;
+    qryLubrificProgFamEquipCLONAVEL: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

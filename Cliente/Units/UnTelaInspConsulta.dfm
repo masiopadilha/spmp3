@@ -1,7 +1,7 @@
 inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Caption = 'Consulta de Inspe'#231#245'es'
-  ClientHeight = 624
-  ClientWidth = 1002
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,8 +11,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 998
-    ExplicitWidth = 998
+    Width = 1008
+    ExplicitWidth = 1002
     object Label9: TLabel [1]
       Left = 133
       Top = 36
@@ -28,7 +28,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
     inherited BtnAjuda: TButton
       Left = 960
-      ExplicitLeft = 970
+      ExplicitLeft = 954
     end
     object BtnImprimir: TButton
       Left = 941
@@ -67,10 +67,10 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PCentro: TPanel
-    Width = 996
-    Height = 485
-    ExplicitWidth = 996
-    ExplicitHeight = 485
+    Width = 1006
+    Height = 505
+    ExplicitWidth = 1000
+    ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
@@ -83,8 +83,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       AlignWithMargins = True
       Left = 2
       Top = 41
-      Width = 992
-      Height = 442
+      Width = 1002
+      Height = 462
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
@@ -93,15 +93,15 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Align = alClient
       TabOrder = 1
       OnChange = PCInspecoesChange
-      ExplicitWidth = 998
-      ExplicitHeight = 459
+      ExplicitWidth = 996
+      ExplicitHeight = 451
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
         object PFundoManut: TPanel
           Left = 0
           Top = 0
-          Width = 990
-          Height = 428
+          Width = 994
+          Height = 431
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -114,6 +114,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
           ParentBackground = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 988
+          ExplicitHeight = 420
           object Label1: TLabel
             Left = 12
             Top = 359
@@ -206,8 +208,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 984
-            Height = 422
+            Width = 988
+            Height = 425
             Align = alClient
             DataSource = DM.dsManutCons
             DrawingStyle = gdsClassic
@@ -236,8 +238,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         object PFundoLubrific: TPanel
           Left = 0
           Top = 0
-          Width = 990
-          Height = 428
+          Width = 994
+          Height = 431
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -342,8 +344,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 984
-            Height = 422
+            Width = 988
+            Height = 425
             Align = alClient
             DataSource = DM.dsLubrificCons
             DrawingStyle = gdsClassic
@@ -372,8 +374,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         object PFundoRota: TPanel
           Left = 0
           Top = 0
-          Width = 990
-          Height = 428
+          Width = 994
+          Height = 431
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -390,8 +392,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 984
-            Height = 422
+            Width = 988
+            Height = 425
             Align = alClient
             DataSource = DM.dsRotaCons
             DrawingStyle = gdsClassic
@@ -418,7 +420,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       AlignWithMargins = True
       Left = 4
       Top = 3
-      Width = 988
+      Width = 998
       Height = 37
       Margins.Top = 2
       Margins.Bottom = 0
@@ -426,6 +428,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
+      ExplicitWidth = 992
       object Label10: TLabel
         Left = 8
         Top = 8
@@ -528,13 +531,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 557
-    Width = 998
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    Top = 577
+    Width = 1008
+    ExplicitTop = 566
+    ExplicitWidth = 1002
     object chbTudo: TCheckBox
       AlignWithMargins = True
-      Left = 895
+      Left = 899
       Top = 4
       Width = 105
       Height = 15
@@ -543,13 +546,14 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Caption = 'Marcar todas'
       TabOrder = 0
       OnClick = chbTudoClick
+      ExplicitLeft = 893
     end
   end
   inherited PBotoes: TPanel
-    Top = 584
-    Width = 998
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    Top = 604
+    Width = 1008
+    ExplicitTop = 593
+    ExplicitWidth = 1002
     inherited BtnOK: TButton
       Left = 423
       Caption = 'Executar'

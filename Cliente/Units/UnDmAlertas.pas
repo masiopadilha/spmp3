@@ -1,7 +1,5 @@
 unit UnDmAlertas;
-
 interface
-
 uses
   Winapi.Windows,
   System.SysUtils,
@@ -22,7 +20,6 @@ uses
   FireDAC.DApt,
   FireDAC.Comp.DataSet,
   FireDAC.Comp.Client;
-
 type
   TDMAlertas = class(TDataModule)
     TrayIcon1: TTrayIcon;
@@ -55,20 +52,14 @@ type
   public
     { Public declarations }
   end;
-
 var
   DMAlertas: TDMAlertas;
-
 implementation
-
 {%CLASSGROUP 'Vcl.Controls.TControl'}
-
 uses UnDM, UnTelaCadOrdemServicoGerencia, UnTelaInspFechamento,
   UnTelaCadOrdemServicoLocalizaMObra, UnTelaPrincipal, UnTelaUsuariosAtivos,
   UnTelaAuditoria, UnTelaOpcoes;
-
 {$R *.dfm}
-
 procedure TDMAlertas.AuditoriaClick(Sender: TObject);
 begin
   if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -84,12 +75,10 @@ begin
       FreeAndNil(FrmTelaAuditoria);
     End;
 end;
-
 procedure TDMAlertas.DataModuleDestroy(Sender: TObject);
 begin
 DMAlertas.qryOrdemServico.Close;
 end;
-
 procedure TDMAlertas.FechamInspClick(Sender: TObject);
 begin
   if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -105,7 +94,6 @@ begin
       FreeAndNil(FrmTelaInspFechamento);
     End;
 end;
-
 procedure TDMAlertas.GerencOrdemServicoClick(Sender: TObject);
 begin
   if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -121,10 +109,9 @@ begin
       FreeAndNil(FrmTelaCadOrdemServicoGerencia);
     End;
 end;
-
 procedure TDMAlertas.MaodeObraServClick(Sender: TObject);
 begin
-  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and  (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
@@ -137,7 +124,6 @@ begin
       FreeAndNil(FrmTelaCadOrdemServicoLocalizaMObra);
     End;
 end;
-
 procedure TDMAlertas.OpcoesClick(Sender: TObject);
 begin
   if (DM.qryUsuarioPAcessoCADPERMISSOES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -153,7 +139,6 @@ begin
       FreeAndNil(FrmTelaOpcoes);
     End;
 end;
-
 procedure TDMAlertas.SairClick(Sender: TObject);
 var
   X: Integer;
@@ -165,10 +150,8 @@ begin
         if not(TForm(Application.Components[X]) = Application.MainForm) then
           if TForm(Application.Components[X]).Showing then TForm(Application.Components[X]).Close;
     end;
-
   FrmTelaPrincipal.Close;
 end;
-
 procedure TDMAlertas.Timer1Timer(Sender: TObject);
 var
   hora_atual, diferenca: TDateTime;
@@ -194,7 +177,6 @@ begin
                                                       begin
                                                         TrayIcon1.BalloonHint := 'Novas OS cadastradas!';
                                                       end;
-
                                                  Except
                                                    Abort;
                                                  End;
@@ -203,7 +185,6 @@ begin
                                 end
                                ).Start;
 end;
-
 procedure TDMAlertas.TrayIcon1DblClick(Sender: TObject);
 begin
 if FrmTelaPrincipal.WindowState <> TWindowState.wsMinimized then
@@ -213,7 +194,6 @@ else
 Application.ProcessMessages;
 //SetWindowPos(FrmTelaPrincipal.Handle,HWND_TOP,0,0,0,0,SWP_NOSIZE);
 end;
-
 procedure TDMAlertas.UsuariosAtivosClick(Sender: TObject);
 begin
   if FrmTelaUsuariosAtivos = nil then
@@ -224,5 +204,4 @@ begin
       FreeAndNil(FrmTelaUsuariosAtivos);
     End;
 end;
-
 end.

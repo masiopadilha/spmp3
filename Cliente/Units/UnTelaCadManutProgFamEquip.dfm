@@ -1,7 +1,11 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
+  ClientHeight = 619
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
+    ExplicitWidth = 1002
     inherited LblDataCad: TDBText
       DataSource = DM.dsManutProgFamEquip
     end
@@ -16,6 +20,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label5: TLabel
       Left = 50
       Top = 32
@@ -178,7 +183,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       DataSource = DM.dsManutProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 7
+      TabOrder = 8
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -192,11 +197,26 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 8
+      TabOrder = 9
       OnClick = BtnMonitoramentoClick
+    end
+    object chbClonavel: TDBCheckBox
+      Left = 839
+      Top = 32
+      Width = 80
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Clon'#225'vel:'
+      DataField = 'CLONAVEL'
+      DataSource = DM.dsManutProgFamEquip
+      TabOrder = 7
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 65
     ExplicitHeight = 65
     inherited Label2: TLabel
@@ -276,10 +296,10 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 220
+    Width = 1008
     Height = 145
     Align = alTop
     ExplicitTop = 220
-    ExplicitWidth = 1008
     ExplicitHeight = 145
     inherited Label3: TLabel
       Width = 179
@@ -347,12 +367,21 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ReadOnly = True
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
+      ExplicitLeft = 328
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 600
+    Width = 1012
+  end
   inherited PAlertas: TPanel
+    Top = 584
+    Width = 1012
     TabOrder = 7
   end
   inherited PBase: TPanel
+    Top = 544
+    Width = 1008
     TabOrder = 5
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
@@ -371,11 +400,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     AlignWithMargins = True
     Left = 3
     Top = 370
-    Width = 1000
+    Width = 1006
     Height = 171
     Align = alTop
     TabOrder = 4
-    ExplicitWidth = 1002
+    ExplicitWidth = 1000
     object Label7: TLabel
       Left = 7
       Top = 3
@@ -397,7 +426,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       AlignWithMargins = True
       Left = 4
       Top = 21
-      Width = 994
+      Width = 998
       Height = 146
       Margins.Top = 20
       Align = alClient

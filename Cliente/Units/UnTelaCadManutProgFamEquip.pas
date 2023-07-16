@@ -40,6 +40,7 @@ type
     Consultar1: TMenuItem;
     REDetalhes: TJvDBRichEdit;
     GrdItens: TDBGrid;
+    chbClonavel: TDBCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);

@@ -943,7 +943,7 @@ begin
 if DM.qryOrdemServicoCODSOLICITACAOTRAB.IsNull = False then
   begin
     Try
-      if (DM.qryUsuarioPAcessoCADSOLICITACAOTRAB.AsString <> 'S') or (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      if (DM.qryUsuarioPAcessoCADSOLICITACAOTRAB.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;

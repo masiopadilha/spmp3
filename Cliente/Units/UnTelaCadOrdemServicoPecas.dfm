@@ -1,7 +1,6 @@
 inherited FrmTelaCadOrdemServicoPecas: TFrmTelaCadOrdemServicoPecas
   Caption = 'Pe'#231'as da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     inherited BtnAjuda: TButton

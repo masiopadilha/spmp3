@@ -1,21 +1,28 @@
 inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
   Caption = 'Planos de Trabalho da O.S.'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     inherited BtnAjuda: TButton
       Left = 467
       ExplicitLeft = 467
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
+    inherited RGTelas: TRadioGroup
+      Height = 163
+    end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -91,7 +98,13 @@ inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 504
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 504
     inherited BtnOK: TButton
       Left = 100
       Visible = False

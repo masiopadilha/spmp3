@@ -1,7 +1,6 @@
 inherited FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrificantes
   Caption = 'Lubrificantes da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     inherited BtnAjuda: TButton

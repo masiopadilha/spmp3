@@ -1,8 +1,10 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
-  ClientHeight = 614
+  ClientHeight = 619
   ClientWidth = 1012
   OnShow = FormShow
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
@@ -21,7 +23,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 998
     object Label5: TLabel
       Left = 57
       Top = 32
@@ -205,7 +206,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 150
-    ExplicitWidth = 998
     ExplicitHeight = 150
     inherited Label2: TLabel
       Width = 132
@@ -243,11 +243,12 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object lblCaracteres: TLabel
-      Left = 992
+      Left = 874
       Top = 131
-      Width = 3
+      Width = 121
       Height = 13
       Alignment = taRightJustify
+      Caption = '200 caracteres restantes'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -450,10 +451,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   inherited PDiversos: TPanel
     Top = 305
     Width = 1008
-    Height = 230
+    Height = 235
     ExplicitTop = 305
-    ExplicitWidth = 998
-    ExplicitHeight = 210
+    ExplicitHeight = 224
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -464,7 +464,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Left = 5
       Top = 28
       Width = 998
-      Height = 197
+      Height = 202
       Margins.Left = 4
       Margins.Top = 27
       Margins.Right = 4
@@ -517,8 +517,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Align = alClient
       BevelOuter = bvLowered
       TabOrder = 0
-      ExplicitWidth = 988
-      ExplicitHeight = 177
+      ExplicitWidth = 992
+      ExplicitHeight = 191
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object Series1: TBarSeries
@@ -546,22 +546,16 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 595
+    Top = 600
     Width = 1012
-    ExplicitTop = 575
-    ExplicitWidth = 1002
   end
   inherited PAlertas: TPanel
-    Top = 579
+    Top = 584
     Width = 1012
-    ExplicitTop = 559
-    ExplicitWidth = 1002
   end
   inherited PBase: TPanel
-    Top = 539
+    Top = 544
     Width = 1008
-    ExplicitTop = 519
-    ExplicitWidth = 998
   end
   inherited TimerAlertas: TTimer
     Left = 362

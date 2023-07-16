@@ -40,6 +40,7 @@ type
     ExcluirCorp: TMenuItem;
     REDetalhes: TJvDBRichEdit;
     GrdItens: TDBGrid;
+    chbClonavel: TDBCheckBox;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
