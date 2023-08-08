@@ -41,6 +41,13 @@ type
     REDetalhes: TJvDBRichEdit;
     GrdItens: TDBGrid;
     chbClonavel: TDBCheckBox;
+    Label13: TLabel;
+    EdtDescOficina: TDBEdit;
+    BtnOficina: TButton;
+    Label28: TLabel;
+    EdtCodOficina: TDBEdit;
+    EdtDias: TDBEdit;
+    Label11: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
@@ -61,6 +68,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnMonitoramentoClick(Sender: TObject);
+    procedure BtnOficinaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,7 +85,7 @@ implementation
 uses UnTelaConsulta, UnTelaCadFamiliaEquipamento,
   UnTelaCadMonitoramento, UnTelaCadTipoProgramacao,
   UnDmRelatorios, UnTelaCadManutProgFamEquipPartes,
-  UnTelaCadManutProgFamEquipPartesItens, UnDM;
+  UnTelaCadManutProgFamEquipPartesItens, UnDM, UnTelaCadOficinas;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -197,6 +205,7 @@ if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 DM.qryManutProgFamEquipCODEMPRESA.AsString    := DM.FCodEmpresa;
 DM.qryManutProgFamEquipATIVO.AsString         := 'S';
 DM.qryManutProgFamEquipVISIVEL.AsString       := 'S';
+DM.qryManutProgFamEquipCLONAVEL.AsString      := 'N';
 
 DM.qryManutProgFamEquipPlanoTrab.Open;
 
@@ -204,6 +213,43 @@ DM.qryManutProgEquipItens.Close;
 
 EdtCodManutencao.ReadOnly := False;
 EdtCodManutencao.SetFocus;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.BtnOficinaClick(Sender: TObject);
+begin
+  inherited;
+if DM.qryManutProgFamEquip.Active = False then Exit;
+if DM.qryManutProgFamEquip.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 200;
+    DM.FNomeConsulta := 'Oficinas';
+    DM.qryManutProgFamEquip.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryManutProgFamEquipCODOFICINA.AsString := DM.FCodCombo;
+        DM.qryManutProgFamEquipOFICINA.AsString    := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADOFICINAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryOficinasCODIGO, DM.qryFormatoCodigoOFICINAS, FrmTelaCadOficinas) = False then exit;
+      Application.CreateForm(TFrmTelaCadOficinas, FrmTelaCadOficinas);
+      FrmTelaCadOficinas.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadOficinas);
+    End;
+  end;
+DM.FTela            := 'CADMANUTPROG';
+DM.FDataSetParam    := DM.qryManutProgFamEquip;
+DM.FDataSourceParam := DM.dsManutProgFamEquip;
+DM.FTabela_auxiliar := 34;
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnProgramacaoClick(Sender: TObject);
@@ -236,6 +282,10 @@ if DM.qryManutProgFamEquipDESCRICAO.IsNull = True then
 if DM.qryManutProgFamEquipCODFAMILIAEQUIP.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FAMÍLIA DO REGISTRO!'; EdtDescFamilia.SetFocus; Abort;
+  end;
+if DM.qryManutProgFamEquipCODOFICINA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO REGISTRO!'; EdtDescOficina.SetFocus; Abort;
   end;
 
 EdtCodManutencao.ReadOnly := True;

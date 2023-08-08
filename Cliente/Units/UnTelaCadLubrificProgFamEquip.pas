@@ -41,6 +41,13 @@ type
     REDetalhes: TJvDBRichEdit;
     GrdItens: TDBGrid;
     chbClonavel: TDBCheckBox;
+    Label13: TLabel;
+    EdtCodOficina: TDBEdit;
+    EdtDescOficina: TDBEdit;
+    BtnOficina: TButton;
+    Label28: TLabel;
+    Label11: TLabel;
+    EdtDias: TDBEdit;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -61,6 +68,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnMonitoramentoClick(Sender: TObject);
+    procedure BtnOficinaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,7 +86,7 @@ implementation
 uses UnTelaConsulta, UnTelaCadFamiliaEquipamento,
   UnTelaCadMonitoramento, UnDmRelatorios,
   UnTelaCadLubrificProgFamEquipPartes, UnTelaCadLubrificProgFamEquipPartesItens,
-  UnDM;
+  UnDM, UnTelaCadOficinas;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -195,6 +203,7 @@ if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 DM.qryLubrificProgFamEquipCODEMPRESA.AsString      := DM.FCodEmpresa;
 DM.qryLubrificProgFamEquipATIVO.AsString           := 'S';
 DM.qryLubrificProgFamEquipVISIVEL.AsString         := 'S';
+DM.qryLubrificProgFamEquipCLONAVEL.AsString        := 'N';
 
 DM.qryLubrificProgFamEquipPlanoTrab.Open;
 
@@ -202,6 +211,43 @@ DM.qryLubrificProgEquipItens.Close;
 
 EdtCodLubrificacao.ReadOnly := False;
 EdtCodLubrificacao.SetFocus;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.BtnOficinaClick(Sender: TObject);
+begin
+  inherited;
+if DM.qryLubrificProgFamEquip.Active = False then Exit;
+if DM.qryLubrificProgFamEquip.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 200;
+    DM.FNomeConsulta := 'Oficinas';
+    DM.qryLubrificProgFamEquip.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryLubrificProgFamEquipCODOFICINA.AsString := DM.FCodCombo;
+        DM.qryLubrificProgFamEquipOFICINA.AsString    := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADOFICINAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryOficinasCODIGO, DM.qryFormatoCodigoOFICINAS, FrmTelaCadOficinas) = False then exit;
+      Application.CreateForm(TFrmTelaCadOficinas, FrmTelaCadOficinas);
+      FrmTelaCadOficinas.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadOficinas);
+    End;
+  end;
+DM.FTela            := 'CADLUBRIFICPROG';
+DM.FDataSetParam    := DM.qryLubrificProgFamEquip;
+DM.FDataSourceParam := DM.dsLubrificProgFamEquip;
+DM.FTabela_auxiliar := 34;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnProgramacaoClick(Sender: TObject);
@@ -234,6 +280,10 @@ if DM.qryLubrificProgFamEquipDESCRICAO.IsNull = True then
 if DM.qryLubrificProgFamEquipCODFAMILIAEQUIP.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FAMÍLIA DO REGISTRO!'; EdtDescFamilia.SetFocus; Exit;
+  end;
+if DM.qryLubrificProgFamEquipCODOFICINA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO REGISTRO!'; EdtDescOficina.SetFocus; Abort;
   end;
 
 EdtCodLubrificacao.ReadOnly := True;

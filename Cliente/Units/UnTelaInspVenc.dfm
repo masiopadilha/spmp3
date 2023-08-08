@@ -75,6 +75,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDrawColumnCell = GrdManutDrawColumnCell
+          OnTitleClick = GrdManutTitleClick
         end
       end
       object TSLubrific: TTabSheet
@@ -105,6 +106,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDrawColumnCell = GrdManutDrawColumnCell
+          OnTitleClick = GrdManutTitleClick
         end
       end
       object TSRotas: TTabSheet
@@ -135,6 +137,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDrawColumnCell = GrdManutDrawColumnCell
+          OnTitleClick = GrdManutTitleClick
         end
       end
     end
@@ -159,8 +162,22 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
         Alignment = taRightJustify
         Caption = 'Fam'#237'lia de Equipamento:'
       end
+      object Label13: TLabel
+        Left = 442
+        Top = 9
+        Width = 44
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Oficina:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object BtnFamiliaEquip: TButton
-        Left = 345
+        Left = 385
         Top = 4
         Width = 28
         Height = 28
@@ -177,7 +194,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       object EdtFamiliaEquip: TEdit
         Left = 154
         Top = 6
-        Width = 189
+        Width = 225
         Height = 24
         Hint = 'D'#234' duplo-clique para excluir o filtro.'
         Color = clBtnFace
@@ -186,6 +203,34 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
         ShowHint = True
         TabOrder = 1
         OnDblClick = EdtFamiliaEquipDblClick
+      end
+      object edtOficina: TEdit
+        Left = 492
+        Top = 6
+        Width = 225
+        Height = 24
+        Hint = 'D'#234' duplo-clique para excluir o filtro.'
+        Color = clBtnFace
+        ParentShowHint = False
+        ReadOnly = True
+        ShowHint = True
+        TabOrder = 2
+        OnDblClick = edtOficinaDblClick
+      end
+      object BtnOficina: TButton
+        Left = 723
+        Top = 4
+        Width = 28
+        Height = 29
+        Hint = 'Consultar/Cadastrar (Ctrl'
+        DisabledImageIndex = 14
+        ImageAlignment = iaCenter
+        ImageIndex = 14
+        Images = DM.ImageListBotoes
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
+        OnClick = BtnOficinaClick
       end
     end
   end
@@ -203,17 +248,17 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     ExplicitTop = 504
     ExplicitWidth = 914
     inherited BtnOK: TButton
-      Left = 381
+      Left = 382
       Caption = 'Executar'
       ModalResult = 0
       TabOrder = 1
       OnClick = BtnOKClick
-      ExplicitLeft = 381
+      ExplicitLeft = 382
     end
     inherited BtnFechar: TButton
-      Left = 464
+      Left = 466
       TabOrder = 0
-      ExplicitLeft = 464
+      ExplicitLeft = 466
     end
   end
 end

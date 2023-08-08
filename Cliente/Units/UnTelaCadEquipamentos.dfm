@@ -1,6 +1,6 @@
 inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   Caption = 'Equipamentos'
-  ClientHeight = 619
+  ClientHeight = 614
   ClientWidth = 1012
   ExplicitLeft = 3
   ExplicitTop = 3
@@ -118,6 +118,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PIdentificacao: TPanel
     Width = 1008
+    ExplicitWidth = 998
     object Label4: TLabel [0]
       Left = 45
       Top = 33
@@ -436,6 +437,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PProgramacao: TPanel
     Width = 1008
+    ExplicitWidth = 998
     inherited Label2: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -877,7 +879,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PDiversos: TPanel
     Width = 1008
-    Height = 195
+    Height = 190
+    ExplicitWidth = 998
+    ExplicitHeight = 170
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -1666,16 +1670,20 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 600
+    Top = 595
     Width = 1012
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
+    ExplicitTop = 575
+    ExplicitWidth = 1002
   end
   inherited PAlertas: TPanel
-    Top = 584
+    Top = 579
     Width = 1012
+    ExplicitTop = 559
+    ExplicitWidth = 1002
     inherited LblAlertas: TLabel
       Left = 1011
       Margins.Left = 4
@@ -1686,8 +1694,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
-    Top = 544
+    Top = 539
     Width = 1008
+    ExplicitTop = 519
+    ExplicitWidth = 998
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

@@ -5524,6 +5524,21 @@ type
     qryLubrificConstempototal: TFMTBCDField;
     qryManutProgFamEquipCLONAVEL: TStringField;
     qryLubrificProgFamEquipCLONAVEL: TStringField;
+    qryLubrificProgFamEquipCODOFICINA: TStringField;
+    qryManutProgFamEquipCODOFICINA: TStringField;
+    qryManutProgEquipCODOFICINA: TStringField;
+    qryLubrificProgEquipCODOFICINA: TStringField;
+    qryManutConsCODOFICINA: TStringField;
+    qryLubrificProgFamEquipOFICINA: TStringField;
+    qryManutProgFamEquipOFICINA: TStringField;
+    qryManutProgFamEquipFREQUENCIA: TSmallintField;
+    qryLubrificProgFamEquipFREQUENCIA: TSmallintField;
+    qrySolicitacaoTrabCODOFICINA: TStringField;
+    qrySolicitacaoTrabOFICINA: TStringField;
+    qryLubrificConsCODOFICINA: TStringField;
+    qryManutVencCODOFICINA: TStringField;
+    qryLubrificVencCODOFICINA: TStringField;
+    qryMonitMedicoesContManutCODOFICINA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5628,7 +5643,7 @@ type
     function PasswordInputBox(const ACaption, APrompt:string): string;
     function VerificaPrimeiroAcesso:Boolean;
     function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao, Lubrificacao, Rota, SolicTrab, Matricula,
-                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal: String): Integer;
+                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
@@ -6189,6 +6204,8 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
@@ -6207,6 +6224,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Mecânica'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6224,6 +6243,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Elétrica'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6241,6 +6262,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Civil'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6258,6 +6281,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Apoio Técnico'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6275,6 +6300,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Produtiva'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6292,6 +6319,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Administrativa'''
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -7528,7 +7557,7 @@ end;
 
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
-  Criticidade, CentroCusto, Observacoes, tempototal: String): Integer;
+  Criticidade, CentroCusto, Observacoes, tempototal, Oficina: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -9162,7 +9191,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                               , DM.qryManutProgEquipEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString);
 
                 if DM.qryManutProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -9216,7 +9245,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                               , DM.qryLubrificProgEquipEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString);
 
                 if DM.qryLubrificProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -9688,7 +9717,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9733,7 +9762,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9778,7 +9807,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0');
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);

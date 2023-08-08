@@ -148,13 +148,15 @@ if DM.qryManutProgEquip.IsEmpty = True then Exit;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar  := 340;
+    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
     DM.FNomeConsulta     := 'Manutenções de Famílias de Equipamentos';
     DM.qryManutProgEquip.Edit;
     if DM.ConsultarCombo <> EmptyStr then
       begin
-        DM.qryManutProgEquipCODMANUTPROGFAMEQUIP.AsString := DM.FCodCombo;
+        DM.qryManutProgEquipCODMANUTPROGFAMEQUIP.AsString  := DM.FCodCombo;
         DM.qryManutProgEquipDESCMANUTPROGFAMEQUIP.AsString := DM.FValorCombo;
-        DM.qryManutProgEquipPROGRAMACAO2.AsString         := DM.FParamAuxiliar[2];
+        DM.qryManutProgEquipPROGRAMACAO2.AsString          := DM.FParamAuxiliar[2];
+        DM.qryManutProgEquipFREQUENCIA1.AsString           := DM.FParamAuxiliar[3];
 
         DM.qryManutProgEquipPartes.Open;
         DM.qryManutProgEquipItens.Open;

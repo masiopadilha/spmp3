@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, System.DateUtils, Data.DB,
-  Vcl.ComCtrls, FireDAC.Stan.Param;
+  Vcl.ComCtrls, FireDAC.Stan.Param, FireDAC.Comp.Client, FireDAC.Stan.Intf;
 
 type
   TFrmTelaInspVenc = class(TFrmTelaPaiOkCancel)
@@ -21,6 +21,9 @@ type
     Label6: TLabel;
     BtnFamiliaEquip: TButton;
     EdtFamiliaEquip: TEdit;
+    Label13: TLabel;
+    edtOficina: TEdit;
+    BtnOficina: TButton;
     procedure BtnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -28,15 +31,19 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure BtnFamiliaEquipClick(Sender: TObject);
     procedure EdtFamiliaEquipDblClick(Sender: TObject);
+    procedure edtOficinaDblClick(Sender: TObject);
+    procedure BtnOficinaClick(Sender: TObject);
+    procedure GrdManutTitleClick(Column: TColumn);
   private
     { Private declarations }
+    procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
   public
     { Public declarations }
   end;
 
 var
   FrmTelaInspVenc: TFrmTelaInspVenc;
-  LCodFamilia: String;
+  LCodFamilia, LCodOficina: String;
   ManutExec, LubrificExec, RotaExec : Boolean;
 
 implementation
@@ -44,6 +51,41 @@ implementation
 {$R *.dfm}
 
 uses UnDmRelatorios, FireDAC.Comp.DataSet, UnDM;
+
+procedure TFrmTelaInspVenc.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
+var
+  sIndexName: string;
+  oOrdenacao: TFDSortOption;
+  i: smallint;
+begin
+  // retira a formatação em negrito de todas as colunas
+  for i := 0 to Grid.Columns.Count - 1 do
+    Grid.Columns[i].Title.Font.Style := [];
+
+  // configura a ordenação ascendente ou descendente
+  if TFDQuery(Grid.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
+  begin
+    sIndexName := Column.FieldName + '_DESC';
+    oOrdenacao := soDescending;
+  end
+  else
+  begin
+    sIndexName := Column.FieldName + '_ASC';
+    oOrdenacao := soNoCase;
+  end ;
+
+  // adiciona a ordenação no DataSet, caso não exista
+  if not Assigned(TFDQuery(Grid.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
+    TFDQuery(Grid.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
+
+  // formata o título da coluna em negrito
+  Column.Title.Font.Style := [fsBold];
+
+  // atribui a ordenação selecionada
+  TFDQuery(Grid.DataSource.DataSet).IndexName := sIndexName;
+
+  TFDQuery(Grid.DataSource.DataSet).First;
+end;
 
 procedure TFrmTelaInspVenc.BtnFamiliaEquipClick(Sender: TObject);
 begin
@@ -88,6 +130,52 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
     TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
   end;
+end;
+
+procedure TFrmTelaInspVenc.BtnOficinaClick(Sender: TObject);
+begin
+  inherited;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 200;
+    DM.FNomeConsulta := 'Oficinas';
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        LCodFamilia                             := DM.FCodCombo;
+        edtOficina.Text                         := DM.FValorCombo;
+        GrdManut.DataSource.DataSet.Filtered    := False;
+        GrdManut.DataSource.DataSet.Filter      := EmptyStr;
+        GrdLubrific.DataSource.DataSet.Filtered := False;
+        GrdLubrific.DataSource.DataSet.Filter   := EmptyStr;
+        if edtOficina.Text <> '' then
+          begin
+            if GrdManut.DataSource.DataSet.Filter = EmptyStr then
+              GrdManut.DataSource.DataSet.Filter := 'CODOFICINA = '+QuotedStr(LCodOficina)
+            else
+              GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+            if GrdManut.DataSource.DataSet.Filter <> EmptyStr then
+              GrdManut.DataSource.DataSet.Filtered := True;
+
+            if GrdLubrific.DataSource.DataSet.Filter = EmptyStr then
+              GrdLubrific.DataSource.DataSet.Filter := 'CODOFICINA = '+QuotedStr(LCodOficina)
+            else
+              GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+            if GrdLubrific.DataSource.DataSet.Filter <> EmptyStr then
+              GrdLubrific.DataSource.DataSet.Filtered := True;
+          end;
+      end
+    else
+      begin
+        GrdManut.DataSource.DataSet.Filtered    := False;
+        GrdLubrific.DataSource.DataSet.Filtered := False;
+        LCodOficina                             := '';
+        edtOficina.Text                    := '';
+      end;
+
+    TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
+    TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
+  end;
+
 end;
 
 procedure TFrmTelaInspVenc.BtnOKClick(Sender: TObject);
@@ -136,7 +224,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                                 , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString);
 
 
               if DM.qryManutProgEquip.IsEmpty = False then
@@ -226,7 +314,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                                 , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString);
 
 
               if DM.qryLubrificProgEquip.IsEmpty = False then
@@ -300,7 +388,7 @@ case PCInspecoes.ActivePageIndex of
 
              DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                                                , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0');
+                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr);
 
              if DM.qryRotaEquipVenc.IsEmpty = False then
                DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaEquipVencCODIGO.AsString, DM.FCodOrdemServico);
@@ -363,6 +451,21 @@ begin
   inherited;
   LCodFamilia := '';
   EdtFamiliaEquip.Text := '';
+
+  GrdManut.DataSource.DataSet.Filtered    := False;
+  GrdManut.DataSource.DataSet.Filter      := EmptyStr;
+  GrdLubrific.DataSource.DataSet.Filtered := False;
+  GrdLubrific.DataSource.DataSet.Filter   := EmptyStr;
+
+  TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
+  TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
+end;
+
+procedure TFrmTelaInspVenc.edtOficinaDblClick(Sender: TObject);
+begin
+  inherited;
+  LCodOficina := '';
+  EdtOficina.Text := '';
 
   GrdManut.DataSource.DataSet.Filtered    := False;
   GrdManut.DataSource.DataSet.Filter      := EmptyStr;
@@ -585,6 +688,28 @@ case PCInspecoes.ActivePageIndex of
       GrdRotas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
     End;
 end;
+end;
+
+procedure TFrmTelaInspVenc.GrdManutTitleClick(Column: TColumn);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+    begin
+      if GrdManut.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+      CliqueNoTitulo(Column, TFDquery(GrdManut.DataSource.DataSet), GrdManut.DataSource.DataSet.Fields[1].Name, GrdManut);
+    end;
+    1:
+    begin
+      if GrdLubrific.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+      CliqueNoTitulo(Column, TFDquery(GrdLubrific.DataSource.DataSet), GrdLubrific.DataSource.DataSet.Fields[1].Name, GrdLubrific);
+    end;
+    2:
+    begin
+      if GrdRotas.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+      CliqueNoTitulo(Column, TFDquery(GrdRotas.DataSource.DataSet), GrdRotas.DataSource.DataSet.Fields[1].Name, GrdRotas);
+    end;
+  end;
 end;
 
 end.

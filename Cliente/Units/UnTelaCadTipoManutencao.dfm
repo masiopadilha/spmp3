@@ -1,15 +1,21 @@
 inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   Caption = 'Tipos de Manuten'#231#227'o'
-  PixelsPerInch = 96
+  ClientHeight = 414
+  ClientWidth = 628
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
+      Left = 500
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
+      Left = 522
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -44,12 +50,14 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
       DataSource = DM.dsTipoManutencao
     end
     inherited LCadastro: TLabel
+      Left = 394
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
+      Left = 356
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -57,6 +65,10 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 313
+    ExplicitWidth = 614
+    ExplicitHeight = 293
     object Label4: TLabel
       Left = 170
       Top = 123
@@ -118,6 +130,7 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
         'Manuten'#231#227'o Corretiva'
         'Manuten'#231#227'o Preventiva'
         'Manuten'#231#227'o Preditiva'
+        'Lubrifica'#231#227'o'
         'Novos Projetos'
         'Altera'#231#245'es de Projetos'
         'Outros Servi'#231'os')
@@ -168,5 +181,17 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 395
+    Width = 628
+    ExplicitTop = 375
+    ExplicitWidth = 618
+  end
+  inherited PAuxiliares: TPanel
+    Top = 368
+    Width = 624
+    ExplicitTop = 348
+    ExplicitWidth = 614
   end
 end

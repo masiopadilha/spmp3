@@ -1,14 +1,11 @@
 unit UnTelaCadLubrifictProgEquip;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, System.Actions,
   Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons;
-
 type
   TFrmTelaCadLubrificProgEquip = class(TFrmTelaPaiCadastros)
     Label5: TLabel;
@@ -70,18 +67,13 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip;
   LDataProgIni : TDateTime;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaCadLubrificProgFamEquip, UnDmRelatorios, UnTelaConsulta,
   UnTelaCadFuncionarios, UnDM, UnTelaCadLubrificProgEquipPartesItensEsp;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnCancelarClick(Sender: TObject);
 begin
   inherited;
@@ -89,7 +81,6 @@ EdtCodLubrificacao.ReadOnly := True;
 if DM.qryLubrificProgEquipItensEsp.Active = True then
   DM.qryLubrificProgEquipItensEsp.Cancel;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnConsultarClick(Sender: TObject);
 begin
   DM.FTabela_auxiliar := 33;
@@ -97,26 +88,21 @@ begin
 if DM.qryLubrificProgEquipCODLUBRIFICPROGFAMEQUIP.AsString <> EmptyStr then
   begin
     LDataProgIni := DM.qryLubrificProgEquipDTAINICIO1.AsDateTime;
-
     DM.qryLubrificProgEquipPartes.Close;
     DM.qryLubrificProgEquipPartes.Open;
-
     DM.qryLubrificProgEquipItens.Close;
 //        qryLubrificProgEquipItens.Params[0].AsString := CodEmpresa;
 //        qryLubrificProgEquipItens.Params[1].AsString := qryLubrificProgEquipCODLubrificPROGFAMEQUIP.AsString;
     DM.qryLubrificProgEquipItens.Open;
-
     DM.qryLubrificProgEquipItensEsp.Close;
 //        qryLubrificProgEquipItensEsp.Params[0].AsString := CodEmpresa;
 //        qryLubrificProgEquipItensEsp.Params[1].AsString := qryLubrificProgEquipCODIGO.AsString;
     DM.qryLubrificProgEquipItensEsp.Open;
     DM.qryLubrificProgEquipItensEsp.Edit;
-
   DM.qryLubrificProgEquipPlanoTrab.Close;
 //  DM.qryLubrificProgEquipPlanoTrab.Params[0].AsString := DM.FCodEmpresa;
 //  DM.qryLubrificProgEquipPlanoTrab.Params[1].AsString := DM.qryLubrificProgEquip.FieldByName('CODMANUTPROGFAMEQUIP').AsString;
   DM.qryLubrificProgEquipPlanoTrab.Open;
-
   end
 else
   begin
@@ -125,7 +111,6 @@ else
     DM.qryLubrificProgEquipPlanoTrab.Close;
   end;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
@@ -136,7 +121,6 @@ if DM.qryLubrificProgEquip.IsEmpty = True then
     DM.qryLubrificProgEquipItensEsp.Close;
   end;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnFamiliaClick(Sender: TObject);
 begin
   inherited;
@@ -145,13 +129,15 @@ if DM.qryLubrificProgEquip.IsEmpty = True then Exit;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 350;
+    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
     DM.FNomeConsulta := 'Lubrificações de Famílias de Equipamentos';
     DM.qryLubrificProgEquip.Edit;
     if DM.ConsultarCombo <> EmptyStr then
       begin
-        DM.qryLubrificProgEquipCODLUBRIFICPROGFAMEQUIP.AsString := DM.FCodCombo;
+        DM.qryLubrificProgEquipCODLUBRIFICPROGFAMEQUIP.AsString  := DM.FCodCombo;
         DM.qryLubrificProgEquipDESCLUBRIFICPROGFAMEQUIP.AsString := DM.FValorCombo;
-        DM.qryLubrificProgEquipPROGRAMACAO2.AsString            := DM.FParamAuxiliar[2];
+        DM.qryLubrificProgEquipPROGRAMACAO2.AsString             := DM.FParamAuxiliar[2];
+        DM.qryLubrificProgEquipFREQUENCIA1.AsString              := DM.FParamAuxiliar[3];
 
         DM.qryLubrificProgEquipPartes.Open;
         DM.qryLubrificProgEquipItens.Open;
@@ -179,12 +165,10 @@ DM.FDataSourceParam := DM.dsLubrificProgEquip;
 DM.FTabela_auxiliar := 33;
 DM.FTela := 'CADLUBRIFICPROGEQUIP';
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnNovoClick(Sender: TObject);
 begin
   inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-
 DM.qryLubrificProgEquipCODEMPRESA.AsString      := DM.FCodEmpresa;
 DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString  := DM.FParamAuxiliar[0];
 DM.qryLubrificProgEquipDATACADASTRO.AsDateTime  := DM.FDataHoraServidor;
@@ -193,11 +177,9 @@ DM.qryLubrificProgEquipCODUSUARIOCAD.AsString   := DM.FCodUsuario;
 DM.qryLubrificProgEquipCODUSUARIOALT.AsString   := DM.FCodUsuario;
 DM.qryLubrificProgEquipGRUPOINSP.AsString       := 'N';
 DM.qryLubrificProgEquipRELATORIO.AsString       := 'N';
-
 EdtCodLubrificacao.ReadOnly := False;
 EdtCodLubrificacao.SetFocus;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnResponsavelClick(Sender: TObject);
 begin
   inherited;
@@ -234,7 +216,6 @@ DM.FDataSourceParam := DM.dsLubrificProgEquip;
 DM.FTabela_auxiliar := 33;
 DM.FTela := 'CADLUBRIFICPROGEQUIP';
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.BtnSalvarClick(Sender: TObject);
 begin
 if DM.FDataSetParam.IsEmpty = True then Exit;
@@ -275,10 +256,8 @@ if DM.qryLubrificProgEquipREPROGRAMAR1.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A REPROGRAMAÇÃO DA LUBRIFICAÇÃO!'; CBReprogramacao.SetFocus; Exit;
   end;
-
 if (DM.qryLubrificProgEquipDTAINICIO1.AsDateTime > 0)  and (DM.qryLubrificProgEquipGRUPOINSP.AsString <> 'S') then
   DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := DateOf(DM.qryLubrificProgEquipDTAINICIO1.AsDateTime);
-
 //Se alterar a data de início
 if LDataProgIni <> 0 then
   begin
@@ -286,7 +265,6 @@ if LDataProgIni <> 0 then
       begin
         DM.qryLubrificProgEquip.Edit;
         DM.qryLubrificProgEquipRELATORIO.AsString := 'N';
-
 //        if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Programação' then //Processo normal, irá vencer na data informada independente de qualquer coisa
 //          begin
 //            DM.qryLubrificProgEquip.Edit;
@@ -299,7 +277,6 @@ if LDataProgIni <> 0 then
 //          end;
       end;
   end;
-
 if (LblProgramarPor.Caption <> EmptyStr) then
   begin
     if DM.qryLubrificProgEquipFREQUENCIA2.IsNull = True then
@@ -310,7 +287,6 @@ if (LblProgramarPor.Caption <> EmptyStr) then
       begin
         PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A REPROGRAMAÇÃO DA LUBRIFICAÇÃO!'; CBReprogramacao2.SetFocus; Exit;
       end;
-
     //Verifica a maior leitura no histórico para não permitir que seja cadastrada um leitura inferior
     DM.qryAuxiliar.Close;
     DM.qryAuxiliar.SQL.Clear;
@@ -330,9 +306,7 @@ else
     DM.qryLubrificProgEquipLEITURA.Clear;
     DM.qryLubrificProgEquipREPROGRAMAR2.Clear;
   end;
-
 DM.MSGAguarde('');
-
 if DM.FEmpTransf = True then
   begin
     if DM.qryEquipamentos.Active = False then
@@ -361,42 +335,33 @@ if DM.FEmpTransf = True then
       end;
     DM.qryEquipEmRota.Close;
   end;
-
 DM.qryLubrificProgEquip.Params[0].AsString := EdtCodLubrificacao.Text;
 DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
 DM.qryLubrificProgEquip.Params[2].AsString := DM.FParamAuxiliar[0];
-
 if DM.qryLubrificProgEquipItensEsp.IsEmpty = False then
   if DM.qryLubrificProgEquipCODIGO.AsString <> '' then
     begin
       DM.qryLubrificProgEquip.Edit;
       DM.qryLubrificProgEquip.Post;
     end;
-
 if DM.qryLubrificProgEquipItensEsp.IsEmpty = False then
   begin
     DM.qryLubrificProgEquipItensEsp.Edit;
     DM.qryLubrificProgEquipItensEsp.Post;
-
 //    DM.qryLubrificProgEquipItensEsp.Close;
 //    DM.qryLubrificProgEquipItensEsp.Params[0].AsString := DM.FCodEmpresa;
 //    DM.qryLubrificProgEquipItensEsp.Params[1].AsString := DM.qryLubrificProgEquipCODIGO.AsString;
 //    DM.qryLubrificProgEquipItensEsp.Open;
   end;
-
   inherited;
 if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
-
 EdtCodLubrificacao.ReadOnly := True;
-
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 DM.qryAuxiliar.SQL.Add('DELETE FROM lubrificprogequipitensesp WHERE CODLUBRIFICPROGEQUIP = ' + QuotedStr(DM.qryLubrificProgEquipCODIGO.AsString) + ' AND CODEMPRESA = '+QuotedStr(DM.FCodEmpresa)+' AND (ITEM IS NULL OR ITEM = '') AND (DESCINSPECAO IS NULL OR DESCINSPECAO = '')');
 DM.qryAuxiliar.Execute;
-
 DM.MSGAguarde('', False);
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -408,7 +373,6 @@ begin
         DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
       end;
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
-
     if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
@@ -426,22 +390,18 @@ begin
     DM.FTabela_auxiliar := 32;
   End;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBLubrificProgEquipGeral;
 DM.FTabela_auxiliar  := 33;
   inherited;
-
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.EdtCodLubrificacaoExit(Sender: TObject);
 begin
   inherited;
 if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -452,7 +412,6 @@ DM.qryLubrificProgEquipItensEsp.Close;
   DM.qryLubrificProgEquip.Close;
 FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -462,13 +421,10 @@ DM.FTabela_auxiliar  := 33;
 DM.FTela := 'CADLUBRIFICPROGEQUIP';
 LDataProgIni := 0;
 end;
-
 procedure TFrmTelaCadLubrificProgEquip.Individual1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBLubrificProgEquipIndividual;
 DM.FTabela_auxiliar := 331;
   inherited;
-
 end;
-
 end.

@@ -979,71 +979,6 @@ GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.
 if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
   GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
 
-//case CBPeriodo.ItemIndex of
-//  0:
-//    begin
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DateOf(DM.FDataHoraServidor)))+' AND DATACADASTRO <= '+QuotedStr(FormatDateTime('dd/mm/yyyy hh:mm', IncMinute(DateOf(DM.FDataHoraServidor), 1439)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO = '+QuotedStr(FormatDateTime('dd/mm/yyyy', DateOf(DM.FDataHoraServidor))) +' AND DATACADASTRO <= '+QuotedStr(FormatDateTime('dd/mm/yyyy hh:mm', IncMinute(DateOf(DM.FDataHoraServidor), 1439)))+')'
-//    end;
-//  1:
-//    begin
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncDay(DM.FDataHoraServidor, -7)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncDay(DM.FDataHoraServidor, -7)))+')'
-//    end;
-//  2:
-//    begin
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncDay(DM.FDataHoraServidor, -15)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncDay(DM.FDataHoraServidor, -15)))+')'
-//    end;
-//  3:
-//    begin
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -1)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -1)))+')'
-//    end;
-//  4:
-//    begin
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -2)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -2)))+')'
-//    end;
-//  5:
-//    begin
-//      DM.qryOrdemServicoGerencia.GetNextPacket;
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -3)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -3)))+')'
-//    end;
-//  6:
-//    begin
-//      DM.qryOrdemServicoGerencia.GetNextPacket;
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -6)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -6)))+ ')'
-//    end;
-//  7:
-//    begin
-//      DM.qryOrdemServicoGerencia.GetNextPacket;
-//      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-//        GrdOrdemServico.DataSource.DataSet.Filter := '(DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -9)))+')'
-//      else
-//        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND (DATACADASTRO >= '+QuotedStr(FormatDateTime('dd/mm/yyyy', IncMonth(DM.FDataHoraServidor, -9)))+')'
-//    end;
-//  8:
-//    begin
-//    end;
-//end;
-
 if EdtFamiliaEquip.Text <> '' then
   begin
     if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
@@ -1642,10 +1577,10 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     else
       DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
     DM.qryOrdemServicoMObraDisp.Open;
-//    DM.qryTotalHomemHora.Close;
-//    DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
-//    DM.qryTotalHomemHora.Open;
-//    DM.qryTotalHomemHoraSeqHora.Open;
+    DM.qryTotalHomemHora.Close;
+    DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryTotalHomemHora.Open;
+    DM.qryTotalHomemHoraSeqHora.Open;
     LiberarMaodeObraEmExecucao;
     DM.qryOrdemServico.Edit;
     DM.qryOrdemServicoDATAFIM.AsDateTime     := DM.FDataHoraServidor;
@@ -1692,7 +1627,7 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     DM.qryOrdemServicoServSolic.Close;
     DM.qryOrdemServicoServExec.Close;
     DM.qryOrdemServicoMObraDisp.Close;
-//    DM.qryTotalHomemHora.Close;
+    DM.qryTotalHomemHora.Close;
     DM.qryTotalHomemHoraSeqHora.Close;
     DM.qrySolicitacaoTrab.Close;
     DM.MSGAguarde('', False);

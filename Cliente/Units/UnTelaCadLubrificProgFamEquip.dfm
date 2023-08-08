@@ -1,17 +1,32 @@
 inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  ClientHeight = 619
+  ClientHeight = 614
   ClientWidth = 1012
   ExplicitLeft = 3
   ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    DesignSize = (
+      1008
+      45)
+    inherited LCadastro: TLabel
+      Left = 722
+    end
+    inherited LCadastroPor: TLabel
+      Left = 678
+    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsLubrificProgFamEquip
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsLubrificProgFamEquip
+    end
+    inherited LAlteracao: TLabel
+      Left = 873
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 847
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsLubrificProgFamEquip
@@ -22,6 +37,9 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   end
   inherited PIdentificacao: TPanel
     Width = 1008
+    Height = 123
+    ExplicitWidth = 998
+    ExplicitHeight = 123
     object Label5: TLabel
       Left = 633
       Top = 62
@@ -74,6 +92,28 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Font.Style = []
       ParentFont = False
     end
+    object Label13: TLabel
+      Left = 80
+      Top = 93
+      Width = 44
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Oficina:'
+    end
+    object Label28: TLabel
+      Left = 516
+      Top = 96
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object BtnFamilia: TButton
       Left = 485
       Top = 58
@@ -84,7 +124,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 4
+      TabOrder = 6
       OnClick = BtnFamiliaClick
     end
     object BtnMonitoramento: TButton
@@ -97,7 +137,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 9
+      TabOrder = 11
       OnClick = BtnMonitoramentoClick
     end
     object ChbAtivo: TDBCheckBox
@@ -109,7 +149,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Caption = 'Ativo:'
       DataField = 'ATIVO'
       DataSource = DM.dsLubrificProgFamEquip
-      TabOrder = 5
+      TabOrder = 7
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
@@ -123,7 +163,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Caption = 'Vis'#237'vel:'
       DataField = 'VISIVEL'
       DataSource = DM.dsLubrificProgFamEquip
-      TabOrder = 6
+      TabOrder = 8
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
@@ -197,7 +237,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       DataSource = DM.dsLubrificProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 8
+      TabOrder = 10
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -210,15 +250,63 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Caption = 'Clon'#225'vel:'
       DataField = 'CLONAVEL'
       DataSource = DM.dsLubrificProgFamEquip
-      TabOrder = 7
+      TabOrder = 9
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
+    object EdtCodOficina: TDBEdit
+      Tag = 555
+      Left = 127
+      Top = 91
+      Width = 125
+      Height = 24
+      TabStop = False
+      CharCase = ecUpperCase
+      Color = clBtnFace
+      DataField = 'CODOFICINA'
+      DataSource = DM.dsLubrificProgFamEquip
+      TabOrder = 4
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object EdtDescOficina: TDBEdit
+      Left = 254
+      Top = 91
+      Width = 230
+      Height = 24
+      Color = clBtnFace
+      Ctl3D = True
+      DataField = 'OFICINA'
+      DataSource = DM.dsLubrificProgFamEquip
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 5
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object BtnOficina: TButton
+      Left = 485
+      Top = 88
+      Width = 28
+      Height = 28
+      Hint = 'Consultar/Cadastrar (Ctrl'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 12
+      OnClick = BtnOficinaClick
+    end
   end
   inherited PProgramacao: TPanel
+    Top = 178
     Width = 1008
     Height = 65
+    ExplicitTop = 178
+    ExplicitWidth = 998
     ExplicitHeight = 65
     inherited Label2: TLabel
       Width = 132
@@ -233,23 +321,37 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Caption = '1'#186' Programa'#231#227'o:'
     end
     object Label9: TLabel
-      Left = 348
+      Left = 420
       Top = 32
       Width = 98
       Height = 16
       Caption = '2'#186' Programa'#231#227'o:'
     end
     object Label10: TLabel
-      Left = 687
+      Left = 756
       Top = 32
       Width = 98
       Height = 16
       Caption = '3'#186' Programa'#231#227'o:'
     end
+    object Label11: TLabel
+      Left = 312
+      Top = 32
+      Width = 29
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Dias:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object EdtProgramacao1: TEdit
       Left = 127
       Top = 30
-      Width = 200
+      Width = 170
       Height = 24
       TabStop = False
       Color = 14671839
@@ -258,18 +360,18 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       OnKeyPress = FormKeyPress
     end
     object EdtProgramacao2: TDBEdit
-      Left = 449
+      Left = 521
       Top = 30
-      Width = 190
+      Width = 183
       Height = 24
       DataField = 'PROGRAMACAO2'
       DataSource = DM.dsLubrificProgFamEquip
-      TabOrder = 1
+      TabOrder = 2
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnProgramacao: TButton
-      Left = 641
+      Left = 713
       Top = 28
       Width = 28
       Height = 28
@@ -280,28 +382,39 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 3
       OnClick = BtnProgramacaoClick
     end
     object EdtProgramacao3: TEdit
-      Left = 788
+      Left = 857
       Top = 30
-      Width = 200
+      Width = 131
       Height = 24
       TabStop = False
       Color = 14671839
-      TabOrder = 3
+      TabOrder = 4
       Text = 'Confiabilidade'
+      OnKeyPress = FormKeyPress
+    end
+    object EdtDias: TDBEdit
+      Left = 345
+      Top = 30
+      Width = 60
+      Height = 24
+      DataField = 'FREQUENCIA'
+      DataSource = DM.dsLubrificProgFamEquip
+      TabOrder = 1
       OnKeyPress = FormKeyPress
     end
   end
   inherited PDiversos: TPanel
-    Top = 220
+    Top = 247
     Width = 1008
-    Height = 145
+    Height = 113
     Align = alTop
-    ExplicitTop = 220
-    ExplicitHeight = 145
+    ExplicitTop = 247
+    ExplicitWidth = 1008
+    ExplicitHeight = 113
     inherited Label3: TLabel
       Width = 179
       Caption = 'PLANO DE TRABALHO'
@@ -312,7 +425,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Left = 4
       Top = 21
       Width = 323
-      Height = 120
+      Height = 88
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -354,7 +467,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Left = 334
       Top = 21
       Width = 670
-      Height = 120
+      Height = 88
       Margins.Top = 20
       DataField = 'DETALHES'
       DataSource = DM.dsLubrificProgFamEquipPlanoTrab
@@ -368,22 +481,29 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ReadOnly = True
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
-      ExplicitLeft = 328
+      ExplicitLeft = 324
+      ExplicitHeight = 120
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 600
+    Top = 595
     Width = 1012
+    ExplicitTop = 575
+    ExplicitWidth = 1002
   end
   inherited PAlertas: TPanel
-    Top = 584
+    Top = 579
     Width = 1012
     TabOrder = 7
+    ExplicitTop = 559
+    ExplicitWidth = 1002
   end
   inherited PBase: TPanel
-    Top = 544
+    Top = 539
     Width = 1008
     TabOrder = 5
+    ExplicitTop = 519
+    ExplicitWidth = 998
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -400,12 +520,13 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
-    Top = 370
+    Top = 365
     Width = 1006
     Height = 171
     Align = alTop
     TabOrder = 4
-    ExplicitWidth = 1000
+    ExplicitTop = 397
+    ExplicitWidth = 996
     object Label4: TLabel
       Left = 7
       Top = 3

@@ -1,7 +1,7 @@
 inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   Caption = 'Medi'#231#245'es do Equipamento'
-  ClientHeight = 324
-  ClientWidth = 508
+  ClientHeight = 344
+  ClientWidth = 518
   Constraints.MaxHeight = 380
   Constraints.MaxWidth = 530
   Constraints.MinHeight = 380
@@ -11,32 +11,34 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   ExplicitHeight = 380
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 504
-    ExplicitWidth = 510
+    Width = 514
+    ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 477
-      ExplicitLeft = 477
+      Left = 497
+      ExplicitLeft = 487
     end
   end
   inherited PCentro: TPanel
-    Width = 502
-    Height = 185
-    ExplicitWidth = 508
-    ExplicitHeight = 202
+    Width = 512
+    Height = 205
+    ExplicitWidth = 502
+    ExplicitHeight = 185
     inherited RGTelas: TRadioGroup
-      Width = 506
-      Height = 200
-      ExplicitWidth = 506
-      ExplicitHeight = 200
+      Width = 510
+      Height = 203
+      ExplicitWidth = 500
+      ExplicitHeight = 183
     end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 506
-      Height = 200
+      Width = 510
+      Height = 203
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 500
+      ExplicitHeight = 183
       object Label7: TLabel
         Left = 5
         Top = 6
@@ -49,8 +51,8 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
         AlignWithMargins = True
         Left = 3
         Top = 30
-        Width = 500
-        Height = 140
+        Width = 504
+        Height = 143
         Margins.Top = 30
         Margins.Bottom = 30
         Align = alClient
@@ -148,16 +150,16 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 257
-    Width = 504
-    ExplicitTop = 274
-    ExplicitWidth = 510
+    Top = 277
+    Width = 514
+    ExplicitTop = 257
+    ExplicitWidth = 504
   end
   inherited PBotoes: TPanel
-    Top = 284
-    Width = 504
-    ExplicitTop = 301
-    ExplicitWidth = 510
+    Top = 304
+    Width = 514
+    ExplicitTop = 284
+    ExplicitWidth = 504
     inherited BtnOK: TButton
       Left = 35
       Visible = False

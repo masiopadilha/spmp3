@@ -1,20 +1,21 @@
 inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   Caption = 'Hist'#243'rico do Funcion'#225'rio'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     Height = 62
-    ExplicitWidth = 1004
+    ExplicitWidth = 998
     ExplicitHeight = 62
     inherited Image1: TImage
       Top = 4
@@ -57,7 +58,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     inherited BtnAjuda: TButton
       Left = 970
       TabOrder = 3
-      ExplicitLeft = 970
+      ExplicitLeft = 960
     end
     object BtnConsultar: TButton
       Left = 603
@@ -134,33 +135,35 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   end
   inherited PCentro: TPanel
     Top = 69
-    Width = 1002
-    Height = 500
+    Width = 1006
+    Height = 503
     ExplicitTop = 69
-    ExplicitWidth = 1002
-    ExplicitHeight = 500
+    ExplicitWidth = 996
+    ExplicitHeight = 483
     inherited RGTelas: TRadioGroup
-      Width = 1000
-      Height = 498
-      ExplicitWidth = 1000
-      ExplicitHeight = 498
+      Width = 1004
+      Height = 501
+      ExplicitWidth = 994
+      ExplicitHeight = 481
     end
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 994
-      Height = 492
+      Width = 998
+      Height = 495
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 988
+      ExplicitHeight = 475
       object GrdManutencoes: TDBGrid
         AlignWithMargins = True
         Left = 5
         Top = 272
         Width = 348
-        Height = 215
+        Height = 218
         Margins.Top = 1
         Align = alLeft
         DataSource = DM.dsFuncionariosTipoManutHist
@@ -219,10 +222,10 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       end
       object GrdInspecoes: TDBGrid
         AlignWithMargins = True
-        Left = 354
+        Left = 358
         Top = 272
         Width = 635
-        Height = 215
+        Height = 218
         Margins.Top = 1
         Align = alRight
         DataSource = DM.dsFuncionariosHistServicos
@@ -311,7 +314,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 984
+        Width = 988
         Height = 265
         Margins.Bottom = 1
         Align = alTop
@@ -398,16 +401,16 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    Top = 577
+    Width = 1008
+    ExplicitTop = 557
+    ExplicitWidth = 998
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    Top = 604
+    Width = 1008
+    ExplicitTop = 584
+    ExplicitWidth = 998
     inherited BtnOK: TButton
       Left = 100
       Visible = False

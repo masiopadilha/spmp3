@@ -2,7 +2,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 302
+  ClientHeight = 304
   ClientWidth = 508
   Color = 14671839
   Constraints.MaxHeight = 340
@@ -11600,6 +11600,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 494
     DesignSize = (
       504
       60)
@@ -12038,7 +12039,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
         9B19924EEEF97F3E0AAB43077639F50000000049454E44AE426082}
     end
     object BtnAjuda: TButton
-      Left = 472
+      Left = 492
       Top = 17
       Width = 28
       Height = 28
@@ -12060,7 +12061,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Left = 3
     Top = 67
     Width = 502
-    Height = 163
+    Height = 165
     Align = alClient
     Color = 14671839
     ParentBackground = False
@@ -12085,7 +12086,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
   object PAuxiliares: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 235
+    Top = 237
     Width = 504
     Height = 23
     Margins.Left = 2
@@ -12108,7 +12109,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
   object PBotoes: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 262
+    Top = 264
     Width = 504
     Height = 38
     Margins.Left = 2

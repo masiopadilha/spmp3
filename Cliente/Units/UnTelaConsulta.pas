@@ -4,7 +4,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, UnTelaPaiOkCancel,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param;
+  Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Intf;
 type
   TFrmTelaAuxiliar = class(TFrmTelaPaiOKCancel)
     BtnConsultar: TButton;
@@ -42,8 +42,10 @@ type
     procedure BtnCelulaClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure GrdAuxiliarTitleClick(Column: TColumn);
   private
     { Private declarations }
+    procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
   public
     { Public declarations }
   end;
@@ -53,6 +55,41 @@ var
 implementation
 {$R *.dfm}
 uses UnTelaCadMonitMedicoes, UnDM;
+
+procedure TFrmTelaAuxiliar.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
+var
+  sIndexName: string;
+  oOrdenacao: TFDSortOption;
+  i: smallint;
+begin
+  // retira a formatação em negrito de todas as colunas
+  for i := 0 to GrdAuxiliar.Columns.Count - 1 do
+    GrdAuxiliar.Columns[i].Title.Font.Style := [];
+
+  // configura a ordenação ascendente ou descendente
+  if TFDQuery(GrdAuxiliar.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
+  begin
+    sIndexName := Column.FieldName + '_DESC';
+    oOrdenacao := soDescending;
+  end
+  else
+  begin
+    sIndexName := Column.FieldName + '_ASC';
+    oOrdenacao := soNoCase;
+  end ;
+
+  // adiciona a ordenação no DataSet, caso não exista
+  if not Assigned(TFDQuery(GrdAuxiliar.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
+    TFDQuery(GrdAuxiliar.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
+
+  // formata o título da coluna em negrito
+  Column.Title.Font.Style := [fsBold];
+
+  // atribui a ordenação selecionada
+  TFDQuery(GrdAuxiliar.DataSource.DataSet).IndexName := sIndexName;
+
+  TFDQuery(GrdAuxiliar.DataSource.DataSet).First;
+end;
 
 procedure TFrmTelaAuxiliar.BtnAreaClick(Sender: TObject);
 begin
@@ -331,15 +368,39 @@ begin
       end;
     34, 340://Manutenção de Família de Equipamento
       begin
-        DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
-                               + ' FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
-                               + ' WHERE (`manutprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         if  DM.FTabela_auxiliar = 340 then
+         begin
+            DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2, '
+                                   + ' `oficinas`.`DESCRICAO` AS Oficina, `manutprogfamequipamento`.`FREQUENCIA` AS Frequência FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) '
+                                   + ' LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2`) = `tipoprogramacao`.`CODIGO` LEFT JOIN `oficinas` ON (`manutprogfamequipamento`.`CODOFICINA` = `oficinas`.`CODIGO`)'
+                                   + ' WHERE (`manutprogfamequipamento`.`CODFAMILIAEQUIP`  = ' + QuotedStr(DM.FParamAuxiliar[0])  + ' AND `manutprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         end else
+         begin
+            DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2, '
+                                   + ' `oficinas`.`DESCRICAO` AS Oficina, `manutprogfamequipamento`.`FREQUENCIA` AS Frequência FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) '
+                                   + ' LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2`) = `tipoprogramacao`.`CODIGO` LEFT JOIN `oficinas` ON (`manutprogfamequipamento`.`CODOFICINA` = `oficinas`.`CODIGO`)'
+                                   + ' WHERE (`manutprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         end;
+
+
       end;
     35, 350://Lubrificação de Família de Equipamento
       begin
-        DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
-                               + ' FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento` ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2`'
-                               + '  = `tipoprogramacao`.`CODIGO`) WHERE (`lubrificprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         if  DM.FTabela_auxiliar = 350 then
+         begin
+           DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2,'
+                                  + ' `oficinas`.`DESCRICAO` AS Oficina, `lubrificprogfamequipamento`.`FREQUENCIA` AS Frequência '
+                                  + ' FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento` ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2`'
+                                  + '  = `tipoprogramacao`.`CODIGO`) LEFT JOIN `oficinas` ON (`lubrificprogfamequipamento`.`CODOFICINA` = `oficinas`.`CODIGO`) '
+                                  + ' WHERE (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP`  = ' + QuotedStr(DM.FParamAuxiliar[0])  + ' AND `lubrificprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         end else
+         begin
+           DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2,'
+                                  + ' `oficinas`.`DESCRICAO` AS Oficina, `lubrificprogfamequipamento`.`FREQUENCIA` AS Frequência '
+                                  + ' FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento` ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2`'
+                                  + '  = `tipoprogramacao`.`CODIGO`) LEFT JOIN `oficinas` ON (`lubrificprogfamequipamento`.`CODOFICINA` = `oficinas`.`CODIGO`) '
+                                  + ' WHERE (`lubrificprogfamequipamento`.`DESCRICAO` LIKE :descricao AND `lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `familiaequipamento`.`DESCRICAO`');
+         end;
       end;
     36, 360://Peças de Reposição
       begin
@@ -718,6 +779,8 @@ begin
         DM.qryAuxiliar.Fields[3].DisplayLabel := '2º Programação';
         DM.qryAuxiliar.Fields[3].DisplayWidth := 25;
         DM.qryAuxiliar.Fields[4].Visible      := False;
+        DM.qryAuxiliar.Fields[5].DisplayWidth := 30;
+        DM.qryAuxiliar.Fields[6].DisplayWidth := 30;
       end;
     26://Imagens
       begin
@@ -1696,6 +1759,7 @@ begin
         DM.FCodCombo         := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo       := DM.DSAuxiliar.DataSet.Fields[1].AsString;
         DM.FParamAuxiliar[2] := DM.qryAuxiliar.FieldByName('PROGRAMARPOR2').AsString;
+        DM.FParamAuxiliar[3] := DM.qryAuxiliar.FieldByName('Frequência').AsString;
       end;
     35://Lubrificação de Família de Equipamento
       begin
@@ -2233,4 +2297,10 @@ begin
   GrdAuxiliar.Canvas.FillRect(Rect);
   GrdAuxiliar.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
+procedure TFrmTelaAuxiliar.GrdAuxiliarTitleClick(Column: TColumn);
+begin
+  inherited;
+  CliqueNoTitulo(Column, TFDquery(GrdAuxiliar.DataSource.DataSet), GrdAuxiliar.DataSource.DataSet.Fields[1].Name);
+end;
+
 end.

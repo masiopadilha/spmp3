@@ -22,7 +22,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Margins.Bottom = 4
     ExplicitLeft = 4
     ExplicitTop = 4
-    ExplicitWidth = 774
+    ExplicitWidth = 770
     inherited Image1: TImage
       Margins.Left = 4
       Margins.Top = 4
@@ -30,8 +30,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 747
-      ExplicitLeft = 747
+      Left = 783
+      ExplicitLeft = 773
     end
   end
   inherited PCentro: TPanel
@@ -46,8 +46,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     TabOrder = 2
     ExplicitLeft = 4
     ExplicitTop = 147
-    ExplicitWidth = 774
-    ExplicitHeight = 325
+    ExplicitWidth = 770
+    ExplicitHeight = 316
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -106,6 +106,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       TitleFont.Style = []
       OnDrawColumnCell = GrdAuxiliarDrawColumnCell
       OnDblClick = GrdAuxiliarDblClick
+      OnTitleClick = GrdAuxiliarTitleClick
     end
   end
   inherited PAuxiliares: TPanel
@@ -118,8 +119,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Margins.Bottom = 4
     TabOrder = 3
     ExplicitLeft = 4
-    ExplicitTop = 480
-    ExplicitWidth = 774
+    ExplicitTop = 471
+    ExplicitWidth = 770
   end
   inherited PBotoes: TPanel
     Left = 4
@@ -131,8 +132,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Margins.Bottom = 4
     TabOrder = 4
     ExplicitLeft = 4
-    ExplicitTop = 511
-    ExplicitWidth = 774
+    ExplicitTop = 502
+    ExplicitWidth = 770
     inherited BtnOK: TButton
       Left = 310
       Margins.Left = 4
@@ -165,7 +166,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Align = alTop
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 774
+    ExplicitWidth = 770
     object Label6: TLabel
       Left = 17
       Top = 8

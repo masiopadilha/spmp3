@@ -53,6 +53,10 @@ type
     Label16: TLabel;
     EdtAquisicao: TJvDBDateEdit;
     Label19: TLabel;
+    Label20: TLabel;
+    EdtOficina: TDBEdit;
+    BtnOficina: TButton;
+    Label28: TLabel;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;
@@ -69,6 +73,7 @@ type
     procedure Descricao1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure MJustificativaChange(Sender: TObject);
+    procedure BtnOficinaClick(Sender: TObject);
   private
     { Private declarations }
     LProgramadas: array[1..31] of Real;
@@ -88,7 +93,7 @@ implementation
 {$R *.dfm}
 
 uses UnTelaCadFuncionarios, UnTelaCadEquipamentos, UnTelaConsulta,
-  UnDmRelatorios, UnTelaCadOrdemServico, UnDM;
+  UnDmRelatorios, UnTelaCadOrdemServico, UnDM, UnTelaCadOficinas;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnCancelarClick(Sender: TObject);
 begin
@@ -262,6 +267,43 @@ DM.qrySolicitacaoTrabCODUSUARIOALT.AsString   := DM.FCodUsuario;
 EdtDescSolicitante.SetFocus;
 end;
 
+procedure TFrmTelaCadSolicitacaoTrab.BtnOficinaClick(Sender: TObject);
+begin
+  inherited;
+if DM.qrySolicitacaoTrab.Active = False then Exit;
+if DM.qrySolicitacaoTrab.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 200;
+    DM.FNomeConsulta := 'Oficinas';
+    DM.qrySolicitacaoTrab.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qrySolicitacaoTrabCODOFICINA.AsString := DM.FCodCombo;
+        DM.qrySolicitacaoTrabOFICINA.AsString    := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADOFICINAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryOficinasCODIGO, DM.qryFormatoCodigoOFICINAS, FrmTelaCadOficinas) = False then exit;
+      Application.CreateForm(TFrmTelaCadOficinas, FrmTelaCadOficinas);
+      FrmTelaCadOficinas.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadOficinas);
+    End;
+  end;
+DM.FDataSetParam    := DM.qrySolicitacaoTrab;
+DM.FDataSourceParam := DM.dsSolicitacaoTrab;
+DM.FTela            := 'CADSOLICITACAOTRAB';
+DM.FTabela_auxiliar := 40;
+end;
+
 procedure TFrmTelaCadSolicitacaoTrab.BtnSalvarClick(Sender: TObject);
 begin
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
@@ -285,6 +327,10 @@ if DM.qrySolicitacaoTrabPRIORIDADEPARADA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DO SERVIÇO!'; CBPrioridade.SetFocus; Exit;
   end;
+if DM.qrySolicitacaoTrabCODOFICINA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO SERVIÇO!'; EdtOficina.SetFocus; Exit;
+  end;
 
 
 DM.MSGAguarde('');
@@ -295,7 +341,7 @@ if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
 
     DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
                                                                             , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
-                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString, DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString);
+                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString, DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString);
     PSituacao.Caption    := 'CADASTRADA';
     PSituacao.Color      := clRed;
     PSituacao.Font.Color := clYellow;

@@ -1,7 +1,7 @@
 inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Caption = 'Consulta de Inspe'#231#245'es'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 624
+  ClientWidth = 1002
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,8 +11,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
-    ExplicitWidth = 1002
+    Width = 998
+    ExplicitWidth = 998
     object Label9: TLabel [1]
       Left = 133
       Top = 36
@@ -27,7 +27,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 960
+      Left = 950
       ExplicitLeft = 954
     end
     object BtnImprimir: TButton
@@ -67,10 +67,10 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
-    ExplicitWidth = 1000
-    ExplicitHeight = 494
+    Width = 996
+    Height = 485
+    ExplicitWidth = 996
+    ExplicitHeight = 485
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
@@ -83,8 +83,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       AlignWithMargins = True
       Left = 2
       Top = 41
-      Width = 1002
-      Height = 462
+      Width = 992
+      Height = 442
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
@@ -420,7 +420,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       AlignWithMargins = True
       Left = 4
       Top = 3
-      Width = 998
+      Width = 988
       Height = 37
       Margins.Top = 2
       Margins.Bottom = 0
@@ -428,7 +428,6 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 992
       object Label10: TLabel
         Left = 8
         Top = 8
@@ -531,8 +530,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 557
+    Width = 998
     ExplicitTop = 566
     ExplicitWidth = 1002
     object chbTudo: TCheckBox
@@ -550,8 +549,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 584
+    Width = 998
     ExplicitTop = 593
     ExplicitWidth = 1002
     inherited BtnOK: TButton

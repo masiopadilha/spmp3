@@ -802,7 +802,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                             , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString, DM.qryManutConsCODOFICINA.AsString);
 
 
               DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -997,7 +997,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                             , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString);
 
 
               DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -1195,7 +1195,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
                                                             , EmptyStr, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0');
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr);
 
               DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
