@@ -1,6 +1,6 @@
 inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   Caption = 'Hist'#243'rico de Ordens de Servi'#231'o'
-  ClientHeight = 642
+  ClientHeight = 644
   ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -12,7 +12,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1004
+    ExplicitWidth = 998
     object Label1: TLabel [1]
       Left = 218
       Top = 36
@@ -118,7 +118,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 503
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -279,13 +279,13 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 575
+    Top = 577
     Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 602
+    Top = 604
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004

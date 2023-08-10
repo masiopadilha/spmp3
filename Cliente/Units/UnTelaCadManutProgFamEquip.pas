@@ -48,6 +48,10 @@ type
     EdtCodOficina: TDBEdit;
     EdtDias: TDBEdit;
     Label11: TLabel;
+    Label12: TLabel;
+    EdtManutencao: TDBEdit;
+    BtnManutencao: TButton;
+    Label21: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);

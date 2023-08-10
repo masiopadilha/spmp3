@@ -123,6 +123,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Align = alNone
       TabOrder = 4
       ExplicitTop = 0
+      ExplicitWidth = 500
       ExplicitHeight = 0
     end
     object PFuncoes: TPanel

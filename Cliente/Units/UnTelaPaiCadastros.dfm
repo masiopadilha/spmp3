@@ -2,7 +2,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 614
+  ClientHeight = 624
   ClientWidth = 1012
   Color = 14671839
   Constraints.MaxHeight = 680
@@ -11604,7 +11604,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 998
     DesignSize = (
       1008
       45)
@@ -12463,7 +12462,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Left = 2
     Top = 345
     Width = 1008
-    Height = 190
+    Height = 200
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -12495,7 +12494,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 595
+    Top = 605
     Width = 1012
     Height = 19
     Color = 14671839
@@ -12520,7 +12519,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 579
+    Top = 589
     Width = 1012
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
@@ -12555,7 +12554,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   object PBase: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 539
+    Top = 549
     Width = 1008
     Height = 38
     Margins.Left = 2

@@ -12039,7 +12039,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
         9B19924EEEF97F3E0AAB43077639F50000000049454E44AE426082}
     end
     object BtnAjuda: TButton
-      Left = 492
+      Left = 502
       Top = 17
       Width = 28
       Height = 28

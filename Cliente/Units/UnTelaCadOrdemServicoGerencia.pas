@@ -1098,6 +1098,8 @@ DM.qryOrdemServicoEquipePecasUtil.Close;
 DM.qryOrdemServico.Close;
 DM.qryOrdemServicoGerencia.Close;
 DM.qryAuxiliar.Close;
+GrdOrdemServico.DataSource.DataSet.Filtered := False;
+GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
 Close;
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.FormCreate(Sender: TObject);

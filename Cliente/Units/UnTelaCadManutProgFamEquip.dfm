@@ -1,10 +1,8 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  ClientHeight = 614
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    ExplicitWidth = 998
     inherited LblDataCad: TDBText
       DataSource = DM.dsManutProgFamEquip
     end
@@ -19,7 +17,6 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 123
     ExplicitWidth = 998
     ExplicitHeight = 123
@@ -41,7 +38,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object Label4: TLabel
       Left = 633
-      Top = 62
+      Top = 93
       Width = 91
       Height = 16
       Alignment = taRightJustify
@@ -86,6 +83,28 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     object Label28: TLabel
       Left = 516
       Top = 96
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 689
+      Top = 26
+      Width = 74
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Manuten'#231#227'o:'
+    end
+    object Label21: TLabel
+      Left = 981
+      Top = 21
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -169,7 +188,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object ChbAtivo: TDBCheckBox
       Left = 686
-      Top = 32
+      Top = 64
       Width = 59
       Height = 17
       Alignment = taLeftJustify
@@ -183,7 +202,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object ChbVisivel: TDBCheckBox
       Left = 759
-      Top = 32
+      Top = 64
       Width = 67
       Height = 17
       Alignment = taLeftJustify
@@ -197,7 +216,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object EdtDescMonitoramento: TDBEdit
       Left = 728
-      Top = 60
+      Top = 91
       Width = 230
       Height = 24
       TabStop = False
@@ -213,7 +232,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object BtnMonitoramento: TButton
       Left = 960
-      Top = 58
+      Top = 88
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -226,7 +245,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object chbClonavel: TDBCheckBox
       Left = 839
-      Top = 32
+      Top = 64
       Width = 80
       Height = 17
       Alignment = taLeftJustify
@@ -283,10 +302,38 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+    object EdtManutencao: TDBEdit
+      Left = 766
+      Top = 24
+      Width = 192
+      Height = 24
+      Color = clBtnFace
+      Ctl3D = True
+      DataField = 'MANUTENCAO'
+      DataSource = DM.dsOrdemServico
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 13
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object BtnManutencao: TButton
+      Left = 951
+      Top = 14
+      Width = 28
+      Height = 28
+      Hint = 'Consultar/Cadastrar (Ctrl'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 14
+    end
   end
   inherited PProgramacao: TPanel
     Top = 178
-    Width = 1008
     Height = 65
     ExplicitTop = 178
     ExplicitWidth = 998
@@ -392,11 +439,10 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 247
-    Width = 1008
     Height = 113
     Align = alTop
     ExplicitTop = 247
-    ExplicitWidth = 1008
+    ExplicitWidth = 998
     ExplicitHeight = 113
     inherited Label3: TLabel
       Width = 179
@@ -447,7 +493,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
     object REDetalhes: TJvDBRichEdit
       AlignWithMargins = True
-      Left = 324
+      Left = 334
       Top = 21
       Width = 670
       Height = 88
@@ -464,26 +510,24 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ReadOnly = True
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
+      ExplicitLeft = 324
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 553
-    Width = 1012
-    ExplicitTop = 553
-    ExplicitWidth = 1012
+    Top = 563
+    ExplicitTop = 533
+    ExplicitWidth = 1002
   end
   inherited PAlertas: TPanel
-    Top = 537
-    Width = 1012
+    Top = 547
     TabOrder = 7
-    ExplicitTop = 537
+    ExplicitTop = 517
     ExplicitWidth = 1002
   end
   inherited PBase: TPanel
-    Top = 574
-    Width = 1008
+    Top = 584
     TabOrder = 5
-    ExplicitTop = 555
+    ExplicitTop = 554
     ExplicitWidth = 998
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
