@@ -261,6 +261,9 @@ type
     FDMemTManutCODORDEMSERVICO: TIntegerField;
     FDMemTLubrificCODORDEMSERVICO: TIntegerField;
     FDMemTRotaCODORDEMSERVICO: TIntegerField;
+    Label12: TLabel;
+    edtOficina: TEdit;
+    BtnOficina: TButton;
     procedure BtnOKClick(Sender: TObject);
     procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -281,6 +284,8 @@ type
     procedure chbTudoClick(Sender: TObject);
     procedure FDMemTLubrific1CalcFields(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
+    procedure edtOficinaDblClick(Sender: TObject);
+    procedure BtnOficinaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -289,7 +294,7 @@ type
 
 var
   FrmTelaInspConsulta: TFrmTelaInspConsulta;
-  LCodArea, LCodFamilia: String;
+  LCodArea, LCodFamilia, LCodOficina: String;
 
 implementation
 
@@ -747,6 +752,22 @@ begin
   end;
 end;
 
+procedure TFrmTelaInspConsulta.BtnOficinaClick(Sender: TObject);
+begin
+  inherited;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 200;
+    DM.FNomeConsulta := 'Oficinas';
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        LCodOficina     := DM.FCodCombo;
+        EdtOficina.Text := DM.FValorCombo;
+        CBPeriodo.OnChange(Sender);
+      end;
+  end;
+end;
+
 procedure TFrmTelaInspConsulta.BtnOKClick(Sender: TObject);
 var
   I: SmallInt;
@@ -802,7 +823,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                             , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString, DM.qryManutConsCODOFICINA.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString, DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString);
 
 
               DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -997,7 +1018,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                             , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString);
 
 
               DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -1195,7 +1216,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
                                                             , EmptyStr, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr);
 
               DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
@@ -1419,6 +1440,14 @@ begin
               GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODAREA = '+ QuotedStr(LCodArea);
           end;
 
+        if edtOficina.Text <> '' then
+          begin
+            if GrdManut.DataSource.DataSet.Filter = '' then
+              GrdManut.DataSource.DataSet.Filter := 'CODOFICINA = '+ QuotedStr(LCodOficina)
+            else
+              GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
+          end;
+
         GrdManut.DataSource.DataSet.Filtered := True;
 
         TSManut.Caption := 'Manutenções ('+ IntToStr(GrdManut.DataSource.DataSet.RecordCount)+')';
@@ -1449,6 +1478,14 @@ begin
               GrdLubrific.DataSource.DataSet.Filter := 'CODAREA = '+ QuotedStr(LCodArea)
             else
               GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODAREA = '+ QuotedStr(LCodArea);
+          end;
+
+        if edtOficina.Text <> '' then
+          begin
+            if GrdLubrific.DataSource.DataSet.Filter = '' then
+              GrdLubrific.DataSource.DataSet.Filter := 'CODOFICINA = '+ QuotedStr(LCodOficina)
+            else
+              GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
           end;
 
         GrdLubrific.DataSource.DataSet.Filtered := True;
@@ -1512,6 +1549,14 @@ begin
               GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODAREA = '+ QuotedStr(LCodArea);
           end;
 
+        if edtOficina.Text <> '' then
+          begin
+            if GrdManut.DataSource.DataSet.Filter = '' then
+              GrdManut.DataSource.DataSet.Filter := 'CODOFICINA = '+ QuotedStr(LCodOficina)
+            else
+              GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
+          end;
+
         if GrdManut.DataSource.DataSet.Filter = '' then
           GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
@@ -1550,7 +1595,14 @@ begin
               GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODAREA = '+ QuotedStr(LCodArea);
           end;
 
-        if GrdLubrific.DataSource.DataSet.Filter = '' then
+         if edtOficina.Text <> '' then
+          begin
+            if GrdLubrific.DataSource.DataSet.Filter = '' then
+              GrdLubrific.DataSource.DataSet.Filter := 'CODOFICINA = '+ QuotedStr(LCodOficina)
+            else
+              GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
+          end;
+                 if GrdLubrific.DataSource.DataSet.Filter = '' then
           GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
           GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
@@ -1651,6 +1703,20 @@ begin
   inherited;
   LCodFamilia := '';
   EdtFamiliaEquip.Text := '';
+
+  GrdManut.DataSource.DataSet.Filtered    := False;
+  GrdManut.DataSource.DataSet.Filter      := EmptyStr;
+  GrdLubrific.DataSource.DataSet.Filtered := False;
+  GrdLubrific.DataSource.DataSet.Filter   := EmptyStr;
+
+  CBPeriodo.OnChange(Sender);
+end;
+
+procedure TFrmTelaInspConsulta.edtOficinaDblClick(Sender: TObject);
+begin
+  inherited;
+  LCodOficina := '';
+  edtOficina.Text := '';
 
   GrdManut.DataSource.DataSet.Filtered    := False;
   GrdManut.DataSource.DataSet.Filter      := EmptyStr;

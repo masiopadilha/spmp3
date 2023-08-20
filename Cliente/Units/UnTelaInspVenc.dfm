@@ -1,41 +1,39 @@
 inherited FrmTelaInspVenc: TFrmTelaInspVenc
   BorderIcons = []
   Caption = 'Inspe'#231#245'es Vencidas'
-  ClientHeight = 564
-  ClientWidth = 928
+  ClientHeight = 544
+  ClientWidth = 918
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 940
   Constraints.MinHeight = 600
   Constraints.MinWidth = 940
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 940
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 924
+    Width = 914
     TabOrder = 1
-    ExplicitWidth = 914
+    ExplicitWidth = 920
     inherited BtnAjuda: TButton
       Left = 887
       Visible = False
-      ExplicitLeft = 877
+      ExplicitLeft = 883
     end
   end
   inherited PCentro: TPanel
-    Width = 922
-    Height = 425
+    Width = 912
+    Height = 405
     TabOrder = 2
-    ExplicitWidth = 912
-    ExplicitHeight = 405
+    ExplicitWidth = 918
+    ExplicitHeight = 422
     inherited RGTelas: TRadioGroup
       Top = 40
       Width = 920
       Height = 384
       ExplicitTop = 40
-      ExplicitWidth = 910
-      ExplicitHeight = 364
+      ExplicitWidth = 916
+      ExplicitHeight = 381
     end
     object PCInspecoes: TPageControl
       AlignWithMargins = True
@@ -46,8 +44,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       ActivePage = TSManut
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 904
-      ExplicitHeight = 358
+      ExplicitWidth = 910
+      ExplicitHeight = 375
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
         object GrdManut: TDBGrid
@@ -153,7 +151,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 904
+      ExplicitWidth = 910
       object Label6: TLabel
         Left = 7
         Top = 9
@@ -235,18 +233,18 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 497
-    Width = 924
+    Top = 477
+    Width = 914
     TabOrder = 3
-    ExplicitTop = 477
-    ExplicitWidth = 914
+    ExplicitTop = 494
+    ExplicitWidth = 920
   end
   inherited PBotoes: TPanel
-    Top = 524
-    Width = 924
+    Top = 504
+    Width = 914
     TabOrder = 0
-    ExplicitTop = 504
-    ExplicitWidth = 914
+    ExplicitTop = 521
+    ExplicitWidth = 920
     inherited BtnOK: TButton
       Left = 382
       Caption = 'Executar'

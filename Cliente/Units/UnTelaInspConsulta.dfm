@@ -7,12 +7,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnShow = FormShow
+  ExplicitLeft = -251
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     object Label9: TLabel [1]
       Left = 133
       Top = 36
@@ -27,8 +28,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 950
-      ExplicitLeft = 954
+      Left = 973
+      ExplicitLeft = 969
     end
     object BtnImprimir: TButton
       Left = 941
@@ -69,22 +70,23 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 996
-    ExplicitHeight = 485
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
       Align = alNone
       Columns = 2
       ExplicitTop = 3
+      ExplicitWidth = 500
       ExplicitHeight = 136
     end
     object PCInspecoes: TPageControl
       AlignWithMargins = True
       Left = 2
-      Top = 41
+      Top = 74
       Width = 1002
-      Height = 462
+      Height = 429
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
@@ -93,15 +95,15 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Align = alClient
       TabOrder = 1
       OnChange = PCInspecoesChange
-      ExplicitWidth = 996
-      ExplicitHeight = 451
+      ExplicitWidth = 998
+      ExplicitHeight = 426
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
         object PFundoManut: TPanel
           Left = 0
           Top = 0
           Width = 994
-          Height = 431
+          Height = 398
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -114,8 +116,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
           ParentBackground = False
           ParentCtl3D = False
           TabOrder = 0
-          ExplicitWidth = 988
-          ExplicitHeight = 420
+          ExplicitWidth = 990
+          ExplicitHeight = 395
           object Label1: TLabel
             Left = 12
             Top = 359
@@ -209,7 +211,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Left = 3
             Top = 3
             Width = 988
-            Height = 425
+            Height = 392
             Align = alClient
             DataSource = DM.dsManutCons
             DrawingStyle = gdsClassic
@@ -239,7 +241,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
           Left = 0
           Top = 0
           Width = 994
-          Height = 431
+          Height = 398
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -345,7 +347,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Left = 3
             Top = 3
             Width = 988
-            Height = 425
+            Height = 392
             Align = alClient
             DataSource = DM.dsLubrificCons
             DrawingStyle = gdsClassic
@@ -375,7 +377,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
           Left = 0
           Top = 0
           Width = 994
-          Height = 431
+          Height = 398
           Margins.Left = 1
           Margins.Top = 1
           Margins.Right = 1
@@ -393,7 +395,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Left = 3
             Top = 3
             Width = 988
-            Height = 425
+            Height = 392
             Align = alClient
             DataSource = DM.dsRotaCons
             DrawingStyle = gdsClassic
@@ -421,41 +423,55 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Left = 4
       Top = 3
       Width = 998
-      Height = 37
+      Height = 70
       Margins.Top = 2
       Margins.Bottom = 0
       Align = alTop
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 988
+      ExplicitWidth = 994
       object Label10: TLabel
-        Left = 8
-        Top = 8
+        Left = 18
+        Top = 12
         Width = 142
         Height = 16
         Alignment = taRightJustify
         Caption = 'Fam'#237'lia de Equipamento:'
       end
       object Label13: TLabel
-        Left = 449
-        Top = 8
+        Left = 293
+        Top = 12
         Width = 32
         Height = 16
         Alignment = taRightJustify
         Caption = #193'rea:'
       end
       object Label11: TLabel
-        Left = 773
-        Top = 9
+        Left = 838
+        Top = 12
         Width = 65
         Height = 16
         Alignment = taRightJustify
         Caption = 'Criticidade:'
       end
+      object Label12: TLabel
+        Left = 566
+        Top = 12
+        Width = 44
+        Height = 16
+        Alignment = taRightJustify
+        Caption = 'Oficina:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object BtnFamiliaEquip: TButton
-        Left = 386
-        Top = 4
+        Left = 242
+        Top = 29
         Width = 28
         Height = 28
         Hint = 'Consultar'
@@ -469,8 +485,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         OnClick = BtnFamiliaEquipClick
       end
       object BtnArea: TButton
-        Left = 717
-        Top = 4
+        Left = 515
+        Top = 29
         Width = 28
         Height = 28
         Hint = 'Consultar/Cadastrar (Ctrl'
@@ -484,14 +500,14 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         OnClick = BtnAreaClick
       end
       object CBCriticidade: TComboBox
-        Left = 842
-        Top = 7
-        Width = 147
+        Left = 838
+        Top = 32
+        Width = 152
         Height = 22
         Style = csOwnerDrawFixed
         Color = clBtnFace
         ItemIndex = 3
-        TabOrder = 4
+        TabOrder = 6
         Text = 'Todas'
         OnChange = CBCriticidadeChange
         Items.Strings = (
@@ -501,9 +517,9 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
           'Todas')
       end
       object edtArea: TEdit
-        Left = 485
-        Top = 6
-        Width = 230
+        Left = 292
+        Top = 31
+        Width = 217
         Height = 24
         Hint = 'D'#234' duplo-clique para excluir o filtro.'
         Color = clBtnFace
@@ -515,9 +531,9 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         OnDblClick = edtAreaDblClick
       end
       object EdtFamiliaEquip: TEdit
-        Left = 154
-        Top = 6
-        Width = 230
+        Left = 18
+        Top = 31
+        Width = 217
         Height = 24
         Hint = 'D'#234' duplo-clique para excluir o filtro.'
         Color = clBtnFace
@@ -528,13 +544,42 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         StyleElements = [seBorder]
         OnDblClick = EdtFamiliaEquipDblClick
       end
+      object edtOficina: TEdit
+        Left = 566
+        Top = 31
+        Width = 217
+        Height = 24
+        Hint = 'D'#234' duplo-clique para excluir o filtro.'
+        Color = clBtnFace
+        ParentShowHint = False
+        ReadOnly = True
+        ShowHint = True
+        TabOrder = 4
+        StyleElements = [seBorder]
+        OnDblClick = edtOficinaDblClick
+      end
+      object BtnOficina: TButton
+        Left = 790
+        Top = 29
+        Width = 28
+        Height = 29
+        Hint = 'Consultar/Cadastrar (Ctrl'
+        DisabledImageIndex = 14
+        ImageAlignment = iaCenter
+        ImageIndex = 14
+        Images = DM.ImageListBotoes
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 5
+        OnClick = BtnOficinaClick
+      end
     end
   end
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 566
-    ExplicitWidth = 1002
+    ExplicitTop = 574
+    ExplicitWidth = 1004
     object chbTudo: TCheckBox
       AlignWithMargins = True
       Left = 899
@@ -546,14 +591,14 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Caption = 'Marcar todas'
       TabOrder = 0
       OnClick = chbTudoClick
-      ExplicitLeft = 893
+      ExplicitLeft = 895
     end
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 593
-    ExplicitWidth = 1002
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 423
       Caption = 'Executar'

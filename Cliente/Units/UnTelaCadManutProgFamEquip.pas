@@ -73,6 +73,7 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnMonitoramentoClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
+    procedure BtnManutencaoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,7 +90,8 @@ implementation
 uses UnTelaConsulta, UnTelaCadFamiliaEquipamento,
   UnTelaCadMonitoramento, UnTelaCadTipoProgramacao,
   UnDmRelatorios, UnTelaCadManutProgFamEquipPartes,
-  UnTelaCadManutProgFamEquipPartesItens, UnDM, UnTelaCadOficinas;
+  UnTelaCadManutProgFamEquipPartesItens, UnDM, UnTelaCadOficinas,
+  UnTelaCadTipoManutencao;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -163,6 +165,44 @@ DM.FTela            := 'CADMANUTPROG';
 DM.FDataSetParam    := DM.qryManutProgFamEquip;
 DM.FDataSourceParam := DM.dsManutProgFamEquip;
 DM.FTabela_auxiliar := 34;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.BtnManutencaoClick(Sender: TObject);
+begin
+  inherited;
+if DM.qryManutProgFamEquip.Active = False then Exit;
+if DM.qryManutProgFamEquip.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 100;
+    DM.FNomeConsulta := 'Tipos de Manutenções';
+    DM.qryManutProgFamEquip.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryManutProgFamEquipCODMANUTENCAO.AsString := DM.FCodCombo;
+        DM.qryManutProgFamEquipMANUTENCAO.AsString    := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADMANUTENCAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryTipoManutencaoCODIGO, DM.qryFormatoCodigoTIPOMANUTENCAO, FrmTelaCadTipoManutencao) = False then exit;
+      Application.CreateForm(TFrmTelaCadTipoManutencao, FrmTelaCadTipoManutencao);
+      FrmTelaCadTipoManutencao.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadTipoManutencao);
+    End;
+  end;
+DM.FTela            := 'CADMANUTPROG';
+DM.FDataSetParam    := DM.qryManutProgFamEquip;
+DM.FDataSourceParam := DM.dsManutProgFamEquip;
+DM.FTabela_auxiliar := 34;
+
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnMonitoramentoClick(Sender: TObject);
@@ -290,6 +330,10 @@ if DM.qryManutProgFamEquipCODFAMILIAEQUIP.IsNull = True then
 if DM.qryManutProgFamEquipCODOFICINA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO REGISTRO!'; EdtDescOficina.SetFocus; Abort;
+  end;
+if DM.qryManutProgFamEquipCODOFICINA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A MANUTENÇÃO DO REGISTRO!'; EdtManutencao.SetFocus; Abort;
   end;
 
 EdtCodManutencao.ReadOnly := True;

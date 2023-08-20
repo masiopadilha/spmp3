@@ -7,7 +7,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, frxRich, frxDMPExport,  frxExportBaseDialog, frxExportCSV, frxExportText,
-  frxExportXLSX, frxExportPDF, frxExportMail;
+  frxExportXLSX, frxExportPDF, frxExportMail, frxExportXLS;
 
 type
   TDmRelatorios = class(TDataModule)
@@ -314,7 +314,6 @@ type
     frxDBOrdemServicoGerenciaRelatMObraProgOS: TfrxDBDataset;
     frxDBOrdemServicoGerenciaRelatMObraUtilOS: TfrxDBDataset;
     frxROrdemServicoGeralCompleta: TfrxReport;
-    frxReport1: TfrxReport;
     frxROrdemServicoGeral: TfrxReport;
     frxCSVExport1: TfrxCSVExport;
     frxXLSXExport1: TfrxXLSXExport;
@@ -329,6 +328,7 @@ type
     frxDBChecklistLubrificPlanoTrab: TfrxDBDataset;
     frxRChecklistLubrificProgEquip: TfrxReport;
     frxREquipamentosHist: TfrxReport;
+    frxXLSExport1: TfrxXLSExport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

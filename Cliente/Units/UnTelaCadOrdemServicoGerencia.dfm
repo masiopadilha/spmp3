@@ -8,12 +8,13 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   OnShow = FormShow
+  ExplicitLeft = -251
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     object Label9: TLabel [1]
       Left = 679
       Top = 22
@@ -51,7 +52,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     inherited BtnAjuda: TButton
       Left = 965
-      ExplicitLeft = 955
+      ExplicitLeft = 961
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -115,8 +116,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 996
-    ExplicitHeight = 485
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -137,7 +138,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 0
-      ExplicitWidth = 988
+      ExplicitWidth = 994
       object BtnCadastro: TButton
         Left = 6
         Top = 7
@@ -400,7 +401,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 988
+      ExplicitWidth = 994
       object chkNProg: TCheckBox
         Left = 6
         Top = 5
@@ -558,7 +559,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 988
+      ExplicitWidth = 994
       object Label6: TLabel
         Left = 6
         Top = 5
@@ -724,8 +725,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 557
-    ExplicitWidth = 998
+    ExplicitTop = 574
+    ExplicitWidth = 1004
     object Label2: TLabel
       Left = 919
       Top = 4
@@ -744,8 +745,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 584
-    ExplicitWidth = 998
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 100
       Visible = False

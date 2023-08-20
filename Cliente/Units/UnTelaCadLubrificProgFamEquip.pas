@@ -48,6 +48,10 @@ type
     Label28: TLabel;
     Label11: TLabel;
     EdtDias: TDBEdit;
+    Label12: TLabel;
+    EdtManutencao: TDBEdit;
+    BtnManutencao: TButton;
+    Label21: TLabel;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -69,6 +73,7 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnMonitoramentoClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
+    procedure BtnManutencaoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,7 +91,7 @@ implementation
 uses UnTelaConsulta, UnTelaCadFamiliaEquipamento,
   UnTelaCadMonitoramento, UnDmRelatorios,
   UnTelaCadLubrificProgFamEquipPartes, UnTelaCadLubrificProgFamEquipPartesItens,
-  UnDM, UnTelaCadOficinas;
+  UnDM, UnTelaCadOficinas, UnTelaCadTipoManutencao;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -150,6 +155,43 @@ else
       FrmTelaCadFamiliaEquipamento.ShowModal;
     Finally
       FreeAndNil(FrmTelaCadFamiliaEquipamento);
+    End;
+  end;
+DM.FTela            := 'CADLUBRIFICPROG';
+DM.FDataSetParam    := DM.qryLubrificProgFamEquip;
+DM.FDataSourceParam := DM.dsLubrificProgFamEquip;
+DM.FTabela_auxiliar := 35;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.BtnManutencaoClick(Sender: TObject);
+begin
+  inherited;
+if DM.qryLubrificProgFamEquip.Active = False then Exit;
+if DM.qryLubrificProgFamEquip.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 100;
+    DM.FNomeConsulta := 'Tipos de Manutenções';
+    DM.qryLubrificProgFamEquip.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryLubrificProgFamEquipCODMANUTENCAO.AsString := DM.FCodCombo;
+        DM.qryLubrificProgFamEquipMANUTENCAO.AsString    := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADMANUTENCAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryTipoManutencaoCODIGO, DM.qryFormatoCodigoTIPOMANUTENCAO, FrmTelaCadTipoManutencao) = False then exit;
+      Application.CreateForm(TFrmTelaCadTipoManutencao, FrmTelaCadTipoManutencao);
+      FrmTelaCadTipoManutencao.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadTipoManutencao);
     End;
   end;
 DM.FTela            := 'CADLUBRIFICPROG';
@@ -285,7 +327,10 @@ if DM.qryLubrificProgFamEquipCODOFICINA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO REGISTRO!'; EdtDescOficina.SetFocus; Abort;
   end;
-
+if DM.qryLubrificProgFamEquipCODMANUTENCAO.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A MANUTENÇÃO DO REGISTRO!'; EdtManutencao.SetFocus; Abort;
+  end;
 EdtCodLubrificacao.ReadOnly := True;
 
 DM.MSGAguarde('');
