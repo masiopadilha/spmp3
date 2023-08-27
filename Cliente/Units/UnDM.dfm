@@ -4777,6 +4777,8 @@ object DM: TDM
       '    , `CODUSUARIOALT`'
       '    , `OBSERVACOES`'
       '    , `CODOFICINA` '
+      '    , `CODMANUTENCAO` '
+      ''
       'FROM'
       '    `ordemservico`'
       'WHERE (`CODIGO` = :codigo);')
@@ -5039,6 +5041,12 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'CODOFICINA'
       Origin = 'CODOFICINA'
+      Size = 9
+    end
+    object qryGerarOSCODMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
       Size = 9
     end
   end

@@ -105,35 +105,6 @@ begin
   else
     DM.qryFuncionariosHist.First;
 
-  //LNumAus := 0;
-  //DM.qryFuncionariosHistAusencias.Close;
-  //DM.qryFuncionariosHistAusencias.Params[0].AsString := DM.FCodEmpresa;
-  //DM.qryFuncionariosHistAusencias.Params[1].AsString := DM.FParamAuxiliar[0];
-  //DM.qryFuncionariosHistAusencias.Params[2].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
-  //DM.qryFuncionariosHistAusencias.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
-  //DM.qryFuncionariosHistAusencias.Open;
-  //while not DM.qryFuncionariosHistAusencias.Eof = True do
-  //  begin
-  //   if (DM.qryFuncionariosHistAusenciasINICIO.AsDateTime >= DM.FDataConsulta1)
-  //     and (DM.qryFuncionariosHistAusenciasFIM.AsDateTime <= DM.FDataConsulta2) then
-  //       LNumAus := LNumAus + DaysBetween(DM.qryFuncionariosHistAusenciasINICIO.AsDateTime, DM.qryFuncionariosHistAusenciasFIM.AsDateTime) + 1
-  //   else
-  //   if (DM.qryFuncionariosHistAusenciasINICIO.AsDateTime >= DM.FDataConsulta1)
-  //     and (DM.qryFuncionariosHistAusenciasFIM.AsDateTime > DM.FDataConsulta2) then
-  //       LNumAus := LNumAus + DaysBetween(DM.qryFuncionariosHistAusenciasINICIO.AsDateTime, DM.FDataConsulta2) + 1
-  //   else
-  //   if (DM.qryFuncionariosHistAusenciasINICIO.AsDateTime < DM.FDataConsulta1)
-  //     and (DM.qryFuncionariosHistAusenciasFIM.AsDateTime <= DM.FDataConsulta2) then
-  //       LNumAus := LNumAus + DaysBetween(DM.FDataConsulta1, DM.qryFuncionariosHistAusenciasFIM.AsDateTime) + 1
-  //   else
-  //   if (DM.qryFuncionariosHistAusenciasINICIO.AsDateTime < DM.FDataConsulta1)
-  //     and (DM.qryFuncionariosHistAusenciasFIM.AsDateTime > DM.FDataConsulta2) then
-  //       LNumAus := LNumAus + DaysBetween(DM.FDataConsulta1, DM.FDataConsulta2) + 1;
-  //
-  //   DM.qryFuncionariosHistAusencias.Next;
-  //  end;
-
-  //LblAusencias.Caption := FormatFloat('00', LNumAus);
   DM.MSGAguarde('', False);
 end;
 

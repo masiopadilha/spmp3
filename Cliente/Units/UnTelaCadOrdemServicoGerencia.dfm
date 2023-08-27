@@ -8,7 +8,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   OnShow = FormShow
-  ExplicitLeft = -251
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16

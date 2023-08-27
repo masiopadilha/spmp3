@@ -7,15 +7,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
     Height = 62
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     ExplicitHeight = 62
     inherited Image1: TImage
       Top = 4
@@ -58,7 +56,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     inherited BtnAjuda: TButton
       Left = 970
       TabOrder = 3
-      ExplicitLeft = 960
+      ExplicitLeft = 966
     end
     object BtnConsultar: TButton
       Left = 603
@@ -138,13 +136,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     Width = 1006
     Height = 503
     ExplicitTop = 69
-    ExplicitWidth = 996
-    ExplicitHeight = 483
+    ExplicitWidth = 1002
+    ExplicitHeight = 500
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 501
-      ExplicitWidth = 994
-      ExplicitHeight = 481
+      ExplicitWidth = 1000
+      ExplicitHeight = 498
     end
     object PFundo: TPanel
       AlignWithMargins = True
@@ -156,8 +154,8 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 988
-      ExplicitHeight = 475
+      ExplicitWidth = 994
+      ExplicitHeight = 492
       object GrdManutencoes: TDBGrid
         AlignWithMargins = True
         Left = 5
@@ -403,14 +401,14 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 557
-    ExplicitWidth = 998
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 584
-    ExplicitWidth = 998
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 100
       Visible = False

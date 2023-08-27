@@ -1173,26 +1173,14 @@ procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDblClick(
   Sender: TObject);
 begin
   inherited;
-//  if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
-    with DM.qryOrdemServico do
-      begin
-        Close;
-        Params[0].AsString := DM.FCodEmpresa;
-        Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
-        Open;
-        Edit;
-//        if DM.qryOrdemServicoServSolic.Active = False then DM.qryOrdemServicoServSolic.Open;
-//        if DM.qryOrdemServicoServExec.Active = False then DM.qryOrdemServicoServExec.Open;
-//        if DM.qryOrdemServicoEquipe.Active = False then DM.qryOrdemServicoEquipe.Open;
-//        if DM.qryOrdemServicoEquipeMObra.Active = False then DM.qryOrdemServicoEquipeMObra.Open;
-//        if DM.qryOrdemServicoEquipePecas.Active = False then DM.qryOrdemServicoEquipePecas.Open;
-//        if DM.qryOrdemServicoEquipeRecursos.Active = False then DM.qryOrdemServicoEquipeRecursos.Open;
-//        if DM.qryOrdemServicoEquipePlanoTrab.Active = False then DM.qryOrdemServicoEquipePlanoTrab.Open;
-//        if DM.qryOrdemServicoEquipeMObraUtil.Active = False then DM.qryOrdemServicoEquipeMObraUtil.Open;
-//        if DM.qryOrdemServicoEquipePecasUtil.Active = False then DM.qryOrdemServicoEquipePecasUtil.Open;
-//        if DM.qryOrdemServicoEquipeRecursosUtil.Active = False then DM.qryOrdemServicoEquipeRecursosUtil.Open;
-      end;
-  //RGConsSimples.ItemIndex := 8;
+  with DM.qryOrdemServico do
+    begin
+      Close;
+      Params[0].AsString := DM.FCodEmpresa;
+      Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+      Open;
+      Edit;
+    end;
   BtnCadastro.OnClick(Sender);
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDrawColumnCell(

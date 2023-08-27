@@ -5548,6 +5548,7 @@ type
     qryManutConsCODMANUTENCAO: TStringField;
     qryLubrificConsCODMANUTENCAO: TStringField;
     qryGerarOSCODOFICINA: TStringField;
+    qryGerarOSCODMANUTENCAO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -7585,6 +7586,7 @@ if CentroCusto  <> EmptyStr          then qryGerarOSCODCENTROCUSTO.AsString     
 if Observacoes  <> EmptyStr          then qryGerarOSOBSERVACOES.AsString          := Observacoes;
 if tempototal   <> EmptyStr          then qryGerarOSTEMPOPREVISTO.AsFloat         := StrToFloat(tempototal);
 if Oficina      <> EmptyStr          then qryGerarOSCODOFICINA.AsString           := Oficina;
+if TipoManutencao <> EmptyStr        then qryGerarOSCODMANUTENCAO.AsString      := TipoManutencao;
 qryGerarOSCODEMPRESA.AsString        := CodEmpresa;
 qryGerarOSDESCRICAO.AsString         := Descricao;
 qryGerarOSEQUIPPARADO.AsString       := 'S';

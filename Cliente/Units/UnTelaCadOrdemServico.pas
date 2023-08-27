@@ -1072,6 +1072,7 @@ DM.qryOrdemServicoEquipePlanoTrab.Open;
 
 if DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA'    then begin PSituacao.Caption := 'SOLICITADA';    PSituacao.Color := clWhite;  PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA'    then begin PSituacao.Caption := 'CADASTRADA';    PSituacao.Color := clYellow; PSituacao.Font.Color := clRed;    end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA'     then begin PSituacao.Caption := 'DETALHADA';     PSituacao.Color := clYellow; PSituacao.Font.Color := clGreen;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
