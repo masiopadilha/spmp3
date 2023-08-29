@@ -1,12 +1,8 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
-  ClientHeight = 624
-  ClientWidth = 1012
   OnShow = FormShow
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     inherited LblDataCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
     end
@@ -21,7 +17,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     ExplicitWidth = 1004
     object Label5: TLabel
       Left = 57
@@ -204,7 +199,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 165
     ExplicitWidth = 1004
     ExplicitHeight = 165
@@ -503,8 +497,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PDiversos: TPanel
     Top = 320
-    Width = 1008
-    Height = 225
+    Height = 222
     ExplicitTop = 320
     ExplicitWidth = 1004
     ExplicitHeight = 222
@@ -600,20 +593,17 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 563
-    Width = 1012
+    Top = 560
     ExplicitTop = 560
     ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 547
-    Width = 1012
+    Top = 544
     ExplicitTop = 544
     ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 584
-    Width = 1008
+    Top = 581
     ExplicitTop = 581
     ExplicitWidth = 1004
   end

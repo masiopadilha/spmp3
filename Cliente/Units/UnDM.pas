@@ -5549,6 +5549,12 @@ type
     qryLubrificConsCODMANUTENCAO: TStringField;
     qryGerarOSCODOFICINA: TStringField;
     qryGerarOSCODMANUTENCAO: TStringField;
+    qryLubrificProgFamEquipEQUIPPARADO: TStringField;
+    qryManutProgFamEquipEQUIPPARADO: TStringField;
+    qryManutProgEquipEQUIPPARADO: TStringField;
+    qryLubrificProgEquipEQUIPPARADO: TStringField;
+    qryManutConsEQUIPPARADO: TStringField;
+    qryLubrificConsEQUIPPARADO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5653,7 +5659,7 @@ type
     function PasswordInputBox(const ACaption, APrompt:string): string;
     function VerificaPrimeiroAcesso:Boolean;
     function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao, Lubrificacao, Rota, SolicTrab, Matricula,
-                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao: String): Integer;
+                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
@@ -5821,27 +5827,27 @@ begin
         end;
       end;
 
-    //Armazeno a versão da aplicação atualmente em uso
+    //Armazeno a versï¿½o da aplicaï¿½ï¿½o atualmente em uso
     versao_local := GetBuildInfo(GetCurrentDir + '\SPMP3.exe');
-    //Armazeno a versão do aplicação que esta disponivel no servidor
+    //Armazeno a versï¿½o do aplicaï¿½ï¿½o que esta disponivel no servidor
     versao_servidor := GetBuildInfo(local_arquivo_servidor);
 
-    //Comparo as versões
+    //Comparo as versï¿½es
     if versao_local <> versao_servidor then
       begin
-        //Guardo na váriavel o tamanho do arquivo que esta no servidor
+        //Guardo na vï¿½riavel o tamanho do arquivo que esta no servidor
         tamanho_original := DSiFileSize(local_arquivo_servidor);
 
-        //Copio a versão que esta no servidor para o computador atual
+        //Copio a versï¿½o que esta no servidor para o computador atual
         CopyFile(PChar(local_arquivo_servidor),PChar(GetCurrentDir+'\SPMP3.new'),False);
 
-        //Guardo na váriavel o tamanho do arquivo copiado
+        //Guardo na vï¿½riavel o tamanho do arquivo copiado
         tamanho_recebido := DSiFileSize(GetCurrentDir+'\SPMP3.new');
 
         //Verifico se o arquivo copiado chegou intacto
         if tamanho_original = tamanho_recebido then
           begin
-            //Apago se existir versão antiga
+            //Apago se existir versï¿½o antiga
             DeleteFile('SPMP3.old');
 
             //Renomeio o arquivo atual
@@ -5850,30 +5856,30 @@ begin
             //Renomeio o arquivo novo para poder usa-lo
             RenameFile('SPMP3.new', 'SPMP3.exe');
 
-            //Informo que a aplicação foi atualizado com sucesso
-            LMensagem := PChar('Atualização aplicada com sucesso!' + #13 +
-                               'Versão anterior: ' + versao_local + #13 +
-                               'Nova versão: ' + versao_servidor + #13 +
-                               'O aplicativo será reiniciado.');
+            //Informo que a aplicaï¿½ï¿½o foi atualizado com sucesso
+            LMensagem := PChar('Atualizaï¿½ï¿½o aplicada com sucesso!' + #13 +
+                               'Versï¿½o anterior: ' + versao_local + #13 +
+                               'Nova versï¿½o: ' + versao_servidor + #13 +
+                               'O aplicativo serï¿½ reiniciado.');
             Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONINFORMATION);
 
-            //Mando abrir a nova versão do teclado
+            //Mando abrir a nova versï¿½o do teclado
 //            ShellExecute(0,Nil,PChar(GetCurrentDir+'\SPMP3.exe'),'', Nil, SW_SHOWNORMAL);
 
-            //Fecho a aplicação e abro novamente
+            //Fecho a aplicaï¿½ï¿½o e abro novamente
             ShellExecute(0, 'open', 'c:\spmp3\UpdateVersion.bat', nil, nil, SW_HIDE);
           end
         else
           begin
-            //Caso o arquivo copiado não seja copiado com sucesso
-            LMensagem := PChar('Atualização falhou, favor tentar novamente!');
+            //Caso o arquivo copiado nï¿½o seja copiado com sucesso
+            LMensagem := PChar('Atualizaï¿½ï¿½o falhou, favor tentar novamente!');
             Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONERROR);
           end;
       end
     else
       begin
-        //Se a aplicação já estiver atualizada
-        LMensagem := PChar('Aplicativo já possui a ultima atualização disponível!');
+        //Se a aplicaï¿½ï¿½o jï¿½ estiver atualizada
+        LMensagem := PChar('Aplicativo jï¿½ possui a ultima atualizaï¿½ï¿½o disponï¿½vel!');
         Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONINFORMATION);
       end;
   except
@@ -5881,7 +5887,7 @@ begin
       begin
         Application.ProcessMessages;
 
-        LMensagem := PChar('Ocorreu um erro ao tentar realizar a atualização.' + #13 +
+        LMensagem := PChar('Ocorreu um erro ao tentar realizar a atualizaï¿½ï¿½o.' + #13 +
                            'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
                            'Mensagem de erro: "' + E.Message+'"');
         Application.MessageBox(LMensagem, 'SPMP3' , MB_OK+MB_ICONERROR);
@@ -5964,12 +5970,12 @@ begin
 //    IdTCPClient1.ReadTimeout    := 2000;
 //    IdTCPClient1.ConnectTimeout := 2000;
 //    IdTCPClient1.Port           := 52215;
-//    IdTCPClient1.Host           := DM.FHost; // ip é um campo que o usuario sete qual o ip da maquina servidora
+//    IdTCPClient1.Host           := DM.FHost; // ip ï¿½ um campo que o usuario sete qual o ip da maquina servidora
 //    IdTCPClient1.Connect;
 //    IdTCPClient1.Disconnect;
 //    FDConnSPMP3.Tag := 0;
 //  Except
-//    MessageDlg('ERRO DE CONEXÃO'+#13+'Houve perda de conexão com o servidor, o sistema será fechado!', mtError, [mbOK], 0);
+//    MessageDlg('ERRO DE CONEXï¿½O'+#13+'Houve perda de conexï¿½o com o servidor, o sistema serï¿½ fechado!', mtError, [mbOK], 0);
 //    FDConnSPMP3.Connected := False;
 //    //Application.Terminate;
 //  End;
@@ -6233,7 +6239,7 @@ begin
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
-                                                    + ' AND `celulas`.`TIPO` = ''Mecânica'''
+                                                    + ' AND `celulas`.`TIPO` = ''Mecï¿½nica'''
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6252,7 +6258,7 @@ begin
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
-                                                    + ' AND `celulas`.`TIPO` = ''Elétrica'''
+                                                    + ' AND `celulas`.`TIPO` = ''Elï¿½trica'''
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6290,7 +6296,7 @@ begin
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
-                                                    + ' AND `celulas`.`TIPO` = ''Apoio Técnico'''
+                                                    + ' AND `celulas`.`TIPO` = ''Apoio Tï¿½cnico'''
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
                                                     + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
@@ -6360,14 +6366,14 @@ procedure TDM.qryLubrificConsCalcFields(DataSet: TDataSet);
 begin
 qryLubrificConsC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), DateOf(qryLubrificConsDTAINICIO1.AsDateTime));
 
-//Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a lubrificação foi fechada ou não.
-if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a lubrificaï¿½ï¿½o foi fechada ou nï¿½o.
+if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programaï¿½ï¿½o' then
   begin
     qryLubrificConsC_PROXINSP.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger);
   end;
-//Sendo a inspeção reprogramada pela execução, definir como lubrificação em aberto até ser efetuado o fechamento, portanto não permitindo
-//a geração de outra lubrificação mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra lubrificação até ser fechada.
-if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execução' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como lubrificaï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+//a geraï¿½ï¿½o de outra lubrificaï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra lubrificaï¿½ï¿½o atï¿½ ser fechada.
+if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
   begin
     if (DM.qryLubrificConsRELATORIO.AsString = 'S') then
       qryLubrificConsC_PROXINSP.AsDateTime := 0;
@@ -6381,13 +6387,13 @@ if FrmTelaInspConsulta <> nil then
       begin
         case CBPeriodo.ItemIndex of
           0: qryLubrificConsPERIODO.AsString := 'Vencidas';
-          1: qryLubrificConsPERIODO.AsString := 'Próximos 7 dias';
-          2: qryLubrificConsPERIODO.AsString := 'Próximos 15 dias';
-          3: qryLubrificConsPERIODO.AsString := 'Próximos 30 dias';
-          4: qryLubrificConsPERIODO.AsString := 'Próximos 60 dias';
-          5: qryLubrificConsPERIODO.AsString := 'Próximos 90 dias';
-          6: qryLubrificConsPERIODO.AsString := 'Próximos 180 dias';
-          7: qryLubrificConsPERIODO.AsString := 'Próximos 365 dias';
+          1: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 7 dias';
+          2: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 15 dias';
+          3: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 30 dias';
+          4: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 60 dias';
+          5: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 90 dias';
+          6: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 180 dias';
+          7: qryLubrificConsPERIODO.AsString := 'Prï¿½ximos 365 dias';
         end;
       end;
   end;
@@ -6512,14 +6518,14 @@ procedure TDM.qryManutConsCalcFields(DataSet: TDataSet);
 begin
 qryManutConsC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), DateOf(qryManutConsDTAINICIO1.AsDateTime));
 
-//Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
-if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a manutenï¿½ï¿½o foi fechada ou nï¿½o.
+if DM.qryManutConsREPROGRAMAR1.AsString = 'Programaï¿½ï¿½o' then
   begin
     qryManutConsC_PROXINSP.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger);
   end;
-//Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
-//a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
-if DM.qryManutConsREPROGRAMAR1.AsString = 'Execução' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como manutenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+//a geraï¿½ï¿½o de outra manutenï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra manutenï¿½ï¿½o atï¿½ ser fechada.
+if DM.qryManutConsREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
   begin
     if (DM.qryManutConsRELATORIO.AsString = 'S') then
       qryManutConsC_PROXINSP.AsDateTime := 0;
@@ -6533,13 +6539,13 @@ if FrmTelaInspConsulta <> nil then
       begin
         case CBPeriodo.ItemIndex of
           0: qryManutConsPERIODO.AsString := 'Vencidas';
-          1: qryManutConsPERIODO.AsString := 'Próximos 7 dias';
-          2: qryManutConsPERIODO.AsString := 'Próximos 15 dias';
-          3: qryManutConsPERIODO.AsString := 'Próximos 30 dias';
-          4: qryManutConsPERIODO.AsString := 'Próximos 60 dias';
-          5: qryManutConsPERIODO.AsString := 'Próximos 90 dias';
-          6: qryManutConsPERIODO.AsString := 'Próximos 180 dias';
-          7: qryManutConsPERIODO.AsString := 'Próximos 365 dias';
+          1: qryManutConsPERIODO.AsString := 'Prï¿½ximos 7 dias';
+          2: qryManutConsPERIODO.AsString := 'Prï¿½ximos 15 dias';
+          3: qryManutConsPERIODO.AsString := 'Prï¿½ximos 30 dias';
+          4: qryManutConsPERIODO.AsString := 'Prï¿½ximos 60 dias';
+          5: qryManutConsPERIODO.AsString := 'Prï¿½ximos 90 dias';
+          6: qryManutConsPERIODO.AsString := 'Prï¿½ximos 180 dias';
+          7: qryManutConsPERIODO.AsString := 'Prï¿½ximos 365 dias';
         end;
       end;
   end;
@@ -6656,8 +6662,8 @@ begin
   if FrmTelaInspVenc <> nil then
     begin
       if DM.qryManutVenc.Active = True then
-        FrmTelaInspVenc.TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
-      //FrmTelaInspVenc.TSLubrific.Caption := 'Lubrificações ('+ IntToStr(CMWeb.CDCadLubrificVenc.RecordCount)+')';
+        FrmTelaInspVenc.TSManut.Caption := 'Manutenï¿½ï¿½es ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
+      //FrmTelaInspVenc.TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+ IntToStr(CMWeb.CDCadLubrificVenc.RecordCount)+')';
     end;
 end;
 
@@ -6843,528 +6849,528 @@ if FrmTelaCadPneusChassi <> nil then
     begin
       if DM.qryPneusChassiCHASSI.AsString = 'Carregadeira de Pneus' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito'  then
             begin BtnPneu.Left := 58; BtnPneu.Top := 24; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin BtnPneu.Left := 58; BtnPneu.Top := 126; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito'   then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Direito'   then
             begin BtnPneu.Left := 163; BtnPneu.Top := 24; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Esquerdo'  then
             begin BtnPneu.Left := 163; BtnPneu.Top := 126; end;
         end;
       if (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Frontal') or (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Trazeiro') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito'  then
             begin BtnPneu.Left := 25; BtnPneu.Top := 19; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin BtnPneu.Left := 25; BtnPneu.Top := 97; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito'   then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Direito'   then
             begin BtnPneu.Left := 172; BtnPneu.Top := 19; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Esquerdo'  then
             begin BtnPneu.Left := 172; BtnPneu.Top := 97; end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 1 Eixo' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 2 Eixos' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 3 Eixos' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/2 Eixos C/Diferencial Frontal') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/2 Eixos C/Diferencial Frontal') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 92;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/2 Eixos C/Diferencial Trazeiro') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/2 Eixos C/Diferencial Trazeiro') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 92;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/Diferencial Frontal') or (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/Diferencial Trazeiro') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/Diferencial Frontal') or (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/Diferencial Trazeiro') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 92;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecânico C/Diferencial Trazeiro') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Cavalo Mecï¿½nico C/Diferencial Trazeiro') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 92;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Ônibus C/ 2 Eixos') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'ï¿½nibus C/ 2 Eixos') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 20;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 100;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 95;
             end;
         end;
-      if DM.qryPneusChassiCHASSI.AsString = 'Ônibus C/ 3 Eixos' then
+      if DM.qryPneusChassiCHASSI.AsString = 'ï¿½nibus C/ 3 Eixos' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 20;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 100;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 95;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 95;
             end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Patrol' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 00; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 00; BtnPneu.Top := 114;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 200; BtnPneu.Top := 23;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 200; BtnPneu.Top := 124;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 270; BtnPneu.Top := 23;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 270; BtnPneu.Top := 124;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhão C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhão C/Diferencial Frontal') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhï¿½o C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhï¿½o C/Diferencial Frontal') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 20; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 20; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 92;
             end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhão C/Diferencial Trazeiro') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhï¿½o C/Diferencial Trazeiro') then
         begin
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
               begin
                 BtnPneu.Left := 20; BtnPneu.Top := 25;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
               begin
                 BtnPneu.Left := 20; BtnPneu.Top := 105;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 27;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 101;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 37;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 92;
               end;
         end;
-      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhão C/Diferencial Triplo') then
+      if (DM.qryPneusChassiCHASSI.AsString = 'Pick-Up/Caminhï¿½o C/Diferencial Triplo') then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 20; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 20; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 158; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 158; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 158; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 158; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4ï¿½ Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 92;
             end;
         end;
     if DM.qryPneusChassiCHASSI.AsString = 'Trator' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Direito' then
             begin
               BtnPneu.Left := 12; BtnPneu.Top := 32;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1ï¿½ Eixo Dianteiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 12; BtnPneu.Top := 112;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 145; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2ï¿½ Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 145; BtnPneu.Top := 123;
             end;
@@ -7417,7 +7423,7 @@ DM.qryTotalEquipHora.Filtered := False;
 DM.qryTotalEquipHora.Filter   := 'CODIGO = ' + QuotedStr(DM.qryRelatGerencDispEquipCODIGO.AsString);
 DM.qryTotalEquipHora.Filtered := True;
 
-//if CMWeb.CDRelatGerencDispEquipCODIGO.AsString = 'ENV 05-003' then ShowMessage('Já');
+//if CMWeb.CDRelatGerencDispEquipCODIGO.AsString = 'ENV 05-003' then ShowMessage('Jï¿½');
 
 DM.FTotalHorasParadas := DM.qryRelatGerencDispEquipHORASPARADASABERTAS.AsFloat + DM.qryRelatGerencDispEquipHORASPARADASFECHADAS.AsFloat;  //CMWeb.HorasParadasEquipamento(CMWeb.CDRelatGerencDispEquipCODIGO.AsString, EmptyStr, EmptyStr, EmptyStr);
 DM.FTotalHorasFunc    := DM.qryTotalEquipHoraHOFICIAIS.AsFloat; //CMWeb.HorasCalendario(1, CMWeb.CDRelatGerencDispEquipCODIGO.AsString);
@@ -7431,14 +7437,14 @@ procedure TDM.qryRotaConsCalcFields(DataSet: TDataSet);
 begin
 qryRotaConsC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), DateOf(qryRotaConsDATAINICIO.AsDateTime));
 
-//Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
-if DM.qryRotaConsREPROGRAMAR.AsString = 'Programação' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a manutenï¿½ï¿½o foi fechada ou nï¿½o.
+if DM.qryRotaConsREPROGRAMAR.AsString = 'Programaï¿½ï¿½o' then
   begin
     qryRotaConsC_PROXINSP.AsDateTime := IncDay(qryRotaConsDATAINICIO.AsDateTime, qryRotaConsFREQUENCIA.AsInteger);
   end;
-//Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
-//a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
-if DM.qryRotaConsREPROGRAMAR.AsString = 'Execução' then
+//Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como manutenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+//a geraï¿½ï¿½o de outra manutenï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra manutenï¿½ï¿½o atï¿½ ser fechada.
+if DM.qryRotaConsREPROGRAMAR.AsString = 'Execuï¿½ï¿½o' then
   begin
     if (DM.qryRotaConsRELATORIO.AsString = 'S') then
       qryRotaConsC_PROXINSP.AsDateTime := 0;
@@ -7452,13 +7458,13 @@ if FrmTelaInspConsulta <> nil then
       begin
         case CBPeriodo.ItemIndex of
           0: qryRotaConsPERIODO.AsString := 'Vencidas';
-          1: qryRotaConsPERIODO.AsString := 'Próximos 7 dias';
-          2: qryRotaConsPERIODO.AsString := 'Próximos 15 dias';
-          3: qryRotaConsPERIODO.AsString := 'Próximos 30 dias';
-          4: qryRotaConsPERIODO.AsString := 'Próximos 60 dias';
-          5: qryRotaConsPERIODO.AsString := 'Próximos 90 dias';
-          6: qryRotaConsPERIODO.AsString := 'Próximos 180 dias';
-          7: qryRotaConsPERIODO.AsString := 'Próximos 365 dias';
+          1: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 7 dias';
+          2: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 15 dias';
+          3: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 30 dias';
+          4: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 60 dias';
+          5: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 90 dias';
+          6: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 180 dias';
+          7: qryRotaConsPERIODO.AsString := 'Prï¿½ximos 365 dias';
         end;
       end;
   end;
@@ -7516,14 +7522,14 @@ if DM.FNomeUsuario <> LowerCase('sam_spmp') then
   begin
     if (Trim(qryUsuarioSENHAALTERADA.AsString) <> 'S') then
       begin
-        if Application.MessageBox('O sistema detectou que sua senha ainda não foi alterada desde o seu cadastro.'+#13+#13+'É necessário fazê-lo agora, deseja prosseguir ?','SPMP', MB_YESNO + MB_ICONQUESTION)=IDYes then
+        if Application.MessageBox('O sistema detectou que sua senha ainda nï¿½o foi alterada desde o seu cadastro.'+#13+#13+'ï¿½ necessï¿½rio fazï¿½-lo agora, deseja prosseguir ?','SPMP', MB_YESNO + MB_ICONQUESTION)=IDYes then
           begin
-            LSenhaAtual := PasswordInputBox('Senha temporária atual','Digite sua senha:');
+            LSenhaAtual := PasswordInputBox('Senha temporï¿½ria atual','Digite sua senha:');
 
             // Verificar senha informada.
             if (LSenhaAtual = EmptyStr) or (LSenhaAtual <> Crypt('D', qryUsuarioSENHA.AsString)) then
               begin
-                MessageDlg('Senha temporária incorreta!', mtWarning, [mbOK], 0);
+                MessageDlg('Senha temporï¿½ria incorreta!', mtWarning, [mbOK], 0);
               end
             else
               begin // SenhaAtual foi informada corretamente.
@@ -7540,7 +7546,7 @@ if DM.FNomeUsuario <> LowerCase('sam_spmp') then
                         LNovaSenhaConfirmacao := PasswordInputBox('Confirme Nova Senha','Confirme sua nova senha.');
                         if LNovaSenha <>  LNovaSenhaConfirmacao then
                           begin
-                            Application.MessageBox('Senhas informadas são diferentes!', 'SPMP3', MB_OK+MB_ICONSTOP);
+                            Application.MessageBox('Senhas informadas sï¿½o diferentes!', 'SPMP3', MB_OK+MB_ICONSTOP);
                             DM.MSGAguarde('', False);
                           end
                         else
@@ -7567,7 +7573,7 @@ end;
 
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
-  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao: String): Integer;
+  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -7586,10 +7592,10 @@ if CentroCusto  <> EmptyStr          then qryGerarOSCODCENTROCUSTO.AsString     
 if Observacoes  <> EmptyStr          then qryGerarOSOBSERVACOES.AsString          := Observacoes;
 if tempototal   <> EmptyStr          then qryGerarOSTEMPOPREVISTO.AsFloat         := StrToFloat(tempototal);
 if Oficina      <> EmptyStr          then qryGerarOSCODOFICINA.AsString           := Oficina;
-if TipoManutencao <> EmptyStr        then qryGerarOSCODMANUTENCAO.AsString      := TipoManutencao;
+if TipoManutencao <> EmptyStr        then qryGerarOSCODMANUTENCAO.AsString        := TipoManutencao;
+if EquipParado <> EmptyStr           then qryGerarOSEQUIPPARADO.AsString          := EquipParado;
 qryGerarOSCODEMPRESA.AsString        := CodEmpresa;
 qryGerarOSDESCRICAO.AsString         := Descricao;
-qryGerarOSEQUIPPARADO.AsString       := 'S';
 qryGerarOSATIVO.AsString             := 'S';
 qryGerarOSVISIVEL.AsString           := 'S';
 qryGerarOSEXECAUTONOMO.AsString      := 'N';
@@ -7967,7 +7973,7 @@ procedure TDM.FDConnSPMP3Recover(ASender, AInitiator: TObject;
 var
   iRes: Integer;
 begin
-  iRes := Application.MessageBox(PChar('Não é possível conectar ao servidor ' + DM.FHost + #13 + 'Deseja tentar conectar novamente?'), 'SPMP3' ,MB_YESNO+MB_ICONSTOP);
+  iRes := Application.MessageBox(PChar('Nï¿½o ï¿½ possï¿½vel conectar ao servidor ' + DM.FHost + #13 + 'Deseja tentar conectar novamente?'), 'SPMP3' ,MB_YESNO+MB_ICONSTOP);
   case iRes of
     mrYes: AAction := faRetry;
     mrNo:   AAction := faOfflineAbort;
@@ -8073,15 +8079,15 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from spmpma_spmp.classes where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
-    6://Famílias de Equipamentos
+    6://Famï¿½lias de Equipamentos
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9, campo10, campo11 from familiaequipamento where `CODIGO` = '+ QuotedStr(Valor));
       end;
-    7://Famílias de Peças
+    7://Famï¿½lias de Peï¿½as
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9, campo10, campo11 from familiapecasreposicao where `CODIGO` = '+ QuotedStr(Valor));
       end;
-    8://Famílias de Recursos
+    8://Famï¿½lias de Recursos
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, campo1, campo2, campo3, campo4, campo5, campo6, campo7, campo8, campo9, campo10, campo11 from familiarecursos where `CODIGO` = '+ QuotedStr(Valor));
       end;
@@ -8089,7 +8095,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from causasfalha where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
-    10://Tipos de Manutenção
+    10://Tipos de Manutenï¿½ï¿½o
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao from tipomanutencao where `CODIGO` = ' + QuotedStr(Valor) + EmptyStr);
       end;
@@ -8097,7 +8103,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from motivoparada where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
-    12://Tipos de Programação
+    12://Tipos de Programaï¿½ï¿½o
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipo from tipoprogramacao where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
@@ -8110,11 +8116,11 @@ Try
         DM.qryAuxiliar.SQL.Add('SELECT `almoxarifado`.`CODIGO`, `almoxarifado`.`DESCRICAO`, `almoxarifado`.`MATERIAL`, `almoxarifado`.`NUMITENS`, `almoxarifado`.`AREA`, `centrocusto`.`DESCRICAO`CENTROCUSTO'
                                + ' FROM `almoxarifado` INNER JOIN `centrocusto` ON (`almoxarifado`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`) WHERE `almoxarifado`.`CODIGO` = '+ QuotedStr(Valor) + ' AND `almoxarifado`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + EmptyStr);
       end;
-    15://Áreas
+    15://ï¿½reas
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from areas where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    16://Células
+    16://Cï¿½lulas
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from celulas where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
@@ -8122,7 +8128,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from linhas where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    18://Sequências
+    18://Sequï¿½ncias
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from sequencias where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa) + ' and codarea = ' + QuotedStr(DM.FParamAuxiliar[1]) + ' and codcelula = ' + QuotedStr(DM.FParamAuxiliar[2]) + ' and codlinha = ' + QuotedStr(DM.FParamAuxiliar[3]));
       end;
@@ -8143,11 +8149,11 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from fabricante where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    23://Calendário de Mão de Obra
+    23://Calendï¿½rio de Mï¿½o de Obra
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from calendario where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    24://Calendário de Equipamentos
+    24://Calendï¿½rio de Equipamentos
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from calendarioequip where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
@@ -8160,7 +8166,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select coditem, codigo, tipoitem from disponibilidade where `CODITEM` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    29, 2900://Usuários
+    29, 2900://Usuï¿½rios
       begin
         case DM.FTabela_auxiliar of
           29:
@@ -8175,35 +8181,35 @@ Try
           end;
         end;
       end;
-    30://Funcionários
+    30://Funcionï¿½rios
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.`MATRICULA` = '+ QuotedStr(Valor) + ' AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ')');
       end;
-    32://Manutenções Programadas do Equipamento
+    32://Manutenï¿½ï¿½es Programadas do Equipamento
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`FREQUENCIA2`, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP,'
                                + ' `equipamentos`.`DESCRICAO` EQUIPAMENTO FROM `manutprogequipamento` INNER JOIN `manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA`'
                                + ' = `manutprogfamequipamento`.`CODEMPRESA`) INNER JOIN `equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) WHERE (`manutprogequipamento`.`CODIGO`'
                                + ' = '+ QuotedStr(Valor) + ' AND `manutprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+')');
       end;
-    33://Lubrificações Programadas do Equipamento
+    33://Lubrificaï¿½ï¿½es Programadas do Equipamento
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`FREQUENCIA2`, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP,'
                                + ' `equipamentos`.`DESCRICAO` EQUIPAMENTO FROM `lubrificprogequipamento` INNER JOIN `lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA`'
                                + ' = `lubrificprogfamequipamento`.`CODEMPRESA`) INNER JOIN `equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) WHERE'
                                + ' (`lubrificprogequipamento`.`CODIGO` = '+ QuotedStr(Valor) + ' AND `lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+')');
       end;
-    34://Manutenção de Família de Equipamento
+    34://Manutenï¿½ï¿½o de Famï¿½lia de Equipamento
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO` FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento`'
                                + ' ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) WHERE (`manutprogfamequipamento`.`CODIGO` = '+ QuotedStr(Valor) + ' AND `manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ')');
       end;
-    35://Lubrificação de Família de Equipamento
+    35://Lubrificaï¿½ï¿½o de Famï¿½lia de Equipamento
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO` FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento`'
                                + ' ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) WHERE (`lubrificprogfamequipamento`.`CODIGO` = '+ QuotedStr(Valor) + ' AND `lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ')');
       end;
-    36, 360://Peças de Reposição
+    36, 360://Peï¿½as de Reposiï¿½ï¿½o
       begin
         if DM.FParamAuxiliar[1] = 'CODIGO' then
           DM.qryAuxiliar.SQL.Add('select codigo, descricao, referencia, quantidade Qtde from pecasreposicao where `CODIGO` = ' + QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
@@ -8217,7 +8223,7 @@ Try
         DM.qryAuxiliar.SQL.Add('SELECT `contadores`.`CODIGO`, `contadores`.`DESCRICAO`, `contadores`.`CODPROGRAMACAO`, `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO` FROM `contadores`'
                                + ' LEFT JOIN `tipoprogramacao` ON (`contadores`.`CODPROGRAMACAO` = `tipoprogramacao`.`CODIGO`) where `contadores`.`codigo` = ' + QuotedStr(Valor) + ' and `contadores`.`codempresa` = '+QuotedStr(DM.FCodEmpresa) + ' order by `contadores`.`descricao`');
       end;
-    40://Solicitação de Trabalho
+    40://Solicitaï¿½ï¿½o de Trabalho
       begin
         DM.qryAuxiliar.SQL.Add('SELECT s.CODIGO, s.DESCSERVICO, e.DESCRICAO FROM solictrabalho s INNER JOIN equipamentos e ON (s.CODEQUIPAMENTO = e.CODIGO) AND (s.CODEMPRESA = e.CODEMPRESA) where s.DESCSERVICO like ' + QuotedStr(Valor) + ' and s.codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
@@ -8229,7 +8235,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao, quantidade from recursos where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    47://Pontos de Inspeção
+    47://Pontos de Inspeï¿½ï¿½o
       begin
         DM.qryAuxiliar.SQL.Add('select p.`CODIGO`, p.`DESCRICAO`, f.`DESCRICAO` AS `FAMILIAEQUIP` FROM `pontosinspecao` p INNER JOIN familiaequipamento f ON (p.`CODFAMILIAEQUIP` = f.`CODIGO`) WHERE p.`CODIGO` = '+ QuotedStr(Valor) + ' and p.codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
@@ -8245,7 +8251,7 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from ferramentaria where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    62://Kit de Peças
+    62://Kit de Peï¿½as
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from pecasreposicaokit where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
@@ -8253,15 +8259,15 @@ Try
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from lubrificantes where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-    6700://Tarefas de Ordens de Serviços Terceirizadas
+    6700://Tarefas de Ordens de Serviï¿½os Terceirizadas
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `DESCRICAO` FROM `ordemservicotercunidtarefas` WHERE (`DESCRICAO` =  '+ QuotedStr(Valor) + '  AND `CODEMPRESA` = '+ QuotedStr(DM.FCodEmpresa)+' AND `CODORDEMSERVICO` = '+QuotedStr(DM.qryOrdemServicoTercUnidTarefasCODORDEMSERVICO.AsString)+')');
       end;
-    68://Literturas Técnicas
+    68://Literturas Tï¿½cnicas
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from arquivotecnico where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
       end;
-  //  69://Desenhos Técnicos
+  //  69://Desenhos Tï¿½cnicos
   //    begin
   //      DM.qryAuxiliar.SQL.Add('select codigo, descricao from arquivotecnico where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa));
   //    end;
@@ -8271,7 +8277,7 @@ Try
                                + ' INNER JOIN `equipamentos` ON (`controlecombustivel`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
                                + ' WHERE (`equipamentos`.`CODIGO` = ' + QuotedStr(Valor) + ' AND `controlecombustivel`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ')');
       end;
-    80://Família de Pneus
+    80://Famï¿½lia de Pneus
       begin
         DM.qryAuxiliar.SQL.Add('SELECT `CODIGO`, `DESCRICAO` FROM `familiapneus` WHERE `CODIGO` = ' + QuotedStr(Valor) + EmptyStr);
       end;
@@ -8304,7 +8310,7 @@ Try
                                    + ' WHERE (`monitoramento`.`CODCONTADOR` = ' + QuotedStr(Valor) + ' AND `monitoramento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' AND `pontosinspecaoloc`.`CODIGO` = ' + QuotedStr(DM.qryMonitoramentoCODPONTOINSPLOC.AsString) + ')');
           end;
       end;
-    90://Locais de Pontos de Inspeção
+    90://Locais de Pontos de Inspeï¿½ï¿½o
       begin
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from pontosinspecaoloc where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa) + ' and codpontoinsp = '+ QuotedStr(DM.FParamAuxiliar[1]));
       end;
@@ -8340,7 +8346,7 @@ Result := True;
 Campo.EditMask := Mascara.AsString;
 if Campo.EditMask = EmptyStr then
   begin
-    Texto := PChar('Máscara do código: "'+Mascara.DisplayLabel+'" não encontrada, por favor, informe a respectiva formatação para poder incluir dados na tabela.');
+    Texto := PChar('Mï¿½scara do cï¿½digo: "'+Mascara.DisplayLabel+'" nï¿½o encontrada, por favor, informe a respectiva formataï¿½ï¿½o para poder incluir dados na tabela.');
     Application.MessageBox(Texto,'SPMP',MB_OK + MB_ICONSTOP);
     Result := False;
   end;
@@ -8362,7 +8368,7 @@ begin
 
   if (Pos('Access denied for user ', E.message) > 0) then
     begin
-      MessageDlg('Conexão não autorizada com o banco de dados!', mtError, [mbOK], 0);
+      MessageDlg('Conexï¿½o nï¿½o autorizada com o banco de dados!', mtError, [mbOK], 0);
     end
   else
   if (Pos('foreign key', E.message) > 0) or (Pos('parent row', E.message) > 0) or (Pos('constraint', E.message) > 0) then
@@ -8373,12 +8379,12 @@ begin
   if ((Pos('Lost connection to MySQL server during query', E.Message) > 0) or (Pos('MySQL server has gone away', E.Message) > 0)) then
      begin
        DM.FDConnSPMP3.Rollback;
-       MessageDlg('Erro ao estabelecer conexão com o banco de dados ou conexão expirada, tente novamente.' + #13 +
+       MessageDlg('Erro ao estabelecer conexï¿½o com o banco de dados ou conexï¿½o expirada, tente novamente.' + #13 +
                   'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
 
 //       LTentaConexao := False;
-//       //MessageDlg('Erro na comunicação com o banco de dados, o sistema será fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
-//       if Application.MessageBox('Erro de comunicação com o servidor ou conexão expirada, deseja tentar reconectar?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
+//       //MessageDlg('Erro na comunicaï¿½ï¿½o com o banco de dados, o sistema serï¿½ fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
+//       if Application.MessageBox('Erro de comunicaï¿½ï¿½o com o servidor ou conexï¿½o expirada, deseja tentar reconectar?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
 //         begin
 //           LTentaConexao := True;
 //           while LTentaConexao = True do
@@ -8386,12 +8392,12 @@ begin
 //               qryAuxiliar.Close;
 //               qryAuxiliar.SQL.Add('select codigo from acessos where codigo = -1');
 //               qryAuxiliar.Open;
-//               MessageDlg('Comunicação com o banco de dados restabelecida!', mtInformation, [mbOK], 0);
+//               MessageDlg('Comunicaï¿½ï¿½o com o banco de dados restabelecida!', mtInformation, [mbOK], 0);
 //               qryAuxiliar.Close;
 //               LTentaConexao := False;
 //             Except on E: Exception do
 //               begin
-//                 if Application.MessageBox('Erro na comunicação com o banco de dados, deseja tentar novamente?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
+//                 if Application.MessageBox('Erro na comunicaï¿½ï¿½o com o banco de dados, deseja tentar novamente?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
 //                   LTentaConexao := True
 //                 else
 //                   LTentaConexao := False;
@@ -8400,7 +8406,7 @@ begin
 //         end
 //       else
 //         begin
-//           MessageDlg('Erro na comunicação com o banco de dados, o sistema será fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
+//           MessageDlg('Erro na comunicaï¿½ï¿½o com o banco de dados, o sistema serï¿½ fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
 //           Application.Terminate;
 //         end;
      end
@@ -8408,23 +8414,23 @@ begin
   if (Pos('Unknown MySQL server host ', E.message) > 0) then
     begin
       DM.FDConnSPMP3.Rollback;
-      MessageDlg('Erro ao estabelecer conexão com o banco de dados no endereço informado.' + #13 +
+      MessageDlg('Erro ao estabelecer conexï¿½o com o banco de dados no endereï¿½o informado.' + #13 +
                  'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
     end
   else
   if E.ClassType = EDBEditError then
     begin
-      MessageDlg('VALOR INVÁLIDO!'+#13+'Preencha o campo corretamente.', mtError, [mbOK], 0);
+      MessageDlg('VALOR INVï¿½LIDO!'+#13+'Preencha o campo corretamente.', mtError, [mbOK], 0);
     end
   else
   if E.ClassType = EConvertError then
     begin
-      MessageDlg('VALOR INVÁLIDO!' + #13 + 'Erro de conversão, caso o erro persista contacte o suporte para solucionar o problema.', mtError, [mbOK], 0);      ;
+      MessageDlg('VALOR INVï¿½LIDO!' + #13 + 'Erro de conversï¿½o, caso o erro persista contacte o suporte para solucionar o problema.', mtError, [mbOK], 0);      ;
     end
   else
     begin
       DM.FDConnSPMP3.Rollback;
-      MessageDlg('Ocorreu um erro não identificado:' + #13 + '"' + E.Message + '"' + #13 + 'Caso o problema persista contacte o suporte.', mtError, [mbOK], 0);
+      MessageDlg('Ocorreu um erro nï¿½o identificado:' + #13 + '"' + E.Message + '"' + #13 + 'Caso o problema persista contacte o suporte.', mtError, [mbOK], 0);
     end;
 
   DM.MSGAguarde('', False);
@@ -8443,21 +8449,21 @@ end;
 //  begin
 //    strColumn := INDICE_DEFAULT;
 //
-//    { Se for um campo calculado não faz nada }
+//    { Se for um campo calculado nï¿½o faz nada }
 //    if (Column.Field.FieldKind = fkCalculated) or (Column.Field.DataType in [ftBlob, ftMemo]) then
 //      Exit;
 //
-//    {Verifica se o índice já está em uso}
+//    {Verifica se o ï¿½ndice jï¿½ estï¿½ em uso}
 //    JaEstaEmUso := Column.Field.FieldName = ClientDataSet.IndexName;
 //
-//    {Verifica a existência do índice e suas propriedades}
+//    {Verifica a existï¿½ncia do ï¿½ndice e suas propriedades}
 //    ClientDataSet.IndexDefs.Update;
 //    for x := 0 to ClientDataSet.IndexDefs.Count - 1 do
 //      begin
 //        if ClientDataSet.IndexDefs.Items[x].Name = Column.Field.FieldName then
 //          begin
 //            strColumn := Column.Field.FieldName;
-//            {Determina como deve ser criado o índice(ASC or DESC), inverte a condição ixDescending}
+//            {Determina como deve ser criado o ï¿½ndice(ASC or DESC), inverte a condiï¿½ï¿½o ixDescending}
 //            if ixDescending in ClientDataSet.IndexDefs.Items[x].Options then
 //              idOptions := []
 //            else
@@ -8467,7 +8473,7 @@ end;
 //        {endif};
 //      end;
 //
-//    {Se não encontrou o índice ou o índice já está em uso}
+//    {Se nï¿½o encontrou o ï¿½ndice ou o ï¿½ndice jï¿½ estï¿½ em uso}
 //    if (strColumn = INDICE_DEFAULT ) or JaEstaEmUso then
 //      begin
 //        if JaEstaEmUso then
@@ -8478,7 +8484,7 @@ end;
 //          ClientDataSet.AddIndex(Column.Field.FieldName, Column.Field.FieldName, idOptions, EmptyStr, EmptyStr, 0);
 //          strColumn := Column.Field.FieldName;
 //        except
-//          {O índice está indeterminado, então é passado para o índice padrão}
+//          {O ï¿½ndice estï¿½ indeterminado, entï¿½o ï¿½ passado para o ï¿½ndice padrï¿½o}
 //          if JaEstaEmUso then
 //            strColumn := INDICE_DEFAULT
 //          {endif};
@@ -8530,10 +8536,10 @@ if (Area <> '') then
 
 while not DM.qryRelatGerencHorasParadas.Eof = True do
   begin
-    //Se já terminou
+    //Se jï¿½ terminou
     if (DM.qryRelatGerencHorasParadasHORASPARADAS.IsNull = False) and (DM.qryRelatGerencHorasParadasDATAINICIOREAL.AsDateTime >= DM.FDataConsulta1) then
         LTotal := LTotal + DM.qryRelatGerencHorasParadasHORASPARADAS.AsFloat;
-    //Se não terminou
+    //Se nï¿½o terminou
     if (DM.qryRelatGerencHorasParadasHORASPARADAS.IsNull = True) then
       begin
         //Se iniciou antes da data inicial da consulta
@@ -8559,7 +8565,7 @@ LDataConsulta := FDataConsulta1;
 LHorasReais   := 0;
 
 case Tipo of
-  0://Mão de Obra
+  0://Mï¿½o de Obra
     begin
       qryTotalHomemHora.Close;
       qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
@@ -8836,63 +8842,63 @@ end;
 function TDM.AnalisarImportancia:SmallInt;
 Begin
 Result := 0;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergência' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergï¿½ncia' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 18;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergência' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergï¿½ncia' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 17;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergência' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Emergï¿½ncia' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 16;
 
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 12 hs' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 12 hs' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 15;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 12 hs' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 12 hs' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 14;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 12 hs' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 12 hs' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 13;
 
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 72 hs' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 72 hs' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 12;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 72 hs' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 72 hs' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 11;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 72 hs' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 72 hs' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 10;
 
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Semana' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Semana' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 9;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Semana' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Semana' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 8;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Semana' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Semana' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 7;
 
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Mês' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Mï¿½s' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 6;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Mês' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Mï¿½s' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 5;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Até 1 Mês' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Atï¿½ 1 Mï¿½s' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 4;
 
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mês' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fábrica' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mï¿½s' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Fï¿½brica' then
      Result := 3;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mês' then
-  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a Área' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mï¿½s' then
+  if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para a ï¿½rea' then
      Result := 2;
-if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mês' then
+if Trim(qryOrdemServico.FieldByName('PRIORIDADEPARADA').AsString) = 'Acima de um mï¿½s' then
   if Trim(qryOrdemServico.FieldByName('CRITICIDADE').AsString) = 'Para o Equipamento' then
      Result := 1;
 End;
@@ -8903,7 +8909,7 @@ var
   oJPG: TJPegImage;
   oBMP: TBitMap;
 begin
-  { Forcar a Compressião para a faixa entre 1..100 }
+  { Forcar a Compressiï¿½o para a faixa entre 1..100 }
   iCompression := abs(ACompression);
   if iCompression = 0 then
     iCompression := 1;
@@ -8916,7 +8922,7 @@ begin
   oBMP := TBitMap.Create;
   oBMP.Assign(oJPG);
 
-  { Fazer a Compressão e salva o novo arquivo }
+  { Fazer a Compressï¿½o e salva o novo arquivo }
   oJPG.CompressionQuality := iCompression;
   oJPG.Compress;
   oJPG.SaveToFile(AOutFile);
@@ -9048,14 +9054,14 @@ qryAlertasOS.Params.ParamByName('data1').AsString  := FormatDateTime('yyyy/mm/dd
 qryAlertasOS.Params.ParamByName('data2').AsString  := FormatDateTime('yyyy/mm/dd', DateOf(DM.FDataHoraServidor)) + ' 23:59:59';
 qryAlertasOS.Open;
 
-if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviços: CADASTRADAS = ' + FormatFloat('00', qryAlertasOSTOTALCAD.AsFloat)
-else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviços: CADASTRADAS = ' + FormatFloat('00', qryAlertasOSTOTALCAD.AsFloat);
+if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviï¿½os: CADASTRADAS = ' + FormatFloat('00', qryAlertasOSTOTALCAD.AsFloat)
+else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviï¿½os: CADASTRADAS = ' + FormatFloat('00', qryAlertasOSTOTALCAD.AsFloat);
 
-if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviços: PROGRAMADAS = ' + FormatFloat('00', qryAlertasOSTOTALPROG.AsFloat)
-else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviços: PROGRAMADAS = ' + FormatFloat('00', qryAlertasOSTOTALPROG.AsFloat);
+if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviï¿½os: PROGRAMADAS = ' + FormatFloat('00', qryAlertasOSTOTALPROG.AsFloat)
+else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviï¿½os: PROGRAMADAS = ' + FormatFloat('00', qryAlertasOSTOTALPROG.AsFloat);
 
-if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviços: EXECUÇÃO = ' + FormatFloat('00', qryAlertasOSTOTALEXEC.AsFloat)
-else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviços: EXECUÇÃO = ' + FormatFloat('00', qryAlertasOSTOTALEXEC.AsFloat);
+if FAlerta = EmptyStr then FAlerta := 'Ordens de Serviï¿½os: EXECUï¿½ï¿½O = ' + FormatFloat('00', qryAlertasOSTOTALEXEC.AsFloat)
+else FAlerta := FAlerta + '  |  ' + 'Ordens de Serviï¿½os: EXECUï¿½ï¿½O = ' + FormatFloat('00', qryAlertasOSTOTALEXEC.AsFloat);
 
 qryAlertasRotas.Close;
 qryAlertasRotas.Params[0].AsString   := FCodEmpresa;
@@ -9067,14 +9073,14 @@ qryAlertasManut.Close;
 qryAlertasManut.Params[0].AsString   := FCodEmpresa;
 qryAlertasManut.Params[1].AsDateTime := DateOf(FDataHoraServidor);
 qryAlertasManut.Open;
-FAlerta := FAlerta + '  |  ' + 'Manutenções Vencidas = ' + FormatCurr('00', qryAlertasManutTOTAL.AsInteger);
+FAlerta := FAlerta + '  |  ' + 'Manutenï¿½ï¿½es Vencidas = ' + FormatCurr('00', qryAlertasManutTOTAL.AsInteger);
 
 qryAlertasLubrific.Close;
 qryAlertasLubrific.Params[0].AsString   := FCodEmpresa;
 qryAlertasLubrific.Params[1].AsDateTime := DateOf(FDataHoraServidor);
 qryAlertasLubrific.Open;
 
-FAlerta := FAlerta + '  |  ' + 'Lubrificações Vencidas = ' + FormatCurr('00', qryAlertasLubrificTOTAL.AsInteger);
+FAlerta := FAlerta + '  |  ' + 'Lubrificaï¿½ï¿½es Vencidas = ' + FormatCurr('00', qryAlertasLubrificTOTAL.AsInteger);
 
 if (DM.qryUsuarioCODNIVELACESSO.AsString = 'ADU-00001') then
   begin
@@ -9111,15 +9117,15 @@ function TDM.XlsToStringGrid(xStringGrid: TStringGrid; xFileXLS: string): Boolea
      // Abre o Workbook
      XLSAplicacao.Workbooks.Open(xFileXLS);
 
-     //Selecione aqui a aba que você deseja abrir primeiro - 1,2,3,4....
+     //Selecione aqui a aba que vocï¿½ deseja abrir primeiro - 1,2,3,4....
      XLSAplicacao.WorkSheets[1].Activate;
 
-     //Selecione aqui a aba que você deseja ativar - começando sempre no 1
+     //Selecione aqui a aba que vocï¿½ deseja ativar - comeï¿½ando sempre no 1
      AbaXLS := XLSAplicacao.Workbooks[ExtractFileName(xFileXLS)].WorkSheets[1];
      AbaXLS.Cells.SpecialCells(xlCellTypeLastCell, EmptyParam).Activate;
-     // Pegar o número da última linha
+     // Pegar o nï¿½mero da ï¿½ltima linha
      x := XLSAplicacao.ActiveCell.Row;
-     // Pegar o número da última coluna
+     // Pegar o nï¿½mero da ï¿½ltima coluna
      y := XLSAplicacao.ActiveCell.Column;
      // Seta xStringGrid linha e coluna
      XStringGrid.RowCount := x;
@@ -9170,7 +9176,7 @@ if (Indice = 0) or (Indice = 1) then
       begin
         if DataImportacao <= DM.qryAbastecimentosDATACONTADORATUAL.AsDateTime then
           begin
-            Application.MessageBox('Arquivo já importado!', 'SPMP3', MB_ICONSTOP + MB_OK);
+            Application.MessageBox('Arquivo jï¿½ importado!', 'SPMP3', MB_ICONSTOP + MB_OK);
             Abort;
           end;
         if Placa <> DM.qryAbastecimentosPLACA.AsString then
@@ -9203,15 +9209,15 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                               , DM.qryManutProgEquipEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString);
+                                                              , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
 
                 if DM.qryManutProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
 
                 DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
 
-                //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
-                if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
+                //Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a manutenï¿½ï¿½o foi fechada ou nï¿½o.
+                if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programaï¿½ï¿½o' then
                   begin
                     DM.qryManutProgEquip.Edit;
                     DM.qryManutProgEquipRELATORIO.AsString    := 'N';
@@ -9220,9 +9226,9 @@ if (Indice = 0) or (Indice = 1) then
                     DM.qryManutProgEquip.Post;
                   end;
 
-                //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
-                //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
-                if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
+                //Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como manutenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+                //a geraï¿½ï¿½o de outra manutenï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra manutenï¿½ï¿½o atï¿½ ser fechada.
+                if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
                   begin
                     DM.qryManutProgEquip.Edit;
                     DM.qryManutProgEquipRELATORIO.AsString := 'S';
@@ -9257,15 +9263,15 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                               , DM.qryLubrificProgEquipEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString);
+                                                              , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
 
                 if DM.qryLubrificProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
 
                 DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
 
-                //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a Lubrificenção foi fechada ou não.
-                if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
+                //Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a Lubrificenï¿½ï¿½o foi fechada ou nï¿½o.
+                if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programaï¿½ï¿½o' then
                   begin
                     DM.qryLubrificProgEquip.Edit;
                     DM.qryLubrificProgEquipRELATORIO.AsString    := 'N';
@@ -9274,9 +9280,9 @@ if (Indice = 0) or (Indice = 1) then
                     DM.qryLubrificProgEquip.Post;
                   end;
 
-                //Sendo a inspeção reprogramada pela execução, definir como Lubrificenção em aberto até ser efetuado o fechamento, portanto não permitindo
-                //a geração de outra Lubrificação mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra Lubrificação até ser fechada.
-                if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução' then
+                //Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como Lubrificenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+                //a geraï¿½ï¿½o de outra Lubrificaï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra Lubrificaï¿½ï¿½o atï¿½ ser fechada.
+                if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
                   begin
                     DM.qryLubrificProgEquip.Edit;
                     DM.qryLubrificProgEquipRELATORIO.AsString := 'S';
@@ -9308,7 +9314,7 @@ if (Indice = 0) or (Indice = 2) then
       begin
         if DataImportacao <= DM.qryPneusChassiDATACONTADORATUAL.AsDateTime then
           begin
-            Application.MessageBox('Arquivo já importado!', 'SPMP3', MB_ICONSTOP + MB_OK);
+            Application.MessageBox('Arquivo jï¿½ importado!', 'SPMP3', MB_ICONSTOP + MB_OK);
             Abort;
           end;
         if Placa <> DM.qryPneusChassiPLACA.AsString then
@@ -9360,35 +9366,35 @@ var
   LNovaSenha, LNovaSenhaConfirmacao: String;
 begin
 Result := False;
-//Se for igual a 0, então ã senha não expira
+//Se for igual a 0, entï¿½o ï¿½ senha nï¿½o expira
 if Dm.FTempoSenhaUsu > 0 then
   if DaysBetween(DateOf(DM.FDataHoraServidor), DateOf(Dm.qryLoginSENHAALTERADADATA.AsDateTime)) >= DM.FTempoSenhaUsu  then
     begin
-      LNovaSenha := DM.PasswordInputBox('Senha Expirada','Digite sua nova senha (mínimo '+ IntToStr(DM.FQtdeMinSenha) +' caracteres).');
+      LNovaSenha := DM.PasswordInputBox('Senha Expirada','Digite sua nova senha (mï¿½nimo '+ IntToStr(DM.FQtdeMinSenha) +' caracteres).');
       if (Length(LNovaSenha) < DM.FQtdeMinSenha) then
         begin
-          Application.MessageBox('Acesso não permitido, senha com menos de 6 caracteres!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+          Application.MessageBox('Acesso nï¿½o permitido, senha com menos de 6 caracteres!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
           DM.MSGAguarde('', False);
           Result := True;
         end
       else
       if LNovaSenha = '' then
         begin
-          Application.MessageBox('Acesso não permitido, nova senha não informada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+          Application.MessageBox('Acesso nï¿½o permitido, nova senha nï¿½o informada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
           DM.MSGAguarde('', False);
           Result := True;
         end
       else
       if DM.FPassword = LNovaSenha then
         begin
-          Application.MessageBox('Acesso não permitido, nova senha não pode ser igual a senha antiga!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+          Application.MessageBox('Acesso nï¿½o permitido, nova senha nï¿½o pode ser igual a senha antiga!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
           DM.MSGAguarde('', False);
           Result := True;
         end
       else
       if DM.FPassword = LNovaSenha then
         begin
-          Application.MessageBox('Acesso não permitido, nova senha não pode ser igual a senha antiga!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+          Application.MessageBox('Acesso nï¿½o permitido, nova senha nï¿½o pode ser igual a senha antiga!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
           DM.MSGAguarde('', False);
           Result := True;
         end
@@ -9397,14 +9403,14 @@ if Dm.FTempoSenhaUsu > 0 then
           LNovaSenhaConfirmacao := DM.PasswordInputBox('Confirme Nova Senha','Confirme sua nova senha.');
           if LNovaSenhaConfirmacao = '' then
             begin
-              Application.MessageBox('Acesso não permitido, nova senha não confirmada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+              Application.MessageBox('Acesso nï¿½o permitido, nova senha nï¿½o confirmada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
               DM.MSGAguarde('', False);
               Result := True;
             end
           else
           if LNovaSenha <> LNovaSenhaConfirmacao then
             begin
-              Application.MessageBox('Acesso não permitido, confirmação de nova senha não confere com a senha informada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
+              Application.MessageBox('Acesso nï¿½o permitido, confirmaï¿½ï¿½o de nova senha nï¿½o confere com a senha informada!', 'SPMP3', MB_ICONEXCLAMATION + MB_OK);
               DM.MSGAguarde('', False);
               Result := True;
             end
@@ -9432,7 +9438,7 @@ I : Integer;
 LTexto : PChar;
 begin
 Result := False;
-//Verificar licença da Unidade
+//Verificar licenï¿½a da Unidade
 DM.qrySAM.Open;
 DM.FNomeEmpresa := qrySAMEMPRESA.AsString;
 FDiasRestantes := 0;
@@ -9476,7 +9482,7 @@ if DM.qrySAM.IsEmpty = True then
           and (FLicenca <> '2 ANOS') and (FLicenca <> '3 ANOS') and (FLicenca <> '4 ANOS')
             and (FLicenca <> '5 ANOS') and (FLicenca <> 'ILIMITADA') then
               begin
-                Application.MessageBox('Chave Inválida!!!', 'SPMP3', MB_OK + MB_ICONERROR);
+                Application.MessageBox('Chave Invï¿½lida!!!', 'SPMP3', MB_OK + MB_ICONERROR);
                 Application.Terminate;
               end;
 
@@ -9529,7 +9535,7 @@ else
 
     if (FDiasRestantes > 0) and (FDiasRestantes <= 7) then
       begin
-        LTexto := PChar('Período de acesso se encerra em '+FormatFloat('00', FDiasRestantes)+' dias!'+#13+'Caso ainda não possua, entre em contato com o fornecedor do software para informar nova chave de acesso.'+#13+'Deseja informar nova chave agora?');
+        LTexto := PChar('Perï¿½odo de acesso se encerra em '+FormatFloat('00', FDiasRestantes)+' dias!'+#13+'Caso ainda nï¿½o possua, entre em contato com o fornecedor do software para informar nova chave de acesso.'+#13+'Deseja informar nova chave agora?');
         if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYES then
           begin
             qrySAM.First;
@@ -9572,7 +9578,7 @@ else
                   end
                 else
                   begin
-                    Application.MessageBox('Chave já cadastrada, informe outra chave para continuar com a ativação!', 'SPMP3', MB_OK + MB_ICONEXCLAMATION);
+                    Application.MessageBox('Chave jï¿½ cadastrada, informe outra chave para continuar com a ativaï¿½ï¿½o!', 'SPMP3', MB_OK + MB_ICONEXCLAMATION);
                     Exit;
                   end;
               end;
@@ -9582,7 +9588,7 @@ else
     if FDiasRestantes <= 0 then
       begin
         Result := True;
-        if Application.MessageBox('Período de acesso encerrado, deseja informar a nova chave de acesso agora?', 'SPMP3', MB_YESNO + MB_ICONERROR) = IDYes then
+        if Application.MessageBox('Perï¿½odo de acesso encerrado, deseja informar a nova chave de acesso agora?', 'SPMP3', MB_YESNO + MB_ICONERROR) = IDYes then
           begin
             LChave := CampoInputBox('SPMP', 'Informe a chave fornecida pela SAM:');
             if LChave = EmptyStr then
@@ -9629,7 +9635,7 @@ else
                   end
                 else
                   begin
-                    Application.MessageBox('Chave já cadastrada, informe outra chave para continuar com a ativação!', 'SPMP3', MB_OK + MB_ICONEXCLAMATION);
+                    Application.MessageBox('Chave jï¿½ cadastrada, informe outra chave para continuar com a ativaï¿½ï¿½o!', 'SPMP3', MB_OK + MB_ICONEXCLAMATION);
                     Exit;
                   end;
               end;
@@ -9643,7 +9649,7 @@ function TDM.VerificarInspecoes: Boolean;
 begin
 Result := False;
 
-DM.FModulo := 'Inspeções Vencidas';
+DM.FModulo := 'Inspeï¿½ï¿½es Vencidas';
 
 qryManutVenc.Close;
 qryManutVenc.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
@@ -9667,8 +9673,8 @@ if DM.FEmpTransf = True then
     begin
       Try
         Application.CreateForm(TFrmTelaInspVenc, FrmTelaInspVenc);
-        FrmTelaInspVenc.TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
-        FrmTelaInspVenc.TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
+        FrmTelaInspVenc.TSManut.Caption := 'Manutenï¿½ï¿½es ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
+        FrmTelaInspVenc.TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
         if DM.FEmpTransf = True then
           begin
             FrmTelaInspVenc.TSRotas.Caption := 'Rotas ('+ IntToStr(DM.qryRotaEquipVenc.RecordCount)+')';
@@ -9689,10 +9695,10 @@ begin
   DM.FDataConsulta1 := IncDay(DateOf(DM.FDataHoraServidor), -periodo);
   DM.FDataConsulta2 := DateOf(DM.FDataHoraServidor);
 
-  //MTBF = Total de horas de funcionamento do equipamento pelo seu calendário.
+  //MTBF = Total de horas de funcionamento do equipamento pelo seu calendï¿½rio.
   ltotalhorasdisp   := DM.HorasCalendario(1, codequip, '');
-//  ltotalhorasparado :=  DM.HorasParadasEquipamento(codequip, 'Manutenção Corretiva', '', '');
-  DM.HorasParadasEquipamento(codequip, 'Manutenção Corretiva', '', '');
+//  ltotalhorasparado :=  DM.HorasParadasEquipamento(codequip, 'Manutenï¿½ï¿½o Corretiva', '', '');
+  DM.HorasParadasEquipamento(codequip, 'Manutenï¿½ï¿½o Corretiva', '', '');
 
   Result := ltotalhorasdisp/FTotalParadasEquip;
 end;
@@ -9728,8 +9734,8 @@ begin
                       C := C * 100;
                       if C < 90 then
                         begin
-                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr);
+                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenï¿½ï¿½o por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Atï¿½ 1 Mï¿½s', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9773,8 +9779,8 @@ begin
                       C := C * 100;
                       if C < 90 then
                         begin
-                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr);
+                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenï¿½ï¿½o por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Atï¿½ 1 Mï¿½s', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -9818,8 +9824,8 @@ begin
                       C := C * 100;
                       if C < 90 then
                         begin
-                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr);
+                          OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenï¿½ï¿½o por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Atï¿½ 1 Mï¿½s', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);

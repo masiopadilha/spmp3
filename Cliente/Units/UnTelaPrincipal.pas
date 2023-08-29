@@ -1666,7 +1666,8 @@ StatusBar1.Panels[0].Text := DM.FNomeUsuario;
 StatusBar1.Panels[1].Text := DM.FNivelAcesso;
 StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
 StatusBar1.Panels[3].Text := DM.FNomeGrupo;
-StatusBar1.Panels[4].Text := DM.FVersao + ' beta';
+//StatusBar1.Panels[4].Text := DM.FVersao + ' beta';
+StatusBar1.Panels[4].Text := DM.FVersao;
 if DM.FDiasRestantes < 36500 then
   lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
 else

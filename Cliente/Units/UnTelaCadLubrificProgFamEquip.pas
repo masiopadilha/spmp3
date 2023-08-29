@@ -52,6 +52,7 @@ type
     EdtManutencao: TDBEdit;
     BtnManutencao: TButton;
     Label21: TLabel;
+    ChbParado: TDBCheckBox;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -246,6 +247,7 @@ DM.qryLubrificProgFamEquipCODEMPRESA.AsString      := DM.FCodEmpresa;
 DM.qryLubrificProgFamEquipATIVO.AsString           := 'S';
 DM.qryLubrificProgFamEquipVISIVEL.AsString         := 'S';
 DM.qryLubrificProgFamEquipCLONAVEL.AsString        := 'N';
+DM.qryLubrificProgFamEquipEQUIPPARADO.AsString     := 'S';
 
 DM.qryLubrificProgFamEquipPlanoTrab.Open;
 

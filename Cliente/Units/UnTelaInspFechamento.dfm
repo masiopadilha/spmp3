@@ -1,7 +1,7 @@
 inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   Caption = 'Fechamento das Inspe'#231#245'es'
-  ClientHeight = 624
-  ClientWidth = 1002
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,7 +12,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   ExplicitHeight = 680
   TextHeight = 11
   inherited PTop: TPanel
-    Width = 998
+    Width = 1004
     ExplicitWidth = 1002
     inherited BtnAjuda: TButton
       Left = 971
@@ -42,8 +42,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PCentro: TPanel
-    Width = 996
-    Height = 485
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1000
     ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
@@ -514,8 +514,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 557
-    Width = 998
+    Top = 574
+    Width = 1004
     ExplicitTop = 566
     ExplicitWidth = 1002
     object Label1: TLabel
@@ -528,8 +528,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PBotoes: TPanel
-    Top = 584
-    Width = 998
+    Top = 601
+    Width = 1004
     ExplicitTop = 593
     ExplicitWidth = 1002
     inherited BtnOK: TButton

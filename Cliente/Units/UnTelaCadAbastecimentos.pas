@@ -170,7 +170,7 @@ else
     Try
       if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
       if DM.AplicarMascara(DM.qryContadoresCODIGO, DM.qryFormatoCodigoPONTOSINSPECAO, FrmTelaCadContadores) = False then exit;
@@ -212,7 +212,7 @@ else
     Try
       if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
       if DM.AplicarMascara(DM.qryEquipamentosCODIGO, DM.qryFormatoCodigoEQUIPAMENTOS, FrmTelaCadEquipamentos) = False then exit;
@@ -281,7 +281,7 @@ if (DM.VerificaDuplo(DM.qryAbastecimentosCODEQUIPAMENTO.AsString) = True) and (D
   begin
     EdtDescEquipamento.SetFocus;
     PAuxiliares.Font.Color := clBlack;
-    PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
+    PAuxiliares.Caption := 'VALOR Jï¿½ CADASTRADO!!!';
     Exit;
   end;
 DM.MSGAguarde('');
@@ -289,7 +289,7 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'CONTADOR DO EQUIPAMENTO INFERIOR PREVIAMENTE CADASTRADO!'; EdtValor.SetFocus; Exit;
   end;
-//Sempre checar se tem inspeção programada com o contador atual
+//Sempre checar se tem inspeï¿½ï¿½o programada com o contador atual
 //if LOdometro < DM.qryAbastecimentosCONTADORATUAL.AsInteger then
   begin
     DM.qryAbastecimentosManutInsp.Close;
@@ -308,12 +308,12 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
         DM.qryManutProgEquip.Open;
         DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                       , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString);
+                                                      , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
         if DM.qryManutProgEquip.IsEmpty = False then
           DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
         DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
-        //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
-        if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
+        //Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a manutenï¿½ï¿½o foi fechada ou nï¿½o.
+        if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programaï¿½ï¿½o' then
           begin
             DM.qryManutProgEquip.Edit;
             DM.qryManutProgEquipRELATORIO.AsString    := 'N';
@@ -321,9 +321,9 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryManutProgEquipLEITURA.AsFloat       := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryManutProgEquipFREQUENCIA2.AsFloat;
             DM.qryManutProgEquip.Post;
           end;
-        //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
-        //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
-        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
+        //Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como manutenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+        //a geraï¿½ï¿½o de outra manutenï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra manutenï¿½ï¿½o atï¿½ ser fechada.
+        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
           begin
             DM.qryManutProgEquip.Edit;
             DM.qryManutProgEquipRELATORIO.AsString := 'S';
@@ -355,12 +355,12 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
         DM.qryLubrificProgEquip.Open;
         DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                       , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                      , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString);
+                                                      , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
         if DM.qryLubrificProgEquip.IsEmpty = False then
           DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
         DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-        //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a Lubrificenção foi fechada ou não.
-        if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
+        //Sendo a inspeï¿½ï¿½o reprogramada pela 'programaï¿½ï¿½o', programa a prï¿½xima inspeï¿½ï¿½o independente se a Lubrificenï¿½ï¿½o foi fechada ou nï¿½o.
+        if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programaï¿½ï¿½o' then
           begin
             DM.qryLubrificProgEquip.Edit;
             DM.qryLubrificProgEquipRELATORIO.AsString    := 'N';
@@ -368,9 +368,9 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
             DM.qryLubrificProgEquipLEITURA.AsFloat       := DM.qryAbastecimentosCONTADORATUAL.AsFloat + DM.qryLubrificProgEquipFREQUENCIA2.AsFloat;
             DM.qryLubrificProgEquip.Post;
           end;
-        //Sendo a inspeção reprogramada pela execução, definir como Lubrificenção em aberto até ser efetuado o fechamento, portanto não permitindo
-        //a geração de outra Lubrificação mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra Lubrificação até ser fechada.
-        if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução' then
+        //Sendo a inspeï¿½ï¿½o reprogramada pela execuï¿½ï¿½o, definir como Lubrificenï¿½ï¿½o em aberto atï¿½ ser efetuado o fechamento, portanto nï¿½o permitindo
+        //a geraï¿½ï¿½o de outra Lubrificaï¿½ï¿½o mesmo que o perï¿½odo venï¿½a novamente. Define a coluna 'RELATORIO = S' para impedir a geraï¿½ï¿½o de outra Lubrificaï¿½ï¿½o atï¿½ ser fechada.
+        if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
           begin
             DM.qryLubrificProgEquip.Edit;
             DM.qryLubrificProgEquipRELATORIO.AsString := 'S';
@@ -404,7 +404,7 @@ begin
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadAbastecimentosCombustivel, FrmTelaCadAbastecimentosCombustivel);
@@ -419,7 +419,7 @@ begin
     DM.qryAbastecimentosCombustAbast.First;
     if DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
-        if Application.MessageBox('Contador superior ao último valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
+        if Application.MessageBox('Contador superior ao ï¿½ltimo valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
           begin
             DM.qryAbastecimentos.Edit;
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat;
@@ -448,11 +448,11 @@ begin
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadAbastecimentosLubrificante, FrmTelaCadAbastecimentosLubrificante);
-    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrificações do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
+    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrificaï¿½ï¿½es do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
     FrmTelaCadAbastecimentosLubrificante.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadAbastecimentosCombustivel);
@@ -463,7 +463,7 @@ begin
     DM.qryAbastecimentosLubrificAbast.First;
     if DM.qryAbastecimentosLubrificAbastODOMETROLubrific.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
-        if Application.MessageBox('Contador superior ao último valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
+        if Application.MessageBox('Contador superior ao ï¿½ltimo valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
           begin
             DM.qryAbastecimentos.Edit;
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosLubrificAbastODOMETROLUBRIFIC.AsFloat;
@@ -558,17 +558,17 @@ begin
   inherited;
 if CBTipo.Text = 'Equipamento' then
   begin
-    GrdAbastCombust.Columns[5].Title.Caption := 'Horímetro';
+    GrdAbastCombust.Columns[5].Title.Caption := 'Horï¿½metro';
     GrdAbastCombust.Columns[8].Title.Caption := 'l/h';
-    GrdAbastLubrific.Columns[5].Title.Caption := 'Horímetro';
+    GrdAbastLubrific.Columns[5].Title.Caption := 'Horï¿½metro';
     GrdAbastLubrific.Columns[8].Title.Caption := 'l/h';
   end
 else
-if CBTipo.Text = 'Veículo' then
+if CBTipo.Text = 'Veï¿½culo' then
   begin
-    GrdAbastCombust.Columns[5].Title.Caption := 'Odômetro';
+    GrdAbastCombust.Columns[5].Title.Caption := 'Odï¿½metro';
     GrdAbastCombust.Columns[8].Title.Caption := 'km/l';
-    GrdAbastLubrific.Columns[5].Title.Caption := 'Odômetro';
+    GrdAbastLubrific.Columns[5].Title.Caption := 'Odï¿½metro';
     GrdAbastLubrific.Columns[8].Title.Caption := 'l/km';
   end;
 end;
@@ -626,29 +626,29 @@ with GrdAbastCombust do
     GrdAbastCombust.Columns[6].Visible := False;
     GrdAbastCombust.Columns[7].Visible := False;
     GrdAbastCombust.Columns[8].Visible := False;
-    GrdAbastCombust.Columns[9].Title.Caption    := 'Combustível';
+    GrdAbastCombust.Columns[9].Title.Caption    := 'Combustï¿½vel';
     GrdAbastCombust.Columns[10].Title.Caption   := 'Data';
     GrdAbastCombust.Columns[10].Title.Alignment := taCenter;
     if DM.qryAbastecimentosTIPO.AsString = 'Equipamento' then
       begin
-        GrdAbastCombust.Columns[11].Title.Caption   := 'Horímetro';
+        GrdAbastCombust.Columns[11].Title.Caption   := 'Horï¿½metro';
         GrdAbastCombust.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastCombust.Columns[].Title.Caption := 'l/h';
       end
     else
-    if DM.qryAbastecimentosTIPO.AsString = 'Veículo' then
+    if DM.qryAbastecimentosTIPO.AsString = 'Veï¿½culo' then
       begin
-        GrdAbastCombust.Columns[11].Title.Caption   := 'Odômetro';
+        GrdAbastCombust.Columns[11].Title.Caption   := 'Odï¿½metro';
         GrdAbastCombust.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastCombust.Columns[].Title.Caption := 'km/l';
       end;
     GrdAbastCombust.Columns[12].Title.Caption   := 'Qtde.';
     GrdAbastCombust.Columns[12].Title.Alignment := taCenter;
-    GrdAbastCombust.Columns[13].Title.Caption   := 'Preço';
+    GrdAbastCombust.Columns[13].Title.Caption   := 'Preï¿½o';
     GrdAbastCombust.Columns[13].Title.Alignment := taCenter;
     GrdAbastCombust.Columns[14].Title.Caption   := 'Total';
     GrdAbastCombust.Columns[14].Title.Alignment := taCenter;
-    GrdAbastCombust.Columns[15].Title.Caption   := 'Funcionário';
+    GrdAbastCombust.Columns[15].Title.Caption   := 'Funcionï¿½rio';
     GrdAbastCombust.Columns[16].Title.Caption   := 'Rota';
     GrdAbastCombust.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastCombust.Columns[17].Title.Alignment := taCenter;
@@ -691,24 +691,24 @@ with GrdAbastLubrific do
     GrdAbastLubrific.Columns[10].Title.Alignment := taCenter;
     if DM.qryAbastecimentosTIPO.AsString = 'Equipamento' then
       begin
-        GrdAbastLubrific.Columns[11].Title.Caption   := 'Horímetro';
+        GrdAbastLubrific.Columns[11].Title.Caption   := 'Horï¿½metro';
         GrdAbastLubrific.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastLubrific.Columns[].Title.Caption := 'l/h';
       end
     else
-    if DM.qryAbastecimentosTIPO.AsString = 'Veículo' then
+    if DM.qryAbastecimentosTIPO.AsString = 'Veï¿½culo' then
       begin
-        GrdAbastLubrific.Columns[11].Title.Caption   := 'Odômetro';
+        GrdAbastLubrific.Columns[11].Title.Caption   := 'Odï¿½metro';
         GrdAbastLubrific.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastLubrific.Columns[].Title.Caption := 'km/l';
       end;
     GrdAbastLubrific.Columns[12].Title.Caption   := 'Qtde.';
     GrdAbastLubrific.Columns[12].Title.Alignment := taCenter;
-    GrdAbastLubrific.Columns[13].Title.Caption   := 'Preço';
+    GrdAbastLubrific.Columns[13].Title.Caption   := 'Preï¿½o';
     GrdAbastLubrific.Columns[13].Title.Alignment := taCenter;
     GrdAbastLubrific.Columns[14].Title.Caption   := 'Total';
     GrdAbastLubrific.Columns[14].Title.Alignment := taCenter;
-    GrdAbastLubrific.Columns[15].Title.Caption   := 'Funcionário';
+    GrdAbastLubrific.Columns[15].Title.Caption   := 'Funcionï¿½rio';
     GrdAbastLubrific.Columns[16].Title.Caption   := 'Rota';
     GrdAbastLubrific.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastLubrific.Columns[17].Title.Alignment := taCenter;

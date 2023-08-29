@@ -147,24 +147,24 @@ PAuxiliares.Font.Color := clBlack;
         begin
           if DM.qryManutPeriodicas.IsEmpty = True then Exit;
 
-          LTexto := PChar('Deseja realmente efetuar o fechamento da manutenção: ' + DM.qryManutPeriodicasDESCRICAO.AsString);
+          LTexto := PChar('Deseja realmente efetuar o fechamento da manutenï¿½ï¿½o: ' + DM.qryManutPeriodicasDESCRICAO.AsString);
           if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
             Begin
               if DM.qryManutPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIï¿½O Nï¿½O FECHADA!';
                   Exit;
                 end;
               if EdtExecucao.Date = 0 then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUÇÃO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUï¿½ï¿½O!';
                   EdtExecucao.SetFocus;
                   Exit;
                 end;
 
               if EdtResponsavel.Text = '' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONÁRIO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONï¿½RIO!';
                   EdtResponsavel.SetFocus;
                   Exit;
                 end;
@@ -184,8 +184,8 @@ PAuxiliares.Font.Color := clBlack;
 
               DM.qryManutPeriodicasItens.First; DM.qryManutPeriodicasItensEsp.First;
 
-              //Habilita a manutenção para ser programada novamente
-              if DM.qryManutPeriodicasREPROGRAMAR1.AsString = 'Execução' then
+              //Habilita a manutenï¿½ï¿½o para ser programada novamente
+              if DM.qryManutPeriodicasREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
                 begin
                   DM.qryManutProgEquip.Close;
                   DM.qryManutProgEquip.Params[0].AsString := DM.qryManutPeriodicasCODIGO.AsString;
@@ -203,7 +203,7 @@ PAuxiliares.Font.Color := clBlack;
                     end;
                 end;
 
-              //Verifica itens problemáticos detectados após a manutenção
+              //Verifica itens problemï¿½ticos detectados apï¿½s a manutenï¿½ï¿½o
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryManutPeriodicasItens.First;
               while not DM.qryManutPeriodicasItens.Eof = True do
@@ -253,12 +253,12 @@ PAuxiliares.Font.Color := clBlack;
                   DM.qryManutPeriodicasItensEsp.Next;
                 end;
 
-              //Gerar OS com itens problemáticos
+              //Gerar OS com itens problemï¿½ticos
               if CDItensProb.RecordCount > 0 then
                 begin
                   LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (Retorno)'
                                                                 , DM.qryManutPeriodicasCODEQUIPAMENTO.AsString, DM.qryManutPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, EmptyStr);
+                                                                , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
 
 
                   DM.qryManutPeriodicas.Edit;
@@ -293,7 +293,7 @@ PAuxiliares.Font.Color := clBlack;
               DM.qryManutPeriodicas.Post;
               DM.qryManutPeriodicas.Refresh;
               // DM.qryManutPeriodicas.Delete;
-              TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+              TSManut.Caption := 'Manutenï¿½ï¿½es ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
             End;
 
           Timer1.Enabled := True;
@@ -305,25 +305,25 @@ PAuxiliares.Font.Color := clBlack;
 
           if DM.qryLubrificPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
 
-          LTexto := PChar('Deseja realmente efetuar o fechamento da Lubrificação: ' + DM.qryLubrificPeriodicasDESCRICAO.AsString);
+          LTexto := PChar('Deseja realmente efetuar o fechamento da Lubrificaï¿½ï¿½o: ' + DM.qryLubrificPeriodicasDESCRICAO.AsString);
           if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
             Begin
 
               if DM.qryLubrificPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIï¿½O Nï¿½O FECHADA!';
                   Exit;
                 end;
               if EdtExecucao.Date = 0 then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUÇÃO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUï¿½ï¿½O!';
                   EdtExecucao.SetFocus;
                   Exit;
                 end;
 
               if EdtResponsavel.Text = '' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONÁRIO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONï¿½RIO!';
                   EdtResponsavel.SetFocus;
                   Exit;
                 end;
@@ -340,8 +340,8 @@ PAuxiliares.Font.Color := clBlack;
 
               DM.qryLubrificPeriodicasItens.First; DM.qryLubrificPeriodicasItensEsp.First;
 
-              //Habilita a Lubrificenção para ser programada novamente
-              if DM.qryLubrificPeriodicasREPROGRAMAR1.AsString = 'Execução' then
+              //Habilita a Lubrificenï¿½ï¿½o para ser programada novamente
+              if DM.qryLubrificPeriodicasREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
                 begin
                   DM.qryLubrificProgEquip.Close;
                   DM.qryLubrificProgEquip.Params[0].AsString := DM.qryLubrificPeriodicasCODIGO.AsString;
@@ -358,7 +358,7 @@ PAuxiliares.Font.Color := clBlack;
                     end;
                 end;
 
-              //Verifica itens problemáticos detectados após a Lubrificenção
+              //Verifica itens problemï¿½ticos detectados apï¿½s a Lubrificenï¿½ï¿½o
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryLubrificPeriodicasItens.First;
               while not DM.qryLubrificPeriodicasItens.Eof = True do
@@ -408,12 +408,12 @@ PAuxiliares.Font.Color := clBlack;
                   DM.qryLubrificPeriodicasItensEsp.Next;
                 end;
 
-            //Gerar OS com itens problemáticos
+            //Gerar OS com itens problemï¿½ticos
             if CDItensProb.RecordCount > 0 then
               begin
                 LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (Retorno)'
                                                               , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString);
+                                                              , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
@@ -448,7 +448,7 @@ PAuxiliares.Font.Color := clBlack;
               DM.qryLubrificPeriodicas.Post;
               DM.qryLubrificPeriodicas.Refresh;
               //DM.qryLubrificPeriodicas.Delete;
-              TSLubrific.Caption := 'Lubrificações ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
+              TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
             End;
 
            Timer1.Enabled := True;
@@ -466,19 +466,19 @@ PAuxiliares.Font.Color := clBlack;
 
               if DM.qryRotaPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIï¿½O Nï¿½O FECHADA!';
                   Exit;
                 end;
               if EdtExecucao.Date = 0 then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUÇÃO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUï¿½ï¿½O!';
                   EdtExecucao.SetFocus;
                   Exit;
                 end;
 
               if EdtResponsavel.Text = '' then
                 begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONÁRIO!';
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FUNCIONï¿½RIO!';
                   EdtResponsavel.SetFocus;
                   Exit;
                 end;
@@ -498,8 +498,8 @@ PAuxiliares.Font.Color := clBlack;
 
                   DM.qryRotaPeriodicasManutItens.First; DM.qryRotaPeriodicasManutItensEsp.First;
 
-                  //Habilita a manutenção para ser programada novamente
-                  if DM.qryRotaPeriodicasManutREPROGRAMAR1.AsString = 'Execução' then
+                  //Habilita a manutenï¿½ï¿½o para ser programada novamente
+                  if DM.qryRotaPeriodicasManutREPROGRAMAR1.AsString = 'Execuï¿½ï¿½o' then
                     begin
                       DM.qryManutProgEquip.Close;
                       DM.qryManutProgEquip.Params[0].AsString := DM.qryRotaPeriodicasManutCODIGO.AsString;
@@ -529,7 +529,7 @@ PAuxiliares.Font.Color := clBlack;
                         end;
                     end;
 
-                  //Verifica itens problemáticos detectados após a manutenção
+                  //Verifica itens problemï¿½ticos detectados apï¿½s a manutenï¿½ï¿½o
                   CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
                   DM.qryRotaPeriodicasManutItens.First;
                   while not DM.qryRotaPeriodicasManutItens.Eof do
@@ -579,12 +579,12 @@ PAuxiliares.Font.Color := clBlack;
                       DM.qryRotaPeriodicasManutItensEsp.Next;
                     end;
 
-                  //Gerar OS com itens problemáticos
+                  //Gerar OS com itens problemï¿½ticos
                   if CDItensProb.RecordCount > 0 then
                     begin
                       LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (Retorno)'
                                                                     , DM.qryRotaPeriodicasManutCODEQUIPAMENTO.AsString, DM.qryRotaPeriodicasManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString);
+                                                                    , EmptyStr, 'Emergï¿½ncia', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
 
 
                       DM.qryRotaPeriodicasManut.Edit;
@@ -635,7 +635,7 @@ begin
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 300;
-    DM.FNomeConsulta := 'Funcionários';
+    DM.FNomeConsulta := 'Funcionï¿½rios';
     DM.FParamAuxiliar[1] := 'NOME';
     if DM.ConsultarCombo <> EmptyStr then
       begin
@@ -648,7 +648,7 @@ else
     Try
       if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
       Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
@@ -666,7 +666,7 @@ begin
   Try
     if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso nï¿½o permitido, contacte o setor responsï¿½vel para solicitar a liberaï¿½ï¿½o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaInspFechamentoHist, FrmTelaInspFechamentoHist);
@@ -682,7 +682,7 @@ begin
 DM.qryManutPeriodicas.Filtered := False;
 DM.qryManutPeriodicas.Filter := EmptyStr;
   case PCInspecoes.ActivePageIndex of
-    0://Manutenções
+    0://Manutenï¿½ï¿½es
       begin
         case RGFiltro.ItemIndex of
           0:
@@ -704,7 +704,7 @@ DM.qryManutPeriodicas.Filter := EmptyStr;
         if DM.qryManutPeriodicas.Filter <> EmptyStr then
           DM.qryManutPeriodicas.Filtered := True;
       end;
-    1://Lubrificações
+    1://Lubrificaï¿½ï¿½es
       begin
         case RGFiltro.ItemIndex of
           0:
@@ -859,7 +859,7 @@ GrdItensLubrific.Columns[8].Title.Caption   := 'Parte';
 DM.qryLubrificPeriodicasItens.Fields[8].DisplayWidth := 23;
 GrdItensLubrific.Columns[9].Title.Caption   := 'Item';
 DM.qryLubrificPeriodicasItens.Fields[9].DisplayWidth := 30;
-GrdItensLubrific.Columns[10].Title.Caption   := 'Inspeção';
+GrdItensLubrific.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';
 DM.qryLubrificPeriodicasItens.Fields[10].DisplayWidth := 45;
 GrdItensLubrific.Columns[12].Title.Caption   := 'Tempo';
 GrdItensLubrific.Columns[12].Title.Alignment := taCenter;
@@ -977,8 +977,8 @@ begin
       DM.qryRotaPeriodicasManutItensEsp.Open;
     end;
 
-TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
-TSLubrific.Caption := 'Lubrificações ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
+TSManut.Caption := 'Manutenï¿½ï¿½es ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
 if PCInspecoes.Pages[2].TabVisible = True then
   TSRota.Caption := 'Rotas ('+IntToStr(DM.qryRotaPeriodicas.RecordCount)+')';
 
@@ -1013,7 +1013,7 @@ if Key = 116 then
                                               DM.qryManutPeriodicas.Open;
                                               DM.qryManutPeriodicasItens.Open;
                                               DM.qryManutPeriodicasItensEsp.Open;
-                                              TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+                                              TSManut.Caption := 'Manutenï¿½ï¿½es ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
                                               GrdManutencao.SelectedRows.CurrentRowSelected := True;
 
 //                                              Application.ProcessMessages;
@@ -1042,7 +1042,7 @@ if Key = 116 then
               DM.qryLubrificPeriodicas.Open;
               DM.qryLubrificPeriodicasItens.Open;
               DM.qryLubrificPeriodicasItensEsp.Open;
-              TSLubrific.Caption := 'Lubrificações ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
+              TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
               GrdLubrificacao.SelectedRows.CurrentRowSelected := True;
 
               DM.MSGAguarde('', False);
@@ -1172,12 +1172,12 @@ begin
   inherited;
 if (Key = #13) and (GrdManutencao.SelectedIndex = 0) then
   begin
-    LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
+    LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o cï¿½digo da ordem de serviï¿½o:');
     if LCampo <> EmptyStr then
       begin
 //        DM.qryManutPeriodicas.FetchOnDemand := True;
         if GrdManutencao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('Ordem de serviï¿½o nï¿½o localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
       end;
   end;
 if (Key = #13) and (GrdManutencao.SelectedIndex = 6) then
@@ -1231,7 +1231,7 @@ GrdRota.Columns[7].Title.Caption   := 'Vencida';
 GrdRota.Columns[7].Title.Alignment := taCenter;
 GrdRota.Columns[7].Alignment       := taCenter;
 DM.qryRotaPeriodicas.Fields[7].DisplayWidth := 10;
-GrdRota.Columns[8].Title.Caption   := 'Situação';
+GrdRota.Columns[8].Title.Caption   := 'Situaï¿½ï¿½o';
 GrdRota.Columns[8].Title.Alignment := taCenter;
 GrdRota.Columns[8].Alignment       := taCenter;
 DM.qryRotaPeriodicas.Fields[8].DisplayWidth := 18;
@@ -1311,11 +1311,11 @@ begin
   inherited;
 if (Key = #13) and (GrdRota.SelectedIndex = 2) then
   begin
-    {LCampo := DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
+    {LCampo := DM.CampoInputBox('SPMPWeb', 'Informe o cï¿½digo da ordem de serviï¿½o:');
     if LCampo <> EmptyStr then
       begin
         if GrdManutencao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('Ordem de serviï¿½o nï¿½o localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
       end;
 
     Try
@@ -1362,9 +1362,9 @@ GrdRotaManut.Columns[15].Visible := False;
 GrdRotaManut.Columns[18].Visible := False;
 GrdRotaManut.Columns[19].Visible := False;
 
-GrdRotaManut.Columns[5].Title.Caption   := 'Inspeção';
+GrdRotaManut.Columns[5].Title.Caption   := 'Inspeï¿½ï¿½o';
 DM.qryRotaPeriodicasManut.Fields[5].DisplayWidth := 20;
-GrdRotaManut.Columns[16].Title.Caption   := 'Código';
+GrdRotaManut.Columns[16].Title.Caption   := 'Cï¿½digo';
 GrdRotaManut.Columns[16].Title.Alignment := taCenter;
 GrdRotaManut.Columns[16].Alignment       := taCenter;
 DM.qryRotaPeriodicasManut.Fields[16].DisplayWidth := 12;
@@ -1486,7 +1486,7 @@ GrdRotaManutItens.Columns[13].Visible  := False;
 
 GrdRotaManutItens.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItens.Fields[8].DisplayWidth  := 23;
 GrdRotaManutItens.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItens.Fields[9].DisplayWidth  := 30;
-GrdRotaManutItens.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItens.Fields[10].DisplayWidth := 45;
+GrdRotaManutItens.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';  DM.qryRotaPeriodicasManutItens.Fields[10].DisplayWidth := 45;
 GrdRotaManutItens.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItens.Fields[12].DisplayWidth := 5;  GrdRotaManutItens.Columns[12].Title.Alignment := taCenter;
 GrdRotaManutItens.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItens.Fields[14].DisplayWidth := 5;  GrdRotaManutItens.Columns[14].Title.Alignment := taCenter;
 GrdRotaManutItens.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItens.Fields[15].DisplayWidth := 5;  GrdRotaManutItens.Columns[15].Title.Alignment := taCenter;
@@ -1647,7 +1647,7 @@ GrdRotaManutItensEsp.Columns[13].Visible  := False;
 
 GrdRotaManutItensEsp.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItensEsp.Fields[8].DisplayWidth  := 23;
 GrdRotaManutItensEsp.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItensEsp.Fields[9].DisplayWidth  := 30;
-GrdRotaManutItensEsp.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItensEsp.Fields[10].DisplayWidth := 45;
+GrdRotaManutItensEsp.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';  DM.qryRotaPeriodicasManutItensEsp.Fields[10].DisplayWidth := 45;
 GrdRotaManutItensEsp.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItensEsp.Fields[12].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[12].Title.Alignment := taCenter;
 GrdRotaManutItensEsp.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItensEsp.Fields[14].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[14].Title.Alignment := taCenter;
 GrdRotaManutItensEsp.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItensEsp.Fields[15].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[15].Title.Alignment := taCenter;
@@ -1801,7 +1801,7 @@ GrdItensManut.Columns[20].Visible  := False; GrdItensManut.Columns[21].Visible  
 
 GrdItensManut.Columns[8].Title.Caption    := 'Parte';     DM.qryManutPeriodicasItens.Fields[8].DisplayWidth  := 23;
 GrdItensManut.Columns[9].Title.Caption    := 'Item';      DM.qryManutPeriodicasItens.Fields[9].DisplayWidth  := 30;
-GrdItensManut.Columns[10].Title.Caption   := 'Inspeção';  DM.qryManutPeriodicasItens.Fields[10].DisplayWidth := 45;
+GrdItensManut.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';  DM.qryManutPeriodicasItens.Fields[10].DisplayWidth := 45;
 GrdItensManut.Columns[12].Title.Caption   := 'Tempo';     DM.qryManutPeriodicasItens.Fields[12].DisplayWidth := 5;  GrdItensManut.Columns[12].Title.Alignment := taCenter;
 GrdItensManut.Columns[14].Title.Caption   := 'Executado'; DM.qryManutPeriodicasItens.Fields[14].DisplayWidth := 5;  GrdItensManut.Columns[14].Title.Alignment := taCenter;
 GrdItensManut.Columns[15].Title.Caption   := 'Bom';       DM.qryManutPeriodicasItens.Fields[15].DisplayWidth := 5;  GrdItensManut.Columns[15].Title.Alignment := taCenter;
@@ -1943,12 +1943,12 @@ begin
   inherited;
 if (Key = #13) and (GrdLubrificacao.SelectedIndex = 0) then
   begin
-    LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
+    LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o cï¿½digo da ordem de serviï¿½o:');
     if LCampo <> EmptyStr then
       begin
 //        DM.qryLubrificPeriodicas.FetchOnDemand := True;
         if GrdLubrificacao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('Ordem de serviï¿½o nï¿½o localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
       end;
   end;
 if (Key = #13) and (GrdLubrificacao.SelectedIndex = 6) then
@@ -2082,7 +2082,7 @@ GrdItensEspLubrific.Columns[8].Title.Caption   := 'Parte';
 DM.qryLubrificPeriodicasItensEsp.Fields[8].DisplayWidth := 23;
 GrdItensEspLubrific.Columns[9].Title.Caption   := 'Item';
 DM.qryLubrificPeriodicasItensEsp.Fields[9].DisplayWidth := 30;
-GrdItensEspLubrific.Columns[10].Title.Caption   := 'Inspeção';
+GrdItensEspLubrific.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';
 DM.qryLubrificPeriodicasItensEsp.Fields[10].DisplayWidth := 45;
 GrdItensEspLubrific.Columns[12].Title.Caption   := 'Tempo';
 GrdItensEspLubrific.Columns[12].Title.Alignment := taCenter;
@@ -2252,7 +2252,7 @@ GrdItensEspManut.Columns[8].Title.Caption   := 'Parte';
 DM.qryManutPeriodicasItensEsp.Fields[8].DisplayWidth := 23;
 GrdItensEspManut.Columns[9].Title.Caption   := 'Item';
 DM.qryManutPeriodicasItensEsp.Fields[9].DisplayWidth := 30;
-GrdItensEspManut.Columns[10].Title.Caption   := 'Inspeção';
+GrdItensEspManut.Columns[10].Title.Caption   := 'Inspeï¿½ï¿½o';
 DM.qryManutPeriodicasItensEsp.Fields[10].DisplayWidth := 45;
 GrdItensEspManut.Columns[12].Title.Caption   := 'Tempo';
 GrdItensEspManut.Columns[12].Title.Alignment := taCenter;
@@ -2348,8 +2348,8 @@ begin
       end;
   end;
 
-  TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
-  TSLubrific.Caption := 'Lubrificações ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
+  TSManut.Caption := 'Manutenï¿½ï¿½es ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+  TSLubrific.Caption := 'Lubrificaï¿½ï¿½es ('+IntToStr(DM.qryLubrificPeriodicas.RecordCount)+')';
   //RGFiltro.OnClick(Sender);
 end;
 
@@ -2399,7 +2399,7 @@ begin
                                                       DM.qryManutPeriodicasItens.Open;
                                                       DM.qryManutPeriodicasItensEsp.Open;
 
-                                                      TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+                                                      TSManut.Caption := 'Manutenï¿½ï¿½es ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
                                                       GrdManutencao.SelectedRows.CurrentRowSelected := True;
                                                       hora_futura := IncMinute(Now, 5);
                                                     Except

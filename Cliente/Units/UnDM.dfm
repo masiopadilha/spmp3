@@ -4779,6 +4779,7 @@ object DM: TDM
       '    , `CODOFICINA` '
       '    , `CODMANUTENCAO` '
       ''
+      ''
       'FROM'
       '    `ordemservico`'
       'WHERE (`CODIGO` = :codigo);')
@@ -6871,6 +6872,7 @@ object DM: TDM
         'AMEQUIP'
       '    , `lubrificprogfamequipamento`.`CODOFICINA`'
       '    , `lubrificprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `lubrificprogfamequipamento`.`EQUIPPARADO`'
       '    , `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`'
       '    , `equipamentos`.`DESCRICAO` EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
@@ -7155,6 +7157,14 @@ object DM: TDM
       Origin = 'CODMANUTENCAO'
       ProviderFlags = []
       Size = 9
+    end
+    object qryLubrificProgEquipEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
     end
     object qryLubrificProgEquipROTA: TStringField
       AutoGenerateValue = arDefault
@@ -27808,6 +27818,7 @@ object DM: TDM
       '    , `lubrificprogfamequipamento`.`ATIVO`'
       '    , `lubrificprogfamequipamento`.`VISIVEL`'
       '    , `lubrificprogfamequipamento`.`CLONAVEL`'
+      '    , `lubrificprogfamequipamento`.`EQUIPPARADO`'
       '    , `lubrificprogfamequipamento`.`DATACADASTRO`'
       '    , `lubrificprogfamequipamento`.`CODUSUARIOCAD`'
       '    , `lubrificprogfamequipamento`.`DATAULTALT`'
@@ -27961,6 +27972,12 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'CLONAVEL'
       Origin = 'CLONAVEL'
+      Size = 1
+    end
+    object qryLubrificProgFamEquipEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
       Size = 1
     end
     object qryLubrificProgFamEquipDATACADASTRO: TDateTimeField
@@ -28562,6 +28579,7 @@ object DM: TDM
         'P'
       '    , `manutprogfamequipamento`.`CODOFICINA`'
       '    , `manutprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `manutprogfamequipamento`.`EQUIPPARADO`'
       '    , `familiaequipamento`.`CODIGO` AS CODFAMILIAEQUIP'
       '    , `familiaequipamento`.`DESCRICAO` AS FAMILIAEQUIP'
       '    , `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2` '
@@ -28802,6 +28820,15 @@ object DM: TDM
       Visible = False
       Size = 9
     end
+    object qryManutConsEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 1
+    end
     object qryManutConsCODFAMILIAEQUIP: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODFAMILIAEQUIP'
@@ -28932,6 +28959,7 @@ object DM: TDM
         'AMEQUIP'
       '    , `lubrificprogfamequipamento`.`CODOFICINA`'
       '    , `lubrificprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `lubrificprogfamequipamento`.`EQUIPPARADO`'
       '    , `familiaequipamento`.`CODIGO` AS CODFAMILIAEQUIP'
       '    , `familiaequipamento`.`DESCRICAO` AS FAMILIAEQUIP'
       '    , `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2` '
@@ -29156,6 +29184,15 @@ object DM: TDM
       ProviderFlags = []
       Visible = False
       Size = 9
+    end
+    object qryLubrificConsEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 1
     end
     object qryLubrificConsDESCLUBRIFICPROGFAMEQUIP: TStringField
       AutoGenerateValue = arDefault
@@ -30881,6 +30918,7 @@ object DM: TDM
         'P'
       '    , `manutprogfamequipamento`.`CODOFICINA`'
       '    , `manutprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `manutprogfamequipamento`.`EQUIPPARADO`'
       '    , `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2` '
       '    , `equipamentos`.`DESCRICAO` EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
@@ -31143,6 +31181,14 @@ object DM: TDM
       Origin = 'CODMANUTENCAO'
       ProviderFlags = []
       Size = 9
+    end
+    object qryManutProgEquipEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
     end
     object qryManutProgEquipPROGRAMACAO2: TStringField
       AutoGenerateValue = arDefault
@@ -31630,6 +31676,7 @@ object DM: TDM
       '    , `manutprogfamequipamento`.`ATIVO`'
       '    , `manutprogfamequipamento`.`VISIVEL`'
       '    , `manutprogfamequipamento`.`CLONAVEL`'
+      '    , `manutprogfamequipamento`.`EQUIPPARADO`'
       '    , `manutprogfamequipamento`.`DATACADASTRO`'
       '    , `manutprogfamequipamento`.`CODUSUARIOCAD`'
       '    , `manutprogfamequipamento`.`DATAULTALT`'
@@ -31781,6 +31828,12 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'CLONAVEL'
       Origin = 'CLONAVEL'
+      Size = 1
+    end
+    object qryManutProgFamEquipEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
       Size = 1
     end
     object qryManutProgFamEquipDATACADASTRO: TDateTimeField

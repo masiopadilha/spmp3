@@ -2,10 +2,12 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lia de Equipamento'
   ClientHeight = 624
   ClientWidth = 1012
-  ExplicitLeft = -251
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    DesignSize = (
+      1008
+      45)
     inherited LCadastro: TLabel
       Left = 722
     end
@@ -159,7 +161,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       OnClick = BtnMonitoramentoClick
     end
     object ChbAtivo: TDBCheckBox
-      Left = 724
+      Left = 642
       Top = 95
       Width = 59
       Height = 17
@@ -173,7 +175,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivel: TDBCheckBox
-      Left = 799
+      Left = 715
       Top = 95
       Width = 67
       Height = 17
@@ -260,7 +262,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       OnKeyPress = FormKeyPress
     end
     object chbClonavel: TDBCheckBox
-      Left = 878
+      Left = 794
       Top = 95
       Width = 80
       Height = 17
@@ -347,6 +349,20 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ShowHint = True
       TabOrder = 9
       OnClick = BtnManutencaoClick
+    end
+    object ChbParado: TDBCheckBox
+      Left = 886
+      Top = 95
+      Width = 72
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Parado:'
+      DataField = 'EQUIPPARADO'
+      DataSource = DM.dsLubrificProgFamEquip
+      TabOrder = 15
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
     end
   end
   inherited PProgramacao: TPanel
