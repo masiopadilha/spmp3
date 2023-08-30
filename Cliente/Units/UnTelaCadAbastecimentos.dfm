@@ -2,7 +2,6 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
   TextHeight = 16
   inherited PControle: TPanel
-    ExplicitWidth = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsAbastecimentos
     end
@@ -320,7 +319,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Height = 166
+    Height = 193
     ExplicitTop = 349
     ExplicitHeight = 193
     inherited Label3: TLabel

@@ -7,7 +7,6 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnShow = FormShow
-  ExplicitLeft = -251
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
@@ -28,8 +27,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 973
-      ExplicitLeft = 969
+      Left = 969
+      ExplicitLeft = 965
     end
     object BtnImprimir: TButton
       Left = 941
@@ -70,8 +69,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 1002
-    ExplicitHeight = 502
+    ExplicitWidth = 1006
+    ExplicitHeight = 505
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
@@ -95,10 +94,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Align = alClient
       TabOrder = 1
       OnChange = PCInspecoesChange
-      ExplicitWidth = 998
-      ExplicitHeight = 426
       object TSManut: TTabSheet
-        Caption = 'Manuten'#231#245'es'
+        Caption = 'Manutenc'
         object PFundoManut: TPanel
           Left = 0
           Top = 0

@@ -697,6 +697,12 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png" Configuration="Release" Class="UWP_DelphiLogo150"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Configuration="Release" Class="UWP_DelphiLogo44"/>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>SPMP3.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Release" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">

@@ -1,8 +1,8 @@
 inherited FrmTelaInspVenc: TFrmTelaInspVenc
   BorderIcons = []
   Caption = 'Inspe'#231#245'es Vencidas'
-  ClientHeight = 544
-  ClientWidth = 918
+  ClientHeight = 564
+  ClientWidth = 928
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 940
   Constraints.MinHeight = 600
@@ -12,7 +12,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 914
+    Width = 924
     TabOrder = 1
     ExplicitWidth = 920
     inherited BtnAjuda: TButton
@@ -22,11 +22,11 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PCentro: TPanel
-    Width = 912
-    Height = 405
+    Width = 922
+    Height = 425
     TabOrder = 2
-    ExplicitWidth = 918
-    ExplicitHeight = 422
+    ExplicitWidth = 922
+    ExplicitHeight = 425
     inherited RGTelas: TRadioGroup
       Top = 40
       Width = 920
@@ -151,7 +151,6 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 910
       object Label6: TLabel
         Left = 7
         Top = 9
@@ -233,15 +232,15 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 477
-    Width = 914
+    Top = 497
+    Width = 924
     TabOrder = 3
     ExplicitTop = 494
     ExplicitWidth = 920
   end
   inherited PBotoes: TPanel
-    Top = 504
-    Width = 914
+    Top = 524
+    Width = 924
     TabOrder = 0
     ExplicitTop = 521
     ExplicitWidth = 920
