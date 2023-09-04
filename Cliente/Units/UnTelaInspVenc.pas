@@ -84,7 +84,7 @@ begin
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 600;
-    DM.FNomeConsulta := 'Fam�lias de Equipamentos';
+    DM.FNomeConsulta := 'Famílias de Equipamentos';
     if DM.ConsultarCombo <> EmptyStr then
       begin
         LCodFamilia                             := DM.FCodCombo;
@@ -178,9 +178,9 @@ case PCInspecoes.ActivePageIndex of
       for I := 0 to GrdManut.SelectedRows.Count - 1 do
         begin
           DM.qryManutVenc.GotoBookmark(GrdManut.SelectedRows.Items[I]);
-          LInsp := LInsp + IntToStr(DM.qryManutVenc.RecNo) + '� - ' + DM.qryManutVenc.FieldByName('DESCRICAO').AsString + #13;
+          LInsp := LInsp + IntToStr(DM.qryManutVenc.RecNo) + 'º - ' + DM.qryManutVenc.FieldByName('DESCRICAO').AsString + #13;
         end;
-      LTexto := PChar('Deseja realmente executar a(s) inspe��e(s) selecionada(s)?' + #13 + LInsp);
+      LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?' + #13 + LInsp);
       if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
         begin
           DM.MSGAguarde('');
@@ -193,7 +193,7 @@ case PCInspecoes.ActivePageIndex of
               DM.qryManutProgEquip.Params[2].AsString := DM.qryManutVencCODEQUIPAMENTO.AsString;
               DM.qryManutProgEquip.Open;
 
-              if (DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execu��o') and (DM.qryManutProgEquipRELATORIO.AsString = 'S') then
+              if (DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução') and (DM.qryManutProgEquipRELATORIO.AsString = 'S') then
                 begin
                   PAuxiliares.Font.Color := clRed;
                   PAuxiliares.Caption := 'EXISTE UMA '+DM.qryManutProgEquipDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
@@ -202,7 +202,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                                 , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
 
               if DM.qryManutProgEquip.IsEmpty = False then
                 DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -211,8 +211,8 @@ case PCInspecoes.ActivePageIndex of
               DM.qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
               DM.qryManutProgEquip.Post;
               DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
-              //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a manuten��o foi fechada ou n�o.
-              if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Programa��o' then
+              //Sendo a inspeção reprogramada pela 'programação', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
+              if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Programação' then
                 begin
                   DM.qryManutProgEquip.Edit;
                   DM.qryManutProgEquipRELATORIO.AsString    := 'N';
@@ -220,20 +220,20 @@ case PCInspecoes.ActivePageIndex of
                     DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutProgEquipFREQUENCIA1.AsInteger)
                   else
                     DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutProgEquipDTAINICIO1.AsDateTime), DM.qryManutProgEquipFREQUENCIA1.AsInteger);
-                  if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programa��o' then
+                  if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
                     DM.qryManutProgEquipLEITURA.AsInteger := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
                   DM.qryManutProgEquip.Post;
                   DM.qryManutVenc.Edit;
                   DM.qryManutVencDTAINICIO1.AsDateTime := DM.qryManutProgEquipDTAINICIO1.AsDateTime;
                   DM.qryManutVenc.Post;
                 end;
-              //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-              //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-              if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execu��o' then
+              //Sendo a inspeção reprogramada pela execu��o, definir como manutenção em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+              //a gera��o de outra manutenção mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manutenção at� ser fechada.
+              if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
                 begin
                   DM.qryManutProgEquip.Edit;
                   DM.qryManutProgEquipRELATORIO.AsString    := 'S';
-                  if (DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programa��o') and (DM.qryManutProgEquipRELATORIO.AsString = 'S') then
+                  if (DM.qryManutProgEquipREPROGRAMAR2.AsString = 'programação') and (DM.qryManutProgEquipRELATORIO.AsString = 'S') then
                     DM.qryManutProgEquipLEITURA.AsInteger := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
                   DM.qryManutProgEquip.Post;
                 end;
@@ -251,9 +251,9 @@ case PCInspecoes.ActivePageIndex of
       for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
         begin
           DM.qryLubrificVenc.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
-          LInsp := LInsp + IntToStr(DM.qryLubrificVenc.RecNo) + '� - ' + DM.qryLubrificVenc.FieldByName('DESCRICAO').AsString + #13;
+          LInsp := LInsp + IntToStr(DM.qryLubrificVenc.RecNo) + 'º - ' + DM.qryLubrificVenc.FieldByName('DESCRICAO').AsString + #13;
         end;
-      LTexto := PChar('Deseja realmente executar a(s) inspe��e(s) selecionada(s)?' + #13 + LInsp);
+      LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?' + #13 + LInsp);
       if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
         begin
           DM.MSGAguarde('');
@@ -266,7 +266,7 @@ case PCInspecoes.ActivePageIndex of
               DM.qryLubrificProgEquip.Params[2].AsString := DM.qryLubrificVencCODEQUIPAMENTO.AsString;
               DM.qryLubrificProgEquip.Open;
 
-              if (DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execu��o') and (DM.qryLubrificProgEquipRELATORIO.AsString = 'S') then
+              if (DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução') and (DM.qryLubrificProgEquipRELATORIO.AsString = 'S') then
                 begin
                   PAuxiliares.Font.Color := clRed;
                   PAuxiliares.Caption := 'EXISTE UMA '+DM.qryLubrificProgEquipDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
@@ -275,7 +275,7 @@ case PCInspecoes.ActivePageIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                                 , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
 
               if DM.qryLubrificProgEquip.IsEmpty = False then
                 DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -283,8 +283,8 @@ case PCInspecoes.ActivePageIndex of
               DM.qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
               DM.qryLubrificProgEquip.Post;
               DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-              //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a Lubrificen��o foi fechada ou n�o.
-              if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Programa��o' then
+              //Sendo a inspeção reprogramada pela 'programação', programa a pr�xima inspeção independente se a Lubrificen��o foi fechada ou n�o.
+              if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'programação' then
                 begin
                   DM.qryLubrificProgEquip.Edit;
                   DM.qryLubrificProgEquipRELATORIO.AsString    := 'N';
@@ -292,20 +292,20 @@ case PCInspecoes.ActivePageIndex of
                     DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificProgEquipFREQUENCIA1.AsInteger)
                   else
                     DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificProgEquipDTAINICIO1.AsDateTime), DM.qryLubrificProgEquipFREQUENCIA1.AsInteger);
-                  if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programa��o' then
+                  if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'programação' then
                     DM.qryLubrificProgEquipLEITURA.AsInteger := DM.qryLubrificProgEquipLEITURA.AsInteger + DM.qryLubrificProgEquipFREQUENCIA2.AsInteger;
                   DM.qryLubrificProgEquip.Post;
                   DM.qryLubrificVenc.Edit;
                   DM.qryLubrificVencDTAINICIO1.AsDateTime := DM.qryLubrificProgEquipDTAINICIO1.AsDateTime;
                   DM.qryLubrificVenc.Post;
                 end;
-              //Sendo a inspe��o reprogramada pela execu��o, definir como Lubrificen��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-              //a gera��o de outra Lubrificen��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra Lubrificen��o at� ser fechada.
-              if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execu��o' then
+              //Sendo a inspeção reprogramada pela execu��o, definir como Lubrificação em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+              //a geração de outra Lubrificação mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra Lubrificação at� ser fechada.
+              if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução' then
                 begin
                   DM.qryLubrificProgEquip.Edit;
                   DM.qryLubrificProgEquipRELATORIO.AsString    := 'S';
-                  if (DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programa��o') and (DM.qryLubrificProgEquipRELATORIO.AsString = 'S') then
+                  if (DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação') and (DM.qryLubrificProgEquipRELATORIO.AsString = 'S') then
                     DM.qryLubrificProgEquipLEITURA.AsInteger := DM.qryLubrificProgEquipLEITURA.AsInteger + DM.qryLubrificProgEquipFREQUENCIA2.AsInteger;
                   DM.qryLubrificProgEquip.Post;
                 end;
@@ -323,9 +323,9 @@ case PCInspecoes.ActivePageIndex of
       for I := 0 to GrdRotas.SelectedRows.Count - 1 do
         begin
           DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
-          LInsp := LInsp + IntToStr(DM.qryRotaEquipVenc.RecNo) + '� - ' + DM.qryRotaEquipVenc.FieldByName('DESCRICAO').AsString + #13;
+          LInsp := LInsp + IntToStr(DM.qryRotaEquipVenc.RecNo) + 'º - ' + DM.qryRotaEquipVenc.FieldByName('DESCRICAO').AsString + #13;
         end;
-      LTexto := PChar('Deseja realmente executar a(s) inspe��e(s) selecionada(s)?' + #13 + LInsp);
+      LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?' + #13 + LInsp);
      if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
         begin
           DM.MSGAguarde('');
@@ -334,27 +334,27 @@ case PCInspecoes.ActivePageIndex of
              DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
              DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                                                , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                               , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
              if DM.qryRotaEquipVenc.IsEmpty = False then
                DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaEquipVencCODIGO.AsString, DM.FCodOrdemServico);
              DmRelatorios.frxRRotaIndividual.ShowReport();
-             //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-             //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-             if (DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Execu��o') and (DM.qryRotaEquipVencRELATORIO.AsString = 'S') then
+             //Sendo a inspeção reprogramada pela execu��o, definir como manutenção em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+             //a geração de outra manutenção mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção at� ser fechada.
+             if (DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Execução') and (DM.qryRotaEquipVencRELATORIO.AsString = 'S') then
                begin
                  PAuxiliares.Font.Color := clRed;
                  PAuxiliares.Caption := 'EXISTE UMA ROTA: '+DM.qryRotaEquipVencDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
                  DM.MSGAguarde('', False);
                  Exit;
                end;
-             if (DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Execu��o') and (DM.qryRotaEquipVencRELATORIO.AsString = 'N') then
+             if (DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Execução') and (DM.qryRotaEquipVencRELATORIO.AsString = 'N') then
                begin
                  DM.qryRotaEquipVenc.Edit;
                  DM.qryRotaEquipVencRELATORIO.AsString    := 'S';
                  DM.qryRotaEquipVenc.Post;
                end;
-             //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a rota foi fechada ou n�o.
-             if DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Programa��o' then
+             //Sendo a inspeção reprogramada pela 'programação', programa a pr�xima inspeção independente se a rota foi fechada ou n�o.
+             if DM.qryRotaEquipVencREPROGRAMAR.AsString = 'programação' then
                begin
                  DM.qryRotaEquipVenc.Edit;
                  DM.qryRotaEquipVencRELATORIO.AsString    := 'N';

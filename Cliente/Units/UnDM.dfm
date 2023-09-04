@@ -26756,7 +26756,7 @@ object DM: TDM
       'FROM '
       '    `ordemservico`'
       '    '
-      '    INNER JOIN `equipamentos` '
+      '    LEFT JOIN `equipamentos` '
       
         '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
         'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
@@ -26781,13 +26781,17 @@ object DM: TDM
         'PRESA`)'
       '        '
       'WHERE '
-      '    (`ordemservico`.`CODEMPRESA` = :codempresa'
+      '    (`ordemservico`.`CODEMPRESA` = :codempresa     '
+      '     AND ('
       
-        '     AND `ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(:data1, ' +
-        #39'%Y/%m/%d'#39') '
+        '          (`ordemservico`.`DATAINICIOREAL` >= STR_TO_DATE(:data1' +
+        ', '#39'%Y/%m/%d'#39') AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE' +
+        '(:data2, '#39'%Y/%m/%d %T'#39'))'
       
-        '     AND `ordemservico`.`DATAINICIOREAL` <= STR_TO_DATE(:data2, ' +
-        #39'%Y/%m/%d %T'#39')'
+        '            OR  (`ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' +
+        ':data1, '#39'%Y/%m/%d'#39') AND `ordemservico`.`DATAFECHAMENTO` <= STR_T' +
+        'O_DATE(:data2, '#39'%Y/%m/%d %T'#39'))'
+      '         )     '
       '     AND `ordemservico`.`SITUACAO` =  '#39'FECHADA'#39
       '     AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula)'
       '     '

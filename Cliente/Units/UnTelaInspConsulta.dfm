@@ -1,7 +1,7 @@
 inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Caption = 'Consulta de Inspe'#231#245'es'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,7 +11,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     object Label9: TLabel [1]
       Left = 133
@@ -67,8 +67,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1006
     ExplicitHeight = 505
     inherited RGTelas: TRadioGroup
@@ -573,8 +573,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 574
+    Width = 1004
     ExplicitTop = 574
     ExplicitWidth = 1004
     object chbTudo: TCheckBox
@@ -592,8 +592,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 601
+    Width = 1004
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

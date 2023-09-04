@@ -308,7 +308,7 @@ begin
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 150;
-    DM.FNomeConsulta := '�reas';
+    DM.FNomeConsulta := 'Áreas';
     if DM.ConsultarCombo <> EmptyStr then
       begin
         LCodArea     := DM.FCodCombo;
@@ -324,7 +324,7 @@ begin
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 600;
-    DM.FNomeConsulta := 'Fam�lias de Equipamentos';
+    DM.FNomeConsulta := 'Famílias de Equipamentos';
     if DM.ConsultarCombo <> EmptyStr then
       begin
         LCodFamilia          := DM.FCodCombo;
@@ -781,14 +781,14 @@ LInsp := EmptyStr;
 
 FrmTelaPrincipal.TimerOscioso.Enabled := False;
 case PCInspecoes.TabIndex of
-  0: //Manuten��es
+  0: //Manutenções
     begin
       if DM.qryManutConsCODIGO.AsString = '' then Exit;
 
 //      for I := 0 to GrdManut.SelectedRows.Count - 1 do
 //        begin
 //          DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
-//          LInsp := LInsp + IntToStr(DM.qryManutCons.RecNo) + '� - ' + DM.qryManutCons.FieldByName('DESCRICAO').AsString + #13;
+//          LInsp := LInsp + IntToStr(DM.qryManutCons.RecNo) + 'º - ' + DM.qryManutCons.FieldByName('DESCRICAO').AsString + #13;
 //        end;
 
 
@@ -814,7 +814,7 @@ case PCInspecoes.TabIndex of
             begin
               GrdManut.DataSource.DataSet.GotoBookmark(GrdManut.SelectedRows.Items[i]);
 
-              if (DM.qryManutConsREPROGRAMAR1.AsString = 'Execu��o') and (DM.qryManutConsRELATORIO.AsString = 'S') then
+              if (DM.qryManutConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryManutConsRELATORIO.AsString = 'S') then
                 begin
                   PAuxiliares.Font.Color := clRed;
                   PAuxiliares.Caption := 'EXISTE UMA '+DM.qryManutConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
@@ -823,7 +823,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                             , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString, DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString, DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString);
 
 
               DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -926,23 +926,23 @@ case PCInspecoes.TabIndex of
                   DM.qryManutConsPlanoTrab.Next;
                 end;
 
-              //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a manuten��o foi fechada ou n�o.
-              if DM.qryManutConsREPROGRAMAR1.AsString = 'Programa��o' then
+              //Sendo a inspeção reprogramada pela 'programa��o', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
+              if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
                 begin
                   DM.qryManutConsRELATORIO.AsString    := 'N';
                   if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
                     DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
                   else
                     DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutConsDTAINICIO1.AsDateTime), DM.qryManutConsFREQUENCIA1.AsInteger);
-                  if DM.qryManutConsREPROGRAMAR2.AsString = 'Programa��o' then
+                  if DM.qryManutConsREPROGRAMAR2.AsString = 'Programação' then
                     DM.qryManutConsLEITURA.AsInteger := DM.qryManutConsLEITURA.AsInteger + DM.qryManutConsFREQUENCIA2.AsInteger;
                 end;
-              //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-              //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-              if DM.qryManutConsREPROGRAMAR1.AsString = 'Execu��o' then
+              //Sendo a inspeção reprogramada pela execu��o, definir como manutenção em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+              //a gera��o de outra manutenção mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manutenção at� ser fechada.
+              if DM.qryManutConsREPROGRAMAR1.AsString = 'Execução' then
                 begin
                   DM.qryManutConsRELATORIO.AsString  := 'S';
-                  if (DM.qryManutConsREPROGRAMAR2.AsString = 'Programa��o') and (DM.qryManutConsRELATORIO.AsString = 'S') then
+                  if (DM.qryManutConsREPROGRAMAR2.AsString = 'Programação') and (DM.qryManutConsRELATORIO.AsString = 'S') then
                     DM.qryManutConsLEITURA.AsInteger := DM.qryManutConsLEITURA.AsInteger + DM.qryManutConsFREQUENCIA2.AsInteger;
                 end;
 
@@ -976,18 +976,18 @@ case PCInspecoes.TabIndex of
           TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutCons.RecordCount)+')';
         end;
     end;
-  1: //Lubrifica��es
+  1: //Lubrificações
     begin
       if DM.qryLubrificConsCODIGO.AsString = '' then Exit;
 
 //      for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
 //        begin
 //          DM.qryLubrificCons.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
-//          LInsp := LInsp + IntToStr(DM.qryLubrificCons.RecNo) + '� - ' + DM.qryLubrificCons.FieldByName('DESCRICAO').AsString + #13;
+//          LInsp := LInsp + IntToStr(DM.qryLubrificCons.RecNo) + 'º - ' + DM.qryLubrificCons.FieldByName('DESCRICAO').AsString + #13;
 //        end;
 
 
-      LTexto := PChar('Deseja realmente executar a(s) inspe��e(s) selecionada(s)?');
+      LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?');
 
       if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
         begin
@@ -1009,7 +1009,7 @@ case PCInspecoes.TabIndex of
             begin
               GrdLubrific.DataSource.DataSet.GotoBookmark(GrdLubrific.SelectedRows.Items[i]);
 
-              if (DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execu��o') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
+              if (DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
                 begin
                   PAuxiliares.Font.Color := clRed;
                   PAuxiliares.Caption := 'EXISTE UMA '+DM.qryLubrificConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
@@ -1018,7 +1018,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                             , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString);
 
 
               DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
@@ -1121,23 +1121,23 @@ case PCInspecoes.TabIndex of
                   DM.qryLubrificConsPlanoTrab.Next;
                 end;
 
-              //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a manuten��o foi fechada ou n�o.
-              if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programa��o' then
+              //Sendo a inspeção reprogramada pela 'programa��o', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
+              if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
                 begin
                   DM.qryLubrificConsRELATORIO.AsString    := 'N';
                   if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
                     DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
                   else
                     DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime), DM.qryLubrificConsFREQUENCIA1.AsInteger);
-                  if DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programa��o' then
+                  if DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programação' then
                     DM.qryLubrificConsLEITURA.AsInteger := DM.qryLubrificConsLEITURA.AsInteger + DM.qryLubrificConsFREQUENCIA2.AsInteger;
                 end;
-              //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-              //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-              if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execu��o' then
+              //Sendo a inspeção reprogramada pela execu��o, definir como manutenção em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+              //a gera��o de outra manutenção mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manutenção at� ser fechada.
+              if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execução' then
                 begin
                   DM.qryLubrificConsRELATORIO.AsString    := 'S';
-                  if (DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programa��o') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
+                  if (DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programação') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
                     DM.qryLubrificConsLEITURA.AsInteger := DM.qryLubrificConsLEITURA.AsInteger + DM.qryLubrificConsFREQUENCIA2.AsInteger;
                 end;
 
@@ -1178,10 +1178,10 @@ case PCInspecoes.TabIndex of
       for I := 0 to GrdRota.SelectedRows.Count - 1 do
         begin
           DM.qryRotaCons.GotoBookmark(GrdRota.SelectedRows.Items[I]);
-          LInsp := LInsp + IntToStr(DM.qryRotaCons.RecNo) + '� - ' + DM.qryRotaCons.FieldByName('DESCRICAO').AsString + #13;
+          LInsp := LInsp + IntToStr(DM.qryRotaCons.RecNo) + 'º - ' + DM.qryRotaCons.FieldByName('DESCRICAO').AsString + #13;
         end;
 
-      LTexto := PChar('Deseja realmente executar a(s) inspe��e(s) selecionada(s)?');
+      LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?');
 
       if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
         begin
@@ -1207,7 +1207,7 @@ case PCInspecoes.TabIndex of
 
               DM.qryRotaCons.GotoBookmark(bmQuery);
 
-              if (DM.qryRotaConsREPROGRAMAR.AsString = 'Execu��o') and (DM.qryRotaConsRELATORIO.AsString = 'S') then
+              if (DM.qryRotaConsREPROGRAMAR.AsString = 'Execução') and (DM.qryRotaConsRELATORIO.AsString = 'S') then
                 begin
                   PAuxiliares.Font.Color := clRed;
                   PAuxiliares.Caption := 'EXISTE UMA '+DM.qryRotaConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
@@ -1216,7 +1216,7 @@ case PCInspecoes.TabIndex of
 
               DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
                                                             , EmptyStr, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emerg�ncia', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
 
               DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
@@ -1224,8 +1224,8 @@ case PCInspecoes.TabIndex of
               DM.qryRotaCons.Edit;
               DM.qryRotaConsCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
 
-              //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a manuten��o foi fechada ou n�o.
-              if DM.qryRotaConsREPROGRAMAR.AsString = 'Programa��o' then
+              //Sendo a inspeção reprogramada pela 'programa��o', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
+              if DM.qryRotaConsREPROGRAMAR.AsString = 'Programação' then
                 begin
                   DM.qryRotaConsRELATORIO.AsString    := 'N';
                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) < DateOf(DM.FDataHoraServidor) then
@@ -1233,14 +1233,14 @@ case PCInspecoes.TabIndex of
                   else
                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaConsDATAINICIO.AsDateTime), DM.qryRotaConsFREQUENCIA.AsInteger);
                 end;
-              //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
-              //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-              if DM.qryRotaConsREPROGRAMAR.AsString = 'Execu��o' then
+              //Sendo a inspeção reprogramada pela execu��o, definir como manutenção em aberto at� ser efetuado o fechamento, portanto n�o permitindo
+              //a gera��o de outra manutenção mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manutenção at� ser fechada.
+              if DM.qryRotaConsREPROGRAMAR.AsString = 'Execução' then
                 begin
                   DM.qryRotaConsRELATORIO.AsString    := 'S';
                 end;
 
-              //Carrega FdMemTable para o relat�rio
+              //Carrega FdMemTable para o relatório
               FDMemTRota.Append;
               FDMemTRotaCODIGO.AsString             := DM.qryRotaConsCODIGO.AsString;
               FDMemTRotaDESCRICAO.AsString          := DM.qryRotaConsDESCRICAO.AsString;
@@ -1419,9 +1419,9 @@ begin
         GrdManut.DataSource.DataSet.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
 
         case CBCriticidade.ItemIndex of
-          0: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a F�brica''';
+          0: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a Fábrica''';
           1: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para o Equipamento''';
-          2: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a �rea''';
+          2: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a Área''';
         end;
 
         if EdtFamiliaEquip.Text <> '' then
@@ -1459,9 +1459,9 @@ begin
         GrdLubrific.DataSource.DataSet.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
 
         case CBCriticidade.ItemIndex of
-          0: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a F�brica''';
+          0: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a Fábrica''';
           1: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para o Equipamento''';
-          2: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a �rea''';
+          2: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CRITICIDADE = ''Para a Área''';
         end;
 
         if EdtFamiliaEquip.Text <> '' then
@@ -1528,9 +1528,9 @@ begin
         DM.qryManutCons.First;
 
         case CBCriticidade.ItemIndex of
-          0: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a F�brica''';
+          0: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a Fábrica''';
           1: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para o Equipamento''';
-          2: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a �rea''';
+          2: GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a Área''';
         end;
 
         if EdtFamiliaEquip.Text <> '' then
@@ -1574,9 +1574,9 @@ begin
         GrdLubrific.DataSource.DataSet.Filter   := EmptyStr;
 
         case CBCriticidade.ItemIndex of
-          0: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a F�brica''';
+          0: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a Fábrica''';
           1: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para o Equipamento''';
-          2: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a �rea''';
+          2: GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + 'CRITICIDADE = ''Para a Área''';
         end;
 
         if EdtFamiliaEquip.Text <> '' then
@@ -1734,13 +1734,13 @@ FDMemTLubrificC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor)
     begin
       case CBPeriodo.ItemIndex of
         0: FDMemTLubrificPERIODO.AsString := 'Vencidas';
-        1: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 7 dias';
-        2: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 15 dias';
-        3: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 30 dias';
-        4: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 60 dias';
-        5: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 90 dias';
-        6: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 180 dias';
-        7: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 365 dias';
+        1: FDMemTLubrificPERIODO.AsString := 'Próximos 7 dias';
+        2: FDMemTLubrificPERIODO.AsString := 'Próximos 15 dias';
+        3: FDMemTLubrificPERIODO.AsString := 'Próximos 30 dias';
+        4: FDMemTLubrificPERIODO.AsString := 'Próximos 60 dias';
+        5: FDMemTLubrificPERIODO.AsString := 'Próximos 90 dias';
+        6: FDMemTLubrificPERIODO.AsString := 'Próximos 180 dias';
+        7: FDMemTLubrificPERIODO.AsString := 'Próximos 365 dias';
       end;
     end;
 end;
@@ -1753,13 +1753,13 @@ FDMemTLubrificC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor)
     begin
       case CBPeriodo.ItemIndex of
         0: FDMemTLubrificPERIODO.AsString := 'Vencidas';
-        1: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 7 dias';
-        2: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 15 dias';
-        3: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 30 dias';
-        4: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 60 dias';
-        5: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 90 dias';
-        6: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 180 dias';
-        7: FDMemTLubrificPERIODO.AsString := 'Pr�ximos 365 dias';
+        1: FDMemTLubrificPERIODO.AsString := 'Próximos 7 dias';
+        2: FDMemTLubrificPERIODO.AsString := 'Próximos 15 dias';
+        3: FDMemTLubrificPERIODO.AsString := 'Próximos 30 dias';
+        4: FDMemTLubrificPERIODO.AsString := 'Próximos 60 dias';
+        5: FDMemTLubrificPERIODO.AsString := 'Próximos 90 dias';
+        6: FDMemTLubrificPERIODO.AsString := 'Próximos 180 dias';
+        7: FDMemTLubrificPERIODO.AsString := 'Próximos 365 dias';
       end;
     end;
 end;
@@ -1773,13 +1773,13 @@ FDMemTManutC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), D
     begin
       case CBPeriodo.ItemIndex of
         0: FDMemTManutPERIODO.AsString := 'Vencidas';
-        1: FDMemTManutPERIODO.AsString := 'Pr�ximos 7 dias';
-        2: FDMemTManutPERIODO.AsString := 'Pr�ximos 15 dias';
-        3: FDMemTManutPERIODO.AsString := 'Pr�ximos 30 dias';
-        4: FDMemTManutPERIODO.AsString := 'Pr�ximos 60 dias';
-        5: FDMemTManutPERIODO.AsString := 'Pr�ximos 90 dias';
-        6: FDMemTManutPERIODO.AsString := 'Pr�ximos 180 dias';
-        7: FDMemTManutPERIODO.AsString := 'Pr�ximos 365 dias';
+        1: FDMemTManutPERIODO.AsString := 'Próximos 7 dias';
+        2: FDMemTManutPERIODO.AsString := 'Próximos 15 dias';
+        3: FDMemTManutPERIODO.AsString := 'Próximos 30 dias';
+        4: FDMemTManutPERIODO.AsString := 'Próximos 60 dias';
+        5: FDMemTManutPERIODO.AsString := 'Próximos 90 dias';
+        6: FDMemTManutPERIODO.AsString := 'Próximos 180 dias';
+        7: FDMemTManutPERIODO.AsString := 'Próximos 365 dias';
       end;
     end;
 end;
@@ -1792,13 +1792,13 @@ FDMemTRotaC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), Da
     begin
       case CBPeriodo.ItemIndex of
         0: FDMemTRotaPERIODO.AsString := 'Vencidas';
-        1: FDMemTRotaPERIODO.AsString := 'Pr�ximos 7 dias';
-        2: FDMemTRotaPERIODO.AsString := 'Pr�ximos 15 dias';
-        3: FDMemTRotaPERIODO.AsString := 'Pr�ximos 30 dias';
-        4: FDMemTRotaPERIODO.AsString := 'Pr�ximos 60 dias';
-        5: FDMemTRotaPERIODO.AsString := 'Pr�ximos 90 dias';
-        6: FDMemTRotaPERIODO.AsString := 'Pr�ximos 180 dias';
-        7: FDMemTRotaPERIODO.AsString := 'Pr�ximos 365 dias';
+        1: FDMemTRotaPERIODO.AsString := 'Próximos 7 dias';
+        2: FDMemTRotaPERIODO.AsString := 'Próximos 15 dias';
+        3: FDMemTRotaPERIODO.AsString := 'Próximos 30 dias';
+        4: FDMemTRotaPERIODO.AsString := 'Próximos 60 dias';
+        5: FDMemTRotaPERIODO.AsString := 'Próximos 90 dias';
+        6: FDMemTRotaPERIODO.AsString := 'Próximos 180 dias';
+        7: FDMemTRotaPERIODO.AsString := 'Próximos 365 dias';
       end;
     end;
 end;
