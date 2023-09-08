@@ -41463,7 +41463,7 @@ object DM: TDM
       ''
       'FROM'
       '    `solictrabalho`'
-      '   INNER JOIN `equipamentos` '
+      '   LEFT JOIN `equipamentos` '
       
         '        ON (`solictrabalho`.`CODEQUIPAMENTO` = `equipamentos`.`C' +
         'ODIGO`) AND (`solictrabalho`.`CODEMPRESA` = `equipamentos`.`CODE' +

@@ -1,9 +1,7 @@
 inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   Caption = 'Equipamentos'
-  ClientHeight = 614
+  ClientHeight = 624
   ClientWidth = 1012
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
@@ -118,7 +116,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     object Label4: TLabel [0]
       Left = 45
       Top = 33
@@ -437,7 +435,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PProgramacao: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     inherited Label2: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -879,9 +877,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PDiversos: TPanel
     Width = 1008
-    Height = 190
-    ExplicitWidth = 998
-    ExplicitHeight = 170
+    Height = 200
+    ExplicitWidth = 1004
+    ExplicitHeight = 197
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -1670,20 +1668,20 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 595
+    Top = 605
     Width = 1012
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
-    ExplicitTop = 575
-    ExplicitWidth = 1002
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 579
+    Top = 589
     Width = 1012
-    ExplicitTop = 559
-    ExplicitWidth = 1002
+    ExplicitTop = 586
+    ExplicitWidth = 1008
     inherited LblAlertas: TLabel
       Left = 1011
       Margins.Left = 4
@@ -1694,10 +1692,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
-    Top = 539
+    Top = 549
     Width = 1008
-    ExplicitTop = 519
-    ExplicitWidth = 998
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

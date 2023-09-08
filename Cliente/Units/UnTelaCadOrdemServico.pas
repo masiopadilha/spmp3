@@ -1124,7 +1124,7 @@ if DM.qryOrdemServico.IsEmpty = False then
 
 if DM.qryOrdemServicoSITUACAO.AsString <> '' then
   begin
-  if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') then
+  if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') then
     begin
       PAuxiliares.Font.Color  := clRed;
       PAuxiliares.Caption     := 'ORDEM DE SERVIÇO: '+DM.qryOrdemServicoSITUACAO.AsString+', ALTERAÇÕES NÃO PERMITIDAS!';
@@ -1138,7 +1138,7 @@ end;
 procedure TFrmTelaCadOrdemServico.GrdServicosExecDblClick(Sender: TObject);
 begin
   inherited;
-if (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'CADASTRADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'SOLICITADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'DESPROGRAMADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'PARALISADA') then
+if (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'CADASTRADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'SOLICITADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'DESPROGRAMADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA') or (Trim(DM.qryOrdemServicoSITUACAO.AsString) = 'PARALISADA') then
   inherited;
 if (DM.qryOrdemServicoServSolic.Active = True) and (DM.qryOrdemServicoServSolic.RecordCount > 0) then
   begin

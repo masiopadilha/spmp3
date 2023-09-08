@@ -1,13 +1,31 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
+  ClientHeight = 624
+  ClientWidth = 1012
   OnShow = FormShow
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
+    DesignSize = (
+      1008
+      45)
+    inherited LCadastro: TLabel
+      Left = 722
+    end
+    inherited LCadastroPor: TLabel
+      Left = 678
+    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
+    end
+    inherited LAlteracao: TLabel
+      Left = 873
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 847
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsSolicitacaoTrab
@@ -17,6 +35,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     ExplicitWidth = 1004
     object Label5: TLabel
       Left = 57
@@ -152,7 +171,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       OnKeyPress = FormKeyPress
     end
     object EdtDescEquipamento: TDBEdit
-      Left = 254
+      Left = 258
       Top = 60
       Width = 230
       Height = 24
@@ -199,6 +218,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 165
     ExplicitWidth = 1004
     ExplicitHeight = 165
@@ -497,7 +517,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PDiversos: TPanel
     Top = 320
-    Height = 222
+    Width = 1008
+    Height = 225
     ExplicitTop = 320
     ExplicitWidth = 1004
     ExplicitHeight = 222
@@ -593,17 +614,20 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 560
+    Top = 563
+    Width = 1012
     ExplicitTop = 560
     ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 544
+    Top = 547
+    Width = 1012
     ExplicitTop = 544
     ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 581
+    Top = 584
+    Width = 1008
     ExplicitTop = 581
     ExplicitWidth = 1004
   end
@@ -611,18 +635,18 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     Left = 362
   end
   inherited PopupMenuRelat: TPopupMenu
-    Left = 176
+    Left = 208
   end
   object PopupMenuCons: TPopupMenu
-    Left = 386
-    Top = 83
-    object Codigo1: TMenuItem
-      Caption = 'C'#243'digo'
-      OnClick = Codigo1Click
+    Left = 162
+    Top = 48
+    object MenuItem1: TMenuItem
+      Caption = 'Ordem de Servi'#231'o'
+      OnClick = MenuItem1Click
     end
-    object Descricao1: TMenuItem
-      Caption = 'Descri'#231#227'o'
-      OnClick = Descricao1Click
+    object MenuItem2: TMenuItem
+      Caption = 'Matr'#237'cula'
+      OnClick = MenuItem2Click
     end
   end
 end

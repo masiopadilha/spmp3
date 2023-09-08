@@ -5,6 +5,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    ExplicitWidth = 1004
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691

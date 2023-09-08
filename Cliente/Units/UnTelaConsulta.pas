@@ -428,10 +428,14 @@ begin
       40://Solicitação de Trabalho
         begin
           DM.qryAuxiliar.SQL.Add('SELECT `solictrabalho`.`CODORDEMSERVICO`, `solictrabalho`.`DESCSERVICO`, `solictrabalho`.`DATACADASTRO`, `funcionarios`.`NOME` AS `SOLICITANTE`, `solictrabalho`.`CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `solictrabalho`.`CODIGO`'
-                                  +  ' FROM `solictrabalho` INNER JOIN `funcionarios` ON (`solictrabalho`.`CODSOLICITANTE` = `funcionarios`.`MATRICULA`) AND (`solictrabalho`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
-                                  +  ' LEFT JOIN `equipamentos` ON (`solictrabalho`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`)  AND (`solictrabalho`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) WHERE (`funcionarios`.`NOME` LIKE :descricao'
-                                  +  ' AND `solictrabalho`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') ORDER BY `solictrabalho`.`DATACADASTRO` DESC');
-          //                        +  ' AND `solictrabalho`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') AND `solictrabalho`.`CODSOLICITANTE` = '+QuotedStr(DM.qrySolicitacaoTrabCODSOLICITANTE.AsString)+' ORDER BY `solictrabalho`.`DATACADASTRO` DESC';
+                                  + ' FROM `solictrabalho` INNER JOIN `funcionarios` ON (`solictrabalho`.`CODSOLICITANTE` = `funcionarios`.`MATRICULA`) AND (`solictrabalho`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                                  + ' LEFT JOIN `equipamentos` ON (`solictrabalho`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`)  AND (`solictrabalho`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`) '
+                                  + ' WHERE (`solictrabalho`.`DESCSERVICO` LIKE :descricao ');
+                                  if DM.FParamAuxiliar[2] = 'Ordem de Serviço' then
+                                    DM.qryAuxiliar.SQL.Add('AND `solictrabalho`.`CODORDEMSERVICO` = ' + DM.FParamAuxiliar[3]);
+                                  if DM.FParamAuxiliar[2] = 'Matrícula' then
+                                    DM.qryAuxiliar.SQL.Add('AND `solictrabalho`.`CODSOLICITANTE` = ' + DM.FParamAuxiliar[3]);
+                                  DM.qryAuxiliar.SQL.Add(' AND `solictrabalho`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') ORDER BY `solictrabalho`.`DATACADASTRO` DESC');
         end;
       41, 410://Plano de Trabalho
         begin

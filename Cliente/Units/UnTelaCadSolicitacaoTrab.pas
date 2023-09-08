@@ -33,9 +33,6 @@ type
     Label17: TLabel;
     Label18: TLabel;
     PSituacao: TPanel;
-    PopupMenuCons: TPopupMenu;
-    Codigo1: TMenuItem;
-    Descricao1: TMenuItem;
     Label14: TLabel;
     MJustificativa: TDBMemo;
     GroupBox1: TGroupBox;
@@ -57,6 +54,9 @@ type
     EdtOficina: TDBEdit;
     BtnOficina: TButton;
     Label28: TLabel;
+    PopupMenuCons: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;
@@ -74,6 +74,10 @@ type
     procedure FormShow(Sender: TObject);
     procedure MJustificativaChange(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure Area1Click(Sender: TObject);
+    procedure Equipamento1Click(Sender: TObject);
   private
     { Private declarations }
     LProgramadas: array[1..31] of Real;
@@ -95,6 +99,13 @@ implementation
 uses UnTelaCadFuncionarios, UnTelaCadEquipamentos, UnTelaConsulta,
   UnDmRelatorios, UnTelaCadOrdemServico, UnDM, UnTelaCadOficinas;
 
+procedure TFrmTelaCadSolicitacaoTrab.Area1Click(Sender: TObject);
+begin
+  inherited;
+DM.FParamAuxiliar[1] := 'Equipamento';
+BtnConsultar.OnClick(Sender);
+end;
+
 procedure TFrmTelaCadSolicitacaoTrab.BtnCancelarClick(Sender: TObject);
 begin
   inherited;
@@ -106,8 +117,35 @@ end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnConsultarClick(Sender: TObject);
 begin
-DM.FTabela_auxiliar := 40;
-  inherited;
+if DM.FParamAuxiliar[2] = '' then
+  begin
+    PopupMenuCons.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+    Exit;
+  end
+else
+if DM.FParamAuxiliar[2] = 'Matrícula' then
+begin
+  DM.FTabela_auxiliar := 40;
+    inherited;
+end
+else
+begin
+  DM.qryAuxiliar.Close;
+  DM.qryAuxiliar.Fields.Clear;
+  DM.qryAuxiliar.Indexes.Clear;
+  DM.qryAuxiliar.SQL.Clear;
+  DM.qryAuxiliar.SQL.Add('SELECT `solictrabalho`.`CODIGO` FROM `solictrabalho` WHERE `solictrabalho`.`CODORDEMSERVICO` = ' + DM.FParamAuxiliar[3]);
+  DM.qryAuxiliar.Open;
+  with DM.dsSolicitacaoTrab.DataSet as TFDQuery do
+    begin
+      Close;
+      Params[0].AsString := DM.DSAuxiliar.DataSet.Fields[0].AsString;
+      Params[1].AsString := DM.FCodEmpresa;
+      Open;
+      Edit;
+    end;
+  DM.qryAuxiliar.Close;
+end;
 PIdentificacao.Enabled  := True;
 PProgramacao.Enabled    := True;
 PDiversos.Enabled       := True;
@@ -135,7 +173,11 @@ if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
         PDiversos.Enabled       := False;
       end;
   end;
-
+DM.FParamAuxiliar[2] := '';
+DM.FDataSetParam     := DM.qrySolicitacaoTrab;
+DM.FDataSourceParam  := DM.dsSolicitacaoTrab;
+DM.FTela := 'CADSOLICITACAOTRAB';
+DM.FTabela_auxiliar := 40;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnEquipamentoClick(Sender: TObject);
@@ -414,6 +456,13 @@ DM.FParamAuxiliar[1] := 'DESCRICAO';
 BtnConsultar.OnClick(Sender);
 end;
 
+procedure TFrmTelaCadSolicitacaoTrab.Equipamento1Click(Sender: TObject);
+begin
+  inherited;
+DM.FParamAuxiliar[1] := 'Equpamento';
+BtnConsultar.OnClick(Sender);
+end;
+
 procedure TFrmTelaCadSolicitacaoTrab.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -479,6 +528,34 @@ DM.FDataSetRelat    := DmRelatorios.frxDBSolicTrabalhoIndividual;
 DM.FTabela_auxiliar := 401;
   inherited;
 
+end;
+
+procedure TFrmTelaCadSolicitacaoTrab.MenuItem1Click(Sender: TObject);
+begin
+  inherited;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FParamAuxiliar[2] := 'Ordem de Serviço';
+    DM.FParamAuxiliar[3] := DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');;
+    BtnConsultar.OnClick(Sender);
+  end;
+end;
+
+procedure TFrmTelaCadSolicitacaoTrab.MenuItem2Click(Sender: TObject);
+begin
+  inherited;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FParamAuxiliar[2] := 'Matrícula';
+    DM.FTabela_auxiliar := 300;
+    DM.FNomeConsulta := 'Solicitantes';
+    DM.FParamAuxiliar[1] := 'NOME';
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.FParamAuxiliar[3] := DM.FCodCombo;
+        BtnConsultar.OnClick(Sender);
+      end;
+  end;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.MJustificativaChange(Sender: TObject);
