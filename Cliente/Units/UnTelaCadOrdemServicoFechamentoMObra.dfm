@@ -1,47 +1,61 @@
 inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamentoMObra
   Caption = 'Fechamento de M'#227'o de Obra'
-  ClientHeight = 371
+  ClientHeight = 374
+  ClientWidth = 508
   Constraints.MaxHeight = 410
   Constraints.MinHeight = 410
   OnCreate = FormCreate
   ExplicitHeight = 410
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    Width = 504
+    inherited BtnAjuda: TButton
+      Left = 506
+      ExplicitLeft = 502
+    end
+  end
   inherited PCentro: TPanel
-    Height = 232
+    Width = 502
+    Height = 235
+    ExplicitWidth = 498
     ExplicitHeight = 232
     inherited RGTelas: TRadioGroup
-      Height = 230
+      Height = 233
+      ExplicitWidth = 496
       ExplicitHeight = 230
     end
     object Panel1: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 224
+      Width = 494
+      Height = 227
       Align = alClient
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 490
+      ExplicitHeight = 224
       object RadioGroup1: TRadioGroup
-        Left = 147
+        Left = 166
         Top = 1
         Width = 0
-        Height = 98
+        Height = 101
         Margins.Left = 2
         Margins.Top = 2
         Margins.Right = 2
         Margins.Bottom = 2
         Align = alClient
         TabOrder = 3
+        ExplicitLeft = 160
+        ExplicitWidth = 5
       end
       object GrdEquipe: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
-        Width = 140
-        Height = 92
+        Width = 159
+        Height = 95
         Hint = 'D'#234' duplo-clique para excluir o registro.'
         Align = alLeft
         Ctl3D = False
@@ -49,7 +63,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         DrawingStyle = gdsClassic
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -9
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentCtl3D = False
@@ -105,8 +119,8 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
       object GrdEquipeMObraUtil: TDBGrid
         AlignWithMargins = True
         Left = 4
-        Top = 102
-        Width = 482
+        Top = 105
+        Width = 486
         Height = 118
         Hint = 
           'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
@@ -208,10 +222,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
       end
       object GrdEquipeMObra: TDBGrid
         AlignWithMargins = True
-        Left = 147
+        Left = 168
         Top = 4
-        Width = 339
-        Height = 92
+        Width = 322
+        Height = 95
         Hint = 
           'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
           'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -274,19 +288,23 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 117
+            Width = 113
             Visible = True
           end>
       end
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 304
+    Top = 307
+    Width = 504
     ExplicitTop = 304
+    ExplicitWidth = 500
   end
   inherited PBotoes: TPanel
-    Top = 331
+    Top = 334
+    Width = 504
     ExplicitTop = 331
+    ExplicitWidth = 500
     inherited BtnOK: TButton
       Left = 100
       Visible = False

@@ -1,8 +1,17 @@
 inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
   Caption = 'Viagens'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     ParentFont = False
+    inherited LAlteracao: TLabel
+      Left = 494
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 516
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsViagens
     end
@@ -15,8 +24,16 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
     inherited LblUsuCad: TDBText
       DataSource = DM.dsViagens
     end
+    inherited LCadastro: TLabel
+      Left = 388
+    end
+    inherited LCadastroPor: TLabel
+      Left = 350
+    end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label24: TLabel
       Left = 146
       Top = 41
@@ -199,6 +216,7 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       DataField = 'ROTA'
       DataSource = DM.dsViagens
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -499,5 +517,13 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
         ParentFont = False
       end
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

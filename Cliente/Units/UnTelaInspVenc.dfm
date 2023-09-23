@@ -1,8 +1,8 @@
 inherited FrmTelaInspVenc: TFrmTelaInspVenc
   BorderIcons = []
   Caption = 'Inspe'#231#245'es Vencidas'
-  ClientHeight = 561
-  ClientWidth = 924
+  ClientHeight = 564
+  ClientWidth = 928
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 940
   Constraints.MinHeight = 600
@@ -12,7 +12,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 920
+    Width = 924
     TabOrder = 1
     ExplicitWidth = 920
     inherited BtnAjuda: TButton
@@ -22,11 +22,11 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PCentro: TPanel
-    Width = 918
-    Height = 422
+    Width = 922
+    Height = 425
     TabOrder = 2
-    ExplicitWidth = 922
-    ExplicitHeight = 425
+    ExplicitWidth = 918
+    ExplicitHeight = 422
     inherited RGTelas: TRadioGroup
       Top = 40
       Width = 920
@@ -151,6 +151,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
+      ExplicitWidth = 910
       object Label6: TLabel
         Left = 7
         Top = 9
@@ -199,6 +200,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
         ReadOnly = True
         ShowHint = True
         TabOrder = 1
+        StyleElements = [seFont, seClient]
         OnDblClick = EdtFamiliaEquipDblClick
       end
       object edtOficina: TEdit
@@ -212,6 +214,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
         ReadOnly = True
         ShowHint = True
         TabOrder = 2
+        StyleElements = [seFont, seClient]
         OnDblClick = edtOficinaDblClick
       end
       object BtnOficina: TButton
@@ -232,15 +235,15 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 494
-    Width = 920
+    Top = 497
+    Width = 924
     TabOrder = 3
     ExplicitTop = 494
     ExplicitWidth = 920
   end
   inherited PBotoes: TPanel
-    Top = 521
-    Width = 920
+    Top = 524
+    Width = 924
     TabOrder = 0
     ExplicitTop = 521
     ExplicitWidth = 920

@@ -2,8 +2,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Gerenciador'
-  ClientHeight = 271
-  ClientWidth = 401
+  ClientHeight = 264
+  ClientWidth = 395
   Constraints.MaxHeight = 300
   Constraints.MaxWidth = 407
   Constraints.MinHeight = 300
@@ -11,38 +11,39 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   OnShow = FormShow
   ExplicitWidth = 407
   ExplicitHeight = 300
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 397
-    ExplicitWidth = 397
+    Width = 391
+    ExplicitWidth = 387
     inherited BtnAjuda: TButton
       Left = 348
       Visible = False
-      ExplicitLeft = 348
+      ExplicitLeft = 344
     end
   end
   inherited PCentro: TPanel
-    Width = 395
-    Height = 201
-    ExplicitWidth = 395
-    ExplicitHeight = 201
+    Width = 389
+    Height = 194
+    ExplicitWidth = 385
+    ExplicitHeight = 191
     inherited RGTelas: TRadioGroup
-      Width = 393
-      Height = 199
-      ExplicitWidth = 393
-      ExplicitHeight = 199
+      Width = 387
+      Height = 192
+      ExplicitWidth = 383
+      ExplicitHeight = 189
     end
     object Panel1: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 387
-      Height = 193
+      Width = 381
+      Height = 186
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 377
+      ExplicitHeight = 183
       object Label1: TLabel
         Left = 274
         Top = 6
@@ -303,6 +304,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         EditLabel.Height = 16
         EditLabel.Caption = 'Hor'#225'rio:'
         TabOrder = 8
+        Text = ''
       end
       object EdtHostName: TEdit
         Left = 141
@@ -360,25 +362,25 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   inherited PAuxiliares: TPanel
     AlignWithMargins = False
     Left = 0
-    Top = 271
-    Width = 401
+    Top = 264
+    Width = 395
     Height = 0
     Visible = False
     ExplicitLeft = 0
-    ExplicitTop = 271
-    ExplicitWidth = 401
+    ExplicitTop = 261
+    ExplicitWidth = 391
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
     AlignWithMargins = False
     Left = 0
-    Top = 271
-    Width = 401
+    Top = 264
+    Width = 395
     Height = 0
     Visible = False
     ExplicitLeft = 0
-    ExplicitTop = 271
-    ExplicitWidth = 401
+    ExplicitTop = 261
+    ExplicitWidth = 391
     ExplicitHeight = 0
     inherited BtnOK: TButton
       Left = 117

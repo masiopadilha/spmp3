@@ -1,8 +1,10 @@
 inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
   Caption = 'Rotas de Manuten'#231#227'o'
-  PixelsPerInch = 96
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsRotas
     end
@@ -17,7 +19,9 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 65
+    ExplicitWidth = 1004
     ExplicitHeight = 65
     object Label4: TLabel
       Left = 96
@@ -77,8 +81,10 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
   end
   inherited PProgramacao: TPanel
     Top = 120
+    Width = 1008
     Height = 65
     ExplicitTop = 120
+    ExplicitWidth = 1004
     ExplicitHeight = 65
     inherited Label2: TLabel
       Width = 132
@@ -191,13 +197,15 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
   end
   inherited PDiversos: TPanel
     Top = 189
-    Height = 353
+    Width = 1008
+    Height = 356
     ExplicitTop = 189
+    ExplicitWidth = 1004
     ExplicitHeight = 353
     object GrdSequencia: TDBGrid
       Left = 1
       Top = 1
-      Width = 1002
+      Width = 1006
       Height = 192
       Align = alTop
       DataSource = DM.dsRotasSequencia
@@ -362,6 +370,24 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
           Visible = True
         end>
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
+  inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
   end
   object CDValidaEquip: TClientDataSet
     Aggregates = <>

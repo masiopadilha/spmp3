@@ -5,7 +5,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -254,7 +253,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Color = clBtnFace
       DataField = 'CODMANUTPROGFAMEQUIP'
       DataSource = DM.dsManutProgEquip
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -268,7 +269,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataField = 'DESCMANUTPROGFAMEQUIP'
       DataSource = DM.dsManutProgEquip
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -303,7 +306,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object EdtCodResponsavel: TDBEdit
-      Tag = 555
       Left = 606
       Top = 29
       Width = 120
@@ -313,7 +315,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Color = clBtnFace
       DataField = 'MATRICULA'
       DataSource = DM.dsManutProgEquip
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -327,7 +331,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataField = 'RESPONSAVEL'
       DataSource = DM.dsManutProgEquip
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end

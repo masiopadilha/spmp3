@@ -1,5 +1,7 @@
 unit UnTelaPrincipal;
+
 interface
+
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
@@ -8,6 +10,7 @@ uses
   Vcl.Buttons, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Error, Winapi.ShellAPI,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdFTP;
+
 type
   TFrmTelaPrincipal = class(TForm)
     Image1: TImage;
@@ -218,6 +221,18 @@ type
     N9: TMenuItem;
     N10: TMenuItem;
     AlterarCodigo1: TMenuItem;
+    Fechamento2: TMenuItem;
+    Area4: TMenuItem;
+    ListaCompleta1: TMenuItem;
+    PorFamilia1: TMenuItem;
+    ListaCompleta2: TMenuItem;
+    PorEquipamento2: TMenuItem;
+    ListaCompleta3: TMenuItem;
+    PorEquipamento3: TMenuItem;
+    ListaCompleta4: TMenuItem;
+    PorFamilia2: TMenuItem;
+    Area5: TMenuItem;
+    AlterarFamilia1: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -364,20 +379,31 @@ type
     procedure odos1Click(Sender: TObject);
     procedure Familia2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure FamliadeEquipamentos1Click(Sender: TObject);
-    procedure Equpamentos1Click(Sender: TObject);
-    procedure Equipamentos5Click(Sender: TObject);
-    procedure FamliadeEquipamentos2Click(Sender: TObject);
     procedure Opcoes1Click(Sender: TObject);
     procedure Auditoria1Click(Sender: TObject);
     procedure DespesasdaManutencao1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure AlterarCodigo1Click(Sender: TObject);
+    procedure Fechamento2Click(Sender: TObject);
+    procedure Area4Click(Sender: TObject);
+    procedure ListaCompleta1Click(Sender: TObject);
+    procedure PorFamilia1Click(Sender: TObject);
+    procedure ListaCompleta2Click(Sender: TObject);
+    procedure PorEquipamento2Click(Sender: TObject);
+    procedure ListaCompleta3Click(Sender: TObject);
+    procedure ListaCompleta4Click(Sender: TObject);
+    procedure PorEquipamento3Click(Sender: TObject);
+    procedure PorFamilia2Click(Sender: TObject);
+    procedure Area5Click(Sender: TObject);
+    procedure AlterarFamilia1Click(Sender: TObject);
   private
-    procedure CheckUpdateVersion;
     { Private declarations }
-//    procedure AppIdle(Sender: TObject; var Done: Boolean);
-//    procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
+    function GetFileVersion(const AFileName: string): String;
+    function GetFileDateTime(AFileName: String): TDateTime;
+    function GetFileDateAsInteger(AFileName: String): Integer;
+    function GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
+
+    procedure CheckUpdateVersion;
   public
     { Public declarations }
     procedure AppIdle(Sender: TObject; var Done: Boolean);
@@ -425,30 +451,100 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadPneusChassiPneusConsertos, UnDmRelatorios,
   UnTelaConsultaPeriodo, UnTelaCadPneusChassiRelat, UnTelaImpDadosSatelite,
   UnTelaImpPedidos, UnTelaCadAbastecimentosViagens, UnTelaOpcoes, UnDM,
-  UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod;
+  UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod,
+  UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod;
+
+
+function TFrmTelaPrincipal.GetFileVersion(const AFileName: string): String;
+var
+  Zero: DWORD; // set to 0 by GetFileVersionInfoSize
+  VersionInfoSize: DWORD;
+  PVersionData: pointer;
+  PFixedFileInfo: PVSFixedFileInfo;
+  FixedFileInfoLength: UINT;
+  Major, Minor, Release, Build: Integer;
+begin
+  VersionInfoSize := GetFileVersionInfoSize(pChar(AFileName), Zero);
+  if VersionInfoSize = 0 then
+     exit;
+  PVersionData := AllocMem(VersionInfoSize);
+  try
+    if GetFileVersionInfo(pChar(AFileName), 0, VersionInfoSize, PVersionData) = False then
+       exit;
+//      raise Exception.Create('Não pude recuperar informação sobre versão');
+    if VerQueryValue(PVersionData, '', pointer(PFixedFileInfo), FixedFileInfoLength) = False then
+       exit;
+    Major := PFixedFileInfo^.dwFileVersionMS shr 16;
+    Minor := PFixedFileInfo^.dwFileVersionMS and $FFFF;
+    Release := PFixedFileInfo^.dwFileVersionLS shr 16;
+    Build := PFixedFileInfo^.dwFileVersionLS and $FFFF;
+  finally
+    FreeMem(PVersionData);
+  end;
+  if (Major or Minor or Release or Build) <> 0 then
+//    result := IntToStr(Major) +'.'+ IntToStr(Minor) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
+//    result := IntToStr(Major) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
+    result := IntToStr(Build);
+end;
+
+function TFrmTelaPrincipal.GetFileDateTime(AFileName: String): TDateTime;
+var
+  LInteger: integer;
+  LSearchRed : TSearchRec;
+begin
+  LInteger := FindFirst(AFileName, faAnyFile, LSearchRed);
+  if LInteger = 0 then
+  begin
+    Result := LSearchRed.TimeStamp;
+    FindClose(LSearchRed);
+  end
+  else
+  begin
+    Result := 0;
+  end;
+end;
+function TFrmTelaPrincipal.GetFileDateAsInteger(AFileName: String): Integer;
+begin
+  Result := StrToInt(FormatDateTime('yyyymmdd', GetFileDateTime(AFileName)));
+end;
+
+function TFrmTelaPrincipal.GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
+var
+  LFileVersion: Currency;
+begin
+  try
+    LFileVersion := GetFileDateAsInteger(AFileName);
+    LFileVersion := LFileVersion + StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
+    Result := LFileVersion;
+  except
+
+  end;
+end;
 
 procedure TFrmTelaPrincipal.CheckUpdateVersion;
 var
   LLocalDir: String;
-  LFileVersionLocal: Currency;
-  LFileVersionServer: Currency;
-  LLocalUpdateFile: PWideChar;
+  LLocalVersion: Currency;
+  LServerVersion: Currency;
+  LLocalFile, LServerFile: PWideChar;
 begin
   //Se a pasta local não existir, então criar.
-  LLocalDir          := 'c:\SPMP3';
-  LLocalUpdateFile   := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
+  LLocalDir := 'c:\spmp3';
+  LLocalFile := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
+  LServerFile := PChar(ExtractFilePath(DM.FServerPathExeVersion)+'UpdateVersion.bat');
   //Checar a versão do programa no servidor e comparar com a atual.
-//  LFileVersionLocal  := DM.GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
-//  LFileVersionServer := DM.GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
-  //Checar a versão do programa no servidor e comparar com a atual.
-  LFileVersionLocal  := StrToCurr(DM.getVersion(Application.ExeName));
-  LFileVersionServer := StrToCurr(DM.getVersion(DM.FServerPathExeVersion));
-  if LFileVersionServer > LFileVersionLocal then
-    begin
-      MessageDlg('Há uma nova versão no servidor.' + #13 + 'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
-      ShellExecute(Handle, 'open', LLocalUpdateFile, nil, nil, SW_HIDE);
-    end;
+  LLocalVersion := GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
+  LServerVersion := GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
+  //Copiar arquivo BAT do servidor.
+  CopyFile(PChar(LServerFile), PChar(LLocalDir+'\UpdateVersion.bat'), False);
+  if LServerVersion > LLocalVersion then
+  begin
+    MessageDlg('Existe uma nova versão no servidor..' + #13 +
+                 'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
+    ShellExecute(Handle, 'open', LLocalFile, nil, nil, SW_HIDE);
+  end;
 end;
+
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
   Try
@@ -496,6 +592,21 @@ begin
     FrmTelaCadEquipamentosAltCod.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadEquipamentosAltCod);
+  End;
+end;
+
+procedure TFrmTelaPrincipal.AlterarFamilia1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    Application.CreateForm(TFrmTelaCadEquipamentosAltFamiliaCod, FrmTelaCadEquipamentosAltFamiliaCod);
+    FrmTelaCadEquipamentosAltFamiliaCod.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadEquipamentosAltFamiliaCod);
   End;
 end;
 
@@ -564,6 +675,77 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
+procedure TFrmTelaPrincipal.Area4Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBManutProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+                           + ', `manutprogequipamento`.`CODMONITORAMENTO`, `manutprogequipamento`.`MATRICULA`, `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`CRITICIDADE`'
+                           + ', `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`REPROGRAMAR1`, `manutprogequipamento`.`FREQUENCIA2`'
+                           + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogequipamento`.`LEITURA`, `manutprogequipamento`.`RELATORIO`, `manutprogequipamento`.`GRUPOINSP`'
+                           + ', `manutprogequipamento`.`DATACADASTRO`, `manutprogequipamento`.`CODUSUARIOCAD`, `manutprogequipamento`.`DATAULTALT`, `manutprogequipamento`.`CODUSUARIOALT`'
+                           + ', `manutprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`manutprogequipamento`.`DTAINICIO1`, INTERVAL `manutprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `manutprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`manutprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`manutprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`manutprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`manutprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `equipamentos`.`CODLOCALIZACAO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `manutprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRManutProgEquipGeral.ShowReport();
+  end;
+end;
+
+procedure TFrmTelaPrincipal.Area5Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBLubrificProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
+                           + ', `lubrificprogequipamento`.`CODMONITORAMENTO`, `lubrificprogequipamento`.`MATRICULA`, `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`CRITICIDADE`'
+                           + ', `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`REPROGRAMAR1`, `lubrificprogequipamento`.`FREQUENCIA2`'
+                           + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogequipamento`.`LEITURA`, `lubrificprogequipamento`.`RELATORIO`, `lubrificprogequipamento`.`GRUPOINSP`'
+                           + ', `lubrificprogequipamento`.`DATACADASTRO`, `lubrificprogequipamento`.`CODUSUARIOCAD`, `lubrificprogequipamento`.`DATAULTALT`, `lubrificprogequipamento`.`CODUSUARIOALT`'
+                           + ', `lubrificprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`lubrificprogequipamento`.`DTAINICIO1`, INTERVAL `lubrificprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `lubrificprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`lubrificprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`lubrificprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`lubrificprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `areas`.`CODIGO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `lubrificprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRLubrificProgEquipGeral.ShowReport();
+  end;
+
+end;
+
 procedure TFrmTelaPrincipal.Assunto1Click(Sender: TObject);
 begin
   Try
@@ -1371,25 +1553,6 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRFamEquipamento.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-procedure TFrmTelaPrincipal.Equipamentos5Click(Sender: TObject);
-begin
-DmRelatorios.frxDBLubrificEquipGeral.DataSet := DM.qryAuxiliar;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
-                       + ', `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`FREQUENCIA2`'
-                       + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogfamequipamento`.`DESCRICAO` AS `DESCLUBRIFICPROGFAMEQUIP`, `lubrificprogfamequipamento`.`CODIGO` AS `CODLUBRIFICPROGFAMEQUIP`'
-                       + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
-                       + ' FROM `spmpma_spmp`.`lubrificprogequipamento`'
-                       + ' INNER JOIN `spmpma_spmp`.`lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`)'
-                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
-                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                       + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
-                       + ' ORDER BY `equipamentos`.`DESCRICAO`');
-//                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
-DM.qryAuxiliar.Open;
-DmRelatorios.frxRLubrificEquipGeral.ShowReport();
-end;
 procedure TFrmTelaPrincipal.EquipamentosReservas2Click(Sender: TObject);
 begin
   Try
@@ -1403,25 +1566,6 @@ begin
   Finally
     FreeAndNil(FrmTelaCadEquipamentoReserva);
   End;
-end;
-procedure TFrmTelaPrincipal.Equpamentos1Click(Sender: TObject);
-begin
-DmRelatorios.frxDBManutEquipGeral.DataSet := DM.qryAuxiliar;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
-                       + ', `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`FREQUENCIA2`'
-                       + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogfamequipamento`.`DESCRICAO` AS `DESCMANUTPROGFAMEQUIP`, `manutprogfamequipamento`.`CODIGO` AS `CODMANUTPROGFAMEQUIP`'
-                       + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
-                       + ' FROM `spmpma_spmp`.`manutprogequipamento`'
-                       + ' INNER JOIN `spmpma_spmp`.`manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`)'
-                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
-                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                       + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
-                       + ' ORDER BY `equipamentos`.`DESCRICAO`');
-//                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
-DM.qryAuxiliar.Open;
-DmRelatorios.frxRManutEquipGeral.ShowReport();
 end;
 procedure TFrmTelaPrincipal.Fabricantes1Click(Sender: TObject);
 begin
@@ -1481,28 +1625,6 @@ if DM.ConsultarCombo <> '' then
     DmRelatorios.frxREquipGeral.ShowReport();
   end;
 end;
-procedure TFrmTelaPrincipal.FamliadeEquipamentos1Click(Sender: TObject);
-begin
-DmRelatorios.frxDBManutFamEquipGeral.DataSet := DM.qryAuxiliar;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
-                       + ' FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
-                       + ' WHERE (`manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `manutprogfamequipamento`.`DESCRICAO`');
-DM.qryAuxiliar.Open;
-DmRelatorios.frxRManutFamEquipGeral.ShowReport();
-end;
-procedure TFrmTelaPrincipal.FamliadeEquipamentos2Click(Sender: TObject);
-begin
-DmRelatorios.frxDBLubrificFamEquipGeral.DataSet := DM.qryAuxiliar;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
-                       +  ' FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento` ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2`'
-                       +  '  = `tipoprogramacao`.`CODIGO`) WHERE (`lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `lubrificprogfamequipamento`.`DESCRICAO`');
-DM.qryAuxiliar.Open;
-DmRelatorios.frxRLubrificFamEquipGeral.ShowReport();
-end;
 procedure TFrmTelaPrincipal.FamliadePneus2Click(Sender: TObject);
 begin
   Try
@@ -1532,6 +1654,58 @@ begin
     FreeAndNil(FrmTelaInspFechamento);
   End;
 end;
+procedure TFrmTelaPrincipal.Fechamento2Click(Sender: TObject);
+var
+  LCampo : String;
+begin
+  if (DM.qryUsuarioPAcessoCADORDEMSERVICOFECHAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+  LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
+  try
+    StrToInt(LCampo);
+  except on E: Exception do
+    begin
+      MessageDlg('Ocorreu um erro ao buscar a Ordem de Serviço, informe apenas valores numéricos.' + #13 +
+                 'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
+                 'Mensagem de erro: ' + E.Message, mtError, [mbOK], 0);
+      Exit;
+    end;
+  end;
+
+  if LCampo <> EmptyStr then
+    begin
+      with DM.qryOrdemServico do
+        begin
+          Close;
+          Params[0].AsString := DM.FCodEmpresa;
+          Params[1].AsString := LCampo;
+          Open;
+        end;
+      if DM.qryOrdemServico.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
+      begin
+        Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.qryOrdemServicoSITUACAO.AsString <> 'LIBERADA' then
+      begin
+        MessageDlg('Ordem de serviço:  '+ DM.qryOrdemServicoSITUACAO.AsString +', não liberada para fechamento.', mtError, [mbOK], 0);
+        Exit;
+      end;
+    end;
+
+  Try
+    Application.CreateForm(TFrmTelaCadOrdemServicoFechamento, FrmTelaCadOrdemServicoFechamento);
+    FrmTelaCadOrdemServicoFechamento.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadOrdemServicoFechamento);
+    DM.qryOrdemServico.Close;
+  End;
+end;
+
 procedure TFrmTelaPrincipal.Feriados1Click(Sender: TObject);
 begin
   Try
@@ -1644,6 +1818,9 @@ begin
     end;
     on E: EFDDBEngineException do begin
       DM.FDConnSPMP3.Rollback;
+      FreeAndNil(DMAlertas);
+      FreeAndNil(DmRelatorios);
+      FreeAndNil(DM);
       Application.Terminate;
       raise;
     end;
@@ -1656,6 +1833,9 @@ begin
       DM.FDConnSPMP3.Connected := False;
       Application.MessageBox('Sistema será encerrado por inatividade!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
     end;
+  FreeAndNil(DMAlertas);
+  FreeAndNil(DmRelatorios);
+  FreeAndNil(DM);
   Application.Terminate;
 end;
 procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
@@ -2002,6 +2182,71 @@ begin
     FreeAndNil(FrmTelaCadRecursosKit);
   End;
 end;
+procedure TFrmTelaPrincipal.ListaCompleta1Click(Sender: TObject);
+begin
+DmRelatorios.frxDBManutFamEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT `manutprogfamequipamento`.`CODIGO`, `manutprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
+                       + ' FROM `manutprogfamequipamento` INNER JOIN `familiaequipamento` ON (`manutprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                       + ' WHERE (`manutprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `manutprogfamequipamento`.`DESCRICAO`');
+DM.qryAuxiliar.Open;
+DmRelatorios.frxRManutFamEquipGeral.ShowReport();
+end;
+
+procedure TFrmTelaPrincipal.ListaCompleta2Click(Sender: TObject);
+begin
+DmRelatorios.frxDBManutEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+                       + ', `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`FREQUENCIA2`'
+                       + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogfamequipamento`.`DESCRICAO` AS `DESCMANUTPROGFAMEQUIP`, `manutprogfamequipamento`.`CODIGO` AS `CODMANUTPROGFAMEQUIP`'
+                       + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
+                       + ' FROM `spmpma_spmp`.`manutprogequipamento`'
+                       + ' INNER JOIN `spmpma_spmp`.`manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`)'
+                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                       + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
+                       + ' ORDER BY `equipamentos`.`DESCRICAO`');
+//                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
+
+DM.qryAuxiliar.Open;
+DmRelatorios.frxRManutEquipGeral.ShowReport();
+end;
+
+procedure TFrmTelaPrincipal.ListaCompleta3Click(Sender: TObject);
+begin
+DmRelatorios.frxDBLubrificEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
+                       + ', `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`FREQUENCIA2`'
+                       + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogfamequipamento`.`DESCRICAO` AS `DESCLUBRIFICPROGFAMEQUIP`, `lubrificprogfamequipamento`.`CODIGO` AS `CODLUBRIFICPROGFAMEQUIP`'
+                       + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
+                       + ' FROM `spmpma_spmp`.`lubrificprogequipamento`'
+                       + ' INNER JOIN `spmpma_spmp`.`lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`)'
+                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                       + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
+                       + ' ORDER BY `equipamentos`.`DESCRICAO`');
+//                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
+DM.qryAuxiliar.Open;
+DmRelatorios.frxRLubrificEquipGeral.ShowReport();
+end;
+
+procedure TFrmTelaPrincipal.ListaCompleta4Click(Sender: TObject);
+begin
+DmRelatorios.frxDBLubrificFamEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogfamequipamento`.`CODIGO`, `lubrificprogfamequipamento`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` AS `FAMILIAEQUIPAMENTO`, `tipoprogramacao`.`DESCRICAO` AS PROGRAMARPOR2, `tipoprogramacao`.`CODIGO` AS CODPROGRAMARPOR2'
+                       +  ' FROM `lubrificprogfamequipamento` INNER JOIN `familiaequipamento` ON (`lubrificprogfamequipamento`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2`'
+                       +  '  = `tipoprogramacao`.`CODIGO`) WHERE (`lubrificprogfamequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `lubrificprogfamequipamento`.`DESCRICAO`');
+DM.qryAuxiliar.Open;
+DmRelatorios.frxRLubrificFamEquipGeral.ShowReport();
+end;
+
 procedure TFrmTelaPrincipal.Literatura1Click(Sender: TObject);
 begin
   Try
@@ -2643,6 +2888,147 @@ DM.qryPecasReposicaoInstEquip.Close;
 DM.FParamAuxiliar[0] := EmptyStr;
 DM.FParamAuxiliar[1] := EmptyStr;
 end;
+procedure TFrmTelaPrincipal.PorEquipamento2Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 250;
+DM.FNomeConsulta := 'Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBManutProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+                           + ', `manutprogequipamento`.`CODMONITORAMENTO`, `manutprogequipamento`.`MATRICULA`, `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`CRITICIDADE`'
+                           + ', `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`REPROGRAMAR1`, `manutprogequipamento`.`FREQUENCIA2`'
+                           + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogequipamento`.`LEITURA`, `manutprogequipamento`.`RELATORIO`, `manutprogequipamento`.`GRUPOINSP`'
+                           + ', `manutprogequipamento`.`DATACADASTRO`, `manutprogequipamento`.`CODUSUARIOCAD`, `manutprogequipamento`.`DATAULTALT`, `manutprogequipamento`.`CODUSUARIOALT`'
+                           + ', `manutprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`manutprogequipamento`.`DTAINICIO1`, INTERVAL `manutprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `manutprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`manutprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`manutprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`manutprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`manutprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `equipamentos`.`CODIGO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `manutprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRManutProgEquipGeral.ShowReport();
+  end;
+
+end;
+
+procedure TFrmTelaPrincipal.PorEquipamento3Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 250;
+DM.FNomeConsulta := 'Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBLubrificProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
+                           + ', `lubrificprogequipamento`.`CODMONITORAMENTO`, `lubrificprogequipamento`.`MATRICULA`, `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`CRITICIDADE`'
+                           + ', `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`REPROGRAMAR1`, `lubrificprogequipamento`.`FREQUENCIA2`'
+                           + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogequipamento`.`LEITURA`, `lubrificprogequipamento`.`RELATORIO`, `lubrificprogequipamento`.`GRUPOINSP`'
+                           + ', `lubrificprogequipamento`.`DATACADASTRO`, `lubrificprogequipamento`.`CODUSUARIOCAD`, `lubrificprogequipamento`.`DATAULTALT`, `lubrificprogequipamento`.`CODUSUARIOALT`'
+                           + ', `lubrificprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`lubrificprogequipamento`.`DTAINICIO1`, INTERVAL `lubrificprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `lubrificprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`lubrificprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`lubrificprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`lubrificprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `equipamentos`.`CODIGO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `lubrificprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRLubrificProgEquipGeral.ShowReport();
+  end;
+end;
+
+procedure TFrmTelaPrincipal.PorFamilia1Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 600;
+DM.FNomeConsulta := 'Família de Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBManutProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipamento`.`CODEMPRESA`, `manutprogequipamento`.`CODEQUIPAMENTO`, `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+                           + ', `manutprogequipamento`.`CODMONITORAMENTO`, `manutprogequipamento`.`MATRICULA`, `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`CRITICIDADE`'
+                           + ', `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`REPROGRAMAR1`, `manutprogequipamento`.`FREQUENCIA2`'
+                           + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogequipamento`.`LEITURA`, `manutprogequipamento`.`RELATORIO`, `manutprogequipamento`.`GRUPOINSP`'
+                           + ', `manutprogequipamento`.`DATACADASTRO`, `manutprogequipamento`.`CODUSUARIOCAD`, `manutprogequipamento`.`DATAULTALT`, `manutprogequipamento`.`CODUSUARIOALT`'
+                           + ', `manutprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`manutprogequipamento`.`DTAINICIO1`, INTERVAL `manutprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `manutprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`manutprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`manutprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`manutprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`manutprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`manutprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `equipamentos`.`CODFAMILIAEQUIP` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `manutprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRManutProgEquipGeral.ShowReport();
+  end;
+end;
+
+procedure TFrmTelaPrincipal.PorFamilia2Click(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 600;
+DM.FNomeConsulta := 'Família de Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBLubrificProgEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprogequipamento`.`CODEMPRESA`, `lubrificprogequipamento`.`CODEQUIPAMENTO`, `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP`'
+                           + ', `lubrificprogequipamento`.`CODMONITORAMENTO`, `lubrificprogequipamento`.`MATRICULA`, `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`CRITICIDADE`'
+                           + ', `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`REPROGRAMAR1`, `lubrificprogequipamento`.`FREQUENCIA2`'
+                           + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogequipamento`.`LEITURA`, `lubrificprogequipamento`.`RELATORIO`, `lubrificprogequipamento`.`GRUPOINSP`'
+                           + ', `lubrificprogequipamento`.`DATACADASTRO`, `lubrificprogequipamento`.`CODUSUARIOCAD`, `lubrificprogequipamento`.`DATAULTALT`, `lubrificprogequipamento`.`CODUSUARIOALT`'
+                           + ', `lubrificprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP'
+                           + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
+                           + ', DATE_ADD(`lubrificprogequipamento`.`DTAINICIO1`, INTERVAL `lubrificprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                           + ' FROM `lubrificprogequipamento`'
+                           + ' LEFT JOIN `usuario` ON (`lubrificprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                           + ' LEFT JOIN `usuario` AS `usuario_1` ON (`lubrificprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                           + ' LEFT JOIN `lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `tipoprogramacao` ON (`lubrificprogfamequipamento`.`PROGRAMARPOR2` = `tipoprogramacao`.`CODIGO`)'
+                           + ' INNER JOIN `equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' INNER JOIN `areas` ON (`areas`.`CODIGO` = `equipamentos`.`CODLOCALIZACAO`) AND (`areas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `funcionarios` ON (`lubrificprogequipamento`.`MATRICULA` = `funcionarios`.`MATRICULA`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `funcionarios`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `rotasequipamentoseq` ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequipamentoseq`.`CODAREA`)'
+                           + ' AND (`equipamentos`.`CODCELULA` = `rotasequipamentoseq`.`CODCELULA`) AND (`equipamentos`.`CODLINHA` = `rotasequipamentoseq`.`CODLINHA`)'
+                           + ' AND (`equipamentos`.`SEQUENCIA` = `rotasequipamentoseq`.`SEQUENCIA`)'
+                           + ' LEFT JOIN `rotasequipamento` ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequipamento`.`CODEMPRESA`)'
+                           + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `equipamentos`.`CODFAMILIAEQUIP` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `lubrificprogequipamento`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxRLubrificProgEquipGeral.ShowReport();
+  end;
+end;
+
 procedure TFrmTelaPrincipal.PorPeca1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then

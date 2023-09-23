@@ -1,7 +1,10 @@
 inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   Caption = 'Servi'#231'os Terceirizados fora da Unidade'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -40,7 +43,8 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     end
   end
   inherited PIdentificacao: TPanel
-    ExplicitWidth = 1008
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 91
       Top = 31
@@ -130,7 +134,6 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       ParentFont = False
     end
     object EdtCodigo: TDBEdit
-      Tag = 555
       Left = 127
       Top = 30
       Width = 125
@@ -142,6 +145,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       DataSource = DM.dsOrdemServicoTercFora
       ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -159,7 +163,6 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       OnKeyPress = FormKeyPress
     end
     object EdtCodEquipamento: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -170,6 +173,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       DataField = 'CODEQUIPAMENTO'
       DataSource = DM.dsOrdemServicoTercFora
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -187,6 +191,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -278,7 +283,9 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 391
+    ExplicitWidth = 1004
     ExplicitHeight = 391
     inherited Label2: TLabel
       Width = 194
@@ -553,6 +560,24 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     Align = alNone
     ExplicitWidth = 300
     ExplicitHeight = 0
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
+  inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
   end
   inherited TimerLetreiro: TTimer
     Left = 442

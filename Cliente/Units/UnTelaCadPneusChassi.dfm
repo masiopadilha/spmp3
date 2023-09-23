@@ -1,7 +1,10 @@
 inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 467
     end
@@ -28,6 +31,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -138,7 +143,6 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       Caption = 'Placa:'
     end
     object EdtCodEquipamento: TDBEdit
-      Tag = 555
       Left = 127
       Top = 30
       Width = 125
@@ -148,7 +152,9 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       Color = clBtnFace
       DataField = 'CODEQUIPAMENTO'
       DataSource = DM.dsPneusChassi
+      ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -162,7 +168,9 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       DataField = 'EQUIPAMENTO'
       DataSource = DM.dsPneusChassi
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 1
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -237,7 +245,9 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       DataField = 'CHASSI'
       DataSource = DM.dsPneusChassi
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 7
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -270,6 +280,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     inherited Label2: TLabel
       Width = 62
       Caption = 'CHASSI'
@@ -279,7 +291,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       AlignWithMargins = True
       Left = 4
       Top = 21
-      Width = 996
+      Width = 1000
       Height = 165
       Margins.Top = 20
       Align = alClient
@@ -315,6 +327,10 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PDiversos: TPanel
+    Width = 1008
+    Height = 200
+    ExplicitWidth = 1004
+    ExplicitHeight = 197
     inherited Label3: TLabel
       Width = 55
       Caption = 'PNEUS'
@@ -324,8 +340,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       AlignWithMargins = True
       Left = 4
       Top = 21
-      Width = 996
-      Height = 172
+      Width = 1000
+      Height = 175
       Hint = 'Tecle ENTER nas colunas em negrito para as op'#231#245'es de cadastro.'
       Margins.Top = 20
       Align = alClient
@@ -347,7 +363,23 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       OnKeyPress = GrdPneusKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Atrelamento de Carrocerias'
       ImageIndex = 84

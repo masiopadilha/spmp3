@@ -46350,6 +46350,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
           Caption = 'Alterar C'#243'digo'
           OnClick = AlterarCodigo1Click
         end
+        object AlterarFamilia1: TMenuItem
+          Caption = 'Alterar Fam'#237'lia'
+          OnClick = AlterarFamilia1Click
+        end
       end
       object ManutenoProgramada1: TMenuItem
         Caption = 'Manuten'#231#245'es Programadas'
@@ -46532,6 +46536,11 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
           Caption = 'Cadastro'
           ShortCut = 49231
           OnClick = Cadastro4Click
+        end
+        object Fechamento2: TMenuItem
+          Caption = 'Fechamento'
+          ShortCut = 123
+          OnClick = Fechamento2Click
         end
         object LocalizarFuncionrio2: TMenuItem
           Caption = 'Localizar Funcion'#225'rio'
@@ -46788,23 +46797,59 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       object ManutencaoProgramada2: TMenuItem
         Caption = 'Manuten'#231#227'o Programada'
         object Equpamentos1: TMenuItem
-          Caption = 'Equipamentos'
-          OnClick = Equpamentos1Click
+          Caption = 'Equipamento'
+          object ListaCompleta2: TMenuItem
+            Caption = 'Lista Completa'
+            OnClick = ListaCompleta2Click
+          end
+          object PorEquipamento2: TMenuItem
+            Caption = 'Por Equipamento'
+            OnClick = PorEquipamento2Click
+          end
         end
         object FamliadeEquipamentos1: TMenuItem
           Caption = 'Fam'#237'lia de Equipamentos'
-          OnClick = FamliadeEquipamentos1Click
+          object ListaCompleta1: TMenuItem
+            Caption = 'Lista Completa'
+            OnClick = ListaCompleta1Click
+          end
+          object PorFamilia1: TMenuItem
+            Caption = 'Por Familia'
+            OnClick = PorFamilia1Click
+          end
+        end
+        object Area4: TMenuItem
+          Caption = #193'rea'
+          OnClick = Area4Click
         end
       end
       object LubrificacaoProgramada2: TMenuItem
         Caption = 'Lubrifica'#231#227'o Programada'
         object Equipamentos5: TMenuItem
           Caption = 'Equipamentos'
-          OnClick = Equipamentos5Click
+          object ListaCompleta3: TMenuItem
+            Caption = 'Lista Completa'
+            OnClick = ListaCompleta3Click
+          end
+          object PorEquipamento3: TMenuItem
+            Caption = 'Por Equipamento'
+            OnClick = PorEquipamento3Click
+          end
         end
         object FamliadeEquipamentos2: TMenuItem
           Caption = 'Fam'#237'lia de Equipamentos'
-          OnClick = FamliadeEquipamentos2Click
+          object ListaCompleta4: TMenuItem
+            Caption = 'Lista Completa'
+            OnClick = ListaCompleta4Click
+          end
+          object PorFamilia2: TMenuItem
+            Caption = 'Por Familia'
+            OnClick = PorFamilia2Click
+          end
+        end
+        object Area5: TMenuItem
+          Caption = #193'rea'
+          OnClick = Area5Click
         end
       end
       object ModeObra2: TMenuItem

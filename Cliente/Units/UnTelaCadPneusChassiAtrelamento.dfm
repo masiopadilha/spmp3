@@ -1,7 +1,7 @@
 inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
   Caption = 'Atrelamentos'
-  ClientHeight = 306
-  ClientWidth = 784
+  ClientHeight = 309
+  ClientWidth = 788
   Constraints.MaxHeight = 345
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 345
@@ -9,13 +9,12 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
   OnCreate = FormCreate
   ExplicitWidth = 800
   ExplicitHeight = 345
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 747
+      Left = 751
       ExplicitLeft = 747
     end
     object BtnImprimir: TButton
@@ -36,13 +35,13 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
     end
   end
   inherited PCentro: TPanel
-    Width = 778
-    Height = 167
+    Width = 782
+    Height = 170
     ExplicitWidth = 778
     ExplicitHeight = 167
     inherited RGTelas: TRadioGroup
-      Width = 776
-      Height = 165
+      Width = 780
+      Height = 168
       ExplicitWidth = 776
       ExplicitHeight = 165
     end
@@ -50,12 +49,14 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 770
-      Height = 159
+      Width = 774
+      Height = 162
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 770
+      ExplicitHeight = 159
       object ImgCavalo: TImage
         Left = 1
         Top = 54
@@ -128,6 +129,7 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 0
+        StyleElements = [seFont, seClient]
       end
       object BtnCarroceria1: TButton
         Left = 227
@@ -153,6 +155,7 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 2
+        StyleElements = [seFont, seClient]
       end
       object BtnCarroceria2: TButton
         Left = 487
@@ -178,6 +181,7 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 4
+        StyleElements = [seFont, seClient]
       end
       object BtnCarroceria3: TButton
         Left = 739
@@ -194,14 +198,14 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 239
-    Width = 780
+    Top = 242
+    Width = 784
     ExplicitTop = 239
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Top = 266
-    Width = 780
+    Top = 269
+    Width = 784
     ExplicitTop = 266
     ExplicitWidth = 780
     inherited BtnOK: TButton

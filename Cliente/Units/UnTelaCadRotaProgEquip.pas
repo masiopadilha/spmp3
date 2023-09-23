@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, Datasnap.DBClient,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadRotaProgEquip = class(TFrmTelaPaiCadastros)

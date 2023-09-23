@@ -1,7 +1,16 @@
 inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
   Caption = 'Desenho T'#233'cnico'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 494
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 516
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsArquivoTecnico
     end
@@ -14,8 +23,16 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
     inherited LblUsuCad: TDBText
       DataSource = DM.dsArquivoTecnico
     end
+    inherited LCadastro: TLabel
+      Left = 388
+    end
+    inherited LCadastroPor: TLabel
+      Left = 350
+    end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 40
       Top = 67
@@ -204,7 +221,6 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtCodEquipamento: TDBEdit
-      Tag = 555
       Left = 86
       Top = 97
       Width = 97
@@ -231,6 +247,7 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -268,6 +285,14 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 36

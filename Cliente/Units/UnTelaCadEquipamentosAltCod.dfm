@@ -11,19 +11,21 @@ inherited FrmTelaCadEquipamentosAltCod: TFrmTelaCadEquipamentosAltCod
   inherited PCentro: TPanel
     Width = 502
     Height = 165
+    ExplicitWidth = 502
+    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
-      Height = 163
+      Height = 160
+      ExplicitHeight = 160
     end
     object pBase: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 494
-      Height = 157
+      Height = 154
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 488
-      ExplicitHeight = 146
+      ExplicitWidth = 490
       object Label1: TLabel
         Left = 125
         Top = 51
@@ -78,10 +80,14 @@ inherited FrmTelaCadEquipamentosAltCod: TFrmTelaCadEquipamentosAltCod
   inherited PAuxiliares: TPanel
     Top = 237
     Width = 504
+    ExplicitTop = 237
+    ExplicitWidth = 500
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 504
+    ExplicitTop = 264
+    ExplicitWidth = 500
     inherited BtnOK: TButton
       Caption = 'Gravar'
       ModalResult = 0

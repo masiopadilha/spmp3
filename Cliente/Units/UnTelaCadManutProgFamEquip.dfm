@@ -146,7 +146,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ReadOnly = True
       TabOrder = 0
       OnExit = EdtCodManutencaoExit
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtDescManutencao: TDBEdit
       Left = 254
@@ -159,7 +159,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ParentCtl3D = False
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtCodFamilia: TDBEdit
       Tag = 555
@@ -172,9 +172,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Color = clBtnFace
       DataField = 'CODFAMILIAEQUIP'
       DataSource = DM.dsManutProgFamEquip
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtDescFamilia: TDBEdit
       Left = 254
@@ -187,9 +189,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       DataField = 'FAMILIAEQUIPAMENTO'
       DataSource = DM.dsManutProgFamEquip
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object BtnFamilia: TButton
       Left = 485
@@ -217,6 +221,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object ChbVisivel: TDBCheckBox
       Left = 715
@@ -231,6 +236,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtDescMonitoramento: TDBEdit
       Left = 766
@@ -245,8 +251,9 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 10
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object BtnMonitoramento: TButton
       Left = 960
@@ -274,6 +281,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtDescOficina: TDBEdit
       Left = 254
@@ -287,8 +295,9 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object BtnOficina: TButton
       Left = 485
@@ -316,9 +325,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Color = clBtnFace
       DataField = 'CODOFICINA'
       DataSource = DM.dsManutProgFamEquip
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtManutencao: TDBEdit
       Left = 766
@@ -332,8 +343,9 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object BtnManutencao: TButton
       Left = 960
@@ -363,6 +375,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
   end
   inherited PProgramacao: TPanel
@@ -421,7 +434,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Color = 14671839
       TabOrder = 0
       Text = 'Tempo de Funcionamento'
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtProgramacao2: TDBEdit
       Left = 521
@@ -432,7 +445,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       DataSource = DM.dsManutProgFamEquip
       TabOrder = 2
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object EdtProgramacao3: TEdit
       Left = 857
@@ -441,9 +454,9 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Height = 24
       TabStop = False
       Color = 14671839
-      TabOrder = 3
+      TabOrder = 4
       Text = 'Confiabilidade'
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
     object BtnProgramacao: TButton
       Left = 709
@@ -457,7 +470,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 3
       OnClick = BtnProgramacaoClick
     end
     object EdtDias: TDBEdit
@@ -468,7 +481,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       DataField = 'FREQUENCIA'
       DataSource = DM.dsManutProgFamEquip
       TabOrder = 1
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodManutencaoKeyPress
     end
   end
   inherited PDiversos: TPanel

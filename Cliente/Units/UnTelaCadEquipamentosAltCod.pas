@@ -42,10 +42,10 @@ begin
   if edtNovoAntigo.Text = MaskEdit1.Text then Exit;
 
   try
-    DM.FDQuery1.Close;
-    DM.FDQuery1.Params.ParamByName('NEWCODE').AsString := edtNovoAntigo.Text;
-    DM.FDQuery1.Params.ParamByName('OLDCODE').AsString := edtCodAntigo.Text;;
-    DM.FDQuery1.Execute();
+    DM.qryAltCodEquip.Close;
+    DM.qryAltCodEquip.Params.ParamByName('NEWCODE').AsString := edtNovoAntigo.Text;
+    DM.qryAltCodEquip.Params.ParamByName('OLDCODE').AsString := edtCodAntigo.Text;;
+    DM.qryAltCodEquip.Execute();
     Mensagem := PChar('Alteração realizada com sucesso!');
     Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
   except

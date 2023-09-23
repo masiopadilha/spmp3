@@ -1,7 +1,16 @@
 inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
   Caption = 'Literatura T'#233'cnica'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 494
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 516
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsArquivoTecnico
     end
@@ -14,8 +23,16 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
     inherited LblUsuCad: TDBText
       DataSource = DM.dsArquivoTecnico
     end
+    inherited LCadastro: TLabel
+      Left = 388
+    end
+    inherited LCadastroPor: TLabel
+      Left = 350
+    end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 40
       Top = 67
@@ -152,6 +169,7 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
       DataSource = DM.dsArquivoTecnico
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -180,6 +198,7 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
       DataSource = DM.dsArquivoTecnico
       ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -208,6 +227,7 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
       DataSource = DM.dsArquivoTecnico
       ReadOnly = True
       TabOrder = 7
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -236,6 +256,7 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
       DataSource = DM.dsArquivoTecnico
       ReadOnly = True
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -298,6 +319,14 @@ inherited FrmTelaCadArqTecnicoLiteratura: TFrmTelaCadArqTecnicoLiteratura
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 30

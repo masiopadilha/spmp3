@@ -575,13 +575,16 @@ DM.qryOrdemServico.Post;
 
 DM.qryOrdemServicoCustoSec.Close;
 
-if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsString, []) = True then
-  begin
-    DM.qryOrdemServicoGerencia.Edit;
-    DM.qryOrdemServicoGerenciaDATAFECHAMENTO.AsString := DM.qryOrdemServicoDATAFECHAMENTO.AsString;
-    DM.qryOrdemServicoGerenciaSITUACAO.AsString       := 'FECHADA';
-    DM.qryOrdemServicoGerencia.Post;
-  end;
+if DM.qryOrdemServicoGerencia.Active = True then
+begin
+  if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsString, []) = True then
+    begin
+      DM.qryOrdemServicoGerencia.Edit;
+      DM.qryOrdemServicoGerenciaDATAFECHAMENTO.AsString := DM.qryOrdemServicoDATAFECHAMENTO.AsString;
+      DM.qryOrdemServicoGerenciaSITUACAO.AsString       := 'FECHADA';
+      DM.qryOrdemServicoGerencia.Post;
+    end;
+end;
 
 PSituacao.Caption := 'FECHADA';
 PSituacao.Color := clGray;

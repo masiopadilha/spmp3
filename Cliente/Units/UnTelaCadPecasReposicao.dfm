@@ -1,7 +1,10 @@
 inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   Caption = 'Pe'#231'as de Reposi'#231#227'o'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -28,6 +31,8 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object Label17: TLabel
       Left = 490
       Top = 34
@@ -186,7 +191,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       OnClick = BtnFornecedorClick
     end
     object EdtCodFabricante: TDBEdit
-      Tag = 555
       Left = 606
       Top = 29
       Width = 120
@@ -197,11 +201,11 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataField = 'CODFABRICANTE'
       DataSource = DM.dsPecasReposicao
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtCodFamiliaPeca: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -212,11 +216,11 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataField = 'CODFAMILIAPECAREP'
       DataSource = DM.dsPecasReposicao
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtCodFornecedor: TDBEdit
-      Tag = 555
       Left = 606
       Top = 60
       Width = 120
@@ -227,6 +231,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataField = 'CODFORNECEDOR'
       DataSource = DM.dsPecasReposicao
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -255,6 +260,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataSource = DM.dsPecasReposicao
       ParentCtl3D = False
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -269,6 +275,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataSource = DM.dsPecasReposicao
       ParentCtl3D = False
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -283,6 +290,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       DataSource = DM.dsPecasReposicao
       ParentCtl3D = False
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -301,6 +309,8 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       Left = 6
       Top = 26
@@ -724,8 +734,10 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   end
   inherited PDiversos: TPanel
     Width = 780
+    Height = 200
     Align = alLeft
     ExplicitWidth = 780
+    ExplicitHeight = 197
     object Label13: TLabel
       Left = 68
       Top = 38
@@ -960,7 +972,23 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       OnExit = TabNextTab1AfterTabChange
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Kit de Pe'#231'as de Reposi'#231#227'o'
       DisabledImageIndex = 81
@@ -981,10 +1009,10 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   object PImagem: TPanel [7]
-    Left = 783
+    Left = 789
     Top = 343
     Width = 223
-    Height = 188
+    Height = 204
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered

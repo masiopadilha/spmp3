@@ -11594,7 +11594,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 427
+    ExplicitWidth = 433
     object Image1: TImage
       Left = 2
       Top = 2
@@ -12088,8 +12088,8 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 427
-    ExplicitHeight = 102
+    ExplicitWidth = 433
+    ExplicitHeight = 119
     object Label1: TLabel
       Left = 120
       Top = 21

@@ -275,7 +275,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       OnKeyPress = FormKeyPress
     end
     object EdtCodFamiliaEquip: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -291,7 +290,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -310,12 +311,13 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtCodFabricante: TDBEdit
-      Tag = 555
       Left = 606
       Top = 29
       Width = 120
@@ -331,7 +333,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -350,12 +354,13 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtCodFornecedor: TDBEdit
-      Tag = 555
       Left = 606
       Top = 60
       Width = 120
@@ -371,7 +376,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -390,7 +397,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
     end
     object BtnFamilia: TButton
@@ -1329,7 +1338,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1348,7 +1359,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1367,7 +1380,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ReadOnly = True
       TabOrder = 4
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1390,6 +1405,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ReadOnly = True
       TabOrder = 14
       Visible = False
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1410,8 +1426,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Style = []
       ParentFont = False
       ParentShowHint = False
+      ReadOnly = True
       ShowHint = True
       TabOrder = 16
+      StyleElements = [seFont, seClient]
       OnDblClick = EdtAreaDblClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
@@ -1433,8 +1451,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Font.Style = []
       ParentFont = False
       ParentShowHint = False
+      ReadOnly = True
       ShowHint = True
       TabOrder = 18
+      StyleElements = [seFont, seClient]
       OnDblClick = EdtCelulaDblClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress

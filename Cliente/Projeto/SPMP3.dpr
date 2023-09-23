@@ -159,20 +159,11 @@ uses
   UnTelaAuditoria in '..\Units\UnTelaAuditoria.pas' {FrmTelaAuditoria},
   UnTelaGerenciador in '..\Units\UnTelaGerenciador.pas' {FrmTelaGerenciador},
   UnDmAlertas in '..\Units\UnDmAlertas.pas' {DMAlertas: TDataModule},
-  UnTelaCadEquipamentosAltCod in '..\Units\UnTelaCadEquipamentosAltCod.pas' {FrmTelaCadEquipamentosAltCod};
+  UnTelaCadEquipamentosAltCod in '..\Units\UnTelaCadEquipamentosAltCod.pas' {FrmTelaCadEquipamentosAltCod},
+  UnTelaCadEquipamentosAltFamiliaCod in '..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas' {FrmTelaCadEquipamentosAltFamiliaCod};
 
 {$R *.res}
 begin
-//Try
-//if (FindWindow(nil, PChar('Serviço SPMP3')) = 0) then
-//    begin
-//      WinExec(PAnsiChar('C:\SPMP3\SPMP3srv.exe'), SW_HIDE);
-//    end;
-//except
-//  MessageDlg('Não foi possível iniciar o C:\SPMP3\SPMP3srv.exe!'+#13+'Favor executá-lo manualmente.', mtError, [mbOK], 0);
-//  Application.Terminate;
-//End;
-
 if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Inspeções Vencidas')) > 0)
   or (FindWindow(nil, PChar('SPMP - Sistema do Plano de Manutenção Programada')) > 0) then
     begin
@@ -208,6 +199,13 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
       Finally
         FreeAndNil(FrmTelaPrincipal);
       End;
+    Application.Run;
+  end else
+  begin
+    FreeAndNil(FrmTelaAcesso);
+    FreeAndNil(DMAlertas);
+    FreeAndNil(DmRelatorios);
+    FreeAndNil(DM);
+    Application.Terminate;
   end;
-Application.Run;
 end.

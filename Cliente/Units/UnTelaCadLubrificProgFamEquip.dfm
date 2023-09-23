@@ -173,6 +173,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object ChbVisivel: TDBCheckBox
       Left = 715
@@ -187,6 +188,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtCodFamilia: TDBEdit
       Tag = 555
@@ -199,9 +201,11 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Color = clBtnFace
       DataField = 'CODFAMILIAEQUIP'
       DataSource = DM.dsLubrificProgFamEquip
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtCodLubrificacao: TDBEdit
       Tag = 555
@@ -215,7 +219,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ReadOnly = True
       TabOrder = 0
       OnExit = EdtCodLubrificacaoExit
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtDescFamilia: TDBEdit
       Left = 254
@@ -228,9 +232,11 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       DataField = 'FAMILIAEQUIPAMENTO'
       DataSource = DM.dsLubrificProgFamEquip
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtDescLubrificacao: TDBEdit
       Left = 254
@@ -243,7 +249,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ParentCtl3D = False
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtDescMonitoramento: TDBEdit
       Left = 766
@@ -258,8 +264,9 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 10
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object chbClonavel: TDBCheckBox
       Left = 794
@@ -274,6 +281,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtCodOficina: TDBEdit
       Tag = 555
@@ -286,9 +294,11 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Color = clBtnFace
       DataField = 'CODOFICINA'
       DataSource = DM.dsLubrificProgFamEquip
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtDescOficina: TDBEdit
       Left = 254
@@ -302,8 +312,9 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object BtnOficina: TButton
       Left = 485
@@ -332,8 +343,9 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object BtnManutencao: TButton
       Left = 960
@@ -363,6 +375,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
   end
   inherited PProgramacao: TPanel
@@ -421,7 +434,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Color = 14671839
       TabOrder = 0
       Text = 'Tempo de Funcionamento'
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtProgramacao2: TDBEdit
       Left = 521
@@ -432,7 +445,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       DataSource = DM.dsLubrificProgFamEquip
       TabOrder = 2
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object BtnProgramacao: TButton
       Left = 709
@@ -458,7 +471,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Color = 14671839
       TabOrder = 4
       Text = 'Confiabilidade'
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
     object EdtDias: TDBEdit
       Left = 345
@@ -468,7 +481,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       DataField = 'FREQUENCIA'
       DataSource = DM.dsLubrificProgFamEquip
       TabOrder = 1
-      OnKeyPress = FormKeyPress
+      OnKeyPress = EdtCodLubrificacaoKeyPress
     end
   end
   inherited PDiversos: TPanel
@@ -483,6 +496,27 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Width = 179
       Caption = 'PLANO DE TRABALHO'
       ExplicitWidth = 179
+    end
+    object REDetalhes: TJvDBRichEdit
+      AlignWithMargins = True
+      Left = 334
+      Top = 21
+      Width = 670
+      Height = 88
+      Margins.Top = 20
+      DataField = 'DETALHES'
+      DataSource = DM.dsLubrificProgFamEquipPlanoTrab
+      Align = alRight
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      OnExit = TabNextTab1AfterTabChange
+      ExplicitLeft = 330
     end
     object GrdPlanoTrabalho: TDBGrid
       AlignWithMargins = True
@@ -501,7 +535,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
@@ -526,33 +560,12 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
           Visible = True
         end>
     end
-    object REDetalhes: TJvDBRichEdit
-      AlignWithMargins = True
-      Left = 334
-      Top = 21
-      Width = 670
-      Height = 88
-      Margins.Top = 20
-      DataField = 'DETALHES'
-      DataSource = DM.dsLubrificProgFamEquipPlanoTrab
-      Align = alRight
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 1
-      OnExit = TabNextTab1AfterTabChange
-      ExplicitLeft = 330
-    end
   end
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
+    ExplicitTop = 605
+    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
     Top = 589

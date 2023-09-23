@@ -252,7 +252,7 @@ begin
     3: Ini.WriteInteger('Backup', 'Frequencia', 30);
   end;
   Ini.WriteString('ARQUIVOS', 'exeLocal', 'C:\SPMP3\SPMP3.exe');
-  Ini.WriteString('ARQUIVOS', 'exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\SPMP3.exe');
+  Ini.WriteString('ARQUIVOS', 'exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\update\SPMP3.exe');
 
   Registro         := TRegistry.Create;
   Registro.RootKey := HKEY_LOCAL_MACHINE;
@@ -279,7 +279,7 @@ begin
         3: Registro.WriteInteger('Frequencia', 30);
       end;
       Registro.WriteString('exeLocal', 'C:\SPMP3\SPMP3.exe');
-      Registro.WriteString('exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\SPMP3.exe');
+      Registro.WriteString('exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\update\SPMP3.exe');
     end;
   Registro.CloseKey;
 

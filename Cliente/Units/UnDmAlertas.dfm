@@ -1,8 +1,6 @@
 object DMAlertas: TDMAlertas
-  OnDestroy = DataModuleDestroy
-  Height = 374
-  Width = 539
-  PixelsPerInch = 120
+  Height = 299
+  Width = 431
   object TrayIcon1: TTrayIcon
     BalloonHint = 'Teste'
     BalloonFlags = bfInfo
@@ -11575,12 +11573,12 @@ object DMAlertas: TDMAlertas
     PopupMenu = PopupMenu1
     Visible = True
     OnDblClick = TrayIcon1DblClick
-    Left = 389
-    Top = 10
+    Left = 311
+    Top = 8
   end
   object PopupMenu1: TPopupMenu
-    Left = 469
-    Top = 10
+    Left = 375
+    Top = 8
     object GerencOrdemServico: TMenuItem
       Caption = '&Gerenciamento de Ordem de Servico'
       OnClick = GerencOrdemServicoClick
@@ -11631,8 +11629,8 @@ object DMAlertas: TDMAlertas
         '       AND (`ordemservico`.`SITUACAO` = '#39'CADASTRADA'#39' OR `ordemse' +
         'rvico`.`SITUACAO` = '#39'SOLICITADA'#39')'
       ')')
-    Left = 310
-    Top = 120
+    Left = 248
+    Top = 96
     ParamData = <
       item
         Name = 'CODEMPRESA'
@@ -11650,7 +11648,7 @@ object DMAlertas: TDMAlertas
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    Left = 470
-    Top = 80
+    Left = 376
+    Top = 64
   end
 end

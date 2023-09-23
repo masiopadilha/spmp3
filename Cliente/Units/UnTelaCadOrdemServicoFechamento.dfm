@@ -1,8 +1,10 @@
 inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    ExplicitWidth = 1008
+    Width = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -44,8 +46,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 124
-    ExplicitWidth = 1008
+    ExplicitWidth = 1004
     ExplicitHeight = 124
     object Label5: TLabel
       Left = 235
@@ -227,8 +230,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PProgramacao: TPanel
     Top = 179
+    Width = 1008
     ExplicitTop = 179
-    ExplicitWidth = 1008
+    ExplicitWidth = 1004
     inherited Label2: TLabel
       Width = 132
       Caption = 'PROGRAMA'#199#195'O'
@@ -548,7 +552,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'MANUTENCAO'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -577,7 +583,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'MOTIVOPARADA'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -606,7 +614,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'FALHA'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 7
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -635,7 +645,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'CENTROCUSTO'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -664,7 +676,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'SOLICITANTE'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 11
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -693,7 +707,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       DataField = 'OFICINA'
       DataSource = DM.dsOrdemServico
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 13
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -715,10 +731,11 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PDiversos: TPanel
     Top = 373
-    Height = 156
+    Width = 1008
+    Height = 172
     ExplicitTop = 373
-    ExplicitWidth = 1008
-    ExplicitHeight = 156
+    ExplicitWidth = 1004
+    ExplicitHeight = 169
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -729,7 +746,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Left = 5
       Top = 26
       Width = 998
-      Height = 134
+      Height = 141
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -793,16 +810,22 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 598
-    ExplicitWidth = 1012
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    ExplicitTop = 582
-    ExplicitWidth = 1012
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    ExplicitTop = 542
-    ExplicitWidth = 1008
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

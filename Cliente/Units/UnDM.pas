@@ -5261,7 +5261,7 @@ type
     dsOrdemServicoLocalizaMObraOSExec: TDataSource;
     qryProgramadasExecucaoMObraCELULA: TStringField;
     qryProgramadasExecucaoMObraTIPOCELULA: TStringField;
-    FDQuery1: TFDQuery;
+    qryAltCodEquip: TFDQuery;
     qryGerarOSCODCENTROCUSTO: TStringField;
     qryMonitMedicoesContCODCENTROCUSTO: TStringField;
     qryMonitMedicoesPtosInspCODCENTROCUSTO: TStringField;
@@ -5555,6 +5555,7 @@ type
     qryLubrificProgEquipEQUIPPARADO: TStringField;
     qryManutConsEQUIPPARADO: TStringField;
     qryLubrificConsEQUIPPARADO: TStringField;
+    qryAltCodFamilia: TFDQuery;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5650,9 +5651,7 @@ type
     FCustos : TArray<Real>;
     FTotalHHDisp, FTotalHorasFunc, FTotalHorasParadas : Real;
 
-    //function GetFileDateAsInteger(AFileName: String): Integer;
-    //function GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
-    //function GetFileDateTime(AFileName: String): TDateTime;
+    function GetVersion(AFileName: String): string;
     function RetornaDataHoraServidor: Boolean;
     function SenhaExpirada: Boolean;
     function Crypt(Action, Src: String): String;
@@ -5675,17 +5674,12 @@ type
     function XlsToStringGrid(xStringGrid: TStringGrid; xFileXLS: string): Boolean;
     function converter_ponto(valor_com_virgula: string): string;
     function AtualizarContadorSatelite(CodEquipamento, Placa: String; DataImportacao: TDateTime; Rodagem: Real; Indice: SmallInt): String;
-    function GetVersion(AFileName: String): string;
     function LicencaExpirada: Boolean;
     function VerificarInspecoes: Boolean;
     function CalcularMTBF(codequip: String; periodo: SmallInt): Real;
     function CalcularTaxaFalha(mtbf: Real): Real;
-    function GetBuildInfo(prog: String): String;
-    function DSiFileSize(const fileName: string): int64;
     function IsAdmin: Boolean;
 
-    procedure Atualiza_Versao_Aplicacao;
-    procedure VerificaConexaoBanco(DataSet: TFDQuery);
     procedure VerificarConfiabilidade;
     procedure MSGAguarde(strTexto: String = ''; boolAguarde: Boolean = true);
     procedure HistoricoInspecoes(Tipo: SmallInt; CodEmpresa, CodEquip, Codigo: String; CodOrdemServico: Integer);
@@ -5719,6 +5713,34 @@ const
   SECURITY_NT_AUTHORITY: TSIDIdentifierAuthority = (Value: (0, 0, 0, 0, 0, 5));
   SECURITY_BUILTIN_DOMAIN_RID = $00000020;
   DOMAIN_ALIAS_RID_ADMINS = $00000220;
+
+function TDM.GetVersion(AFileName: String): string;
+var
+  Size, Size2: DWord;
+  Pt, Pt2: Pointer;
+  Ver: String;
+begin
+  Size := GetFileVersionInfoSize(PChar(AFileName), Size2);
+  if Size > 0 then
+    begin
+      GetMem (Pt, Size);
+      try
+        GetFileVersionInfo(PChar(AFileName), 0, Size, Pt);
+        VerQueryValue (Pt, '\', Pt2, Size2);
+        with TVSFixedFileInfo (Pt2^) do
+          begin
+            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+                      IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                      IntToStr (HiWord (dwFileVersionLS)) + '.' +
+                      IntToStr (LoWord (dwFileVersionLS));
+            DM.FVersao := Ver;
+            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
+          end;
+      finally
+        FreeMem (Pt);
+      end;
+    end;
+end;
 
 function TDM.IsAdmin: Boolean;
 var
@@ -5761,224 +5783,6 @@ begin
         end;
       FreeMem(ptgGroups);
     end;
-end;
-
-//Retorna o build de um arquivo
-function TDM.GetBuildInfo(prog: String): String;
-var
-  VerInfoSize: DWORD;
-  VerInfo: Pointer;
-  VerValueSize: DWORD;
-  VerValue: PVSFixedFileInfo;
-  Dummy: DWORD;
-  V1, V2, V3, V4: Word;
-begin
-  VerInfoSize := GetFileVersionInfoSize(PChar(prog),Dummy);
-  GetMem(VerInfo,VerInfoSize);
-  GetFileVersionInfo(PChar(prog),0,VerInfoSize,VerInfo);
-  VerQueryValue(VerInfo,'',Pointer(VerValue),VerValueSize);
-  with VerValue^ do
-    begin
-      V1 := dwFileVersionMS shr 16;
-      V2 := dwFileVersionMS and $FFFF;
-      V3 := dwFileVersionLS shr 16;
-      V4 := dwFileVersionLS and $FFFF;
-    end;
-FreeMem(VerInfo,VerInfoSize);
-result := Copy(IntToStr(100 + v1),3,2) + '.' + Copy(IntToStr(100 + V2),3,2) + '.' + Copy(IntToStr(100 + V3),3,2) + '.' + Copy(IntToStr(100 + V4),3,2);
-end;
-
-//Retorna o tamanho de um arquivo em bytes
-function TDM.DSiFileSize(const fileName: string): int64;
-var
-  fHandle: DWORD;
-begin
-  fHandle := CreateFile(PChar(fileName), 0, 0, nil, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-  if fHandle = INVALID_HANDLE_VALUE then
-    Result := -1
-  else
-    try
-      Int64Rec(Result).Lo := GetFileSize(fHandle, @Int64Rec(Result).Hi);
-    finally CloseHandle(fHandle);
-  end;
-end;
-
-procedure TDM.Atualiza_Versao_Aplicacao;
-var
-  versao_local, versao_servidor: string;
-  tamanho_original, tamanho_recebido: integer;
-  local_arquivo_servidor: string;
-  iArq: Tinifile;
-  LMensagem: PChar;
-begin
-  try
-    DM.MSGAguarde('', True);
-    Application.ProcessMessages;
-
-    //Verifico onde esta armazenado o arquivo a ser atualizado
-    if FileExists(GetCurrentDir + '\spmp.ini') then
-      begin
-        try
-          iArq := TInifile.Create(GetCurrentDir + '\spmp.ini');
-          //local_arquivo_servidor := iArq.ReadString('Conexao','HOSTNAME','\\SERVIDOR\PASTA\ARQUIVO.EXE');
-          local_arquivo_servidor := iArq.ReadString('ARQUIVOS','exeRemoto','');
-        finally
-          iArq.Free;
-        end;
-      end;
-
-    //Armazeno a vers�o da aplica��o atualmente em uso
-    versao_local := GetBuildInfo(GetCurrentDir + '\SPMP3.exe');
-    //Armazeno a vers�o do aplica��o que esta disponivel no servidor
-    versao_servidor := GetBuildInfo(local_arquivo_servidor);
-
-    //Comparo as vers�es
-    if versao_local <> versao_servidor then
-      begin
-        //Guardo na v�riavel o tamanho do arquivo que esta no servidor
-        tamanho_original := DSiFileSize(local_arquivo_servidor);
-
-        //Copio a vers�o que esta no servidor para o computador atual
-        CopyFile(PChar(local_arquivo_servidor),PChar(GetCurrentDir+'\SPMP3.new'),False);
-
-        //Guardo na v�riavel o tamanho do arquivo copiado
-        tamanho_recebido := DSiFileSize(GetCurrentDir+'\SPMP3.new');
-
-        //Verifico se o arquivo copiado chegou intacto
-        if tamanho_original = tamanho_recebido then
-          begin
-            //Apago se existir vers�o antiga
-            DeleteFile('SPMP3.old');
-
-            //Renomeio o arquivo atual
-            RenameFile('SPMP3.exe', 'SPMP3.old');
-
-            //Renomeio o arquivo novo para poder usa-lo
-            RenameFile('SPMP3.new', 'SPMP3.exe');
-
-            //Informo que a aplica��o foi atualizado com sucesso
-            LMensagem := PChar('Atualização aplicada com sucesso!' + #13 +
-                               'Versão anterior: ' + versao_local + #13 +
-                               'Nova versão: ' + versao_servidor + #13 +
-                               'O aplicativo será reiniciado.');
-            Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONINFORMATION);
-
-            //Mando abrir a nova vers�o do teclado
-//            ShellExecute(0,Nil,PChar(GetCurrentDir+'\SPMP3.exe'),'', Nil, SW_SHOWNORMAL);
-
-            //Fecho a aplica��o e abro novamente
-            ShellExecute(0, 'open', 'c:\spmp3\UpdateVersion.bat', nil, nil, SW_HIDE);
-          end
-        else
-          begin
-            //Caso o arquivo copiado n�o seja copiado com sucesso
-            LMensagem := PChar('Atualização falhou, favor tentar novamente!');
-            Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONERROR);
-          end;
-      end
-    else
-      begin
-        //Se a aplica��o j� estiver atualizada
-        LMensagem := PChar('Aplicativo já possui a ultima atualização disponível!');
-        Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONINFORMATION);
-      end;
-  except
-    on E: Exception do
-      begin
-        Application.ProcessMessages;
-
-        LMensagem := PChar('Ocorreu um erro ao tentar realizar a atualização.' + #13 +
-                           'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
-                           'Mensagem de erro: "' + E.Message+'"');
-        Application.MessageBox(LMensagem, 'SPMP3' , MB_OK+MB_ICONERROR);
-      end;
-  end;
-
-  DM.MSGAguarde('', False);
-end;
-
-function TDM.GetVersion(AFileName: String): string;
-var
-  Size, Size2: DWord;
-  Pt, Pt2: Pointer;
-  Ver: String;
-//  i: INteger;
-begin
-//  i := GetFileVersion(AFileName);
-//  Size := GetFileVersionInfoSize(PChar (ParamStr (0)), Size2);
-  Size := GetFileVersionInfoSize(PChar(AFileName), Size2);
-  if Size > 0 then
-    begin
-      GetMem (Pt, Size);
-      try
-//        GetFileVersionInfo(PChar(ParamStr (0)), 0, Size, Pt);
-        GetFileVersionInfo(PChar(AFileName), 0, Size, Pt);
-        VerQueryValue (Pt, '\', Pt2, Size2);
-        with TVSFixedFileInfo (Pt2^) do
-          begin
-//            Result := ' Ver ' +
-            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
-                      IntToStr (LoWord (dwFileVersionMS)) + '.' +
-                      IntToStr (HiWord (dwFileVersionLS)) + '.' +
-                      IntToStr (LoWord (dwFileVersionLS));
-            DM.FVersao := Ver;
-            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
-          end;
-      finally
-        FreeMem (Pt);
-      end;
-    end;
-end;
-
-//function TDM.GetFileDateTime(AFileName: String): TDateTime;
-//var
-//  LInteger: integer;
-//  LSearchRed : TSearchRec;
-//begin
-//  LInteger := FindFirst(AFileName, faAnyFile, LSearchRed);
-//  if LInteger = 0 then
-//    begin
-//      Result := LSearchRed.TimeStamp;
-//      System.SysUtils.FindClose(LSearchRed);
-//    end
-//  else
-//    begin
-//      Result := 0;
-//    end;
-//end;
-//
-//function TDM.GetFileDateAsInteger(AFileName: String): Integer;
-//begin
-//  Result := StrToInt(FormatDateTime('yyyymmdd', GetFileDateTime(AFileName)));
-//end;
-//
-//function TDM.GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
-//var
-//  LFileVersion: Currency;
-//begin
-//  LFileVersion := GetFileDateAsInteger(AFileName);
-//  LFileVersion := LFileVersion + StrToCurr(StringReplace(CurrToStr(GetFileVersion(AFileName)), '.', '',[rfReplaceAll]));
-//
-////  LFileVersion := StrToCurr(GetVersion(AFileName));
-//
-//  Result := LFileVersion;
-//end;
-
-procedure TDM.VerificaConexaoBanco(DataSet: TFDQuery);
-begin
-//  Try
-//    IdTCPClient1.ReadTimeout    := 2000;
-//    IdTCPClient1.ConnectTimeout := 2000;
-//    IdTCPClient1.Port           := 52215;
-//    IdTCPClient1.Host           := DM.FHost; // ip � um campo que o usuario sete qual o ip da maquina servidora
-//    IdTCPClient1.Connect;
-//    IdTCPClient1.Disconnect;
-//    FDConnSPMP3.Tag := 0;
-//  Except
-//    MessageDlg('ERRO DE CONEX�O'+#13+'Houve perda de conex�o com o servidor, o sistema ser� fechado!', mtError, [mbOK], 0);
-//    FDConnSPMP3.Connected := False;
-//    //Application.Terminate;
-//  End;
 end;
 
 function TDM.RetornaDataHoraServidor: Boolean;
@@ -7522,7 +7326,7 @@ if DM.FNomeUsuario <> LowerCase('sam_spmp') then
   begin
     if (Trim(qryUsuarioSENHAALTERADA.AsString) <> 'S') then
       begin
-        if Application.MessageBox('O sistema detectou que sua senha ainda não foi alterada desde o seu cadastro.'+#13+#13+'º necessário fazê-lo agora, deseja prosseguir ?','SPMP', MB_YESNO + MB_ICONQUESTION)=IDYes then
+        if Application.MessageBox('O sistema detectou que sua senha ainda não foi alterada desde o seu cadastro.'+#13+#13+'Será necessário fazê-lo agora, deseja prosseguir ?','SPMP', MB_YESNO + MB_ICONQUESTION)=IDYes then
           begin
             LSenhaAtual := PasswordInputBox('Senha temporária atual','Digite sua senha:');
 

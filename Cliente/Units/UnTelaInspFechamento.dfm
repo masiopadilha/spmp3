@@ -1,7 +1,7 @@
 inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   Caption = 'Fechamento das Inspe'#231#245'es'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,7 +12,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   ExplicitHeight = 680
   TextHeight = 11
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
       Left = 971
@@ -42,8 +42,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
+    Width = 1006
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -474,7 +474,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        ReadOnly = True
         TabOrder = 1
+        StyleElements = [seFont, seClient]
         OnKeyPress = EdtMatriculaKeyPress
       end
       object EdtResponsavel: TEdit
@@ -491,6 +493,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         ParentFont = False
         ReadOnly = True
         TabOrder = 2
+        StyleElements = [seFont, seClient]
       end
       object rgStatus: TRadioGroup
         Left = 817
@@ -514,8 +517,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 577
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
     object Label1: TLabel
@@ -528,8 +531,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 604
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

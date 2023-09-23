@@ -469,7 +469,7 @@ begin
   Try
     if DM.isAdmin then
       begin
-        DM.Atualiza_Versao_Aplicacao;
+       // DM.Atualiza_Versao_Aplicacao;
       end
     else
       begin

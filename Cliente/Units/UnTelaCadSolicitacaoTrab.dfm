@@ -85,7 +85,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object Label17: TLabel
-      Left = 516
+      Left = 519
       Top = 37
       Width = 6
       Height = 13
@@ -99,7 +99,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 516
+      Left = 519
       Top = 67
       Width = 6
       Height = 13
@@ -124,6 +124,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       DataSource = DM.dsSolicitacaoTrab
       ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -139,11 +140,12 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 1
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnSolicitante: TButton
-      Left = 485
+      Left = 488
       Top = 29
       Width = 28
       Height = 28
@@ -156,7 +158,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       OnClick = BtnSolicitanteClick
     end
     object EdtCodEquipamento: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -167,11 +168,12 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       DataSource = DM.dsSolicitacaoTrab
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtDescEquipamento: TDBEdit
-      Left = 258
+      Left = 254
       Top = 60
       Width = 230
       Height = 24
@@ -182,11 +184,12 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 4
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnEquipamento: TButton
-      Left = 485
+      Left = 488
       Top = 59
       Width = 28
       Height = 28
@@ -496,6 +499,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end

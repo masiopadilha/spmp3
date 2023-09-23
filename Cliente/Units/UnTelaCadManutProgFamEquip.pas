@@ -75,6 +75,8 @@ type
     procedure BtnMonitoramentoClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
     procedure BtnManutencaoClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtCodManutencaoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -445,6 +447,25 @@ if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
 end;
 
+procedure TFrmTelaCadManutProgFamEquip.EdtCodManutencaoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+PAuxiliares.Font.Color := clGreen;
+PAuxiliares.Caption := EmptyStr;
+If Key = #13 Then
+  Try
+    Begin
+      Key := #0;
+      SelectNext(ActiveControl, True, True);
+    End;
+  Except
+    Begin
+      Application.MessageBox('Não foi possível identificar esse valor, por favor verifique o valor informado.','SPMP',MB_OK + MB_ICONERROR);
+    End;
+  End;
+end;
+
 procedure TFrmTelaCadManutProgFamEquip.ExcluirCorpClick(Sender: TObject);
 begin
   inherited;
@@ -476,6 +497,13 @@ DM.FDataSourceParam := DM.dsManutProgFamEquip;
 DM.FTabela_auxiliar  := 34;
 end;
 
+procedure TFrmTelaCadManutProgFamEquip.FormKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+//  inherited;
+
+end;
+
 procedure TFrmTelaCadManutProgFamEquip.GrdPlanoTrabalhoDblClick(
   Sender: TObject);
 begin
@@ -492,7 +520,7 @@ end;
 
 procedure TFrmTelaCadManutProgFamEquip.GrdPlanoTrabalhoKeyPress(Sender: TObject; var Key: Char);
 begin
-  inherited;
+//  inherited;
 if (Key = #13) then
   begin
 

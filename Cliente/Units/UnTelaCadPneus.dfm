@@ -1,7 +1,10 @@
 inherited FrmTelaCadPneus: TFrmTelaCadPneus
   Caption = 'Pneus'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsPneus
     end
@@ -16,6 +19,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 90
       Top = 33
@@ -166,7 +171,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       Color = clBtnFace
       DataField = 'CODFABRICANTE'
       DataSource = DM.dsPneus
+      ReadOnly = True
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -180,7 +187,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       DataField = 'FABRICANTE'
       DataSource = DM.dsPneus
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -200,7 +209,6 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       OnClick = BtnFabricanteClick
     end
     object EdtCodFamiliaPneu: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -210,7 +218,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       Color = clBtnFace
       DataField = 'CODFAMILIAPNEU'
       DataSource = DM.dsPneus
+      ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -224,7 +234,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       DataField = 'FAMILIAPNEU'
       DataSource = DM.dsPneus
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -254,7 +266,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       Color = clBtnFace
       DataField = 'CODFORNECEDOR'
       DataSource = DM.dsPneus
+      ReadOnly = True
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -268,7 +282,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       DataField = 'FORNECEDOR'
       DataSource = DM.dsPneus
       ParentCtl3D = False
+      ReadOnly = True
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
     end
     object BtnFornecedor: TButton
@@ -288,6 +304,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -711,6 +729,10 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PDiversos: TPanel
+    Width = 1008
+    Height = 200
+    ExplicitWidth = 1004
+    ExplicitHeight = 197
     object Label8: TLabel
       Left = 64
       Top = 38
@@ -898,7 +920,23 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       OnKeyPress = FormKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'ID dos Pneus'
       DisabledImageIndex = 81

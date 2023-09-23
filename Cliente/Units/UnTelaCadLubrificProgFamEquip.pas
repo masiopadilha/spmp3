@@ -27,7 +27,6 @@ type
     Label18: TLabel;
     Panel1: TPanel;
     Label4: TLabel;
-    GrdPlanoTrabalho: TDBGrid;
     Label8: TLabel;
     EdtProgramacao1: TEdit;
     Label9: TLabel;
@@ -53,6 +52,7 @@ type
     BtnManutencao: TButton;
     Label21: TLabel;
     ChbParado: TDBCheckBox;
+    GrdPlanoTrabalho: TDBGrid;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -75,6 +75,8 @@ type
     procedure BtnMonitoramentoClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
     procedure BtnManutencaoClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtCodLubrificacaoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -442,6 +444,25 @@ if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
 end;
 
+procedure TFrmTelaCadLubrificProgFamEquip.EdtCodLubrificacaoKeyPress(
+  Sender: TObject; var Key: Char);
+begin
+  inherited;
+PAuxiliares.Font.Color := clGreen;
+PAuxiliares.Caption := EmptyStr;
+If Key = #13 Then
+  Try
+    Begin
+      Key := #0;
+      SelectNext(ActiveControl, True, True);
+    End;
+  Except
+    Begin
+      Application.MessageBox('Não foi possível identificar esse valor, por favor verifique o valor informado.','SPMP',MB_OK + MB_ICONERROR);
+    End;
+  End;
+end;
+
 procedure TFrmTelaCadLubrificProgFamEquip.ExcluirCorpClick(Sender: TObject);
 begin
   inherited;
@@ -471,6 +492,13 @@ DM.FTela := 'CADLUBRIFICPROG';
 DM.FDataSetParam    := DM.qryLubrificProgFamEquip;
 DM.FDataSourceParam := DM.dsLubrificProgFamEquip;
 DM.FTabela_auxiliar  := 35;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.FormKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+//  inherited;
+
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.GrdPlanoTrabalhoDblClick(

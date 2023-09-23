@@ -5,7 +5,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -147,6 +146,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       DataSource = DM.dsOrdemServico
       ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -162,6 +162,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -463,6 +464,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -493,6 +495,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -523,6 +526,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 4
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -553,6 +557,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -583,6 +588,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -646,6 +652,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 10
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -676,6 +683,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 14
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -748,6 +756,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 17
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end

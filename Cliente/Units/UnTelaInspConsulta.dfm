@@ -1,7 +1,7 @@
 inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Caption = 'Consulta de Inspe'#231#245'es'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,7 +11,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     object Label9: TLabel [1]
       Left = 133
@@ -67,10 +67,10 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
-    ExplicitWidth = 1006
-    ExplicitHeight = 505
+    Width = 1006
+    Height = 505
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 3
       Height = 136
@@ -94,6 +94,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Align = alClient
       TabOrder = 1
       OnChange = PCInspecoesChange
+      ExplicitWidth = 998
+      ExplicitHeight = 426
       object TSManut: TTabSheet
         Caption = 'Manutenc'
         object PFundoManut: TPanel
@@ -524,7 +526,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         ReadOnly = True
         ShowHint = True
         TabOrder = 2
-        StyleElements = [seBorder]
+        StyleElements = [seFont, seClient]
         OnDblClick = edtAreaDblClick
       end
       object EdtFamiliaEquip: TEdit
@@ -538,7 +540,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         ReadOnly = True
         ShowHint = True
         TabOrder = 0
-        StyleElements = [seBorder]
+        StyleElements = [seFont, seClient]
         OnDblClick = EdtFamiliaEquipDblClick
       end
       object edtOficina: TEdit
@@ -552,7 +554,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
         ReadOnly = True
         ShowHint = True
         TabOrder = 4
-        StyleElements = [seBorder]
+        StyleElements = [seFont, seClient]
         OnDblClick = edtOficinaDblClick
       end
       object BtnOficina: TButton
@@ -573,8 +575,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 577
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
     object chbTudo: TCheckBox
@@ -592,8 +594,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 604
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

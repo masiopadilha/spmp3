@@ -650,6 +650,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ReadOnly = True
         ShowHint = True
         TabOrder = 2
+        StyleElements = [seFont, seClient]
         OnDblClick = EdtOficinaDblClick
       end
       object EdtFamiliaEquip: TEdit
@@ -663,6 +664,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ReadOnly = True
         ShowHint = True
         TabOrder = 0
+        StyleElements = [seFont, seClient]
         OnDblClick = EdtFamiliaEquipDblClick
       end
       object edtManutencao: TEdit
@@ -676,6 +678,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ReadOnly = True
         ShowHint = True
         TabOrder = 4
+        StyleElements = [seFont, seClient]
         OnDblClick = edtManutencaoDblClick
       end
       object BtnManutencao: TButton
@@ -700,6 +703,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Height = 22
         Style = csOwnerDrawFixed
         TabOrder = 6
+        StyleElements = [seFont, seClient]
         OnChange = CBPrioridadeChange
         Items.Strings = (
           ''

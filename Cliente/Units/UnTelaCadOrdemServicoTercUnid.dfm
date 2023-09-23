@@ -1,7 +1,10 @@
 inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   Caption = 'Servi'#231'os Terceirizados na Unidade'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -40,6 +43,8 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 93
       Top = 32
@@ -101,7 +106,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       Caption = 'Contrato:'
     end
     object EdtCodigo: TDBEdit
-      Tag = 555
       Left = 127
       Top = 30
       Width = 125
@@ -113,6 +117,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       DataSource = DM.dsOrdemServicoTercUnid
       ReadOnly = True
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -130,7 +135,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
     object EdtCodCentroCusto: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -141,6 +145,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       DataField = 'CODCENTROCUSTO'
       DataSource = DM.dsOrdemServicoTercUnid
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -156,6 +161,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       DataSource = DM.dsOrdemServicoTercUnid
       ParentCtl3D = False
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -222,13 +228,15 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 211
+    ExplicitWidth = 1004
     ExplicitHeight = 211
     object Chart1: TChart
       AlignWithMargins = True
       Left = 4
       Top = 26
-      Width = 996
+      Width = 1000
       Height = 181
       Margins.Top = 25
       Legend.CheckBoxesStyle = cbsRadio
@@ -243,6 +251,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -276,10 +285,11 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   end
   inherited PDiversos: TPanel
     Top = 366
-    Height = 163
+    Width = 1008
+    Height = 179
     ExplicitTop = 366
-    ExplicitWidth = 1008
-    ExplicitHeight = 174
+    ExplicitWidth = 1004
+    ExplicitHeight = 176
     inherited Label3: TLabel
       Width = 93
       Caption = 'CONTRATO'
@@ -511,7 +521,23 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Left = 852
       Hint = 'Tarefas'

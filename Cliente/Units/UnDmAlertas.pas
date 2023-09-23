@@ -45,7 +45,6 @@ type
     procedure OpcoesClick(Sender: TObject);
     procedure SairClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
     ftotalosatual, ftotalosnovo: integer;
@@ -74,10 +73,6 @@ begin
     Finally
       FreeAndNil(FrmTelaAuditoria);
     End;
-end;
-procedure TDMAlertas.DataModuleDestroy(Sender: TObject);
-begin
-DMAlertas.qryOrdemServico.Close;
 end;
 procedure TDMAlertas.FechamInspClick(Sender: TObject);
 begin

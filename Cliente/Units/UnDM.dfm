@@ -6068,7 +6068,12 @@ object DM: TDM
       '    `usuario`'
       '    LEFT JOIN `acessos` '
       '        ON (`usuario`.`NOME` = `acessos`.`USUARIO`)'
-      'WHERE (`usuario`.`NOME` = :usuario);')
+      'WHERE (`usuario`.`NOME` = :usuario)'
+      
+        'GROUP BY `usuario`.`NOME`, `usuario`.`SENHA`, `usuario`.`BLOQUEI' +
+        'O`, `usuario`.`SENHAALTERADA`, `usuario`.`SENHAALTERADADATA`, `a' +
+        'cessos`.`DATAACESSO`'
+      'LIMIT 1;;')
     Left = 399
     Top = 8
     ParamData = <
@@ -28072,6 +28077,7 @@ object DM: TDM
   object qryLubrificProgFamEquipPlanoTrab: TFDQuery
     MasterSource = dsLubrificProgFamEquip
     MasterFields = 'CODEMPRESA;CODIGO'
+    DetailFields = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
     Connection = FDConnSPMP3
     SQL.Strings = (
       '  SELECT'
@@ -28092,7 +28098,8 @@ object DM: TDM
       'WHERE (`lubrificprogfamequipplantrab`.`CODEMPRESA` = :codempresa'
       
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
-        ' = :codigo)'
+        ' = :codigo'
+      ')'
       'order by `planotrabalho`.`DESCRICAO`;')
     Left = 829
     Top = 269
@@ -53291,7 +53298,7 @@ object DM: TDM
     Left = 207
     Top = 531
   end
-  object FDQuery1: TFDQuery
+  object qryAltCodEquip: TFDQuery
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SET FOREIGN_KEY_CHECKS = 0;'
@@ -53442,8 +53449,8 @@ object DM: TDM
       ''
       ''
       'SET FOREIGN_KEY_CHECKS = 1;')
-    Left = 1465
-    Top = 695
+    Left = 1425
+    Top = 693
     ParamData = <
       item
         Name = 'NEWCODE'
@@ -55816,5 +55823,87 @@ object DM: TDM
       FieldName = 'DATACONSULTAFIN'
       Size = 10
     end
+  end
+  object qryAltCodFamilia: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SET FOREIGN_KEY_CHECKS = 0;'
+      ''
+      'UPDATE `equipamentos`'
+      'SET `equipamentos`.`CODFAMILIAEQUIP` = :newcode'
+      'WHERE `equipamentos`.`CODFAMILIAEQUIP` = :oldcode'
+      'AND `equipamentos`.`CODIGO` = :codequip;'
+      ''
+      'UPDATE `familiaequipamentodados`'
+      'SET `familiaequipamentodados`.`CODFAMILIAEQUIP` = :newcode'
+      'WHERE `familiaequipamentodados`.`CODFAMILIAEQUIP` = :oldcode'
+      'AND `familiaequipamentodados`.`CODEQUIPAMENTO` = :codequip;'
+      ''
+      'UPDATE `familiaequipamentodados`'
+      
+        'SET `familiaequipamentodados`.`REGISTRO1` = NULL, `familiaequipa' +
+        'mentodados`.`REGISTRO2` = NULL,'
+      
+        '`familiaequipamentodados`.`REGISTRO3` = NULL, `familiaequipament' +
+        'odados`.`REGISTRO4` = NULL,'
+      
+        '`familiaequipamentodados`.`REGISTRO5` = NULL, `familiaequipament' +
+        'odados`.`REGISTRO6` = NULL,'
+      
+        '`familiaequipamentodados`.`REGISTRO7` = NULL, `familiaequipament' +
+        'odados`.`REGISTRO8` = NULL,'
+      
+        '`familiaequipamentodados`.`REGISTRO9` = NULL, `familiaequipament' +
+        'odados`.`REGISTRO10` = NULL,'
+      
+        '`familiaequipamentodados`.`REGISTRO11` = NULL, `familiaequipamen' +
+        'todados`.`REGISTRO12` = NULL'
+      'WHERE  `familiaequipamentodados`.`CODEQUIPAMENTO` = :codequip;'
+      ''
+      'UPDATE `familiaequipamentodadosr`'
+      'SET `familiaequipamentodadosr`.`CODFAMILIAEQUIP` = :newcode'
+      'WHERE `familiaequipamentodadosr`.`CODFAMILIAEQUIP` = :oldcode'
+      'AND `familiaequipamentodadosr`.`CODEQUIPAMENTO` = :codequip;'
+      ''
+      'UPDATE `familiaequipamentodadosr`'
+      
+        'SET `familiaequipamentodadosr`.`REGISTRO1` = NULL, `familiaequip' +
+        'amentodadosr`.`REGISTRO2` = NULL,'
+      
+        '`familiaequipamentodadosr`.`REGISTRO3` = NULL, `familiaequipamen' +
+        'todadosr`.`REGISTRO4` = NULL,'
+      
+        '`familiaequipamentodadosr`.`REGISTRO5` = NULL, `familiaequipamen' +
+        'todadosr`.`REGISTRO6` = NULL,'
+      
+        '`familiaequipamentodadosr`.`REGISTRO7` = NULL, `familiaequipamen' +
+        'todadosr`.`REGISTRO8` = NULL,'
+      
+        '`familiaequipamentodadosr`.`REGISTRO9` = NULL, `familiaequipamen' +
+        'todadosr`.`REGISTRO10` = NULL,'
+      
+        '`familiaequipamentodadosr`.`REGISTRO11` = NULL, `familiaequipame' +
+        'ntodadosr`.`REGISTRO12` = NULL'
+      'WHERE  `familiaequipamentodadosr`.`CODEQUIPAMENTO` = :codequip;'
+      ''
+      'SET FOREIGN_KEY_CHECKS = 1;')
+    Left = 1473
+    Top = 693
+    ParamData = <
+      item
+        Name = 'NEWCODE'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'OLDCODE'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEQUIP'
+        DataType = ftString
+        ParamType = ptInput
+      end>
   end
 end

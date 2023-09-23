@@ -1,7 +1,7 @@
 inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
   Caption = 'Programa'#231#227'o da O.S.'
-  ClientHeight = 441
-  ClientWidth = 542
+  ClientHeight = 444
+  ClientWidth = 546
   Constraints.MaxHeight = 480
   Constraints.MaxWidth = 558
   Constraints.MinHeight = 480
@@ -9,10 +9,9 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
   OnCreate = FormCreate
   ExplicitWidth = 558
   ExplicitHeight = 480
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 538
+    Width = 542
     ExplicitWidth = 538
     object Label3: TLabel [1]
       Left = 123
@@ -34,18 +33,18 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       Height = 16
     end
     inherited BtnAjuda: TButton
-      Left = 505
+      Left = 509
       ExplicitLeft = 505
     end
   end
   inherited PCentro: TPanel
-    Width = 536
-    Height = 302
+    Width = 540
+    Height = 305
     ExplicitWidth = 536
     ExplicitHeight = 302
     inherited RGTelas: TRadioGroup
-      Width = 534
-      Height = 300
+      Width = 538
+      Height = 303
       ExplicitWidth = 534
       ExplicitHeight = 300
     end
@@ -53,12 +52,14 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 528
-      Height = 294
+      Width = 532
+      Height = 297
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 528
+      ExplicitHeight = 294
       object Label1: TLabel
         Left = 16
         Top = 9
@@ -333,7 +334,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
             FieldName = 'CODEQUIPE'
             ReadOnly = False
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
+            Title.Caption = 'Equipe'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -12
@@ -392,14 +393,14 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 374
-    Width = 538
+    Top = 377
+    Width = 542
     ExplicitTop = 374
     ExplicitWidth = 538
   end
   inherited PBotoes: TPanel
-    Top = 401
-    Width = 538
+    Top = 404
+    Width = 542
     ExplicitTop = 401
     ExplicitWidth = 538
     inherited BtnOK: TButton

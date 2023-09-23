@@ -1,7 +1,10 @@
 inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   Caption = 'Recursos'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -32,6 +35,8 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 72
       Top = 32
@@ -172,7 +177,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnKeyPress = FormKeyPress
     end
     object EdtCodFamiliaRecurso: TDBEdit
-      Tag = 555
       Left = 127
       Top = 60
       Width = 125
@@ -183,6 +187,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataField = 'CODFAMILIARECURSO'
       DataSource = DM.dsRecursos
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -197,6 +202,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -216,7 +222,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnClick = BtnFamiliaClick
     end
     object EdtCodFabricante: TDBEdit
-      Tag = 555
       Left = 606
       Top = 30
       Width = 120
@@ -227,6 +232,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataField = 'CODFABRICANTE'
       DataSource = DM.dsRecursos
       TabOrder = 5
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -241,6 +247,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 6
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -260,7 +267,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnClick = BtnFabricanteClick
     end
     object EdtCodFornecedor: TDBEdit
-      Tag = 555
       Left = 606
       Top = 60
       Width = 120
@@ -271,6 +277,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataField = 'CODFORNECEDOR'
       DataSource = DM.dsRecursos
       TabOrder = 8
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -285,6 +292,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 9
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -305,6 +313,8 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
+    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -729,8 +739,10 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   end
   inherited PDiversos: TPanel
     Width = 780
+    Height = 200
     Align = alLeft
     ExplicitWidth = 780
+    ExplicitHeight = 197
     object Label15: TLabel
       Left = 97
       Top = 38
@@ -953,6 +965,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 0
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -982,6 +995,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 2
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1011,6 +1025,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       DataSource = DM.dsRecursos
       ParentCtl3D = False
       TabOrder = 4
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -1121,7 +1136,23 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnKeyPress = FormKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Ferramentas'
       DisabledImageIndex = 38
@@ -1130,10 +1161,10 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   object PImagem: TPanel [7]
-    Left = 783
+    Left = 789
     Top = 343
     Width = 223
-    Height = 188
+    Height = 204
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered

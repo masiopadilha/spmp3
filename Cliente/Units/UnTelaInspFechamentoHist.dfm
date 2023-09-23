@@ -1,7 +1,7 @@
 inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
   Caption = 'Hist'#243'rico de Inspe'#231#245'es'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -9,10 +9,9 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     object Label1: TLabel [1]
       Left = 284
@@ -38,7 +37,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     inherited BtnAjuda: TButton
       Left = 968
       TabOrder = 4
-      ExplicitLeft = 968
+      ExplicitLeft = 964
     end
     object BtnImprimir: TButton
       Left = 938
@@ -92,14 +91,14 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
+    Width = 1006
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 501
-      Width = 1000
-      Height = 0
+      Width = 1004
+      Height = 3
       ExplicitTop = 501
       ExplicitWidth = 1000
       ExplicitHeight = 0
@@ -108,7 +107,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       AlignWithMargins = True
       Left = 4
       Top = 270
-      Width = 994
+      Width = 998
       Height = 228
       Align = alTop
       Color = clBtnFace
@@ -210,7 +209,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       AlignWithMargins = True
       Left = 4
       Top = 39
-      Width = 994
+      Width = 998
       Height = 228
       Margins.Bottom = 0
       Align = alTop
@@ -312,7 +311,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       AlignWithMargins = True
       Left = 4
       Top = 3
-      Width = 994
+      Width = 998
       Height = 33
       Margins.Top = 2
       Margins.Bottom = 0
@@ -320,8 +319,9 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 3
+      ExplicitWidth = 994
       object Label6: TLabel
-        Left = 218
+        Left = 186
         Top = 7
         Width = 142
         Height = 16
@@ -337,7 +337,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
         Caption = 'Situa'#231#227'o:'
       end
       object Button1: TButton
-        Left = 532
+        Left = 542
         Top = 2
         Width = 28
         Height = 28
@@ -352,9 +352,9 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
         OnClick = Button1Click
       end
       object EdtFamiliaEquip: TEdit
-        Left = 365
+        Left = 333
         Top = 4
-        Width = 165
+        Width = 205
         Height = 24
         Hint = 'D'#234' duplo-clique para excluir o filtro.'
         Color = clBtnFace
@@ -362,6 +362,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
         ReadOnly = True
         ShowHint = True
         TabOrder = 1
+        StyleElements = [seFont, seClient]
         OnDblClick = EdtFamiliaEquipDblClick
       end
       object CBConsSimples: TComboBox
@@ -382,14 +383,14 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 577
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 604
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

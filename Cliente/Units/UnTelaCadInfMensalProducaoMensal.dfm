@@ -1,12 +1,16 @@
 inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
   Caption = 'Produ'#231#227'o Mensal'
-  PixelsPerInch = 96
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
+      Left = 494
       Visible = False
     end
     inherited LAlteradoPor: TLabel
+      Left = 516
       Visible = False
     end
     inherited LblDataAlt: TDBText
@@ -26,13 +30,17 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       Visible = False
     end
     inherited LCadastro: TLabel
+      Left = 388
       Visible = False
     end
     inherited LCadastroPor: TLabel
+      Left = 350
       Visible = False
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label32: TLabel
       Left = 203
       Top = 60
@@ -127,6 +135,7 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 3
+      StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
@@ -194,5 +203,13 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       TabOrder = 6
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end
