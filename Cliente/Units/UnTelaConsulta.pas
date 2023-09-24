@@ -275,7 +275,7 @@ begin
           if (DM.FParamAuxiliar[1] <> 'CODIGO') and (DM.FParamAuxiliar[1] <> 'DESCRICAO') then
             DM.FParamAuxiliar[1] := 'DESCRICAO';
           DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA ,`equipamentos`.`SEQUENCIA`'
-                                  + ' , `centrocusto`.`DESCRICAO` CENTROCUSTO, `centrocusto`.`CODIGO` CODCENTROCUSTO FROM `equipamentos` INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                                  + ' , `centrocusto`.`DESCRICAO` CENTROCUSTO, `centrocusto`.`CODIGO` CODCENTROCUSTO, `equipamentos`.`CODFAMILIAEQUIP` FROM `equipamentos` INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
                                   + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                   + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
                                   + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
@@ -780,6 +780,7 @@ begin
           DM.qryAuxiliar.Fields[7].DisplayLabel := 'Centro de Custo';
           DM.qryAuxiliar.Fields[7].DisplayWidth := 30;
           DM.qryAuxiliar.Fields[8].Visible      := False;
+          DM.qryAuxiliar.Fields[9].Visible      := False;
         end;
       34, 340, 35, 350://Inspeções de Família
         begin
@@ -1686,6 +1687,7 @@ begin
         DM.FParamAuxiliar[3] := DM.DSAuxiliar.DataSet.Fields[4].AsString;
         DM.FParamAuxiliar[4] := DM.DSAuxiliar.DataSet.Fields[5].AsString;
         DM.FParamAuxiliar[5] := DM.DSAuxiliar.DataSet.Fields[8].AsString;
+        DM.FParamAuxiliar[6] := DM.DSAuxiliar.DataSet.Fields[9].AsString;
       end;
     26://Imagens
       begin

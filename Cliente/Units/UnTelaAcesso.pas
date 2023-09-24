@@ -195,7 +195,11 @@ else
 
               qLogin := DM.qryLoginBLOQUEIO.AsInteger;
             end;
+        end else
+        begin
+          qLogin := -5;
         end;
+
 
       DM.qryLogin.Close;
 
