@@ -45,11 +45,14 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnDmRelatorios;
 
 procedure TFrmTelaCustosMes.BtnConsultarClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 LDataIniMes := StrToDateTime('01/' + IntToStr(CBMes.ItemIndex + 1) + '/' + CBAno.Text);
 LDataFimMes := StrToDateTime(IntToStr(DaysInAMonth(StrToInt(CBAno.Text), CBMes.ItemIndex + 1)) + '/' + IntToStr(CBMes.ItemIndex + 1) + '/' + CBAno.Text + ' 23:59:59');
 

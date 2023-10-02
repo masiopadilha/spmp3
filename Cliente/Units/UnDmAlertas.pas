@@ -148,11 +148,6 @@ begin
   FrmTelaPrincipal.Close;
 end;
 procedure TDMAlertas.Timer1Timer(Sender: TObject);
-var
-  hora_atual, diferenca: TDateTime;
-  df_hr: TTime;
-  dt_ini, dt_final: TDate;
-  codos: Integer;
 begin
   inherited;
   TThread.CreateAnonymousThread(

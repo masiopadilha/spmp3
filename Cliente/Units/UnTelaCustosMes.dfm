@@ -1,17 +1,18 @@
 inherited FrmTelaCustosMes: TFrmTelaCustosMes
   Caption = 'Custos do M'#234's'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PCentro: TPanel
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Align = alClient
       TabOrder = 1
+      ExplicitWidth = 490
+      ExplicitHeight = 154
       object CBMes: TComboBox
         Left = 144
         Top = 52
@@ -159,7 +160,7 @@ inherited FrmTelaCustosMes: TFrmTelaCustosMes
     Top = 89
   end
   object frxRCustoMes: TfrxReport
-    Version = '6.9.12'
+    Version = '6.9.14'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]

@@ -1,7 +1,7 @@
 inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
   Caption = 'Pneus Cadastrados'
-  ClientHeight = 561
-  ClientWidth = 544
+  ClientHeight = 564
+  ClientWidth = 548
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 560
   Constraints.MinHeight = 600
@@ -9,13 +9,12 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
   OnCreate = FormCreate
   ExplicitWidth = 560
   ExplicitHeight = 600
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 540
+    Width = 544
     ExplicitWidth = 540
     inherited BtnAjuda: TButton
-      Left = 506
+      Left = 510
       ExplicitLeft = 506
     end
     object Button6: TButton
@@ -54,14 +53,14 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
     end
   end
   inherited PCentro: TPanel
-    Width = 538
-    Height = 422
+    Width = 542
+    Height = 425
     ExplicitWidth = 538
     ExplicitHeight = 422
     inherited RGTelas: TRadioGroup
       Top = 31
-      Width = 536
-      Height = 390
+      Width = 540
+      Height = 393
       ExplicitTop = 31
       ExplicitWidth = 536
       ExplicitHeight = 390
@@ -70,8 +69,8 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
       AlignWithMargins = True
       Left = 4
       Top = 32
-      Width = 530
-      Height = 386
+      Width = 534
+      Height = 389
       Margins.Top = 1
       Align = alClient
       Color = 14671839
@@ -154,7 +153,7 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 530
+      Width = 534
       Height = 24
       Hint = 
         'Informe o ID do pneu, caso n'#227'o exista ser'#225' cadastrado como um no' +
@@ -165,17 +164,18 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
       TabOrder = 2
       OnChange = EdtConsultaChange
       OnKeyPress = EdtConsultaKeyPress
+      ExplicitWidth = 530
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 494
-    Width = 540
+    Top = 497
+    Width = 544
     ExplicitTop = 494
     ExplicitWidth = 540
   end
   inherited PBotoes: TPanel
-    Top = 521
-    Width = 540
+    Top = 524
+    Width = 544
     ExplicitTop = 521
     ExplicitWidth = 540
     inherited BtnOK: TButton

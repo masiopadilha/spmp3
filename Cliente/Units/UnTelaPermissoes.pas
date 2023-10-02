@@ -532,8 +532,11 @@ if CDPermissoesUsuPESSOAL.AsString = 'S' then
             end;
         end;
     Except
-      PAuxiliares.Font.Color := clRed;
-      PAuxiliares.Caption := 'NÃO FOI POSSÍVEL REALIZAR A ALTERAÇÃO!';
+      on E: Exception do
+      begin
+        DM.GravaLog('Falha ao alterar a permissão. FrmTelaPermissoes Linha: 537', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao alterar permissão!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+      end;
     End;
   end;
 end;

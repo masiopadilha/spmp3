@@ -691,15 +691,9 @@ begin
   inherited;
 if key = #32 then key := #0;
 If Key = #13 Then
-  Try
-    Begin
-      Key := #0;
-      SelectNext(ActiveControl, True, True);
-    End;
-  Except
-    Begin
-      Application.MessageBox('Não foi possível identificar esse valor, por favor verifique o valor informado.','SPMP',MB_OK + MB_ICONERROR);
-    End;
+  Begin
+    Key := #0;
+    SelectNext(ActiveControl, True, True);
   End;
 end;
 

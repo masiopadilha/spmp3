@@ -1,6 +1,5 @@
 inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
   Caption = 'Grupo Industrial'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
@@ -82,12 +81,13 @@ inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
       Left = 4
       Top = 4
       Width = 608
-      Height = 308
+      Height = 328
       ActivePage = TSGrupo
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PCGrupoIndustrialChange
+      ExplicitHeight = 308
       object TSGrupo: TTabSheet
         Margins.Left = 2
         Margins.Top = 2

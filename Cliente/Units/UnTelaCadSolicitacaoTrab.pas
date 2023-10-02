@@ -280,7 +280,12 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
               PSituacao.Font.Color := $00FF8000;
             end;
         Except
-          PAuxiliares.Caption := EmptyStr;
+          on E: Exception do
+          begin
+            DM.GravaLog('Falha ao excluir o registro. FrmTelaCadSolicitacaoTrab Linha: 285', E.ClassName, E.Message);
+            Application.MessageBox('Falha ao excluir o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+            PAuxiliares.Caption := EmptyStr;
+          end;
         End;
       end;
     BtnSalvar.ImageIndex := 2;

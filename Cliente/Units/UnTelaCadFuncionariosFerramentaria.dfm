@@ -5,7 +5,6 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
   Constraints.MinWidth = 805
   OnCreate = FormCreate
   ExplicitWidth = 805
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 785

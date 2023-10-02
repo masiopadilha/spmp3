@@ -9,7 +9,6 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
   OnCreate = FormCreate
   ExplicitWidth = 800
   ExplicitHeight = 600
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 780
@@ -39,8 +38,8 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
     ExplicitWidth = 780
     ExplicitHeight = 424
     inherited RGTelas: TRadioGroup
-      Width = 778
-      Height = 422
+      Width = 782
+      Height = 425
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -52,18 +51,20 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 772
-      Height = 416
+      Width = 776
+      Height = 419
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 772
+      ExplicitHeight = 416
       object GBTelas: TGroupBox
         AlignWithMargins = True
         Left = 5
         Top = 5
         Width = 250
-        Height = 406
+        Height = 409
         Align = alLeft
         Caption = 'Telas do Sistema:'
         Font.Charset = ANSI_CHARSET
@@ -73,11 +74,12 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        ExplicitHeight = 406
         object TVTelas: TTreeView
           Left = 2
           Top = 15
           Width = 246
-          Height = 389
+          Height = 392
           Hint = 'D'#234' duplo-clique para liberar a permiss'#227'o para a tela.'
           Align = alClient
           AutoExpand = True

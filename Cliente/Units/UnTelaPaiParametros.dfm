@@ -11582,7 +11582,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
     00000000000000000000000000000000000000000000}
   KeyPreview = True
   Menu = MainMenuPadrao
-  OldCreateOrder = False
   Position = poScreenCenter
   OnActivate = FormActivate
   OnClose = FormClose
@@ -11591,7 +11590,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
   OnKeyPress = FormKeyPress
   OnMouseMove = FormMouseMove
   OnPaint = FormPaint
-  PixelsPerInch = 96
   TextHeight = 16
   object PControle: TPanel
     AlignWithMargins = True
@@ -11612,7 +11610,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       620
       45)
     object LAlteracao: TLabel
-      Left = 490
+      Left = 494
       Top = 6
       Width = 52
       Height = 13
@@ -11625,9 +11623,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 490
     end
     object LAlteradoPor: TLabel
-      Left = 512
+      Left = 516
       Top = 23
       Width = 30
       Height = 13
@@ -11640,6 +11639,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 512
     end
     object LblDataAlt: TDBText
       Left = 550
@@ -11702,7 +11702,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ShowHint = True
     end
     object LCadastro: TLabel
-      Left = 384
+      Left = 388
       Top = 23
       Width = 30
       Height = 13
@@ -11715,9 +11715,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 384
     end
     object LCadastroPor: TLabel
-      Left = 346
+      Left = 350
       Top = 6
       Width = 68
       Height = 13
@@ -11730,6 +11731,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 346
     end
     object BtnAjuda: TButton
       Left = 245

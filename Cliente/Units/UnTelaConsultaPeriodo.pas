@@ -50,6 +50,9 @@ if (MonthOf(DM.FDataConsulta1) = MonthOf(DM.FDataHoraServidor)) and (YearOf(DM.F
     Abort;
   end;
 
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
   case FrmTelaPrincipal.Tag of
     1:
       begin

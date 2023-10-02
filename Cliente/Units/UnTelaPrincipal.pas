@@ -398,12 +398,7 @@ type
     procedure AlterarFamilia1Click(Sender: TObject);
   private
     { Private declarations }
-    function GetFileVersion(const AFileName: string): String;
-    function GetFileDateTime(AFileName: String): TDateTime;
-    function GetFileDateAsInteger(AFileName: String): Integer;
-    function GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
-
-    procedure CheckUpdateVersion;
+//    procedure CheckUpdateVersion;
   public
     { Public declarations }
     procedure AppIdle(Sender: TObject; var Done: Boolean);
@@ -455,96 +450,6 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod;
 
 
-function TFrmTelaPrincipal.GetFileVersion(const AFileName: string): String;
-var
-  Zero: DWORD; // set to 0 by GetFileVersionInfoSize
-  VersionInfoSize: DWORD;
-  PVersionData: pointer;
-  PFixedFileInfo: PVSFixedFileInfo;
-  FixedFileInfoLength: UINT;
-  Major, Minor, Release, Build: Integer;
-begin
-  VersionInfoSize := GetFileVersionInfoSize(pChar(AFileName), Zero);
-  if VersionInfoSize = 0 then
-     exit;
-  PVersionData := AllocMem(VersionInfoSize);
-  try
-    if GetFileVersionInfo(pChar(AFileName), 0, VersionInfoSize, PVersionData) = False then
-       exit;
-//      raise Exception.Create('Não pude recuperar informação sobre versão');
-    if VerQueryValue(PVersionData, '', pointer(PFixedFileInfo), FixedFileInfoLength) = False then
-       exit;
-    Major := PFixedFileInfo^.dwFileVersionMS shr 16;
-    Minor := PFixedFileInfo^.dwFileVersionMS and $FFFF;
-    Release := PFixedFileInfo^.dwFileVersionLS shr 16;
-    Build := PFixedFileInfo^.dwFileVersionLS and $FFFF;
-  finally
-    FreeMem(PVersionData);
-  end;
-  if (Major or Minor or Release or Build) <> 0 then
-//    result := IntToStr(Major) +'.'+ IntToStr(Minor) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
-//    result := IntToStr(Major) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
-    result := IntToStr(Build);
-end;
-
-function TFrmTelaPrincipal.GetFileDateTime(AFileName: String): TDateTime;
-var
-  LInteger: integer;
-  LSearchRed : TSearchRec;
-begin
-  LInteger := FindFirst(AFileName, faAnyFile, LSearchRed);
-  if LInteger = 0 then
-  begin
-    Result := LSearchRed.TimeStamp;
-    FindClose(LSearchRed);
-  end
-  else
-  begin
-    Result := 0;
-  end;
-end;
-function TFrmTelaPrincipal.GetFileDateAsInteger(AFileName: String): Integer;
-begin
-  Result := StrToInt(FormatDateTime('yyyymmdd', GetFileDateTime(AFileName)));
-end;
-
-function TFrmTelaPrincipal.GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
-var
-  LFileVersion: Currency;
-begin
-  try
-    LFileVersion := GetFileDateAsInteger(AFileName);
-    LFileVersion := LFileVersion + StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
-    Result := LFileVersion;
-  except
-
-  end;
-end;
-
-procedure TFrmTelaPrincipal.CheckUpdateVersion;
-var
-  LLocalDir: String;
-  LLocalVersion: Currency;
-  LServerVersion: Currency;
-  LLocalFile, LServerFile: PWideChar;
-begin
-  //Se a pasta local não existir, então criar.
-  LLocalDir := 'c:\spmp3';
-  LLocalFile := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
-  LServerFile := PChar(ExtractFilePath(DM.FServerPathExeVersion)+'UpdateVersion.bat');
-  //Checar a versão do programa no servidor e comparar com a atual.
-  LLocalVersion := GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
-  LServerVersion := GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
-  //Copiar arquivo BAT do servidor.
-  CopyFile(PChar(LServerFile), PChar(LLocalDir+'\UpdateVersion.bat'), False);
-  if LServerVersion > LLocalVersion then
-  begin
-    MessageDlg('Existe uma nova versão no servidor..' + #13 +
-                 'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
-    ShellExecute(Handle, 'open', LLocalFile, nil, nil, SW_HIDE);
-  end;
-end;
-
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
   Try
@@ -571,6 +476,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Almoxarifados2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBAlmoxarifado.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -677,6 +584,8 @@ if DM.ConsultarCombo <> '' then
 end;
 procedure TFrmTelaPrincipal.Area4Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 150;
 DM.FNomeConsulta := 'Áreas';
 if DM.ConsultarCombo <> '' then
@@ -712,6 +621,8 @@ end;
 
 procedure TFrmTelaPrincipal.Area5Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 150;
 DM.FNomeConsulta := 'Áreas';
 if DM.ConsultarCombo <> '' then
@@ -1103,6 +1014,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.CalendriodeEquipamentos2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBCalendEquip.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1128,6 +1041,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.CalendriodeModeObra2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBCalendMObra.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1138,6 +1053,8 @@ DM.qryAuxiliar.Close;
 end;
 procedure TFrmTelaPrincipal.Cargos1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBCargos.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1178,6 +1095,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.CausasdeFalhas2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBCausaFalha.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1222,6 +1141,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.CentrosdeCustos2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBCentroCusto.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1247,6 +1168,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.ClassesdeEquipamentos2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBClasses.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1545,6 +1468,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Equipamentos4Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFamEquipamento.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1584,6 +1509,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Fabricantes2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFabricantes.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1612,6 +1539,8 @@ if DM.ConsultarCombo <> '' then
 end;
 procedure TFrmTelaPrincipal.Familia2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 600;
 DM.FNomeConsulta := 'Família de Equipamentos';
 if DM.ConsultarCombo <> '' then
@@ -1667,7 +1596,8 @@ begin
   LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
   try
     StrToInt(LCampo);
-  except on E: Exception do
+  except
+    on E: Exception do
     begin
       MessageDlg('Ocorreu um erro ao buscar a Ordem de Serviço, informe apenas valores numéricos.' + #13 +
                  'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
@@ -1723,6 +1653,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Feriados2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFeriados.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -1838,36 +1770,81 @@ begin
   FreeAndNil(DM);
   Application.Terminate;
 end;
+
+//procedure TFrmTelaPrincipal.CheckUpdateVersion;
+//var
+//  LLocalDir: String;
+//  LLocalVersion: Currency;
+//  LServerVersion: Currency;
+//  LLocalFile, LServerFile: PWideChar;
+//  ErrorCode: Integer;
+//begin
+//  //Se a pasta local não existir, então criar.
+//  LLocalDir := 'c:\spmp3';
+//  LLocalFile := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
+//  LServerFile := PChar(ExtractFilePath(DM.FServerPathExeVersion)+'UpdateVersion.bat');
+//  //Checar a versão do programa no servidor e comparar com a atual.
+//  LLocalVersion := GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
+//  LServerVersion := GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
+//  //Copiar arquivo BAT do servidor.
+//  CopyFile(PChar(LServerFile), PChar(LLocalDir+'\UpdateVersion.bat'), False);
+//  if LServerVersion > LLocalVersion then
+//  begin
+//    MessageDlg('Existe uma nova versão no servidor..' + #13 +
+//                 'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
+//
+//    ShellExecute(Handle, 'open', LLocalFile, nil, nil, SW_HIDE);
+//  end;
+//end;
+
 procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
+var
+  Handle: TextFile;
 begin
-//CheckUpdateVersion;
-StatusBar1.Font.Size := 9;
-StatusBar1.Panels[0].Text := DM.FNomeUsuario;
-StatusBar1.Panels[1].Text := DM.FNivelAcesso;
-StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
-StatusBar1.Panels[3].Text := DM.FNomeGrupo;
-//StatusBar1.Panels[4].Text := DM.FVersao + ' beta';
-StatusBar1.Panels[4].Text := DM.FVersao;
-if DM.FDiasRestantes < 36500 then
-  lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
-else
-  lblLicenca.Caption :=  'Licença: Ilimitada';
-LblAlertas.Caption := DM.FAlerta;
-if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-  begin
-    ConsultadeAcessos1.Enabled := False;
-    Permissoes1.Enabled := False;
-    FormatodeCdigos1.Enabled := False;
-    GrupoIndustrial1.Enabled := False;
-    CadastrodeUsurios1.Enabled := False;
-    Auditoria1.Enabled := False;
-    Opcoes1.Enabled := False;
-  end;
-RotasdeManuteno1.Visible := DM.FEmpTransf;
-DM.FFecharForms := False;
-TimerOscioso.Interval := DM.FMinutosInativo * 60000;
-Application.OnMessage := AppMessage;
-Application.OnIdle := AppIdle;
+//  try
+////    DM.CheckUpdateVersion;
+//  except
+//    on E: Exception do
+//      begin
+//        AssignFile(Handle, ExtractFilePath(Application.ExeName)+'\Error.log');
+//        if not FileExists(ExtractFilePath(Application.ExeName)+'\Error.log') then
+//          Rewrite(Handle);
+//        Append(Handle);
+//        WriteLn(Handle, DateTimeToStr(Now)+'> '+DM.FNomeUsuario+'> '+DM.FEstacao+'> '+ Screen.ActiveForm.Name+'> '+Screen.ActiveControl.Name+'> Update > '+E.Message);
+//        CloseFile(Handle);
+//      end;
+//  end;
+
+  StatusBar1.Font.Size := 9;
+  StatusBar1.Panels[0].Text := DM.FNomeUsuario;
+  StatusBar1.Panels[1].Text := DM.FNivelAcesso;
+  StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
+  StatusBar1.Panels[3].Text := DM.FNomeGrupo;
+  StatusBar1.Panels[4].Text := DM.GetVersion(Application.ExeName);
+
+//  StatusBar1.Panels[4].Text := DM.FVersao;
+
+  if DM.FDiasRestantes < 36500 then
+    lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
+  else
+    lblLicenca.Caption :=  'Licença: Ilimitada';
+  LblAlertas.Caption := DM.FAlerta;
+  if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      ConsultadeAcessos1.Enabled := False;
+      Permissoes1.Enabled := False;
+      FormatodeCdigos1.Enabled := False;
+      GrupoIndustrial1.Enabled := False;
+      CadastrodeUsurios1.Enabled := False;
+      Auditoria1.Enabled := False;
+      Opcoes1.Enabled := False;
+    end;
+
+  RotasdeManuteno1.Visible := DM.FEmpTransf;
+  DM.FFecharForms := False;
+  TimerOscioso.Interval := DM.FMinutosInativo * 60000;
+  Application.OnMessage := AppMessage;
+  Application.OnIdle := AppIdle;
 end;
 procedure TFrmTelaPrincipal.Fornecedores1Click(Sender: TObject);
 begin
@@ -1886,6 +1863,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Fornecedores2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFornecedores.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2004,6 +1983,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Imagens1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBImagens.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2119,6 +2100,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.iposdeManuteno2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBTipoManutencao.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2144,6 +2127,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.iposdeProgramao2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBTipoProgramacao.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2184,6 +2169,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.ListaCompleta1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBManutFamEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2196,6 +2183,8 @@ end;
 
 procedure TFrmTelaPrincipal.ListaCompleta2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBManutEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2217,6 +2206,8 @@ end;
 
 procedure TFrmTelaPrincipal.ListaCompleta3Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBLubrificEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2237,6 +2228,8 @@ end;
 
 procedure TFrmTelaPrincipal.ListaCompleta4Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBLubrificFamEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2323,6 +2316,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.Lubrificantes2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBLubrificantesGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2433,6 +2428,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.ModeObra2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFuncionariosGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2518,6 +2515,8 @@ if DM.ConsultarCombo <> '' then
 end;
 procedure TFrmTelaPrincipal.MotivosdeParadas1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBMotivoParada.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2586,6 +2585,8 @@ End;
 end;
 procedure TFrmTelaPrincipal.odos1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2614,6 +2615,8 @@ if DM.ConsultarCombo <> '' then
 end;
 procedure TFrmTelaPrincipal.Oficinas1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBOficina.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2669,6 +2672,10 @@ begin
 end;
 procedure TFrmTelaPrincipal.PeasdeReposio1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFamPecasRep.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -2863,6 +2870,8 @@ if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsua
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.FParamAuxiliar[0] = EmptyStr then
   begin
     DM.FTabela_auxiliar  := 250;
@@ -2890,6 +2899,8 @@ DM.FParamAuxiliar[1] := EmptyStr;
 end;
 procedure TFrmTelaPrincipal.PorEquipamento2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 250;
 DM.FNomeConsulta := 'Equipamentos';
 if DM.ConsultarCombo <> '' then
@@ -2926,6 +2937,8 @@ end;
 
 procedure TFrmTelaPrincipal.PorEquipamento3Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 250;
 DM.FNomeConsulta := 'Equipamentos';
 if DM.ConsultarCombo <> '' then
@@ -2961,6 +2974,8 @@ end;
 
 procedure TFrmTelaPrincipal.PorFamilia1Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 600;
 DM.FNomeConsulta := 'Família de Equipamentos';
 if DM.ConsultarCombo <> '' then
@@ -2996,6 +3011,8 @@ end;
 
 procedure TFrmTelaPrincipal.PorFamilia2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 600;
 DM.FNomeConsulta := 'Família de Equipamentos';
 if DM.ConsultarCombo <> '' then
@@ -3036,6 +3053,8 @@ if (DM.qryUsuarioPAcessoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsua
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.FParamAuxiliar[0] = EmptyStr then
   begin
     DM.FTabela_auxiliar  := 360;
@@ -3157,6 +3176,8 @@ begin
 end;
 procedure TFrmTelaPrincipal.reas2Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBAreas.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -3171,6 +3192,8 @@ DM.qryAuxiliar.Close;
 end;
 procedure TFrmTelaPrincipal.Recursos3Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBFamRecursos.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
@@ -3181,6 +3204,8 @@ DM.qryAuxiliar.Close;
 end;
 procedure TFrmTelaPrincipal.Recursos4Click(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxDBRecursosGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;

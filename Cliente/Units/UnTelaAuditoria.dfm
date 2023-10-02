@@ -1,18 +1,17 @@
 inherited FrmTelaAuditoria: TFrmTelaAuditoria
   Caption = 'Auditoria'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 638
+  ClientWidth = 1004
   Constraints.MaxHeight = 0
   Constraints.MaxWidth = 0
   Constraints.MinHeight = 0
   Constraints.MinWidth = 0
   OnCreate = FormCreate
-  ExplicitWidth = 1024
-  ExplicitHeight = 680
-  PixelsPerInch = 96
+  ExplicitWidth = 1020
+  ExplicitHeight = 677
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1000
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
       Left = 966
@@ -41,8 +40,8 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
   end
   inherited PCentro: TPanel
     Top = 153
-    Width = 1002
-    Height = 416
+    Width = 998
+    Height = 413
     OnResize = PCentroResize
     ExplicitTop = 153
     ExplicitWidth = 1002
@@ -132,7 +131,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 488
+          Width = 38
           Height = 15
           Align = alTop
           Caption = 'Antes'
@@ -142,7 +141,6 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           Font.Name = 'Roboto Lt'
           Font.Style = [fsBold]
           ParentFont = False
-          ExplicitWidth = 38
         end
         object mAntes: TDBMemo
           AlignWithMargins = True
@@ -179,7 +177,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 488
+          Width = 46
           Height = 15
           Align = alTop
           Caption = 'Depois'
@@ -189,7 +187,6 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           Font.Name = 'Roboto Lt'
           Font.Style = [fsBold]
           ParentFont = False
-          ExplicitWidth = 46
         end
         object mDepois: TDBMemo
           AlignWithMargins = True
@@ -217,14 +214,14 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 571
+    Width = 1000
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 598
+    Width = 1000
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton
@@ -239,13 +236,14 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     AlignWithMargins = True
     Left = 3
     Top = 67
-    Width = 1002
+    Width = 998
     Height = 80
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
+    ExplicitWidth = 1002
     object PConsulta: TPanel
       AlignWithMargins = True
       Left = 3
@@ -817,6 +815,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     ShowProgress = True
     OverwritePrompt = False
     DataOnly = False
+    EmbedFontsIfProtected = False
     InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
     OpenAfterExport = False
     PrintOptimized = False
@@ -863,7 +862,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     Top = 383
   end
   object frxReport1: TfrxReport
-    Version = '6.9.12'
+    Version = '6.9.14'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]

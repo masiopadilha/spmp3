@@ -31,6 +31,8 @@ uses UnDmRelatorios, UnTelaConsulta, UnDM;
 procedure TFrmTelaCadPneusChassiPneusHist.Button6Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.qryPneusChassiPneusHist.IsEmpty = False then
   DmRelatorios.frxRPneusChassiPneusHist.ShowReport();
 end;

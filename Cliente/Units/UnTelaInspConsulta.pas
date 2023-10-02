@@ -335,11 +335,10 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 end;
 
 procedure TFrmTelaInspConsulta.BtnImprimirClick(Sender: TObject);
-var
-  I: SmallInt;
-  bmQuery : TBookmark;
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
   case PCInspecoes.TabIndex of
     0:
       begin
@@ -349,139 +348,8 @@ begin
         if DM.qryManutConsItensEsp.Active = False then DM.qryManutConsItensEsp.Open;
         if DM.qryManutConsPlanoTrab.Active = False then DM.qryManutConsPlanoTrab.Open;
 
-//        FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
-//        FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
-//        FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
-//        FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
-//
-//        if GrdManut.SelectedRows.Count = 0 then
-//          GrdManut.SelectedRows.CurrentRowSelected := True;
-//
-//        for I := 0 to GrdManut.SelectedRows.Count - 1 do
-//          begin
-//            GrdManut.DataSource.DataSet.GotoBookmark(GrdManut.SelectedRows.Items[i]);
-//
-//            if (DM.qryManutConsREPROGRAMAR1.AsString = 'Execu��o') and (DM.qryManutConsRELATORIO.AsString = 'S') then
-//              begin
-//                PAuxiliares.Font.Color := clRed;
-//                PAuxiliares.Caption := 'EXISTE UMA '+DM.qryManutConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
-//                Exit;
-//              end;
-//
-//            //Carrega FdMemTable para o relat�rio
-//            FDMemTManut.Append;
-//            FDMemTManutCODIGO.AsString               := DM.qryManutConsCODIGO.AsString;
-//            FDMemTManutDESCRICAO.AsString            := DM.qryManutConsDESCRICAO.AsString;
-//            FDMemTManutFREQUENCIA1.AsInteger         := DM.qryManutConsFREQUENCIA1.AsInteger;
-//            FDMemTManutDTAINICIO1.AsDateTime         := DM.qryManutConsDTAINICIO1.AsDateTime;
-//            FDMemTManutCODEQUIPAMENTO.AsString       := DM.qryManutConsCODEQUIPAMENTO.AsString;
-//            FDMemTManutEQUIPAMENTO.AsString          := DM.qryManutConsEQUIPAMENTO.AsString;
-//            FDMemTManutCODEMPRESA.AsString           := DM.qryManutConsCODEMPRESA.AsString;
-//            FDMemTManutCODMANUTPROGFAMEQUIP.AsString := DM.qryManutConsCODMANUTPROGFAMEQUIP.AsString;
-//            FDMemTManutCODMONITORAMENTO.AsInteger    := DM.qryManutConsCODMONITORAMENTO.AsInteger;
-//            FDMemTManutCRITICIDADE.AsString          := DM.qryManutConsCRITICIDADE.AsString;
-//            FDMemTManutREPROGRAMAR1.AsString         := DM.qryManutConsREPROGRAMAR1.AsString;
-//            FDMemTManutFREQUENCIA2.AsInteger         := DM.qryManutConsFREQUENCIA2.AsInteger;
-//            FDMemTManutLEITURA.AsInteger             := DM.qryManutConsLEITURA.AsInteger;
-//            FDMemTManutREPROGRAMAR2.AsString         := DM.qryManutConsREPROGRAMAR2.AsString;
-//            FDMemTManutRELATORIO.AsString            := DM.qryManutConsRELATORIO.AsString;
-//            FDMemTManutSEQUENCIA.AsInteger           := DM.qryManutConsSEQUENCIA.AsInteger;
-//            FDMemTManutCODFAMILIAEQUIP.AsString      := DM.qryManutConsCODFAMILIAEQUIP.AsString;
-//            FDMemTManutFAMILIAEQUIP.AsString         := DM.qryManutConsFAMILIAEQUIP.AsString;
-//            FDMemTManutPROGRAMACAO2.AsString         := DM.qryManutConsPROGRAMACAO2.AsString;
-//            FDMemTManutDESCMANUTPROGFAMEQUIP.AsString:= DM.qryManutConsDESCMANUTPROGFAMEQUIP.AsString;
-//            FDMemTManutCODAREA.AsString              := DM.qryManutConsCODAREA.AsString;
-//            FDMemTManutAREA.AsString                 := DM.qryManutConsAREA.AsString;
-//            FDMemTManutCODCELULA.AsString            := DM.qryManutConsCODCELULA.AsString;
-//            FDMemTManutCELULA.AsString               := DM.qryManutConsCELULA.AsString;
-//            FDMemTManutCODLINHA.AsString             := DM.qryManutConsCODLINHA.AsString;
-//            FDMemTManutLINHA.AsString                := DM.qryManutConsLINHA.AsString;
-//            FDMemTManutCODORDEMSERVICO.AsInteger     := DM.qryManutConsCODORDEMSERVICO.AsInteger;
-//            FDMemTManutPERIODO.AsString              := DM.qryManutConsPERIODO.AsString;
-//            FDMemTManutC_PROXINSP.AsDateTime         := DM.qryManutConsC_PROXINSP.AsDateTime;
-//            FDMemTManut.Post;
-//
-//            DM.qryManutConsItens.First;
-//            while not DM.qryManutConsItens.Eof = True do
-//              begin
-//                if FDMemTManutItens.Locate('CODIGO', DM.qryManutConsItensCODIGO.AsInteger, []) = False then
-//                  begin
-//                    FDMemTManutItens.Append;
-//                    FDMemTManutItensCODIGO.AsString               := DM.qryManutConsItensCODIGO.AsString;
-//                    FDMemTManutItensCODEMPRESA.AsString           := DM.qryManutConsItensCODEMPRESA.AsString;
-//                    FDMemTManutItensCODMANUTPROGFAMEQUIP.AsString := DM.qryManutConsItensCODMANUTPROGFAMEQUIP.AsString;
-//                    FDMemTManutItensCODPARTE.AsString             := DM.qryManutConsItensCODPARTE.AsString;
-//                    FDMemTManutItensITEM.AsString                 := DM.qryManutConsItensITEM.AsString;
-//                    FDMemTManutItensDESCINSPECAO.AsString         := DM.qryManutConsItensDESCINSPECAO.AsString;
-//                    FDMemTManutItensEQUIPPARADO.AsString          := DM.qryManutConsItensEQUIPPARADO.AsString;
-//                    FDMemTManutItensTEMPO.AsString                := DM.qryManutConsItensTEMPO.AsString;
-//                    FDMemTManutItensEXECAUTONOMO.AsString         := DM.qryManutConsItensEXECAUTONOMO.AsString;
-//                    FDMemTManutItensPARTE.AsString                := DM.qryManutConsItensPARTE.AsString;
-//                    FDMemTManutItens.Post;
-//                  end;
-//
-//                DM.qryManutConsItens.Next;
-//              end;
-//
-//            DM.qryManutConsItensEsp.First;
-//            while not DM.qryManutConsItensEsp.Eof = True do
-//              begin
-//                if FDMemTManutItensEsp.Locate('CODIGO', DM.qryManutConsItensEspCODIGO.AsInteger, []) = False then
-//                  begin
-//                    FDMemTManutItensEsp.Append;
-//                    FDMemTManutItensEspCODIGO.AsString            := DM.qryManutConsItensEspCODIGO.AsString;
-//                    FDMemTManutItensEspCODEMPRESA.AsString        := DM.qryManutConsItensEspCODEMPRESA.AsString;
-//                    FDMemTManutItensEspCODMANUTPROGEQUIP.AsString := DM.qryManutConsItensEspCODMANUTPROGEQUIP.AsString;
-//                    FDMemTManutItensEspCODPARTE.AsString          := DM.qryManutConsItensEspCODPARTE.AsString;
-//                    FDMemTManutItensEspITEM.AsString              := DM.qryManutConsItensEspITEM.AsString;
-//                    FDMemTManutItensEspDESCINSPECAO.AsString      := DM.qryManutConsItensEspDESCINSPECAO.AsString;
-//                    FDMemTManutItensEspEQUIPPARADO.AsString       := DM.qryManutConsItensEspEQUIPPARADO.AsString;
-//                    FDMemTManutItensEspTEMPO.AsString             := DM.qryManutConsItensEspTEMPO.AsString;
-//                    FDMemTManutItensEspEXECAUTONOMO.AsString      := DM.qryManutConsItensEspEXECAUTONOMO.AsString;
-//                    FDMemTManutItensEspPARTE.AsString             := DM.qryManutConsItensEspPARTE.AsString;
-//                    FDMemTManutItensEsp.Post;
-//                  end;
-//
-//                DM.qryManutConsItensEsp.Next;
-//              end;
-//
-//            DM.qryManutConsPlanoTrab.First;
-//            while not DM.qryManutConsPlanoTrab.Eof = True do
-//              begin
-//                if FDMemTManutPlanoTrab.Locate('CODIGO', DM.qryManutConsPlanoTrabCODIGO.AsString, []) = False then
-//                  begin
-//                    FDMemTManutPlanoTrab.Append;
-//                    FDMemTManutPlanoTrabCODIGO.AsString               := DM.qryManutConsPlanoTrabCODIGO.AsString;
-//                    FDMemTManutPlanoTrabCODEMPRESA.AsString           := DM.qryManutConsPlanoTrabCODEMPRESA.AsString;
-//                    FDMemTManutPlanoTrabCODMANUTPROGFAMEQUIP.AsString := DM.qryManutConsPlanoTrabCODMANUTPROGFAMEQUIP.AsString;
-//                    FDMemTManutPlanoTrabCODPLANOTRABALHO.AsString     := DM.qryManutConsPlanoTrabCODPLANOTRABALHO.AsString;
-//                    FDMemTManutPlanoTrabPLANOTRABALHO.AsString        := DM.qryManutConsPlanoTrabPLANOTRABALHO.AsString;
-//                    FDMemTManutPlanoTrabDETALHES.AsString             := DM.qryManutConsPlanoTrabDETALHES.AsString;
-//                    FDMemTManutPlanoTrab.Post;
-//                  end;
-//
-//                DM.qryManutConsPlanoTrab.Next;
-//              end;
-//
-//
-//          end;
-//
-//        DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
-//        DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
-//        DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
-//        DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
-
-//        DmRelatorios.frxRInspConsManut.ShowReport();
-
-
         DmRelatorios.frxDBInspConsManut.DataSet :=  DM.qryManutCons;
         DmRelatorios.frxRInspConsManut1.ShowReport();
-
-
-//        FDMemTManut.Close;
-//        FDMemTManutItens.Close;
-//        FDMemTManutItensEsp.Close;
-//        FDMemTManutPlanoTrab.Close;
 
         DM.MSGAguarde('', False);
 
@@ -499,119 +367,8 @@ begin
         if DM.qryLubrificConsItensEsp.Active = False then DM.qryLubrificConsItensEsp.Open;
         if DM.qryLubrificConsPlanoTrab.Active = False then DM.qryLubrificConsPlanoTrab.Open;
 
-//        FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
-//        FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
-//        FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
-//        FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
-//
-//        if GrdLubrific.SelectedRows.Count = 0 then
-//          GrdLubrific.SelectedRows.CurrentRowSelected := True;
-//
-//        for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
-//          begin
-//            GrdLubrific.DataSource.DataSet.GotoBookmark(GrdLubrific.SelectedRows.Items[i]);
-//
-//            //Carrega FdMemTable para o relat�rio
-//            FDMemTLubrific.Append;
-//            FDMemTLubrificCODIGO.AsString               := DM.qryLubrificConsCODIGO.AsString;
-//            FDMemTLubrificDESCRICAO.AsString            := DM.qryLubrificConsDESCRICAO.AsString;
-//            FDMemTLubrificFREQUENCIA1.AsInteger         := DM.qryLubrificConsFREQUENCIA1.AsInteger;
-//            FDMemTLubrificDTAINICIO1.AsDateTime         := DM.qryLubrificConsDTAINICIO1.AsDateTime;
-//            FDMemTLubrificCODEQUIPAMENTO.AsString       := DM.qryLubrificConsCODEQUIPAMENTO.AsString;
-//            FDMemTLubrificEQUIPAMENTO.AsString          := DM.qryLubrificConsEQUIPAMENTO.AsString;
-//            FDMemTLubrificCODEMPRESA.AsString           := DM.qryLubrificConsCODEMPRESA.AsString;
-//            FDMemTLubrificCODLUBRIFICPROGFAMEQUIP.AsString := DM.qryLubrificConsCODLUBRIFICPROGFAMEQUIP.AsString;
-//            FDMemTLubrificCODMONITORAMENTO.AsInteger    := DM.qryLubrificConsCODMONITORAMENTO.AsInteger;
-//            FDMemTLubrificCRITICIDADE.AsString          := DM.qryLubrificConsCRITICIDADE.AsString;
-//            FDMemTLubrificREPROGRAMAR1.AsString         := DM.qryLubrificConsREPROGRAMAR1.AsString;
-//            FDMemTLubrificFREQUENCIA2.AsInteger         := DM.qryLubrificConsFREQUENCIA2.AsInteger;
-//            FDMemTLubrificLEITURA.AsInteger             := DM.qryLubrificConsLEITURA.AsInteger;
-//            FDMemTLubrificREPROGRAMAR2.AsString         := DM.qryLubrificConsREPROGRAMAR2.AsString;
-//            FDMemTLubrificRELATORIO.AsString            := DM.qryLubrificConsRELATORIO.AsString;
-//            FDMemTLubrificSEQUENCIA.AsInteger           := DM.qryLubrificConsSEQUENCIA.AsInteger;
-//            FDMemTLubrificCODFAMILIAEQUIP.AsString      := DM.qryLubrificConsCODFAMILIAEQUIP.AsString;
-//            FDMemTLubrificFAMILIAEQUIP.AsString         := DM.qryLubrificConsFAMILIAEQUIP.AsString;
-//            FDMemTLubrificPROGRAMACAO2.AsString         := DM.qryLubrificConsPROGRAMACAO2.AsString;
-//            FDMemTLubrificDESCLUBRIFICPROGFAMEQUIP.AsString:= DM.qryLubrificConsDESCLUBRIFICPROGFAMEQUIP.AsString;
-//            FDMemTLubrificCODAREA.AsString              := DM.qryLubrificConsCODAREA.AsString;
-//            FDMemTLubrificAREA.AsString                 := DM.qryLubrificConsAREA.AsString;
-//            FDMemTLubrificCODCELULA.AsString            := DM.qryLubrificConsCODCELULA.AsString;
-//            FDMemTLubrificCELULA.AsString               := DM.qryLubrificConsCELULA.AsString;
-//            FDMemTLubrificCODLINHA.AsString             := DM.qryLubrificConsCODLINHA.AsString;
-//            FDMemTLubrificLINHA.AsString                := DM.qryLubrificConsLINHA.AsString;
-//            FDMemTLubrificCODORDEMSERVICO.AsInteger     := DM.qryLubrificConsCODORDEMSERVICO.AsInteger;
-//            FDMemTLubrificPERIODO.AsString              := DM.qryLubrificConsPERIODO.AsString;
-//            FDMemTLubrificC_PROXINSP.AsDateTime         := DM.qryLubrificConsC_PROXINSP.AsDateTime;
-//            FDMemTLubrific.Post;
-//
-//            DM.qryLubrificConsItens.First;
-//            while not DM.qryLubrificConsItens.Eof = True do
-//              begin
-//                FDMemTLubrificItens.Append;
-//                FDMemTLubrificItensCODIGO.AsString               := DM.qryLubrificConsItensCODIGO.AsString;
-//                FDMemTLubrificItensCODEMPRESA.AsString           := DM.qryLubrificConsItensCODEMPRESA.AsString;
-//                FDMemTLubrificItensCODLUBRIFICPROGFAMEQUIP.AsString := DM.qryLubrificConsItensCODLUBRIFICPROGFAMEQUIP.AsString;
-//                FDMemTLubrificItensCODPARTE.AsString             := DM.qryLubrificConsItensCODPARTE.AsString;
-//                FDMemTLubrificItensITEM.AsString                 := DM.qryLubrificConsItensITEM.AsString;
-//                FDMemTLubrificItensDESCINSPECAO.AsString         := DM.qryLubrificConsItensDESCINSPECAO.AsString;
-//                FDMemTLubrificItensEQUIPPARADO.AsString          := DM.qryLubrificConsItensEQUIPPARADO.AsString;
-//                FDMemTLubrificItensTEMPO.AsString                := DM.qryLubrificConsItensTEMPO.AsString;
-//                FDMemTLubrificItensEXECAUTONOMO.AsString         := DM.qryLubrificConsItensEXECAUTONOMO.AsString;
-//                FDMemTLubrificItensPARTE.AsString                := DM.qryLubrificConsItensPARTE.AsString;
-//                FDMemTLubrificItens.Post;
-//
-//                DM.qryLubrificConsItens.Next;
-//              end;
-//
-//            DM.qryLubrificConsItensEsp.First;
-//            while not DM.qryLubrificConsItensEsp.Eof = True do
-//              begin
-//                FDMemTLubrificItensEsp.Append;
-//                FDMemTLubrificItensEspCODIGO.AsString            := DM.qryLubrificConsItensEspCODIGO.AsString;
-//                FDMemTLubrificItensEspCODEMPRESA.AsString        := DM.qryLubrificConsItensEspCODEMPRESA.AsString;
-//                FDMemTLubrificItensEspCODLUBRIFICPROGEQUIP.AsString := DM.qryLubrificConsItensEspCODLUBRIFICPROGEQUIP.AsString;
-//                FDMemTLubrificItensEspCODPARTE.AsString          := DM.qryLubrificConsItensEspCODPARTE.AsString;
-//                FDMemTLubrificItensEspITEM.AsString              := DM.qryLubrificConsItensEspITEM.AsString;
-//                FDMemTLubrificItensEspDESCINSPECAO.AsString      := DM.qryLubrificConsItensEspDESCINSPECAO.AsString;
-//                FDMemTLubrificItensEspEQUIPPARADO.AsString       := DM.qryLubrificConsItensEspEQUIPPARADO.AsString;
-//                FDMemTLubrificItensEspTEMPO.AsString             := DM.qryLubrificConsItensEspTEMPO.AsString;
-//                FDMemTLubrificItensEspEXECAUTONOMO.AsString      := DM.qryLubrificConsItensEspEXECAUTONOMO.AsString;
-//                FDMemTLubrificItensEspPARTE.AsString             := DM.qryLubrificConsItensEspPARTE.AsString;
-//                FDMemTLubrificItensEsp.Post;
-//
-//                DM.qryLubrificConsItensEsp.Next;
-//              end;
-//
-//            DM.qryLubrificConsPlanoTrab.First;
-//            while not DM.qryLubrificConsPlanoTrab.Eof = True do
-//              begin
-//                FDMemTLubrificPlanoTrab.Append;
-//                FDMemTLubrificPlanoTrabCODIGO.AsString               := DM.qryLubrificConsPlanoTrabCODIGO.AsString;
-//                FDMemTLubrificPlanoTrabCODEMPRESA.AsString           := DM.qryLubrificConsPlanoTrabCODEMPRESA.AsString;
-//                FDMemTLubrificPlanoTrabCODLUBRIFICPROGFAMEQUIP.AsString := DM.qryLubrificConsPlanoTrabCODLUBRIFICPROGFAMEQUIP.AsString;
-//                FDMemTLubrificPlanoTrabCODPLANOTRABALHO.AsString     := DM.qryLubrificConsPlanoTrabCODPLANOTRABALHO.AsString;
-//                FDMemTLubrificPlanoTrabPLANOTRABALHO.AsString        := DM.qryLubrificConsPlanoTrabPLANOTRABALHO.AsString;
-//                FDMemTLubrificPlanoTrabDETALHES.AsString             := DM.qryLubrificConsPlanoTrabDETALHES.AsString;
-//                FDMemTLubrificPlanoTrab.Post;
-//
-//                DM.qryLubrificConsPlanoTrab.Next;
-//              end;
-//
-//           DM.qryLubrificCons.FreeBookMark(bmQuery);
-//         end;
-//
-//        DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
-//        DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
-//        DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
-//        DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
-
         DmRelatorios.frxDBInspConsLubrific.DataSet :=  DM.qryLubrificCons;
         DmRelatorios.frxRInspConsLubrific1.ShowReport();
-
-//        FDMemTLubrific.Close;
-//        FDMemTLubrificItens.Close;
-//        FDMemTLubrificItensEsp.Close;
-//        FDMemTLubrificPlanoTrab.Close;
 
         chbTudo.Checked := False;
       end;
@@ -622,130 +379,9 @@ begin
         if DM.qryRotaConsSeqManutItens.Active = False then DM.qryRotaConsSeqManutItens.Open;
         if DM.qryRotaConsSeqManutItensEsp.Active = False then DM.qryRotaConsSeqManutItensEsp.Open;
 
-//        FDMemTRota.Close; FDMemTRota.CreateDataSet; FDMemTRota.Open;
-//        FDMemTRotaSeq.Close; FDMemTRotaSeq.CreateDataSet; FDMemTRotaSeq.Open;
-//        FDMemTRotaSeqManut.Close; FDMemTRotaSeqManut.CreateDataSet; FDMemTRotaSeqManut.Open;
-//        FDMemTRotaSeqManutItens.Close; FDMemTRotaSeqManutItens.CreateDataSet; FDMemTRotaSeqManutItens.Open;
-//        FDMemTRotaSeqManutItensEsp.Close; FDMemTRotaSeqManutItensEsp.CreateDataSet; FDMemTRotaSeqManutItensEsp.Open;
-//
-//        if GrdRota.SelectedRows.Count = 0 then
-//          GrdRota.SelectedRows.CurrentRowSelected := True;
-//
-//        for I := 0 to GrdRota.SelectedRows.Count - 1 do
-//          begin
-//            GrdRota.DataSource.DataSet.GotoBookmark(GrdRota.SelectedRows.Items[i]);
-//
-//            //Carrega FdMemTable para o relat�rio
-//            FDMemTRota.Append;
-//            FDMemTRotaCODIGO.AsString             := DM.qryRotaConsCODIGO.AsString;
-//            FDMemTRotaDESCRICAO.AsString          := DM.qryRotaConsDESCRICAO.AsString;
-//            FDMemTRotaFREQUENCIA.AsInteger        := DM.qryRotaConsFREQUENCIA.AsInteger;
-//            FDMemTRotaDATAINICIO.AsDateTime       := DM.qryRotaConsDATAINICIO.AsDateTime;
-//            FDMemTRotaCODEMPRESA.AsString         := DM.qryRotaConsCODEMPRESA.AsString;
-//            FDMemTRotaREPROGRAMAR.AsString        := DM.qryRotaConsREPROGRAMAR.AsString;
-//            FDMemTRotaRELATORIO.AsString          := DM.qryRotaConsRELATORIO.AsString;
-//            FDMemTRotaCODORDEMSERVICO.AsInteger := DM.qryRotaConsCODORDEMSERVICO.AsInteger;
-//            FDMemTRotaPERIODO.AsString            := DM.qryRotaConsPERIODO.AsString;
-//            FDMemTRotaC_PROXINSP.AsDateTime       := DM.qryRotaConsC_PROXINSP.AsDateTime;
-//            FDMemTRota.Post;
-//
-//            DM.qryRotaConsSeq.First;
-//            while not DM.qryRotaConsSeq.Eof = True do
-//              begin
-//                FDMemTRotaSeq.Append;
-//                FDMemTRotaSeqCODIGO.AsString          := DM.qryRotaConsSeqCODIGO.AsString;
-//                FDMemTRotaSeqCODEMPRESA.AsString      := DM.qryRotaConsSeqCODEMPRESA.AsString;
-//                FDMemTRotaSeqCODROTA.AsString         := DM.qryRotaConsSeqCODROTA.AsString;
-//                FDMemTRotaSeqCODAREA.AsString         := DM.qryRotaConsSeqCODAREA.AsString;
-//                FDMemTRotaSeqCODCELULA.AsString       := DM.qryRotaConsSeqCODCELULA.AsString;
-//                FDMemTRotaSeqCODLINHA.AsString        := DM.qryRotaConsSeqCODLINHA.AsString;
-//                FDMemTRotaSeqSEQUENCIA.AsString       := DM.qryRotaConsSeqSEQUENCIA.AsString;
-//                FDMemTRotaSeqCODFAMILIAEQUIP.AsString := DM.qryRotaConsSeqCODFAMILIAEQUIP.AsString;
-//                FDMemTRotaSeqAREA.AsString            := DM.qryRotaConsSeqAREA.AsString;
-//                FDMemTRotaSeqCELULA.AsString          := DM.qryRotaConsSeqCELULA.AsString;
-//                FDMemTRotaSeqLINHA.AsString           := DM.qryRotaConsSeqLINHA.AsString;
-//                FDMemTRotaSeqFAMILIAEQUIP.AsString    := DM.qryRotaConsSeqFAMILIAEQUIP.AsString;
-//                FDMemTRotaSeqCODEQUIPATUAL.AsString   := DM.qryRotaConsSeqCODEQUIPATUAL.AsString;
-//                FDMemTRotaSeqEQUIPATUAL.AsString      := DM.qryRotaConsSeqEQUIPATUAL.AsString;
-//                FDMemTRotaSeqFREQUENCIA.AsString      := DM.qryRotaConsSeqFREQUENCIA.AsString;
-//                FDMemTRotaSeq.Post;
-//
-//                DM.qryRotaConsSeq.Next;
-//              end;
-//
-//            DM.qryRotaConsSeqManut.First;
-//            while not DM.qryRotaConsSeqManut.Eof = True do
-//              begin
-//                FDMemTRotaSeqManut.Append;
-//                FDMemTRotaSeqManutCODIGO.AsString               := DM.qryRotaConsSeqManutCODIGO.AsString;
-//                FDMemTRotaSeqManutCODEMPRESA.AsString           := DM.qryRotaConsSeqManutCODEMPRESA.AsString;
-//                FDMemTRotaSeqManutCODMANUTPROGFAMEQUIP.AsString := DM.qryRotaConsSeqManutCODMANUTPROGFAMEQUIP.AsString;
-//                FDMemTRotaSeqManutDESCRICAO.AsString            := DM.qryRotaConsSeqManutDESCRICAO.AsString;
-//                FDMemTRotaSeqManutDTAINICIO1.AsString           := DM.qryRotaConsSeqManutDTAINICIO1.AsString;
-//                FDMemTRotaSeqManutFREQUENCIA1.AsString          := DM.qryRotaConsSeqManutFREQUENCIA1.AsString;
-//                FDMemTRotaSeqManutRELATORIO.AsString            := DM.qryRotaConsSeqManutRELATORIO.AsString;
-//                FDMemTRotaSeqManutCODEQUIPAMENTO.AsString       := DM.qryRotaConsSeqManutCODEQUIPAMENTO.AsString;
-//                FDMemTRotaSeqManut.Post;
-//
-//                DM.qryRotaConsSeqManut.Next;
-//              end;
-//
-//
-//            DM.qryRotaConsSeqManutItens.First;
-//            while not DM.qryRotaConsSeqManutItens.Eof = True do
-//              begin
-//                FDMemTRotaSeqManutItens.Append;
-//                FDMemTRotaSeqManutItensCODIGO.AsString               := DM.qryRotaConsSeqManutItensCODIGO.AsString;
-//                FDMemTRotaSeqManutItensCODEMPRESA.AsString           := DM.qryRotaConsSeqManutItensCODEMPRESA.AsString;
-//                FDMemTRotaSeqManutItensCODMANUTPROGFAMEQUIP.AsString := DM.qryRotaConsSeqManutItensCODMANUTPROGFAMEQUIP.AsString;
-//                FDMemTRotaSeqManutItensCODPARTE.AsString             := DM.qryRotaConsSeqManutItensCODPARTE.AsString;
-//                FDMemTRotaSeqManutItensITEM.AsString                 := DM.qryRotaConsSeqManutItensITEM.AsString;
-//                FDMemTRotaSeqManutItensDESCINSPECAO.AsString         := DM.qryRotaConsSeqManutItensDESCINSPECAO.AsString;
-//                FDMemTRotaSeqManutItensEQUIPPARADO.AsString          := DM.qryRotaConsSeqManutItensEQUIPPARADO.AsString;
-//                FDMemTRotaSeqManutItensTEMPO.AsString                := DM.qryRotaConsSeqManutItensTEMPO.AsString;
-//                FDMemTRotaSeqManutItensEXECAUTONOMO.AsString         := DM.qryRotaConsSeqManutItensEXECAUTONOMO.AsString;
-//                FDMemTRotaSeqManutItensPARTE.AsString                := DM.qryRotaConsSeqManutItensPARTE.AsString;
-//                FDMemTRotaSeqManutItens.Post;
-//
-//                DM.qryRotaConsSeqManutItens.Next;
-//              end;
-//
-//            DM.qryRotaConsSeqManutItensEsp.First;
-//            while not DM.qryRotaConsSeqManutItensEsp.Eof = True do
-//              begin
-//                FDMemTRotaSeqManutItensEsp.Append;
-//                FDMemTRotaSeqManutItensEspCODIGO.AsString            := DM.qryRotaConsSeqManutItensEspCODIGO.AsString;
-//                FDMemTRotaSeqManutItensEspCODEMPRESA.AsString        := DM.qryRotaConsSeqManutItensEspCODEMPRESA.AsString;
-//                FDMemTRotaSeqManutItensEspCODMANUTPROGEQUIP.AsString := DM.qryRotaConsSeqManutItensEspCODMANUTPROGEQUIP.AsString;
-//                FDMemTRotaSeqManutItensEspCODPARTE.AsString          := DM.qryRotaConsSeqManutItensEspCODPARTE.AsString;
-//                FDMemTRotaSeqManutItensEspITEM.AsString              := DM.qryRotaConsSeqManutItensEspITEM.AsString;
-//                FDMemTRotaSeqManutItensEspDESCINSPECAO.AsString      := DM.qryRotaConsSeqManutItensEspDESCINSPECAO.AsString;
-//                FDMemTRotaSeqManutItensEspEQUIPPARADO.AsString       := DM.qryRotaConsSeqManutItensEspEQUIPPARADO.AsString;
-//                FDMemTRotaSeqManutItensEspTEMPO.AsString             := DM.qryRotaConsSeqManutItensEspTEMPO.AsString;
-//                FDMemTRotaSeqManutItensEspEXECAUTONOMO.AsString      := DM.qryRotaConsSeqManutItensEspEXECAUTONOMO.AsString;
-//                FDMemTRotaSeqManutItensEspPARTE.AsString             := DM.qryRotaConsSeqManutItensEspPARTE.AsString;
-//                FDMemTRotaSeqManutItensEsp.Post;
-//
-//                DM.qryRotaConsSeqManutItensEsp.Next;
-//              end;
-//
-//            DM.qryRotaCons.FreeBookMark(bmQuery);
-//          end;
-//
-//        DmRelatorios.frxDBInspConsRotas.DataSet :=  FDMemTRota;
-//        DmRelatorios.frxDBInspConsRotasSeq.DataSet :=  FDMemTRotaSeq;
-//        DmRelatorios.frxDBInspConsRotasSeqManut.DataSet :=  FDMemTRotaSeqManut;
-//        DmRelatorios.frxDBInspConsRotasSeqManutItens.DataSet :=  FDMemTRotaSeqManutItens;
-//        DmRelatorios.frxDBInspConsRotasSeqManutItensEsp.DataSet :=  FDMemTRotaSeqManutItensEsp;
-
         DmRelatorios.frxDBInspConsRotas.DataSet :=  DM.qryRotaCons;
         DmRelatorios.frxRInspConsRotas1.ShowReport();
 
-//        FDMemTRota.Close;
-//        FDMemTRotaSeq.Close;
-//        FDMemTRotaSeqManut.Close;
-//        FDMemTRotaSeqManutItens.Close;
-//        FDMemTRotaSeqManutItensEsp.Close;
 
         chbTudo.Checked := False;
       end;
@@ -776,6 +412,9 @@ var
   bmQuery : TBookmark;
 begin
   inherited;
+ if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 PAuxiliares.Caption := EmptyStr;
 LInsp := EmptyStr;
 

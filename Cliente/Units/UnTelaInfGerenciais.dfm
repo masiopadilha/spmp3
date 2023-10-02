@@ -10,7 +10,6 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1004
@@ -202,6 +201,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
           35)
         ColorPaletteIndex = 13
         object Series1: TBarSeries
+          HoverElement = []
           ColorEachPoint = True
           Marks.Font.Color = clBlue
           Marks.Font.Height = -9
@@ -417,7 +417,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     Top = 23
   end
   object frxRInfGerenciais: TfrxReport
-    Version = '6.9.12'
+    Version = '6.9.14'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]

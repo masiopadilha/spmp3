@@ -258,6 +258,9 @@ EdtDescEquipamento.SetFocus;
 end;
 procedure TFrmTelaCadAbastecimentos.BtnSalvarClick(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryAbastecimentosCODEQUIPAMENTO.IsNull = True then

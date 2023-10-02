@@ -2,8 +2,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 624
-  ClientWidth = 1012
+  ClientHeight = 621
+  ClientWidth = 1008
   Color = 14671839
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -11594,7 +11594,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 2
-    Width = 1008
+    Width = 1004
     Height = 45
     Margins.Left = 2
     Margins.Top = 2
@@ -11605,10 +11605,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 0
     DesignSize = (
-      1008
+      1004
       45)
     object LCadastro: TLabel
-      Left = 722
+      Left = 718
       Top = 23
       Width = 36
       Height = 16
@@ -11621,9 +11621,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 722
     end
     object LCadastroPor: TLabel
-      Left = 678
+      Left = 674
       Top = 9
       Width = 80
       Height = 16
@@ -11636,6 +11637,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 678
     end
     object LblDataCad: TDBText
       Left = 764
@@ -11669,7 +11671,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ShowHint = True
     end
     object LAlteracao: TLabel
-      Left = 873
+      Left = 869
       Top = 23
       Width = 36
       Height = 16
@@ -11682,9 +11684,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 873
     end
     object LAlteradoPor: TLabel
-      Left = 847
+      Left = 843
       Top = 9
       Width = 62
       Height = 16
@@ -11697,6 +11700,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitLeft = 847
     end
     object LblDataAlt: TDBText
       Left = 915
@@ -12393,7 +12397,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 51
-    Width = 1008
+    Width = 1004
     Height = 96
     Margins.Left = 2
     Margins.Top = 2
@@ -12404,7 +12408,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 1
     OnMouseMove = PIdentificacaoMouseMove
-    ExplicitWidth = 1002
     object Label1: TLabel
       Left = 7
       Top = 3
@@ -12427,7 +12430,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 151
-    Width = 1008
+    Width = 1004
     Height = 190
     Margins.Left = 2
     Margins.Top = 2
@@ -12438,7 +12441,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 2
     OnMouseMove = PIdentificacaoMouseMove
-    ExplicitWidth = 1002
     object Label2: TLabel
       Left = 7
       Top = 3
@@ -12461,8 +12463,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 345
-    Width = 1008
-    Height = 200
+    Width = 1004
+    Height = 197
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -12472,8 +12474,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentBackground = False
     TabOrder = 3
     OnMouseMove = PIdentificacaoMouseMove
-    ExplicitWidth = 1002
-    ExplicitHeight = 184
     object Label3: TLabel
       Left = 7
       Top = 3
@@ -12494,8 +12494,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 605
-    Width = 1012
+    Top = 602
+    Width = 1008
     Height = 19
     Color = 14671839
     Panels = <
@@ -12514,13 +12514,11 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
         Text = ' Grupo:'
         Width = 310
       end>
-    ExplicitTop = 589
-    ExplicitWidth = 1006
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 589
-    Width = 1012
+    Top = 586
+    Width = 1008
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
     Margins.Left = 2
@@ -12541,8 +12539,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ShowHint = True
     TabOrder = 5
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 573
-    ExplicitWidth = 1006
     object LblAlertas: TLabel
       Left = 1005
       Top = 1
@@ -12554,8 +12550,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   object PBase: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 549
-    Width = 1008
+    Top = 546
+    Width = 1004
     Height = 38
     Margins.Left = 2
     Margins.Top = 2
@@ -12565,8 +12561,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 4
-    ExplicitTop = 533
-    ExplicitWidth = 1002
     object BtnMais: TButton
       Left = 4
       Top = 4

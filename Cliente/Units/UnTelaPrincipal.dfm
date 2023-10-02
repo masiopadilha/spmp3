@@ -3,8 +3,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 624
-  ClientWidth = 1012
+  ClientHeight = 621
+  ClientWidth = 1008
   Color = 14671839
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -11589,8 +11589,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   object Image1: TImage
     Left = 0
     Top = 0
-    Width = 1012
-    Height = 589
+    Width = 1008
+    Height = 586
     Align = alClient
     Center = True
     Picture.Data = {
@@ -46072,8 +46072,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 589
-    Width = 1012
+    Top = 586
+    Width = 1008
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
     Align = alBottom
@@ -46090,8 +46090,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     TabOrder = 0
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 586
-    ExplicitWidth = 1008
     object LblAlertas: TLabel
       Left = 1005
       Top = 1
@@ -46103,8 +46101,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 605
-    Width = 1012
+    Top = 602
+    Width = 1008
     Height = 19
     Color = 14671839
     Panels = <
@@ -46126,8 +46124,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       item
         Width = 15
       end>
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   object ProgressBar1: TProgressBar
     Left = 488

@@ -547,6 +547,8 @@ end;
 
 procedure TFrmTelaCadEquipamentosHist.BtnImprimirClick(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
   inherited;
   with DM do
   begin

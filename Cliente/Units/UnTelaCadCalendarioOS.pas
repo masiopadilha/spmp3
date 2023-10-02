@@ -177,6 +177,8 @@ end;
 procedure TFrmTelaCadCalendarioOS.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 //  DM.qryProgramadasExecucao.Close;
 //  DM.qryProgramadasExecucao.Params[0].AsString := DM.FCodEmpresa;
 //  DM.qryProgramadasExecucao.Params[1].AsString := FormatDateTime('yyyy/mm/dd', LPrimeiroDataMes );

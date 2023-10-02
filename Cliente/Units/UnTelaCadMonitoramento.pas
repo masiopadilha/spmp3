@@ -640,6 +640,8 @@ end;
 procedure TFrmTelaCadMonitoramento.BtnImprimirClick(Sender: TObject);
 begin
 //  inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.FDataSetParam.IsEmpty = True then Exit;
 DM.qryMonitoramentoPlanoTrab.Open;
 DmRelatorios.frxRMonitoramento.ShowReport();

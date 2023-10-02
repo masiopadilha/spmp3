@@ -14,6 +14,7 @@ uses
   Vcl.StdCtrls,
   System.Types,
   Winapi.Windows,
+  Winapi.WinSvc, Datasnap.DBClient, Vcl.AppEvnts, System.ImageList, Vcl.ImgList,
   System.UITypes,
   Vcl.Dialogs,
   frxDBSet,
@@ -25,9 +26,8 @@ uses
   System.Variants,
   Vcl.Grids,
   System.Win.ComObj, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  Vcl.AppEvnts, System.ImageList, Vcl.ImgList, frxClass,
-  frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
-  Datasnap.DBClient, FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math, Winapi.ShellAPI,
+  frxClass, frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
+  FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math, Winapi.ShellAPI,
   Vcl.Menus;
 
 const
@@ -5556,6 +5556,7 @@ type
     qryManutConsEQUIPPARADO: TStringField;
     qryLubrificConsEQUIPPARADO: TStringField;
     qryAltCodFamilia: TFDQuery;
+    qryConfigsversion: TIntegerField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5631,28 +5632,36 @@ type
     procedure qryFuncionariosHistCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
+    var caminhoArquivo: string;
+
+    function GetFileVersion(const AFileName: string): String;
+   // function GetFileDateTime(AFileName: String): TDateTime;
+   // function GetFileDateAsInteger(AFileName: String): Integer;
+    function GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
+
+
   public
     { Public declarations }
-    FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent: SmallInt;
-    FTabela_auxiliar : SmallInt;
     FDataSetParam : TFDQuery;
     FDataSetRelat : TfrxDBDataset;
     FDataSourceParam : TDataSource;
-    FDataHoraServidor : TDateTime;
-    FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa, FNomeEmpresa, FCodGrupo, FNomeGrupo, FVersao, FAlerta, FLicenca, FTela, FCodCombo,
-    FValorCombo, FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo, FNomeConsulta, FServerPathExeVersion,
-    FCodFamilia, FCodArea, FCodCelula, FCodLinha: String;
-    FNumUsuarios, FCodOrdemServico : Integer;
-    FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2 : TDateTime;
+    FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
+    FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
+    FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
+    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha: String;
+    FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
+    FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
+    FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
+    FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms: Boolean;
     FParamAuxiliar: array[0..10] of String;
-    FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip : Integer;
-    FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms : Boolean;
     FParametros : TArray<String>;
     FCustos : TArray<Real>;
     FTotalHHDisp, FTotalHorasFunc, FTotalHorasParadas : Real;
 
-    function GetVersion(AFileName: String): string;
     function RetornaDataHoraServidor: Boolean;
+    function VerificaArquivoAberto(FileName: TFileName) : boolean;
+    function IniciaServicoWin(sMachine, sService: string): boolean;
+    function GetVersion(AFileName: String): string;
     function SenhaExpirada: Boolean;
     function Crypt(Action, Src: String): String;
     function PasswordInputBox(const ACaption, APrompt:string): string;
@@ -5680,6 +5689,11 @@ type
     function CalcularTaxaFalha(mtbf: Real): Real;
     function IsAdmin: Boolean;
 
+    procedure GravaLog(linha1: string = ''; linha2: string = ''; linha3: string = '');
+    procedure CriaArquivoLog(var arquivo: TextFile);
+    procedure ConectaBanco(sIp: string);
+    procedure ReconectaBanco;
+    procedure CheckUpdateVersion;
     procedure VerificarConfiabilidade;
     procedure MSGAguarde(strTexto: String = ''; boolAguarde: Boolean = true);
     procedure HistoricoInspecoes(Tipo: SmallInt; CodEmpresa, CodEquip, Codigo: String; CodOrdemServico: Integer);
@@ -5693,7 +5707,7 @@ type
 
 var
   DM: TDM;
-  LTentaConexao: Boolean;
+  LTentaConexao, Conectou: Boolean;
 
 implementation
 
@@ -5714,6 +5728,142 @@ const
   SECURITY_BUILTIN_DOMAIN_RID = $00000020;
   DOMAIN_ALIAS_RID_ADMINS = $00000220;
 
+
+function TDM.GetFileVersion(const AFileName: string): String;
+var
+  Zero: DWORD; // set to 0 by GetFileVersionInfoSize
+  VersionInfoSize: DWORD;
+  PVersionData: pointer;
+  PFixedFileInfo: PVSFixedFileInfo;
+  FixedFileInfoLength: UINT;
+  Major, Minor, Release, Build: Integer;
+begin
+  VersionInfoSize := GetFileVersionInfoSize(pChar(AFileName), Zero);
+  if VersionInfoSize = 0 then
+     exit;
+  PVersionData := AllocMem(VersionInfoSize);
+  try
+    if GetFileVersionInfo(pChar(AFileName), 0, VersionInfoSize, PVersionData) = False then
+       exit;
+//      raise Exception.Create('Não pude recuperar informação sobre versão');
+    if VerQueryValue(PVersionData, '', pointer(PFixedFileInfo), FixedFileInfoLength) = False then
+       exit;
+    Major := PFixedFileInfo^.dwFileVersionMS shr 16;
+    Minor := PFixedFileInfo^.dwFileVersionMS and $FFFF;
+    Release := PFixedFileInfo^.dwFileVersionLS shr 16;
+    Build := PFixedFileInfo^.dwFileVersionLS and $FFFF;
+  finally
+    FreeMem(PVersionData);
+  end;
+  if (Major or Minor or Release or Build) <> 0 then
+    result := IntToStr(Major) +'.'+ IntToStr(Minor) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
+//    result := IntToStr(Major) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
+//    result := IntToStr(Build);
+end;
+
+//function TDM.GetFileDateTime(AFileName: String): TDateTime;
+//var
+//  LInteger: integer;
+//  LSearchRed : TSearchRec;
+//begin
+//  LInteger := FindFirst(AFileName, faAnyFile, LSearchRed);
+//  if LInteger = 0 then
+//  begin
+//    Result := LSearchRed.TimeStamp;
+//    System.SysUtils.FindClose(LSearchRed);
+//  end
+//  else
+//  begin
+//    Result := 0;
+//  end;
+//end;
+
+//function TDM.GetFileDateAsInteger(AFileName: String): Integer;
+//begin
+//  Result := StrToInt(FormatDateTime('yyyymmdd', GetFileDateTime(AFileName)));
+//end;
+
+function TDM.GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
+var
+  LFileVersion: Currency;
+  Handle: TextFile;
+begin
+  try
+//    LFileVersion := GetFileDateAsInteger(AFileName);
+//    LFileVersion := LFileVersion + StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
+    LFileVersion := StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
+    Result := LFileVersion;
+  except
+    on E: Exception do
+    begin
+      GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 5799', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
+  end;
+end;
+
+//procedure TDM.RunAsAdmin(const FileName: string; const Parameters: string);
+//var
+//  ShellExecuteInfo: TShellExecuteInfo;
+//begin
+//  FillChar(ShellExecuteInfo, SizeOf(ShellExecuteInfo), 0);
+//  ShellExecuteInfo.cbSize := SizeOf(ShellExecuteInfo);
+//  ShellExecuteInfo.lpVerb := 'runas'; // Solicita privilégios de administrador
+//  ShellExecuteInfo.lpFile := PChar(FileName);
+//  ShellExecuteInfo.lpParameters := PChar(Parameters);
+//  ShellExecuteInfo.nShow := SW_NORMAL; // Mostrar a janela do aplicativo
+//  ShellExecuteInfo.fMask := SEE_MASK_NOCLOSEPROCESS;
+//
+//  if ShellExecuteEx(@ShellExecuteInfo) then
+//  begin
+//    // O comando foi iniciado com sucesso, você pode esperar pelo término do processo, se necessário
+//    WaitForSingleObject(ShellExecuteInfo.hProcess, INFINITE);
+//    CloseHandle(ShellExecuteInfo.hProcess);
+//  end
+//  else
+//  begin
+//    // Ocorreu um erro ao executar o comando com privilégios de administrador
+//    ShowMessage('Erro ao executar com privilégios de administrador');
+//  end;
+//end;
+
+procedure TDM.CheckUpdateVersion;
+var
+  LLocalDir: String;
+  LLocalVersion: Currency;
+  LServerVersion: Currency;
+  LLocalFile, LServerFile: PWideChar;
+  Handle: TextFile;
+  Handle2: HWnd;
+begin
+  try
+    //Se a pasta local não existir, então criar.
+    LLocalDir := 'c:\spmp3';
+    LLocalFile := PChar(ExtractFilePath(Application.ExeName)+'UpdateVersion.bat');
+    LServerFile := PChar(ExtractFilePath(DM.FServerPathExeVersion)+'UpdateVersion.bat');
+    //Checar a versão do programa no servidor e comparar com a atual.
+    LLocalVersion := GetFileDateAsIntegerAndBuildVersion(Application.ExeName);
+    LServerVersion := GetFileDateAsIntegerAndBuildVersion(DM.FServerPathExeVersion);
+    //Copiar arquivo BAT do servidor.
+    CopyFile(PChar(LServerFile), PChar(LLocalDir+'\UpdateVersion.bat'), False);
+    if LServerVersion > LLocalVersion then
+    begin
+      MessageDlg('Existe uma nova versão no servidor..' + #13 +
+                   'Pressione OK para iniciar a atualização.', mtInformation, [mbOK], 0);
+
+      ShellExecute(Handle2, 'open', LLocalFile, nil, nil, SW_SHOW);
+      sleep(10000);
+    end;
+  except
+    on E: Exception do
+    begin
+      GravaLog('Falha ao atualizar o SPMP3. DM linha: 5864', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao atualizar o SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
+  end;
+end;
+
+
 function TDM.GetVersion(AFileName: String): string;
 var
   Size, Size2: DWord;
@@ -5733,8 +5883,9 @@ begin
                       IntToStr (LoWord (dwFileVersionMS)) + '.' +
                       IntToStr (HiWord (dwFileVersionLS)) + '.' +
                       IntToStr (LoWord (dwFileVersionLS));
-            DM.FVersao := Ver;
-            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
+//            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
+            FVersaoMaquina := StrToInt(StringReplace(Ver, '.', '',[rfReplaceAll]));
+            Result := Ver;
           end;
       finally
         FreeMem (Pt);
@@ -8119,12 +8270,14 @@ Try
         DM.qryAuxiliar.SQL.Add('select codigo, descricao from pontosinspecaoloc where `CODIGO` = '+ QuotedStr(Valor) + ' and codempresa = '+QuotedStr(DM.FCodEmpresa) + ' and codpontoinsp = '+ QuotedStr(DM.FParamAuxiliar[1]));
       end;
   end;
-except on E: Exception do
+except
+  on E: Exception do
   begin
-    //MessageDlg('Houve um problema ao conectar o banco: '+E.Message, mtError, [mbOK], 0);
-    //Application.Terminate;
+    DM.GravaLog('Falha ao consultar registro duplicado. DM Linha: 8726', E.ClassName, E.Message);
+    Application.MessageBox('Falha ao consultar registro duplicado!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
   end;
 End;
+
 DM.qryAuxiliar.Open;
 if DM.qryAuxiliar.IsEmpty = False then
   Result := True;
@@ -8156,86 +8309,310 @@ if Campo.EditMask = EmptyStr then
   end;
 end;
 
-procedure TDM.ApplicationEventsSPMPException(Sender: TObject; E: Exception);
+procedure TDM.GravaLog(linha1: string = ''; linha2: string = ''; linha3: string = '');
 var
-  Handle: TextFile;
+  DirLog: string;
+  arquivo: TextFile;
 begin
   try
-    AssignFile(Handle, ExtractFilePath(Application.ExeName)+'\Error.log');
-    if not FileExists(ExtractFilePath(Application.ExeName)+'\Error.log') then
-      Rewrite(Handle);
-    Append(Handle);
-    WriteLn(Handle, DateTimeToStr(Now)+'> '+DM.FNomeUsuario+'> '+DM.FEstacao+'> '+ Screen.ActiveForm.Name+'> '+Screen.ActiveControl.Name+'> '+E.ClassName+' >'+E.Message);
-  finally
-    CloseFile(Handle);
+    DirLog := ExtractFilePath(Application.ExeName) + 'SPMP3.log';
+    AssignFile(arquivo, DirLog);//Cria o arquivo de Log
+    if FileExists(DirLog) then //se o arquivo existe
+      Append(arquivo) //adiciona linhas
+    else//caso nao exista..
+      Rewrite(arquivo);//cria o arquivo..
+
+    Writeln(arquivo, '');
+    Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+    if Length(linha1) > 0  then
+      Writeln(arquivo, linha1);
+
+    if Length(linha2) > 0  then
+      Writeln(arquivo, linha2);
+
+    if Length(linha3) > 0  then
+      Writeln(arquivo, linha3);
+
+    Writeln(arquivo, '<-------------------------------------------------------->');
+    CloseFile(arquivo);
+  except
+
   end;
+end;
 
-  if (Pos('Access denied for user ', E.message) > 0) then
-    begin
-      MessageDlg('Conexão não autorizada com o banco de dados!', mtError, [mbOK], 0);
-    end
-  else
-  if (Pos('foreign key', E.message) > 0) or (Pos('parent row', E.message) > 0) or (Pos('constraint', E.message) > 0) then
-    begin
-      MessageDlg('Erro de chave estrangeira!', mtError, [mbOK], 0);
-    end
-  else
-  if ((Pos('Lost connection to MySQL server during query', E.Message) > 0) or (Pos('MySQL server has gone away', E.Message) > 0)) then
-     begin
-       DM.FDConnSPMP3.Rollback;
-       MessageDlg('Erro ao estabelecer conexão com o banco de dados ou conexão expirada, tente novamente.' + #13 +
-                  'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
+procedure TDM.CriaArquivoLog(var arquivo: TextFile);
+begin
+  AssignFile(arquivo, caminhoArquivo); //Cria o arquivo de Log
+  if FileExists(caminhoArquivo) then //se o arquivo existe
+    Append(arquivo) //adiciona linhas
+  else    //caso nao exista..
+    Rewrite(arquivo); //cria o arquivo..
+end;
 
-//       LTentaConexao := False;
-//       //MessageDlg('Erro na comunica��o com o banco de dados, o sistema ser� fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
-//       if Application.MessageBox('Erro de comunica��o com o servidor ou conex�o expirada, deseja tentar reconectar?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
-//         begin
-//           LTentaConexao := True;
-//           while LTentaConexao = True do
-//             Try
-//               qryAuxiliar.Close;
-//               qryAuxiliar.SQL.Add('select codigo from acessos where codigo = -1');
-//               qryAuxiliar.Open;
-//               MessageDlg('Comunica��o com o banco de dados restabelecida!', mtInformation, [mbOK], 0);
-//               qryAuxiliar.Close;
-//               LTentaConexao := False;
-//             Except on E: Exception do
-//               begin
-//                 if Application.MessageBox('Erro na comunica��o com o banco de dados, deseja tentar novamente?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
-//                   LTentaConexao := True
-//                 else
-//                   LTentaConexao := False;
-//               end;
-//             End;
-//         end
-//       else
-//         begin
-//           MessageDlg('Erro na comunica��o com o banco de dados, o sistema ser� fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
-//           Application.Terminate;
-//         end;
-     end
-  else
-  if (Pos('Unknown MySQL server host ', E.message) > 0) then
+function TDM.IniciaServicoWin(sMachine, sService: string): boolean;
+var
+  schm,
+  schs   : SC_Handle;
+  ss     : TServiceStatus;
+  psTemp : PChar;
+  arquivo: TextFile;
+begin
+  schm := OpenSCManager(PChar(sMachine), Nil,SC_MANAGER_CONNECT);// connect to the service control manager
+  if(schm > 0)then
+  begin
+    schs := OpenService(schm,PChar(sService),SERVICE_START or SERVICE_QUERY_STATUS);
+    if(schs > 0)then
     begin
-      DM.FDConnSPMP3.Rollback;
-      MessageDlg('Erro ao estabelecer conexão com o banco de dados no endereço informado.' + #13 +
-                 'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
-    end
-  else
-  if E.ClassType = EDBEditError then
+      QueryServiceStatus(schs,ss);//consulta o status do servico
+      if (SERVICE_RUNNING <> ss.dwCurrentState) then
+      begin //caso os servico nao esteja em execução, tente inicia-lo
+        psTemp := Nil;
+        if(StartService(schs, 0, psTemp)) then
+        begin
+          Sleep(3000); //espera 3 segundos, conectar e consulta o status
+          if (QueryServiceStatus(schs,ss)) then
+          begin     //se nao estiver iniciado ainda
+            if (SERVICE_RUNNING <> ss.dwCurrentState) then
+            begin
+              Sleep(8000); //espera mais 8 segundos para consultar o status
+              QueryServiceStatus(schs,ss);
+            end;
+            //verifica o status para registrar o log
+            if (SERVICE_RUNNING = ss.dwCurrentState) then
+            begin
+              CriaArquivoLog(arquivo); //arquivo de log..
+              Writeln(arquivo, '');
+              Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+              Writeln(arquivo, 'Serviço do MySQL Reiniciado com Sucesso.');
+              Writeln(arquivo, '<-------------------------------------------------------->');
+              CloseFile(arquivo);
+            end;
+          end;
+        end;
+      end;
+      CloseServiceHandle(schs); //close service handle
+   end;
+    CloseServiceHandle(schm);   //close service control manager handle
+  end;
+  Result := SERVICE_RUNNING = ss.dwCurrentState; //return TRUE if the service status is running
+end;
+
+procedure TDM.ConectaBanco(sIp: string);
+var
+   sHost :string;
+   arquivo: TextFile;
+begin
+  Try
+    FDConnSPMP3.Close;
+    FDConnSPMP3.Connected := False;
+    FDConnSPMP3.Params.Values['Database']  := DM.FDatabase;
+    FDConnSPMP3.Params.Values['User_Name'] := DM.FUserName;
+    FDConnSPMP3.Params.Values['Password']  := DM.FPassword;
+    FDConnSPMP3.Params.Values['Server']    := DM.FHost;
+    FDConnSPMP3.Params.Values['Port']      := DM.FPort;
+    FDConnSPMP3.Connected := True;//realiza a conexão
+    Conectou := true;
+
+    CriaArquivoLog(arquivo); //registra o log
+    Writeln(arquivo, '');
+    Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+    Writeln(arquivo, 'Sucesso ao conectar com o banco de dados');
+    Writeln(arquivo, '<-------------------------------------------------------->');
+    CloseFile(arquivo);
+  except
+    On E:exception do
     begin
-      MessageDlg('VALOR INVÁLIDO!'+#13+'Preencha o campo corretamente.', mtError, [mbOK], 0);
-    end
-  else
-  if E.ClassType = EConvertError then
-    begin
-      MessageDlg('VALOR INVÁLIDO!' + #13 + 'Erro de conversão, caso o erro persista contacte o suporte para solucionar o problema.', mtError, [mbOK], 0);      ;
-    end
-  else
-    begin
-      DM.FDConnSPMP3.Rollback;
-      MessageDlg('Ocorreu um erro não identificado:' + #13 + '"' + E.Message + '"' + #13 + 'Caso o problema persista contacte o suporte.', mtError, [mbOK], 0);
+      CriaArquivoLog(arquivo); //registra o log
+      Writeln(arquivo, '');
+      Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+      Writeln(arquivo, 'Falha ao conectar com o banco de dados');
+      Writeln(arquivo, 'Class: ' + E.ClassName);
+      Writeln(arquivo, 'Falha: ' + E.Message);
+      Writeln(arquivo, '<-------------------------------------------------------->');
+      CloseFile(arquivo);
     end;
+  end;
+end;
+
+procedure TDM.ReconectaBanco;
+var
+  sIp: string;
+  arquivo: TextFile;
+begin
+ try
+    Application.MessageBox('Falha na conexão ao Banco de Dados!','SPMP3.', MB_OK + MB_ICONEXCLAMATION);
+    Conectou := false; //variavel que verifica se conectou..
+    MSGAguarde('Aguarde');
+    //se for um ip local e o diretorio do servidor existir é pq o banco de dados esta aqui,
+    if (((sIp = '127.0.0.1') OR (UpperCase(sIp) = 'LOCALHOST')) AND (DirectoryExists(ExtractFilePath(application.ExeName) + 'servidor\'))) then //tenta iniciar o serviço mysql novamente..
+      IniciaServicoWin('','mysql'); //tenta iniciar servico do mysql...
+
+    ConectaBanco(sIp);
+    if Conectou = true then //verifica se conectou
+    begin
+      CriaArquivoLog(arquivo);
+      Writeln(arquivo, '');  //registra o log
+      Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+      Writeln(arquivo, 'A conexão com o banco de dados foi restabelecida!');
+      Writeln(arquivo, '<-------------------------------------------------------->');
+      CloseFile(arquivo);
+      Application.MessageBox('Sucesso ao restabelecer conexão!, Por favor, tente repita a operação novamente. Caso persistir o erro, contate o suporte.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    end else
+    begin
+      CriaArquivoLog(arquivo);
+      Writeln(arquivo, '');  //registra o log
+      Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+      Writeln(arquivo, 'Falha ao tentar restabelecer a conexão com o banco de dados!');
+      Writeln(arquivo, '<-------------------------------------------------------->');
+      CloseFile(arquivo);
+      Application.MessageBox('Falha ao tentar restabelecer conexão!, caso persistir o erro, contate o suporte.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    end;
+  except
+    CriaArquivoLog(arquivo);
+    Writeln(arquivo, ''); //registra o log
+    Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+    Writeln(arquivo, 'Falha ao tentar restabelecer a conexão com o banco de dados!');
+    Writeln(arquivo, '<-------------------------------------------------------->');
+    CloseFile(arquivo);
+    Application.MessageBox('Falha ao tentar restabelecer conexão!, caso persistir o erro, contate o suporte.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+  end;
+end;
+
+function TDM.VerificaArquivoAberto(FileName: TFileName) : boolean;
+var HFileRes: HFILE;
+begin
+  Result := False;
+  if not FileExists(FileName) then Exit;
+  HFileRes := CreateFile( PChar(FileName),
+  GENERIC_READ or GENERIC_WRITE, 0, nil, OPEN_EXISTING,
+  FILE_ATTRIBUTE_NORMAL, 0);
+  Result := (HFileRes = INVALID_HANDLE_VALUE);
+  CloseHandle(HFileRes);
+end;
+
+procedure TDM.ApplicationEventsSPMPException(Sender: TObject; E: Exception);
+var
+//  Handle: TextFile;
+  caminhoArquivo: string;
+  arquivo: TextFile;
+begin
+
+begin
+  caminhoArquivo := ExtractFilePath(Application.ExeName) + 'SPMP3.log';
+  if (VerificaArquivoAberto(caminhoArquivo) = true) then
+  begin
+    try
+      Closefile(Arquivo); // se o arquivo estava aberto, fecha...
+    except
+
+    end;
+  end;
+  AssignFile(arquivo, caminhoArquivo); //Cria o arquivo de Log
+  if FileExists(caminhoArquivo) then //se o arquivo existe
+    Append(arquivo) //adiciona linhas
+  else    //caso nao exista..
+    Rewrite(arquivo); //cria o arquivo..
+
+  if ((UpperCase(E.Message) = 'MYSQL SERVER HAS GONE AWAY') OR (pos('CONNECT', UpperCase(E.Message)) > 0)) then
+  begin   //se perdeu a conexão com o banco de dados
+    //registra o log
+    Writeln(arquivo, '');
+    Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+    Writeln(arquivo, 'Falha ao conectar com o banco de dados');
+    Writeln(arquivo, 'Class: ' + E.ClassName);
+    Writeln(arquivo, 'Falha: ' + E.Message);
+    Writeln(arquivo, '<-------------------------------------------------------->');
+    CloseFile(arquivo);
+    //tenta reconectar com o DB
+    dm.ReconectaBanco;
+  end else
+  begin
+    Writeln(arquivo, '');
+    Writeln(arquivo, '<----------------------- ' + DateTimeToStr(now) + ' ---------------------->');
+    Writeln(arquivo, 'Class: ' + E.QualifiedClassName);
+    Writeln(arquivo, 'Falha: ' + E.Message);
+    Writeln(arquivo, 'Sender:' + Sender.QualifiedClassName);
+    Writeln(arquivo, '<-------------------------------------------------------->');
+    CloseFile(arquivo);
+  end;
+end;
+//  try
+//    AssignFile(Handle, ExtractFilePath(Application.ExeName)+'\Error.log');
+//    if not FileExists(ExtractFilePath(Application.ExeName)+'\Error.log') then
+//      Rewrite(Handle);
+//    Append(Handle);
+//    WriteLn(Handle, DateTimeToStr(Now)+'> '+DM.FNomeUsuario+'> '+DM.FEstacao+'> '+ Screen.ActiveForm.Name+'> '+Screen.ActiveControl.Name+'> '+E.ClassName+' >'+E.Message);
+//  finally
+//    CloseFile(Handle);
+//  end;
+//
+//  if (Pos('Access denied for user ', E.message) > 0) then
+//    begin
+//      MessageDlg('Conexão não autorizada com o banco de dados!', mtError, [mbOK], 0);
+//    end
+//  else
+//  if (Pos('foreign key', E.message) > 0) or (Pos('parent row', E.message) > 0) or (Pos('constraint', E.message) > 0) then
+//    begin
+//      MessageDlg('Erro de chave estrangeira!', mtError, [mbOK], 0);
+//    end
+//  else
+//  if ((Pos('Lost connection to MySQL server during query', E.Message) > 0) or (Pos('MySQL server has gone away', E.Message) > 0)) then
+//     begin
+//       DM.FDConnSPMP3.Rollback;
+//       MessageDlg('Erro ao estabelecer conexão com o banco de dados ou conexão expirada, tente novamente.' + #13 +
+//                  'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
+//
+////       LTentaConexao := False;
+////       //MessageDlg('Erro na comunica��o com o banco de dados, o sistema ser� fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
+////       if Application.MessageBox('Erro de comunica��o com o servidor ou conex�o expirada, deseja tentar reconectar?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
+////         begin
+////           LTentaConexao := True;
+////           while LTentaConexao = True do
+////             Try
+////               qryAuxiliar.Close;
+////               qryAuxiliar.SQL.Add('select codigo from acessos where codigo = -1');
+////               qryAuxiliar.Open;
+////               MessageDlg('Comunica��o com o banco de dados restabelecida!', mtInformation, [mbOK], 0);
+////               qryAuxiliar.Close;
+////               LTentaConexao := False;
+////             Except on E: Exception do
+////               begin
+////                 if Application.MessageBox('Erro na comunica��o com o banco de dados, deseja tentar novamente?', 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
+////                   LTentaConexao := True
+////                 else
+////                   LTentaConexao := False;
+////               end;
+////             End;
+////         end
+////       else
+////         begin
+////           MessageDlg('Erro na comunica��o com o banco de dados, o sistema ser� fechado. Se o erro persistir, contacte o suporte', mtError, [mbOK], 0);
+////           Application.Terminate;
+////         end;
+//     end
+//  else
+//  if (Pos('Unknown MySQL server host ', E.message) > 0) then
+//    begin
+//      DM.FDConnSPMP3.Rollback;
+//      MessageDlg('Erro ao estabelecer conexão com o banco de dados no endereço informado.' + #13 +
+//                 'Caso o erro se repita, favor entrar em contato com o administrador do sistema.', mtError, [mbOK], 0);
+//    end
+//  else
+//  if E.ClassType = EDBEditError then
+//    begin
+//      MessageDlg('VALOR INVÁLIDO!'+#13+'Preencha o campo corretamente.', mtError, [mbOK], 0);
+//    end
+//  else
+//  if E.ClassType = EConvertError then
+//    begin
+//      MessageDlg('VALOR INVÁLIDO!' + #13 + 'Erro de conversão, caso o erro persista contacte o suporte para solucionar o problema.', mtError, [mbOK], 0);      ;
+//    end
+//  else
+//    begin
+//      DM.FDConnSPMP3.Rollback;
+//      MessageDlg('Ocorreu um erro não identificado:' + #13 + '"' + E.Message + '"' + #13 + 'Caso o problema persista contacte o suporte.', mtError, [mbOK], 0);
+//    end;
+//
 
   DM.MSGAguarde('', False);
 end;
@@ -8476,8 +8853,8 @@ end;
 
 procedure TDM.DataModuleCreate(Sender: TObject);
 var
-Ini: TIniFile;
-//Registro: TRegistry;
+  Ini: TIniFile;
+  Handle: TextFile;
 begin
 if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
   begin
@@ -8489,7 +8866,8 @@ if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
     DM.FPort     := Ini.ReadString('Conexao', 'Port', '');
     DM.FPassword := Crypt('D', (Ini.ReadString( 'Conexao', 'Password', '')));
 
-    DM.FServerPathExeVersion := Ini.ReadString( 'ARQUIVOS', 'exeRemoto', '');
+//    DM.FServerPathExeVersion := Ini.ReadString( 'ARQUIVOS', 'exeRemoto', '');
+    DM.FServerPathExeVersion := '\\'+DM.FHost+'\update_sam\spmp3.exe';
 
     FDConnSPMP3.Params.Values['Database']  := DM.FDatabase;
     FDConnSPMP3.Params.Values['User_Name'] := DM.FUserName;
@@ -8507,25 +8885,38 @@ else
     Finally
       FreeAndNil(FrmTelaGerenciador);
     End;
+  end;
 
-//    Registro := TRegistry.Create;
-//    Registro.RootKey := HKEY_LOCAL_MACHINE;
-//    if registro.OpenKey('Software\SPMP3',true) then
-//      begin
-//        DM.FDatabase := Registro.ReadString('DataBase');
-//        DM.FHost     := Registro.ReadString('HostName''');
-//        DM.FUserName := Registro.ReadString('User_Name');
-//        DM.FPort     := Registro.ReadString('Port');
-//        DM.FPassword := Crypt('D', (Ini.ReadString( 'Conexao', 'Password', '')));
-//
-//        FDConnSPMP3.Params.Values['Database']  := DM.FDatabase;
-//        FDConnSPMP3.Params.Values['User_Name'] := DM.FUserName;
-//        FDConnSPMP3.Params.Values['Password']  := DM.FPassword;
-//        FDConnSPMP3.Params.Values['Server']    := DM.FHost;
-//        FDConnSPMP3.Params.Values['Port']      := DM.FPort;
-//      end;
-//    registro.CloseKey;
-//    registro.Free;
+  //Buscar informações de configuração
+  DM.qryConfigs.Close;
+  DM.qryConfigs.Open;
+  DM.FTempoNovaOS    := DM.qryConfigstempoconsos.AsInteger;
+  DM.FTempoSenhaUsu  := DM.qryConfigstemposenhausu.AsInteger;
+  DM.FQtdeMinSenha   := DM.qryConfigsqtdeminsenha.AsInteger;
+  DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
+  DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
+  DM.FVersaoBanco    := DM.qryConfigsversion.AsInteger;
+
+  DM.GetVersion(Application.ExeName);
+
+  if DM.FVersaoBanco > DM.FVersaoMaquina then
+  begin
+    try
+      DM.CheckUpdateVersion;
+    except
+      on E: Exception do
+      begin
+        GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 8911', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+      end;
+    end;
+  end else
+  if DM.FVersaoBanco < DM.FVersaoMaquina then
+  begin
+    DM.qryConfigs.Edit;
+    DM.qryConfigsversion.AsInteger := DM.FVersaoMaquina;
+    DM.qryConfigs.Post;
+    DM.FVersaoBanco := DM.FVersaoMaquina;
   end;
 end;
 

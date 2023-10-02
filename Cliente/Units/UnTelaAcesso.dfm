@@ -5,7 +5,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
   BorderStyle = bsDialog
   Caption = 'SPMP3 - Acesso'
   ClientHeight = 194
-  ClientWidth = 443
+  ClientWidth = 439
   Color = 14671839
   Constraints.MaxHeight = 230
   Constraints.MinHeight = 230
@@ -11588,13 +11588,13 @@ object FrmTelaAcesso: TFrmTelaAcesso
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 437
+    Width = 433
     Height = 60
     Align = alTop
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 433
+    ExplicitWidth = 429
     object Image1: TImage
       Left = 2
       Top = 2
@@ -12045,24 +12045,8 @@ object FrmTelaAcesso: TFrmTelaAcesso
       StyleElements = []
       OnClick = BtnConsultarClick
     end
-    object btnAtualizar: TButton
-      Left = 361
-      Top = 16
-      Width = 30
-      Height = 30
-      Hint = 'Atualizar'
-      DisabledImageIndex = 111114
-      ImageAlignment = iaCenter
-      ImageIndex = 122
-      Images = DM.ImageListBotoes
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
-      StyleElements = []
-      OnClick = btnAtualizarClick
-    end
     object btnLicenca: TButton
-      Left = 329
+      Left = 360
       Top = 16
       Width = 30
       Height = 30
@@ -12073,7 +12057,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 1
       StyleElements = []
       OnClick = btnLicencaClick
     end
@@ -12082,13 +12066,13 @@ object FrmTelaAcesso: TFrmTelaAcesso
     AlignWithMargins = True
     Left = 3
     Top = 69
-    Width = 437
+    Width = 433
     Height = 122
     Align = alClient
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 433
+    ExplicitWidth = 429
     ExplicitHeight = 119
     object Label1: TLabel
       Left = 120
@@ -12105,6 +12089,22 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Height = 16
       Alignment = taRightJustify
       Caption = 'Senha:'
+    end
+    object LblVersao: TLabel
+      Left = 401
+      Top = 106
+      Width = 29
+      Height = 11
+      Alignment = taRightJustify
+      Caption = '3.0.0.0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -9
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      StyleElements = []
     end
     object BtnSair: TButton
       Left = 220

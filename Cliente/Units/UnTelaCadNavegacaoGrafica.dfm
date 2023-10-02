@@ -10,7 +10,6 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
   OnShow = FormShow
   ExplicitWidth = 680
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 660
@@ -26,8 +25,8 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
     ExplicitWidth = 658
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 656
-      Height = 500
+      Width = 660
+      Height = 503
       TabOrder = 3
       ExplicitWidth = 656
       ExplicitHeight = 500
@@ -36,18 +35,20 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 650
-      Height = 494
+      Width = 654
+      Height = 497
       Align = alClient
       BevelInner = bvLowered
       Color = 14671839
       ParentBackground = False
       TabOrder = 4
+      ExplicitWidth = 650
+      ExplicitHeight = 494
       object TVArvore: TJvTreeView
         Left = 2
         Top = 2
-        Width = 646
-        Height = 490
+        Width = 650
+        Height = 493
         Align = alClient
         Ctl3D = True
         Font.Charset = DEFAULT_CHARSET

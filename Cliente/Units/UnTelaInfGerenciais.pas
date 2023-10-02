@@ -124,7 +124,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnDmRelatorios;
 
 procedure TFrmTelaInfGerenciais.CBPeriodoChange(Sender: TObject);
 var
@@ -742,6 +742,8 @@ var
  bmp: TBitmap;
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.FDataConsulta1 <= 0 then Exit;
 
 DeleteFile('C:\SPMP3\Temp.bmp');

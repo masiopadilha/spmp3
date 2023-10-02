@@ -115,7 +115,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnDmRelatorios;
 
 procedure TFrmTelaAuditoria.AjustaLarguraMinTituloGrid(var aGrid: TJvDBGrid);
 var
@@ -201,6 +201,9 @@ procedure TFrmTelaAuditoria.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
  if qryAuditoria.Active = False then Exit;
+
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 
  frxReport1.ShowReport();
 end;

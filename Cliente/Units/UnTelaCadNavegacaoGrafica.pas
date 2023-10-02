@@ -238,9 +238,6 @@ DM.MSGAguarde('', False);
 end;
 
 procedure TFrmTelaCadNavegacaoGrafica.BtnConsultar1Click(Sender: TObject);
-Var
-  ItemUltiimoCurso, ItemUltimaUnidade, ItemUltimaTurma: TTreeNode;
-  xUnidadeAnt, xCursoAnt, xTurmaAnt: String;
 begin
   inherited;
 DM.qryAuxiliar.Close;

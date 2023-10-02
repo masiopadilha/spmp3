@@ -1,14 +1,12 @@
 inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
   Caption = 'Calend'#225'rio de Ordem de Servi'#231'o'
-  ClientHeight = 645
-  ClientWidth = 1014
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 680
   TextHeight = 16
@@ -21,7 +19,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     Caption = 'LblDataConsulta'
   end
   inherited PTop: TPanel
-    Width = 1010
+    Width = 1004
     ExplicitWidth = 1002
     object Label1: TLabel [1]
       Left = 128
@@ -71,8 +69,8 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     end
   end
   inherited PCentro: TPanel
-    Width = 1008
-    Height = 506
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1000
     ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
@@ -275,14 +273,14 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 578
-    Width = 1010
+    Top = 574
+    Width = 1004
     ExplicitTop = 566
     ExplicitWidth = 1002
   end
   inherited PBotoes: TPanel
-    Top = 605
-    Width = 1010
+    Top = 601
+    Width = 1004
     ExplicitTop = 593
     ExplicitWidth = 1002
     inherited BtnOK: TButton

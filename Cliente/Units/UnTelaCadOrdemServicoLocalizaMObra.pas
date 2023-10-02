@@ -45,6 +45,8 @@ end;
 procedure TFrmTelaCadOrdemServicoLocalizaMObra.Completo1Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxROrdemServicoLocalizaMObra.ShowReport();
 end;
 procedure TFrmTelaCadOrdemServicoLocalizaMObra.FormClose(Sender: TObject;
@@ -259,6 +261,8 @@ procedure TFrmTelaCadOrdemServicoLocalizaMObra.Individual1Click(
   Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.qryOrdemServicoLocalizaMObra.Filter := 'MATRICULA = ' + QuotedStr(DM.qryOrdemServicoLocalizaMObraMATRICULA.AsString);
 DM.qryOrdemServicoLocalizaMObra.Filtered := True;
 DmRelatorios.frxROrdemServicoLocalizaMObra.ShowReport();

@@ -1,10 +1,7 @@
 inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   Caption = 'Pe'#231'as de Reposi'#231#227'o'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -31,8 +28,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object Label17: TLabel
       Left = 490
       Top = 34
@@ -309,8 +304,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       Left = 6
       Top = 26
@@ -734,10 +727,8 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   end
   inherited PDiversos: TPanel
     Width = 780
-    Height = 200
     Align = alLeft
     ExplicitWidth = 780
-    ExplicitHeight = 197
     object Label13: TLabel
       Left = 68
       Top = 38
@@ -972,23 +963,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Kit de Pe'#231'as de Reposi'#231#227'o'
       DisabledImageIndex = 81

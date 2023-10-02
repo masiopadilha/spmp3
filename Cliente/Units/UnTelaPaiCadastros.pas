@@ -409,7 +409,12 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
               ControleBotoes(0);
             end;
         Except
-          PAuxiliares.Caption := EmptyStr;
+          on E: Exception do
+          begin
+            DM.GravaLog('Falha ao excluir o registro. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+            Application.MessageBox('Falha ao excluir o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+            PAuxiliares.Caption := EmptyStr;
+          end;
         End;
       end;
   end;
@@ -418,6 +423,9 @@ end;
 
 procedure TFrmTelaPaiCadastros.BtnImprimirClick(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := EmptyStr;
 PopupMenuRelat.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
@@ -688,8 +696,12 @@ DM.MSGAguarde('', False);
   Try
     Close;
   Except
-    Application.MessageBox('O SPMP encontrou um problema e precisa ser fechado!','SPMP', MB_OK + MB_ICONERROR);
-    Application.Terminate;
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao fechar a tela. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao fechar a tela!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+      Application.Terminate;
+    end;
   End;
 end;
 

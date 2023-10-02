@@ -12,7 +12,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     object Label1: TLabel [1]
       Left = 218
       Top = 36
@@ -29,7 +29,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
     end
     inherited BtnAjuda: TButton
       Left = 970
-      ExplicitLeft = 970
+      ExplicitLeft = 966
     end
     object EdtData1: TDateTimePicker
       Left = 124
@@ -122,8 +122,8 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1000
-      Height = 500
+      Width = 1004
+      Height = 503
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -131,8 +131,8 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 994
-      Height = 494
+      Width = 998
+      Height = 497
       Hint = 'D'#234' duplo-clique para visualizar a O.S.'
       Align = alClient
       Color = 14671839

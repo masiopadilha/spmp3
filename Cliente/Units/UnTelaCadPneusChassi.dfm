@@ -1,10 +1,11 @@
 inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
-  ClientHeight = 624
-  ClientWidth = 1012
+  ClientHeight = 621
+  ClientWidth = 1008
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    Width = 1004
+    ExplicitWidth = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 467
     end
@@ -31,8 +32,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
+    Width = 1004
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -280,8 +280,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
+    Width = 1004
     inherited Label2: TLabel
       Width = 62
       Caption = 'CHASSI'
@@ -327,10 +326,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PDiversos: TPanel
-    Width = 1008
-    Height = 200
-    ExplicitWidth = 1004
-    ExplicitHeight = 197
+    Width = 1004
+    Height = 197
     inherited Label3: TLabel
       Width = 55
       Caption = 'PNEUS'
@@ -364,22 +361,16 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
+    Top = 602
+    Width = 1008
   end
   inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
+    Top = 586
+    Width = 1008
   end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
+    Top = 546
+    Width = 1004
     inherited Button1: TButton
       Hint = 'Atrelamento de Carrocerias'
       ImageIndex = 84

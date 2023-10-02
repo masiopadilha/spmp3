@@ -74,8 +74,7 @@ type
     procedure BtnExcluirClick(Sender: TObject);
   private
     { Private declarations }
-    LPrimeiroDataMes, LUltimaDataMes, LDataConsulta: TDateTime;
-    LTotalHH, LNovoTotalHH: Real;
+    LPrimeiroDataMes: TDateTime;
     DatFer : array[0..50] of String;
     HntFer : array[0..50] of String;
   public
@@ -132,8 +131,6 @@ BtnExcluirHorario.Enabled := True;
 end;
 
 procedure TFrmTelaCadCalendMObra.BtnConsultarClick(Sender: TObject);
-var
-  LData: String;
 begin
   inherited;
 if DM.qryCalendMObra.IsEmpty = False then

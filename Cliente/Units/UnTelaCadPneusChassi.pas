@@ -277,6 +277,8 @@ end;
 procedure TFrmTelaCadPneusChassi.BtnImprimirClick(Sender: TObject);
 begin
 //  inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.qryPneusChassi.IsEmpty = False then
   DmRelatorios.frxRPneusChassi.ShowReport();
 end;

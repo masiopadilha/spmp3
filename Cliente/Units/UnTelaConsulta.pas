@@ -1228,14 +1228,10 @@ begin
   DM.FParamAuxiliar[6] := '';
   except
     on E: Exception do
-      begin
-        Application.ProcessMessages;
-
-        LMensagem := PChar('Ocorreu um problema ao tentar realizar a consulta.' + #13 +
-                           'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
-                           'Mensagem de erro: "' + E.Message+'"');
-        Application.MessageBox(LMensagem, 'SPMP3' , MB_OK+MB_ICONERROR);
-      end;
+    begin
+      DM.GravaLog('Falha ao realizar a consulta. frmTelaAuxiliar: 1232', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao realizar a consulta!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
   end;
 end;
 procedure TFrmTelaAuxiliar.BtnFamiliaEquipClick(Sender: TObject);
@@ -2326,7 +2322,11 @@ begin
   try
     CliqueNoTitulo(Column, TFDquery(GrdAuxiliar.DataSource.DataSet), GrdAuxiliar.DataSource.DataSet.Fields[1].Name);
   except
-
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao ordenar o grid. FrmTelaCOnsulta Linha: 2327', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
   end;
 end;
 

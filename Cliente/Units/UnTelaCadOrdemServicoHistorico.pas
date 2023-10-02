@@ -371,12 +371,16 @@ end;
 procedure TFrmTelaCadOrdemServicoHistorico.RelatorioClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxROrdemServicoHistorico.ShowReport();
 end;
 
 procedure TFrmTelaCadOrdemServicoHistorico.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.qryOrdemServicoHistorico.IsEmpty then Exit;
 DmRelatorios.frxROrdemServicoHistorico.ShowReport();
 
@@ -386,6 +390,8 @@ end;
 procedure TFrmTelaCadOrdemServicoHistorico.ConsultarClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
   CDResumoConsulta.Close; CDResumoConsulta.CreateDataSet; CDResumoConsulta.Open;
   DM.qryOrdemServicoHistorico.First;
   while not DM.qryOrdemServicoHistorico.Eof = True do

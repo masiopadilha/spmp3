@@ -21254,6 +21254,7 @@ object DM: TDM
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
+    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 56
@@ -47722,6 +47723,7 @@ object DM: TDM
       '    , `tempomaxocioso`'
       '    , `dataultalt`'
       '    , `codusuarioalt`'
+      '    , `version`'
       'FROM'
       '    `configs`')
     Left = 453
@@ -47771,6 +47773,11 @@ object DM: TDM
       FieldName = 'codusuarioalt'
       Origin = 'codusuarioalt'
       Size = 9
+    end
+    object qryConfigsversion: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'version'
+      Origin = 'version'
     end
   end
   object dsConfigs: TDataSource

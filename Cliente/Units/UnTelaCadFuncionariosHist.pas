@@ -51,8 +51,6 @@ implementation
 uses UnDM, UnTelaConsulta, UnDmRelatorios;
 
 procedure TFrmTelaCadFuncionariosHist.BtnConsultarClick(Sender: TObject);
-var
-  LNumAus : Integer;
 begin
   inherited;
   if EdtData1.Date > EdtData2.Date then Exit;
@@ -111,6 +109,8 @@ end;
 procedure TFrmTelaCadFuncionariosHist.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
   DmRelatorios.frxRFuncionariosHist.ShowReport();
   if DM.FParamAuxiliar[0] <> '' then
     DM.qryFuncionariosHist.Locate('MATRICULA', DM.FParamAuxiliar[0], [])
@@ -227,8 +227,6 @@ end;
 
 procedure TFrmTelaCadFuncionariosHist.GrdFuncionariosKeyPress(Sender: TObject;
   var Key: Char);
-var
-LCampo : String;
 begin
   inherited;
 if (Key = #13) and ((GrdFuncionarios.SelectedIndex = 0) or (GrdFuncionarios.SelectedIndex = 1)) then

@@ -44,7 +44,7 @@ else
   begin
     LblRegistro.Caption := 'Registrado';
   end;
-LblVersao.Caption := DM.FVersao;
+LblVersao.Caption := DM.GetVersion(Application.ExeName);
 end;
 
 procedure TFrmTelaSplash.Timer1Timer(Sender: TObject);

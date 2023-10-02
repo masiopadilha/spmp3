@@ -170,6 +170,9 @@ var
   LInsp: String;
   LTexto: PChar;
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 LInsp := EmptyStr;
 case PCInspecoes.ActivePageIndex of
   0:

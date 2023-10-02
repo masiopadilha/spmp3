@@ -484,6 +484,8 @@ end;
 procedure TFrmTelaCadPecasReposicao.Button2Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.qryPecasReposicao.IsEmpty = True then Exit;
 
 DM.qryPecasReposicaoInstPecas.Close;

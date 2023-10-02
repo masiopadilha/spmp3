@@ -50,6 +50,8 @@ procedure TFrmTelaCadFuncionariosFerramentaria.Ferramenta1Click(
   Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FTabela_auxiliar := 460;
 DM.FNomeConsulta := 'Recursos';
 if DM.ConsultarCombo <> EmptyStr then
@@ -92,6 +94,8 @@ procedure TFrmTelaCadFuncionariosFerramentaria.Funcionario1Click(
   Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if DM.qryFerramentariaItens.Active = True then
   begin
     DM.qryFerramentariaItens.Edit;
@@ -216,6 +220,8 @@ end;
 procedure TFrmTelaCadFuncionariosFerramentaria.odos1Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.qryFuncionariosFerramentaria.Filtered := False;
 if DM.qryFuncionariosFerramentaria.IsEmpty = False then
   DmRelatorios.frxRFuncionariosFerramentaria.ShowReport();

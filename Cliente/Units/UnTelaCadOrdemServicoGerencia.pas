@@ -158,7 +158,7 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNome
       end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
+if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')
   or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA')
     or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA') then
       begin
@@ -670,6 +670,9 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnImpressaoClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 PopupMenuRelat.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
@@ -822,16 +825,24 @@ begin
   end;
   if DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '' then
   begin
-    DM.qryLubrificProgEquip.Close;
-    DM.qryLubrificProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString;
-    DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
-    DM.qryLubrificProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
-    DM.qryLubrificProgEquip.Open;
-    if DM.qryLubrificProgEquip.IsEmpty = False then
+    DM.qryChecklistLubrific.Close;
+    DM.qryChecklistLubrific.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+    DM.qryChecklistLubrific.Open;
+
+    if DM.qryChecklistLubrific.IsEmpty = False then
     begin
-      DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-      DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
+      DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
     end;
+//    DM.qryLubrificProgEquip.Close;
+//    DM.qryLubrificProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString;
+//    DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
+//    DM.qryLubrificProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
+//    DM.qryLubrificProgEquip.Open;
+//    if DM.qryLubrificProgEquip.IsEmpty = False then
+//    begin
+//      DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
+//      DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
+//    end;
   end;
 end;
 

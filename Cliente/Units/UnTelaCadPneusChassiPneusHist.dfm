@@ -8,7 +8,6 @@ inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
   Constraints.MinWidth = 800
   ExplicitWidth = 800
   ExplicitHeight = 600
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 780

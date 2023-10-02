@@ -466,7 +466,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
-      Left = 504
+      Left = 508
       Top = 5
       Width = 495
       Height = 150
@@ -611,7 +611,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   end
   inherited PDiversos: TPanel
     Top = 348
-    Height = 181
+    Height = 197
     ExplicitTop = 348
     ExplicitHeight = 194
     inherited Label3: TLabel
@@ -623,8 +623,8 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       AlignWithMargins = True
       Left = 5
       Top = 26
-      Width = 994
-      Height = 163
+      Width = 998
+      Height = 166
       Margins.Left = 4
       Margins.Top = 25
       Margins.Right = 4
@@ -682,6 +682,8 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       Zoom.Pen.Mode = pmNotXor
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 994
+      ExplicitHeight = 163
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15

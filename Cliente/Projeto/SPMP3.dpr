@@ -164,6 +164,10 @@ uses
 
 {$R *.res}
 begin
+  {$WARNINGS OFF}
+  ReportMemoryLeaksOnShutdown := DebugHook <> 0;
+  //ReportMemoryLeaksOnShutdown := True;
+  {$WARNINGS ON}
 if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Inspeções Vencidas')) > 0)
   or (FindWindow(nil, PChar('SPMP - Sistema do Plano de Manutenção Programada')) > 0) then
     begin
@@ -176,7 +180,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   TStyleManager.TrySetStyle('Windows10 Malibu');
   Application.Title := 'SPMP - Sistema do Plano de Manutenção LTDA.';
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
+ // Application.CreateForm(TDmRelatorios, DmRelatorios);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
   FrmTelaAcesso.ShowModal;

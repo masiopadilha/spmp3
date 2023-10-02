@@ -48,6 +48,8 @@ procedure TFrmTelaCadFuncionariosCxaFerramentas.BtnImprimirClick(
   Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxRFuncionarioscxaFerram.ShowReport();
 end;
 

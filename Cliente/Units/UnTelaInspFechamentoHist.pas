@@ -291,6 +291,8 @@ end;
 procedure TFrmTelaInspFechamentoHist.Lubrificacoes1Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if LCodEquipamento <> '' then
   if DM.qryLubrificPeriodicas.Filter = '' then
     begin
@@ -304,6 +306,8 @@ end;
 procedure TFrmTelaInspFechamentoHist.Manutencoes1Click(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 if LCodEquipamento <> '' then
   if DM.qryManutPeriodicasHist.Filter = '' then
     begin

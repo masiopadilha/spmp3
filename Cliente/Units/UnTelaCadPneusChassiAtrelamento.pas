@@ -61,6 +61,8 @@ end;
 procedure TFrmTelaCadPneusChassiAtrelamento.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.qryPneusChassiAtrelamentoRelat.Params[0].AsString := DM.FCodEmpresa;
 DM.qryPneusChassiAtrelamentoRelat.Open;
 

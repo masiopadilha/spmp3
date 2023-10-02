@@ -329,6 +329,7 @@ type
     frxRChecklistLubrificProgEquip: TfrxReport;
     frxREquipamentosHist: TfrxReport;
     frxXLSExport1: TfrxXLSExport;
+    frxReport1: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

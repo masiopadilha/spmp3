@@ -12,7 +12,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 998
+    ExplicitWidth = 1004
     object Label3: TLabel [1]
       Left = 125
       Top = 33
@@ -38,7 +38,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       Left = 971
       Top = 15
       TabOrder = 3
-      ExplicitLeft = 961
+      ExplicitLeft = 967
       ExplicitTop = 15
     end
     object BtnConsultar: TButton
@@ -99,13 +99,13 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 996
-    ExplicitHeight = 485
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 503
-      ExplicitWidth = 994
-      ExplicitHeight = 483
+      ExplicitWidth = 1000
+      ExplicitHeight = 500
     end
     object PFundo: TPanel
       AlignWithMargins = True
@@ -117,8 +117,8 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 988
-      ExplicitHeight = 477
+      ExplicitWidth = 994
+      ExplicitHeight = 494
       object Label8: TLabel
         Left = 515
         Top = 38
@@ -300,7 +300,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ActivePage = TSManutencoes
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 978
+        ExplicitWidth = 984
         object TSManutencoes: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencoes: TDBGrid
@@ -591,14 +591,14 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 557
-    ExplicitWidth = 998
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 584
-    ExplicitWidth = 998
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 313
       Visible = False

@@ -214,7 +214,11 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
               ControleBotoes(0);
             end;
         Except
-          PAuxiliares.Caption := EmptyStr;
+          on E: Exception do
+          begin
+            DM.GravaLog('Falha ao excluir o registro. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+            Application.MessageBox('Falha ao excluir o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+          end;
         End;
       end;
   end;
@@ -223,6 +227,8 @@ end;
 
 procedure TFrmTelaPaiParametros.BtnImprimirClick(Sender: TObject);
 begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := EmptyStr;
 PopupMenuRelat.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
@@ -320,23 +326,11 @@ DM.MSGAguarde('');
         DM.FDataSetParam.Edit;
       end;
   except
-//    on E: Exception do
-//      begin
-//        ShowMessage(
-//          'Ocorreu um erro não identificado' + #13 +
-//          'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
-//          'Mensagem de erro: ' + E.Message);
-//      end;
-//
-//    on E: EFDDBEngineException do
-//      begin
-//        ShowMessage(
-//          'Ocorreu um erro ao salvar o registro.' + #13 +
-//          'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
-//          'Mensagem de erro: ' + E.Message);
-//        DM.FDConnSPMP3.Rollback;
-//        raise;
-//      end;
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao gravar o registro.' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao gravar o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
   end;
 
 DM.MSGAguarde('', False);
@@ -593,9 +587,13 @@ DM.FModulo := Screen.ActiveForm.Caption;
 DM.MSGAguarde('', False);
   Try
     Close;
-  Except
-    Application.MessageBox('O SPMP encontrou um problema e precisa ser fechado!','SPMP', MB_OK + MB_ICONERROR);
-    Application.Terminate;
+  except
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao fechar a tela.' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao fechar a tela!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+      Application.Terminate;
+    end;
   End;
 end;
 
@@ -637,9 +635,11 @@ If Key = #13 Then
       SelectNext(ActiveControl, True, True);
     End;
   Except
-    Begin
-      Application.MessageBox('Não foi possível identificar esse valor, por favor verifique o valor informado.','SPMP',MB_OK + MB_ICONERROR);
-    End;
+    on E: Exception do
+    begin
+      DM.GravaLog('Não foi possível identificar esse valor, por favor verifique o valor informado.' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao realizar operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
   End;
 end;
 

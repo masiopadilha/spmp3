@@ -1,17 +1,17 @@
 inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramInv
   Caption = 'Invent'#225'rio de Caixa de Ferramentas'
-  ClientWidth = 604
+  ClientHeight = 304
+  ClientWidth = 608
   Constraints.MaxWidth = 620
   Constraints.MinWidth = 620
   OnCreate = FormCreate
   ExplicitWidth = 620
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 600
+    Width = 604
     ExplicitWidth = 600
     inherited BtnAjuda: TButton
-      Left = 567
+      Left = 571
       ExplicitLeft = 567
     end
     object BtnImprimir: TButton
@@ -35,20 +35,21 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     end
   end
   inherited PCentro: TPanel
-    Width = 598
-    ExplicitWidth = 598
+    Width = 602
+    Height = 165
+    ExplicitWidth = 602
     inherited RGTelas: TRadioGroup
       Left = 216
-      Width = 2
+      Width = 0
       ExplicitLeft = 216
-      ExplicitWidth = 2
+      ExplicitWidth = 0
     end
     object GrdEquipe: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 209
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para as op'#231#245'es.'
       Align = alLeft
       Ctl3D = False
@@ -74,7 +75,6 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
       Columns = <
         item
           Alignment = taCenter
-          Color = clWhite
           Expanded = False
           FieldName = 'DATACADASTRO'
           Title.Alignment = taCenter
@@ -89,7 +89,6 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
         end
         item
           Alignment = taCenter
-          Color = clWhite
           Expanded = False
           FieldName = 'DATAFECHAMENTO'
           Title.Alignment = taCenter
@@ -105,10 +104,10 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     end
     object GrdEquipeRecursos: TDBGrid
       AlignWithMargins = True
-      Left = 215
+      Left = 219
       Top = 4
       Width = 379
-      Height = 154
+      Height = 157
       Align = alRight
       Ctl3D = False
       DataSource = DM.dsFuncionariosCxaFerramInvItens
@@ -193,12 +192,14 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 600
-    ExplicitWidth = 600
+    Top = 237
+    Width = 604
+    ExplicitWidth = 604
   end
   inherited PBotoes: TPanel
-    Width = 600
-    ExplicitWidth = 600
+    Top = 264
+    Width = 604
+    ExplicitWidth = 604
     inherited BtnOK: TButton
       Left = 100
       Visible = False

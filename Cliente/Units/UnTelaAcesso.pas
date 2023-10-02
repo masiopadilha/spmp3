@@ -20,14 +20,13 @@ type
     EdtLogin: TEdit;
     EdtSenha: TEdit;
     BtnConsultar: TButton;
-    btnAtualizar: TButton;
     btnLicenca: TButton;
+    LblVersao: TLabel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure BtnEntrarClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
-    procedure btnAtualizarClick(Sender: TObject);
     procedure btnLicencaClick(Sender: TObject);
 
   private
@@ -109,22 +108,10 @@ if (DM.FNumUsuarios > 0) and (DM.qryUsuariosAtivos.RecordCount >= (DM.FNumUsuari
     Exit;
   end;
 
-
-//Buscar informações de configuração
-DM.qryConfigs.Close;
-DM.qryConfigs.Open;
-DM.FTempoNovaOS    := DM.qryConfigstempoconsos.AsInteger;
-DM.FTempoSenhaUsu  := DM.qryConfigstemposenhausu.AsInteger;
-DM.FQtdeMinSenha   := DM.qryConfigsqtdeminsenha.AsInteger;
-DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
-DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
-
 DM.FAcessoLiberado := False;
 
 DM.FNomeUsuario := EdtLogin.Text;
 DM.FPassword := EdtSenha.Text;
-
-DM.GetVersion(Application.ExeName);
 
 //Usuário Adm da SAM
 if DM.FNomeUsuario = 'sam_spmp' then
@@ -161,7 +148,7 @@ else
       DM.qryLogin.Params[0].AsString := DM.FNomeUsuario;
       DM.qryLogin.Open;
 
-      qLogin := 0;
+      //qLogin := 0;
 
       //Usuário informado localizado
       if DM.qryLogin.IsEmpty = False then
@@ -239,9 +226,9 @@ else
         end;
     Except on E: Exception do
       begin
-        MessageDlg('O SISTEMA APRESENTOU O ERRO: "'+E.Message+'"'+#13+'Não foi possível a conexão com o servidor, caso o erro persista, contacte o suporte para solucionar o problema.', mtWarning, [mbOK], 0);
-          DM.MSGAguarde('', False);
-        Exit;
+        DM.GravaLog('Falha ao  realizar o login! ', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao  realizar o login!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        DM.MSGAguarde('', False);
       end;
     End;
 
@@ -369,11 +356,12 @@ else
       else
         DM.FEmpTransf := True;
     except
-      //Application.MessageBox('Não foi possível realizar o login desse usuário!', 'SPMP3', MB_OK+MB_ICONSTOP);
-      DM.MSGAguarde('', False);
-      MessageDlg('O SISTEMA APRESENTOU O ERRO: "'+E.Message+'"'+#13 + 'Caso o erro persista, contacte o suporte para solucionar o problema.', mtError, [mbOK], 0);
-      EdtLogin.SetFocus;
-      Exit;
+      on E: Exception do
+      begin
+        DM.GravaLog('Falha ao realizar o login. FrmTelaAcesso Linha: 361', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao realizar po login!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        DM.MSGAguarde('', False);
+      end;
     end;
   End;
 
@@ -385,7 +373,6 @@ procedure TFrmTelaAcesso.btnLicencaClick(Sender: TObject);
 var
   LChave, LNomeEmpresa, LUsuarios, c, LChaveInformada : String;
   I : Integer;
-  LTexto : PChar;
 begin
   DM.qrySAM.Open;
   DM.FNomeEmpresa := DM.qrySAMEMPRESA.AsString;
@@ -466,38 +453,17 @@ begin
   Application.Terminate;
 end;
 
-procedure TFrmTelaAcesso.btnAtualizarClick(Sender: TObject);
-var
-  LMensagem: PChar;
-begin
-  Try
-    if DM.isAdmin then
-      begin
-       // DM.Atualiza_Versao_Aplicacao;
-      end
-    else
-      begin
-        LMensagem := PChar('Não é possível buscar atualização, o usuário não possui permissão.');
-        Application.MessageBox(LMensagem, 'SPMP3' , MB_OK + MB_ICONSTOP);
-      end;
-  Except
-    on E: Exception do
-      begin
-        ShowMessage(
-          'Ocorreu um erro ao buscar atualização!' + #13 +
-          'Caso o erro se repita, favor entrar em contato com o administrador do sistema.' + #13 +
-          'Mensagem de erro: ' + E.Message);
-      end;
-  End;
-end;
-
 procedure TFrmTelaAcesso.FormCreate(Sender: TObject);
+var
+LDiasRestantes : SmallInt;
 begin
 if (Screen.Width < 1024) or (Screen.Height < 600) then
   begin
     Application.MessageBox('A resolução mínima para execução do SPMP é 1024 x 600!', 'SPMP3', MB_OK + MB_ICONSTOP);
     Application.Terminate;
   end;
+
+LblVersao.Caption := DM.GetVersion(Application.ExeName);
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);

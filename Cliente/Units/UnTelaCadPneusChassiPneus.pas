@@ -38,6 +38,8 @@ uses UnTelaCadPneusChassi, UnTelaCadPneusChassiPneusHist,
 procedure TFrmTelaCadPneusChassiPneus.BtnImprimirClick(Sender: TObject);
 begin
   inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DmRelatorios.frxRPneusChassiPneus.ShowReport();
 end;
 

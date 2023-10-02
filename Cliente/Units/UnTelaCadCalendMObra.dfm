@@ -1,8 +1,10 @@
 inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
   Caption = 'Calend'#225'rios de M'#227'o de Obra'
-  PixelsPerInch = 96
+  ClientHeight = 421
+  ClientWidth = 624
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 620
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -57,6 +59,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
     end
   end
   inherited PCentro: TPanel
+    Width = 620
+    Height = 320
     object Label3: TLabel
       Left = 234
       Top = 114
@@ -640,6 +644,14 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       TabOrder = 14
       Visible = False
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 402
+    Width = 624
+  end
+  inherited PAuxiliares: TPanel
+    Top = 375
+    Width = 620
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 358
