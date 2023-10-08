@@ -5557,6 +5557,7 @@ type
     qryLubrificConsEQUIPPARADO: TStringField;
     qryAltCodFamilia: TFDQuery;
     qryConfigsversion: TIntegerField;
+    qryConfigsautoupdate: TBooleanField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5652,7 +5653,7 @@ type
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
     FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
     FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
-    FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms: Boolean;
+    FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms, FAutoUpdate: Boolean;
     FParamAuxiliar: array[0..10] of String;
     FParametros : TArray<String>;
     FCustos : TArray<Real>;
@@ -8896,27 +8897,32 @@ else
   DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
   DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
   DM.FVersaoBanco    := DM.qryConfigsversion.AsInteger;
+  DM.FAutoUpdate     := DM.qryConfigsautoupdate.AsBoolean;
+
 
   DM.GetVersion(Application.ExeName);
 
-  if DM.FVersaoBanco > DM.FVersaoMaquina then
+  if DM.FAutoUpdate = True then
   begin
-    try
-      DM.CheckUpdateVersion;
-    except
-      on E: Exception do
-      begin
-        GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 8911', E.ClassName, E.Message);
-        Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    if DM.FVersaoBanco > DM.FVersaoMaquina then
+    begin
+      try
+        DM.CheckUpdateVersion;
+      except
+        on E: Exception do
+        begin
+          GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 8911', E.ClassName, E.Message);
+          Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        end;
       end;
+    end else
+    if DM.FVersaoBanco < DM.FVersaoMaquina then
+    begin
+      DM.qryConfigs.Edit;
+      DM.qryConfigsversion.AsInteger := DM.FVersaoMaquina;
+      DM.qryConfigs.Post;
+      DM.FVersaoBanco := DM.FVersaoMaquina;
     end;
-  end else
-  if DM.FVersaoBanco < DM.FVersaoMaquina then
-  begin
-    DM.qryConfigs.Edit;
-    DM.qryConfigsversion.AsInteger := DM.FVersaoMaquina;
-    DM.qryConfigs.Post;
-    DM.FVersaoBanco := DM.FVersaoMaquina;
   end;
 end;
 

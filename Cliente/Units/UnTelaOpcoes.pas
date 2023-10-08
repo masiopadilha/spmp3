@@ -20,6 +20,7 @@ type
     edtqtdelogintent: TDBEdit;
     Label5: TLabel;
     edttempoocioso: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnOKClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);

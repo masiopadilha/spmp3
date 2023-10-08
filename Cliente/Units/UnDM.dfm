@@ -47724,6 +47724,7 @@ object DM: TDM
       '    , `dataultalt`'
       '    , `codusuarioalt`'
       '    , `version`'
+      '    , `autoupdate`'
       'FROM'
       '    `configs`')
     Left = 453
@@ -47778,6 +47779,11 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'version'
       Origin = 'version'
+    end
+    object qryConfigsautoupdate: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'autoupdate'
+      Origin = 'autoupdate'
     end
   end
   object dsConfigs: TDataSource

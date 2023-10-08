@@ -1,8 +1,8 @@
 inherited FrmTelaOpcoes: TFrmTelaOpcoes
   BorderStyle = bsDialog
   Caption = 'Op'#231#245'es'
-  ClientHeight = 379
-  ClientWidth = 394
+  ClientHeight = 372
+  ClientWidth = 388
   Constraints.MaxHeight = 408
   Constraints.MaxWidth = 400
   Constraints.MinHeight = 408
@@ -10,37 +10,38 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
   OnCreate = FormCreate
   ExplicitWidth = 400
   ExplicitHeight = 408
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 390
-    ExplicitWidth = 390
+    Width = 384
+    ExplicitWidth = 380
     inherited BtnAjuda: TButton
-      Left = 357
+      Left = 361
       ExplicitLeft = 357
     end
   end
   inherited PCentro: TPanel
-    Width = 388
-    Height = 240
-    ExplicitWidth = 388
-    ExplicitHeight = 240
+    Width = 382
+    Height = 233
+    ExplicitWidth = 378
+    ExplicitHeight = 230
     inherited RGTelas: TRadioGroup
-      Width = 386
-      Height = 238
-      ExplicitWidth = 386
-      ExplicitHeight = 238
+      Width = 380
+      Height = 231
+      ExplicitWidth = 376
+      ExplicitHeight = 228
     end
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 380
-      Height = 232
+      Width = 374
+      Height = 225
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
+      ExplicitWidth = 370
+      ExplicitHeight = 222
       object Label1: TLabel
         Left = 12
         Top = 10
@@ -126,19 +127,32 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
         DataSource = DM.dsConfigs
         TabOrder = 4
       end
+      object DBCheckBox1: TDBCheckBox
+        Left = 188
+        Top = 151
+        Width = 164
+        Height = 17
+        Alignment = taLeftJustify
+        Caption = 'Atualiza'#231#227'o Autom'#225'tica:'
+        DataField = 'autoupdate'
+        DataSource = DM.dsConfigs
+        TabOrder = 5
+        ValueChecked = '1'
+        ValueUnchecked = '0'
+      end
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 312
-    Width = 390
-    ExplicitTop = 312
-    ExplicitWidth = 390
+    Top = 305
+    Width = 384
+    ExplicitTop = 302
+    ExplicitWidth = 380
   end
   inherited PBotoes: TPanel
-    Top = 339
-    Width = 390
-    ExplicitTop = 339
-    ExplicitWidth = 390
+    Top = 332
+    Width = 384
+    ExplicitTop = 329
+    ExplicitWidth = 380
     inherited BtnOK: TButton
       Left = 116
       OnClick = BtnOKClick
