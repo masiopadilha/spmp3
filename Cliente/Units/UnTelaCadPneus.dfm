@@ -1,11 +1,10 @@
 inherited FrmTelaCadPneus: TFrmTelaCadPneus
   Caption = 'Pneus'
-  ClientHeight = 661
-  ClientWidth = 1008
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
-    ExplicitWidth = 1008
+    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsPneus
     end
@@ -20,8 +19,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
-    ExplicitWidth = 1008
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 90
       Top = 33
@@ -305,8 +304,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
-    ExplicitWidth = 1008
+    Width = 1008
+    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -730,9 +729,10 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PDiversos: TPanel
-    Width = 1004
-    Height = 176
-    ExplicitHeight = 179
+    Width = 1008
+    Height = 200
+    ExplicitWidth = 1004
+    ExplicitHeight = 197
     object Label8: TLabel
       Left = 64
       Top = 38
@@ -750,8 +750,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       Caption = 'Pre'#231'o:'
     end
     object Label11: TLabel
-      Left = 403
-      Top = 40
+      Left = 65
+      Top = 165
       Width = 59
       Height = 16
       Alignment = taRightJustify
@@ -802,8 +802,8 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 642
-      Top = 42
+      Left = 322
+      Top = 168
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -817,7 +817,7 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
     object Label15: TLabel
       Left = 421
-      Top = 71
+      Top = 38
       Width = 41
       Height = 16
       Alignment = taRightJustify
@@ -825,7 +825,7 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
     object Label21: TLabel
       Left = 642
-      Top = 73
+      Top = 40
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -864,9 +864,9 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       OnMouseMove = PIdentificacaoMouseMove
     end
     object CBTipo: TDBComboBox
-      Left = 466
-      Top = 37
-      Width = 171
+      Left = 128
+      Top = 164
+      Width = 190
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'TIPO'
@@ -906,7 +906,7 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
     object CBStatus: TDBComboBox
       Left = 466
-      Top = 68
+      Top = 36
       Width = 171
       Height = 22
       Style = csOwnerDrawFixed
@@ -921,19 +921,22 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 642
-    Width = 1008
-    ExplicitWidth = 1012
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 626
-    Width = 1008
-    ExplicitWidth = 1012
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 586
-    Width = 1004
-    ExplicitWidth = 1008
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'ID dos Pneus'
       DisabledImageIndex = 81

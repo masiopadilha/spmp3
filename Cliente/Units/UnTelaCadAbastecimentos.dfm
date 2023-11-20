@@ -1,6 +1,6 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
-  ClientHeight = 661
+  ClientHeight = 621
   ClientWidth = 1008
   TextHeight = 16
   inherited PControle: TPanel
@@ -21,9 +21,6 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PIdentificacao: TPanel
     Width = 1004
-    Height = 100
-    ExplicitWidth = 1008
-    ExplicitHeight = 100
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -70,7 +67,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object Label8: TLabel
       Left = 67
-      Top = 64
+      Top = 62
       Width = 57
       Height = 16
       Alignment = taRightJustify
@@ -84,7 +81,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object Label21: TLabel
       Left = 377
-      Top = 67
+      Top = 65
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -98,7 +95,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object Label11: TLabel
       Left = 612
-      Top = 67
+      Top = 65
       Width = 57
       Height = 16
       Alignment = taRightJustify
@@ -113,7 +110,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object Label6: TLabel
       Left = 395
-      Top = 64
+      Top = 62
       Width = 48
       Height = 16
       Alignment = taRightJustify
@@ -121,7 +118,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object Label7: TLabel
       Left = 528
-      Top = 67
+      Top = 63
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -195,7 +192,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object EdtMedidor: TDBEdit
       Left = 127
-      Top = 62
+      Top = 60
       Width = 218
       Height = 24
       Color = clBtnFace
@@ -216,7 +213,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object BtnContador: TButton
       Left = 347
-      Top = 60
+      Top = 58
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -231,7 +228,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object EdtValor: TDBEdit
       Left = 673
-      Top = 65
+      Top = 63
       Width = 125
       Height = 24
       DataField = 'CONTADORATUAL'
@@ -255,7 +252,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object CBPeriodo: TComboBox
       Left = 868
-      Top = 68
+      Top = 66
       Width = 125
       Height = 22
       Style = csOwnerDrawFixed
@@ -284,7 +281,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
     object EdtTanque: TDBEdit
       Left = 448
-      Top = 62
+      Top = 60
       Width = 76
       Height = 24
       DataField = 'VOLUMETANQUE'
@@ -296,12 +293,9 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PProgramacao: TPanel
-    Top = 177
     Width = 1004
-    Height = 201
-    ExplicitTop = 177
-    ExplicitWidth = 1008
-    ExplicitHeight = 201
+    Height = 194
+    ExplicitHeight = 194
     inherited Label2: TLabel
       Width = 153
       Caption = 'ABASTECIMENTOS'
@@ -312,7 +306,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       Left = 4
       Top = 25
       Width = 1000
-      Height = 172
+      Height = 165
       Margins.Top = 24
       Align = alClient
       Color = 14671839
@@ -331,12 +325,11 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PDiversos: TPanel
-    Top = 382
+    Top = 349
     Width = 1004
-    Height = 200
-    ExplicitTop = 382
-    ExplicitWidth = 1008
-    ExplicitHeight = 200
+    Height = 193
+    ExplicitTop = 349
+    ExplicitHeight = 193
     inherited Label3: TLabel
       Width = 133
       Caption = 'LUBRIFICA'#199#213'ES'
@@ -347,7 +340,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       Left = 4
       Top = 25
       Width = 1000
-      Height = 174
+      Height = 167
       Margins.Top = 24
       Align = alClient
       Color = 14671839
@@ -366,19 +359,16 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 642
+    Top = 602
     Width = 1008
-    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
-    Top = 626
+    Top = 586
     Width = 1008
-    ExplicitWidth = 1012
   end
   inherited PBase: TPanel
-    Top = 586
+    Top = 546
     Width = 1004
-    ExplicitWidth = 1008
     inherited Button1: TButton
       Hint = 'Abastecimentos'
       DisabledImageIndex = 110

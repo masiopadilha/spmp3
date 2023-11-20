@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, System.DateUtils, Data.DB,
   JvExMask, JvToolEdit, JvDBControls, Vcl.Mask, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, Vcl.Buttons;
+  Vcl.ExtActns;
 
 type
   TFrmTelaCadFuncionariosAusencias = class(TFrmTelaPaiParametros)
@@ -33,7 +33,6 @@ type
     procedure BtnAntMesClick(Sender: TObject);
     procedure BtnProxMesClick(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     LPrimeiroDiaMes: TDateTime;
     DatFer : array[0..50] of String;
@@ -69,6 +68,7 @@ begin
 DM.FDataSetParam    := DM.qryFuncionariosAusencias;
 DM.FDataSourceParam := DM.dsFuncionariosAusencias;
 DM.FTela := 'CADFUNCIONARIOS';
+DM.FTabela_auxiliar := 60;
 
 //Feriados
 DM.qryAuxiliar.Close;
@@ -173,19 +173,6 @@ if DM.qryFuncionariosAusenciasFIM.AsString = EmptyStr then
 
   inherited;
   DesenharCalendario;
-end;
-
-procedure TFrmTelaCadFuncionariosAusencias.ButConsultarClick(Sender: TObject);
-var
-I: integer;
-begin
-DM.qryFuncionariosAusencias.Close;
-DM.qryFuncionariosAusencias.Open;
-DesenharCalendario;
-Exit;
-with CalendarGrid do
-  for I := 0 to RowCount -1 do
-    Rows[I].Clear;
 end;
 
 procedure TFrmTelaCadFuncionariosAusencias.CalendarGridClick(Sender: TObject);

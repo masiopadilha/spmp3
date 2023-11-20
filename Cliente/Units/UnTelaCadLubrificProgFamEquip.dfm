@@ -1,15 +1,30 @@
 inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  ClientHeight = 664
+  ClientHeight = 624
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    DesignSize = (
+      1008
+      45)
+    inherited LCadastro: TLabel
+      Left = 722
+    end
+    inherited LCadastroPor: TLabel
+      Left = 678
+    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsLubrificProgFamEquip
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsLubrificProgFamEquip
+    end
+    inherited LAlteracao: TLabel
+      Left = 873
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 847
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsLubrificProgFamEquip
@@ -21,6 +36,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   inherited PIdentificacao: TPanel
     Width = 1008
     Height = 123
+    ExplicitWidth = 1004
     ExplicitHeight = 123
     object Label5: TLabel
       Left = 672
@@ -363,10 +379,11 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     end
   end
   inherited PProgramacao: TPanel
-    Top = 200
+    Top = 178
     Width = 1008
     Height = 65
-    ExplicitTop = 200
+    ExplicitTop = 178
+    ExplicitWidth = 1004
     ExplicitHeight = 65
     inherited Label2: TLabel
       Width = 132
@@ -468,11 +485,12 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     end
   end
   inherited PDiversos: TPanel
-    Top = 269
+    Top = 247
     Width = 1008
     Height = 113
     Align = alTop
-    ExplicitTop = 269
+    ExplicitTop = 247
+    ExplicitWidth = 1004
     ExplicitHeight = 113
     inherited Label3: TLabel
       Width = 179
@@ -544,18 +562,24 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 645
+    Top = 605
     Width = 1012
+    ExplicitTop = 605
+    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
-    Top = 629
+    Top = 589
     Width = 1012
     TabOrder = 7
+    ExplicitTop = 586
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 589
+    Top = 549
     Width = 1008
     TabOrder = 5
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -572,9 +596,9 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
-    Top = 387
+    Top = 365
     Width = 1006
-    Height = 196
+    Height = 171
     Align = alTop
     TabOrder = 4
     ExplicitWidth = 1002
@@ -600,7 +624,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Left = 4
       Top = 21
       Width = 998
-      Height = 171
+      Height = 146
       Margins.Top = 20
       Align = alClient
       Color = 14671839

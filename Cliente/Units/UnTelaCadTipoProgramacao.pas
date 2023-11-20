@@ -6,18 +6,18 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadTipoProgramacao = class(TFrmTelaPaiParametros)
-    Label1: TLabel;
-    CBTipo: TDBComboBox;
     Label2: TLabel;
     EdtCodigo: TDBEdit;
     Label4: TLabel;
     EdtDescricao: TDBEdit;
     ChbAtivoNF: TDBCheckBox;
     ChbVisivelNF: TDBCheckBox;
+    Label1: TLabel;
+    CBTipo: TDBComboBox;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -25,9 +25,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,15 +46,9 @@ begin
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadTipoProgramacao.btnConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 12;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadTipoProgramacao.BtnImprimirClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 12;
   inherited;
 DM.FDataSetRelat    := DmRelatorios.frxDBTipoProgramacao;
 end;
@@ -114,24 +105,11 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadTipoProgramacao.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 12;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadTipoProgramacao.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBTipoProgramacao;
-end;
-
 procedure TFrmTelaCadTipoProgramacao.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadTipoProgramacao.FormClose(Sender: TObject;
@@ -147,6 +125,7 @@ begin
 DM.FDataSetParam    := DM.qryTipoProgramacao;
 DM.FDataSourceParam := DM.dsTipoProgramacao;
 DM.FTela := 'CADTIPOPROGRAMACAO';
+DM.FTabela_auxiliar := 12;
 end;
 
 end.

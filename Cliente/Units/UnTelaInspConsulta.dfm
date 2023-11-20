@@ -31,7 +31,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ExplicitLeft = 965
     end
     object BtnImprimir: TButton
-      Left = 935
+      Left = 941
       Top = 17
       Width = 28
       Height = 28
@@ -77,7 +77,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Align = alNone
       Columns = 2
       ExplicitTop = 3
-      ExplicitWidth = 480
+      ExplicitWidth = 500
       ExplicitHeight = 136
     end
     object PCInspecoes: TPageControl
@@ -599,15 +599,15 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton
-      Left = 425
+      Left = 423
       Caption = 'Executar'
       ModalResult = 0
       OnClick = BtnOKClick
-      ExplicitLeft = 425
+      ExplicitLeft = 423
     end
     inherited BtnFechar: TButton
-      Left = 507
-      ExplicitLeft = 507
+      Left = 505
+      ExplicitLeft = 505
     end
   end
   object FDMemTManut: TFDMemTable

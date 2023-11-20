@@ -1,7 +1,7 @@
 inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   Caption = 'Entrada/Sa'#237'da de M'#227'o de Obra'
-  ClientHeight = 389
-  ClientWidth = 773
+  ClientHeight = 386
+  ClientWidth = 769
   Constraints.MaxHeight = 425
   Constraints.MaxWidth = 785
   Constraints.MinHeight = 425
@@ -9,352 +9,314 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   OnCreate = FormCreate
   ExplicitWidth = 785
   ExplicitHeight = 425
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 769
+    Width = 765
     ExplicitWidth = 765
     inherited BtnAjuda: TButton
-      Left = 734
-      ExplicitLeft = 734
+      Left = 732
+      ExplicitLeft = 732
     end
   end
   inherited PCentro: TPanel
-    Width = 767
-    Height = 250
-    ExplicitWidth = 767
-    ExplicitHeight = 250
+    Width = 763
+    Height = 247
+    ExplicitWidth = 763
+    ExplicitHeight = 247
     inherited RGTelas: TRadioGroup
-      Width = 520
-      Height = 0
-      Align = alNone
-      TabOrder = 2
-      ExplicitWidth = 520
-      ExplicitHeight = 0
+      Width = 435
+      Height = 245
+      TabOrder = 4
+      ExplicitWidth = 435
+      ExplicitHeight = 245
     end
-    object PMovimen: TPanel
-      AlignWithMargins = True
-      Left = 448
-      Top = 4
-      Width = 315
-      Height = 243
-      Align = alRight
-      TabOrder = 1
-      ExplicitHeight = 242
-      object GrdMovimen: TDBGrid
-        AlignWithMargins = True
-        Left = 4
-        Top = 4
-        Width = 307
-        Height = 235
-        Hint = 
-          'Tecle ENTER para entrada de m'#227'o de obra ou d'#234' duplo-clique para ' +
-          'libera-la.'
-        Align = alClient
-        Color = clBtnFace
-        Ctl3D = False
-        DataSource = DM.dsOrdemServicoMObraMovim
-        DrawingStyle = gdsClassic
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentCtl3D = False
-        ParentFont = False
-        ParentShowHint = False
-        ReadOnly = True
-        ShowHint = True
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        StyleElements = [seFont]
-        OnDblClick = GrdMovimenDblClick
-        OnKeyDown = GrdEquipeKeyDown
-        OnKeyPress = GrdMovimenKeyPress
-        Columns = <
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'EQUIPE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Equipe'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 63
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ENTRADA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Entrada'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 107
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'SAIDA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sa'#237'da'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 104
-            Visible = True
-          end>
-      end
-    end
-    object PCadastros: TPanel
+    object GrdEquipe: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 441
-      Height = 243
-      Align = alLeft
+      Width = 137
+      Height = 103
+      Ctl3D = False
+      DataSource = DM.dsOrdemServicoEquipe
+      DrawingStyle = gdsClassic
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitHeight = 248
-      object GrdEquipeMObraUtil: TDBGrid
-        AlignWithMargins = True
-        Left = 4
-        Top = 104
-        Width = 433
-        Height = 135
-        Hint = 
-          'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
-          'ou efetue o duplo-clique para exclu'#237'-lo'
-        Align = alBottom
-        Ctl3D = False
-        DataSource = DM.dsOrdemServicoEquipeMObraUtil
-        DrawingStyle = gdsClassic
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentCtl3D = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        StyleElements = [seFont, seBorder]
-        OnDblClick = GrdEquipeMObraUtilDblClick
-        OnKeyDown = GrdEquipeKeyDown
-        OnKeyPress = GrdEquipeMObraUtilKeyPress
-        Columns = <
-          item
-            Alignment = taCenter
-            Color = clBtnFace
-            Expanded = False
-            FieldName = 'MATRICULA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Matr'#237'cula'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 60
-            Visible = True
-          end
-          item
-            Color = clBtnFace
-            Expanded = False
-            FieldName = 'NOME'
-            Title.Caption = 'Nome'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 164
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TOTALHOMEMHORA'
-            Title.Alignment = taCenter
-            Title.Caption = 'HH'
-            Width = 56
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTDEHENORMAL'
-            Title.Alignment = taCenter
-            Title.Caption = 'HE Norm.'
-            Width = 56
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTDEHEFERIADO'
-            Title.Alignment = taCenter
-            Title.Caption = 'HE Fer.'
-            Width = 57
-            Visible = True
-          end>
-      end
-      object PCadTopo: TPanel
-        AlignWithMargins = True
-        Left = 4
-        Top = 4
-        Width = 433
-        Height = 94
-        Align = alClient
-        TabOrder = 0
-        ExplicitLeft = 0
-        ExplicitTop = 16
-        ExplicitWidth = 185
-        ExplicitHeight = 41
-        object GrdEquipe: TDBGrid
-          AlignWithMargins = True
-          Left = 4
-          Top = 4
-          Width = 137
-          Height = 86
-          Align = alLeft
-          Ctl3D = False
-          DataSource = DM.dsOrdemServicoEquipe
-          DrawingStyle = gdsClassic
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          StyleElements = [seFont, seBorder]
-          OnDblClick = GrdEquipeDblClick
-          OnKeyDown = GrdEquipeKeyDown
-          Columns = <
-            item
-              Alignment = taCenter
-              Expanded = False
-              FieldName = 'CODEQUIPE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Equipe'
-              Width = 54
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TEMPO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tempo'
-              Width = 49
-              Visible = True
-            end>
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      StyleElements = [seFont, seBorder]
+      OnDblClick = GrdEquipeDblClick
+      OnKeyDown = GrdEquipeKeyDown
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'CODEQUIPE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Equipe'
+          Width = 54
+          Visible = True
         end
-        object GrdEquipeMObra: TDBGrid
-          AlignWithMargins = True
-          Left = 143
-          Top = 4
-          Width = 286
-          Height = 86
-          Hint = 
-            'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
-            'ou efetue o duplo-clique para exclu'#237'-lo'
-          Align = alRight
-          Ctl3D = False
-          DataSource = DM.dsOrdemServicoEquipeMObra
-          DrawingStyle = gdsClassic
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentCtl3D = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          StyleElements = [seFont, seBorder]
-          OnDblClick = GrdEquipeMObraDblClick
-          OnKeyDown = GrdEquipeKeyDown
-          OnKeyPress = GrdEquipeMObraKeyPress
-          Columns = <
-            item
-              Color = clBtnFace
-              Expanded = False
-              FieldName = 'CARGO'
-              Title.Caption = 'Cargo'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -11
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 97
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TOTALHOMEMHORA'
-              Title.Alignment = taCenter
-              Title.Caption = 'HH'
-              Width = 50
-              Visible = True
-            end
-            item
-              Color = clBtnFace
-              Expanded = False
-              FieldName = 'CALENDARIO'
-              Title.Caption = 'Calend'#225'rio'
-              Title.Font.Charset = DEFAULT_CHARSET
-              Title.Font.Color = clWindowText
-              Title.Font.Height = -11
-              Title.Font.Name = 'Tahoma'
-              Title.Font.Style = [fsBold]
-              Width = 111
-              Visible = True
-            end>
+        item
+          Expanded = False
+          FieldName = 'TEMPO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tempo'
+          Width = 49
+          Visible = True
+        end>
+    end
+    object GrdEquipeMObraUtil: TDBGrid
+      AlignWithMargins = True
+      Left = 4
+      Top = 108
+      Width = 434
+      Height = 135
+      Hint = 
+        'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
+        'ou efetue o duplo-clique para exclu'#237'-lo'
+      Ctl3D = False
+      DataSource = DM.dsOrdemServicoEquipeMObraUtil
+      DrawingStyle = gdsClassic
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      StyleElements = [seFont, seBorder]
+      OnDblClick = GrdEquipeMObraUtilDblClick
+      OnKeyDown = GrdEquipeKeyDown
+      OnKeyPress = GrdEquipeMObraUtilKeyPress
+      Columns = <
+        item
+          Alignment = taCenter
+          Color = clBtnFace
+          Expanded = False
+          FieldName = 'MATRICULA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Matr'#237'cula'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 60
+          Visible = True
         end
-      end
+        item
+          Color = clBtnFace
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'Nome'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 164
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTALHOMEMHORA'
+          Title.Alignment = taCenter
+          Title.Caption = 'HH'
+          Width = 56
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QTDEHENORMAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'HE Norm.'
+          Width = 56
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'QTDEHEFERIADO'
+          Title.Alignment = taCenter
+          Title.Caption = 'HE Fer.'
+          Width = 57
+          Visible = True
+        end>
+    end
+    object GrdEquipeMObra: TDBGrid
+      AlignWithMargins = True
+      Left = 142
+      Top = 4
+      Width = 296
+      Height = 103
+      Hint = 
+        'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
+        'ou efetue o duplo-clique para exclu'#237'-lo'
+      Ctl3D = False
+      DataSource = DM.dsOrdemServicoEquipeMObra
+      DrawingStyle = gdsClassic
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      StyleElements = [seFont, seBorder]
+      OnDblClick = GrdEquipeMObraDblClick
+      OnKeyDown = GrdEquipeKeyDown
+      OnKeyPress = GrdEquipeMObraKeyPress
+      Columns = <
+        item
+          Color = clBtnFace
+          Expanded = False
+          FieldName = 'CARGO'
+          Title.Caption = 'Cargo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 97
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTALHOMEMHORA'
+          Title.Alignment = taCenter
+          Title.Caption = 'HH'
+          Width = 50
+          Visible = True
+        end
+        item
+          Color = clBtnFace
+          Expanded = False
+          FieldName = 'CALENDARIO'
+          Title.Caption = 'Calend'#225'rio'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 111
+          Visible = True
+        end>
+    end
+    object GrdMovimen: TDBGrid
+      AlignWithMargins = True
+      Left = 439
+      Top = 4
+      Width = 320
+      Height = 239
+      Hint = 
+        'Tecle ENTER para entrada de m'#227'o de obra ou d'#234' duplo-clique para ' +
+        'libera-la.'
+      Align = alRight
+      Color = clBtnFace
+      Ctl3D = False
+      DataSource = DM.dsOrdemServicoMObraMovim
+      DrawingStyle = gdsClassic
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      StyleElements = [seFont]
+      OnDblClick = GrdMovimenDblClick
+      OnKeyDown = GrdEquipeKeyDown
+      OnKeyPress = GrdMovimenKeyPress
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'EQUIPE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Equipe'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 65
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'ENTRADA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Entrada'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 110
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SAIDA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Sa'#237'da'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 110
+          Visible = True
+        end>
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 322
-    Width = 769
+    Top = 319
+    Width = 765
     ExplicitTop = 319
     ExplicitWidth = 765
   end
   inherited PBotoes: TPanel
-    Top = 349
-    Width = 769
+    Top = 346
+    Width = 765
     ExplicitTop = 346
     ExplicitWidth = 765
     inherited BtnOK: TButton
@@ -365,9 +327,9 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
       ExplicitTop = 7
     end
     inherited BtnFechar: TButton
-      Left = 347
+      Left = 345
       Top = 7
-      ExplicitLeft = 347
+      ExplicitLeft = 345
       ExplicitTop = 7
     end
   end

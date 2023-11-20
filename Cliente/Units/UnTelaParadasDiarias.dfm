@@ -1,7 +1,7 @@
 inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
   Caption = 'Paradas dos Equipamento'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -9,16 +9,17 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
-      Left = 975
+      Left = 971
       ExplicitLeft = 971
     end
     object BtnConsultar: TButton
-      Left = 941
+      Left = 942
       Top = 17
       Width = 28
       Height = 28
@@ -34,13 +35,13 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1004
-      Height = 503
+      Width = 1000
+      Height = 500
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -66,8 +67,8 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 998
-      Height = 497
+      Width = 994
+      Height = 494
       Align = alClient
       DataSource = DSDados
       DrawingStyle = gdsClassic
@@ -89,22 +90,22 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 574
+    Width = 1004
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 601
+    Width = 1004
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton
       Visible = False
     end
     inherited BtnFechar: TButton
-      Left = 465
-      ExplicitLeft = 465
+      Left = 464
+      ExplicitLeft = 464
     end
   end
   object JvDBGridExcelExport1: TJvDBGridExcelExport

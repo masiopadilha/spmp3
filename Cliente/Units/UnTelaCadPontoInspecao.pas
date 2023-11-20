@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadPontoInspecao = class(TFrmTelaPaiParametros)
@@ -49,8 +49,6 @@ type
     procedure BtnFamiliaEquipClick(Sender: TObject);
     procedure BtnProgramacaoClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -197,7 +195,7 @@ case PCPontos.TabIndex of
       PAuxiliares.Caption := 'NOVO REGISTRO';
       DM.FAlterando := False;
       ControleBotoes(1);
-      BtnSalvar.ImageName := 'Operacional\salvar';
+      BtnSalvar.ImageIndex := 2;
     end;
   1:
     begin
@@ -223,7 +221,7 @@ case PCPontos.TabIndex of
       PAuxiliares.Caption := 'NOVO REGISTRO';
       DM.FAlterando := False;
       ControleBotoes(1);
-      BtnSalvar.ImageName := 'Operacional\salvar';
+      BtnSalvar.ImageIndex := 2;
     end;
 end;
 end;
@@ -338,7 +336,7 @@ case PCPontos.TabIndex of
       PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
       DM.FAlterando := True;
       ControleBotoes(2);
-      BtnSalvar.ImageName := 'Operacional\salvar';
+      BtnSalvar.ImageIndex := 2;
     end;
   1:
     begin
@@ -420,29 +418,16 @@ case PCPontos.TabIndex of
       PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
       DM.FAlterando := True;
       ControleBotoes(2);
-      BtnSalvar.ImageName := 'Operacional\salvar';
+      BtnSalvar.ImageIndex := 2;
     end;
 end;
-end;
-
-procedure TFrmTelaCadPontoInspecao.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 47;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadPontoInspecao.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBPontosInspecao;
 end;
 
 procedure TFrmTelaCadPontoInspecao.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadPontoInspecao.FormClose(Sender: TObject;

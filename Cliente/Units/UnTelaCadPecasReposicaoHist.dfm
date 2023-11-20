@@ -1,7 +1,7 @@
 inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
   Caption = 'Hist'#243'rico da Pe'#231'a'
-  ClientHeight = 564
-  ClientWidth = 788
+  ClientHeight = 561
+  ClientWidth = 784
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -9,25 +9,26 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
   OnCreate = FormCreate
   ExplicitWidth = 800
   ExplicitHeight = 600
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 784
+    Width = 780
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 749
+      Left = 747
       Top = 15
-      ExplicitLeft = 749
+      ExplicitLeft = 747
       ExplicitTop = 15
     end
   end
   inherited PCentro: TPanel
-    Width = 782
-    Height = 425
+    Width = 778
+    Height = 422
     ExplicitWidth = 778
     ExplicitHeight = 422
     inherited RGTelas: TRadioGroup
-      Width = 780
-      Height = 423
+      Width = 776
+      Height = 420
       ExplicitWidth = 776
       ExplicitHeight = 420
     end
@@ -35,8 +36,8 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 774
-      Height = 417
+      Width = 770
+      Height = 414
       Align = alClient
       Color = clBtnFace
       DrawingStyle = gdsClassic
@@ -57,6 +58,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
           Alignment = taCenter
           Expanded = False
           FieldName = 'CODEQUIPAMENTO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Equip.'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -70,6 +76,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
         item
           Expanded = False
           FieldName = 'DESCEQUIPAMENTO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Caption = 'Equipamento'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
@@ -83,6 +94,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
           Alignment = taCenter
           Expanded = False
           FieldName = 'REFERENCIA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Refer'#234'ncia'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -96,6 +112,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
         item
           Expanded = False
           FieldName = 'PECA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Caption = 'Pe'#231'a'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
@@ -109,6 +130,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
           Alignment = taCenter
           Expanded = False
           FieldName = 'CODORDEMSERVICO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. O.S.'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -122,6 +148,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
         item
           Expanded = False
           FieldName = 'QTDESOLIC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Qtde'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -136,6 +167,11 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
           Alignment = taCenter
           Expanded = False
           FieldName = 'ENTRADA'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
           Title.Alignment = taCenter
           Title.Caption = 'Entrada'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -149,14 +185,14 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 497
-    Width = 784
+    Top = 494
+    Width = 780
     ExplicitTop = 494
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Top = 524
-    Width = 784
+    Top = 521
+    Width = 780
     ExplicitTop = 521
     ExplicitWidth = 780
     inherited BtnOK: TButton
@@ -165,8 +201,8 @@ inherited FrmTelaCadPecasReposicaoHist: TFrmTelaCadPecasReposicaoHist
       ExplicitLeft = 202
     end
     inherited BtnFechar: TButton
-      Left = 355
-      ExplicitLeft = 355
+      Left = 353
+      ExplicitLeft = 353
     end
   end
 end

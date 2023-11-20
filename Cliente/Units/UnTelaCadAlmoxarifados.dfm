@@ -1,10 +1,13 @@
 inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
   Caption = 'Almoxarifados'
-  ClientHeight = 371
-  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 780
+    inherited LAlteracao: TLabel
+      Left = 506
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 528
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsAlmoxarifado
     end
@@ -17,13 +20,17 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
     inherited LblUsuCad: TDBText
       DataSource = DM.dsAlmoxarifado
     end
+    inherited LCadastro: TLabel
+      Left = 400
+    end
+    inherited LCadastroPor: TLabel
+      Left = 362
+    end
   end
   inherited PCentro: TPanel
-    Width = 780
-    Height = 248
     object Label1: TLabel
-      Left = 64
-      Top = 73
+      Left = 190
+      Top = 60
       Width = 44
       Height = 16
       Alignment = taRightJustify
@@ -31,16 +38,16 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       FocusControl = EdtCodigo
     end
     object Label2: TLabel
-      Left = 194
-      Top = 73
+      Left = 174
+      Top = 91
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
     object Label3: TLabel
-      Left = 429
-      Top = 73
+      Left = 180
+      Top = 122
       Width = 54
       Height = 16
       Alignment = taRightJustify
@@ -48,8 +55,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       FocusControl = EdtDescricao
     end
     object Label4: TLabel
-      Left = 64
-      Top = 120
+      Left = 170
+      Top = 153
       Width = 64
       Height = 16
       Alignment = taRightJustify
@@ -57,8 +64,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       FocusControl = EdtMateriais
     end
     object Label5: TLabel
-      Left = 194
-      Top = 120
+      Left = 170
+      Top = 184
       Width = 64
       Height = 16
       Alignment = taRightJustify
@@ -66,8 +73,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       FocusControl = EdtQtdeItens
     end
     object Label6: TLabel
-      Left = 325
-      Top = 120
+      Left = 137
+      Top = 215
       Width = 97
       Height = 16
       Alignment = taRightJustify
@@ -75,8 +82,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       FocusControl = EdtArea
     end
     object BtnCentroCusto: TButton
-      Left = 560
-      Top = 135
+      Left = 469
+      Top = 212
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -90,8 +97,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnClick = BtnCentroCustoClick
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 599
-      Top = 141
+      Left = 199
+      Top = 245
       Width = 59
       Height = 17
       Alignment = taLeftJustify
@@ -104,8 +111,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 668
-      Top = 141
+      Left = 298
+      Top = 245
       Width = 65
       Height = 17
       Alignment = taLeftJustify
@@ -118,8 +125,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtArea: TDBEdit
-      Left = 194
-      Top = 137
+      Left = 238
+      Top = 183
       Width = 125
       Height = 24
       DataField = 'AREA'
@@ -130,8 +137,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnKeyPress = FormKeyPress
     end
     object EdtCentroCusto: TDBEdit
-      Left = 325
-      Top = 137
+      Left = 238
+      Top = 214
       Width = 230
       Height = 24
       Color = clBtnFace
@@ -143,8 +150,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 64
-      Top = 90
+      Left = 238
+      Top = 59
       Width = 125
       Height = 24
       CharCase = ecUpperCase
@@ -155,7 +162,7 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 194
+      Left = 238
       Top = 90
       Width = 230
       Height = 24
@@ -166,8 +173,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnKeyPress = FormKeyPress
     end
     object EdtMateriais: TDBEdit
-      Left = 429
-      Top = 90
+      Left = 238
+      Top = 121
       Width = 230
       Height = 24
       DataField = 'MATERIAL'
@@ -177,8 +184,8 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
       OnKeyPress = FormKeyPress
     end
     object EdtQtdeItens: TDBEdit
-      Left = 64
-      Top = 137
+      Left = 238
+      Top = 152
       Width = 125
       Height = 24
       DataField = 'NUMITENS'
@@ -190,15 +197,9 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 352
-    Width = 784
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
-  end
-  inherited PAuxiliares: TPanel
-    Top = 325
-    Width = 780
   end
 end

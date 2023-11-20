@@ -33,8 +33,8 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       Height = 16
     end
     inherited BtnAjuda: TButton
-      Left = 506
-      ExplicitLeft = 506
+      Left = 509
+      ExplicitLeft = 505
     end
   end
   inherited PCentro: TPanel
@@ -218,7 +218,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
             Title.Font.Height = -12
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 159
+            Width = 141
             Visible = True
           end
           item
@@ -277,7 +277,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       end
       object BtnDesprogramar: TButton
         Left = 332
-        Top = 264
+        Top = 260
         Width = 98
         Height = 25
         Caption = 'Desprogramar'
@@ -288,7 +288,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       end
       object BtnProgramar: TButton
         Left = 434
-        Top = 264
+        Top = 260
         Width = 89
         Height = 25
         Caption = 'Programar'
@@ -411,9 +411,9 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 234
+      Left = 232
       OnClick = BtnFecharClick
-      ExplicitLeft = 234
+      ExplicitLeft = 232
     end
   end
 end

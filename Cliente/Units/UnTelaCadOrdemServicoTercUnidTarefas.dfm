@@ -1,11 +1,8 @@
 inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnidTarefas
   Caption = 'Tarefas'
-  ClientHeight = 371
-  ClientWidth = 784
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 780
-    ExplicitWidth = 784
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -36,13 +33,9 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
     end
   end
   inherited PCentro: TPanel
-    Width = 780
-    Height = 248
-    ExplicitWidth = 784
-    ExplicitHeight = 251
     object Label16: TLabel
-      Left = 64
-      Top = 76
+      Left = 168
+      Top = 62
       Width = 66
       Height = 16
       Alignment = taRightJustify
@@ -55,8 +48,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       ParentFont = False
     end
     object Label19: TLabel
-      Left = 331
-      Top = 97
+      Left = 499
+      Top = 64
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -69,7 +62,7 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       ParentFont = False
     end
     object Label2: TLabel
-      Left = 64
+      Left = 174
       Top = 124
       Width = 60
       Height = 16
@@ -77,32 +70,32 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       Caption = 'Descri'#231#227'o:'
     end
     object Label4: TLabel
-      Left = 351
-      Top = 124
+      Left = 162
+      Top = 155
       Width = 72
       Height = 16
       Alignment = taRightJustify
       Caption = 'Tempo (hs):'
     end
     object Label1: TLabel
-      Left = 494
-      Top = 124
+      Left = 199
+      Top = 186
       Width = 35
       Height = 16
       Alignment = taRightJustify
       Caption = 'In'#237'cio:'
     end
     object Label3: TLabel
-      Left = 502
-      Top = 149
+      Left = 207
+      Top = 217
       Width = 26
       Height = 16
       Alignment = taRightJustify
       Caption = 'Fim:'
     end
     object Label5: TLabel
-      Left = 351
-      Top = 76
+      Left = 152
+      Top = 93
       Width = 82
       Height = 16
       Alignment = taRightJustify
@@ -115,8 +108,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       ParentFont = False
     end
     object lblDataFim: TDBText
-      Left = 533
-      Top = 149
+      Left = 238
+      Top = 217
       Width = 65
       Height = 16
       AutoSize = True
@@ -130,8 +123,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       ParentFont = False
     end
     object EdtCalendario: TDBEdit
-      Left = 64
-      Top = 93
+      Left = 238
+      Top = 60
       Width = 230
       Height = 24
       Ctl3D = True
@@ -143,8 +136,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
     object BtnCalendario: TButton
-      Left = 298
-      Top = 91
+      Left = 469
+      Top = 57
       Width = 28
       Height = 28
       DisabledImageIndex = 14
@@ -155,8 +148,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnClick = BtnCalendarioClick
     end
     object EdtDescricao: TDBEdit
-      Left = 64
-      Top = 142
+      Left = 238
+      Top = 122
       Width = 230
       Height = 24
       DataField = 'DESCRICAO'
@@ -165,8 +158,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
     object EdtTempo: TDBEdit
-      Left = 351
-      Top = 142
+      Left = 238
+      Top = 153
       Width = 125
       Height = 24
       DataField = 'TEMPOPREVISTO'
@@ -176,8 +169,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
     object EdtInicio: TJvDBMaskEdit
-      Left = 533
-      Top = 120
+      Left = 238
+      Top = 184
       Width = 125
       Height = 24
       DataField = 'DATAPROGINI'
@@ -188,8 +181,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnExit = EdtTempoExit
     end
     object EdtPredecessora: TDBEdit
-      Left = 351
-      Top = 93
+      Left = 238
+      Top = 91
       Width = 230
       Height = 24
       Ctl3D = True
@@ -201,8 +194,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnKeyPress = FormKeyPress
     end
     object BtnPredecessora: TButton
-      Left = 585
-      Top = 91
+      Left = 469
+      Top = 89
       Width = 28
       Height = 28
       DisabledImageIndex = 14
@@ -213,20 +206,8 @@ inherited FrmTelaCadOrdemServicoTercUnidTarefas: TFrmTelaCadOrdemServicoTercUnid
       OnClick = BtnPredecessoraClick
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 352
-    Width = 784
-    ExplicitTop = 355
-    ExplicitWidth = 788
-  end
-  inherited PAuxiliares: TPanel
-    Top = 325
-    Width = 780
-    ExplicitTop = 328
-    ExplicitWidth = 784
-  end
   inherited MainMenuPadrao: TMainMenu
-    Left = 382
-    Top = 52
+    Left = 422
+    Top = 140
   end
 end

@@ -5,6 +5,7 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
   Constraints.MinWidth = 540
   OnCreate = FormCreate
   ExplicitWidth = 540
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Width = 520
@@ -17,17 +18,16 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
   inherited PCentro: TPanel
     Width = 518
     ExplicitWidth = 518
-    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
-      Width = 520
+      Width = 516
       ExplicitWidth = 516
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 514
-      Height = 157
+      Width = 510
+      Height = 154
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -130,12 +130,10 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
   end
   inherited PAuxiliares: TPanel
     Width = 520
-    ExplicitTop = 237
     ExplicitWidth = 520
   end
   inherited PBotoes: TPanel
     Width = 520
-    ExplicitTop = 264
     ExplicitWidth = 520
     inherited BtnOK: TButton
       Left = 100
@@ -143,8 +141,8 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 225
-      ExplicitLeft = 225
+      Left = 212
+      ExplicitLeft = 212
     end
   end
 end

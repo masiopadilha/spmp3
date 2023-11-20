@@ -1,7 +1,7 @@
 inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
   Caption = 'Navega'#231#227'o Gr'#225'fica'
-  ClientHeight = 644
-  ClientWidth = 668
+  ClientHeight = 641
+  ClientWidth = 664
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 680
   Constraints.MinHeight = 680
@@ -12,16 +12,16 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 664
+    Width = 660
     ExplicitWidth = 660
     inherited BtnAjuda: TButton
       Left = 625
-      ExplicitLeft = 621
+      ExplicitLeft = 625
     end
   end
   inherited PCentro: TPanel
-    Width = 662
-    Height = 505
+    Width = 658
+    Height = 502
     ExplicitWidth = 658
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -65,8 +65,6 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
         TabOrder = 0
         OnDblClick = TVArvoreDblClick
         LineColor = clBlack
-        ExplicitWidth = 646
-        ExplicitHeight = 490
       end
     end
     object EdtConsulta: TEdit
@@ -120,14 +118,14 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 664
+    Top = 574
+    Width = 660
     ExplicitTop = 574
     ExplicitWidth = 660
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 664
+    Top = 601
+    Width = 660
     ExplicitTop = 601
     ExplicitWidth = 660
     inherited BtnOK: TButton
@@ -136,8 +134,8 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
       ExplicitLeft = 86
     end
     inherited BtnFechar: TButton
-      Left = 295
-      ExplicitLeft = 295
+      Left = 294
+      ExplicitLeft = 294
     end
   end
   object CDArvore: TClientDataSet

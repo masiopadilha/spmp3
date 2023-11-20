@@ -1,70 +1,81 @@
 inherited FrmTelaCadImagens: TFrmTelaCadImagens
   Caption = 'Imagens'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 661
+      Left = 502
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 683
+      Left = 524
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LblDataAlt: TDBText
+      Width = 75
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
+      ExplicitWidth = 75
     end
     inherited LblDataCad: TDBText
+      Width = 77
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
+      ExplicitWidth = 77
     end
     inherited LblUsuAlt: TDBText
+      Width = 75
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
+      ExplicitWidth = 75
     end
     inherited LblUsuCad: TDBText
+      Width = 77
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
+      ExplicitWidth = 77
     end
     inherited LCadastro: TLabel
-      Left = 557
+      Left = 396
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 553
     end
     inherited LCadastroPor: TLabel
-      Left = 519
+      Left = 358
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 515
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
       Left = 44
-      Top = 54
+      Top = 73
       Width = 60
       Height = 16
       Alignment = taRightJustify
@@ -72,7 +83,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object Label6: TLabel
       Left = 44
-      Top = 101
+      Top = 120
       Width = 79
       Height = 16
       Alignment = taRightJustify
@@ -80,7 +91,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object EdtDescricao: TDBEdit
       Left = 44
-      Top = 74
+      Top = 93
       Width = 227
       Height = 24
       DataField = 'DESCRICAO'
@@ -91,7 +102,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object EdtEquipamento: TDBEdit
       Left = 44
-      Top = 121
+      Top = 140
       Width = 197
       Height = 24
       Color = clBtnFace
@@ -104,7 +115,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object BtnEquipamento: TButton
       Left = 243
-      Top = 118
+      Top = 137
       Width = 28
       Height = 28
       Hint = 'Consultar'
@@ -119,7 +130,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object EdtPontoInspecao: TDBEdit
       Left = 44
-      Top = 174
+      Top = 193
       Width = 197
       Height = 24
       Color = clBtnFace
@@ -132,7 +143,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object BtnPontoInspecao: TButton
       Left = 243
-      Top = 171
+      Top = 190
       Width = 28
       Height = 28
       Hint = 'Consultar'
@@ -147,7 +158,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object PProgramacao: TPanel
       Left = 315
-      Top = 23
+      Top = 42
       Width = 293
       Height = 211
       BevelInner = bvLowered
@@ -189,7 +200,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
     object ChbTipo: TDBCheckBox
       Left = 44
-      Top = 153
+      Top = 172
       Width = 65
       Height = 17
       Alignment = taLeftJustify
@@ -242,18 +253,26 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
       OnExit = TabNextTab1AfterTabChange
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
+  end
   inherited MainMenuPadrao: TMainMenu
-    Left = 302
-    Top = 52
+    Left = 350
+    Top = 124
   end
   object SPDFoto: TSavePictureDialog
     Filter = '.jpg;*.jpeg;'
-    Left = 652
-    Top = 117
+    Left = 476
+    Top = 93
   end
   object PopupMenuCons: TPopupMenu
-    Left = 242
-    Top = 51
+    Left = 282
+    Top = 123
     object Codigo1: TMenuItem
       Caption = 'C'#243'digo'
       OnClick = Codigo1Click
@@ -264,8 +283,8 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     end
   end
   object PopupMenuCons2: TPopupMenu
-    Left = 242
-    Top = 107
+    Left = 282
+    Top = 171
     object MenuItem1: TMenuItem
       Caption = 'C'#243'digo'
       OnClick = MenuItem1Click
@@ -279,7 +298,7 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
     Filter = 'JPGl image files (*.jpg,*.jpeg)|*.JPG'
     Height = 0
     Width = 0
-    Left = 708
-    Top = 128
+    Left = 484
+    Top = 160
   end
 end

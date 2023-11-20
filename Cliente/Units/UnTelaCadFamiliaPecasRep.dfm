@@ -3,14 +3,14 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
-      Left = 661
+      Left = 506
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 683
+      Left = 528
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -45,14 +45,14 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       DataSource = DM.dsFamPecasRep
     end
     inherited LCadastro: TLabel
-      Left = 558
+      Left = 400
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 520
+      Left = 362
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -61,23 +61,23 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
   end
   inherited PCentro: TPanel
     object Label2: TLabel
-      Left = 64
-      Top = 9
+      Left = 79
+      Top = 60
       Width = 44
       Height = 16
       Caption = 'C'#243'digo:'
     end
     object Label4: TLabel
-      Left = 195
-      Top = 9
+      Left = 301
+      Top = 60
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
     object Label35: TLabel
-      Left = 64
-      Top = 56
+      Left = 71
+      Top = 90
       Width = 52
       Height = 16
       Caption = 'Campo1:'
@@ -89,8 +89,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 301
-      Top = 56
+      Left = 309
+      Top = 90
       Width = 52
       Height = 16
       Caption = 'Campo2:'
@@ -102,8 +102,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 541
-      Top = 56
+      Left = 71
+      Top = 121
       Width = 52
       Height = 16
       Caption = 'Campo3:'
@@ -115,8 +115,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 64
-      Top = 103
+      Left = 309
+      Top = 121
       Width = 52
       Height = 16
       Caption = 'Campo4:'
@@ -128,8 +128,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 301
-      Top = 103
+      Left = 71
+      Top = 152
       Width = 52
       Height = 16
       Caption = 'Campo5:'
@@ -141,8 +141,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 541
-      Top = 103
+      Left = 309
+      Top = 152
       Width = 52
       Height = 16
       Caption = 'Campo6:'
@@ -154,8 +154,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 64
-      Top = 150
+      Left = 71
+      Top = 183
       Width = 52
       Height = 16
       Caption = 'Campo7:'
@@ -167,8 +167,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 301
-      Top = 150
+      Left = 309
+      Top = 183
       Width = 52
       Height = 16
       Caption = 'Campo8:'
@@ -180,8 +180,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 541
-      Top = 150
+      Left = 71
+      Top = 214
       Width = 52
       Height = 16
       Caption = 'Campo9:'
@@ -193,8 +193,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 64
-      Top = 197
+      Left = 302
+      Top = 214
       Width = 59
       Height = 16
       Caption = 'Campo10:'
@@ -206,8 +206,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 301
-      Top = 197
+      Left = 64
+      Top = 245
       Width = 59
       Height = 16
       Caption = 'Campo11:'
@@ -219,8 +219,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 541
-      Top = 197
+      Left = 302
+      Top = 245
       Width = 59
       Height = 16
       Caption = 'Campo12:'
@@ -233,8 +233,8 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 64
-      Top = 27
+      Left = 127
+      Top = 58
       Width = 125
       Height = 24
       CharCase = ecUpperCase
@@ -246,9 +246,9 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 195
-      Top = 27
-      Width = 333
+      Left = 365
+      Top = 58
+      Width = 230
       Height = 24
       DataField = 'DESCRICAO'
       DataSource = DM.dsFamPecasRep
@@ -256,40 +256,48 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object ChbAtivoNF: TDBCheckBox
-      Left = 539
-      Top = 31
-      Width = 63
-      Height = 17
-      Alignment = taLeftJustify
-      Caption = 'Ativo:'
-      DataField = 'ATIVO'
-      DataSource = DM.dsFamPecasRep
-      TabOrder = 2
-      ValueChecked = 'S'
-      ValueUnchecked = 'N'
-      OnExit = TabNextTab1AfterTabChange
-    end
-    object ChbVisivelNF: TDBCheckBox
-      Left = 608
-      Top = 31
-      Width = 71
-      Height = 17
-      Alignment = taLeftJustify
-      Caption = 'Vis'#237'vel:'
-      DataField = 'VISIVEL'
-      DataSource = DM.dsFamPecasRep
-      TabOrder = 3
-      ValueChecked = 'S'
-      ValueUnchecked = 'N'
-      OnExit = TabNextTab1AfterTabChange
-    end
     object EdtCampo1: TDBEdit
-      Left = 64
-      Top = 74
-      Width = 230
+      Left = 127
+      Top = 89
+      Width = 160
       Height = 24
       DataField = 'CAMPO1'
+      DataSource = DM.dsFamPecasRep
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      MaxLength = 30
+      ParentFont = False
+      TabOrder = 2
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object EdtCampo2: TDBEdit
+      Left = 365
+      Top = 89
+      Width = 160
+      Height = 24
+      DataField = 'CAMPO2'
+      DataSource = DM.dsFamPecasRep
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      MaxLength = 30
+      ParentFont = False
+      TabOrder = 3
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object EdtCampo3: TDBEdit
+      Left = 127
+      Top = 120
+      Width = 160
+      Height = 24
+      DataField = 'CAMPO3'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -302,12 +310,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo2: TDBEdit
-      Left = 301
-      Top = 74
-      Width = 230
+    object EdtCampo4: TDBEdit
+      Left = 365
+      Top = 120
+      Width = 160
       Height = 24
-      DataField = 'CAMPO2'
+      DataField = 'CAMPO4'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -320,12 +328,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo3: TDBEdit
-      Left = 541
-      Top = 74
-      Width = 230
+    object EdtCampo5: TDBEdit
+      Left = 127
+      Top = 151
+      Width = 160
       Height = 24
-      DataField = 'CAMPO3'
+      DataField = 'CAMPO5'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -338,12 +346,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo4: TDBEdit
-      Left = 64
-      Top = 121
-      Width = 230
+    object EdtCampo6: TDBEdit
+      Left = 365
+      Top = 151
+      Width = 160
       Height = 24
-      DataField = 'CAMPO4'
+      DataField = 'CAMPO6'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -356,12 +364,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo5: TDBEdit
-      Left = 301
-      Top = 121
-      Width = 230
+    object EdtCampo7: TDBEdit
+      Left = 127
+      Top = 182
+      Width = 160
       Height = 24
-      DataField = 'CAMPO5'
+      DataField = 'CAMPO7'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -374,12 +382,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo6: TDBEdit
-      Left = 541
-      Top = 121
-      Width = 230
+    object EdtCampo8: TDBEdit
+      Left = 365
+      Top = 182
+      Width = 160
       Height = 24
-      DataField = 'CAMPO6'
+      DataField = 'CAMPO8'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -392,12 +400,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo7: TDBEdit
-      Left = 64
-      Top = 168
-      Width = 230
+    object EdtCampo9: TDBEdit
+      Left = 127
+      Top = 213
+      Width = 160
       Height = 24
-      DataField = 'CAMPO7'
+      DataField = 'CAMPO9'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -410,12 +418,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo8: TDBEdit
-      Left = 301
-      Top = 168
-      Width = 230
+    object EdtCampo10: TDBEdit
+      Left = 365
+      Top = 213
+      Width = 160
       Height = 24
-      DataField = 'CAMPO8'
+      DataField = 'CAMPO10'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -428,12 +436,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo9: TDBEdit
-      Left = 541
-      Top = 168
-      Width = 230
+    object EdtCampo11: TDBEdit
+      Left = 127
+      Top = 244
+      Width = 160
       Height = 24
-      DataField = 'CAMPO9'
+      DataField = 'CAMPO11'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -446,12 +454,12 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo10: TDBEdit
-      Left = 64
-      Top = 215
-      Width = 230
+    object EdtCampo12: TDBEdit
+      Left = 365
+      Top = 244
+      Width = 160
       Height = 24
-      DataField = 'CAMPO10'
+      DataField = 'CAMPO12'
       DataSource = DM.dsFamPecasRep
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -464,53 +472,36 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCampo11: TDBEdit
-      Left = 301
-      Top = 215
-      Width = 230
-      Height = 24
-      DataField = 'CAMPO11'
+    object ChbAtivoNF: TDBCheckBox
+      Left = 87
+      Top = 273
+      Width = 58
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Ativo:'
+      DataField = 'ATIVO'
       DataSource = DM.dsFamPecasRep
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      MaxLength = 30
-      ParentFont = False
       TabOrder = 14
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
     end
-    object EdtCampo12: TDBEdit
-      Left = 541
-      Top = 215
-      Width = 230
-      Height = 24
-      DataField = 'CAMPO12'
+    object ChbVisivelNF: TDBCheckBox
+      Left = 157
+      Top = 273
+      Width = 67
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Vis'#237'vel:'
+      DataField = 'VISIVEL'
       DataSource = DM.dsFamPecasRep
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      MaxLength = 30
-      ParentFont = False
       TabOrder = 15
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
     end
   end
   inherited PopupMenuRelat: TPopupMenu
-    Left = 228
-    Top = 24
-  end
-  inherited ActionList1: TActionList
-    Left = 490
-    Top = 27
-  end
-  inherited MainMenuPadrao: TMainMenu
-    Left = 358
-    Top = 28
+    Left = 196
   end
 end

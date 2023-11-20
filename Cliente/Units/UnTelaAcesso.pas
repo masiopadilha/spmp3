@@ -6,36 +6,28 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, System.DateUtils, Winapi.Winsock, FireDAC.Stan.Param, Data.DB, System.UItypes,
-  Vcl.Buttons, Vcl.ComCtrls, System.ImageList, Vcl.ImgList;
+  Vcl.Buttons;
 
 type
   TFrmTelaAcesso = class(TForm)
+    PTop: TPanel;
+    Image1: TImage;
     PCentro: TPanel;
+    BtnSair: TButton;
+    BtnEntrar: TButton;
     Label1: TLabel;
     Label2: TLabel;
     EdtLogin: TEdit;
     EdtSenha: TEdit;
-    pLogo1: TPanel;
-    Image2: TImage;
-    pSPMP: TPanel;
-    lblSPMP: TLabel;
-    Panel1: TPanel;
-    Panel2: TPanel;
+    BtnConsultar: TButton;
+    btnLicenca: TButton;
     LblVersao: TLabel;
-    BitBtn1: TBitBtn;
-    Panel3: TPanel;
-    Image3: TImage;
-    Panel4: TPanel;
-    Image4: TImage;
-    btnSair: TSpeedButton;
-    btnLicenca: TSpeedButton;
-    btnConfiguracao: TSpeedButton;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure BtnEntrarClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure btnSairClick(Sender: TObject);
+    procedure BtnConsultarClick(Sender: TObject);
     procedure btnLicencaClick(Sender: TObject);
-    procedure btnConfiguracaoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -52,7 +44,17 @@ implementation
 
 uses UnTelaPrincipal, UnTelaAcessoUnidade, UnDM, UnTelaGerenciador, UnDmAlertas;
 
-procedure TFrmTelaAcesso.BitBtn1Click(Sender: TObject);
+procedure TFrmTelaAcesso.BtnConsultarClick(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TFrmTelaGerenciador, FrmTelaGerenciador);
+    FrmTelaGerenciador.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaGerenciador);
+  End;
+end;
+
+procedure TFrmTelaAcesso.BtnEntrarClick(Sender: TObject);
 var
   wVersionRequested : WORD;
   wsaData : TWSAData;
@@ -364,7 +366,8 @@ else
   End;
 
 DM.MSGAguarde('', False);
-Close;end;
+Close;
+end;
 
 procedure TFrmTelaAcesso.btnLicencaClick(Sender: TObject);
 var
@@ -445,6 +448,11 @@ begin
     end;
 end;
 
+procedure TFrmTelaAcesso.BtnSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
 procedure TFrmTelaAcesso.FormCreate(Sender: TObject);
 var
 LDiasRestantes : SmallInt;
@@ -455,8 +463,7 @@ if (Screen.Width < 1024) or (Screen.Height < 600) then
     Application.Terminate;
   end;
 
-DM.GetVersion(Application.ExeName);
-LblVersao.Caption := DM.FVersaoMacro;
+LblVersao.Caption := DM.GetVersion(Application.ExeName);
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);
@@ -468,20 +475,5 @@ if Key = #13 then
   end;
 end;
 
-
-procedure TFrmTelaAcesso.btnSairClick(Sender: TObject);
-begin
-  Close;
-end;
-
-procedure TFrmTelaAcesso.btnConfiguracaoClick(Sender: TObject);
-begin
-  Try
-    Application.CreateForm(TFrmTelaGerenciador, FrmTelaGerenciador);
-    FrmTelaGerenciador.ShowModal;
-  Finally
-    FreeAndNil(FrmTelaGerenciador);
-  End;
-end;
 
 end.

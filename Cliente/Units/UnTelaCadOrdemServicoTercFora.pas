@@ -56,7 +56,6 @@ type
     procedure BtnExcluirClick(Sender: TObject);
     procedure Codigo1Click(Sender: TObject);
     procedure Descricao1Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -276,30 +275,6 @@ DM.qryOrdemServicoTercForaTOTALSERVCOMP.AsString := DM.qryOrdemServicoTercForaOC
 DM.qryOrdemServicoTercForaTOTALSERVTERC.AsString := DM.qryOrdemServicoTercForaOESUM_TOTAL.AsString;
 DM.qryOrdemServicoTercForaTOTALGERAL.AsFloat    := DM.qryOrdemServicoTercForaTOTALSERVINI.AsFloat + DM.qryOrdemServicoTercForaTOTALSERVCOMP.AsFloat + DM.qryOrdemServicoTercForaTOTALSERVTERC.AsFloat;
 DM.qryOrdemServicoTercFora.Post;
-end;
-
-procedure TFrmTelaCadOrdemServicoTercFora.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 65;
-  inherited;
-if DM.qryOrdemServicoTercForaCODIGO.AsString <> EmptyStr then
-  begin
-    DM.qryOrdemServicoTercForaOI.Close;
-    DM.qryOrdemServicoTercForaOI.Params[0].AsString := DM.qryOrdemServicoTercForaCODIGO.AsString;
-    DM.qryOrdemServicoTercForaOI.Open;
-
-    DM.qryOrdemServicoTercForaOC.Close;
-    DM.qryOrdemServicoTercForaOC.Params[0].AsString := DM.qryOrdemServicoTercForaCODIGO.AsString;;
-    DM.qryOrdemServicoTercForaOC.Open;
-
-    DM.qryOrdemServicoTercForaOE.Close;
-    DM.qryOrdemServicoTercForaOE.Params[0].AsString := DM.qryOrdemServicoTercForaCODIGO.AsString;;
-    DM.qryOrdemServicoTercForaOE.Open;
-
-    DM.qryOrdemServicoTercForaAditivos.Close;
-    DM.qryOrdemServicoTercForaAditivos.Params[0].AsString := DM.qryOrdemServicoTercForaCODIGO.AsString;;
-    DM.qryOrdemServicoTercForaAditivos.Open;
-  end;
 end;
 
 procedure TFrmTelaCadOrdemServicoTercFora.Codigo1Click(Sender: TObject);

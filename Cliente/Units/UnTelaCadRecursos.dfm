@@ -1,10 +1,10 @@
 inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   Caption = 'Recursos'
-  ClientHeight = 661
-  ClientWidth = 1008
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -29,13 +29,14 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsRecursos
     end
-    inherited BtnConsultar1: TButton
+    inherited BtnConsultar: TButton
       Left = 151
       ExplicitLeft = 151
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
+    Width = 1008
+    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 72
       Top = 32
@@ -312,7 +313,8 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
+    Width = 1008
+    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -737,9 +739,10 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   end
   inherited PDiversos: TPanel
     Width = 780
-    Height = 176
+    Height = 200
     Align = alLeft
     ExplicitWidth = 780
+    ExplicitHeight = 197
     object Label15: TLabel
       Left = 97
       Top = 38
@@ -1134,16 +1137,22 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 642
-    Width = 1008
+    Top = 605
+    Width = 1012
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 626
-    Width = 1008
+    Top = 589
+    Width = 1012
+    ExplicitTop = 586
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 586
-    Width = 1004
+    Top = 549
+    Width = 1008
+    ExplicitTop = 546
+    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Ferramentas'
       DisabledImageIndex = 38
@@ -1152,14 +1161,16 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   object PImagem: TPanel [7]
-    Left = 785
-    Top = 404
+    Left = 789
+    Top = 343
     Width = 223
-    Height = 180
+    Height = 204
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 7
+    ExplicitLeft = 785
+    ExplicitHeight = 201
     object ImgFotoRecurso: TImage
       Left = 25
       Top = 10

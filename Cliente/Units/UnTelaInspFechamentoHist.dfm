@@ -1,21 +1,18 @@
 inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
   Caption = 'Hist'#243'rico de Inspe'#231#245'es'
-  ClientHeight = 684
+  ClientHeight = 644
   ClientWidth = 1012
-  Constraints.MaxHeight = 720
+  Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
-  Constraints.MinHeight = 720
+  Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 720
+  ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
     ExplicitWidth = 1004
-    DesignSize = (
-      1008
-      60)
     object Label1: TLabel [1]
       Left = 284
       Top = 33
@@ -43,7 +40,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       ExplicitLeft = 964
     end
     object BtnImprimir: TButton
-      Left = 935
+      Left = 938
       Top = 17
       Width = 28
       Height = 28
@@ -95,25 +92,23 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 545
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Top = 529
+      Top = 501
       Width = 1004
-      Height = 0
-      Align = alNone
-      Visible = False
-      ExplicitTop = 529
-      ExplicitWidth = 1004
+      Height = 3
+      ExplicitTop = 501
+      ExplicitWidth = 1000
       ExplicitHeight = 0
     end
     object GrdLubrificacaoHist: TDBGrid
       AlignWithMargins = True
       Left = 4
-      Top = 290
+      Top = 270
       Width = 998
-      Height = 248
+      Height = 228
       Align = alTop
       Color = clBtnFace
       DataSource = DM.dsLubrificPeriodicasHist
@@ -215,7 +210,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       Left = 4
       Top = 39
       Width = 998
-      Height = 248
+      Height = 228
       Margins.Bottom = 0
       Align = alTop
       Color = clBtnFace
@@ -388,13 +383,13 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 617
+    Top = 577
     Width = 1008
-    ExplicitTop = 617
-    ExplicitWidth = 1008
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 644
+    Top = 604
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004

@@ -1,22 +1,19 @@
 inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Caption = 'Ordens de Servi'#231'o'
-  ClientHeight = 684
+  ClientHeight = 644
   ClientWidth = 1012
-  Constraints.MaxHeight = 720
+  Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
-  Constraints.MinHeight = 720
+  Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   OnShow = FormShow
   ExplicitWidth = 1024
-  ExplicitHeight = 720
+  ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
     ExplicitWidth = 1004
-    DesignSize = (
-      1008
-      60)
     object Label9: TLabel [1]
       Left = 679
       Top = 22
@@ -53,8 +50,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 966
-      ExplicitLeft = 962
+      Left = 965
+      ExplicitLeft = 961
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -117,7 +114,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 545
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -126,7 +123,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Align = alNone
       TabOrder = 4
       ExplicitTop = 0
-      ExplicitWidth = 480
+      ExplicitWidth = 500
       ExplicitHeight = 0
     end
     object PFuncoes: TPanel
@@ -142,7 +139,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TabOrder = 0
       ExplicitWidth = 994
       object BtnCadastro: TButton
-        Left = 7
+        Left = 6
         Top = 7
         Width = 110
         Height = 25
@@ -165,7 +162,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnCadastroClick
       end
       object BtnProgramacao: TButton
-        Left = 122
+        Left = 121
         Top = 7
         Width = 110
         Height = 25
@@ -237,7 +234,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnLiberacaoClick
       end
       object BtnFechamento: TButton
-        Left = 467
+        Left = 468
         Top = 7
         Width = 110
         Height = 25
@@ -260,7 +257,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnFechamentoClick
       end
       object BtnParalisacao: TButton
-        Left = 582
+        Left = 583
         Top = 7
         Width = 110
         Height = 25
@@ -283,7 +280,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnParalisacaoClick
       end
       object BtnImpressao: TButton
-        Left = 697
+        Left = 699
         Top = 7
         Width = 110
         Height = 25
@@ -306,7 +303,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnImpressaoClick
       end
       object BtnCancelamento: TButton
-        Left = 812
+        Left = 815
         Top = 7
         Width = 110
         Height = 25
@@ -330,7 +327,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnCancelamentoClick
       end
       object BtnHistorico: TButton
-        Left = 961
+        Left = 959
         Top = 5
         Width = 29
         Height = 29
@@ -346,7 +343,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = BtnHistoricoClick
       end
       object btnMObra: TButton
-        Left = 927
+        Left = 928
         Top = 5
         Width = 29
         Height = 29
@@ -367,7 +364,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Left = 4
       Top = 134
       Width = 998
-      Height = 407
+      Height = 367
       Hint = 'D'#234' duplo-clique para visualizar as informa'#231#245'es da O.S.'
       Align = alClient
       DataSource = DM.dsOrdemServicoGerencia
@@ -727,27 +724,12 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
     end
-    object grid: TJvStringGrid
-      Left = 872
-      Top = 432
-      Width = 116
-      Height = 73
-      FixedRows = 0
-      TabOrder = 5
-      Visible = False
-      Alignment = taLeftJustify
-      FixedFont.Charset = DEFAULT_CHARSET
-      FixedFont.Color = clWindowText
-      FixedFont.Height = -12
-      FixedFont.Name = 'Segoe UI'
-      FixedFont.Style = []
-    end
   end
   inherited PAuxiliares: TPanel
-    Top = 617
+    Top = 577
     Width = 1008
-    ExplicitTop = 617
-    ExplicitWidth = 1008
+    ExplicitTop = 574
+    ExplicitWidth = 1004
     object Label2: TLabel
       Left = 919
       Top = 4
@@ -764,7 +746,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   inherited PBotoes: TPanel
-    Top = 644
+    Top = 604
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
@@ -774,13 +756,13 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 465
+      ExplicitLeft = 465
     end
   end
   object PopupMenuLiberar: TPopupMenu
-    Left = 589
-    Top = 13
+    Left = 397
+    Top = 65533
     object Total: TMenuItem
       Caption = 'Libera'#231#227'o total'
       OnClick = TotalClick
@@ -791,7 +773,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   object PopupMenuRelat: TPopupMenu
-    Left = 684
+    Left = 756
     Top = 16
     object Ficha1: TMenuItem
       Caption = 'Ficha'
@@ -815,10 +797,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Caption = 'Inspe'#231#245'es'
         OnClick = Inspecoes1Click
       end
-      object Exportar1: TMenuItem
-        Caption = 'Exportar Excel'
-        OnClick = Exportar1Click
-      end
     end
     object Checklist1: TMenuItem
       Caption = 'Checklist'
@@ -831,8 +809,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     Top = 18
   end
   object PopupMenuExecutar: TPopupMenu
-    Left = 493
-    Top = 13
+    Left = 301
+    Top = 65533
     object MenuItem1: TMenuItem
       Caption = 'Executar'
       OnClick = TotalClick
@@ -840,167 +818,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     object MenuItem2: TMenuItem
       Caption = 'Entrada/Sa'#237'da  de m'#227'o de obra'
       OnClick = ParcialClick
-    end
-  end
-  object DSOSSimplesExcel: TDataSource
-    DataSet = FDMemTOSSimplesExcel
-    Left = 907
-    Top = 331
-  end
-  object FDMemTOSSimplesExcel: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 907
-    Top = 275
-  end
-  object FDMemTable1: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 795
-    Top = 267
-    object IntegerField2: TIntegerField
-      DisplayLabel = 'O.S.'
-      FieldName = 'CODIGO'
-      DisplayFormat = '#000000'
-    end
-    object StringField9: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Servi'#231'o'
-      FieldName = 'DESCRICAO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = [pfInUpdate]
-      Size = 200
-    end
-    object DateTimeField7: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Cad.'
-      FieldName = 'DATACADASTRO'
-      Origin = 'DATACADASTRO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object DateTimeField8: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Plan.'
-      FieldName = 'PLANEJADA'
-      Origin = 'PLANEJADA'
-      ProviderFlags = []
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object DateTimeField9: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Prog.'
-      FieldName = 'DATAPROGINI'
-      Origin = 'DATAPROGINI'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy hh:mm'
-    end
-    object DateTimeField10: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'In'#237'cio'
-      FieldName = 'DATAINICIOREAL'
-      Origin = 'DATAINICIOREAL'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object DateTimeField11: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Fim'
-      FieldName = 'DATAFIMREAL'
-      Origin = 'DATAFIMREAL'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
-    end
-    object DateTimeField12: TDateTimeField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Fecham.'
-      FieldName = 'DATAFECHAMENTO'
-      Origin = 'DATAFECHAMENTO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy'
-    end
-    object StringField10: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Equip.'
-      FieldName = 'CODEQUIPAMENTO'
-      Origin = 'CODEQUIPAMENTO'
-      ProviderFlags = [pfInUpdate]
-    end
-    object StringField11: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Centro/Custo'
-      FieldName = 'CENTROCUSTO'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      Visible = False
-      Size = 80
-    end
-    object BCDField3: TBCDField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Prv. (hs)'
-      FieldName = 'TEMPOPREVISTO'
-      Origin = 'TEMPOPREVISTO'
-      ProviderFlags = []
-      DisplayFormat = ',0.00'
-      Precision = 10
-      Size = 2
-    end
-    object BCDField4: TBCDField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Exc. (hs)'
-      FieldName = 'TEMPOEXECUTADO'
-      Origin = 'TEMPOEXECUTADO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = ',0.00'
-      Precision = 16
-      Size = 2
-    end
-    object StringField12: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Situa'#231#227'o'
-      FieldName = 'SITUACAO'
-      Origin = 'SITUACAO'
-      ProviderFlags = [pfInUpdate]
-      Size = 40
-    end
-    object StringField13: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Tipo'
-      FieldName = 'TIPOMANUTENCAO'
-      Origin = 'TIPOMANUTENCAO'
-      ProviderFlags = []
-      Size = 40
-    end
-    object StringField14: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Oficina'
-      FieldName = 'OFICINA'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      Size = 80
-    end
-    object StringField15: TStringField
-      AutoGenerateValue = arDefault
-      DisplayLabel = 'Prioridade'
-      FieldName = 'PRIORIDADEPARADA'
-      Origin = 'PRIORIDADEPARADA'
-      ProviderFlags = [pfInUpdate]
-      Size = 40
-    end
-    object StringField16: TStringField
-      DisplayLabel = 'Op.'
-      FieldName = 'OPERACAO'
-      Size = 2
     end
   end
 end

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.StdCtrls,
   Vcl.Mask, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, JvExMask,
   JvToolEdit, JvMaskEdit, JvDBControls, System.DateUtils, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadOrdemServicoTercUnidTarefas = class(TFrmTelaPaiParametros)
@@ -34,7 +34,6 @@ type
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
     procedure EdtTempoExit(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,7 +104,7 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageName := 'Operacional\salvar';
+BtnSalvar.ImageIndex := 2;
 
 EdtCalendario.SetFocus;
 end;
@@ -247,24 +246,9 @@ PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageName := 'Operacional\salvar';
+BtnSalvar.ImageIndex := 2;
 
 //  inherited;
-end;
-
-procedure TFrmTelaCadOrdemServicoTercUnidTarefas.ButConsultarClick(
-  Sender: TObject);
-begin
-DM.FTabela_auxiliar := 67;
-  inherited;
-DM.qryOrdemServicoTercUnidTarefasPred.Close;
-DM.qryOrdemServicoTercUnidTarefasPred.Params[0].AsString := DM.FParamAuxiliar[0];
-DM.qryOrdemServicoTercUnidTarefasPred.Open;
-
-if DM.qryOrdemServicoTercUnidSITUACAO.AsString = 'FECHADA' then
-  begin
-    PCentro.Enabled := False;
-  end;
 end;
 
 procedure TFrmTelaCadOrdemServicoTercUnidTarefas.EdtTempoExit(Sender: TObject);

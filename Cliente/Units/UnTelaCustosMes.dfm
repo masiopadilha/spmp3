@@ -1,32 +1,21 @@
 inherited FrmTelaCustosMes: TFrmTelaCustosMes
   Caption = 'Custos do M'#234's'
-  ClientHeight = 304
-  ClientWidth = 488
   OnCreate = FormCreate
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 484
-    inherited BtnAjuda: TButton
-      Left = 448
-      ExplicitLeft = 448
-    end
-  end
   inherited PCentro: TPanel
-    Width = 482
-    Height = 165
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 474
+      Width = 494
       Height = 157
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 470
+      ExplicitWidth = 490
       ExplicitHeight = 154
       object CBMes: TComboBox
         Left = 144
-        Top = 65
+        Top = 52
         Width = 91
         Height = 22
         Style = csOwnerDrawFixed
@@ -49,7 +38,7 @@ inherited FrmTelaCustosMes: TFrmTelaCustosMes
       end
       object CBAno: TComboBox
         Left = 237
-        Top = 65
+        Top = 52
         Width = 62
         Height = 22
         Style = csOwnerDrawFixed
@@ -76,7 +65,7 @@ inherited FrmTelaCustosMes: TFrmTelaCustosMes
       end
       object BtnConsultar: TButton
         Left = 303
-        Top = 62
+        Top = 49
         Width = 28
         Height = 28
         Hint = 'Consultar'
@@ -91,21 +80,15 @@ inherited FrmTelaCustosMes: TFrmTelaCustosMes
       end
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 484
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 484
     inherited BtnOK: TButton
       Left = 8
       Visible = False
       ExplicitLeft = 8
     end
     inherited BtnFechar: TButton
-      Left = 205
-      ExplicitLeft = 205
+      Left = 214
+      ExplicitLeft = 214
     end
   end
   object CDCustos: TClientDataSet

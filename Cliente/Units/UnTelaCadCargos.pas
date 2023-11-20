@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadCargos = class(TFrmTelaPaiParametros)
@@ -21,8 +21,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -93,24 +91,11 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadCargos.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 13;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadCargos.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBCargos;
-end;
-
 procedure TFrmTelaCadCargos.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadCargos.FormClose(Sender: TObject;
@@ -126,6 +111,7 @@ begin
 DM.FDataSetParam    := DM.qryCargos;
 DM.FDataSourceParam := DM.dsCargos;
 DM.FTela := 'CADCARGOS';
+DM.FTabela_auxiliar := 13;
 end;
 
 end.

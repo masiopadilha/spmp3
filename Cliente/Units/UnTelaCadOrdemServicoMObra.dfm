@@ -3,23 +3,24 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
   ClientHeight = 304
   ClientWidth = 508
   OnCreate = FormCreate
-  ExplicitWidth = 520
   TextHeight = 16
   inherited PTop: TPanel
     Width = 504
-    ExplicitWidth = 500
+    ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 469
-      ExplicitLeft = 465
+      Left = 473
+      ExplicitLeft = 473
     end
   end
   inherited PCentro: TPanel
     Width = 502
     Height = 165
-    ExplicitWidth = 498
+    ExplicitWidth = 502
+    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
       Left = 158
       Width = 0
+      Height = 152
       TabOrder = 1
       ExplicitLeft = 158
       ExplicitWidth = 0
@@ -29,7 +30,7 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
       Left = 4
       Top = 4
       Width = 151
-      Height = 157
+      Height = 146
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alLeft
       Ctl3D = False
@@ -75,7 +76,7 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
       Left = 161
       Top = 4
       Width = 337
-      Height = 157
+      Height = 146
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -128,21 +129,21 @@ inherited FrmTelaCadOrdemServicoMObra: TFrmTelaCadOrdemServicoMObra
   inherited PAuxiliares: TPanel
     Top = 237
     Width = 504
-    ExplicitWidth = 500
+    ExplicitTop = 237
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 504
-    ExplicitWidth = 500
+    ExplicitTop = 264
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 215
+      Left = 213
       OnClick = BtnFecharClick
-      ExplicitLeft = 215
+      ExplicitLeft = 213
     end
   end
 end

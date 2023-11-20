@@ -1,10 +1,16 @@
 inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
   Caption = 'Desenho T'#233'cnico'
-  ClientHeight = 371
-  ClientWidth = 784
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 780
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 494
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 516
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsArquivoTecnico
     end
@@ -17,13 +23,19 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
     inherited LblUsuCad: TDBText
       DataSource = DM.dsArquivoTecnico
     end
+    inherited LCadastro: TLabel
+      Left = 388
+    end
+    inherited LCadastroPor: TLabel
+      Left = 350
+    end
   end
   inherited PCentro: TPanel
-    Width = 780
-    Height = 248
+    Width = 624
+    Height = 323
     object Label1: TLabel
-      Left = 64
-      Top = 38
+      Left = 40
+      Top = 67
       Width = 44
       Height = 16
       Alignment = taRightJustify
@@ -31,8 +43,8 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       FocusControl = EdtCodigo
     end
     object Label3: TLabel
-      Left = 252
-      Top = 128
+      Left = 327
+      Top = 129
       Width = 56
       Height = 16
       Alignment = taRightJustify
@@ -40,62 +52,62 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       FocusControl = EdtDescricao
     end
     object Label6: TLabel
-      Left = 64
-      Top = 128
+      Left = 36
+      Top = 129
       Width = 46
       Height = 16
       Alignment = taRightJustify
       Caption = 'Projeto:'
     end
     object Label15: TLabel
-      Left = 405
-      Top = 128
+      Left = 32
+      Top = 160
       Width = 50
       Height = 16
       Caption = 'N'#250'mero:'
       FocusControl = EdtNumero
     end
     object Label5: TLabel
-      Left = 560
-      Top = 128
+      Left = 323
+      Top = 160
       Width = 60
       Height = 16
       Caption = 'Mapoteca:'
       FocusControl = EdtMapoteca
     end
     object Label14: TLabel
-      Left = 64
-      Top = 173
+      Left = 38
+      Top = 191
       Width = 44
       Height = 16
       Caption = 'Gaveta:'
       FocusControl = EdtGaveta
     end
     object Label7: TLabel
-      Left = 252
-      Top = 173
+      Left = 347
+      Top = 191
       Width = 36
       Height = 16
       Caption = 'Pasta:'
     end
     object Label10: TLabel
-      Left = 64
-      Top = 83
+      Left = 4
+      Top = 98
       Width = 79
       Height = 16
       Alignment = taRightJustify
       Caption = 'Equipamento:'
     end
     object Label12: TLabel
-      Left = 405
-      Top = 173
+      Left = 34
+      Top = 222
       Width = 48
       Height = 16
       Caption = 'Arquivo:'
     end
     object Label8: TLabel
-      Left = 560
-      Top = 173
+      Left = 334
+      Top = 222
       Width = 49
       Height = 16
       Alignment = taRightJustify
@@ -103,8 +115,8 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 64
-      Top = 56
+      Left = 86
+      Top = 66
       Width = 97
       Height = 24
       CharCase = ecUpperCase
@@ -115,9 +127,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 166
-      Top = 56
-      Width = 544
+      Left = 184
+      Top = 66
+      Width = 423
       Height = 24
       DataField = 'DESCRICAO'
       DataSource = DM.dsArquivoTecnico
@@ -126,9 +138,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtConjunto: TDBEdit
-      Left = 252
-      Top = 144
-      Width = 150
+      Left = 387
+      Top = 128
+      Width = 220
       Height = 24
       DataField = 'CONJUNTO'
       DataSource = DM.dsArquivoTecnico
@@ -137,9 +149,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtProjeto: TDBEdit
-      Left = 64
-      Top = 146
-      Width = 150
+      Left = 86
+      Top = 128
+      Width = 190
       Height = 24
       Color = clBtnFace
       DataField = 'PROJETO'
@@ -150,8 +162,8 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object BtnProjeto: TButton
-      Left = 218
-      Top = 142
+      Left = 278
+      Top = 126
       Width = 28
       Height = 28
       Hint = 'Consultar'
@@ -165,9 +177,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnClick = BtnProjetoClick
     end
     object EdtNumero: TDBEdit
-      Left = 405
-      Top = 144
-      Width = 150
+      Left = 86
+      Top = 159
+      Width = 220
       Height = 24
       DataField = 'NUMORIGINAL'
       DataSource = DM.dsArquivoTecnico
@@ -176,9 +188,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtMapoteca: TDBEdit
-      Left = 560
-      Top = 144
-      Width = 150
+      Left = 387
+      Top = 159
+      Width = 220
       Height = 24
       DataField = 'MAPOTECA'
       DataSource = DM.dsArquivoTecnico
@@ -187,9 +199,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtGaveta: TDBEdit
-      Left = 64
-      Top = 191
-      Width = 182
+      Left = 86
+      Top = 190
+      Width = 220
       Height = 24
       DataField = 'GAVETA'
       DataSource = DM.dsArquivoTecnico
@@ -198,9 +210,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtPasta: TDBEdit
-      Left = 252
-      Top = 191
-      Width = 150
+      Left = 387
+      Top = 190
+      Width = 220
       Height = 24
       DataField = 'PASTA'
       DataSource = DM.dsArquivoTecnico
@@ -209,8 +221,8 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtCodEquipamento: TDBEdit
-      Left = 64
-      Top = 101
+      Left = 86
+      Top = 97
       Width = 97
       Height = 24
       TabStop = False
@@ -224,9 +236,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtDescEquipamento: TDBEdit
-      Left = 166
-      Top = 100
-      Width = 510
+      Left = 184
+      Top = 97
+      Width = 394
       Height = 24
       Color = clBtnFace
       Ctl3D = True
@@ -240,8 +252,8 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object BtnEquipamento: TButton
-      Left = 682
-      Top = 98
+      Left = 579
+      Top = 95
       Width = 28
       Height = 28
       DisabledImageIndex = 14
@@ -252,9 +264,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnClick = BtnEquipamentoClick
     end
     object EdtArquivo: TDBEdit
-      Left = 405
-      Top = 191
-      Width = 150
+      Left = 86
+      Top = 221
+      Width = 220
       Height = 24
       DataField = 'ARQUIVO'
       DataSource = DM.dsArquivoTecnico
@@ -263,9 +275,9 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
       OnKeyPress = FormKeyPress
     end
     object EdtEstacao: TDBEdit
-      Left = 560
-      Top = 191
-      Width = 150
+      Left = 387
+      Top = 221
+      Width = 220
       Height = 24
       DataField = 'ESTACAO'
       DataSource = DM.dsArquivoTecnico
@@ -275,19 +287,19 @@ inherited FrmTelaCadArqTecnicoDesenho: TFrmTelaCadArqTecnicoDesenho
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 352
-    Width = 784
+    Top = 405
+    Width = 628
   end
   inherited PAuxiliares: TPanel
-    Top = 325
-    Width = 780
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 36
   end
   object PopupMenuCons: TPopupMenu
-    Left = 402
-    Top = 83
+    Left = 506
+    Top = 139
     object Codigo1: TMenuItem
       Caption = 'C'#243'digo'
       OnClick = Codigo1Click

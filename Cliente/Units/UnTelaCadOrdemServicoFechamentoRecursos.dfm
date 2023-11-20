@@ -1,28 +1,27 @@
 inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFechamentoRecursos
   Caption = 'Fechamento de Recursos da O.S.'
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     inherited BtnAjuda: TButton
-      Left = 448
-      ExplicitLeft = 448
+      Left = 467
+      ExplicitLeft = 467
     end
   end
   inherited PCentro: TPanel
-    ExplicitWidth = 482
-    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
       Left = 157
-      Width = 0
+      Width = 3
       ExplicitLeft = 157
       ExplicitWidth = 3
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
-      Left = 157
+      Left = 155
       Top = 4
-      Width = 321
-      Height = 157
+      Width = 339
+      Height = 154
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -60,7 +59,7 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 143
+          Width = 148
           Visible = True
         end
         item
@@ -75,7 +74,6 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
-          Width = 50
           Visible = True
         end
         item
@@ -99,7 +97,7 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
       Left = 4
       Top = 4
       Width = 150
-      Height = 157
+      Height = 154
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alLeft
       Ctl3D = False
@@ -154,22 +152,16 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    ExplicitTop = 237
-    ExplicitWidth = 484
-  end
   inherited PBotoes: TPanel
-    ExplicitTop = 264
-    ExplicitWidth = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 206
+      Left = 212
       OnClick = BtnFecharClick
-      ExplicitLeft = 206
+      ExplicitLeft = 212
     end
   end
 end

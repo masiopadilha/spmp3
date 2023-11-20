@@ -67,7 +67,6 @@ type
     procedure BtnExcluirClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure aaaaaa1Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,7 +170,7 @@ else
     Try
       if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso n�o permitido, contacte o setor respons�vel para solicitar a libera��o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
       if DM.AplicarMascara(DM.qryContadoresCODIGO, DM.qryFormatoCodigoPONTOSINSPECAO, FrmTelaCadContadores) = False then exit;
@@ -213,7 +212,7 @@ else
     Try
       if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso n�o permitido, contacte o setor respons�vel para solicitar a libera��o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
       if DM.AplicarMascara(DM.qryEquipamentosCODIGO, DM.qryFormatoCodigoEQUIPAMENTOS, FrmTelaCadEquipamentos) = False then exit;
@@ -317,7 +316,7 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
           DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
         DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
         //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a manuten��o foi fechada ou n�o.
-        if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
+        if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programa��o' then
           begin
             DM.qryManutProgEquip.Edit;
             DM.qryManutProgEquipRELATORIO.AsString    := 'N';
@@ -327,7 +326,7 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
           end;
         //Sendo a inspe��o reprogramada pela execu��o, definir como manuten��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
         //a gera��o de outra manuten��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra manuten��o at� ser fechada.
-        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
+        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execu��o' then
           begin
             DM.qryManutProgEquip.Edit;
             DM.qryManutProgEquipRELATORIO.AsString := 'S';
@@ -364,7 +363,7 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
           DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
         DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
         //Sendo a inspe��o reprogramada pela 'programa��o', programa a pr�xima inspe��o independente se a Lubrificen��o foi fechada ou n�o.
-        if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
+        if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programa��o' then
           begin
             DM.qryLubrificProgEquip.Edit;
             DM.qryLubrificProgEquipRELATORIO.AsString    := 'N';
@@ -374,7 +373,7 @@ if DM.qryAbastecimentosCONTADORATUAL.AsInteger < LOdometro then
           end;
         //Sendo a inspe��o reprogramada pela execu��o, definir como Lubrificen��o em aberto at� ser efetuado o fechamento, portanto n�o permitindo
         //a gera��o de outra Lubrifica��o mesmo que o per�odo ven�a novamente. Define a coluna 'RELATORIO = S' para impedir a gera��o de outra Lubrifica��o at� ser fechada.
-        if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execução' then
+        if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Execu��o' then
           begin
             DM.qryLubrificProgEquip.Edit;
             DM.qryLubrificProgEquipRELATORIO.AsString := 'S';
@@ -399,43 +398,6 @@ if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
 DM.MSGAguarde('', False);
 end;
-procedure TFrmTelaCadAbastecimentos.ButConsultarClick(Sender: TObject);
-begin
-if DM.FParamAuxiliar[1] = '' then
-  begin
-    PopupMenuCons.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
-    Exit;
-  end
-else
-DM.FTabela_auxiliar := 78;
-  inherited;
-if DM.qryAbastecimentosCODEQUIPAMENTO.AsString <> EmptyStr then
-  begin
-    DM.qryAbastecimentosCombustTodos.Close;
-    DM.qryAbastecimentosCombustTodos.Open;
-
-    DM.qryAbastecimentosLubrificTodos.Close;
-    DM.qryAbastecimentosLubrificTodos.Open;
-
-
-    DM.qryAbastecimentosCombust.Open;
-
-    DM.qryAbastecimentosCombustAbast.Close;
-    DM.qryAbastecimentosCombustAbast.Open;
-
-    DM.qryAbastecimentosLubrific.Open;
-
-    DM.qryAbastecimentosLubrificAbast.Close;
-    DM.qryAbastecimentosLubrificAbast.Params[0].AsInteger := DM.qryAbastecimentosLubrificCODIGO.AsInteger;
-    DM.qryAbastecimentosLubrificAbast.Open;
-
-    LOdometro := DM.qryAbastecimentosCONTADORATUAL.AsInteger;
-
-    CBPeriodo.OnChange(Sender);
-  end;
-DM.FParamAuxiliar[1] := '';
-end;
-
 procedure TFrmTelaCadAbastecimentos.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -493,7 +455,7 @@ begin
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadAbastecimentosLubrificante, FrmTelaCadAbastecimentosLubrificante);
-    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrificações do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
+    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrifica��es do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
     FrmTelaCadAbastecimentosLubrificante.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadAbastecimentosCombustivel);
@@ -504,7 +466,7 @@ begin
     DM.qryAbastecimentosLubrificAbast.First;
     if DM.qryAbastecimentosLubrificAbastODOMETROLubrific.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
-        if Application.MessageBox('Contador superior ao último valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
+        if Application.MessageBox('Contador superior ao �ltimo valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
           begin
             DM.qryAbastecimentos.Edit;
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosLubrificAbastODOMETROLUBRIFIC.AsFloat;

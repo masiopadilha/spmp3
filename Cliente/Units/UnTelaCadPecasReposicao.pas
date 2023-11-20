@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, JvDialogs, Vcl.Imaging.Jpeg, FireDAC.Stan.Param,
-  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPecasReposicao = class(TFrmTelaPaiCadastros)
@@ -105,7 +105,6 @@ type
     procedure BtnFornecedorClick(Sender: TObject);
     procedure BtnAnexarClick(Sender: TObject);
     procedure BtnLimparClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -459,41 +458,6 @@ DM.qryPecasReposicaoDados.Edit;
 DM.MSGAguarde('', False);
 end;
 
-procedure TFrmTelaCadPecasReposicao.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar  := 36;
-DM.FParamAuxiliar[1] := 'DESCRICAO';
-  inherited;
-if DM.qryPecasReposicaoCODFAMILIAPECAREP.AsString <> EmptyStr then
-  begin
-    DM.qryFamPecasRep.Close;
-    DM.qryFamPecasRep.Params[0].AsString := DM.qryPecasReposicaoCODFAMILIAPECAREP.AsString;
-    DM.qryFamPecasRep.Open;
-
-    DM.qryPecasReposicaoDados.Close;
-    DM.qryPecasReposicaoDados.Params[0].AsString := DM.FCodEmpresa;
-    DM.qryPecasReposicaoDados.Params[1].AsString := DM.qryPecasReposicaoCODFAMILIAPECAREP.AsString;
-    DM.qryPecasReposicaoDados.Params[2].AsString := DM.qryPecasReposicaoCODIGO.AsString;
-    DM.qryPecasReposicaoDados.Open;
-    DM.qryPecasReposicaoDados.Edit;
-
-    if DM.qryFamPecasRepCAMPO1.AsString = EmptyStr then EdtCampo1.Visible := False else EdtCampo1.Visible := True;
-    if DM.qryFamPecasRepCAMPO2.AsString = EmptyStr then EdtCampo2.Visible := False else EdtCampo2.Visible := True;
-    if DM.qryFamPecasRepCAMPO3.AsString = EmptyStr then EdtCampo3.Visible := False else EdtCampo3.Visible := True;
-    if DM.qryFamPecasRepCAMPO4.AsString = EmptyStr then EdtCampo4.Visible := False else EdtCampo4.Visible := True;
-    if DM.qryFamPecasRepCAMPO5.AsString = EmptyStr then EdtCampo5.Visible := False else EdtCampo5.Visible := True;
-    if DM.qryFamPecasRepCAMPO6.AsString = EmptyStr then EdtCampo6.Visible := False else EdtCampo6.Visible := True;
-    if DM.qryFamPecasRepCAMPO7.AsString = EmptyStr then EdtCampo7.Visible := False else EdtCampo7.Visible := True;
-    if DM.qryFamPecasRepCAMPO8.AsString = EmptyStr then EdtCampo8.Visible := False else EdtCampo8.Visible := True;
-    if DM.qryFamPecasRepCAMPO9.AsString = EmptyStr then EdtCampo9.Visible := False else EdtCampo9.Visible := True;
-    if DM.qryFamPecasRepCAMPO10.AsString = EmptyStr then EdtCampo10.Visible := False else EdtCampo10.Visible := True;
-    if DM.qryFamPecasRepCAMPO11.AsString = EmptyStr then EdtCampo11.Visible := False else EdtCampo11.Visible := True;
-    if DM.qryFamPecasRepCAMPO12.AsString = EmptyStr then EdtCampo12.Visible := False else EdtCampo12.Visible := True;
-  end;
-
-DM.ExibeFoto(DM.qryPecasReposicao, 'IMAGEM', FrmTelaCadPecasReposicao.ImgFotoPeca);
-end;
-
 procedure TFrmTelaCadPecasReposicao.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -595,15 +559,15 @@ end;
 procedure TFrmTelaCadPecasReposicao.EdtCodPecaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadPecasReposicao.EdtDescricaoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 if (DM.VerificaDuplo(EdtDescricao.Text) = True) and (DM.FAlterando = False) then
   begin
@@ -617,8 +581,8 @@ end;
 procedure TFrmTelaCadPecasReposicao.EdtReferenciaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 DM.FParamAuxiliar[1] := 'REFERENCIA';
 if (DM.VerificaDuplo(EdtReferencia.Text) = True) and (DM.FAlterando = False) then
   begin
@@ -645,6 +609,7 @@ begin
 DM.FDataSetParam    := DM.qryPecasReposicao;
 DM.FDataSourceParam := DM.dsPecasReposicao;
 DM.FTela := 'CADPECASREP';
+DM.FTabela_auxiliar  := 36;
 end;
 
 procedure TFrmTelaCadPecasReposicao.Individual1Click(Sender: TObject);

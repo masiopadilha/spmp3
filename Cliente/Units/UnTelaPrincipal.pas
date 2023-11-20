@@ -9,13 +9,11 @@ uses
   System.DateUtils, Data.DB, Datasnap.DBClient, Data.SqlExpr, System.UITypes, Vcl.Imaging.pngimage,
   Vcl.Buttons, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Error, Winapi.ShellAPI,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-  IdExplicitTLSClientServerBase, IdFTP, VclTee.TeeGDIPlus, VCLTee.TeEngine,
-  VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, System.ImageList, Vcl.ImgList,
-  Vcl.CategoryButtons, System.Actions, Vcl.ActnList, Generics.Collections;
-
+  IdExplicitTLSClientServerBase, IdFTP;
 
 type
   TFrmTelaPrincipal = class(TForm)
+    Image1: TImage;
     MainMenuPrincipal: TMainMenu;
     Arquivo1: TMenuItem;
     PAlertas: TPanel;
@@ -235,143 +233,36 @@ type
     PorFamilia2: TMenuItem;
     Area5: TMenuItem;
     AlterarFamilia1: TMenuItem;
-    TeeGDIPlus1: TTeeGDIPlus;
-    N11: TMenuItem;
-    Dashboard1: TMenuItem;
-    Image4: TImage;
-    catMenuItens: TCategoryButtons;
-    imlIcons: TImageList;
-    pFundoAreaForm: TPanel;
-    catButtonsPrim: TCategoryButtons;
-    catButtonsSec: TCategoryButtons;
-    nbDashboard: TNotebook;
-    chartFalhas: TChart;
-    BarSeries2: THorizBarSeries;
-    chartPrevistoRealizado: TChart;
-    HorizBarSeries1: TLineSeries;
-    Series3: TLineSeries;
-    chartSolicTrab: TChart;
-    SpeedButton2: TSpeedButton;
-    Series1: TBarSeries;
-    chartTipoManut: TChart;
-    BarSeries1: TPieSeries;
-    pMTBFMTTR: TPanel;
-    pMTBF: TPanel;
-    pMTBFLogo: TPanel;
-    Image2: TImage;
-    pMTBFCentro: TPanel;
-    Label1: TLabel;
-    lblMTBF: TLabel;
-    pMTTR: TPanel;
-    pMTTRLogo: TPanel;
-    Image3: TImage;
-    pMTTRCentro: TPanel;
-    Label2: TLabel;
-    Label3: TLabel;
-    ActionListForms: TActionList;
-    actParamCorporativos: TAction;
-    actParamUnidades: TAction;
-    actCorpFormatoCodigos: TAction;
-    actCorpGrupoIndustrial: TAction;
-    actCorpCentrosCustos: TAction;
-    actCorpClassesEquipamentos: TAction;
-    actCorpFamiliasEquipamentos: TAction;
-    actCorpFamiliasPecasReposicao: TAction;
-    actCorpFamiliasRecursos: TAction;
-    actCorpCausasFalhas: TAction;
-    actCorpTiposManutencao: TAction;
-    actCorpMotivosParadas: TAction;
-    actCorpTiposProgramacao: TAction;
-    actCorpCargos: TAction;
-    actEquipCad: TAction;
-    actManutProgFam: TAction;
-    actSolicTrab: TAction;
-    actPlanoTrab: TAction;
-    actMObraCad: TAction;
-    actRecursosMenu: TAction;
-    actOSGerenc: TAction;
-    actUtiArqTec: TAction;
-    actUnidUsuarios: TAction;
-    actEquipManutProg: TAction;
-    actEquipLubrificProg: TAction;
-    actManutProgLubrificProgFam: TAction;
-    actManutProgConsInspPer: TAction;
-    actManutProgFechamInspPer: TAction;
-    actManutProgHistInspPer: TAction;
-    actManutProgConsEquipParados: TAction;
-    actManutProgPontosInsp: TAction;
-    actManutProgContadores: TAction;
-    actManutProgMonitCondOpe: TAction;
-    actManutProgEquipReservas: TAction;
-    actManutProgRotaManut: TAction;
-    actEquipPontoInsp: TAction;
-    actEquipContadores: TAction;
-    actEquipConf: TAction;
-    actEquipPecasRep: TAction;
-    actEquipMObraEsp: TAction;
-    actEquipLitTecnica: TAction;
-    actEquipNavGraf: TAction;
-    actEquipHist: TAction;
-    actUnidOficinas: TAction;
-    actUnidAlmoxarifados: TAction;
-    actUnidAreas: TAction;
-    actUnidFeriados: TAction;
-    actUnidCalendMObra: TAction;
-    actUnidCalendEquip: TAction;
-    actUnidImagens: TAction;
-    actUnidFornecedores: TAction;
-    actUnidFabricantes: TAction;
-    actUnidDispAdm: TAction;
-    actMObraCxaFerram: TAction;
-    actMObraInvent: TAction;
-    actMObraEmprest: TAction;
-    actMObraAusencias: TAction;
-    actMObraHist: TAction;
-    actRecursosCad: TAction;
-    actRecursosKit: TAction;
-    actRecursosFerram: TAction;
-    actPecasRepMenu: TAction;
-    actLubrificantes: TAction;
-    actPecasRepCad: TAction;
-    actPecasRepKit: TAction;
-    actPecasRepHist: TAction;
-    actPecasRepPed: TAction;
-    actLubrificCad: TAction;
-    actOSCad: TAction;
-    actOSFunc: TAction;
-    actOSTerc: TAction;
-    actOSTercFora: TAction;
-    actOSHist: TAction;
-    actUtiInfMensais: TAction;
-    actUtiIndDesemp: TAction;
-    actUtiAbastecim: TAction;
-    actUtiPneus: TAction;
-    actUtiAbastecimCad: TAction;
-    actUtiAbastecimViag: TAction;
-    actUtiAbastecimRotas: TAction;
-    actUtiPneusCad: TAction;
-    actUtiPneusFam: TAction;
-    actUtiPneusMont: TAction;
-    actUtiPneusCons: TAction;
-    actUtiAlertas: TAction;
-    actUtiCustoMes: TAction;
-    actUtiInfGerenc: TAction;
-    actConsAcessos: TAction;
-    actUsuAtivos: TAction;
-    actPermUsu: TAction;
-    pLogo: TPanel;
-    Image1: TImage;
-    pMainForm: TPanel;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
+    procedure CentrosdeCustos1Click(Sender: TObject);
     procedure TimerLetreiroTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PAlertasDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormatodeCdigos1Click(Sender: TObject);
+    procedure GrupoIndustrial1Click(Sender: TObject);
     procedure TimerOsciosoTimer(Sender: TObject);
+    procedure ClassesdeEquipamentos1Click(Sender: TObject);
+    procedure Equipamentos2Click(Sender: TObject);
+    procedure PeasdeReposio3Click(Sender: TObject);
+    procedure Recursos7Click(Sender: TObject);
+    procedure CausasdeFalhas1Click(Sender: TObject);
+    procedure iposdeManuteno1Click(Sender: TObject);
+    procedure MotivosdeParadas2Click(Sender: TObject);
+    procedure iposdeProgramao1Click(Sender: TObject);
+    procedure Cargos2Click(Sender: TObject);
     procedure Oficinas2Click(Sender: TObject);
+    procedure Almoxarifados1Click(Sender: TObject);
+    procedure reas1Click(Sender: TObject);
+    procedure Feriados1Click(Sender: TObject);
+    procedure CalendriodeModeObra1Click(Sender: TObject);
+    procedure CalendriodeEquipamentos1Click(Sender: TObject);
+    procedure Imagens2Click(Sender: TObject);
+    procedure Fabricantes1Click(Sender: TObject);
     procedure DisponibilidadesAdmissveis1Click(Sender: TObject);
+    procedure CadastrodeUsurios1Click(Sender: TObject);
     procedure Permissoes1Click(Sender: TObject);
     procedure PecasdeReposio1Click(Sender: TObject);
     procedure ModeObraEspecializada1Click(Sender: TObject);
@@ -505,63 +396,11 @@ type
     procedure PorFamilia2Click(Sender: TObject);
     procedure Area5Click(Sender: TObject);
     procedure AlterarFamilia1Click(Sender: TObject);
-    procedure Dashboard1Click(Sender: TObject);
-    procedure catMenuItensHotButton(Sender: TObject; const Button: TButtonItem);
-    procedure catMenuItensSelectedItemChange(Sender: TObject;
-      const Button: TButtonItem);
-    procedure catMenuItensCategories0Items0Click(Sender: TObject);
-    procedure catMenuItensCategories0Items1Click(Sender: TObject);
-    procedure catMenuItensCategories0Items2Click(Sender: TObject);
-    procedure catMenuItensCategories0Items3Click(Sender: TObject);
-    procedure catMenuItensCategories0Items4Click(Sender: TObject);
-    procedure catMenuItensCategories0Items5Click(Sender: TObject);
-    procedure catMenuItensCategories0Items6Click(Sender: TObject);
-    procedure catMenuItensCategories0Items7Click(Sender: TObject);
-    procedure catMenuItensCategories0Items8Click(Sender: TObject);
-    procedure catMenuItensCategories0Items9Click(Sender: TObject);
-    procedure catMenuItensCategories0Items10Click(Sender: TObject);
-    procedure catMenuItensCategories0Items12Click(Sender: TObject);
-    procedure catButtonsSecMouseLeave(Sender: TObject);
-    procedure actParamCorporativosExecute(Sender: TObject);
-    procedure actParamUnidadesExecute(Sender: TObject);
-    procedure actCorpFormatoCodigosExecute(Sender: TObject);
-    procedure actCorpGrupoIndustrialExecute(Sender: TObject);
-    procedure actCorpCentrosCustosExecute(Sender: TObject);
-    procedure actCorpClassesEquipamentosExecute(Sender: TObject);
-    procedure actCorpFamiliasEquipamentosExecute(Sender: TObject);
-    procedure actCorpFamiliasPecasReposicaoExecute(Sender: TObject);
-    procedure actCorpFamiliasRecursosExecute(Sender: TObject);
-    procedure actCorpCausasFalhasExecute(Sender: TObject);
-    procedure actCorpTiposManutencaoExecute(Sender: TObject);
-    procedure actCorpMotivosParadasExecute(Sender: TObject);
-    procedure actCorpTiposProgramacaoExecute(Sender: TObject);
-    procedure actCorpCargosExecute(Sender: TObject);
-    procedure actUnidUsuariosExecute(Sender: TObject);
-    procedure actUnidOficinasExecute(Sender: TObject);
-    procedure actUnidAlmoxarifadosExecute(Sender: TObject);
-    procedure actUnidAreasExecute(Sender: TObject);
-    procedure actUnidFeriadosExecute(Sender: TObject);
-    procedure actUnidCalendMObraExecute(Sender: TObject);
-    procedure actUnidCalendEquipExecute(Sender: TObject);
-    procedure actUnidImagensExecute(Sender: TObject);
-    procedure actUnidFornecedoresExecute(Sender: TObject);
-    procedure actUnidFabricantesExecute(Sender: TObject);
-    procedure actUnidDispAdmExecute(Sender: TObject);
   private
     { Private declarations }
-    FormList: TObjectList<TForm>;
-
-    procedure PosicionaMenuPrim(pTop:integer);
-    procedure PosicionaMenuSec(pTop:integer) ;
-    procedure LimpaButoesCatbuPrim;
-    procedure LimpaButoesCatbuSec;
-    procedure AdicionaButoesCatbuPrim(Categoria: string);
-    procedure AdicionaButoesCatbuSec(Categoria: string);
-    procedure AjustaMenuAposAddBotoes;
-    procedure AddForm(Value: TComponentClass; Form : TForm; const Parent : TPanel);
+//    procedure CheckUpdateVersion;
   public
     { Public declarations }
-
     procedure AppIdle(Sender: TObject; var Done: Boolean);
     procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
   end;
@@ -611,489 +450,6 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod;
 
 
-procedure TFrmTelaPrincipal.actCorpCargosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCARGOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryCargosCODIGO, DM.qryFormatoCodigoCAUSASFALHA, FrmTelaCadCargos) = False then exit;
-
-  AddForm(TFrmTelaCadCargos, FrmTelaCadCargos, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpCausasFalhasExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCAUSASFALHA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryCausaFalhaCODIGO, DM.qryFormatoCodigoCAUSASFALHA, FrmTelaCadCausaFalha) = False then exit;
-
-  AddForm(TFrmTelaCadCausaFalha, FrmTelaCadCausaFalha, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpCentrosCustosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCENTROCUSTO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-  begin
-    Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-    Exit;
-  end;
-
-  if DM.AplicarMascara(DM.qryCentroCustoCODIGO, DM.qryFormatoCodigoCENTROCUSTO, FrmTelaCadCentroCusto) = False then exit;
-
-  AddForm(TFrmTelaCadCentroCusto, FrmTelaCadCentroCusto, pMainForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpClassesEquipamentosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCLASSES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryClassesCODIGO, DM.qryFormatoCodigoCLASSES, FrmTelaCadClasses) = False then exit;
-
-  AddForm(TFrmTelaCadClasses, FrmTelaCadClasses, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpFamiliasEquipamentosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFAMILIAEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFamEquipamentoCODIGO, DM.qryFormatoCodigoFAMILIAEQUIPAMENTO, FrmTelaCadFamiliaEquipamento) = False then exit;
-
-  AddForm(TFrmTelaCadFamiliaEquipamento, FrmTelaCadFamiliaEquipamento, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpFamiliasPecasReposicaoExecute(
-  Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFAMILIAPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFamPecasRepCODIGO, DM.qryFormatoCodigoFAMILIAPECASREPOSICAO, FrmTelaCadFamiliaPecasRep) = False then exit;
-
-  AddForm(TFrmTelaCadFamiliaPecasRep, FrmTelaCadFamiliaPecasRep, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpFamiliasRecursosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFAMILIARECURSOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFamRecursosCODIGO, DM.qryFormatoCodigoFAMILIARECURSOS, FrmTelaCadFamiliaRecursos) = False then exit;
-
-  AddForm(TFrmTelaCadFamiliaRecursos, FrmTelaCadFamiliaRecursos, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpFormatoCodigosExecute(Sender: TObject);
-begin
-if (DM.qryUsuarioPAcessoCADFORMATOCODIGO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-  begin
-    Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-    Exit;
-  end;
-
-  AddForm(TFrmTelaCadFormatoCodigo, FrmTelaCadFormatoCodigo, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpGrupoIndustrialExecute(Sender: TObject);
-begin
-if (DM.qryUsuarioPAcessoCADGRUPOINDUSTRIAL.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-  begin
-    Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-    Exit;
-  end;
-
-  AddForm(TFrmTelaCadGrupoIndustrial, FrmTelaCadGrupoIndustrial, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpMotivosParadasExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADMOTIVOPARADA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryMotivoParadaCODIGO, DM.qryFormatoCodigoMOTIVOPARADA, FrmTelaCadMotivoParada) = False then exit;
-
-  AddForm(TFrmTelaCadMotivoParada, FrmTelaCadMotivoParada, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpTiposManutencaoExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADMANUTENCAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryTipoManutencaoCODIGO, DM.qryFormatoCodigoTIPOMANUTENCAO, FrmTelaCadTipoManutencao) = False then exit;
-
-  AddForm(TFrmTelaCadTipoManutencao, FrmTelaCadTipoManutencao, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actCorpTiposProgramacaoExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADTIPOPROGRAMACAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryTipoProgramacaoCODIGO, DM.qryFormatoCodigoTIPOPROGRAMACAO, FrmTelaCadTipoProgramacao) = False then exit;
-
-  AddForm(TFrmTelaCadTipoProgramacao, FrmTelaCadTipoProgramacao, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actParamCorporativosExecute(Sender: TObject);
-begin
-  PosicionaMenuSec(45);
-  catButtonsPrim.Width := 150;
-  Repaint;
-  LimpaButoesCatbuSec;
-  AdicionaButoesCatbuSec('Corporativo');
-  AjustaMenuAposAddBotoes;
-  catButtonsSec.Categories[0].Caption := 'Corporativo';
-end;
-
-procedure TFrmTelaPrincipal.actParamUnidadesExecute(Sender: TObject);
-begin
-  PosicionaMenuSec(74);
-  catButtonsPrim.Width := 150;
-  Repaint;
-  LimpaButoesCatbuSec;
-  AdicionaButoesCatbuSec('Unidade');
-  AjustaMenuAposAddBotoes;
-  catButtonsSec.Categories[0].Caption := 'Unidade';
-end;
-
-procedure TFrmTelaPrincipal.actUnidAlmoxarifadosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADALMOXARIFADO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryAlmoxarifadoCODIGO, DM.qryFormatoCodigoALMOXARIFADO, FrmTelaCadAlmoxarifados) = False then exit;
-
-  AddForm(TFrmTelaCadAlmoxarifados, FrmTelaCadAlmoxarifados, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidAreasExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADAREAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryAreasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
-  if DM.AplicarMascara(DM.qryCelulasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
-  if DM.AplicarMascara(DM.qryLinhasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
-
-  AddForm(TFrmTelaCadAreas, FrmTelaCadAreas, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidCalendEquipExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCALENDEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryCalendEquipCODIGO, DM.qryFormatoCodigoCALENDARIOEQUIP, FrmTelaCadCalendEquip) = False then exit;
-
-  AddForm(TFrmTelaCadCalendEquip, FrmTelaCadCalendEquip, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidCalendMObraExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADCALENDMOBRA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryCalendMObraCODIGO, DM.qryFormatoCodigoCALENDARIO, FrmTelaCadCalendMObra) = False then exit;
-
-  AddForm(TFrmTelaCadCalendMObra, FrmTelaCadCalendMObra, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidDispAdmExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADDISPONIBILIDADE.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  AddForm(TFrmTelaCadDisponibilidade, FrmTelaCadDisponibilidade, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidFabricantesExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFABRICANTES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFabricantesCODIGO, DM.qryFormatoCodigoFABRICANTE, FrmTelaCadFabricantes) = False then exit;
-
-  AddForm(TFrmTelaCadFabricantes, FrmTelaCadFabricantes, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidFeriadosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFeriadosCODIGO, DM.qryFormatoCodigoFERIADOS, FrmTelaCadFeriados) = False then exit;
-
-  AddForm(TFrmTelaCadFeriados, FrmTelaCadFeriados, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidFornecedoresExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADFORNECEDORES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryFornecedoresCODIGO, DM.qryFormatoCodigoFORNECEDOR, FrmTelaCadFornecedores) = False then exit;
-
-  AddForm(TFrmTelaCadFornecedores, FrmTelaCadFornecedores, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidImagensExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADIMANGENS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  AddForm(TFrmTelaCadImagens, FrmTelaCadImagens, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidOficinasExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADOFICINAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryOficinasCODIGO, DM.qryFormatoCodigoOFICINAS, FrmTelaCadOficinas) = False then exit;
-
-  AddForm(TFrmTelaCadOficinas, FrmTelaCadOficinas, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.actUnidUsuariosExecute(Sender: TObject);
-begin
-  if (DM.qryUsuarioPAcessoCADUSUARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-    begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-      Exit;
-    end;
-
-  if DM.AplicarMascara(DM.qryUsuariosCODIGO, DM.qryFormatoCodigoUSUARIO, FrmTelaCadUsuarios) = False then exit;
-
-  AddForm(TFrmTelaCadUsuarios, FrmTelaCadUsuarios, pFundoAreaForm);
-
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.AddForm(Value: TComponentClass; Form : TForm; const Parent : TPanel);
-var
-  LabelCaminhoForm:Tlabel;
-  LabelAtual       : Tlabel;
-begin
-  if not Assigned(Form) then
-  begin
-    Application.CreateForm(Value, Form);
-    FormList.Add(Form);
-  end;
-
-  Parent.Visible := True;
-
-  Form.Parent := Parent;
-  Form.BorderStyle := bsSizeable;
-  Form.FormStyle   := fsNormal;
-  Form.Align := alClient;
-  Form.WindowState := wsMaximized;
-  Form.Show;
-end;
-
-procedure TFrmTelaPrincipal.AjustaMenuAposAddBotoes;
-begin
-  catButtonsPrim.Height := (catButtonsPrim.Categories[0].Items.Count * 25) + 10;
-  catButtonsPrim.Categories[0].Collapsed := not catButtonsPrim.Visible;
-
-  catButtonsSec.Height := (catButtonsSec.Categories[0].Items.Count * 25) + 8;
-  catButtonsSec.Categories[0].Collapsed := not catButtonsSec.Visible;
-end;
-
-procedure TFrmTelaPrincipal.AdicionaButoesCatbuPrim(Categoria: string);
-var
-  I: Integer;
-begin
-  for I := 0 to ActionListForms.ActionCount -1  do
-    begin
-      if ActionListForms.Actions[i].Category = Categoria then
-         catButtonsPrim.Categories[0].Items.Add.Action:= ActionListForms.Actions[i];
-    end;
-end;
-
-procedure TFrmTelaPrincipal.AdicionaButoesCatbuSec(Categoria: string);
-var
-  I: Integer;
-begin
-  for I := 0 to ActionListForms.ActionCount -1  do
-    begin
-      if ActionListForms.Actions[i].Category=Categoria then
-        begin
-          catButtonsSec.Categories[0].Items.Add.Action:= ActionListForms.Actions[i];
-        end;
-    end;
-end;
-
-procedure TFrmTelaPrincipal.LimpaButoesCatbuSec;
-var
-  i: integer;
-begin
-  for i := 0 to catButtonsSec.Categories[0].Items.Count - 1 do
-    catButtonsSec.Categories[0].Items[0].DisposeOf;
-end;
-
-procedure TFrmTelaPrincipal.LimpaButoesCatbuPrim;
-var
-  i: integer;
-begin
-  for i := 0 to catButtonsPrim.Categories[0].Items.Count - 1 do
-    catButtonsPrim.Categories[0].Items[0].DisposeOf;
-
-  for i := 0 to catButtonsSec.Categories[0].Items.Count - 1 do
-    catButtonsSec.Categories[0].Items[0].DisposeOf;
-end;
-
-procedure TFrmTelaPrincipal.PosicionaMenuPrim(pTop:integer) ;
-begin
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-
-  if catButtonsPrim.Top = pTop then
-    catButtonsPrim.Visible := not catButtonsPrim.Visible
-  else
-    catButtonsPrim.Visible := True;
-
-  //catButtonsPrim.Left := SplitViewMenu.Width - 3;
-  catButtonsPrim.Top  := pTop;
-end;
-
-procedure TFrmTelaPrincipal.PosicionaMenuSec(pTop:integer) ;
-begin
-  if catButtonsSec.Top = pTop then
-    catButtonsSec.Visible := not catButtonsSec.Visible
-  else
-    catButtonsSec.Visible := true;
-
-  catButtonsSec.Left := catButtonsPrim.Left + catButtonsPrim.Width;
-  catButtonsSec.Top  := pTop;
-end;
-
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
   Try
@@ -1101,6 +457,21 @@ begin
     FrmTelaCadAlertas.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadAlertas);
+  End;
+end;
+procedure TFrmTelaPrincipal.Almoxarifados1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADALMOXARIFADO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryAlmoxarifadoCODIGO, DM.qryFormatoCodigoALMOXARIFADO, FrmTelaCadAlmoxarifados) = False then exit;
+    Application.CreateForm(TFrmTelaCadAlmoxarifados, FrmTelaCadAlmoxarifados);
+    FrmTelaCadAlmoxarifados.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadAlmoxarifados);
   End;
 end;
 procedure TFrmTelaPrincipal.Almoxarifados2Click(Sender: TObject);
@@ -1597,6 +968,21 @@ begin
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramentas);
   End;
 end;
+procedure TFrmTelaPrincipal.CadastrodeUsurios1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADUSUARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryUsuariosCODIGO, DM.qryFormatoCodigoUSUARIO, FrmTelaCadUsuarios) = False then exit;
+    Application.CreateForm(TFrmTelaCadUsuarios, FrmTelaCadUsuarios);
+    FrmTelaCadUsuarios.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadUsuarios);
+  End;
+end;
 procedure TFrmTelaPrincipal.Calendrio1Click(Sender: TObject);
 begin
   Try
@@ -1611,6 +997,21 @@ begin
     FreeAndNil(FrmTelaCadCalendarioOS);
   End;
 end;
+procedure TFrmTelaPrincipal.CalendriodeEquipamentos1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADCALENDEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryCalendEquipCODIGO, DM.qryFormatoCodigoCALENDARIOEQUIP, FrmTelaCadCalendEquip) = False then exit;
+    Application.CreateForm(TFrmTelaCadCalendEquip, FrmTelaCadCalendEquip);
+    FrmTelaCadCalendEquip.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadCalendEquip);
+  End;
+end;
 procedure TFrmTelaPrincipal.CalendriodeEquipamentos2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -1622,6 +1023,21 @@ DM.qryAuxiliar.SQL.Add('select codigo, descricao from calendarioequip where code
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRCalendEquip.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+procedure TFrmTelaPrincipal.CalendriodeModeObra1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADCALENDMOBRA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryCalendMObraCODIGO, DM.qryFormatoCodigoCALENDARIO, FrmTelaCadCalendMObra) = False then exit;
+    Application.CreateForm(TFrmTelaCadCalendMObra, FrmTelaCadCalendMObra);
+    FrmTelaCadCalendMObra.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadCalendMObra);
+  End;
 end;
 procedure TFrmTelaPrincipal.CalendriodeModeObra2Click(Sender: TObject);
 begin
@@ -1647,154 +1063,36 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRCargos.ShowReport();
 DM.qryAuxiliar.Close;
 end;
-procedure TFrmTelaPrincipal.catButtonsSecMouseLeave(Sender: TObject);
+procedure TFrmTelaPrincipal.Cargos2Click(Sender: TObject);
 begin
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
+  Try
+    if (DM.qryUsuarioPAcessoCADCARGOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryCargosCODIGO, DM.qryFormatoCodigoCARGOS, FrmTelaCadCargos) = False then exit;
+    Application.CreateForm(TFrmTelaCadCargos, FrmTelaCadCargos);
+    FrmTelaCadCargos.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadCargos);
+  End;
 end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items0Click(Sender: TObject);
+procedure TFrmTelaPrincipal.CausasdeFalhas1Click(Sender: TObject);
 begin
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible  := False;
-//  pTitulo.Visible             := False;
-//  pMainForm.Visible           := False;
+  Try
+    if (DM.qryUsuarioPAcessoCADCAUSASFALHA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryCausaFalhaCODIGO, DM.qryFormatoCodigoCAUSASFALHA, FrmTelaCadCausaFalha) = False then exit;
+    Application.CreateForm(TFrmTelaCadCausaFalha, FrmTelaCadCausaFalha);
+    FrmTelaCadCausaFalha.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadCausaFalha);
+  End;
 end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items10Click(
-  Sender: TObject);
-begin
-  PosicionaMenuPrim(390);
-  catButtonsPrim.Width := 260;
-  repaint;
-  LimpaButoesCatbuPrim;
-  LimpaButoesCatbuSec;
-  AdicionaButoesCatbuPrim('Utilitários');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Utilitários';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items12Click(
-  Sender: TObject);
-begin
-  PosicionaMenuPrim(464);
-  catButtonsPrim.Width := 175;
-  Repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Administração');
-  catButtonsPrim.Categories[0].Caption := 'Adminstração';
-  AjustaMenuAposAddBotoes
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items1Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(45);
-  catButtonsPrim.Width := 150;
-  Repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Parâmetros do Sistema');
-  catButtonsPrim.Categories[0].Caption := 'Parâmetros';
-  AjustaMenuAposAddBotoes
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items2Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(86);
-  catButtonsPrim.Width := 250;
-  Repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Equipamento');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Equipamento';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items3Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(124);
-  catButtonsPrim.Width := 335;
-  repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Manutenção Programada');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Manutenção Programada';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items4Click(Sender: TObject);
-begin
-//  ControllerProxy.AddForm(TfrmCentroCusto, pMainForm, pTitulo);
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items5Click(Sender: TObject);
-begin
-//  ControllerProxy.AddForm(TfrmCentroCusto, pMainForm, pTitulo);
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible := False;
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items6Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(238);  //426
-  catButtonsPrim.Width := 200;
-  repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Mão de Obra');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Mão de Obra';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items7Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(276);
-  catButtonsPrim.Width := 205;
-  repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Recurso');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Recurso';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items8Click(Sender: TObject);
-begin
-  PosicionaMenuPrim(314);
-  catButtonsPrim.Width := 330;
-  repaint;
-  LimpaButoesCatbuPrim;
-  AdicionaButoesCatbuPrim('Ordem de Serviço');
-  AjustaMenuAposAddBotoes;
-  catButtonsPrim.Categories[0].Caption := 'Ordem de Serviço';
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensCategories0Items9Click(Sender: TObject);
-begin
-  catButtonsPrim.Visible := False;
-  catButtonsSec.Visible  := False;
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensHotButton(Sender: TObject;
-  const Button: TButtonItem);
-begin
-  if Button <> nil then
-    begin
-//      if catMenuItens.Categories[0].Items[Button.Index].Caption = '' then
-      if Button.Caption = '' then
-         catMenuItens.HotButtonColor := $00858727
-      else
-         catMenuItens.HotButtonColor := $00CAA25E;
-    end;
-end;
-
-procedure TFrmTelaPrincipal.catMenuItensSelectedItemChange(Sender: TObject;
-  const Button: TButtonItem);
-begin
-//  if Button <> nil then
-//    begin
-//      if Button.Caption = '' then
-//         catMenuItens.SelectedButtonColor := clRed;
-//    end;
-end;
-
 procedure TFrmTelaPrincipal.CausasdeFalhas2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -1825,6 +1123,22 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
+procedure TFrmTelaPrincipal.CentrosdeCustos1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADCENTROCUSTO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+    if DM.AplicarMascara(DM.qryCentroCustoCODIGO, DM.qryFormatoCodigoCENTROCUSTO, FrmTelaCadCentroCusto) = False then exit;
+    //if DM.AplicarMascara(DM.qryCentroCustoCODIGO, DM.qryFormatoCodigoNATUREZAFINANCEIRA, FrmTelaCadCentroCusto) = False then exit;
+    Application.CreateForm(TFrmTelaCadCentroCusto, FrmTelaCadCentroCusto);
+    FrmTelaCadCentroCusto.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadCentroCusto);
+  End;
+end;
 procedure TFrmTelaPrincipal.CentrosdeCustos2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -1836,6 +1150,21 @@ DM.qryAuxiliar.SQL.Add('select codigo, descricao from centrocusto order by descr
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRCentroCusto.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+procedure TFrmTelaPrincipal.ClassesdeEquipamentos1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADCLASSES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryClassesCODIGO, DM.qryFormatoCodigoCLASSES, FrmTelaCadClasses) = False then exit;
+    Application.CreateForm(TFrmTelaCadClasses, FrmTelaCadClasses);
+    FrmTelaCadClasses.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadClasses);
+  End;
 end;
 procedure TFrmTelaPrincipal.ClassesdeEquipamentos2Click(Sender: TObject);
 begin
@@ -1992,14 +1321,6 @@ begin
     FreeAndNil(FrmTelaCustosMes);
   End;
 end;
-procedure TFrmTelaPrincipal.Dashboard1Click(Sender: TObject);
-begin
-  if nbDashboard.PageIndex = 0 then
-    nbDashboard.PageIndex := 1
-  else
-    nbDashboard.PageIndex := 0;
-end;
-
 procedure TFrmTelaPrincipal.DespesasdaManutencao1Click(Sender: TObject);
 begin
   Try
@@ -2130,6 +1451,21 @@ begin
     FreeAndNil(FrmTelaCadPecasReposicaoHist);
   End;
 end;
+procedure TFrmTelaPrincipal.Equipamentos2Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADFAMILIAEQUIP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryFamEquipamentoCODIGO, DM.qryFormatoCodigoFAMILIAEQUIPAMENTO, FrmTelaCadFamiliaEquipamento) = False then exit;
+    Application.CreateForm(TFrmTelaCadFamiliaEquipamento, FrmTelaCadFamiliaEquipamento);
+    FrmTelaCadFamiliaEquipamento.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFamiliaEquipamento);
+  End;
+end;
 procedure TFrmTelaPrincipal.Equipamentos4Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -2154,6 +1490,21 @@ begin
     FrmTelaCadEquipamentoReserva.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadEquipamentoReserva);
+  End;
+end;
+procedure TFrmTelaPrincipal.Fabricantes1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADFABRICANTES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryFabricantesCODIGO, DM.qryFormatoCodigoFABRICANTE, FrmTelaCadFabricantes) = False then exit;
+    Application.CreateForm(TFrmTelaCadFabricantes, FrmTelaCadFabricantes);
+    FrmTelaCadFabricantes.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFabricantes);
   End;
 end;
 procedure TFrmTelaPrincipal.Fabricantes2Click(Sender: TObject);
@@ -2285,6 +1636,21 @@ begin
   End;
 end;
 
+procedure TFrmTelaPrincipal.Feriados1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADFERIADOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryFeriadosCODIGO, DM.qryFormatoCodigoFERIADOS, FrmTelaCadFeriados) = False then exit;
+    Application.CreateForm(TFrmTelaCadFeriados, FrmTelaCadFeriados);
+    FrmTelaCadFeriados.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFeriados);
+  End;
+end;
 procedure TFrmTelaPrincipal.Feriados2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -2340,10 +1706,23 @@ begin
     FreeAndNil(FrmTelaCadRecursosFerram);
   End;
 end;
+procedure TFrmTelaPrincipal.FormatodeCdigos1Click(Sender: TObject);
+begin
+if (DM.qryUsuarioPAcessoCADFORMATOCODIGO.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+  Try
+    Application.CreateForm(TFrmTelaCadFormatoCodigo, FrmTelaCadFormatoCodigo);
+    FrmTelaCadFormatoCodigo.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFormatoCodigo);
+  End
+else
+  begin
+    Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    Exit;
+  end;
+end;
 procedure TFrmTelaPrincipal.FormClose(Sender: TObject;
   var Action: TCloseAction);
-var
-  i: Integer;
 begin
   try
     if DM.FNomeUsuario <> 'sam_spmp' then
@@ -2378,25 +1757,17 @@ begin
       raise;
     end;
   end;
-
-
   DM.qryUsuario.Close;
   DM.qryFormatoCodigo.Close;
   DM.qryUsuarioAcessos.Close;
-
   if DM.FFecharForms = True then
     begin
       DM.FDConnSPMP3.Connected := False;
       Application.MessageBox('Sistema será encerrado por inatividade!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
     end;
-
-  for i := 0 to FormList.Count - 1 do
-    FormList[i].Free;
-
   FreeAndNil(DMAlertas);
   FreeAndNil(DmRelatorios);
   FreeAndNil(DM);
-
   Application.Terminate;
 end;
 
@@ -2430,21 +1801,33 @@ procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
 var
   Handle: TextFile;
 begin
-//  DM.GetVersion(Application.ExeName);
+//  try
+////    DM.CheckUpdateVersion;
+//  except
+//    on E: Exception do
+//      begin
+//        AssignFile(Handle, ExtractFilePath(Application.ExeName)+'\Error.log');
+//        if not FileExists(ExtractFilePath(Application.ExeName)+'\Error.log') then
+//          Rewrite(Handle);
+//        Append(Handle);
+//        WriteLn(Handle, DateTimeToStr(Now)+'> '+DM.FNomeUsuario+'> '+DM.FEstacao+'> '+ Screen.ActiveForm.Name+'> '+Screen.ActiveControl.Name+'> Update > '+E.Message);
+//        CloseFile(Handle);
+//      end;
+//  end;
+
   StatusBar1.Font.Size := 9;
   StatusBar1.Panels[0].Text := DM.FNomeUsuario;
   StatusBar1.Panels[1].Text := DM.FNivelAcesso;
   StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
   StatusBar1.Panels[3].Text := DM.FNomeGrupo;
-  StatusBar1.Panels[4].Text := DM.FVersaoMacro;
+  StatusBar1.Panels[4].Text := DM.GetVersion(Application.ExeName);
+
+//  StatusBar1.Panels[4].Text := DM.FVersao;
 
   if DM.FDiasRestantes < 36500 then
-//    lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
-    StatusBar1.Panels[5].Text := 'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
+    lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
   else
-//    lblLicenca.Caption :=  'Licença: Ilimitada';
-    StatusBar1.Panels[5].Text := 'Licença: Ilimitada';
-
+    lblLicenca.Caption :=  'Licença: Ilimitada';
   LblAlertas.Caption := DM.FAlerta;
   if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
     begin
@@ -2462,8 +1845,6 @@ begin
   TimerOscioso.Interval := DM.FMinutosInativo * 60000;
   Application.OnMessage := AppMessage;
   Application.OnIdle := AppIdle;
-  nbDashboard.PageIndex := 0;
-  FormList := TObjectList<TForm>.Create;
 end;
 procedure TFrmTelaPrincipal.Fornecedores1Click(Sender: TObject);
 begin
@@ -2505,6 +1886,24 @@ begin
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoGerencia);
   End;
+end;
+procedure TFrmTelaPrincipal.GrupoIndustrial1Click(Sender: TObject);
+begin
+if (DM.qryUsuarioPAcessoCADGRUPOINDUSTRIAL.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+  Try
+    if DM.AplicarMascara(DM.qryUnidadesCODIGO, DM.qryFormatoCodigoEMPRESA, FrmTelaCadGrupoIndustrial) = False then exit;
+    if DM.AplicarMascara(DM.qryAdmCorpCODIGO, DM.qryFormatoCodigoUSUARIO, FrmTelaCadGrupoIndustrial) = False then exit;
+    if DM.AplicarMascara(DM.qryAdmUnidCODIGO, DM.qryFormatoCodigoUSUARIO, FrmTelaCadGrupoIndustrial) = False then exit;
+    Application.CreateForm(TFrmTelaCadGrupoIndustrial, FrmTelaCadGrupoIndustrial);
+    FrmTelaCadGrupoIndustrial.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadGrupoIndustrial);
+  End
+else
+  begin
+    Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    Exit;
+  end;
 end;
 procedure TFrmTelaPrincipal.Historico1Click(Sender: TObject);
 begin
@@ -2582,7 +1981,6 @@ begin
     FreeAndNil(FrmTelaCadEquipamentosHist);
   End;
 end;
-
 procedure TFrmTelaPrincipal.Imagens1Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -2595,6 +1993,20 @@ DM.qryAuxiliar.SQL.Add('SELECT `imagens`.`CODIGO`, `imagens`.`DESCRICAO`, `equip
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRImagens.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+procedure TFrmTelaPrincipal.Imagens2Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADIMANGENS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    Application.CreateForm(TFrmTelaCadImagens, FrmTelaCadImagens);
+    FrmTelaCadImagens.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadImagens);
+  End;
 end;
 procedure TFrmTelaPrincipal.IndicadoresdeDesempenho2Click(Sender: TObject);
 begin
@@ -2671,6 +2083,21 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
+procedure TFrmTelaPrincipal.iposdeManuteno1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADMANUTENCAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryTipoManutencaoCODIGO, DM.qryFormatoCodigoTIPOMANUTENCAO, FrmTelaCadTipoManutencao) = False then exit;
+    Application.CreateForm(TFrmTelaCadTipoManutencao, FrmTelaCadTipoManutencao);
+    FrmTelaCadTipoManutencao.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadTipoManutencao);
+  End;
+end;
 procedure TFrmTelaPrincipal.iposdeManuteno2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -2682,6 +2109,21 @@ DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao from tipomanute
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRTipoManutencao.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+procedure TFrmTelaPrincipal.iposdeProgramao1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADTIPOPROGRAMACAO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryTipoProgramacaoCODIGO, DM.qryFormatoCodigoTIPOPROGRAMACAO, FrmTelaCadTipoProgramacao) = False then exit;
+    Application.CreateForm(TFrmTelaCadTipoProgramacao, FrmTelaCadTipoProgramacao);
+    FrmTelaCadTipoProgramacao.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadTipoProgramacao);
+  End;
 end;
 procedure TFrmTelaPrincipal.iposdeProgramao2Click(Sender: TObject);
 begin
@@ -3083,6 +2525,21 @@ DM.qryAuxiliar.Open;
 DmRelatorios.frxRMotivoParada.ShowReport();
 DM.qryAuxiliar.Close;
 end;
+procedure TFrmTelaPrincipal.MotivosdeParadas2Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADMOTIVOPARADA.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryMotivoParadaCODIGO, DM.qryFormatoCodigoMOTIVOPARADA, FrmTelaCadMotivoParada) = False then exit;
+    Application.CreateForm(TFrmTelaCadMotivoParada, FrmTelaCadMotivoParada);
+    FrmTelaCadMotivoParada.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadMotivoParada);
+  End;
+end;
 procedure TFrmTelaPrincipal.NavegaoGrfica1Click(Sender: TObject);
 begin
   Try
@@ -3236,6 +2693,21 @@ DM.qryAuxiliar.SQL.Add('SELECT `pecasreposicao`.`CODIGO`, `pecasreposicao`.`DESC
                        + ' ON (`pecasreposicao`.`CODFAMILIAPECAREP` = `familiapecasreposicao`.`CODIGO`) WHERE (`pecasreposicao`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `pecasreposicao`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRPecasRepGeral.ShowReport();
+end;
+procedure TFrmTelaPrincipal.PeasdeReposio3Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADFAMILIAPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryFamPecasRepCODIGO, DM.qryFormatoCodigoFAMILIAPECASREPOSICAO, FrmTelaCadFamiliaPecasRep) = False then exit;
+    Application.CreateForm(TFrmTelaCadFamiliaPecasRep, FrmTelaCadFamiliaPecasRep);
+    FrmTelaCadFamiliaPecasRep.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFamiliaPecasRep);
+  End;
 end;
 procedure TFrmTelaPrincipal.PecadeReposicao1Click(Sender: TObject);
 begin
@@ -3685,6 +3157,23 @@ if DM.ConsultarCombo <> '' then
     End;
   end;
 end;
+procedure TFrmTelaPrincipal.reas1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADAREAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryAreasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+    if DM.AplicarMascara(DM.qryCelulasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+    if DM.AplicarMascara(DM.qryLinhasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+    Application.CreateForm(TFrmTelaCadAreas, FrmTelaCadAreas);
+    FrmTelaCadAreas.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadAreas);
+  End;
+end;
 procedure TFrmTelaPrincipal.reas2Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -3724,6 +3213,21 @@ DM.qryAuxiliar.SQL.Add('SELECT `recursos`.`CODIGO`, `recursos`.`DESCRICAO`, `rec
                        + ' ON (`recursos`.`CODFAMILIARECURSO` = `familiarecursos`.`CODIGO`) WHERE (`recursos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `recursos`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRRecursosGeral.ShowReport();
+end;
+procedure TFrmTelaPrincipal.Recursos7Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADFAMILIARECURSOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if DM.AplicarMascara(DM.qryFamRecursosCODIGO, DM.qryFormatoCodigoFAMILIARECURSOS, FrmTelaCadFamiliaRecursos) = False then exit;
+    Application.CreateForm(TFrmTelaCadFamiliaRecursos, FrmTelaCadFamiliaRecursos);
+    FrmTelaCadFamiliaRecursos.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadFamiliaRecursos);
+  End;
 end;
 procedure TFrmTelaPrincipal.Rotas2Click(Sender: TObject);
 begin

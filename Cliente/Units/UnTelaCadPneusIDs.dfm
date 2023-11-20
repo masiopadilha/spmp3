@@ -1,34 +1,33 @@
 inherited FrmTelaCadPneusIDs: TFrmTelaCadPneusIDs
   Caption = 'ID dos Pneus'
-  ClientHeight = 304
-  ClientWidth = 563
+  ClientWidth = 559
   Constraints.MaxWidth = 575
   Constraints.MinWidth = 575
   OnCreate = FormCreate
   ExplicitWidth = 575
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 559
+    Width = 555
     ExplicitWidth = 555
     inherited BtnAjuda: TButton
-      Left = 524
-      ExplicitLeft = 524
+      Left = 522
+      ExplicitLeft = 522
     end
   end
   inherited PCentro: TPanel
-    Width = 557
-    Height = 165
+    Width = 553
     ExplicitWidth = 553
     inherited RGTelas: TRadioGroup
-      Width = 555
+      Width = 551
       ExplicitWidth = 551
     end
     object GrdPneus: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 549
-      Height = 157
+      Width = 545
+      Height = 154
       Align = alClient
       Color = 14671839
       DataSource = DM.dsPneusIDs
@@ -124,20 +123,18 @@ inherited FrmTelaCadPneusIDs: TFrmTelaCadPneusIDs
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 559
+    Width = 555
     ExplicitWidth = 555
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 559
+    Width = 555
     ExplicitWidth = 555
     inherited BtnOK: TButton
       Visible = False
     end
     inherited BtnFechar: TButton
-      Left = 243
-      ExplicitLeft = 243
+      Left = 240
+      ExplicitLeft = 240
     end
   end
 end

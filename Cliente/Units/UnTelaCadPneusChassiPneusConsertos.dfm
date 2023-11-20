@@ -1,14 +1,15 @@
 inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConsertos
   Caption = 'Conserto de Pneus'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 662
-      ExplicitLeft = 662
+      Left = 502
     end
     inherited LAlteradoPor: TLabel
-      Left = 684
-      ExplicitLeft = 684
+      Left = 524
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPneusChassiPneusConsertos
@@ -22,23 +23,31 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPneusChassiPneusConsertos
     end
-    inherited BtnNovo1: TButton
+    inherited LCadastro: TLabel
+      Left = 396
+    end
+    inherited LCadastroPor: TLabel
+      Left = 358
+    end
+    inherited BtnNovo: TButton
       Width = 28
       ExplicitWidth = 28
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
-      Left = 268
-      Top = 70
+      Left = 134
+      Top = 122
       Width = 70
       Height = 16
       Alignment = taRightJustify
       Caption = 'Fornecedor:'
     end
     object Label3: TLabel
-      Left = 64
-      Top = 22
+      Left = 187
+      Top = 61
       Width = 17
       Height = 16
       Alignment = taRightJustify
@@ -46,16 +55,16 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       FocusControl = EdtID
     end
     object Label4: TLabel
-      Left = 64
-      Top = 69
+      Left = 171
+      Top = 91
       Width = 33
       Height = 16
       Alignment = taRightJustify
       Caption = 'A'#231#227'o:'
     end
     object Label5: TLabel
-      Left = 155
-      Top = 71
+      Left = 300
+      Top = 91
       Width = 66
       Height = 16
       Alignment = taRightJustify
@@ -63,8 +72,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       FocusControl = EdtCusto
     end
     object Label7: TLabel
-      Left = 64
-      Top = 116
+      Left = 157
+      Top = 153
       Width = 47
       Height = 16
       Alignment = taRightJustify
@@ -72,32 +81,32 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       FocusControl = EdtServico
     end
     object Label8: TLabel
-      Left = 310
-      Top = 116
+      Left = 169
+      Top = 184
       Width = 35
       Height = 16
       Alignment = taRightJustify
       Caption = 'Envio:'
     end
     object Label9: TLabel
-      Left = 432
-      Top = 116
+      Left = 317
+      Top = 184
       Width = 49
       Height = 16
       Alignment = taRightJustify
       Caption = 'Entrega:'
     end
     object Label10: TLabel
-      Left = 64
-      Top = 162
+      Left = 126
+      Top = 215
       Width = 78
       Height = 16
       Alignment = taRightJustify
       Caption = 'Observacoes:'
     end
     object LblRodagem: TDBText
-      Left = 203
-      Top = 43
+      Left = 333
+      Top = 64
       Width = 70
       Height = 13
       AutoSize = True
@@ -111,8 +120,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 187
-      Top = 43
+      Left = 322
+      Top = 63
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -125,8 +134,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 254
-      Top = 92
+      Left = 467
+      Top = 93
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -139,8 +148,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 529
-      Top = 92
+      Left = 467
+      Top = 124
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -153,8 +162,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 279
-      Top = 138
+      Left = 467
+      Top = 154
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -167,8 +176,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label13: TLabel
-      Left = 407
-      Top = 138
+      Left = 307
+      Top = 184
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -181,8 +190,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 527
-      Top = 138
+      Left = 467
+      Top = 184
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -195,8 +204,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       ParentFont = False
     end
     object EdtID: TDBEdit
-      Left = 64
-      Top = 39
+      Left = 207
+      Top = 60
       Width = 85
       Height = 24
       Color = clBtnFace
@@ -208,8 +217,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object EdtCusto: TDBEdit
-      Left = 155
-      Top = 88
+      Left = 369
+      Top = 91
       Width = 95
       Height = 24
       DataField = 'CUSTO'
@@ -219,9 +228,9 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object EdtServico: TDBEdit
-      Left = 64
-      Top = 135
-      Width = 211
+      Left = 208
+      Top = 151
+      Width = 256
       Height = 24
       DataField = 'SERVICO'
       DataSource = DM.dsPneusChassiPneusConsertos
@@ -230,8 +239,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object EdtFornecedor: TDBEdit
-      Left = 268
-      Top = 88
+      Left = 208
+      Top = 120
       Width = 227
       Height = 24
       Color = clBtnFace
@@ -243,8 +252,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object BtnFornecedor: TButton
-      Left = 498
-      Top = 88
+      Left = 436
+      Top = 117
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -258,8 +267,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnClick = BtnFornecedorClick
     end
     object CBAcao: TDBComboBox
-      Left = 64
-      Top = 88
+      Left = 208
+      Top = 91
       Width = 85
       Height = 22
       Style = csOwnerDrawFixed
@@ -274,8 +283,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object EdtEnvio: TJvDBDateEdit
-      Left = 310
-      Top = 135
+      Left = 208
+      Top = 182
       Width = 95
       Height = 24
       DataField = 'ENVIO'
@@ -287,8 +296,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object EdtEntrega: TJvDBDateEdit
-      Left = 432
-      Top = 135
+      Left = 369
+      Top = 182
       Width = 95
       Height = 24
       DataField = 'ENTREGA'
@@ -300,10 +309,10 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object MObservacoes: TDBMemo
-      Left = 64
-      Top = 182
+      Left = 208
+      Top = 213
       Width = 256
-      Height = 53
+      Height = 73
       DataField = 'OBSERVACOES'
       DataSource = DM.dsPneusChassiPneusConsertos
       ScrollBars = ssVertical
@@ -312,8 +321,8 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnKeyPress = FormKeyPress
     end
     object BtnPneu: TButton
-      Left = 152
-      Top = 37
+      Left = 293
+      Top = 58
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -327,12 +336,19 @@ inherited FrmTelaCadPneusChassiPneusConsertos: TFrmTelaCadPneusChassiPneusConser
       OnClick = BtnPneuClick
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
+  end
   inherited PopupMenuRelat: TPopupMenu
     Left = 228
     Top = 10
   end
   inherited MainMenuPadrao: TMainMenu
-    Left = 158
-    Top = 4
+    Left = 46
   end
 end

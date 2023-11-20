@@ -1,7 +1,7 @@
 inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
   Caption = 'Equipamentos Reservas'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -9,36 +9,35 @@ inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
-      Left = 970
-      ExplicitLeft = 970
+      Left = 967
+      ExplicitLeft = 967
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1004
-      Height = 503
+      Width = 1000
+      Height = 500
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 1004
-      Height = 503
+      Width = 1000
+      Height = 500
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1000
-      ExplicitHeight = 500
       object Label1: TLabel
         Left = 5
         Top = 13
@@ -228,8 +227,8 @@ inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
       object GBEquipCompativeis: TGroupBox
         AlignWithMargins = True
         Left = 3
-        Top = 298
-        Width = 998
+        Top = 295
+        Width = 994
         Height = 202
         Align = alBottom
         Caption = 'Equipamentos compat'#237'veis dispon'#237'veis:'
@@ -237,13 +236,11 @@ inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
         ParentBackground = False
         ParentColor = False
         TabOrder = 4
-        ExplicitTop = 295
-        ExplicitWidth = 994
         object GrdEquipCompat: TDBGrid
           AlignWithMargins = True
           Left = 3
           Top = 19
-          Width = 992
+          Width = 988
           Height = 180
           Hint = 'D'#234' duplo-clique para realizar a substitui'#231#227'o do equipamento.'
           Margins.Left = 1
@@ -390,14 +387,14 @@ inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 574
+    Width = 1004
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 601
+    Width = 1004
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton
@@ -406,8 +403,8 @@ inherited FrmTelaCadEquipamentoReserva: TFrmTelaCadEquipamentoReserva
       ExplicitLeft = 5
     end
     inherited BtnFechar: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 465
+      ExplicitLeft = 465
     end
   end
 end

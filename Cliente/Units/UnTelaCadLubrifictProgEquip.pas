@@ -5,8 +5,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons,
-  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons;
 type
   TFrmTelaCadLubrificProgEquip = class(TFrmTelaPaiCadastros)
     Label5: TLabel;
@@ -63,7 +62,6 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -364,13 +362,6 @@ DM.qryAuxiliar.SQL.Add('DELETE FROM lubrificprogequipitensesp WHERE CODLUBRIFICP
 DM.qryAuxiliar.Execute;
 DM.MSGAguarde('', False);
 end;
-procedure TFrmTelaCadLubrificProgEquip.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar  := 33;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadLubrificProgEquip.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -408,8 +399,8 @@ end;
 procedure TFrmTelaCadLubrificProgEquip.EdtCodLubrificacaoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 procedure TFrmTelaCadLubrificProgEquip.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -426,6 +417,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryLubrificProgEquip;
 DM.FDataSourceParam := DM.dsLubrificProgEquip;
+DM.FTabela_auxiliar  := 33;
 DM.FTela := 'CADLUBRIFICPROGEQUIP';
 LDataProgIni := 0;
 end;

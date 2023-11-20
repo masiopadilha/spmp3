@@ -63,7 +63,6 @@ type
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -282,35 +281,6 @@ if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 
 DM.qryOrdemServicoTercUnidMedicoes.Edit;
 DM.qryOrdemServicoTercUnidMedicoes.Post;
-end;
-
-procedure TFrmTelaCadOrdemServicoTercUnid.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 66;
-  inherited;
-if DM.qryOrdemServicoTercUnidCODIGO.AsString <> EmptyStr then
-  begin
-    if DM.qryOrdemServicoTercUnidSITUACAO.AsString = 'ABERTA'  then
-      begin
-        PSituacao.Caption := 'ABERTA';
-        PSituacao.Color := clYellow;
-        PSituacao.Font.Color := clRed;
-
-        PIdentificacao.Enabled := True;
-        PDiversos.Enabled := True;
-      end;
-    if DM.qryOrdemServicoTercUnidSITUACAO.AsString = 'FECHADA' then
-      begin
-        PSituacao.Caption := 'FECHADA';
-        PSituacao.Color := clGray;
-        PSituacao.Font.Color := clBlack;
-
-        PIdentificacao.Enabled := False;
-        PDiversos.Enabled := False;
-      end;
-
-    MontarGrafico;
-  end;
 end;
 
 procedure TFrmTelaCadOrdemServicoTercUnid.Button1Click(Sender: TObject);

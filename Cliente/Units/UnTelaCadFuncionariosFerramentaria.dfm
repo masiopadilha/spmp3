@@ -1,21 +1,20 @@
 inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramentaria
   Caption = 'Empr'#233'stimo de Ferramentas'
-  ClientHeight = 304
-  ClientWidth = 793
+  ClientWidth = 789
   Constraints.MaxWidth = 805
   Constraints.MinWidth = 805
   OnCreate = FormCreate
   ExplicitWidth = 805
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 789
+    Width = 785
     ExplicitWidth = 785
     inherited BtnAjuda: TButton
-      Left = 753
-      ExplicitLeft = 753
+      Left = 752
+      ExplicitLeft = 752
     end
     object BtnImprimir: TButton
-      Left = 719
+      Left = 722
       Top = 17
       Width = 28
       Height = 28
@@ -31,13 +30,12 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
     end
   end
   inherited PCentro: TPanel
-    Width = 787
-    Height = 165
+    Width = 783
     ExplicitWidth = 783
     inherited RGTelas: TRadioGroup
       Top = 160
-      Width = 785
-      Height = 4
+      Width = 781
+      Height = 1
       ExplicitTop = 160
       ExplicitWidth = 781
       ExplicitHeight = 1
@@ -46,7 +44,7 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 779
+      Width = 775
       Height = 153
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para realizar um empr'#233'sti' +
@@ -173,13 +171,11 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 789
+    Width = 785
     ExplicitWidth = 785
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 789
+    Width = 785
     ExplicitWidth = 785
     inherited BtnOK: TButton
       Left = 100
@@ -187,8 +183,8 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 358
-      ExplicitLeft = 358
+      Left = 355
+      ExplicitLeft = 355
     end
   end
   object PopupMenuInventario: TPopupMenu

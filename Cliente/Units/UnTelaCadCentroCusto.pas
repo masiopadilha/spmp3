@@ -6,12 +6,10 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Mask, Datasnap.DBClient, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
-  Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid, Vcl.WinXCtrls,
-  System.ImageList, Vcl.ImgList, UnBaseCrud, JvExStdCtrls, JvEdit;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
-  TFrmTelaCadCentroCusto = class(TfrmBaseCrud)
+  TFrmTelaCadCentroCusto = class(TFrmTelaPaiParametros)
     Label2: TLabel;
     EdtCodigo: TDBEdit;
     Label4: TLabel;
@@ -25,9 +23,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
-    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,15 +44,9 @@ begin
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadCentroCusto.btnConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 4;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadCentroCusto.BtnImprimirClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 4;
   inherited;
 DM.FDataSetRelat    := DmRelatorios.frxDBCentroCusto;
 end;
@@ -107,40 +96,27 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadCentroCusto.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 4;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadCentroCusto.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBCentroCusto;
-end;
-
 procedure TFrmTelaCadCentroCusto.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadCentroCusto.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-DM.qryCentroCusto.Close;
   inherited;
+DM.qryCentroCusto.Close;
 end;
 
 procedure TFrmTelaCadCentroCusto.FormCreate(Sender: TObject);
 begin
+  inherited;
 DM.FDataSetParam    := DM.qryCentroCusto;
 DM.FDataSourceParam := DM.dsCentroCusto;
 DM.FTela := 'CADCENTROCUSTO';
 DM.FTabela_auxiliar := 4;
-  inherited;
 end;
 
 end.

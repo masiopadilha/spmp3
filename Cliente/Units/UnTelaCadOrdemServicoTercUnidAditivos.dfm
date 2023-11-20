@@ -1,22 +1,12 @@
 inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUnidAditivos
   Caption = 'Aditivos'
-  ClientHeight = 304
-  ClientWidth = 488
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 484
-    inherited BtnAjuda: TButton
-      Left = 446
-      ExplicitLeft = 446
-    end
-  end
   inherited PCentro: TPanel
-    Width = 482
-    Height = 165
     inherited RGTelas: TRadioGroup
       Left = 267
-      Width = 1
+      Width = 0
       ExplicitLeft = 267
       ExplicitWidth = 0
     end
@@ -25,7 +15,7 @@ inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUni
       Left = 4
       Top = 4
       Width = 260
-      Height = 157
+      Height = 154
       Align = alLeft
       DataSource = DM.dsOrdemServicoTercUnidAditivos
       TabOrder = 1
@@ -64,33 +54,26 @@ inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUni
     end
     object MMotivo: TDBMemo
       AlignWithMargins = True
-      Left = 271
+      Left = 267
       Top = 4
-      Width = 207
-      Height = 157
+      Width = 227
+      Height = 154
       Align = alRight
       DataField = 'MOTIVO'
       DataSource = DM.dsOrdemServicoTercUnidAditivos
       TabOrder = 2
-      ExplicitLeft = 272
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 484
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 205
+      Left = 213
       OnClick = BtnFecharClick
-      ExplicitLeft = 205
+      ExplicitLeft = 213
     end
   end
 end

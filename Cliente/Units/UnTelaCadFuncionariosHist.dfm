@@ -1,14 +1,14 @@
 inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   Caption = 'Hist'#243'rico do Funcion'#225'rio'
-  ClientHeight = 684
+  ClientHeight = 644
   ClientWidth = 1012
-  Constraints.MaxHeight = 720
+  Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 720
+  ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
@@ -116,7 +116,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
         'Utilidades')
     end
     object BtnImprimir: TButton
-      Left = 937
+      Left = 941
       Top = 17
       Width = 28
       Height = 28
@@ -134,13 +134,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PCentro: TPanel
     Top = 69
     Width = 1006
-    Height = 543
+    Height = 503
     ExplicitTop = 69
     ExplicitWidth = 1002
     ExplicitHeight = 500
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 541
+      Height = 501
       ExplicitWidth = 1000
       ExplicitHeight = 498
     end
@@ -149,7 +149,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       Left = 4
       Top = 4
       Width = 998
-      Height = 535
+      Height = 495
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
@@ -161,7 +161,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
         Left = 5
         Top = 272
         Width = 348
-        Height = 258
+        Height = 218
         Margins.Top = 1
         Align = alLeft
         DataSource = DM.dsFuncionariosTipoManutHist
@@ -223,7 +223,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
         Left = 358
         Top = 272
         Width = 635
-        Height = 258
+        Height = 218
         Margins.Top = 1
         Align = alRight
         DataSource = DM.dsFuncionariosHistServicos
@@ -399,13 +399,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 617
+    Top = 577
     Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 644
+    Top = 604
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004

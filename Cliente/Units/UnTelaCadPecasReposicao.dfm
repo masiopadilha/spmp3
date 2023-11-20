@@ -1,10 +1,7 @@
 inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   Caption = 'Pe'#231'as de Reposi'#231#227'o'
-  ClientHeight = 661
-  ClientWidth = 1008
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -31,7 +28,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
     object Label17: TLabel
       Left = 490
       Top = 34
@@ -308,7 +304,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
     object PCDadosTecnicos: TPageControl
       Left = 6
       Top = 26
@@ -732,7 +727,6 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
   end
   inherited PDiversos: TPanel
     Width = 780
-    Height = 176
     Align = alLeft
     ExplicitWidth = 780
     object Label13: TLabel
@@ -969,17 +963,7 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 642
-    Width = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 626
-    Width = 1008
-  end
   inherited PBase: TPanel
-    Top = 586
-    Width = 1004
     inherited Button1: TButton
       Hint = 'Kit de Pe'#231'as de Reposi'#231#227'o'
       DisabledImageIndex = 81
@@ -1000,14 +984,16 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
   end
   object PImagem: TPanel [7]
-    Left = 785
-    Top = 404
+    Left = 789
+    Top = 343
     Width = 223
-    Height = 180
+    Height = 204
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 7
+    ExplicitLeft = 785
+    ExplicitHeight = 201
     object ImgFotoPeca: TImage
       Left = 25
       Top = 10
@@ -1023,9 +1009,9 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
     object BtnAnexar: TButton
       Left = 35
-      Top = 158
+      Top = 160
       Width = 75
-      Height = 20
+      Height = 22
       Caption = 'Anexar'
       DisabledImageIndex = 74
       ImageIndex = 73
@@ -1035,9 +1021,9 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
     object BtnLimpar: TButton
       Left = 115
-      Top = 158
+      Top = 160
       Width = 75
-      Height = 20
+      Height = 22
       Caption = 'Limpar'
       DisabledImageIndex = 63
       DragCursor = 63

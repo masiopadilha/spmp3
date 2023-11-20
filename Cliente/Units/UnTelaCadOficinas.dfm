@@ -1,108 +1,124 @@
 inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
   Caption = 'Oficinas'
-  ClientHeight = 441
-  ClientWidth = 891
-  ExplicitWidth = 903
-  ExplicitHeight = 477
-  TextHeight = 15
-  inherited pntBoxFundo: TPaintBox
-    Width = 891
-    Height = 441
-    ExplicitWidth = 891
-    ExplicitHeight = 441
-  end
-  inherited PanelFundo: TPanel
-    Width = 891
-    Height = 441
-    object Label1: TLabel [0]
-      Left = 72
-      Top = 136
-      Width = 89
-      Height = 15
-      Alignment = taRightJustify
-      Caption = 'Centro de Custo:'
+  TextHeight = 16
+  inherited PControle: TPanel
+    inherited LAlteracao: TLabel
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
     end
-    object Label2: TLabel [1]
-      Left = 64
-      Top = 89
-      Width = 42
-      Height = 15
+    inherited LAlteradoPor: TLabel
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+    end
+    inherited LblDataAlt: TDBText
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      DataSource = DM.dsOficinas
+    end
+    inherited LblDataCad: TDBText
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      DataSource = DM.dsOficinas
+    end
+    inherited LblUsuAlt: TDBText
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      DataSource = DM.dsOficinas
+    end
+    inherited LblUsuCad: TDBText
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      DataSource = DM.dsOficinas
+    end
+    inherited LCadastro: TLabel
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+    end
+    inherited LCadastroPor: TLabel
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+    end
+  end
+  inherited PCentro: TPanel
+    object Label2: TLabel
+      Left = 190
+      Top = 92
+      Width = 44
+      Height = 16
       Caption = 'C'#243'digo:'
     end
-    object Label4: TLabel [2]
-      Left = 201
-      Top = 89
-      Width = 54
-      Height = 15
+    object Label4: TLabel
+      Left = 174
+      Top = 122
+      Width = 60
+      Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
-    inherited PanelConteudo: TPanel
-      Width = 891
-      Height = 441
-      TabOrder = 6
-      inherited PageControlCRUD: TPageControl
-        Width = 888
-        Height = 435
-        inherited TabSheetLista: TTabSheet
-          ExplicitWidth = 876
-          ExplicitHeight = 396
-          inherited PanelCor: TPanel
-            Width = 876
-            Height = 396
-            inherited pJvDBGridLista: TPanel
-              Width = 876
-              Height = 396
-              inherited pSearchBox: TPanel
-                Width = 870
-              end
-              inherited JvDBGridLista: TJvDBGrid
-                Width = 872
-                Height = 348
-              end
-            end
-          end
-        end
-        inherited TabSheetCadastra: TTabSheet
-          ExplicitWidth = 874
-          ExplicitHeight = 396
-          inherited PControle: TPanel
-            Width = 874
-          end
-          inherited ScrollBox1: TScrollBox
-            Width = 874
-            Height = 279
-            inherited PanelColor: TPanel
-              Width = 874
-              Height = 279
-              ExplicitHeight = 282
-            end
-          end
-          inherited PAuxiliares: TPanel
-            Top = 352
-            Width = 874
-          end
-          inherited StatusBar1: TStatusBar
-            Top = 377
-            Width = 874
-          end
-        end
-      end
+    object Label1: TLabel
+      Left = 137
+      Top = 153
+      Width = 97
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Centro de Custo:'
+    end
+    object EdtCodigo: TDBEdit
+      Tag = 555
+      Left = 238
+      Top = 90
+      Width = 125
+      Height = 24
+      CharCase = ecUpperCase
+      DataField = 'CODIGO'
+      DataSource = DM.dsOficinas
+      ReadOnly = True
+      TabOrder = 0
+      OnExit = EdtCodigoExit
+      OnKeyPress = FormKeyPress
+    end
+    object EdtDescricao: TDBEdit
+      Left = 238
+      Top = 121
+      Width = 230
+      Height = 24
+      DataField = 'DESCRICAO'
+      DataSource = DM.dsOficinas
+      TabOrder = 1
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
     end
     object EdtCentroCusto: TDBEdit
-      Left = 64
+      Left = 239
       Top = 152
       Width = 230
-      Height = 23
+      Height = 24
       Color = clBtnFace
       DataField = 'CENTROCUSTO'
       DataSource = DM.dsOficinas
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 2
+      OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnCentroCusto: TButton
-      Left = 299
+      Left = 470
       Top = 151
       Width = 28
       Height = 28
@@ -113,65 +129,36 @@ inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 3
       OnClick = BtnCentroCustoClick
     end
-    object EdtCodigo: TDBEdit
-      Tag = 555
-      Left = 64
-      Top = 106
-      Width = 125
-      Height = 23
-      CharCase = ecUpperCase
-      DataField = 'CODIGO'
-      DataSource = DM.dsOficinas
-      ReadOnly = True
-      TabOrder = 0
-      OnExit = EdtCodigoExit
-      OnKeyPress = FormKeyPress
-    end
-    object EdtDescricao: TDBEdit
-      Left = 195
-      Top = 106
-      Width = 230
-      Height = 23
-      DataField = 'DESCRICAO'
-      DataSource = DM.dsOficinas
-      TabOrder = 1
-      OnKeyPress = FormKeyPress
-    end
     object ChbAtivoNF: TDBCheckBox
-      Left = 434
-      Top = 110
-      Width = 63
+      Left = 196
+      Top = 183
+      Width = 57
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Ativo:'
       DataField = 'ATIVO'
       DataSource = DM.dsOficinas
-      TabOrder = 2
+      TabOrder = 4
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 510
-      Top = 110
-      Width = 71
+      Left = 297
+      Top = 183
+      Width = 65
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Vis'#237'vel:'
       DataField = 'VISIVEL'
       DataSource = DM.dsOficinas
-      TabOrder = 3
+      TabOrder = 5
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
     end
-  end
-  inherited PopupMenuRelat: TPopupMenu
-    Top = 32
-  end
-  inherited ActionList1: TActionList
-    Left = 306
-    Top = 35
   end
 end

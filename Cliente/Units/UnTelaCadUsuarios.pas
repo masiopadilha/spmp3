@@ -6,8 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, JvExMask, JvToolEdit,
-  JvDBControls, Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons;
+  JvDBControls, Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadUsuarios = class(TFrmTelaPaiParametros)
@@ -40,8 +39,6 @@ type
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnFuncionarioClick(Sender: TObject);
     procedure BtnNivelClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -320,24 +317,11 @@ if (DM.qryUsuariosCODEMPRESAS.IsNull = True) or (DM.qryUsuarioUnidades.RecordCou
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadUsuarios.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 29;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadUsuarios.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBUsuarios;
-end;
-
 procedure TFrmTelaCadUsuarios.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 DM.FTabela_auxiliar := 29;
 end;
 
@@ -355,6 +339,7 @@ begin
 DM.FDataSetParam    := DM.qryUsuarios;
 DM.FDataSourceParam := DM.dsUsuarios;
 DM.FTela := 'CADUSUARIOS';
+DM.FTabela_auxiliar := 29;
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadMotivoParada = class(TFrmTelaPaiParametros)
@@ -23,9 +23,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,15 +44,9 @@ begin
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadMotivoParada.btnConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 11;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadMotivoParada.BtnImprimirClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 11;
   inherited;
 DM.FDataSetRelat    := DmRelatorios.frxDBMotivoParada;
 end;
@@ -105,24 +96,11 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadMotivoParada.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 11;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadMotivoParada.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBMotivoParada;
-end;
-
 procedure TFrmTelaCadMotivoParada.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else btnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadMotivoParada.FormClose(Sender: TObject;
@@ -138,6 +116,7 @@ begin
 DM.FDataSetParam    := DM.qryMotivoParada;
 DM.FDataSourceParam := DM.dsMotivoParada;
 DM.FTela := 'CADMOTIVOPARADA';
+DM.FTabela_auxiliar := 11;
 end;
 
 end.

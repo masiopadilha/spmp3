@@ -1,26 +1,21 @@
 inherited FrmTelaCadOrdemServicoTercUnidRecursos: TFrmTelaCadOrdemServicoTercUnidRecursos
   Caption = 'Recursos'
-  ClientHeight = 304
-  ClientWidth = 488
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 484
-    ExplicitWidth = 480
     inherited BtnAjuda: TButton
-      Left = 448
-      ExplicitLeft = 448
+      Left = 467
+      ExplicitLeft = 467
     end
   end
   inherited PCentro: TPanel
-    Width = 482
-    Height = 165
     object GrdRecursos: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 474
-      Height = 157
+      Width = 490
+      Height = 154
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -57,7 +52,7 @@ inherited FrmTelaCadOrdemServicoTercUnidRecursos: TFrmTelaCadOrdemServicoTercUni
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 372
+          Width = 384
           Visible = True
         end
         item
@@ -70,22 +65,16 @@ inherited FrmTelaCadOrdemServicoTercUnidRecursos: TFrmTelaCadOrdemServicoTercUni
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 484
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 205
+      Left = 213
       OnClick = BtnFecharClick
-      ExplicitLeft = 205
+      ExplicitLeft = 213
     end
   end
 end

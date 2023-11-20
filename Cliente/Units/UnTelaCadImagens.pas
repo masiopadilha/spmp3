@@ -48,8 +48,6 @@ type
     procedure Descricao1Click(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,6 +139,7 @@ end;
 
 procedure TFrmTelaCadImagens.BtnImprimirClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 26;
   inherited;
 DM.FDataSetRelat    := DmRelatorios.frxDBImagens;
 end;
@@ -276,19 +275,6 @@ if DM.qryImagensTIPO.AsString = 'Ponto' then
 // DM.qryImagens.Params[0].AsInteger := DM.RetornaProximoIndice('imagens');
 DM.qryImagens.Params[0].AsInteger := DM.qryImagensCODIGO.AsInteger;
 DM.qryImagens.Params[1].AsString  := DM.FCodEmpresa;
-end;
-
-procedure TFrmTelaCadImagens.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 26;
-  inherited;
-DM.ExibeFoto(DM.qryImagens, 'FOTO', FrmTelaCadImagens.ImgFotoEquip);
-end;
-
-procedure TFrmTelaCadImagens.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBImagens;
 end;
 
 procedure TFrmTelaCadImagens.Codigo1Click(Sender: TObject);

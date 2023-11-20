@@ -3,14 +3,14 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
-      Left = 661
+      Left = 506
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 683
+      Left = 528
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -45,14 +45,14 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
       DataSource = DM.dsDispAdmissiveis
     end
     inherited LCadastro: TLabel
-      Left = 558
+      Left = 400
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 520
+      Left = 362
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -61,24 +61,24 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
   end
   inherited PCentro: TPanel
     object Label6: TLabel
-      Left = 71
-      Top = 104
+      Left = 190
+      Top = 150
       Width = 31
       Height = 16
       Alignment = taRightJustify
       Caption = #205'tem:'
     end
     object Label5: TLabel
-      Left = 71
-      Top = 153
+      Left = 186
+      Top = 182
       Width = 35
       Height = 16
       Alignment = taRightJustify
       Caption = 'Valor:'
     end
     object EdtItem: TDBEdit
-      Left = 71
-      Top = 123
+      Left = 225
+      Top = 148
       Width = 230
       Height = 24
       Color = clBtnFace
@@ -90,8 +90,8 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
       OnKeyPress = FormKeyPress
     end
     object BtnItem: TButton
-      Left = 305
-      Top = 121
+      Left = 456
+      Top = 145
       Width = 28
       Height = 28
       Hint = 'Consultar'
@@ -105,8 +105,8 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
       OnClick = BtnItemClick
     end
     object EdtValor: TDBEdit
-      Left = 71
-      Top = 171
+      Left = 225
+      Top = 180
       Width = 125
       Height = 24
       DataField = 'VALITEM'
@@ -118,8 +118,8 @@ inherited FrmTelaCadDisponibilidade: TFrmTelaCadDisponibilidade
     end
   end
   object RGTipo: TDBRadioGroup [4]
-    Left = 64
-    Top = 125
+    Left = 183
+    Top = 149
     Width = 303
     Height = 46
     Caption = 'Tipo:'

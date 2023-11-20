@@ -1,6 +1,6 @@
 inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   Caption = 'Equipamentos'
-  ClientHeight = 664
+  ClientHeight = 624
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
@@ -25,11 +25,13 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       DataSource = DM.dsEquipamentos
     end
     inherited LblUsuCad: TDBText
+      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
+      ExplicitWidth = 87
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -51,69 +53,69 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       DataSource = DM.dsEquipamentos
     end
     inherited LblUsuAlt: TDBText
+      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
+      ExplicitWidth = 87
     end
-    inherited BtnNovo1: TButton
+    inherited BtnNovo: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnSalvar1: TButton
+    inherited BtnSalvar: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnCancelar1: TButton
+    inherited BtnCancelar: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnExcluir1: TButton
+    inherited BtnExcluir: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnConsultar1: TButton
+    inherited BtnConsultar: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnImprimir1: TButton
+    inherited BtnImprimir: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnAjuda1: TButton
+    inherited BtnAjuda: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnSair1: TButton
+    inherited BtnSair: TButton
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnImagem1: TButton
+    inherited BtnImagem: TButton
       Visible = True
       OnClick = BtnImagemClick
     end
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    Height = 96
-    ExplicitHeight = 96
     object Label4: TLabel [0]
       Left = 45
       Top = 33
@@ -400,7 +402,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       OnExit = TabNextTab1AfterTabChange
     end
     object BtnFamilia: TButton
-      Left = 486
+      Left = 485
       Top = 57
       Width = 28
       Height = 28
@@ -440,11 +442,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PProgramacao: TPanel
-    Top = 173
     Width = 1008
-    Height = 190
-    ExplicitTop = 173
-    ExplicitHeight = 190
     inherited Label2: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -455,7 +453,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Left = 6
       Top = 26
       Width = 995
-      Height = 159
+      Height = 158
       ActivePage = TSDadosTecnicos
       Style = tsFlatButtons
       TabOrder = 0
@@ -465,14 +463,14 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           Left = 0
           Top = 0
           Width = 987
-          Height = 125
+          Height = 124
           Align = alClient
           Color = 14671839
           ParentBackground = False
           TabOrder = 0
           object Campo1: TDBText
             Left = 0
-            Top = 10
+            Top = 11
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -487,7 +485,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo2: TDBText
             Left = 0
-            Top = 39
+            Top = 40
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -502,7 +500,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo3: TDBText
             Left = 0
-            Top = 68
+            Top = 69
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -517,7 +515,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo4: TDBText
             Left = 0
-            Top = 97
+            Top = 98
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -532,7 +530,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo8: TDBText
             Left = 319
-            Top = 97
+            Top = 98
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -547,7 +545,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo7: TDBText
             Left = 319
-            Top = 68
+            Top = 69
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -562,7 +560,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo6: TDBText
             Left = 319
-            Top = 39
+            Top = 40
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -577,7 +575,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo5: TDBText
             Left = 319
-            Top = 10
+            Top = 11
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -592,7 +590,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo9: TDBText
             Left = 639
-            Top = 10
+            Top = 11
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -607,7 +605,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo10: TDBText
             Left = 639
-            Top = 39
+            Top = 40
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -622,7 +620,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo11: TDBText
             Left = 639
-            Top = 68
+            Top = 69
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -637,7 +635,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object Campo12: TDBText
             Left = 639
-            Top = 97
+            Top = 98
             Width = 169
             Height = 15
             Alignment = taRightJustify
@@ -652,7 +650,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo1: TDBEdit
             Left = 173
-            Top = 8
+            Top = 9
             Width = 135
             Height = 22
             DataField = 'REGISTRO1'
@@ -670,7 +668,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo2: TDBEdit
             Left = 173
-            Top = 37
+            Top = 38
             Width = 135
             Height = 22
             DataField = 'REGISTRO2'
@@ -688,7 +686,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo3: TDBEdit
             Left = 173
-            Top = 66
+            Top = 67
             Width = 135
             Height = 22
             DataField = 'REGISTRO3'
@@ -706,7 +704,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo4: TDBEdit
             Left = 173
-            Top = 95
+            Top = 96
             Width = 135
             Height = 22
             DataField = 'REGISTRO4'
@@ -724,7 +722,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo8: TDBEdit
             Left = 492
-            Top = 95
+            Top = 96
             Width = 135
             Height = 22
             DataField = 'REGISTRO8'
@@ -742,7 +740,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo7: TDBEdit
             Left = 492
-            Top = 66
+            Top = 67
             Width = 135
             Height = 22
             DataField = 'REGISTRO7'
@@ -760,7 +758,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo6: TDBEdit
             Left = 492
-            Top = 37
+            Top = 38
             Width = 135
             Height = 22
             DataField = 'REGISTRO6'
@@ -778,7 +776,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo5: TDBEdit
             Left = 492
-            Top = 8
+            Top = 9
             Width = 135
             Height = 22
             DataField = 'REGISTRO5'
@@ -796,7 +794,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo9: TDBEdit
             Left = 813
-            Top = 8
+            Top = 9
             Width = 135
             Height = 22
             DataField = 'REGISTRO9'
@@ -814,7 +812,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo10: TDBEdit
             Left = 813
-            Top = 37
+            Top = 38
             Width = 135
             Height = 22
             DataField = 'REGISTRO10'
@@ -832,7 +830,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo11: TDBEdit
             Left = 813
-            Top = 66
+            Top = 67
             Width = 135
             Height = 22
             DataField = 'REGISTRO11'
@@ -850,7 +848,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           end
           object EdtCampo12: TDBEdit
             Left = 813
-            Top = 95
+            Top = 96
             Width = 135
             Height = 22
             DataField = 'REGISTRO12'
@@ -885,11 +883,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PDiversos: TPanel
-    Top = 367
     Width = 1008
-    Height = 218
-    ExplicitTop = 367
-    ExplicitHeight = 215
+    Height = 200
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -912,7 +907,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label9: TLabel
       Left = 82
-      Top = 75
+      Top = 68
       Width = 42
       Height = 16
       Alignment = taRightJustify
@@ -926,7 +921,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label10: TLabel
       Left = 27
-      Top = 112
+      Top = 99
       Width = 97
       Height = 16
       Alignment = taRightJustify
@@ -940,7 +935,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label11: TLabel
       Left = 17
-      Top = 149
+      Top = 130
       Width = 107
       Height = 16
       Alignment = taRightJustify
@@ -954,7 +949,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label12: TLabel
       Left = 23
-      Top = 186
+      Top = 161
       Width = 101
       Height = 16
       Alignment = taRightJustify
@@ -968,7 +963,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label13: TLabel
       Left = 397
-      Top = 74
+      Top = 68
       Width = 67
       Height = 16
       Alignment = taRightJustify
@@ -982,7 +977,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label14: TLabel
       Left = 411
-      Top = 111
+      Top = 99
       Width = 53
       Height = 16
       Alignment = taRightJustify
@@ -1010,7 +1005,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label16: TLabel
       Left = 722
-      Top = 74
+      Top = 68
       Width = 40
       Height = 16
       Alignment = taRightJustify
@@ -1038,7 +1033,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label22: TLabel
       Left = 349
-      Top = 79
+      Top = 73
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1052,7 +1047,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label23: TLabel
       Left = 349
-      Top = 115
+      Top = 103
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1094,7 +1089,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label26: TLabel
       Left = 990
-      Top = 79
+      Top = 73
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1122,7 +1117,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object LblPrimario: TDBText
       Left = 670
-      Top = 186
+      Top = 161
       Width = 326
       Height = 16
       DataSource = DM.dsEquipamentos
@@ -1136,7 +1131,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label32: TLabel
       Left = 321
-      Top = 190
+      Top = 165
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1150,7 +1145,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtNotaFiscal: TDBEdit
       Left = 467
-      Top = 73
+      Top = 67
       Width = 170
       Height = 24
       DataField = 'NOTAFISCAL'
@@ -1167,7 +1162,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtGarantia: TJvDBDateEdit
       Left = 467
-      Top = 110
+      Top = 98
       Width = 170
       Height = 24
       DataField = 'DATAGARANTIA'
@@ -1186,7 +1181,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object ChbOperando: TDBCheckBox
       Left = 399
-      Top = 147
+      Top = 130
       Width = 85
       Height = 17
       Alignment = taLeftJustify
@@ -1206,7 +1201,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object ChbReserva: TDBCheckBox
       Left = 561
-      Top = 147
+      Top = 130
       Width = 76
       Height = 17
       Alignment = taLeftJustify
@@ -1226,7 +1221,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object ChbSecundario: TDBCheckBox
       Left = 391
-      Top = 184
+      Top = 159
       Width = 93
       Height = 18
       Alignment = taLeftJustify
@@ -1260,7 +1255,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnClasse: TButton
       Left = 318
-      Top = 72
+      Top = 65
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1273,7 +1268,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnCentroCusto: TButton
       Left = 318
-      Top = 108
+      Top = 96
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1286,7 +1281,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnPrimario: TButton
       Left = 639
-      Top = 180
+      Top = 155
       Width = 25
       Height = 28
       Hint = 'Consultar'
@@ -1313,7 +1308,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnCelula: TButton
       Left = 960
-      Top = 72
+      Top = 65
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1347,7 +1342,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtClasse: TDBEdit
       Left = 127
-      Top = 73
+      Top = 67
       Width = 189
       Height = 24
       TabStop = False
@@ -1368,7 +1363,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtCentroCusto: TDBEdit
       Left = 127
-      Top = 110
+      Top = 98
       Width = 189
       Height = 24
       TabStop = False
@@ -1389,7 +1384,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtPrimario: TDBEdit
       Left = 487
-      Top = 182
+      Top = 157
       Width = 150
       Height = 24
       Color = clBtnFace
@@ -1437,7 +1432,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtCelula: TDBEdit
       Left = 766
-      Top = 73
+      Top = 67
       Width = 192
       Height = 24
       Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1480,9 +1475,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object NBLocalizacao: TNotebook
       Left = 692
-      Top = 99
+      Top = 95
       Width = 304
-      Height = 79
+      Height = 61
       PageIndex = 1
       TabOrder = 20
       object TPage
@@ -1491,7 +1486,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         Caption = 'PrimTransf'
         object LblLinha: TLabel
           Left = 35
-          Top = 17
+          Top = 8
           Width = 35
           Height = 16
           Alignment = taRightJustify
@@ -1505,7 +1500,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object Label27: TLabel
           Left = 298
-          Top = 16
+          Top = 7
           Width = 6
           Height = 13
           Alignment = taRightJustify
@@ -1519,7 +1514,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object LblSequencia: TLabel
           Left = 4
-          Top = 50
+          Top = 38
           Width = 64
           Height = 16
           Alignment = taRightJustify
@@ -1533,7 +1528,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object Label28: TLabel
           Left = 270
-          Top = 50
+          Top = 38
           Width = 6
           Height = 13
           Alignment = taRightJustify
@@ -1547,7 +1542,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object EdtLinha: TDBEdit
           Left = 74
-          Top = 13
+          Top = 4
           Width = 192
           Height = 24
           Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1570,7 +1565,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object BtnLinha: TButton
           Left = 268
-          Top = 10
+          Top = 1
           Width = 28
           Height = 28
           Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1583,7 +1578,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         end
         object EdtSequenciaPrim: TDBEdit
           Left = 74
-          Top = 46
+          Top = 34
           Width = 192
           Height = 24
           DataField = 'SEQUENCIA'
@@ -1651,7 +1646,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtAquisicao: TJvDBDateEdit
       Left = 127
-      Top = 147
+      Top = 129
       Width = 189
       Height = 24
       DataField = 'DATAAQUISICAO'
@@ -1670,7 +1665,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtFuncionamento: TJvDBDateEdit
       Left = 127
-      Top = 185
+      Top = 160
       Width = 189
       Height = 24
       DataField = 'DATAINIFUNC'
@@ -1689,7 +1684,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 645
+    Top = 605
     Width = 1012
     Margins.Left = 2
     Margins.Top = 2
@@ -1697,7 +1692,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     Margins.Bottom = 2
   end
   inherited PAlertas: TPanel
-    Top = 629
+    Top = 589
     Width = 1012
     inherited LblAlertas: TLabel
       Left = 1011
@@ -1709,7 +1704,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
-    Top = 589
+    Top = 549
     Width = 1008
     inherited BtnMais: TButton
       Margins.Left = 4
@@ -1847,8 +1842,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   object PopupMenuCons: TPopupMenu
-    Left = 266
-    Top = 72
+    Left = 338
+    Top = 64
     object Codigo1: TMenuItem
       Caption = 'C'#243'digo'
       OnClick = Codigo1Click

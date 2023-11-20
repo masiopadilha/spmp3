@@ -11,11 +11,11 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     Width = 604
     ExplicitWidth = 600
     inherited BtnAjuda: TButton
-      Left = 568
-      ExplicitLeft = 568
+      Left = 571
+      ExplicitLeft = 567
     end
     object BtnImprimir: TButton
-      Left = 531
+      Left = 538
       Top = 17
       Width = 28
       Height = 28
@@ -37,7 +37,7 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
   inherited PCentro: TPanel
     Width = 602
     Height = 165
-    ExplicitWidth = 598
+    ExplicitWidth = 602
     inherited RGTelas: TRadioGroup
       Left = 216
       Width = 0
@@ -194,20 +194,20 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
   inherited PAuxiliares: TPanel
     Top = 237
     Width = 604
-    ExplicitWidth = 600
+    ExplicitWidth = 604
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 604
-    ExplicitWidth = 600
+    ExplicitWidth = 604
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 266
-      ExplicitLeft = 266
+      Left = 263
+      ExplicitLeft = 263
     end
   end
   object PopupMenuInventario: TPopupMenu

@@ -18,11 +18,11 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
       1008
       60)
     inherited BtnAjuda: TButton
-      Left = 972
-      ExplicitLeft = 972
+      Left = 981
+      ExplicitLeft = 977
     end
     object BtnImprimir: TButton
-      Left = 938
+      Left = 941
       Top = 17
       Width = 28
       Height = 28
@@ -163,8 +163,8 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 465
+      ExplicitLeft = 465
     end
   end
   object PopupMenuRelat: TPopupMenu

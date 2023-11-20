@@ -1,10 +1,8 @@
 inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensais
   Caption = 'Despesas Mensais'
-  ClientHeight = 371
-  ClientWidth = 784
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 780
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -35,11 +33,9 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
     end
   end
   inherited PCentro: TPanel
-    Width = 780
-    Height = 248
     object Label10: TLabel
-      Left = 217
-      Top = 173
+      Left = 258
+      Top = 175
       Width = 93
       Height = 16
       Caption = 'Horas extras: '
@@ -51,15 +47,15 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 64
-      Top = 51
+      Left = 107
+      Top = 80
       Width = 92
       Height = 32
       Caption = 'Recupera'#231#227'o de'#13#10'equipamentos:'
     end
     object Label37: TLabel
-      Left = 64
-      Top = 123
+      Left = 105
+      Top = 125
       Width = 125
       Height = 16
       Caption = 'M'#227'o de obra adm.: '
@@ -71,8 +67,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object Label38: TLabel
-      Left = 217
-      Top = 123
+      Left = 258
+      Top = 125
       Width = 124
       Height = 16
       Caption = 'Materiais diversos:'
@@ -84,8 +80,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object Label39: TLabel
-      Left = 372
-      Top = 123
+      Left = 413
+      Top = 125
       Width = 147
       Height = 16
       Caption = 'Utiliza'#231#227'o de recursos:'
@@ -97,8 +93,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object Label40: TLabel
-      Left = 372
-      Top = 173
+      Left = 413
+      Top = 175
       Width = 110
       Height = 16
       Caption = 'DESPESA TOTAL: '
@@ -110,8 +106,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 66
-      Top = 173
+      Left = 107
+      Top = 175
       Width = 86
       Height = 16
       Caption = 'Treinamento:'
@@ -123,8 +119,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       ParentFont = False
     end
     object LblCustoHoraExtra: TDBText
-      Left = 217
-      Top = 188
+      Left = 258
+      Top = 190
       Width = 104
       Height = 16
       AutoSize = True
@@ -132,8 +128,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object LblCustoTreinam: TDBText
-      Left = 66
-      Top = 190
+      Left = 107
+      Top = 192
       Width = 96
       Height = 16
       AutoSize = True
@@ -141,8 +137,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object LblDespMatDiv: TDBText
-      Left = 217
-      Top = 138
+      Left = 258
+      Top = 140
       Width = 82
       Height = 16
       AutoSize = True
@@ -150,8 +146,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object LblDespMObra: TDBText
-      Left = 64
-      Top = 138
+      Left = 105
+      Top = 140
       Width = 82
       Height = 16
       AutoSize = True
@@ -159,8 +155,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object LblDespTotal: TDBText
-      Left = 372
-      Top = 188
+      Left = 413
+      Top = 190
       Width = 73
       Height = 16
       AutoSize = True
@@ -168,8 +164,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object LblDespUtilRec: TDBText
-      Left = 372
-      Top = 138
+      Left = 413
+      Top = 140
       Width = 83
       Height = 16
       AutoSize = True
@@ -177,24 +173,24 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       DataSource = DM.dsDespMensalManutencao
     end
     object Label1: TLabel
-      Left = 181
-      Top = 67
+      Left = 323
+      Top = 88
       Width = 28
       Height = 16
       Alignment = taRightJustify
       Caption = 'M'#234's:'
     end
     object Label2: TLabel
-      Left = 262
-      Top = 67
+      Left = 454
+      Top = 88
       Width = 27
       Height = 16
       Caption = 'Ano:'
     end
     object EdtRecEquip: TDBEdit
-      Left = 64
+      Left = 207
       Top = 86
-      Width = 111
+      Width = 83
       Height = 24
       DataField = 'DESPRECEQUIP'
       DataSource = DM.dsDespMensalManutencao
@@ -202,8 +198,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       OnExit = TabNextTab1AfterTabChange
     end
     object CBMes: TDBComboBox
-      Left = 181
-      Top = 85
+      Left = 355
+      Top = 86
       Width = 75
       Height = 24
       DataField = 'MES'
@@ -225,8 +221,8 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       OnExit = TabNextTab1AfterTabChange
     end
     object CBAno: TDBComboBox
-      Left = 262
-      Top = 85
+      Left = 485
+      Top = 86
       Width = 75
       Height = 22
       Style = csOwnerDrawFixed
@@ -252,14 +248,6 @@ inherited FrmTelaCadInfMensalDespesasMensais: TFrmTelaCadInfMensalDespesasMensai
       TabOrder = 2
       OnExit = TabNextTab1AfterTabChange
     end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 352
-    Width = 784
-  end
-  inherited PAuxiliares: TPanel
-    Top = 325
-    Width = 780
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 342

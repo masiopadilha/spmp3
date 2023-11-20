@@ -61,7 +61,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       OnClick = BtnConsultarClick
     end
     object BtnImprimir: TButton
-      Left = 938
+      Left = 942
       Top = 15
       Width = 28
       Height = 28
@@ -597,17 +597,16 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitLeft = -3
-    ExplicitTop = 599
-    ExplicitWidth = 1008
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 313
       Visible = False
       ExplicitLeft = 313
     end
     inherited BtnFechar: TButton
-      Left = 468
-      ExplicitLeft = 468
+      Left = 464
+      ExplicitLeft = 464
     end
   end
   object ImageList1: TImageList

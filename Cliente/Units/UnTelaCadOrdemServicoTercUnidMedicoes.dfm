@@ -1,34 +1,33 @@
 inherited FrmTelaCadOrdemServicoTercUnidMedicoes: TFrmTelaCadOrdemServicoTercUnidMedicoes
   Caption = 'Medi'#231#245'es do Servi'#231'o'
-  ClientHeight = 304
-  ClientWidth = 288
+  ClientWidth = 284
   Constraints.MaxWidth = 300
   Constraints.MinWidth = 300
   OnCreate = FormCreate
   ExplicitWidth = 300
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 284
+    Width = 280
     ExplicitWidth = 280
     inherited BtnAjuda: TButton
-      Left = 244
-      ExplicitLeft = 244
+      Left = 247
+      ExplicitLeft = 247
     end
   end
   inherited PCentro: TPanel
-    Width = 282
-    Height = 165
+    Width = 278
     ExplicitWidth = 278
     inherited RGTelas: TRadioGroup
-      Width = 280
+      Width = 276
       ExplicitWidth = 276
     end
     object GrdMedicoes: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 274
-      Height = 157
+      Width = 270
+      Height = 154
       Align = alClient
       Color = clWhite
       DataSource = DM.dsOrdemServicoTercUnidMedicoes
@@ -75,13 +74,11 @@ inherited FrmTelaCadOrdemServicoTercUnidMedicoes: TFrmTelaCadOrdemServicoTercUni
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 284
+    Width = 280
     ExplicitWidth = 280
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 284
+    Width = 280
     ExplicitWidth = 280
     inherited BtnOK: TButton
       Left = 5
@@ -89,8 +86,8 @@ inherited FrmTelaCadOrdemServicoTercUnidMedicoes: TFrmTelaCadOrdemServicoTercUni
       ExplicitLeft = 5
     end
     inherited BtnFechar: TButton
-      Left = 105
-      ExplicitLeft = 105
+      Left = 103
+      ExplicitLeft = 103
     end
   end
 end

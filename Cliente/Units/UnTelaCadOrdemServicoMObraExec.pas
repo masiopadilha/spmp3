@@ -10,13 +10,10 @@ uses
 
 type
   TFrmTelaCadOrdemServicoMObraExec = class(TFrmTelaPaiOkCancel)
-    PMovimen: TPanel;
-    GrdMovimen: TDBGrid;
-    PCadastros: TPanel;
-    GrdEquipeMObraUtil: TDBGrid;
-    PCadTopo: TPanel;
     GrdEquipe: TDBGrid;
+    GrdEquipeMObraUtil: TDBGrid;
     GrdEquipeMObra: TDBGrid;
+    GrdMovimen: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure GrdEquipeMObraKeyPress(Sender: TObject; var Key: Char);

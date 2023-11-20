@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExStdCtrls,
   JvRichEdit, JvDBRichEdit, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPlanoTrabalho = class(TFrmTelaPaiCadastros)
@@ -41,7 +41,6 @@ type
     procedure Individual1Click(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure TabNextTab1AfterTabChange(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,13 +114,6 @@ if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadPlanoTrabalho.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 41;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadPlanoTrabalho.Centro1Click(Sender: TObject);
 begin
   inherited;
@@ -145,8 +137,8 @@ end;
 procedure TFrmTelaCadPlanoTrabalho.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadPlanoTrabalho.Esquerda1Click(Sender: TObject);
@@ -175,6 +167,7 @@ begin
 DM.FDataSetParam    := DM.qryPlanoTrabalho;
 DM.FDataSourceParam := DM.dsPlanoTrabalho;
 DM.FTela := 'CADPLANOTRAB';
+DM.FTabela_auxiliar := 41;
 i := 0;
 end;
 
@@ -198,8 +191,8 @@ end;
 procedure TFrmTelaCadPlanoTrabalho.TabNextTab1AfterTabChange(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 end.

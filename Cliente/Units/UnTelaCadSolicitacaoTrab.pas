@@ -9,8 +9,7 @@ uses
   JvToolEdit, JvMaskEdit, JvDBControls, VclTee.TeeGDIPlus, VCLTee.TeEngine,
   VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, System.DateUtils, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, Datasnap.DBClient, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, System.ImageList, Vcl.ImgList,
-  Vcl.VirtualImageList;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons;
 
 type
   TFrmTelaCadSolicitacaoTrab = class(TFrmTelaPaiCadastros)
@@ -79,7 +78,6 @@ type
     procedure MenuItem2Click(Sender: TObject);
     procedure Area1Click(Sender: TObject);
     procedure Equipamento1Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
     LProgramadas: array[1..31] of Real;
@@ -294,7 +292,7 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
           end;
         End;
       end;
-    BtnSalvar.ImageName := 'Operacional\salvar';
+    BtnSalvar.ImageIndex := 2;
     PSituacao.Caption    := EmptyStr;
     PSituacao.Color      := $00DFDFDF;
   end;
@@ -445,38 +443,6 @@ DM.FTabela_auxiliar := 40;
 
 end;
 
-procedure TFrmTelaCadSolicitacaoTrab.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 40;
-  inherited;
-PIdentificacao.Enabled  := True;
-PProgramacao.Enabled    := True;
-PDiversos.Enabled       := True;
-
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'SOLICITADA'    then begin PSituacao.Caption := 'SOLICITADA';    PSituacao.Color := clWhite;  PSituacao.Font.Color := clBlack;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CADASTRADA'    then begin PSituacao.Caption := 'CADASTRADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'EXECUCAO'      then begin PSituacao.Caption := 'EXECUÇÃO';      PSituacao.Color := clInfoBk; PSituacao.Font.Color := clGreen;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'LIBERADA'      then begin PSituacao.Caption := 'LIBERADA';      PSituacao.Color := clGreen;  PSituacao.Font.Color := clWhite;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
-
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
-  begin
-    if (DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA') then
-      begin
-        PAuxiliares.Font.Color  := clRed;
-        PAuxiliares.Caption     := 'ORDEM DE SERVIÇO CANCELADA, ALTERAÇÕES NÃO PERMITIDAS!';
-        PIdentificacao.Enabled  := False;
-        PProgramacao.Enabled    := False;
-        PDiversos.Enabled       := False;
-      end;
-  end;
-end;
-
 procedure TFrmTelaCadSolicitacaoTrab.Codigo1Click(Sender: TObject);
 begin
   inherited;
@@ -534,6 +500,7 @@ begin
   DM.FDataSetParam     := DM.qrySolicitacaoTrab;
   DM.FDataSourceParam  := DM.dsSolicitacaoTrab;
   DM.FTela := 'CADSOLICITACAOTRAB';
+  DM.FTabela_auxiliar := 40;
 
   LPrimeiroDataMes := DateOf(StartOfTheMonth(DM.FDataHoraServidor));
   LUltimaDataMes   := DateOf(EndOfTheMonth(LPrimeiroDataMes));

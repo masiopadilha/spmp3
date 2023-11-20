@@ -1,10 +1,8 @@
 inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
   Caption = 'Indicadores de Desempenho'
-  ClientHeight = 371
-  ClientWidth = 784
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 780
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -35,8 +33,6 @@ inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
     end
   end
   inherited PCentro: TPanel
-    Width = 780
-    Height = 248
     object LblGravAcidMenM: TDBText
       Left = 223
       Top = 206
@@ -536,20 +532,12 @@ inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 352
-    Width = 784
-  end
-  inherited PAuxiliares: TPanel
-    Top = 325
-    Width = 780
+  inherited MainMenuPadrao: TMainMenu
+    Left = 414
+    Top = 260
   end
   inherited ActionList1: TActionList
     Left = 450
     Top = 99
-  end
-  inherited MainMenuPadrao: TMainMenu
-    Left = 414
-    Top = 260
   end
 end

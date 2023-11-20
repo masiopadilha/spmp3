@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPneus = class(TFrmTelaPaiCadastros)
@@ -88,7 +88,6 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnFabricanteClick(Sender: TObject);
     procedure BtnFornecedorClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -373,39 +372,6 @@ DM.qryPneusDados.Edit;
 DM.MSGAguarde('', False);
 end;
 
-procedure TFrmTelaCadPneus.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar  := 83;
-DM.FParamAuxiliar[1] := 'DESCRICAO';
-  inherited;
-if DM.qryPneusCODFAMILIAPNEU.AsString <> EmptyStr then
-  begin
-    DM.qryFamPneus.Close;
-    DM.qryFamPneus.Params[0].AsString := DM.qryPneusCODFAMILIAPNEU.AsString;
-    DM.qryFamPneus.Open;
-
-    DM.qryPneusDados.Close;
-    DM.qryPneusDados.Params[0].AsString := DM.FCodEmpresa;
-    DM.qryPneusDados.Params[1].AsString := DM.qryPneusCODFAMILIAPNEU.AsString;
-    DM.qryPneusDados.Params[2].AsString := DM.qryPneusCODIGO.AsString;
-    DM.qryPneusDados.Open;
-    DM.qryPneusDados.Edit;
-
-    if DM.qryFamPneusCAMPO1.AsString = EmptyStr then EdtCampo1.Visible := False else EdtCampo1.Visible := True;
-    if DM.qryFamPneusCAMPO2.AsString = EmptyStr then EdtCampo2.Visible := False else EdtCampo2.Visible := True;
-    if DM.qryFamPneusCAMPO3.AsString = EmptyStr then EdtCampo3.Visible := False else EdtCampo3.Visible := True;
-    if DM.qryFamPneusCAMPO4.AsString = EmptyStr then EdtCampo4.Visible := False else EdtCampo4.Visible := True;
-    if DM.qryFamPneusCAMPO5.AsString = EmptyStr then EdtCampo5.Visible := False else EdtCampo5.Visible := True;
-    if DM.qryFamPneusCAMPO6.AsString = EmptyStr then EdtCampo6.Visible := False else EdtCampo6.Visible := True;
-    if DM.qryFamPneusCAMPO7.AsString = EmptyStr then EdtCampo7.Visible := False else EdtCampo7.Visible := True;
-    if DM.qryFamPneusCAMPO8.AsString = EmptyStr then EdtCampo8.Visible := False else EdtCampo8.Visible := True;
-    if DM.qryFamPneusCAMPO9.AsString = EmptyStr then EdtCampo9.Visible := False else EdtCampo9.Visible := True;
-    if DM.qryFamPneusCAMPO10.AsString = EmptyStr then EdtCampo10.Visible := False else EdtCampo10.Visible := True;
-    if DM.qryFamPneusCAMPO11.AsString = EmptyStr then EdtCampo11.Visible := False else EdtCampo11.Visible := True;
-    if DM.qryFamPneusCAMPO12.AsString = EmptyStr then EdtCampo12.Visible := False else EdtCampo12.Visible := True;
-  end;
-end;
-
 procedure TFrmTelaCadPneus.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -429,8 +395,8 @@ end;
 procedure TFrmTelaCadPneus.EdtCodPneuExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadPneus.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -447,6 +413,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryPneus;
 DM.FDataSourceParam := DM.dsPneus;
+DM.FTabela_auxiliar  := 83;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.qryPneusDados.Open;
 DM.qryPneusDados.Edit;

@@ -30,8 +30,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 807
-      ExplicitLeft = 803
+      Left = 799
+      ExplicitLeft = 795
     end
   end
   inherited PCentro: TPanel
@@ -58,7 +58,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Align = alNone
       TabOrder = 3
       ExplicitTop = 0
-      ExplicitWidth = 480
+      ExplicitWidth = 500
       ExplicitHeight = 0
     end
     object EdtConsulta: TEdit

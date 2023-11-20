@@ -1,7 +1,7 @@
 inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   Caption = 'Confiabilidade do Equipamento'
-  ClientHeight = 344
-  ClientWidth = 368
+  ClientHeight = 341
+  ClientWidth = 364
   Constraints.MaxHeight = 380
   Constraints.MaxWidth = 380
   Constraints.MinHeight = 380
@@ -9,11 +9,12 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   OnCreate = FormCreate
   ExplicitWidth = 380
   ExplicitHeight = 380
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 362
+    Width = 358
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -28,15 +29,15 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 329
-      ExplicitLeft = 329
+      Left = 324
+      ExplicitLeft = 324
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 360
-    Height = 197
+    Width = 356
+    Height = 194
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -46,20 +47,17 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     ExplicitWidth = 356
     ExplicitHeight = 194
     inherited RGTelas: TRadioGroup
-      AlignWithMargins = True
-      Left = 4
-      Top = 4
-      Width = 352
-      Height = 189
+      Width = 354
+      Height = 192
       Margins.Left = 3
       Margins.Top = 3
       Margins.Right = 3
       Margins.Bottom = 3
       TabOrder = 3
-      ExplicitLeft = 4
-      ExplicitTop = 4
-      ExplicitWidth = 348
-      ExplicitHeight = 186
+      ExplicitLeft = 0
+      ExplicitTop = 3
+      ExplicitWidth = 354
+      ExplicitHeight = 192
     end
     object ChbAtivado: TDBCheckBox
       Left = 39
@@ -179,8 +177,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   end
   inherited PAuxiliares: TPanel
     Left = 3
-    Top = 274
-    Width = 362
+    Top = 271
+    Width = 358
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -191,8 +189,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   end
   inherited PBotoes: TPanel
     Left = 3
-    Top = 303
-    Width = 362
+    Top = 300
+    Width = 358
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -201,22 +199,22 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     ExplicitTop = 300
     ExplicitWidth = 358
     inherited BtnOK: TButton
-      Left = 104
+      Left = 106
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       OnClick = BtnOKClick
-      ExplicitLeft = 104
+      ExplicitLeft = 106
     end
     inherited BtnFechar: TButton
-      Left = 185
+      Left = 187
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       OnClick = BtnFecharClick
-      ExplicitLeft = 185
+      ExplicitLeft = 187
     end
   end
 end

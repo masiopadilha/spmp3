@@ -7,8 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.Menus,
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Data.DB, Vcl.Mask,
   JvExMask, JvToolEdit, JvDBControls, System.DateUtils, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Grids, Vcl.DBGrids,
-  Vcl.Buttons;
+  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Grids, Vcl.DBGrids;
 
 type
   TFrmTelaCadPneusChassiPneusConsertos = class(TFrmTelaPaiParametros)
@@ -45,7 +44,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnFornecedorClick(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -260,14 +258,6 @@ if DM.qryPneusChassiPneus.Locate('ID', DM.qryPneusChassiPneusConsertosID.AsInteg
   end;
 
 EdtID.ReadOnly := True;
-end;
-
-procedure TFrmTelaCadPneusChassiPneusConsertos.ButConsultarClick(
-  Sender: TObject);
-begin
-DM.FTabela_auxiliar := 92;
-  inherited;
-
 end;
 
 procedure TFrmTelaCadPneusChassiPneusConsertos.FormClose(Sender: TObject;

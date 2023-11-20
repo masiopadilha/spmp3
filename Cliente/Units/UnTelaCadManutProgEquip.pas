@@ -7,8 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons,
-  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.ActnList, Vcl.ExtActns, System.DateUtils, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadManutProgEquip = class(TFrmTelaPaiCadastros)
@@ -67,7 +66,6 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -405,13 +403,6 @@ DM.qryAuxiliar.Execute;
 DM.MSGAguarde('', False);
 end;
 
-procedure TFrmTelaCadManutProgEquip.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 32;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadManutProgEquip.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -453,8 +444,8 @@ end;
 procedure TFrmTelaCadManutProgEquip.EdtCodManutencaoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else btnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadManutProgEquip.FormClose(Sender: TObject;
@@ -477,6 +468,7 @@ begin
 DM.FDataSetParam    :=DM.qryManutProgEquip;
 DM.FDataSourceParam := DM.dsManutProgEquip;
 DM.FTela := 'CADMANUTPROGEQUIP';
+DM.FTabela_auxiliar := 32;
 LDataProgIni := 0;
 end;
 

@@ -1,18 +1,18 @@
 inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   Caption = 'Informa'#231#245'es Gerenciais'
-  ClientHeight = 664
-  ClientWidth = 1012
-  Constraints.MaxHeight = 720
+  ClientHeight = 621
+  ClientWidth = 1008
+  Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   Menu = MainMenu1
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 720
+  ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     inherited Image1: TImage
       Left = 2
@@ -35,7 +35,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
     inherited BtnAjuda: TButton
       Left = 970
-      ExplicitLeft = 966
+      ExplicitLeft = 970
     end
     object CBPeriodo: TComboBox
       Left = 175
@@ -72,7 +72,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
       Visible = False
     end
     object BtnImprimir: TButton
-      Left = 937
+      Left = 941
       Top = 17
       Width = 28
       Height = 28
@@ -88,13 +88,13 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 525
+    Width = 1002
+    Height = 482
     ExplicitWidth = 1002
     ExplicitHeight = 482
     inherited RGTelas: TRadioGroup
-      Width = 1004
-      Height = 523
+      Width = 1000
+      Height = 480
       ExplicitWidth = 1000
       ExplicitHeight = 480
     end
@@ -102,21 +102,19 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 998
-      Height = 517
+      Width = 994
+      Height = 474
       Align = alClient
       BevelInner = bvLowered
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 994
-      ExplicitHeight = 474
       object Chart1: TChart
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 992
-        Height = 511
+        Width = 988
+        Height = 468
         Margins.Left = 1
         Margins.Top = 1
         Margins.Right = 1
@@ -195,8 +193,6 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
         BevelInner = bvRaised
         BevelOuter = bvLowered
         TabOrder = 0
-        ExplicitWidth = 988
-        ExplicitHeight = 468
         DefaultCanvas = 'TGDIPlusCanvas'
         PrintMargins = (
           15
@@ -227,14 +223,14 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 597
-    Width = 1008
+    Top = 554
+    Width = 1004
     ExplicitTop = 554
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 624
-    Width = 1008
+    Top = 581
+    Width = 1004
     ExplicitTop = 581
     ExplicitWidth = 1004
     inherited BtnOK: TButton

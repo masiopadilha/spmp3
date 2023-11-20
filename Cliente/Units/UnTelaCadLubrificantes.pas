@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExComCtrls,
   JvComCtrls, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+  Vcl.Buttons;
 
 type
   TFrmTelaCadLubrificantes = class(TFrmTelaPaiCadastros)
@@ -98,7 +98,6 @@ type
     procedure BtnFabricanteClick(Sender: TObject);
     procedure BtnFornecedorClick(Sender: TObject);
     procedure BtnAreaClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -296,13 +295,6 @@ EdtCodLubrificante.ReadOnly := True;
 DM.MSGAguarde('', False);
 end;
 
-procedure TFrmTelaCadLubrificantes.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar  := 64;
-  inherited;
-
-end;
-
 procedure TFrmTelaCadLubrificantes.ChbOleoClick(Sender: TObject);
 begin
   inherited;
@@ -331,8 +323,8 @@ end;
 procedure TFrmTelaCadLubrificantes.EdtCodLubrificanteExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadLubrificantes.FormClose(Sender: TObject;
@@ -349,6 +341,7 @@ begin
 DM.FDataSetParam    := DM.qryLubrificantes;
 DM.FDataSourceParam := DM.dsLubrificantes;
 DM.FTela := 'CADLUBRIFICANTES';
+DM.FTabela_auxiliar  := 64;
 if ChbOleo.Checked = True then
   begin
     PCLubrificante.Pages[0].TabVisible := False;

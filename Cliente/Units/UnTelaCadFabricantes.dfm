@@ -3,14 +3,14 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
-      Left = 661
+      Left = 506
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 683
+      Left = 528
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -45,14 +45,14 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       DataSource = DM.dsFabricantes
     end
     inherited LCadastro: TLabel
-      Left = 558
+      Left = 400
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 520
+      Left = 362
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -60,41 +60,37 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
     end
   end
   inherited PCentro: TPanel
-    object Label2: TLabel
-      Left = 64
-      Top = 72
+    Caption = 'DM.dsFornecedores'
+    object Label1: TLabel
+      Left = 188
+      Top = 60
       Width = 44
       Height = 16
+      Alignment = taRightJustify
       Caption = 'C'#243'digo:'
+      FocusControl = EdtCodigo
     end
-    object Label1: TLabel
-      Left = 193
-      Top = 72
+    object Label2: TLabel
+      Left = 172
+      Top = 91
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
+      FocusControl = EdtDescricao
     end
     object Label3: TLabel
-      Left = 427
-      Top = 72
+      Left = 199
+      Top = 123
       Width = 33
       Height = 16
       Alignment = taRightJustify
       Caption = 'CNPJ:'
       FocusControl = EdtCNPJ
     end
-    object Label6: TLabel
-      Left = 540
-      Top = 72
-      Width = 33
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Fone:'
-    end
     object Label4: TLabel
-      Left = 64
-      Top = 118
+      Left = 174
+      Top = 155
       Width = 58
       Height = 16
       Alignment = taRightJustify
@@ -102,17 +98,25 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       FocusControl = EdtEndereco
     end
     object Label5: TLabel
-      Left = 279
-      Top = 118
+      Left = 196
+      Top = 187
       Width = 36
       Height = 16
       Alignment = taRightJustify
       Caption = 'Email:'
       FocusControl = EdtEmail
     end
+    object Label6: TLabel
+      Left = 199
+      Top = 219
+      Width = 33
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Fone:'
+    end
     object Label7: TLabel
-      Left = 470
-      Top = 118
+      Left = 183
+      Top = 251
       Width = 49
       Height = 16
       Alignment = taRightJustify
@@ -121,22 +125,21 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 64
-      Top = 89
+      Left = 238
+      Top = 58
       Width = 121
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
       DataSource = DM.dsFabricantes
-      ReadOnly = True
       TabOrder = 0
       OnExit = EdtCodigoExit
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 193
-      Top = 89
-      Width = 229
+      Left = 237
+      Top = 90
+      Width = 226
       Height = 24
       DataField = 'DESCRICAO'
       DataSource = DM.dsFabricantes
@@ -145,9 +148,9 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       OnKeyPress = FormKeyPress
     end
     object EdtCNPJ: TDBEdit
-      Left = 427
-      Top = 89
-      Width = 109
+      Left = 237
+      Top = 122
+      Width = 121
       Height = 24
       DataField = 'ID'
       DataSource = DM.dsFabricantes
@@ -155,46 +158,46 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtFone: TJvDBMaskEdit
-      Left = 540
-      Top = 89
-      Width = 100
+    object EdtEndereco: TDBEdit
+      Left = 237
+      Top = 154
+      Width = 226
       Height = 24
-      DataField = 'FONE'
+      DataField = 'ENDERECO'
       DataSource = DM.dsFabricantes
-      MaxLength = 15
       TabOrder = 3
-      EditMask = '!(99) 99999-9999;1;_'
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtEndereco: TDBEdit
-      Left = 64
-      Top = 135
-      Width = 210
+    object EdtEmail: TDBEdit
+      Left = 237
+      Top = 186
+      Width = 226
       Height = 24
-      DataField = 'ENDERECO'
+      CharCase = ecLowerCase
+      DataField = 'EMAIL'
       DataSource = DM.dsFabricantes
       TabOrder = 4
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtEmail: TDBEdit
-      Left = 279
-      Top = 135
-      Width = 186
+    object EdtFone: TJvDBMaskEdit
+      Left = 237
+      Top = 218
+      Width = 123
       Height = 24
-      CharCase = ecLowerCase
-      DataField = 'EMAIL'
+      DataField = 'FONE'
       DataSource = DM.dsFabricantes
+      MaxLength = 15
       TabOrder = 5
+      EditMask = '!(99) 99999-9999;1;_'
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtContato: TDBEdit
-      Left = 470
-      Top = 135
-      Width = 170
+      Left = 237
+      Top = 250
+      Width = 228
       Height = 24
       DataField = 'CONTATO'
       DataSource = DM.dsFabricantes
@@ -202,9 +205,9 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 63
-      Top = 167
-      Width = 57
+      Left = 196
+      Top = 280
+      Width = 59
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Ativo:'
@@ -215,9 +218,9 @@ inherited FrmTelaCadFabricantes: TFrmTelaCadFabricantes
       ValueUnchecked = 'N'
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 128
-      Top = 167
-      Width = 63
+      Left = 304
+      Top = 280
+      Width = 65
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Vis'#237'vel:'

@@ -6,54 +6,52 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
-  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid,
-  Vcl.WinXCtrls;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadFamiliaEquipamento = class(TFrmTelaPaiParametros)
-    ChbAtivoNF: TDBCheckBox;
     ChbCampo1: TDBCheckBox;
-    ChbCampo10: TDBCheckBox;
-    ChbCampo11: TDBCheckBox;
-    ChbCampo12: TDBCheckBox;
-    ChbCampo2: TDBCheckBox;
     ChbCampo3: TDBCheckBox;
-    ChbCampo4: TDBCheckBox;
     ChbCampo5: TDBCheckBox;
-    ChbCampo6: TDBCheckBox;
     ChbCampo7: TDBCheckBox;
-    ChbCampo8: TDBCheckBox;
     ChbCampo9: TDBCheckBox;
-    ChbVisivelNF: TDBCheckBox;
-    EdtCampo1: TDBEdit;
-    EdtCampo10: TDBEdit;
-    EdtCampo11: TDBEdit;
-    EdtCampo12: TDBEdit;
-    EdtCampo2: TDBEdit;
-    EdtCampo3: TDBEdit;
-    EdtCampo4: TDBEdit;
-    EdtCampo5: TDBEdit;
-    EdtCampo6: TDBEdit;
-    EdtCampo7: TDBEdit;
-    EdtCampo8: TDBEdit;
-    EdtCampo9: TDBEdit;
-    EdtCodigo: TDBEdit;
-    EdtDescricao: TDBEdit;
-    Label1: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
+    ChbCampo11: TDBCheckBox;
+    ChbCampo2: TDBCheckBox;
+    ChbCampo4: TDBCheckBox;
+    ChbCampo6: TDBCheckBox;
+    ChbCampo8: TDBCheckBox;
+    ChbCampo10: TDBCheckBox;
+    ChbCampo12: TDBCheckBox;
     Label2: TLabel;
-    Label3: TLabel;
-    Label35: TLabel;
+    EdtCodigo: TDBEdit;
     Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
+    EdtDescricao: TDBEdit;
+    Label35: TLabel;
+    EdtCampo1: TDBEdit;
     Label8: TLabel;
+    EdtCampo2: TDBEdit;
+    Label1: TLabel;
+    EdtCampo3: TDBEdit;
     Label9: TLabel;
+    EdtCampo4: TDBEdit;
+    Label3: TLabel;
+    EdtCampo5: TDBEdit;
+    Label10: TLabel;
+    EdtCampo6: TDBEdit;
+    Label5: TLabel;
+    EdtCampo7: TDBEdit;
+    Label11: TLabel;
+    EdtCampo8: TDBEdit;
+    Label6: TLabel;
+    EdtCampo9: TDBEdit;
+    Label12: TLabel;
+    EdtCampo10: TDBEdit;
+    Label7: TLabel;
+    EdtCampo11: TDBEdit;
+    Label13: TLabel;
+    EdtCampo12: TDBEdit;
+    ChbAtivoNF: TDBCheckBox;
+    ChbVisivelNF: TDBCheckBox;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -62,8 +60,6 @@ type
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
-    procedure butImprimirClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,7 +83,6 @@ end;
 
 procedure TFrmTelaCadFamiliaEquipamento.BtnConsultarClick(Sender: TObject);
 begin
-DM.FTabela_auxiliar := 6;
   inherited;
 if DM.qryFamEquipamento.IsEmpty = False then
   begin
@@ -208,24 +203,11 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadFamiliaEquipamento.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 6;
-  inherited;
-
-end;
-
-procedure TFrmTelaCadFamiliaEquipamento.butImprimirClick(Sender: TObject);
-begin
-  inherited;
-DM.FDataSetRelat    := DmRelatorios.frxDBFamEquipamento;
-end;
-
 procedure TFrmTelaCadFamiliaEquipamento.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
-else BtnSalvar.ImageName := 'Operacional\salvar';
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
+else BtnSalvar.ImageIndex := 2;
 end;
 
 procedure TFrmTelaCadFamiliaEquipamento.FormClose(Sender: TObject;
@@ -242,6 +224,7 @@ begin
 DM.FDataSetParam    := DM.qryFamEquipamento;
 DM.FDataSourceParam := DM.dsFamEquipamento;
 DM.FTela := 'CADFAMILIAEQUIP';
+DM.FTabela_auxiliar := 6;
 end;
 
 end.

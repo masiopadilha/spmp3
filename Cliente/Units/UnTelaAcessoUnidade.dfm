@@ -1,37 +1,34 @@
 inherited FrmTelaAcessoUnidade: TFrmTelaAcessoUnidade
   BorderIcons = []
   Caption = 'SPMP3 - Acesso - Unidade'
-  ClientHeight = 304
-  ClientWidth = 438
+  ClientWidth = 434
   Constraints.MaxWidth = 450
   Constraints.MinWidth = 450
   ExplicitWidth = 450
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 434
-    ExplicitWidth = 430
+    Width = 430
     inherited BtnAjuda: TButton
-      Left = 397
+      Left = 393
       ExplicitLeft = 393
     end
   end
   inherited PCentro: TPanel
-    Width = 432
-    Height = 188
-    ExplicitWidth = 428
+    Width = 428
+    Height = 185
     ExplicitHeight = 185
     inherited RGTelas: TRadioGroup
-      Width = 430
-      Height = 186
-      ExplicitWidth = 426
+      Width = 426
+      Height = 183
       ExplicitHeight = 183
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 424
-      Height = 180
+      Width = 420
+      Height = 177
       Align = alClient
       DataSource = DM.dsUnidadesCorp
       Font.Charset = DEFAULT_CHARSET
@@ -107,21 +104,18 @@ inherited FrmTelaAcessoUnidade: TFrmTelaAcessoUnidade
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 260
-    Width = 434
+    Top = 257
+    Width = 430
     Height = 0
     ExplicitTop = 257
-    ExplicitWidth = 430
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 434
-    ExplicitWidth = 430
+    Width = 430
     inherited BtnOK: TButton
-      Left = 180
+      Left = 178
       OnClick = BtnOKClick
-      ExplicitLeft = 180
+      ExplicitLeft = 178
     end
     inherited BtnFechar: TButton
       Left = 13

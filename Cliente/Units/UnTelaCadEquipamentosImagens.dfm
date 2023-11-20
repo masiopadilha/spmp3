@@ -1,7 +1,7 @@
 inherited FrmTelaCadEquipamentosImagens: TFrmTelaCadEquipamentosImagens
   Caption = 'Imagens do Equipamento'
-  ClientHeight = 464
-  ClientWidth = 548
+  ClientHeight = 461
+  ClientWidth = 544
   Constraints.MaxHeight = 500
   Constraints.MaxWidth = 560
   Constraints.MinHeight = 500
@@ -9,24 +9,25 @@ inherited FrmTelaCadEquipamentosImagens: TFrmTelaCadEquipamentosImagens
   OnCreate = FormCreate
   ExplicitWidth = 560
   ExplicitHeight = 500
+  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 544
+    Width = 540
     ExplicitWidth = 540
     inherited BtnAjuda: TButton
-      Left = 511
+      Left = 507
       Visible = False
-      ExplicitLeft = 511
+      ExplicitLeft = 507
     end
   end
   inherited PCentro: TPanel
-    Width = 542
-    Height = 325
+    Width = 538
+    Height = 322
     ExplicitWidth = 538
     ExplicitHeight = 322
     inherited RGTelas: TRadioGroup
-      Width = 540
-      Height = 323
+      Width = 536
+      Height = 320
       Caption = 'Imagens do Equipamento:'
       ExplicitWidth = 536
       ExplicitHeight = 320
@@ -35,20 +36,18 @@ inherited FrmTelaCadEquipamentosImagens: TFrmTelaCadEquipamentosImagens
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 534
-      Height = 317
+      Width = 530
+      Height = 314
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 530
-      ExplicitHeight = 314
       object ImgFotoEquip: TImage
         AlignWithMargins = True
         Left = 5
         Top = 37
-        Width = 524
-        Height = 243
+        Width = 520
+        Height = 240
         Margins.Top = 35
         Margins.Bottom = 35
         Align = alClient
@@ -117,14 +116,14 @@ inherited FrmTelaCadEquipamentosImagens: TFrmTelaCadEquipamentosImagens
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 397
-    Width = 544
+    Top = 394
+    Width = 540
     ExplicitTop = 394
     ExplicitWidth = 540
   end
   inherited PBotoes: TPanel
-    Top = 424
-    Width = 544
+    Top = 421
+    Width = 540
     ExplicitTop = 421
     ExplicitWidth = 540
     inherited BtnOK: TButton

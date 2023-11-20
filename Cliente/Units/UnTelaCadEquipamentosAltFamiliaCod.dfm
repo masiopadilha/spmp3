@@ -1,38 +1,38 @@
 inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamiliaCod
   Caption = 'Altera'#231#227'o de C'#243'digo da Fam'#237'lia do Equipamento'
-  ClientHeight = 304
-  ClientWidth = 488
   OnShow = FormShow
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 484
+    ExplicitWidth = 504
     inherited BtnAjuda: TButton
       Left = 506
-      ExplicitLeft = 502
+      ExplicitLeft = 506
     end
   end
   inherited PCentro: TPanel
-    Width = 482
-    Height = 165
+    ExplicitWidth = 502
+    ExplicitHeight = 165
+    inherited RGTelas: TRadioGroup
+      Height = 160
+    end
     object pBase: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 474
-      Height = 157
+      Width = 494
+      Height = 154
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 470
-      ExplicitHeight = 154
+      ExplicitWidth = 490
       object Label1: TLabel
-        Left = 13
+        Left = 29
         Top = 64
         Width = 83
         Height = 16
         Caption = 'C'#243'digo antigo:'
       end
       object Label2: TLabel
-        Left = 13
+        Left = 29
         Top = 95
         Width = 83
         Height = 16
@@ -45,7 +45,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         ParentFont = False
       end
       object Label5: TLabel
-        Left = 17
+        Left = 33
         Top = 33
         Width = 79
         Height = 16
@@ -53,7 +53,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         Caption = 'Equipamento:'
       end
       object edtCodAntigo: TMaskEdit
-        Left = 101
+        Left = 117
         Top = 62
         Width = 125
         Height = 24
@@ -65,7 +65,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         OnKeyPress = edtCodAntigoKeyPress
       end
       object edtNovoAntigo: TMaskEdit
-        Left = 101
+        Left = 117
         Top = 94
         Width = 125
         Height = 24
@@ -75,7 +75,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
       end
       object EdtCodEquipamento: TDBEdit
         Tag = 555
-        Left = 101
+        Left = 117
         Top = 31
         Width = 125
         Height = 24
@@ -89,7 +89,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         StyleElements = [seFont, seClient]
       end
       object EdtDescEquipamento: TDBEdit
-        Left = 229
+        Left = 245
         Top = 31
         Width = 204
         Height = 24
@@ -103,7 +103,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         StyleElements = [seFont, seClient]
       end
       object BtnEquipamento: TButton
-        Left = 438
+        Left = 454
         Top = 29
         Width = 28
         Height = 28
@@ -118,8 +118,8 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
         OnClick = BtnEquipamentoClick
       end
       object MaskEdit1: TMaskEdit
-        Left = 229
-        Top = 62
+        Left = 248
+        Top = 64
         Width = 121
         Height = 24
         TabOrder = 5
@@ -129,20 +129,12 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 484
+    ExplicitTop = 237
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 484
+    ExplicitTop = 264
     inherited BtnOK: TButton
-      Left = 164
       OnClick = BtnOKClick
-      ExplicitLeft = 164
-    end
-    inherited BtnFechar: TButton
-      Left = 246
-      ExplicitLeft = 246
     end
   end
 end

@@ -1,10 +1,7 @@
 inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
   Caption = 'Lubrificantes'
-  ClientHeight = 661
-  ClientWidth = 1008
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
     inherited LblDataCad: TDBText
       DataSource = DM.dsLubrificantes
     end
@@ -19,7 +16,6 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
     object Label4: TLabel
       Left = 52
       Top = 33
@@ -234,13 +230,12 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
     object PCLubrificante: TJvPageControl
       AlignWithMargins = True
       Left = 4
       Top = 21
       Width = 1000
-      Height = 190
+      Height = 165
       Margins.Top = 20
       ActivePage = TSGraxa
       Align = alClient
@@ -253,8 +248,8 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
         object POleo: TPanel
           Left = 0
           Top = 0
-          Width = 992
-          Height = 159
+          Width = 988
+          Height = 134
           Align = alClient
           BevelOuter = bvNone
           Color = 14671839
@@ -501,14 +496,13 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
         object PGraxa: TPanel
           Left = 0
           Top = 0
-          Width = 992
-          Height = 159
+          Width = 988
+          Height = 134
           Align = alClient
           BevelOuter = bvNone
           Color = 14671839
           ParentBackground = False
           TabOrder = 0
-          ExplicitWidth = 988
           object Label37: TLabel
             Left = 47
             Top = 12
@@ -664,8 +658,6 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
     end
   end
   inherited PDiversos: TPanel
-    Width = 1004
-    Height = 176
     object Label11: TLabel
       Left = 31
       Top = 99
@@ -898,19 +890,10 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
       OnClick = BtnAreaClick
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 642
-    Width = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 626
-    Width = 1008
-  end
-  inherited PBase: TPanel
-    Top = 586
-    Width = 1004
-  end
   inherited TimerAlertas: TTimer
     Top = 14
+  end
+  inherited PopupMenuRelat: TPopupMenu
+    Top = 88
   end
 end

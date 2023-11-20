@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Vcl.DBCtrls, System.DateUtils, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
 
 type
   TFrmTelaCadIndDesempenho = class(TFrmTelaPaiParametros)
@@ -48,7 +48,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnNovoClick(Sender: TObject);
-    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
     LTotalHorasParadasEquip, LTotalHorasTrabMObra, LTotalHorasTrabEquip, LDisp : Real;
@@ -118,7 +117,7 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageName := 'Operacional\salvar';
+BtnSalvar.ImageIndex := 2;
 
 CBMes.SetFocus;
 end;
@@ -229,15 +228,8 @@ PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageName := 'Operacional\salvar';
+BtnSalvar.ImageIndex := 2;
 //  inherited;
-end;
-
-procedure TFrmTelaCadIndDesempenho.ButConsultarClick(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 75;
-  inherited;
-
 end;
 
 procedure TFrmTelaCadIndDesempenho.FormClose(Sender: TObject;
