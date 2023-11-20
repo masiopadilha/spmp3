@@ -28,7 +28,7 @@ uses
   System.Win.ComObj, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   frxClass, frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
   FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math, Winapi.ShellAPI,
-  Vcl.Menus;
+  Vcl.Menus, Vcl.BaseImageCollection, Vcl.ImageCollection, Vcl.VirtualImageList;
 
 const
   OffsetMemoryStream : Int64 = 0;
@@ -5355,7 +5355,6 @@ type
     qryOrdemServicoLocalizaMObraOSExecDESCEQUIPAMENTO: TStringField;
     qryOrdemServicoLocalizaMObraOSExecCENTROCUSTO: TStringField;
     qryOrdemServicoLocalizaMObraOSExecMATRICULA: TStringField;
-    ImgListNewButtons: TImageList;
     qryOrdemServicoGerenciaEQUIPPARADO: TStringField;
     qryManutPeriodicasHistCRITICIDADE: TStringField;
     qryManutPeriodicasHistFREQUENCIA2: TIntegerField;
@@ -5558,6 +5557,13 @@ type
     qryAltCodFamilia: TFDQuery;
     qryConfigsversion: TIntegerField;
     qryConfigsautoupdate: TBooleanField;
+    ImageCollection32x32: TImageCollection;
+    VirtualImageList32x32: TVirtualImageList;
+    ImageCollection16x16: TImageCollection;
+    VirtualImageList16x16: TVirtualImageList;
+    ImageCollection24x24: TImageCollection;
+    VirtualImageList24x24: TVirtualImageList;
+    qryFuncionariosHistServicosFIM: TDateTimeField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5649,7 +5655,7 @@ type
     FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
     FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
     FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
-    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha: String;
+    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro: String;
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
     FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
     FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
@@ -5880,10 +5886,13 @@ begin
         VerQueryValue (Pt, '\', Pt2, Size2);
         with TVSFixedFileInfo (Pt2^) do
           begin
-            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+            FVersaoMacro := IntToStr (HiWord (dwFileVersionMS)) + '.' +
                       IntToStr (LoWord (dwFileVersionMS)) + '.' +
-                      IntToStr (HiWord (dwFileVersionLS)) + '.' +
-                      IntToStr (LoWord (dwFileVersionLS));
+                      IntToStr (HiWord (dwFileVersionLS));
+            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+                    IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                    IntToStr (HiWord (dwFileVersionLS)) + '.' +
+                    IntToStr (LoWord (dwFileVersionLS));
 //            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
             FVersaoMaquina := StrToInt(StringReplace(Ver, '.', '',[rfReplaceAll]));
             Result := Ver;

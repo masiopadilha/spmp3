@@ -1,8 +1,17 @@
 inherited FrmTelaCadRecursosFerram: TFrmTelaCadRecursosFerram
   Caption = 'Ferramentarias'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
+    ExplicitWidth = 784
+    inherited LAlteracao: TLabel
+      Left = 661
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 683
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsFerramentaria
     end
@@ -15,8 +24,18 @@ inherited FrmTelaCadRecursosFerram: TFrmTelaCadRecursosFerram
     inherited LblUsuCad: TDBText
       DataSource = DM.dsFerramentaria
     end
+    inherited LCadastro: TLabel
+      Left = 558
+    end
+    inherited LCadastroPor: TLabel
+      Left = 520
+    end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
+    ExplicitWidth = 784
+    ExplicitHeight = 251
     object Label1: TLabel
       Left = 10
       Top = 9
@@ -62,8 +81,8 @@ inherited FrmTelaCadRecursosFerram: TFrmTelaCadRecursosFerram
       AlignWithMargins = True
       Left = 4
       Top = 36
-      Width = 612
-      Height = 280
+      Width = 776
+      Height = 211
       Hint = 
         'Tecle ENTER na(s) coluna(s) para incluir um registro ou efetue o' +
         ' duplo-clique para exclu'#237'-lo'
@@ -138,5 +157,17 @@ inherited FrmTelaCadRecursosFerram: TFrmTelaCadRecursosFerram
           Visible = True
         end>
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+    ExplicitTop = 355
+    ExplicitWidth = 788
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
+    ExplicitTop = 328
+    ExplicitWidth = 784
   end
 end

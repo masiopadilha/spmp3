@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, JvExControls,
-  JvGradientHeaderPanel, FireDAC.Stan.Param;
+  JvGradientHeaderPanel, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadAreas = class(TFrmTelaPaiParametros)
@@ -15,26 +15,26 @@ type
     TSAreas: TTabSheet;
     TSCelulas: TTabSheet;
     TSLinhas: TTabSheet;
-    Label2: TLabel;
-    EdtCodigo: TDBEdit;
-    Label4: TLabel;
-    EdtDescricao: TDBEdit;
-    ChbAtivoNF: TDBCheckBox;
-    ChbVisivelNF: TDBCheckBox;
     Label1: TLabel;
     EdtFtrMarcha: TDBEdit;
-    Label3: TLabel;
-    EdtCodCelula: TDBEdit;
-    Label5: TLabel;
-    EdtDescCelula: TDBEdit;
     Label6: TLabel;
     Label7: TLabel;
     EdtFtrMarchaCel: TDBEdit;
     CBTipo: TDBComboBox;
+    EdtDescricao: TDBEdit;
+    ChbVisivelNF: TDBCheckBox;
+    ChbAtivoNF: TDBCheckBox;
+    Label4: TLabel;
+    EdtCodigo: TDBEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    EdtCodCelula: TDBEdit;
+    Label5: TLabel;
+    EdtDescCelula: TDBEdit;
+    EdtDescLinha: TDBEdit;
     Label8: TLabel;
     EdtCodLinha: TDBEdit;
     Label9: TLabel;
-    EdtDescLinha: TDBEdit;
     procedure PCAreasChange(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -53,6 +53,8 @@ type
     procedure MmExcluirClick(Sender: TObject);
     procedure MmConsultarClick(Sender: TObject);
     procedure MmRelatorioClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -260,6 +262,8 @@ procedure TFrmTelaCadAreas.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 151;
   inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBAreas;
+
 end;
 
 procedure TFrmTelaCadAreas.BtnNovoClick(Sender: TObject);
@@ -336,7 +340,7 @@ case  PCAreas.TabIndex of
       EdtCodLinha.SetFocus;
     end;
 end;
-BtnSalvar.ImageIndex := 2;
+btnSalvar.ImageName := 'Operacional\naosalvo'
 end;
 
 procedure TFrmTelaCadAreas.BtnSalvarClick(Sender: TObject);
@@ -386,7 +390,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
         end;
       1:
         begin
@@ -431,7 +435,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\naosalvo';
         end;
       2:
         begin
@@ -474,7 +478,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
         end;
     end;
   end;
@@ -482,25 +486,100 @@ DM.MSGAguarde('', False);
 DM.FAlterando := True;
 end;
 
+procedure TFrmTelaCadAreas.ButConsultarClick(Sender: TObject);
+begin
+case PCAreas.TabIndex of
+  0:
+    begin
+      DM.FTabela_auxiliar := 15;
+      DM.qryCelulas.Close;
+      DM.qryLinhas.Close;
+    end;
+  1:
+    begin
+      if DM.qryAreasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA ÁREA SELECIONADA!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
+      DM.FTabela_auxiliar := 16;
+      DM.qryLinhas.Close;
+    end;
+  2:
+    begin
+      if DM.qryAreasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA ÁREA SELECIONADA!!!';
+          Exit;
+        end;
+      if DM.qryCelulasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA CÉLULA SELECIONADA!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
+      DM.FParamAuxiliar[2] := DM.qryCelulasCODIGO.AsString;
+      DM.FTabela_auxiliar := 17;
+    end;
+  3:
+    begin
+      if DM.qryAreasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA ÁREA SELECIONADA!!!';
+          Exit;
+        end;
+      if DM.qryCelulasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA CÉLULA SELECIONADA!!!';
+          Exit;
+        end;
+      if DM.qryLinhasCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA LINHA SELECIONADA!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
+      DM.FParamAuxiliar[2] := DM.qryCelulasCODIGO.AsString;
+      DM.FParamAuxiliar[3] := DM.qryLinhasCODIGO.AsString;
+      DM.FTabela_auxiliar := 18;
+    end;
+end;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadAreas.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBAreas;
+end;
+
 procedure TFrmTelaCadAreas.EdtCodCelulaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAreas.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAreas.EdtCodLinhaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAreas.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -517,7 +596,6 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryAreas;
 DM.FDataSourceParam := DM.dsAreas;
-DM.FDataSetRelat    := DmRelatorios.frxDBAreas;
 DM.FTela := 'CADAREAS';
 if DM.FEmpTransf = False then
   PCAreas.Pages[2].TabVisible := False;

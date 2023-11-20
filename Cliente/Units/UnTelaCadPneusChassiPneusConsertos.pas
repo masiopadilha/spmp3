@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.Menus,
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Data.DB, Vcl.Mask,
   JvExMask, JvToolEdit, JvDBControls, System.DateUtils, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Grids, Vcl.DBGrids;
+  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Grids, Vcl.DBGrids,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPneusChassiPneusConsertos = class(TFrmTelaPaiParametros)
@@ -43,6 +44,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnFornecedorClick(Sender: TObject);
+    procedure BtnImprimirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +109,13 @@ DM.FDataSetParam    := DM.qryPneusChassiPneusConsertos;
 DM.FDataSourceParam := DM.dsPneusChassiPneusConsertos;
 DM.FTela            := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 92;
+end;
+
+procedure TFrmTelaCadPneusChassiPneusConsertos.BtnImprimirClick(
+  Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBPneusChassiPneusConsertos;
 end;
 
 procedure TFrmTelaCadPneusChassiPneusConsertos.BtnNovoClick(Sender: TObject);
@@ -252,6 +262,14 @@ if DM.qryPneusChassiPneus.Locate('ID', DM.qryPneusChassiPneusConsertosID.AsInteg
 EdtID.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadPneusChassiPneusConsertos.ButConsultarClick(
+  Sender: TObject);
+begin
+DM.FTabela_auxiliar := 92;
+  inherited;
+
+end;
+
 procedure TFrmTelaCadPneusChassiPneusConsertos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -266,7 +284,6 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryPneusChassiPneusConsertos;
 DM.FDataSourceParam := DM.dsPneusChassiPneusConsertos;
-DM.FDataSetRelat    := DmRelatorios.frxDBPneusChassiPneusConsertos;
 DM.FTela := 'CADCONTROLEPNEUS';
 DM.FTabela_auxiliar := 92;
 

@@ -9,8 +9,6 @@ uses
 
 type
   TFrmTelaCadOrdemServicoFechamentoMObra = class(TFrmTelaPaiOkCancel)
-    Panel1: TPanel;
-    RadioGroup1: TRadioGroup;
     GrdEquipe: TDBGrid;
     GrdEquipeMObraUtil: TDBGrid;
     GrdEquipeMObra: TDBGrid;
@@ -320,7 +318,7 @@ if ((GrdEquipeMObraUtil.SelectedIndex = 0) or (GrdEquipeMObraUtil.SelectedIndex 
                 DM.qryOrdemServicoEquipeMObraUtil.Post;
                 DM.qryOrdemServicoEquipeMObraUtil.Refresh;
 
-                FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageIndex := 115;
+                FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageName := 'Operacional\naosalvo';
                 FrmTelaCadOrdemServicoFechamento.PAuxiliares.Font.Color := clRed;
                 FrmTelaCadOrdemServicoFechamento.PAuxiliares.Caption := 'GRAVE O REGISTRO PARA RECALCULAR O CUSTO DA MÃO DE OBRA!!!';
 

@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Datasnap.DBClient, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, JvExControls,
-  JvGradientHeaderPanel, JvButton, JvNavigationPane, FireDAC.Stan.Param;
+  JvGradientHeaderPanel, JvButton, JvNavigationPane, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadAlmoxarifados = class(TFrmTelaPaiParametros)
@@ -34,6 +35,8 @@ type
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnCentroCustoClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -85,6 +88,8 @@ else
   end;
 DM.FDataSetParam    := DM.qryAlmoxarifado;
 DM.FDataSourceParam := DM.dsAlmoxarifado;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
 DM.FDataSetRelat    := DmRelatorios.frxDBAlmoxarifado;
 DM.FTela            := 'CADALMOXARIFADO';
 DM.FTabela_auxiliar := 14;
@@ -94,6 +99,7 @@ procedure TFrmTelaCadAlmoxarifados.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 14;
   inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBAlmoxarifado;
 
 end;
 
@@ -151,11 +157,24 @@ DM.FDataSetParam.Params[1].AsString := DM.FCodEmpresa;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadAlmoxarifados.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 14;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadAlmoxarifados.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBAlmoxarifado;
+end;
+
 procedure TFrmTelaCadAlmoxarifados.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAlmoxarifados.FormClose(Sender: TObject;
@@ -170,9 +189,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryAlmoxarifado;
 DM.FDataSourceParam := DM.dsAlmoxarifado;
-DM.FDataSetRelat    := DmRelatorios.frxDBAlmoxarifado;
 DM.FTela := 'CADALMOXARIFADO';
-DM.FTabela_auxiliar := 14;
 end;
 
 end.

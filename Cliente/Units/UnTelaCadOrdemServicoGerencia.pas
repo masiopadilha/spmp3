@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker;
+  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, JvExGrids, JvStringGrid, IOUtils;
 type
   TFrmTelaCadOrdemServicoGerencia = class(TFrmTelaPaiOKCancel)
     PFuncoes: TPanel;
@@ -71,6 +71,28 @@ type
     Checklist1: TMenuItem;
     chkParado: TCheckBox;
     chkDetalhad: TCheckBox;
+    Exportar1: TMenuItem;
+    grid: TJvStringGrid;
+    DSOSSimplesExcel: TDataSource;
+    FDMemTOSSimplesExcel: TFDMemTable;
+    FDMemTable1: TFDMemTable;
+    IntegerField2: TIntegerField;
+    StringField9: TStringField;
+    DateTimeField7: TDateTimeField;
+    DateTimeField8: TDateTimeField;
+    DateTimeField9: TDateTimeField;
+    DateTimeField10: TDateTimeField;
+    DateTimeField11: TDateTimeField;
+    DateTimeField12: TDateTimeField;
+    StringField10: TStringField;
+    StringField11: TStringField;
+    BCDField3: TBCDField;
+    BCDField4: TBCDField;
+    StringField12: TStringField;
+    StringField13: TStringField;
+    StringField14: TStringField;
+    StringField15: TStringField;
+    StringField16: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -110,9 +132,13 @@ type
     procedure Simples1Click(Sender: TObject);
     procedure Checklist1Click(Sender: TObject);
     procedure CBPrioridadeChange(Sender: TObject);
+    procedure Exportar1Click(Sender: TObject);
   private
     { Private declarations }
     hora_futura: TDateTime;
+
+    procedure LimpaGrid(Grid: TStringGrid);
+    procedure CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
   public
     { Public declarations }
   end;
@@ -443,7 +469,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
               begin
                 if DM.qryOrdemServicoMObraProgOCUPADO.AsString = 'S' then
                   begin
-                    LTexto := PChar(DM.qryOrdemServicoMObraProgNOME.AsString + 'está ocupado em outro serviço, confirma a inclusão?');
+                    LTexto := PChar(DM.qryOrdemServicoMObraProgNOME.AsString + ' está ocupado em outro serviço, confirma a inclusão?');
                     if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
                       begin
                         DM.qryOrdemServicoEquipeMObraUtil.Append;
@@ -1093,6 +1119,131 @@ begin
   EdtOficina.Text := '';
   ConfigurarFiltros;
 end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.LimpaGrid(Grid: TStringGrid);
+var lin, col: integer;
+begin
+     for lin := 1 to Grid.RowCount - 1 do
+       for col := 0 to Grid.ColCount - 1 do
+         Grid.Cells[col, lin] := '';
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
+var
+  I, J: Integer;
+begin
+  // Limpe o TStringGrid, se necessário
+  LimpaGrid(StringGrid);
+
+  // Defina o número de colunas do TStringGrid
+  StringGrid.ColCount := Query.FieldCount;
+  StringGrid.RowCount := Query.RecordCount + 1;
+
+  // Preencha os cabeçalhos das colunas com os nomes dos campos do ClientDataSet
+  for I := 0 to Query.FieldCount - 1 do
+  begin
+    if Query.Fields[I].Visible = True then
+      StringGrid.Cells[I, 0] := Query.Fields[I].DisplayLabel;
+  end;
+
+  // Preencha as células do TStringGrid com os valores da Query
+  Query.First;
+  J := 1; // Comece a partir da segunda linha
+  while not Query.Eof do
+  begin
+    for I := 0 to Query.FieldCount - 1 do
+    begin
+      if Query.Fields[I].Visible = True then
+        StringGrid.Cells[I, J] := Query.Fields[I].AsString;
+    end;
+
+    Query.Next;
+    Inc(J);
+  end;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.Exportar1Click(Sender: TObject);
+var
+  caminho: string;
+begin
+  inherited;
+  caminho := 'C:\SPMP3\Planilhas';
+
+  // Verifica se a pasta existe
+  if not TDirectory.Exists(caminho) then
+  begin
+    // Cria a pasta se não existir
+    try
+      TDirectory.CreateDirectory(caminho);
+    except
+      on E: Exception do
+        ShowMessage('Erro ao criar a pasta: C:\SPMP3\Planilhas' + E.Message);
+    end;
+  end
+  else
+    begin;
+      FDMemTOSSimplesExcel.Close;
+      FDMemTOSSimplesExcel.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
+      FDMemTOSSimplesExcel.FieldByName('CODIGO').DisplayLabel           := 'O.S';
+      FDMemTOSSimplesExcel.FieldByName('CODIGO').Index                  := 0;
+      FDMemTOSSimplesExcel.FieldByName('DESCRICAO').DisplayLabel        := 'Serviço';
+      FDMemTOSSimplesExcel.FieldByName('DESCRICAO').Index               := 1;
+      FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').DisplayLabel     := 'Cad.';
+      FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').Index            := 2;
+      FDMemTOSSimplesExcel.FieldByName('PLANEJADA').Visible               := True;
+      FDMemTOSSimplesExcel.FieldByName('PLANEJADA').DisplayLabel        := 'Plan.';
+      FDMemTOSSimplesExcel.FieldByName('PLANEJADA').Index               := 3;
+      FDMemTOSSimplesExcel.FieldByName('DATAPROGINI').DisplayLabel      := 'Prog.';
+      FDMemTOSSimplesExcel.FieldByName('DATAPROGINI').Index             := 4;
+      FDMemTOSSimplesExcel.FieldByName('DATAINICIOREAL').DisplayLabel   := 'Início';
+      FDMemTOSSimplesExcel.FieldByName('DATAINICIOREAL').Index          := 5;
+      FDMemTOSSimplesExcel.FieldByName('DATAFIMREAL').DisplayLabel      := 'Fim';
+      FDMemTOSSimplesExcel.FieldByName('DATAFIMREAL').Index             := 6;
+      FDMemTOSSimplesExcel.FieldByName('DATAFECHAMENTO').DisplayLabel   := 'Fecham.';
+      FDMemTOSSimplesExcel.FieldByName('DATAFECHAMENTO').Index          := 7;
+      FDMemTOSSimplesExcel.FieldByName('CODEQUIPAMENTO').DisplayLabel   := 'Equipam.';
+      FDMemTOSSimplesExcel.FieldByName('CODEQUIPAMENTO').Index          := 8;
+      FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').DisplayLabel      := 'Centro/Custo';
+      FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').Index             := 9;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').DisplayLabel    := 'Prev. (hs)';
+      FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').Index           := 10;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').DisplayLabel   := 'Exec. (hs)';
+      FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').Index          := 11;
+      FDMemTOSSimplesExcel.FieldByName('SITUACAO').DisplayLabel         := 'Situação';
+      FDMemTOSSimplesExcel.FieldByName('SITUACAO').Index                := 12;
+      FDMemTOSSimplesExcel.FieldByName('TIPOMANUTENCAO').DisplayLabel   := 'Tipo';
+      FDMemTOSSimplesExcel.FieldByName('TIPOMANUTENCAO').Index          := 13;
+      FDMemTOSSimplesExcel.FieldByName('OFICINA').Visible               := True;
+      FDMemTOSSimplesExcel.FieldByName('OFICINA').DisplayLabel          := 'Oficina';
+      FDMemTOSSimplesExcel.FieldByName('OFICINA').Index                 := 14;
+      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').DisplayLabel := 'Prioridade';
+      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Index        := 15;
+      FDMemTOSSimplesExcel.FieldByName('ORIGEM').Visible                := True;
+      FDMemTOSSimplesExcel.FieldByName('ORIGEM').DisplayLabel           := 'O';
+      FDMemTOSSimplesExcel.FieldByName('ORIGEM').Index                  := 16;
+
+      FDMemTOSSimplesExcel.FieldByName('Equipamento').Visible           := False;
+      FDMemTOSSimplesExcel.FieldByName('CODMANUTENCAO').Visible         := False;
+      FDMemTOSSimplesExcel.FieldByName('ROTAEQUIP').Visible             := False;
+      FDMemTOSSimplesExcel.FieldByName('MATRICULA').Visible             := False;
+      FDMemTOSSimplesExcel.FieldByName('DESCINSPECAO').Visible          := False;
+      FDMemTOSSimplesExcel.FieldByName('FREQUENCIA').Visible            := False;
+      FDMemTOSSimplesExcel.FieldByName('REPROGRAMAR').Visible           := False;
+      FDMemTOSSimplesExcel.FieldByName('SOLICTRAB').Visible             := False;
+      FDMemTOSSimplesExcel.FieldByName('IMPORTANCIA').Visible           := False;
+
+      CopyDataSetToGrid(FDMemTOSSimplesExcel, grid);
+      grid.SaveToCSV(caminho+'\Lista Simples das Ordens de Serviços.'+FormatDateTime('dd.mm.yyyy.hh.sss', now) + '.csv');
+
+      PAuxiliares.Caption := 'Exportação concluída!';
+      Sleep(3);
+      PAuxiliares.Caption := '';
+    end;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin

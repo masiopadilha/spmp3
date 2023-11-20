@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, System.DateUtils, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadInfMensalFuncionarios = class(TFrmTelaPaiParametros)
@@ -27,6 +27,7 @@ type
     procedure Completo1Click(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -118,7 +119,7 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadInfMensalFuncionarios.BtnSalvarClick(Sender: TObject);
@@ -163,7 +164,14 @@ PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
+end;
+
+procedure TFrmTelaCadInfMensalFuncionarios.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 71;
+  inherited;
+DM.qryDespMensalFunc.Open;
 end;
 
 procedure TFrmTelaCadInfMensalFuncionarios.Completo1Click(Sender: TObject);

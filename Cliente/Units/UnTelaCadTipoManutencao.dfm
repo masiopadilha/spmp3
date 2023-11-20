@@ -1,21 +1,16 @@
 inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   Caption = 'Tipos de Manuten'#231#227'o'
-  ClientHeight = 414
-  ClientWidth = 628
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
     inherited LAlteracao: TLabel
-      Left = 500
+      Left = 661
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 522
+      Left = 683
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -50,14 +45,14 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
       DataSource = DM.dsTipoManutencao
     end
     inherited LCadastro: TLabel
-      Left = 394
+      Left = 558
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 356
+      Left = 520
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -65,61 +60,32 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
     end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 313
-    ExplicitWidth = 614
-    ExplicitHeight = 293
-    object Label4: TLabel
-      Left = 170
-      Top = 123
-      Width = 60
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Descri'#231#227'o:'
-    end
-    object Label2: TLabel
-      Left = 186
-      Top = 92
-      Width = 44
-      Height = 16
-      Caption = 'C'#243'digo:'
-    end
     object Label1: TLabel
-      Left = 200
-      Top = 154
+      Left = 432
+      Top = 89
       Width = 30
       Height = 16
       Alignment = taRightJustify
       Caption = 'Tipo:'
     end
-    object EdtCodigo: TDBEdit
-      Tag = 555
-      Left = 234
-      Top = 90
-      Width = 131
-      Height = 24
-      CharCase = ecUpperCase
-      DataField = 'CODIGO'
-      DataSource = DM.dsTipoManutencao
-      ReadOnly = True
-      TabOrder = 0
-      OnExit = EdtCodigoExit
-      OnKeyPress = FormKeyPress
+    object Label2: TLabel
+      Left = 64
+      Top = 89
+      Width = 44
+      Height = 16
+      Caption = 'C'#243'digo:'
     end
-    object EdtDescricao: TDBEdit
-      Left = 234
-      Top = 121
-      Width = 227
-      Height = 24
-      DataField = 'DESCRICAO'
-      DataSource = DM.dsTipoManutencao
-      TabOrder = 1
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+    object Label4: TLabel
+      Left = 195
+      Top = 89
+      Width = 60
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Descri'#231#227'o:'
     end
     object CBTipo: TDBComboBox
-      Left = 234
-      Top = 152
+      Left = 432
+      Top = 107
       Width = 167
       Height = 22
       Style = csOwnerDrawFixed
@@ -139,59 +105,72 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
       OnKeyPress = FormKeyPress
     end
     object ChbConf: TDBCheckBox
-      Left = 143
-      Top = 183
+      Left = 217
+      Top = 140
       Width = 108
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Confiabilidade:'
       DataField = 'CONFIABILIDADE'
       DataSource = DM.dsTipoManutencao
-      TabOrder = 3
+      TabOrder = 5
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+    object EdtCodigo: TDBEdit
+      Tag = 555
+      Left = 64
+      Top = 106
+      Width = 125
+      Height = 24
+      CharCase = ecUpperCase
+      DataField = 'CODIGO'
+      DataSource = DM.dsTipoManutencao
+      ReadOnly = True
+      TabOrder = 0
+      OnExit = EdtCodigoExit
+      OnKeyPress = FormKeyPress
+    end
+    object EdtDescricao: TDBEdit
+      Left = 195
+      Top = 106
+      Width = 230
+      Height = 24
+      DataField = 'DESCRICAO'
+      DataSource = DM.dsTipoManutencao
+      TabOrder = 1
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
     object ChbAtivoNF: TDBCheckBox
-      Left = 194
-      Top = 212
-      Width = 57
+      Left = 64
+      Top = 140
+      Width = 63
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Ativo:'
       DataField = 'ATIVO'
+      DataSource = DM.dsTipoManutencao
+      TabOrder = 3
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
+    end
+    object ChbVisivelNF: TDBCheckBox
+      Left = 140
+      Top = 140
+      Width = 71
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Vis'#237'vel:'
+      DataField = 'VISIVEL'
       DataSource = DM.dsTipoManutencao
       TabOrder = 4
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
-    object ChbVisivelNF: TDBCheckBox
-      Left = 295
-      Top = 212
-      Width = 65
-      Height = 17
-      Alignment = taLeftJustify
-      Caption = 'Vis'#237'vel:'
-      DataField = 'VISIVEL'
-      DataSource = DM.dsTipoManutencao
-      TabOrder = 5
-      ValueChecked = 'S'
-      ValueUnchecked = 'N'
-      OnExit = TabNextTab1AfterTabChange
-    end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 395
-    Width = 628
-    ExplicitTop = 375
-    ExplicitWidth = 618
-  end
-  inherited PAuxiliares: TPanel
-    Top = 368
-    Width = 624
-    ExplicitTop = 348
-    ExplicitWidth = 614
   end
 end

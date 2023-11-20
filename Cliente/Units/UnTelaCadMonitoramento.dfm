@@ -1,5 +1,7 @@
 inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   Caption = 'Monitoramento'
+  ClientHeight = 664
+  ClientWidth = 1012
   TextHeight = 16
   object Label9: TLabel [0]
     Left = 33
@@ -10,6 +12,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     Caption = 'Fam'#237'lia:'
   end
   inherited PControle: TPanel
+    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsMonitoramento
     end
@@ -24,6 +27,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 129
     ExplicitHeight = 129
     object Label4: TLabel
@@ -366,9 +370,10 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
   end
   inherited PProgramacao: TPanel
-    Top = 184
+    Top = 206
+    Width = 1008
     Height = 160
-    ExplicitTop = 184
+    ExplicitTop = 206
     ExplicitHeight = 160
     inherited Label2: TLabel
       Width = 86
@@ -610,10 +615,11 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
   end
   inherited PDiversos: TPanel
-    Top = 348
-    Height = 197
-    ExplicitTop = 348
-    ExplicitHeight = 194
+    Top = 370
+    Width = 1008
+    Height = 215
+    ExplicitTop = 370
+    ExplicitHeight = 212
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -624,7 +630,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       Left = 5
       Top = 26
       Width = 998
-      Height = 166
+      Height = 184
       Margins.Left = 4
       Margins.Top = 25
       Margins.Right = 4
@@ -683,7 +689,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 994
-      ExplicitHeight = 163
+      ExplicitHeight = 181
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -703,7 +709,17 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       end
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 645
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 629
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 589
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Cadastrar leituras'
       DisabledImageIndex = 97

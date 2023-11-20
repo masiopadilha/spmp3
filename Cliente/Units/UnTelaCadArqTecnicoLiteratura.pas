@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadArqTecnicoLiteratura = class(TFrmTelaPaiParametros)
@@ -48,6 +48,7 @@ type
     procedure BtnAssuntoClick(Sender: TObject);
     procedure BtnTemaClick(Sender: TObject);
     procedure BtnEditoraClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -236,6 +237,13 @@ DM.FTela            := 'CADARQUIVOTECNICO';
 DM.FTabela_auxiliar := 68;
 end;
 
+procedure TFrmTelaCadArqTecnicoLiteratura.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 68;
+  inherited;
+
+end;
+
 procedure TFrmTelaCadArqTecnicoLiteratura.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBArqTecnicoGeral;
@@ -247,8 +255,8 @@ end;
 procedure TFrmTelaCadArqTecnicoLiteratura.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadArqTecnicoLiteratura.BtnEditoraClick(Sender: TObject);
@@ -303,7 +311,6 @@ begin
 DM.FDataSetParam := DM.qryArquivoTecnico;
 DM.FDataSourceParam := DM.dsArquivoTecnico;
 DM.FTela := 'CADARQUIVOTECNICO';
-DM.FTabela_auxiliar := 68;
 end;
 
 procedure TFrmTelaCadArqTecnicoLiteratura.Individual1Click(Sender: TObject);

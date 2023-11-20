@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Data.DB, Vcl.Mask,
   JvExMask, JvToolEdit, JvDBControls, JvMaskEdit, JvDialogs, Vcl.Imaging.Jpeg, Vcl.Clipbrd,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
+  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
 
 Type
  TRGBArray = array[Word] of TRGBTriple;
@@ -101,6 +102,7 @@ type
     procedure BtnCelulaClick(Sender: TObject);
     procedure TabNextTab1AfterTabChange(Sender: TObject);
     procedure CBMaodeObraChange(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -385,6 +387,18 @@ if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadFuncionarios.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar  := 30;
+  inherited;
+DM.FDataSetParam := DM.qryFuncionarios;
+DM.FDataSourceParam := DM.dsFuncionarios;
+DM.FTela := 'CADFUNCIONARIOS';
+DM.FParamAuxiliar[1] := 'NOME';
+DM.FTabela_auxiliar  := 30;
+DM.ExibeFoto(DM.qryFuncionarios, 'IMAGEM', FrmTelaCadFuncionarios.ImgFotoFunc);
+end;
+
 procedure TFrmTelaCadFuncionarios.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -457,8 +471,8 @@ end;
 procedure TFrmTelaCadFuncionarios.EdtMatriculaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadFuncionarios.Ferramentaria1Click(Sender: TObject);
@@ -497,7 +511,6 @@ DM.FDataSetParam := DM.qryFuncionarios;
 DM.FDataSourceParam := DM.dsFuncionarios;
 DM.FTela := 'CADFUNCIONARIOS';
 DM.FParamAuxiliar[1] := 'NOME';
-DM.FTabela_auxiliar  := 30;
 end;
 
 procedure TFrmTelaCadFuncionarios.Individual1Click(Sender: TObject);

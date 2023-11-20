@@ -3,19 +3,23 @@ inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
   ClientHeight = 304
   ClientWidth = 508
   OnCreate = FormCreate
+  ExplicitWidth = 520
   TextHeight = 16
   inherited PTop: TPanel
     Width = 504
+    ExplicitWidth = 500
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 465
+      ExplicitLeft = 465
     end
   end
   inherited PCentro: TPanel
     Width = 502
     Height = 165
+    ExplicitWidth = 498
     inherited RGTelas: TRadioGroup
-      Height = 163
+      Width = 500
+      ExplicitWidth = 496
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
@@ -101,18 +105,20 @@ inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
   inherited PAuxiliares: TPanel
     Top = 237
     Width = 504
+    ExplicitWidth = 500
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 504
+    ExplicitWidth = 500
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 213
-      ExplicitLeft = 213
+      Left = 216
+      ExplicitLeft = 216
     end
   end
 end

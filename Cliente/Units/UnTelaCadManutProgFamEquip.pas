@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids, Data.DB,
   Vcl.DBGrids, JvExStdCtrls, JvRichEdit, JvDBRichEdit, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons, System.ImageList,
+  Vcl.ImgList, Vcl.VirtualImageList;
 
 type
   TFrmTelaCadManutProgFamEquip = class(TFrmTelaPaiCadastros)
@@ -77,6 +78,7 @@ type
     procedure BtnManutencaoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure EdtCodManutencaoKeyPress(Sender: TObject; var Key: Char);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,8 +112,8 @@ end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnConsultarClick(Sender: TObject);
 begin
-  inherited;
 DM.FTabela_auxiliar  := 34;
+  inherited;
 if DM.qryManutProgFamEquip.IsEmpty = False then
   begin
     DM.qryManutProgFamEquipPartes.Close;
@@ -359,6 +361,21 @@ if DM.qryManutProgFamEquipPlanoTrab.IsEmpty = False then
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadManutProgFamEquip.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar  := 34;
+  inherited;
+if DM.qryManutProgFamEquip.IsEmpty = False then
+  begin
+    DM.qryManutProgFamEquipPartes.Close;
+//    DM.qryManutProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
+//    DM.qryManutProgFamEquipPartes.Params[1].AsString := DM.qryManutProgFamEquipCODIGO.AsString;
+    DM.qryManutProgFamEquipPartes.Open;
+    DM.qryManutProgFamEquipItensTodos.Open;
+    DM.qryManutProgFamEquipPlanoTrab.Open;
+  end;
+end;
+
 procedure TFrmTelaCadManutProgFamEquip.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -443,8 +460,8 @@ end;
 procedure TFrmTelaCadManutProgFamEquip.EdtCodManutencaoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.EdtCodManutencaoKeyPress(Sender: TObject;
@@ -494,7 +511,6 @@ begin
 DM.FTela := 'CADMANUTPROG';
 DM.FDataSetParam    := DM.qryManutProgFamEquip;
 DM.FDataSourceParam := DM.dsManutProgFamEquip;
-DM.FTabela_auxiliar  := 34;
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.FormKeyPress(Sender: TObject;

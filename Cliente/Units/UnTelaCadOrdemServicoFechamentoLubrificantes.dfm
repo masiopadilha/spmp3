@@ -1,15 +1,22 @@
 inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServicoFechamentoLubrificantes
   Caption = 'Fechamento de Lubrificantes da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    inherited BtnAjuda: TButton
+      Left = 447
+      ExplicitLeft = 447
+    end
+  end
   inherited PCentro: TPanel
+    ExplicitWidth = 482
+    ExplicitHeight = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 474
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -73,7 +80,7 @@ inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServico
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 208
+          Width = 191
           Visible = True
         end
         item
@@ -93,7 +100,7 @@ inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServico
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
-          Width = 33
+          Width = 42
           Visible = True
         end
         item
@@ -108,7 +115,6 @@ inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServico
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
-          Width = 68
           Visible = True
         end
         item
@@ -129,15 +135,21 @@ inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServico
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    ExplicitTop = 237
+    ExplicitWidth = 484
+  end
   inherited PBotoes: TPanel
+    ExplicitTop = 264
+    ExplicitWidth = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 212
-      ExplicitLeft = 212
+      Left = 205
+      ExplicitLeft = 205
     end
   end
 end

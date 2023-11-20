@@ -8,7 +8,7 @@ uses
   Vcl.Mask, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, JvExMask,
   JvToolEdit, JvDBControls, Data.DB, Vcl.Grids, Vcl.DBGrids, System.Actions,
   Vcl.ActnList, Vcl.ExtActns, Vcl.Imaging.Jpeg, JvDialogs, FireDAC.Stan.Param,
-  Vcl.Buttons;
+  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
 
 type
   TFrmTelaCadRecursos = class(TFrmTelaPaiCadastros)
@@ -120,6 +120,7 @@ type
     procedure BtnCentroCustoClick(Sender: TObject);
     procedure BtnAnexarClick(Sender: TObject);
     procedure BtnLimparClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -587,6 +588,40 @@ DM.qryRecursosDados.Edit;
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadRecursos.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 46;
+  inherited;
+if DM.qryRecursosCODFAMILIARECURSO.AsString <> EmptyStr then
+  begin
+    DM.qryFamRecursos.Close;
+    DM.qryFamRecursos.Params[0].AsString := DM.qryRecursosCODFAMILIARECURSO.AsString;
+    DM.qryFamRecursos.Open;
+
+    DM.qryRecursosDados.Close;
+    DM.qryRecursosDados.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryRecursosDados.Params[1].AsString := DM.qryRecursosCODFAMILIARECURSO.AsString;
+    DM.qryRecursosDados.Params[2].AsString := DM.qryRecursosCODIGO.AsString;
+    DM.qryRecursosDados.Open;
+    DM.qryRecursosDados.Edit;
+
+    if DM.qryFamRecursosCAMPO1.AsString = EmptyStr then EdtCampo1.Visible := False else EdtCampo1.Visible := True;
+    if DM.qryFamRecursosCAMPO2.AsString = EmptyStr then EdtCampo2.Visible := False else EdtCampo2.Visible := True;
+    if DM.qryFamRecursosCAMPO3.AsString = EmptyStr then EdtCampo3.Visible := False else EdtCampo3.Visible := True;
+    if DM.qryFamRecursosCAMPO4.AsString = EmptyStr then EdtCampo4.Visible := False else EdtCampo4.Visible := True;
+    if DM.qryFamRecursosCAMPO5.AsString = EmptyStr then EdtCampo5.Visible := False else EdtCampo5.Visible := True;
+    if DM.qryFamRecursosCAMPO6.AsString = EmptyStr then EdtCampo6.Visible := False else EdtCampo6.Visible := True;
+    if DM.qryFamRecursosCAMPO7.AsString = EmptyStr then EdtCampo7.Visible := False else EdtCampo7.Visible := True;
+    if DM.qryFamRecursosCAMPO8.AsString = EmptyStr then EdtCampo8.Visible := False else EdtCampo8.Visible := True;
+    if DM.qryFamRecursosCAMPO9.AsString = EmptyStr then EdtCampo9.Visible := False else EdtCampo9.Visible := True;
+    if DM.qryFamRecursosCAMPO10.AsString = EmptyStr then EdtCampo10.Visible := False else EdtCampo10.Visible := True;
+    if DM.qryFamRecursosCAMPO11.AsString = EmptyStr then EdtCampo11.Visible := False else EdtCampo11.Visible := True;
+    if DM.qryFamRecursosCAMPO12.AsString = EmptyStr then EdtCampo12.Visible := False else EdtCampo12.Visible := True;
+  end;
+
+DM.ExibeFoto(DM.qryRecursos, 'IMAGEM', FrmTelaCadRecursos.ImgFotoRecurso);
+end;
+
 procedure TFrmTelaCadRecursos.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -607,8 +642,8 @@ end;
 procedure TFrmTelaCadRecursos.EdtCodRecursoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadRecursos.Ferramentaria1Click(Sender: TObject);
@@ -647,7 +682,6 @@ begin
 DM.FDataSetParam    := DM.qryRecursos;
 DM.FDataSourceParam := DM.dsRecursos;
 DM.FTela := 'CADRECURSOS';
-DM.FTabela_auxiliar := 46;
 end;
 
 procedure TFrmTelaCadRecursos.Individual1Click(Sender: TObject);

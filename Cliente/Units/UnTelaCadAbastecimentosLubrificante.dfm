@@ -1,7 +1,7 @@
 inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrificante
   Caption = 'Lubrificante'
-  ClientHeight = 381
-  ClientWidth = 1008
+  ClientHeight = 384
+  ClientWidth = 1012
   Constraints.MaxHeight = 420
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 420
@@ -9,11 +9,10 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 420
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
-    ExplicitWidth = 880
+    Width = 1008
+    ExplicitWidth = 1004
     object Label3: TLabel [1]
       Left = 125
       Top = 33
@@ -36,8 +35,8 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 971
-      ExplicitLeft = 847
+      Left = 974
+      ExplicitLeft = 974
     end
     object BtnConsultar: TButton
       Left = 404
@@ -77,32 +76,33 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 244
+    Width = 1006
+    Height = 247
     Margins.Bottom = 1
-    ExplicitWidth = 878
-    ExplicitHeight = 164
+    ExplicitWidth = 1002
+    ExplicitHeight = 244
     inherited RGTelas: TRadioGroup
       Left = 211
-      Width = 3
-      Height = 242
-      ExplicitLeft = 186
-      ExplicitWidth = 0
-      ExplicitHeight = 162
+      Width = 7
+      Height = 245
+      ExplicitLeft = 211
+      ExplicitWidth = 3
+      ExplicitHeight = 242
     end
     object PEsquerda: TPanel
       Left = 1
       Top = 1
       Width = 210
-      Height = 242
+      Height = 245
       Align = alLeft
       TabOrder = 1
+      ExplicitHeight = 242
       object GrdLubrificante: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
         Width = 202
-        Height = 236
+        Height = 239
         Hint = 'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro.'
         Margins.Bottom = 1
         Align = alClient
@@ -141,18 +141,20 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
     end
     object PDireita: TPanel
-      Left = 214
+      Left = 218
       Top = 1
       Width = 787
-      Height = 242
+      Height = 245
       Align = alRight
       TabOrder = 2
+      ExplicitLeft = 214
+      ExplicitHeight = 242
       object GrdAbastLubrific: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
         Width = 779
-        Height = 205
+        Height = 208
         Margins.Bottom = 32
         Align = alClient
         Color = clBtnFace
@@ -168,8 +170,8 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
         OnDrawColumnCell = GrdAbastLubrificDrawColumnCell
       end
       object BtnLubrific: TButton
-        Left = 751
-        Top = 211
+        Left = 753
+        Top = 213
         Width = 30
         Height = 29
         Hint = 'Incluir'
@@ -184,7 +186,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtDataLubrific: TDateTimePicker
         Left = 421
-        Top = 213
+        Top = 216
         Width = 105
         Height = 23
         Hint = 'Data da Lubrifica'#231#227'o'
@@ -196,7 +198,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtLeitorLubrific: TEdit
         Left = 601
-        Top = 213
+        Top = 215
         Width = 78
         Height = 24
         Hint = 'Contador'
@@ -207,7 +209,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtMatriculaLubrific: TEdit
         Left = 206
-        Top = 213
+        Top = 215
         Width = 208
         Height = 24
         Hint = 'Tecle ENTER para incluir o funcion'#225'rio'
@@ -222,7 +224,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtPrecoLubrific: TEdit
         Left = 684
-        Top = 213
+        Top = 215
         Width = 63
         Height = 24
         Hint = 'Pre'#231'o do Lubrificante'
@@ -234,7 +236,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtQtdeLubrific: TEdit
         Left = 532
-        Top = 213
+        Top = 215
         Width = 63
         Height = 24
         Hint = 'Quantidade da Lubrifica'#231#227'o'
@@ -245,7 +247,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       end
       object EdtRotaLubrific: TEdit
         Left = 4
-        Top = 213
+        Top = 215
         Width = 196
         Height = 24
         Hint = 'Tecle ENTER para incluir a rota'
@@ -261,12 +263,13 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 314
-    Width = 1004
-    ExplicitWidth = 880
+    Top = 317
+    Width = 1008
+    ExplicitTop = 314
+    ExplicitWidth = 1004
     object LblCustoTotal: TDBText
       AlignWithMargins = True
-      Left = 935
+      Left = 939
       Top = 4
       Width = 65
       Height = 15
@@ -280,22 +283,23 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 811
+      ExplicitLeft = 935
       ExplicitHeight = 13
     end
   end
   inherited PBotoes: TPanel
-    Top = 341
-    Width = 1004
-    ExplicitWidth = 880
+    Top = 344
+    Width = 1008
+    ExplicitTop = 341
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 311
       Visible = False
       ExplicitLeft = 311
     end
     inherited BtnFechar: TButton
-      Left = 465
-      ExplicitLeft = 465
+      Left = 467
+      ExplicitLeft = 467
     end
   end
 end

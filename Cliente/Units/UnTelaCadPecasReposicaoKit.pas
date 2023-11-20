@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadPecasReposicaoKit = class(TFrmTelaPaiParametros)
@@ -29,6 +30,7 @@ type
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -122,6 +124,13 @@ DM.qryPecaReposicaoKitItens.Edit;
 DM.qryPecaReposicaoKitItens.Post;
 end;
 
+procedure TFrmTelaCadPecasReposicaoKit.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 62;
+  inherited;
+DM.qryPecaReposicaoKitItens.Open;
+end;
+
 procedure TFrmTelaCadPecasReposicaoKit.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBPecasRepKitGeral;
@@ -132,8 +141,8 @@ end;
 procedure TFrmTelaCadPecasReposicaoKit.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadPecasReposicaoKit.FormClose(Sender: TObject;
@@ -154,7 +163,6 @@ begin
 DM.FDataSetParam := DM.qryPecaReposicaoKit;
 DM.FDataSourceParam := DM.dsPecaReposicaoKit;
 DM.FTela := 'CADPECASREPKIT';
-DM.FTabela_auxiliar := 62;
 end;
 
 procedure TFrmTelaCadPecasReposicaoKit.GrdItensDblClick(Sender: TObject);

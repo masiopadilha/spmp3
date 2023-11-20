@@ -1,26 +1,28 @@
 inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPartesItens
   Caption = 'Itens a Inspecionar'
-  ClientWidth = 784
+  ClientHeight = 304
+  ClientWidth = 788
   Constraints.MaxWidth = 800
   Constraints.MinWidth = 800
   OnCreate = FormCreate
   ExplicitWidth = 800
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 747
-      ExplicitLeft = 747
+      Left = 748
+      ExplicitLeft = 748
     end
   end
   inherited PCentro: TPanel
-    Width = 778
+    Width = 782
+    Height = 165
     ExplicitWidth = 778
     inherited RGTelas: TRadioGroup
       Height = 0
       Align = alNone
+      ExplicitWidth = 480
       ExplicitHeight = 0
     end
     object GrdCadastro: TDBGrid
@@ -28,7 +30,7 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
       Left = 4
       Top = 4
       Width = 200
-      Height = 154
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -71,10 +73,10 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
     end
     object GrdItens: TDBGrid
       AlignWithMargins = True
-      Left = 205
+      Left = 209
       Top = 4
       Width = 569
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alRight
       DataSource = DM.dsManutProgFamEquipItens
@@ -164,11 +166,13 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 780
+    Top = 237
+    Width = 784
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Width = 780
+    Top = 264
+    Width = 784
     ExplicitWidth = 780
     inherited BtnOK: TButton
       Left = 100
@@ -176,9 +180,9 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 352
+      Left = 354
       OnClick = BtnFecharClick
-      ExplicitLeft = 352
+      ExplicitLeft = 354
     end
   end
 end

@@ -1,14 +1,14 @@
 inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
   Caption = 'Calend'#225'rio de Ordem de Servi'#231'o'
-  ClientHeight = 641
-  ClientWidth = 1008
-  Constraints.MaxHeight = 680
+  ClientHeight = 684
+  ClientWidth = 1012
+  Constraints.MaxHeight = 720
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 680
+  ExplicitHeight = 720
   TextHeight = 16
   object LblDataConsulta: TLabel [0]
     Left = 344
@@ -19,8 +19,11 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     Caption = 'LblDataConsulta'
   end
   inherited PTop: TPanel
-    Width = 1004
-    ExplicitWidth = 1002
+    Width = 1008
+    ExplicitWidth = 1004
+    DesignSize = (
+      1008
+      60)
     object Label1: TLabel [1]
       Left = 128
       Top = 36
@@ -30,7 +33,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     end
     inherited BtnAjuda: TButton
       Left = 969
-      ExplicitLeft = 961
+      ExplicitLeft = 965
     end
     object CBConsSimples: TComboBox
       Left = 212
@@ -53,7 +56,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
         'Utilidades')
     end
     object BtnImprimir: TButton
-      Left = 941
+      Left = 935
       Top = 17
       Width = 28
       Height = 28
@@ -69,22 +72,22 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
-    ExplicitWidth = 1000
-    ExplicitHeight = 494
+    Width = 1006
+    Height = 545
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1006
-      Height = 325
-      ExplicitWidth = 998
-      ExplicitHeight = 313
+      Width = 1004
+      Height = 318
+      ExplicitWidth = 1000
+      ExplicitHeight = 321
     end
     object Chart1: TChart
       AlignWithMargins = True
       Left = 4
-      Top = 329
-      Width = 1000
-      Height = 173
+      Top = 322
+      Width = 998
+      Height = 219
       AllowPanning = pmNone
       BackWall.Brush.Style = bsClear
       Gradient.EndColor = 13224338
@@ -134,8 +137,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       Align = alBottom
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitTop = 317
-      ExplicitWidth = 992
+      ExplicitTop = 321
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object Series1: TBarSeries
@@ -173,8 +175,8 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       AlignWithMargins = True
       Left = 1
       Top = 3
-      Width = 1006
-      Height = 323
+      Width = 1004
+      Height = 316
       Margins.Left = 0
       Margins.Top = 2
       Margins.Right = 0
@@ -182,16 +184,15 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       Align = alClient
       Caption = 'Total Homem/Hora Programada e em Execu'#231#227'o para:'
       TabOrder = 2
-      ExplicitWidth = 998
-      ExplicitHeight = 311
+      ExplicitHeight = 359
       object CalendarGrid: TStringGrid
         AlignWithMargins = True
         Left = 5
         Top = 21
-        Width = 996
-        Height = 279
+        Width = 994
+        Height = 273
         Hint = 'Efetue duplo-clique na data para visualizar os servi'#231'os do dia.'
-        Margins.Bottom = 21
+        Margins.Bottom = 20
         Align = alClient
         Color = clWhite
         ColCount = 7
@@ -216,12 +217,11 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
         OnClick = CalendarGridClick
         OnDblClick = CalendarGridDblClick
         OnDrawCell = CalendarGridDrawCell
-        ExplicitWidth = 988
-        ExplicitHeight = 267
+        ExplicitHeight = 268
       end
       object PPeriodo: TPanel
         Left = 398
-        Top = 302
+        Top = 295
         Width = 206
         Height = 18
         BevelOuter = bvNone
@@ -250,7 +250,6 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
           ShowHint = True
           TabOrder = 0
           OnClick = BtnAntMesClick
-          ExplicitTop = 1
         end
         object BtnProxMes: TButton
           Left = 188
@@ -267,30 +266,29 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
           ShowHint = True
           TabOrder = 1
           OnClick = BtnProxMesClick
-          ExplicitTop = 1
         end
       end
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
-    ExplicitTop = 566
-    ExplicitWidth = 1002
+    Top = 617
+    Width = 1008
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
-    ExplicitTop = 593
-    ExplicitWidth = 1002
+    Top = 644
+    Width = 1008
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 316
       Visible = False
       ExplicitLeft = 316
     end
     inherited BtnFechar: TButton
-      Left = 465
-      ExplicitLeft = 465
+      Left = 467
+      ExplicitLeft = 467
     end
   end
 end

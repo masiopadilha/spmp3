@@ -1,12 +1,11 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
+  ClientHeight = 661
+  ClientWidth = 1008
   OnShow = FormShow
   TextHeight = 16
   inherited PControle: TPanel
-    ExplicitWidth = 1008
-    DesignSize = (
-      1004
-      45)
+    Width = 1004
     inherited LblDataCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
     end
@@ -21,6 +20,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1004
     object Label5: TLabel
       Left = 57
       Top = 32
@@ -205,6 +205,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1004
     Height = 165
     ExplicitHeight = 165
     inherited Label2: TLabel
@@ -502,10 +503,11 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PDiversos: TPanel
-    Top = 320
-    Height = 222
-    ExplicitTop = 320
-    ExplicitHeight = 222
+    Top = 356
+    Width = 1004
+    Height = 226
+    ExplicitTop = 356
+    ExplicitHeight = 226
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -516,7 +518,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Left = 5
       Top = 28
       Width = 998
-      Height = 192
+      Height = 196
       Margins.Left = 4
       Margins.Top = 27
       Margins.Right = 4
@@ -570,7 +572,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BevelOuter = bvLowered
       TabOrder = 0
       ExplicitWidth = 994
-      ExplicitHeight = 189
+      ExplicitHeight = 193
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object Series1: TBarSeries
@@ -598,26 +600,34 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 560
-    ExplicitTop = 560
+    Top = 642
+    Width = 1008
   end
   inherited PAlertas: TPanel
-    Top = 544
-    ExplicitTop = 544
+    Top = 584
+    Width = 1008
+    ExplicitTop = 584
   end
   inherited PBase: TPanel
-    Top = 581
-    ExplicitTop = 581
+    Top = 602
+    Width = 1004
+    ExplicitTop = 602
+    ExplicitWidth = 1008
   end
   inherited TimerAlertas: TTimer
     Left = 362
   end
   inherited PopupMenuRelat: TPopupMenu
-    Left = 208
+    Left = 232
+    Top = 16
+  end
+  inherited ActionList1: TActionList
+    Left = 530
+    Top = 18
   end
   object PopupMenuCons: TPopupMenu
-    Left = 162
-    Top = 48
+    Left = 154
+    Top = 16
     object MenuItem1: TMenuItem
       Caption = 'Ordem de Servi'#231'o'
       OnClick = MenuItem1Click

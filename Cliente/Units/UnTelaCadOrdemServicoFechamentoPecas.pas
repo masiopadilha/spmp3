@@ -153,7 +153,7 @@ if (Key = #13) then
             DM.qryOrdemServicoEquipePecasUtilPECA.AsString              := DM.FValorCombo;
             DM.qryOrdemServicoEquipePecasUtil.Post;
 
-            FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageIndex := 115;
+            FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageName := 'Operacional\naosalvo';
             FrmTelaCadOrdemServicoFechamento.PAuxiliares.Font.Color := clRed;
             FrmTelaCadOrdemServicoFechamento.PAuxiliares.Caption := 'GRAVE O REGISTRO PARA RECALCULAR O CUSTO DAS PEÇAS DE REPOSIÇÃO!!!';
 

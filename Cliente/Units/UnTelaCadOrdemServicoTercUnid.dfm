@@ -1,50 +1,25 @@
 inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   Caption = 'Servi'#231'os Terceirizados na Unidade'
-  ClientHeight = 624
+  ClientHeight = 664
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      Left = 691
-      ExplicitLeft = 691
-    end
-    inherited LCadastroPor: TLabel
-      Left = 647
-      ExplicitLeft = 647
-    end
     inherited LblDataCad: TDBText
-      Left = 734
       DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 734
     end
     inherited LblUsuCad: TDBText
-      Left = 734
       DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 734
-    end
-    inherited LAlteracao: TLabel
-      Left = 850
-      ExplicitLeft = 850
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 824
-      ExplicitLeft = 824
     end
     inherited LblDataAlt: TDBText
-      Left = 893
       DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 893
     end
     inherited LblUsuAlt: TDBText
-      Left = 893
       DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 893
     end
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 93
       Top = 32
@@ -230,7 +205,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 211
-    ExplicitWidth = 1004
     ExplicitHeight = 211
     object Chart1: TChart
       AlignWithMargins = True
@@ -250,6 +224,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       Zoom.Pen.Mode = pmNotXor
       Align = alClient
       BevelOuter = bvNone
+      Color = 16446959
       TabOrder = 0
       ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
@@ -284,12 +259,11 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
     end
   end
   inherited PDiversos: TPanel
-    Top = 366
+    Top = 402
     Width = 1008
-    Height = 179
-    ExplicitTop = 366
-    ExplicitWidth = 1004
-    ExplicitHeight = 176
+    Height = 183
+    ExplicitTop = 402
+    ExplicitHeight = 180
     inherited Label3: TLabel
       Width = 93
       Caption = 'CONTRATO'
@@ -522,61 +496,55 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 645
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 629
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 589
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
-      Left = 852
+      Left = 853
       Hint = 'Tarefas'
       DisabledImageIndex = 50
       ImageIndex = 49
       OnClick = Button1Click
-      ExplicitLeft = 852
+      ExplicitLeft = 853
     end
     inherited Button2: TButton
-      Left = 881
+      Left = 883
       Hint = 'Aditivos'
       DisabledImageIndex = 42
       ImageIndex = 41
       OnClick = Button2Click
-      ExplicitLeft = 881
+      ExplicitLeft = 883
     end
     inherited Button3: TButton
-      Left = 910
+      Left = 913
       Hint = 'Materiais'
       DisabledImageIndex = 71
       ImageIndex = 70
       OnClick = Button3Click
-      ExplicitLeft = 910
+      ExplicitLeft = 913
     end
     inherited Button4: TButton
-      Left = 939
+      Left = 943
       Hint = 'Pe'#231'as de Reposi'#231#227'o'
       DisabledImageIndex = 81
       ImageIndex = 80
       OnClick = Button4Click
-      ExplicitLeft = 939
+      ExplicitLeft = 943
     end
     inherited Button5: TButton
-      Left = 968
+      Left = 973
       Hint = 'Recursos'
       DisabledImageIndex = 38
       ImageIndex = 37
       OnClick = Button5Click
-      ExplicitLeft = 968
+      ExplicitLeft = 973
     end
     inherited Button6: TButton
       Left = 823

@@ -7,14 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvMaskEdit, JvDBControls, Data.DB, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadFornecedores = class(TFrmTelaPaiParametros)
-    Label1: TLabel;
-    EdtCodigo: TDBEdit;
-    Label2: TLabel;
-    EdtDescricao: TDBEdit;
     Label3: TLabel;
     EdtCNPJ: TDBEdit;
     Label4: TLabel;
@@ -27,6 +23,10 @@ type
     ChbAtivoNF: TDBCheckBox;
     ChbVisivelNF: TDBCheckBox;
     EdtFone: TJvDBMaskEdit;
+    Label2: TLabel;
+    EdtCodigo: TDBEdit;
+    Label1: TLabel;
+    EdtDescricao: TDBEdit;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -34,6 +34,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,11 +58,17 @@ begin
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadFornecedores.BtnImprimirClick(Sender: TObject);
+procedure TFrmTelaCadFornecedores.btnConsultarClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 21;
   inherited;
 
+end;
+
+procedure TFrmTelaCadFornecedores.BtnImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBFornecedores;
 end;
 
 procedure TFrmTelaCadFornecedores.BtnNovoClick(Sender: TObject);
@@ -109,11 +118,24 @@ DM.FDataSetParam.Params[1].AsString := DM.FCodEmpresa;
   EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadFornecedores.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 21;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadFornecedores.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBFornecedores;
+end;
+
 procedure TFrmTelaCadFornecedores.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadFornecedores.FormClose(Sender: TObject;
@@ -128,9 +150,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryFornecedores;
 DM.FDataSourceParam := DM.dsFornecedores;
-DM.FDataSetRelat    := DmRelatorios.frxDBFornecedores;
 DM.FTela := 'CADFORNECEDORES';
-DM.FTabela_auxiliar := 21;
 end;
 
 end.

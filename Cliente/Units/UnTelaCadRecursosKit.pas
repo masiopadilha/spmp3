@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids,
-  Vcl.DBGrids, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.DBGrids, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadRecursosKit = class(TFrmTelaPaiParametros)
@@ -29,6 +30,7 @@ type
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -126,6 +128,13 @@ DM.qryRecursoKitItens.Edit;
 DM.qryRecursoKitItens.Post;
 end;
 
+procedure TFrmTelaCadRecursosKit.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 50;
+  inherited;
+DM.qryRecursoKitItens.Open;
+end;
+
 procedure TFrmTelaCadRecursosKit.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBRecursosKitGeral;
@@ -137,8 +146,8 @@ end;
 procedure TFrmTelaCadRecursosKit.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadRecursosKit.FormClose(Sender: TObject;
@@ -159,7 +168,6 @@ begin
 DM.FDataSetParam :=DM.qryRecursoKit;
 DM.FDataSourceParam := DM.dsRecursoKit;
 DM.FTela := 'CADRECURSOSKIT';
-DM.FTabela_auxiliar := 50;
 end;
 
 procedure TFrmTelaCadRecursosKit.GrdItensDblClick(Sender: TObject);

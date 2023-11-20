@@ -1,52 +1,42 @@
 inherited FrmTelaCadInfMensalTaxas: TFrmTelaCadInfMensalTaxas
   Caption = 'Taxas do M'#234's'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LAlteracao: TLabel
-      Left = 478
       Visible = False
-      ExplicitLeft = 478
     end
     inherited LAlteradoPor: TLabel
-      Left = 499
       Visible = False
-      ExplicitLeft = 499
     end
     inherited LblDataAlt: TDBText
-      Left = 536
       DataField = ''
       Visible = False
-      ExplicitLeft = 536
     end
     inherited LblDataCad: TDBText
-      Left = 418
       DataField = ''
       Visible = False
-      ExplicitLeft = 418
     end
     inherited LblUsuAlt: TDBText
-      Left = 536
       DataField = ''
       Visible = False
-      ExplicitLeft = 536
     end
     inherited LblUsuCad: TDBText
-      Left = 418
       DataField = ''
       Visible = False
-      ExplicitLeft = 418
     end
     inherited LCadastro: TLabel
-      Left = 382
       Visible = False
-      ExplicitLeft = 382
     end
     inherited LCadastroPor: TLabel
       Visible = False
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
     object Label1: TLabel
       Left = 8
       Top = 291
@@ -66,7 +56,7 @@ inherited FrmTelaCadInfMensalTaxas: TFrmTelaCadInfMensalTaxas
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 612
+      Width = 776
       Height = 281
       Align = alTop
       Caption = 'TAXAS:'
@@ -77,11 +67,12 @@ inherited FrmTelaCadInfMensalTaxas: TFrmTelaCadInfMensalTaxas
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 772
       object GrdTaxas: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 16
-        Width = 606
+        Width = 770
         Height = 262
         Margins.Left = 1
         Margins.Top = 1
@@ -176,11 +167,24 @@ inherited FrmTelaCadInfMensalTaxas: TFrmTelaCadInfMensalTaxas
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited MainMenuPadrao: TMainMenu
-    Top = 4
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
   end
   inherited PopupMenuRelat: TPopupMenu
-    Left = 228
-    Top = 0
+    Left = 212
+    Top = 112
+  end
+  inherited ActionList1: TActionList
+    Left = 394
+    Top = 115
+  end
+  inherited MainMenuPadrao: TMainMenu
+    Left = 310
+    Top = 116
   end
 end

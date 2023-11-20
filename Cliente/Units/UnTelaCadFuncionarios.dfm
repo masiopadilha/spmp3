@@ -1,6 +1,6 @@
 inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   Caption = 'Funcion'#225'rios'
-  ClientHeight = 624
+  ClientHeight = 664
   ClientWidth = 1012
   TextHeight = 16
   object ImgFotoFunc: TImage [0]
@@ -18,23 +18,11 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   end
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      ExplicitLeft = 467
-    end
-    inherited LCadastroPor: TLabel
-      ExplicitLeft = 431
-    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsFuncionarios
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsFuncionarios
-    end
-    inherited LAlteracao: TLabel
-      ExplicitLeft = 626
-    end
-    inherited LAlteradoPor: TLabel
-      ExplicitLeft = 610
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsFuncionarios
@@ -216,11 +204,11 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
   end
   inherited PProgramacao: TPanel
-    Top = 183
+    Top = 205
     Width = 770
     Height = 158
     Margins.Right = 240
-    ExplicitTop = 183
+    ExplicitTop = 205
     ExplicitWidth = 766
     ExplicitHeight = 158
     inherited Label2: TLabel
@@ -428,10 +416,11 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
   end
   inherited PDiversos: TPanel
+    Top = 367
     Width = 1008
-    Height = 200
-    ExplicitWidth = 1004
-    ExplicitHeight = 197
+    Height = 218
+    ExplicitTop = 367
+    ExplicitHeight = 215
     object Label12: TLabel
       Left = 335
       Top = 34
@@ -756,22 +745,16 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 645
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 629
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 589
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Caixa de Ferramentas e Ferramentaria'
       DisabledImageIndex = 38

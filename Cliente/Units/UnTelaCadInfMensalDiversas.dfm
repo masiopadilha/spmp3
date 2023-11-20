@@ -1,8 +1,10 @@
 inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
   Caption = 'Diversas'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -33,11 +35,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
     object Label44: TLabel
-      Left = 140
-      Top = 60
-      Width = 145
-      Height = 16
+      Left = 64
+      Top = 63
+      Width = 89
+      Height = 32
       Caption = 'Custo total dos estoques:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -45,12 +49,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      WordWrap = True
     end
     object Label36: TLabel
-      Left = 90
-      Top = 90
-      Width = 195
-      Height = 16
+      Left = 195
+      Top = 63
+      Width = 118
+      Height = 32
       Caption = 'Coeficiente de grav. de acidentes:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -58,12 +63,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      WordWrap = True
     end
     object Label43: TLabel
-      Left = 92
-      Top = 121
-      Width = 193
-      Height = 16
+      Left = 325
+      Top = 63
+      Width = 108
+      Height = 32
       Caption = 'Coeficiente de freq. de acidentes:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -71,12 +77,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      WordWrap = True
     end
     object Label41: TLabel
-      Left = 141
-      Top = 152
-      Width = 144
-      Height = 16
+      Left = 64
+      Top = 127
+      Width = 90
+      Height = 32
       Caption = 'Horas extras da unidade:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -84,12 +91,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      WordWrap = True
     end
     object Label42: TLabel
-      Left = 138
-      Top = 182
-      Width = 147
-      Height = 16
+      Left = 195
+      Top = 127
+      Width = 109
+      Height = 32
       Caption = 'Cota'#231#227'o mensal do dolar:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -97,25 +105,26 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      WordWrap = True
     end
     object Label1: TLabel
-      Left = 257
-      Top = 213
+      Left = 325
+      Top = 144
       Width = 28
       Height = 16
       Alignment = taRightJustify
       Caption = 'M'#234's:'
     end
     object Label2: TLabel
-      Left = 258
-      Top = 244
+      Left = 381
+      Top = 144
       Width = 27
       Height = 16
       Caption = 'Ano:'
     end
     object EdtCustoTotal: TDBEdit
-      Left = 290
-      Top = 59
+      Left = 64
+      Top = 97
       Width = 125
       Height = 24
       DataField = 'CUSTOTOTALEST'
@@ -125,8 +134,8 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnKeyPress = FormKeyPress
     end
     object EdtCoefGrav: TDBEdit
-      Left = 290
-      Top = 90
+      Left = 195
+      Top = 97
       Width = 125
       Height = 24
       DataField = 'COEFGRAVACID'
@@ -136,8 +145,8 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnKeyPress = FormKeyPress
     end
     object EdtCoefFreq: TDBEdit
-      Left = 290
-      Top = 121
+      Left = 325
+      Top = 97
       Width = 125
       Height = 24
       DataField = 'COEFFREQACID'
@@ -147,8 +156,8 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnKeyPress = FormKeyPress
     end
     object EdtHorasNormais: TDBEdit
-      Left = 290
-      Top = 152
+      Left = 64
+      Top = 161
       Width = 125
       Height = 24
       DataField = 'HORASNORMAISTRAB'
@@ -158,8 +167,8 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnKeyPress = FormKeyPress
     end
     object EdtCotDolar: TDBEdit
-      Left = 290
-      Top = 183
+      Left = 195
+      Top = 161
       Width = 125
       Height = 24
       DataField = 'COTACAODOLAR'
@@ -169,9 +178,9 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnKeyPress = FormKeyPress
     end
     object CBMes: TDBComboBox
-      Left = 290
-      Top = 214
-      Width = 75
+      Left = 325
+      Top = 161
+      Width = 52
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'MES'
@@ -193,9 +202,9 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       OnExit = TabNextTab1AfterTabChange
     end
     object CBAno: TDBComboBox
-      Left = 290
-      Top = 243
-      Width = 75
+      Left = 381
+      Top = 161
+      Width = 69
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'ANO'
@@ -220,5 +229,13 @@ inherited FrmTelaCadInfMensalDiversas: TFrmTelaCadInfMensalDiversas
       TabOrder = 6
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
   end
 end

@@ -2,6 +2,12 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
   Caption = 'Pontos de Inspe'#231#227'o'
   TextHeight = 16
   inherited PControle: TPanel
+    inherited LAlteracao: TLabel
+      Left = 661
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 683
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPontosInspecao
     end
@@ -14,25 +20,31 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPontosInspecao
     end
+    inherited LCadastro: TLabel
+      Left = 558
+    end
+    inherited LCadastroPor: TLabel
+      Left = 520
+    end
   end
   inherited PCentro: TPanel
     object PCPontos: TPageControl
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 610
-      Height = 324
+      Width = 776
+      Height = 243
       ActivePage = TSPontos
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PCPontosChange
-      ExplicitWidth = 612
-      ExplicitHeight = 312
+      ExplicitWidth = 772
+      ExplicitHeight = 240
       object TSPontos: TTabSheet
         Caption = 'Pontos de Inspe'#231#227'o'
         object Label1: TLabel
-          Left = 187
+          Left = 65
           Top = 73
           Width = 44
           Height = 16
@@ -41,24 +53,24 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           FocusControl = EdtCodigo
         end
         object Label2: TLabel
-          Left = 171
-          Top = 103
+          Left = 202
+          Top = 73
           Width = 60
           Height = 16
           Alignment = taRightJustify
           Caption = 'Descri'#231#227'o:'
         end
         object Label6: TLabel
-          Left = 89
-          Top = 133
+          Left = 435
+          Top = 73
           Width = 142
           Height = 16
           Alignment = taRightJustify
           Caption = 'Fam'#237'lia de Equipamento:'
         end
         object BtnFamiliaEquip: TButton
-          Left = 433
-          Top = 130
+          Left = 637
+          Top = 91
           Width = 28
           Height = 28
           Hint = 'Consultar'
@@ -73,8 +85,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
         end
         object EdtCodigo: TDBEdit
           Tag = 555
-          Left = 234
-          Top = 70
+          Left = 65
+          Top = 91
           Width = 131
           Height = 24
           CharCase = ecUpperCase
@@ -85,8 +97,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtDescricao: TDBEdit
-          Left = 234
-          Top = 101
+          Left = 202
+          Top = 91
           Width = 227
           Height = 24
           DataField = 'DESCRICAO'
@@ -96,8 +108,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtFamiliaEquip: TDBEdit
-          Left = 234
-          Top = 132
+          Left = 435
+          Top = 91
           Width = 197
           Height = 24
           Color = clBtnFace
@@ -113,7 +125,7 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
         Caption = 'Locais de Medi'#231#227'o'
         ImageIndex = 1
         object Label3: TLabel
-          Left = 170
+          Left = 65
           Top = 53
           Width = 60
           Height = 16
@@ -121,60 +133,60 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           FocusControl = EdtDescLocal
         end
         object Label4: TLabel
-          Left = 149
-          Top = 83
+          Left = 298
+          Top = 53
           Width = 81
           Height = 16
           Alignment = taRightJustify
           Caption = 'Programa'#231#227'o:'
         end
         object Label5: TLabel
-          Left = 186
-          Top = 114
+          Left = 535
+          Top = 53
           Width = 44
           Height = 16
           Alignment = taRightJustify
           Caption = 'Leitura:'
         end
         object Label15: TLabel
-          Left = 340
-          Top = 114
+          Left = 633
+          Top = 53
           Width = 51
           Height = 16
           Alignment = taRightJustify
           Caption = 'Unidade:'
         end
         object Label16: TLabel
-          Left = 147
-          Top = 144
+          Left = 65
+          Top = 101
           Width = 83
           Height = 16
           Caption = 'Lim. Inf. M'#225'x.:'
         end
         object Label17: TLabel
-          Left = 309
-          Top = 144
+          Left = 160
+          Top = 101
           Width = 82
           Height = 16
           Caption = 'Lim. Inf. Seg.:'
         end
         object Label18: TLabel
-          Left = 141
-          Top = 175
+          Left = 256
+          Top = 101
           Width = 89
           Height = 16
           Caption = 'Lim. Sup. Seg.:'
         end
         object Label19: TLabel
-          Left = 301
-          Top = 175
+          Left = 359
+          Top = 101
           Width = 90
           Height = 16
           Caption = 'Lim. Sup. M'#225'x.:'
         end
         object EdtDescLocal: TDBEdit
-          Left = 234
-          Top = 50
+          Left = 65
+          Top = 71
           Width = 227
           Height = 24
           DataField = 'DESCRICAO'
@@ -183,8 +195,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnExit = TabNextTab1AfterTabChange
         end
         object EdtProgramacao: TDBEdit
-          Left = 234
-          Top = 81
+          Left = 298
+          Top = 71
           Width = 197
           Height = 24
           Color = clBtnFace
@@ -196,8 +208,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object BtnProgramacao: TButton
-          Left = 433
-          Top = 79
+          Left = 498
+          Top = 69
           Width = 28
           Height = 28
           Hint = 'Consultar'
@@ -211,8 +223,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnClick = BtnProgramacaoClick
         end
         object CBLeitura: TDBComboBox
-          Left = 234
-          Top = 112
+          Left = 534
+          Top = 72
           Width = 93
           Height = 22
           Style = csOwnerDrawFixed
@@ -226,8 +238,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtUnidade: TDBEdit
-          Left = 395
-          Top = 112
+          Left = 633
+          Top = 71
           Width = 65
           Height = 24
           DataField = 'UNIDMEDIDA'
@@ -237,8 +249,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtLimInfMax: TDBEdit
-          Left = 234
-          Top = 141
+          Left = 65
+          Top = 123
           Width = 65
           Height = 24
           DataField = 'LIMINFMAX'
@@ -249,8 +261,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtLimInfSeg: TDBEdit
-          Left = 395
-          Top = 141
+          Left = 160
+          Top = 123
           Width = 65
           Height = 24
           DataField = 'LIMINFSEG'
@@ -261,8 +273,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtLimSupSeg: TDBEdit
-          Left = 234
-          Top = 172
+          Left = 256
+          Top = 123
           Width = 65
           Height = 24
           DataField = 'LIMSUPSEG'
@@ -273,8 +285,8 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
           OnKeyPress = FormKeyPress
         end
         object EdtLimSupMax: TDBEdit
-          Left = 395
-          Top = 172
+          Left = 359
+          Top = 123
           Width = 65
           Height = 24
           DataField = 'LIMSUPMAX'
@@ -287,8 +299,16 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
       end
     end
   end
+  inherited PopupMenuRelat: TPopupMenu
+    Left = 156
+    Top = 16
+  end
+  inherited ActionList1: TActionList
+    Left = 402
+    Top = 11
+  end
   inherited MainMenuPadrao: TMainMenu
-    Left = 414
-    Top = 260
+    Left = 278
+    Top = 20
   end
 end

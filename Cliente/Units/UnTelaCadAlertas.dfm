@@ -1,15 +1,25 @@
 inherited FrmTelaCadAlertas: TFrmTelaCadAlertas
   Caption = 'Alertas'
+  ClientHeight = 304
+  ClientWidth = 488
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    Width = 484
+    inherited BtnAjuda: TButton
+      Left = 449
+      ExplicitLeft = 449
+    end
+  end
   inherited PCentro: TPanel
+    Width = 482
+    Height = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 474
+      Height = 157
       Align = alClient
       DataSource = DM.dsAlertas
       TabOrder = 1
@@ -76,9 +86,21 @@ inherited FrmTelaCadAlertas: TFrmTelaCadAlertas
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 484
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 484
     inherited BtnOK: TButton
+      Left = 164
       OnClick = BtnOKClick
+      ExplicitLeft = 164
+    end
+    inherited BtnFechar: TButton
+      Left = 246
+      ExplicitLeft = 246
     end
   end
 end

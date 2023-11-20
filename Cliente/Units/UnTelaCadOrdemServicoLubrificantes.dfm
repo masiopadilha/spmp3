@@ -1,20 +1,25 @@
 inherited FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrificantes
   Caption = 'Lubrificantes da O.S.'
+  ClientHeight = 304
+  ClientWidth = 488
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 484
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 445
+      ExplicitLeft = 445
     end
   end
   inherited PCentro: TPanel
+    Width = 482
+    Height = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 474
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -66,7 +71,7 @@ inherited FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrifican
           Title.Font.Height = -13
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 359
+          Width = 343
           Visible = True
         end
         item
@@ -84,7 +89,13 @@ inherited FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrifican
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 484
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
@@ -92,8 +103,8 @@ inherited FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrifican
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 213
-      ExplicitLeft = 213
+      Left = 206
+      ExplicitLeft = 206
     end
   end
 end

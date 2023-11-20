@@ -1,7 +1,7 @@
 inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Caption = 'Consulta'
-  ClientHeight = 561
-  ClientWidth = 784
+  ClientHeight = 564
+  ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -15,7 +15,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   inherited PTop: TPanel
     Left = 4
     Top = 4
-    Width = 776
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -30,15 +30,15 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 795
-      ExplicitLeft = 791
+      Left = 807
+      ExplicitLeft = 803
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 147
-    Width = 776
-    Height = 333
+    Width = 780
+    Height = 336
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -58,7 +58,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Align = alNone
       TabOrder = 3
       ExplicitTop = 0
-      ExplicitWidth = 500
+      ExplicitWidth = 480
       ExplicitHeight = 0
     end
     object EdtConsulta: TEdit
@@ -111,8 +111,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PAuxiliares: TPanel
     Left = 4
-    Top = 488
-    Width = 776
+    Top = 491
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -124,8 +124,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PBotoes: TPanel
     Left = 4
-    Top = 519
-    Width = 776
+    Top = 522
+    Width = 780
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -157,7 +157,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     AlignWithMargins = True
     Left = 4
     Top = 72
-    Width = 776
+    Width = 780
     Height = 67
     Margins.Left = 4
     Margins.Top = 4
@@ -166,6 +166,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Align = alTop
     TabOrder = 1
     Visible = False
+    ExplicitWidth = 776
     object Label6: TLabel
       Left = 17
       Top = 8

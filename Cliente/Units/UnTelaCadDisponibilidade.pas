@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadDisponibilidade = class(TFrmTelaPaiParametros)
@@ -24,6 +24,8 @@ type
     procedure RGTipoChange(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure BtnItemClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,6 +43,7 @@ uses UnDmRelatorios, UnDM;
 
 procedure TFrmTelaCadDisponibilidade.BtnConsultarClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 27;
   inherited;
 if DM.FParamAuxiliar[0] = 'Área' then EdtItem.DataField := 'AREA';
 if DM.FParamAuxiliar[0] = 'Célula' then EdtItem.DataField := 'CELULA';
@@ -49,9 +52,8 @@ end;
 
 procedure TFrmTelaCadDisponibilidade.BtnImprimirClick(Sender: TObject);
 begin
-DM.FTabela_auxiliar := 27;
   inherited;
-
+DM.FDataSetRelat    := DmRelatorios.frxDBDispAdmissiveis;
 end;
 
 procedure TFrmTelaCadDisponibilidade.BtnItemClick(Sender: TObject);
@@ -176,6 +178,19 @@ if (DM.VerificaDuplo(DM.qryDispAdmissiveisCODITEM.AsString) = True) and (DM.FAlt
     end;
 end;
 
+procedure TFrmTelaCadDisponibilidade.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 27;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadDisponibilidade.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBDispAdmissiveis;
+end;
+
 procedure TFrmTelaCadDisponibilidade.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -188,9 +203,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryDispAdmissiveis;
 DM.FDataSourceParam := DM.dsDispAdmissiveis;
-DM.FDataSetRelat    := DmRelatorios.frxDBDispAdmissiveis;
 DM.FTela := 'CADDISPONIBILIDADE';
-DM.FTabela_auxiliar := 27;
 end;
 
 procedure TFrmTelaCadDisponibilidade.RGTipoChange(Sender: TObject);

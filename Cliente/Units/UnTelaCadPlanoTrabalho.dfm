@@ -1,7 +1,7 @@
 inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
   Hint = 'Next|Go to the next tab'
   Caption = 'Plano de Trabalho'
-  ClientHeight = 624
+  ClientHeight = 664
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
@@ -117,11 +117,11 @@ inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
     end
   end
   inherited PProgramacao: TPanel
-    Top = 118
+    Top = 140
     Width = 1008
-    Height = 424
-    ExplicitTop = 118
-    ExplicitHeight = 424
+    Height = 443
+    ExplicitTop = 140
+    ExplicitHeight = 443
     inherited Label2: TLabel
       Width = 107
       Caption = 'INSTRU'#199#213'ES'
@@ -132,7 +132,7 @@ inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
       Left = 5
       Top = 21
       Width = 998
-      Height = 398
+      Height = 417
       Margins.Left = 4
       Margins.Top = 20
       Margins.Right = 4
@@ -159,15 +159,15 @@ inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
     ExplicitHeight = 0
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 645
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 629
     Width = 1012
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 589
     Width = 1008
   end
   inherited MainMenuPadrao: TMainMenu

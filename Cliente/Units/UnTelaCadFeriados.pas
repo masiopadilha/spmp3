@@ -7,16 +7,16 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvMaskEdit, JvDBControls, Data.DB, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadFeriados = class(TFrmTelaPaiParametros)
-    Label2: TLabel;
-    EdtCodigo: TDBEdit;
-    Label4: TLabel;
-    EdtDescricao: TDBEdit;
     Label1: TLabel;
     EdtData: TJvDBMaskEdit;
+    EdtCodigo: TDBEdit;
+    Label2: TLabel;
+    Label4: TLabel;
+    EdtDescricao: TDBEdit;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -24,6 +24,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,11 +48,17 @@ begin
 EdtCodigo.ReadOnly := True;
 end;
 
-procedure TFrmTelaCadFeriados.BtnImprimirClick(Sender: TObject);
+procedure TFrmTelaCadFeriados.btnConsultarClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 19;
   inherited;
 
+end;
+
+procedure TFrmTelaCadFeriados.BtnImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBFeriados;
 end;
 
 procedure TFrmTelaCadFeriados.BtnNovoClick(Sender: TObject);
@@ -119,11 +128,24 @@ DM.FDataSetParam.Params[1].AsString := DM.FCodEmpresa;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadFeriados.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 19;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadFeriados.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBFeriados;
+end;
+
 procedure TFrmTelaCadFeriados.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else btnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadFeriados.FormClose(Sender: TObject;
@@ -138,7 +160,6 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryFeriados;
 DM.FDataSourceParam := DM.dsFeriados;
-DM.FDataSetRelat    := DmRelatorios.frxDBFeriados;
 DM.FTela := 'CADFERIADOS';
 DM.FTabela_auxiliar := 19;
 end;

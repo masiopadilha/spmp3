@@ -1,19 +1,23 @@
 inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   Caption = 'Pe'#231'as do Equipamento'
+  ClientHeight = 304
+  ClientWidth = 488
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 498
+    Width = 482
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
     Margins.Bottom = 3
     ExplicitLeft = 3
     ExplicitTop = 3
-    ExplicitWidth = 498
+    ExplicitWidth = 478
+    DesignSize = (
+      482
+      60)
     inherited Image1: TImage
       Margins.Left = 4
       Margins.Top = 4
@@ -21,35 +25,36 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 465
-      ExplicitLeft = 465
+      Left = 446
+      ExplicitLeft = 446
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 496
+    Width = 480
+    Height = 165
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     ExplicitLeft = 4
     ExplicitTop = 70
-    ExplicitWidth = 496
+    ExplicitWidth = 476
     inherited RGTelas: TRadioGroup
-      Width = 494
+      Width = 478
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
       Margins.Bottom = 1
-      ExplicitWidth = 494
+      ExplicitWidth = 474
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 488
-      Height = 154
+      Width = 472
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -150,27 +155,27 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   end
   inherited PAuxiliares: TPanel
     Left = 1
-    Top = 237
-    Width = 502
+    Top = 240
+    Width = 486
     Margins.Left = 1
     Margins.Top = 1
     Margins.Right = 1
     Margins.Bottom = 1
     ExplicitLeft = 1
     ExplicitTop = 237
-    ExplicitWidth = 502
+    ExplicitWidth = 482
   end
   inherited PBotoes: TPanel
     Left = 1
-    Top = 262
-    Width = 502
+    Top = 265
+    Width = 486
     Margins.Left = 1
     Margins.Top = 1
     Margins.Right = 1
     Margins.Bottom = 1
     ExplicitLeft = 1
     ExplicitTop = 262
-    ExplicitWidth = 502
+    ExplicitWidth = 482
     inherited BtnOK: TButton
       Left = 100
       Margins.Left = 4
@@ -182,12 +187,12 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 214
+      Left = 207
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 214
+      ExplicitLeft = 207
     end
   end
 end

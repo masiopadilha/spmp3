@@ -1,15 +1,15 @@
 inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   Caption = 'Fechamento das Inspe'#231#245'es'
-  ClientHeight = 644
+  ClientHeight = 684
   ClientWidth = 1012
-  Constraints.MaxHeight = 680
+  Constraints.MaxHeight = 720
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   Font.Height = -9
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 680
+  ExplicitHeight = 720
   TextHeight = 11
   inherited PTop: TPanel
     Width = 1008
@@ -21,7 +21,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       ExplicitTop = 15
     end
     object Button6: TButton
-      Left = 942
+      Left = 937
       Top = 15
       Width = 28
       Height = 28
@@ -43,12 +43,12 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 505
+    Height = 545
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 503
+      Height = 543
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -57,7 +57,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       Left = 4
       Top = 4
       Width = 998
-      Height = 497
+      Height = 537
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
@@ -126,7 +126,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Left = 5
         Top = 32
         Width = 988
-        Height = 460
+        Height = 500
         Margins.Top = 30
         ActivePage = TSManut
         Align = alClient
@@ -184,7 +184,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Left = 1
             Top = 173
             Width = 978
-            Height = 153
+            Height = 193
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -213,7 +213,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdItensEspManut: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 328
+            Top = 368
             Width = 978
             Height = 100
             Margins.Left = 1
@@ -336,7 +336,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Left = 1
             Top = 1
             Width = 410
-            Height = 150
+            Height = 193
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -362,7 +362,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Left = 413
             Top = 1
             Width = 562
-            Height = 150
+            Height = 193
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -384,7 +384,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdRotaManutItens: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 156
+            Top = 196
             Width = 978
             Height = 170
             Margins.Left = 1
@@ -409,7 +409,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdRotaManutItensEsp: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 328
+            Top = 368
             Width = 978
             Height = 100
             Margins.Left = 1
@@ -517,7 +517,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
+    Top = 617
     Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
@@ -531,7 +531,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PBotoes: TPanel
-    Top = 604
+    Top = 644
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004

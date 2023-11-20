@@ -4,19 +4,21 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnBaseCrud, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
+  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid,
+  Vcl.WinXCtrls;
 
 type
-  TFrmTelaCadOficinas = class(TFrmTelaPaiParametros)
+  TFrmTelaCadOficinas = class(TfrmBaseCrud)
+    Label1: TLabel;
+    EdtCentroCusto: TDBEdit;
+    BtnCentroCusto: TButton;
     Label2: TLabel;
     EdtCodigo: TDBEdit;
     Label4: TLabel;
     EdtDescricao: TDBEdit;
-    Label1: TLabel;
-    EdtCentroCusto: TDBEdit;
-    BtnCentroCusto: TButton;
     ChbAtivoNF: TDBCheckBox;
     ChbVisivelNF: TDBCheckBox;
     procedure BtnCancelarClick(Sender: TObject);
@@ -24,9 +26,11 @@ type
     procedure BtnSalvarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnCentroCustoClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnTelaCadCentroCusto, UnDmRelatorios, UnDM;
+uses UnDmRelatorios, UnDM, UnTelaCadCentroCusto;
 
 procedure TFrmTelaCadOficinas.BtnCancelarClick(Sender: TObject);
 begin
@@ -86,7 +90,7 @@ DM.FTela            := 'CADOFICINAS';
 DM.FTabela_auxiliar := 20;
 end;
 
-procedure TFrmTelaCadOficinas.BtnImprimirClick(Sender: TObject);
+procedure TFrmTelaCadOficinas.btnConsultarClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 20;
   inherited;
@@ -147,11 +151,24 @@ DM.FDataSetParam.Params[1].AsString := DM.FCodEmpresa;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadOficinas.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 20;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadOficinas.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBOficina;
+end;
+
 procedure TFrmTelaCadOficinas.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadOficinas.FormClose(Sender: TObject;
@@ -168,7 +185,6 @@ DM.FDataSetParam    := DM.qryOficinas;
 DM.FDataSourceParam := DM.dsOficinas;
 DM.FDataSetRelat    := DmRelatorios.frxDBOficina;
 DM.FTela := 'CADOFICINAS';
-DM.FTabela_auxiliar := 20;
 end;
 
 end.

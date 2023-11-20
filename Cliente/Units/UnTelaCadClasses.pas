@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.StdCtrls,
   Vcl.DBCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadClasses = class(TFrmTelaPaiParametros)
@@ -23,6 +23,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +50,7 @@ procedure TFrmTelaCadClasses.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 5;
   inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBClasses;
 end;
 
 procedure TFrmTelaCadClasses.BtnNovoClick(Sender: TObject);
@@ -95,11 +98,24 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadClasses.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 5;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadClasses.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBClasses;
+end;
+
 procedure TFrmTelaCadClasses.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadClasses.FormClose(Sender: TObject;
@@ -114,9 +130,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryClasses;
 DM.FDataSourceParam := DM.dsClasses;
-DM.FDataSetRelat    := DmRelatorios.frxDBClasses;
 DM.FTela := 'CADCLASSES';
-DM.FTabela_auxiliar := 5;
 end;
 
 end.

@@ -93,6 +93,7 @@ type
     procedure Lubrificantes1Click(Sender: TObject);
     procedure GrdServicosExecDblClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -373,6 +374,26 @@ procedure TFrmTelaCadOrdemServicoFechamento.BtnSalvarClick(Sender: TObject);
 var
   LSalario, LHOficiais, LHomemHora, LHENormal, LHEFeriado, LPercHENormal, LPercHEFeriado, LCusto, LTotalHH : Real;
 begin
+if DM.FDataSetParam.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O INÍCIO DA O.S.!'; EdtDataInicioReal.SetFocus; Exit;
@@ -592,6 +613,7 @@ PSituacao.Font.Color := clBlack;
 
 DM.MSGAguarde('', False);
   inherited;
+
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.BtnSolicitadoClick(Sender: TObject);
@@ -629,6 +651,67 @@ DM.FDataSetParam    := DM.qryOrdemServico;
 DM.FDataSourceParam := DM.dsOrdemServico;
 DM.FTela            := 'CADORDEMSERVICO';
 DM.FTabela_auxiliar := 45;
+end;
+
+procedure TFrmTelaCadOrdemServicoFechamento.ButConsultarClick(Sender: TObject);
+begin
+DM.FParamAuxiliar[1] := 'FECHADA';
+DM.FTabela_auxiliar := 45;
+  inherited;
+if DM.qryOrdemServicoCODIGO.IsNull then Exit;
+
+if DM.qryOrdemServicoSOLICITACAOTRAB.AsString <> EmptyStr then
+  begin
+    LblOrigem.Caption := DM.qryOrdemServicoSOLICITACAOTRAB.AsString;
+  end
+else
+if DM.qryOrdemServicoROTAEQUIP.AsString = 'S' then
+  begin
+    LblOrigem.Caption := 'ROTA DE EQUIPAMENTOS';
+  end
+else
+if DM.qryOrdemServicoMANUTPROGEQUIP.AsString <> EmptyStr then
+  begin
+    LblOrigem.Caption := DM.qryOrdemServicoMANUTPROGEQUIP.AsString;
+  end
+else
+if DM.qryOrdemServicoLUBRIFICPROGEQUIP.AsString <> EmptyStr then
+  begin
+    LblOrigem.Caption := DM.qryOrdemServicoLUBRIFICPROGEQUIP.AsString;
+  end
+else
+  begin
+    LblOrigem.Caption := 'MANUAL';
+  end;
+
+if DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA' then
+  begin
+    PSituacao.Caption := 'CADASTRADA';
+    PSituacao.Font.Color := clRed;
+    if DM.qryOrdemServicoCODMANUTENCAO.AsString <> EmptyStr then
+      PSituacao.Color := clYellow
+    else
+      PSituacao.Color := $00BBFFFF;
+  end;
+
+if DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA' then
+  begin
+    PSituacao.Caption := 'SOLICITADA';
+    PSituacao.Font.Color := clBlack;
+    if DM.qryOrdemServicoCODMANUTENCAO.AsString <> EmptyStr then
+      PSituacao.Color := clWhite
+    else
+      PSituacao.Color := $00F3F3F3;
+  end;
+
+if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'EXECUCAO'      then begin PSituacao.Caption := 'EXECUÇÃO';      PSituacao.Color := clInfoBk; PSituacao.Font.Color := clGreen;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Caption := 'LIBERADA';      PSituacao.Color := clGreen;  PSituacao.Font.Color := clWhite;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.Button1Click(Sender: TObject);
@@ -745,7 +828,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryOrdemServico;
 DM.FDataSourceParam := DM.dsOrdemServico;
-DM.FTela := 'CADORDEMSERVICO';
+DM.FTela := 'CADORDEMSERVICOFECHAR';
 LCustoAlterado := False;
 
 if DM.qryOrdemServicoServExec.Active = False then

@@ -1,10 +1,10 @@
 inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
   Caption = 'Calend'#225'rios de M'#227'o de Obra'
-  ClientHeight = 421
-  ClientWidth = 624
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 620
+    Width = 780
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -46,70 +46,74 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       DataSource = DM.dsCalendMObra
     end
     inherited LCadastro: TLabel
+      Left = 553
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 553
     end
     inherited LCadastroPor: TLabel
+      Left = 515
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 515
     end
   end
   inherited PCentro: TPanel
-    Width = 620
-    Height = 320
+    Width = 780
+    Height = 248
     object Label3: TLabel
-      Left = 234
-      Top = 114
+      Left = 467
+      Top = 38
       Width = 77
       Height = 16
       Caption = '%HE Normal:'
     end
     object Label5: TLabel
-      Left = 399
-      Top = 114
+      Left = 550
+      Top = 38
       Width = 79
       Height = 16
       Caption = '%HE Feriado:'
     end
     object LblDataConsulta: TLabel
-      Left = 350
-      Top = 272
+      Left = 269
+      Top = 214
       Width = 91
       Height = 16
       Alignment = taCenter
       Caption = 'LblDataConsulta'
     end
     object Label2: TLabel
-      Left = 97
-      Top = 52
+      Left = 64
+      Top = 38
       Width = 44
       Height = 16
       Alignment = taRightJustify
       Caption = 'C'#243'digo:'
     end
     object Label4: TLabel
-      Left = 81
-      Top = 82
+      Left = 176
+      Top = 38
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
     object Label6: TLabel
-      Left = 80
-      Top = 113
+      Left = 398
+      Top = 38
       Width = 61
       Height = 16
       Alignment = taRightJustify
       Caption = 'Oficial (h):'
     end
     object Label1: TLabel
-      Left = 271
-      Top = 84
+      Left = 671
+      Top = -35
       Width = 32
       Height = 13
       Caption = 'Horas:'
@@ -121,12 +125,13 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       ParentFont = False
     end
     object LblHorasReais: TDBText
-      Left = 308
-      Top = 84
+      Left = 708
+      Top = -35
       Width = 67
       Height = 13
       AutoSize = True
       DataField = 'HREAIS'
+      DataSource = DM.dsCalendMObra
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -135,9 +140,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       ParentFont = False
     end
     object EdtHENormal: TDBEdit
-      Left = 315
-      Top = 112
-      Width = 60
+      Left = 467
+      Top = 57
+      Width = 75
       Height = 24
       DataField = 'HENORMAL'
       DataSource = DM.dsCalendMObra
@@ -147,9 +152,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnKeyPress = FormKeyPress
     end
     object EdtHEFeriado: TDBEdit
-      Left = 482
-      Top = 112
-      Width = 60
+      Left = 550
+      Top = 57
+      Width = 75
       Height = 24
       DataField = 'HEFERIADO'
       DataSource = DM.dsCalendMObra
@@ -160,9 +165,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 145
-      Top = 50
-      Width = 125
+      Left = 64
+      Top = 57
+      Width = 106
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
@@ -173,9 +178,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 145
-      Top = 80
-      Width = 230
+      Left = 176
+      Top = 57
+      Width = 217
       Height = 24
       DataField = 'DESCRICAO'
       DataSource = DM.dsCalendMObra
@@ -184,8 +189,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnKeyPress = FormKeyPress
     end
     object EdtHOficiais: TDBEdit
-      Left = 145
-      Top = 112
+      Left = 398
+      Top = 57
       Width = 60
       Height = 24
       DataField = 'HOFICIAIS'
@@ -196,9 +201,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnKeyPress = FormKeyPress
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 401
-      Top = 82
-      Width = 59
+      Left = 634
+      Top = 60
+      Width = 61
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Ativo:'
@@ -210,9 +215,9 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 477
-      Top = 82
-      Width = 65
+      Left = 702
+      Top = 60
+      Width = 67
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Vis'#237'vel:'
@@ -224,8 +229,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnExit = TabNextTab1AfterTabChange
     end
     object CalendarGrid: TStringGrid
-      Left = 145
-      Top = 145
+      Left = 64
+      Top = 86
       Width = 193
       Height = 124
       Hint = 'Clique na data para visualizar o hor'#225'rio de trabalho.'
@@ -253,10 +258,18 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       TabOrder = 7
       OnClick = CalendarGridClick
       OnDrawCell = CalendarGridDrawCell
+      ColWidths = (
+        27
+        27
+        27
+        27
+        27
+        27
+        27)
     end
     object PPeriodo: TPanel
-      Left = 145
-      Top = 272
+      Left = 64
+      Top = 214
       Width = 193
       Height = 18
       Align = alCustom
@@ -303,8 +316,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       end
     end
     object GBHorario: TGroupBox
-      Left = 348
-      Top = 142
+      Left = 265
+      Top = 83
       Width = 163
       Height = 127
       Caption = 'Hor'#225'rio de Trabalho:'
@@ -566,8 +579,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       end
     end
     object BtnNovoHorario: TButton
-      Left = 514
-      Top = 145
+      Left = 431
+      Top = 91
       Width = 28
       Height = 28
       Hint = 'Novo hor'#225'rio'
@@ -581,8 +594,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnClick = BtnNovoHorarioClick
     end
     object BtnSalvarHorario: TButton
-      Left = 514
-      Top = 175
+      Left = 431
+      Top = 121
       Width = 28
       Height = 28
       Hint = 'Salvar hor'#225'rio'
@@ -596,8 +609,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnClick = BtnSalvarHorarioClick
     end
     object BtnCancelarHorario: TButton
-      Left = 514
-      Top = 205
+      Left = 431
+      Top = 151
       Width = 28
       Height = 28
       Hint = 'Cancelar hor'#225'rio'
@@ -611,8 +624,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnClick = BtnCancelarHorarioClick
     end
     object BtnExcluirHorario: TButton
-      Left = 514
-      Top = 235
+      Left = 431
+      Top = 181
       Width = 28
       Height = 28
       Hint = 'Excluir hor'#225'rio'
@@ -626,8 +639,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       OnClick = BtnExcluirHorarioClick
     end
     object PHHDisponivel: TPanel
-      Left = 145
-      Top = 289
+      Left = 64
+      Top = 231
       Width = 193
       Height = 18
       Align = alCustom
@@ -646,15 +659,19 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 402
-    Width = 624
+    Top = 352
+    Width = 784
   end
   inherited PAuxiliares: TPanel
-    Top = 375
-    Width = 620
+    Top = 325
+    Width = 780
+  end
+  inherited ActionList1: TActionList
+    Left = 338
+    Top = 19
   end
   inherited MainMenuPadrao: TMainMenu
-    Left = 358
-    Top = 68
+    Left = 254
+    Top = 36
   end
 end

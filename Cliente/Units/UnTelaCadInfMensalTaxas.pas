@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.StdCtrls,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls, System.DateUtils, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadInfMensalTaxas = class(TFrmTelaPaiParametros)
@@ -23,6 +23,7 @@ type
     procedure BtnSalvarClick(Sender: TObject);
     procedure GrdFuncionariosKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,7 +84,7 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadInfMensalTaxas.BtnSalvarClick(Sender: TObject);
@@ -136,7 +137,20 @@ PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
+end;
+
+procedure TFrmTelaCadInfMensalTaxas.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 91;
+  inherited;
+if DM.qryDespMensalTaxasPer.IsEmpty = False then
+  begin
+    DM.qryDespMensalTaxas.Close;
+    DM.qryDespMensalTaxas.Params[0].AsInteger := DM.qryDespMensalTaxasPerCODIGO.AsInteger;
+    DM.qryDespMensalTaxas.Open;
+    DM.qryDespMensalTaxas.Edit;
+  end;
 end;
 
 procedure TFrmTelaCadInfMensalTaxas.FormClose(Sender: TObject;

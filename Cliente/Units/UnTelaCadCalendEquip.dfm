@@ -1,8 +1,10 @@
 inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
   Caption = 'Calend'#225'rios de Equipamentos'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -44,22 +46,28 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       DataSource = DM.dsCalendEquip
     end
     inherited LCadastro: TLabel
+      Left = 553
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 553
     end
     inherited LCadastroPor: TLabel
+      Left = 515
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 515
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
     object Label1: TLabel
       Left = 233
-      Top = 83
+      Top = 63
       Width = 70
       Height = 13
       Caption = 'Horas reais/m:'
@@ -72,7 +80,7 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
     end
     object LblHorasReais: TDBText
       Left = 308
-      Top = 83
+      Top = 63
       Width = 67
       Height = 13
       AutoSize = True
@@ -85,41 +93,41 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ParentFont = False
     end
     object LblDataConsulta: TLabel
-      Left = 350
-      Top = 272
+      Left = 269
+      Top = 214
       Width = 91
       Height = 16
       Alignment = taCenter
       Caption = 'LblDataConsulta'
     end
     object Label2: TLabel
-      Left = 97
-      Top = 52
+      Left = 64
+      Top = 38
       Width = 44
       Height = 16
       Alignment = taRightJustify
       Caption = 'C'#243'digo:'
     end
     object Label4: TLabel
-      Left = 81
-      Top = 82
+      Left = 176
+      Top = 38
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
     object Label3: TLabel
-      Left = 64
-      Top = 113
+      Left = 398
+      Top = 38
       Width = 77
       Height = 16
       Alignment = taRightJustify
       Caption = 'Oficial (h/m):'
     end
     object EdtHOficiais: TDBEdit
-      Left = 145
-      Top = 112
-      Width = 60
+      Left = 398
+      Top = 57
+      Width = 77
       Height = 24
       DataField = 'HOFICIAIS'
       DataSource = DM.dsCalendEquip
@@ -129,8 +137,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnKeyPress = FormKeyPress
     end
     object CalendarGrid: TStringGrid
-      Left = 145
-      Top = 145
+      Left = 64
+      Top = 86
       Width = 193
       Height = 124
       Hint = 'Clique na data para visualizar o hor'#225'rio de trabalho.'
@@ -160,8 +168,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnDrawCell = CalendarGridDrawCell
     end
     object PPeriodo: TPanel
-      Left = 145
-      Top = 272
+      Left = 64
+      Top = 214
       Width = 193
       Height = 18
       Align = alCustom
@@ -208,8 +216,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       end
     end
     object GBHorario: TGroupBox
-      Left = 348
-      Top = 142
+      Left = 265
+      Top = 83
       Width = 163
       Height = 127
       Caption = 'Hor'#225'rio de Trabalho:'
@@ -471,8 +479,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       end
     end
     object BtnNovoHorario: TButton
-      Left = 514
-      Top = 145
+      Left = 431
+      Top = 91
       Width = 28
       Height = 28
       Hint = 'Novo hor'#225'rio'
@@ -486,8 +494,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnClick = BtnNovoHorarioClick
     end
     object BtnSalvarHorario: TButton
-      Left = 514
-      Top = 175
+      Left = 431
+      Top = 121
       Width = 28
       Height = 28
       Hint = 'Salvar hor'#225'rio'
@@ -501,8 +509,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnClick = BtnSalvarHorarioClick
     end
     object BtnCancelarHorario: TButton
-      Left = 514
-      Top = 205
+      Left = 431
+      Top = 151
       Width = 28
       Height = 28
       Hint = 'Cancelar hor'#225'rio'
@@ -516,8 +524,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnClick = BtnCancelarHorarioClick
     end
     object BtnExcluirHorario: TButton
-      Left = 514
-      Top = 235
+      Left = 431
+      Top = 181
       Width = 28
       Height = 28
       Hint = 'Excluir hor'#225'rio'
@@ -532,9 +540,9 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 145
-      Top = 50
-      Width = 125
+      Left = 64
+      Top = 57
+      Width = 106
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
@@ -545,9 +553,9 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 145
-      Top = 80
-      Width = 230
+      Left = 176
+      Top = 57
+      Width = 217
       Height = 24
       DataField = 'DESCRICAO'
       DataSource = DM.dsCalendEquip
@@ -556,8 +564,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnKeyPress = FormKeyPress
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 401
-      Top = 82
+      Left = 489
+      Top = 61
       Width = 59
       Height = 17
       Alignment = taLeftJustify
@@ -570,8 +578,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 477
-      Top = 82
+      Left = 559
+      Top = 61
       Width = 65
       Height = 17
       Alignment = taLeftJustify
@@ -584,7 +592,20 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       OnExit = TabNextTab1AfterTabChange
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
+  end
+  inherited ActionList1: TActionList
+    Left = 338
+    Top = 35
+  end
   inherited MainMenuPadrao: TMainMenu
-    Top = 284
+    Left = 446
+    Top = 44
   end
 end

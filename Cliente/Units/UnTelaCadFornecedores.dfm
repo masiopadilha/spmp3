@@ -1,15 +1,16 @@
 inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
   Caption = 'Fornecedores'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
+      Left = 661
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
+      Left = 683
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -44,12 +45,14 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       DataSource = DM.dsFornecedores
     end
     inherited LCadastro: TLabel
+      Left = 558
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
+      Left = 520
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -57,27 +60,9 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
     end
   end
   inherited PCentro: TPanel
-    object Label1: TLabel
-      Left = 188
-      Top = 60
-      Width = 44
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'C'#243'digo:'
-      FocusControl = EdtCodigo
-    end
-    object Label2: TLabel
-      Left = 172
-      Top = 91
-      Width = 60
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Descri'#231#227'o:'
-      FocusControl = EdtDescricao
-    end
     object Label3: TLabel
-      Left = 199
-      Top = 123
+      Left = 427
+      Top = 72
       Width = 33
       Height = 16
       Alignment = taRightJustify
@@ -85,8 +70,8 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       FocusControl = EdtCNPJ
     end
     object Label4: TLabel
-      Left = 174
-      Top = 155
+      Left = 64
+      Top = 118
       Width = 58
       Height = 16
       Alignment = taRightJustify
@@ -94,8 +79,8 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       FocusControl = EdtEndereco
     end
     object Label5: TLabel
-      Left = 196
-      Top = 187
+      Left = 279
+      Top = 118
       Width = 36
       Height = 16
       Alignment = taRightJustify
@@ -103,50 +88,41 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       FocusControl = EdtEmail
     end
     object Label6: TLabel
-      Left = 199
-      Top = 219
+      Left = 540
+      Top = 72
       Width = 33
       Height = 16
       Alignment = taRightJustify
       Caption = 'Fone:'
     end
     object Label7: TLabel
-      Left = 183
-      Top = 251
+      Left = 470
+      Top = 118
       Width = 49
       Height = 16
       Alignment = taRightJustify
       Caption = 'Contato:'
       FocusControl = EdtContato
     end
-    object EdtCodigo: TDBEdit
-      Tag = 555
-      Left = 238
-      Top = 58
-      Width = 121
-      Height = 24
-      CharCase = ecUpperCase
-      DataField = 'CODIGO'
-      DataSource = DM.dsFornecedores
-      TabOrder = 0
-      OnExit = EdtCodigoExit
-      OnKeyPress = FormKeyPress
+    object Label2: TLabel
+      Left = 64
+      Top = 72
+      Width = 44
+      Height = 16
+      Caption = 'C'#243'digo:'
     end
-    object EdtDescricao: TDBEdit
-      Left = 237
-      Top = 90
-      Width = 226
-      Height = 24
-      DataField = 'DESCRICAO'
-      DataSource = DM.dsFornecedores
-      TabOrder = 1
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
+    object Label1: TLabel
+      Left = 193
+      Top = 72
+      Width = 60
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Descri'#231#227'o:'
     end
     object EdtCNPJ: TDBEdit
-      Left = 237
-      Top = 122
-      Width = 121
+      Left = 427
+      Top = 89
+      Width = 109
       Height = 24
       DataField = 'ID'
       DataSource = DM.dsFornecedores
@@ -155,32 +131,32 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       OnKeyPress = FormKeyPress
     end
     object EdtEndereco: TDBEdit
-      Left = 237
-      Top = 154
-      Width = 226
+      Left = 64
+      Top = 135
+      Width = 211
       Height = 24
       DataField = 'ENDERECO'
-      DataSource = DM.dsFornecedores
-      TabOrder = 3
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-    end
-    object EdtEmail: TDBEdit
-      Left = 237
-      Top = 186
-      Width = 226
-      Height = 24
-      CharCase = ecLowerCase
-      DataField = 'EMAIL'
       DataSource = DM.dsFornecedores
       TabOrder = 4
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+    object EdtEmail: TDBEdit
+      Left = 279
+      Top = 135
+      Width = 186
+      Height = 24
+      CharCase = ecLowerCase
+      DataField = 'EMAIL'
+      DataSource = DM.dsFornecedores
+      TabOrder = 5
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
     object EdtContato: TDBEdit
-      Left = 237
-      Top = 250
-      Width = 228
+      Left = 470
+      Top = 135
+      Width = 171
       Height = 24
       DataField = 'CONTATO'
       DataSource = DM.dsFornecedores
@@ -188,8 +164,8 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 196
-      Top = 280
+      Left = 63
+      Top = 167
       Width = 59
       Height = 17
       Alignment = taLeftJustify
@@ -201,8 +177,8 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       ValueUnchecked = 'N'
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 304
-      Top = 280
+      Left = 128
+      Top = 167
       Width = 65
       Height = 17
       Alignment = taLeftJustify
@@ -214,15 +190,40 @@ inherited FrmTelaCadFornecedores: TFrmTelaCadFornecedores
       ValueUnchecked = 'N'
     end
     object EdtFone: TJvDBMaskEdit
-      Left = 237
-      Top = 218
-      Width = 123
+      Left = 540
+      Top = 89
+      Width = 101
       Height = 24
       DataField = 'FONE'
       DataSource = DM.dsFornecedores
       MaxLength = 15
-      TabOrder = 5
+      TabOrder = 3
       EditMask = '!(99) 99999-9999;1;_'
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object EdtCodigo: TDBEdit
+      Tag = 555
+      Left = 64
+      Top = 89
+      Width = 125
+      Height = 24
+      CharCase = ecUpperCase
+      DataField = 'CODIGO'
+      DataSource = DM.dsFornecedores
+      ReadOnly = True
+      TabOrder = 0
+      OnExit = EdtCodigoExit
+      OnKeyPress = FormKeyPress
+    end
+    object EdtDescricao: TDBEdit
+      Left = 193
+      Top = 89
+      Width = 230
+      Height = 24
+      DataField = 'DESCRICAO'
+      DataSource = DM.dsFornecedores
+      TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end

@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
-  Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.Mask, Data.DB, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadRecursosFerram = class(TFrmTelaPaiParametros)
@@ -26,6 +27,7 @@ type
     procedure Completo1Click(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -116,6 +118,13 @@ DM.qryFerramentariaItens.Edit;
 DM.qryFerramentariaItens.Post;
 end;
 
+procedure TFrmTelaCadRecursosFerram.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 61;
+  inherited;
+DM.qryFerramentariaItens.Open;
+end;
+
 procedure TFrmTelaCadRecursosFerram.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBFerramentariaGeral;
@@ -127,8 +136,8 @@ end;
 procedure TFrmTelaCadRecursosFerram.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadRecursosFerram.FormClose(Sender: TObject;
@@ -146,7 +155,6 @@ begin
 DM.FDataSetParam := DM.qryFerramentaria;
 DM.FDataSourceParam := DM.dsFerramentaria;
 DM.FTela := 'CADFERRAMENTARIA';
-DM.FTabela_auxiliar := 61;
 end;
 
 procedure TFrmTelaCadRecursosFerram.GrdItensDblClick(Sender: TObject);

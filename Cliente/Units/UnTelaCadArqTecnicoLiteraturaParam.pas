@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, Vcl.Buttons;
 
 type
   TFrmTelaCadArqTecnicoLiteraturaParam = class(TFrmTelaPaiParametros)
@@ -17,6 +17,7 @@ type
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +68,14 @@ if DM.qryArquivoTecnicoParamDESCRICAO.IsNull = True then
   end;
 
   inherited;
+end;
+
+procedure TFrmTelaCadArqTecnicoLiteraturaParam.ButConsultarClick(
+  Sender: TObject);
+begin
+DM.FTabela_auxiliar := 70;
+  inherited;
+
 end;
 
 procedure TFrmTelaCadArqTecnicoLiteraturaParam.FormClose(Sender: TObject;

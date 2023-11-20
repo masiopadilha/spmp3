@@ -160,7 +160,9 @@ uses
   UnTelaGerenciador in '..\Units\UnTelaGerenciador.pas' {FrmTelaGerenciador},
   UnDmAlertas in '..\Units\UnDmAlertas.pas' {DMAlertas: TDataModule},
   UnTelaCadEquipamentosAltCod in '..\Units\UnTelaCadEquipamentosAltCod.pas' {FrmTelaCadEquipamentosAltCod},
-  UnTelaCadEquipamentosAltFamiliaCod in '..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas' {FrmTelaCadEquipamentosAltFamiliaCod};
+  UnTelaCadEquipamentosAltFamiliaCod in '..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas' {FrmTelaCadEquipamentosAltFamiliaCod},
+  UnBaseHeranca in '..\Units\UnBaseHeranca.pas' {frmBaseHeranca},
+  UnBaseCrud in '..\Units\UnBaseCrud.pas' {frmBaseCrud};
 
 {$R *.res}
 begin
@@ -180,7 +182,6 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   TStyleManager.TrySetStyle('Windows10 Malibu');
   Application.Title := 'SPMP - Sistema do Plano de Manutenção LTDA.';
   Application.CreateForm(TDM, DM);
- // Application.CreateForm(TDmRelatorios, DmRelatorios);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
   FrmTelaAcesso.ShowModal;
@@ -191,7 +192,6 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
       FrmTelaSplash.ShowModal;
       FreeAndNil(FrmTelaSplash);
       Try
-        Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
         if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade')
           or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
             or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
@@ -199,6 +199,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
                 DM.VerificarInspecoes;
                 DM.VerificarConfiabilidade;
               end;
+        Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
         FrmTelaPrincipal.ShowModal;
       Finally
         FreeAndNil(FrmTelaPrincipal);

@@ -1,8 +1,11 @@
 inherited FrmTelaCadAbastecimentosRotas: TFrmTelaCadAbastecimentosRotas
   Caption = 'Rotas'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
+    ExplicitWidth = 784
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -34,6 +37,9 @@ inherited FrmTelaCadAbastecimentosRotas: TFrmTelaCadAbastecimentosRotas
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
+    ExplicitHeight = 251
     object Label2: TLabel
       Left = 174
       Top = 60
@@ -131,6 +137,16 @@ inherited FrmTelaCadAbastecimentosRotas: TFrmTelaCadAbastecimentosRotas
       TabOrder = 4
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+    ExplicitWidth = 788
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
+    ExplicitWidth = 784
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 44

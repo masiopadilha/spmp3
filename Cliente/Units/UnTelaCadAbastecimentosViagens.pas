@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, JvExMask,
   JvToolEdit, JvDBControls, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls, Data.DB, FireDAC.Stan.Param;
+  Vcl.ActnList, Vcl.ExtActns, Vcl.Menus, Vcl.ComCtrls, Vcl.ExtCtrls, Data.DB, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadAbastecimentosViagens = class(TFrmTelaPaiParametros)
@@ -55,6 +56,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Individual1Click(Sender: TObject);
     procedure Completo1Click(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -259,6 +261,32 @@ if (DM.qryViagensCombustAbast.Active = False) and (DM.qryViagensDATACHEGADA.AsDa
     DM.qryViagensLubrificAbast.Params[1].AsString := DM.qryViagensLubrificCODIGO.AsString;
     DM.qryViagensLubrificAbast.Params[2].AsString := FormatDateTime('yyyy/mm/dd', IncMonth(DM.FDataHoraServidor, -12)) + ' 00:00:00';
     DM.qryViagensLubrificAbast.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
+    DM.qryViagensLubrificAbast.Open;
+  end;
+end;
+
+procedure TFrmTelaCadAbastecimentosViagens.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 95;
+  inherited;
+if (DM.qryViagensCODIGO.AsString <> EmptyStr) then
+  begin
+    DM.qryViagensCombust.Open;
+
+    DM.qryViagensCombustAbast.Close;
+    DM.qryViagensCombustAbast.Params[0].AsString := DM.qryViagensCombustCODEQUIPAMENTO.AsString;
+    DM.qryViagensCombustAbast.Params[1].AsString := DM.qryViagensCombustCODIGO.AsString;
+    DM.qryViagensCombustAbast.Params[2].AsString := FormatDateTime('yyyy/mm/dd', DM.qryViagensDATAPARTIDA.AsDateTime);
+    DM.qryViagensCombustAbast.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.qryViagensDATACHEGADA.AsDateTime) + ' 23:59:59';
+    DM.qryViagensCombustAbast.Open;
+
+    DM.qryViagensLubrific.Open;
+
+    DM.qryViagensLubrificAbast.Close;
+    DM.qryViagensLubrificAbast.Params[0].AsString := DM.qryViagensLubrificCODEQUIPAMENTO.AsString;
+    DM.qryViagensLubrificAbast.Params[1].AsString := DM.qryViagensLubrificCODIGO.AsString;
+    DM.qryViagensLubrificAbast.Params[2].AsString := FormatDateTime('yyyy/mm/dd', DM.qryViagensDATAPARTIDA.AsDateTime);
+    DM.qryViagensLubrificAbast.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.qryViagensDATACHEGADA.AsDateTime) + ' 23:59:59';
     DM.qryViagensLubrificAbast.Open;
   end;
 end;

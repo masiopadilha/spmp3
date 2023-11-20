@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Vcl.DBCtrls,
   Vcl.StdCtrls, Data.DB, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, JvExMask, JvToolEdit,
   JvDBControls, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons;
+  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
 
 type
   TFrmTelaCadEquipamentos = class(TFrmTelaPaiCadastros)
@@ -171,6 +171,7 @@ type
     procedure BtnImagemClick(Sender: TObject);
     procedure Area1Click(Sender: TObject);
     procedure Famlia1Click(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -201,6 +202,10 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 150;
     DM.FNomeConsulta := 'Áreas';
+    DM.FCodFamilia := EmptyStr;
+    DM.FCodArea    := EmptyStr;
+    DM.FCodCelula  := EmptyStr;
+    DM.FCodLinha   := EmptyStr;
     if DM.ConsultarCombo <> EmptyStr then
       begin
         DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -1219,12 +1224,86 @@ if DM.qryEquipamentosDados.Active = True then
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadEquipamentos.ButConsultarClick(Sender: TObject);
+begin
+if DM.FParamAuxiliar[1] = '' then
+  begin
+    PopupMenuCons.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+    Exit;
+  end
+else
+DM.FTabela_auxiliar := 25;
+  inherited;
+if DM.qryEquipamentosCODFAMILIAEQUIP.AsString <> EmptyStr then
+  begin
+    if DM.qryEquipamentosCODEQUIPAMENTOPAI.AsString <> EmptyStr then
+      begin
+        EdtPrimario.Visible := True;
+        BtnPrimario.Visible := True;
+      end
+    else
+      begin
+        EdtPrimario.Visible := False;
+        BtnPrimario.Visible := False;
+      end;
+
+    DM.qryFamEquipamento.Close;
+    DM.qryFamEquipamento.Params[0].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+    DM.qryFamEquipamento.Open;
+
+    if DM.qryFamEquipamentoCAMPO1.AsString = EmptyStr then EdtCampo1.Visible := False else EdtCampo1.Visible := True;
+    if DM.qryFamEquipamentoCAMPO2.AsString = EmptyStr then EdtCampo2.Visible := False else EdtCampo2.Visible := True;
+    if DM.qryFamEquipamentoCAMPO3.AsString = EmptyStr then EdtCampo3.Visible := False else EdtCampo3.Visible := True;
+    if DM.qryFamEquipamentoCAMPO4.AsString = EmptyStr then EdtCampo4.Visible := False else EdtCampo4.Visible := True;
+    if DM.qryFamEquipamentoCAMPO5.AsString = EmptyStr then EdtCampo5.Visible := False else EdtCampo5.Visible := True;
+    if DM.qryFamEquipamentoCAMPO6.AsString = EmptyStr then EdtCampo6.Visible := False else EdtCampo6.Visible := True;
+    if DM.qryFamEquipamentoCAMPO7.AsString = EmptyStr then EdtCampo7.Visible := False else EdtCampo7.Visible := True;
+    if DM.qryFamEquipamentoCAMPO8.AsString = EmptyStr then EdtCampo8.Visible := False else EdtCampo8.Visible := True;
+    if DM.qryFamEquipamentoCAMPO9.AsString = EmptyStr then EdtCampo9.Visible := False else EdtCampo9.Visible := True;
+    if DM.qryFamEquipamentoCAMPO10.AsString = EmptyStr then EdtCampo10.Visible := False else EdtCampo10.Visible := True;
+    if DM.qryFamEquipamentoCAMPO11.AsString = EmptyStr then EdtCampo11.Visible := False else EdtCampo11.Visible := True;
+    if DM.qryFamEquipamentoCAMPO12.AsString = EmptyStr then EdtCampo12.Visible := False else EdtCampo12.Visible := True;
+
+    LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
+
+    DM.qryEquipamentosDados.Close;
+    DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryEquipamentosDados.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+    DM.qryEquipamentosDados.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+    DM.qryEquipamentosDados.Open;
+    DM.qryEquipamentosDados.Edit;
+
+    DM.qryEquipamentosDadosR.Close;
+    DM.qryEquipamentosDadosR.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryEquipamentosDadosR.Params[1].AsString := DM.qryEquipamentosCODFAMILIAEQUIP.AsString;
+    DM.qryEquipamentosDadosR.Params[2].AsString := DM.qryEquipamentosCODIGO.AsString;
+    DM.qryEquipamentosDadosR.Open;
+    DM.qryEquipamentosDadosR.Edit;
+  end;
+
+if DM.FEmpTransf = True then
+  begin
+    if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then
+      begin
+        NBLocalizacao.PageIndex := 0;
+        //LblPrimario.Visible := False;
+      end
+    else
+    if DM.qryEquipamentosSECUNDARIO.AsString = 'S' then
+      begin
+        NBLocalizacao.PageIndex := 1;
+        //LblPrimario.Visible := True;
+      end;
+  end;
+DM.FParamAuxiliar[1] := '';
+end;
+
 procedure TFrmTelaCadEquipamentos.Button1Click(Sender: TObject);
 begin
   inherited;
 if DM.qryEquipamentosCODIGO.IsNull = True then
   begin
-    BtnSalvar.OnClick(Sender);
+    btnSalvar.OnClick(Sender);
     Exit;
   end;
 PopupMenuInspecoes.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
@@ -1391,6 +1470,10 @@ begin
   inherited;
 DM.FParamAuxiliar[1] := 'CODIGO';
 DM.FParamAuxiliar[2] := '';
+DM.FCodFamilia := EmptyStr;
+DM.FCodArea    := EmptyStr;
+DM.FCodCelula  := EmptyStr;
+DM.FCodLinha   := EmptyStr;
 BtnConsultar.OnClick(Sender);
 end;
 
@@ -1461,6 +1544,10 @@ begin
   inherited;
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 DM.FParamAuxiliar[2] := '';
+DM.FCodFamilia := EmptyStr;
+DM.FCodArea    := EmptyStr;
+DM.FCodCelula  := EmptyStr;
+DM.FCodLinha   := EmptyStr;
 BtnConsultar.OnClick(Sender);
 end;
 
@@ -1825,8 +1912,8 @@ end;
 procedure TFrmTelaCadEquipamentos.EdtCodEquipExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadEquipamentos.EdtLinhaDblClick(Sender: TObject);
@@ -1859,6 +1946,10 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 600;
     DM.FNomeConsulta := 'Famílias de Equipamentos';
+    DM.FCodFamilia := EmptyStr;
+    DM.FCodArea    := EmptyStr;
+    DM.FCodCelula  := EmptyStr;
+    DM.FCodLinha   := EmptyStr;
     if DM.ConsultarCombo <> EmptyStr then
       begin
         DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -1886,7 +1977,6 @@ begin
 DM.FDataSetParam    := DM.qryEquipamentos;
 DM.FDataSourceParam := DM.dsEquipamentos;
 DM.FTela := 'CADEQUIPAMENTOS';
-DM.FTabela_auxiliar := 25;
 
 if DM.FEmpTransf = True then
   NBLocalizacao.PageIndex := 0

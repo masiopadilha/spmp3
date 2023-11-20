@@ -1,8 +1,10 @@
 inherited FrmTelaCadInfMensalFuncionarios: TFrmTelaCadInfMensalFuncionarios
   Caption = 'Informa'#231#245'es Mensais de Funcion'#225'rios'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LAlteracao: TLabel
       Visible = False
     end
@@ -33,6 +35,8 @@ inherited FrmTelaCadInfMensalFuncionarios: TFrmTelaCadInfMensalFuncionarios
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
     object Label1: TLabel
       Left = 2
       Top = 293
@@ -52,7 +56,7 @@ inherited FrmTelaCadInfMensalFuncionarios: TFrmTelaCadInfMensalFuncionarios
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 612
+      Width = 776
       Height = 283
       Align = alTop
       Caption = 'FUNCION'#193'RIOS:'
@@ -63,10 +67,11 @@ inherited FrmTelaCadInfMensalFuncionarios: TFrmTelaCadInfMensalFuncionarios
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 772
       object GrdFuncionarios: TDBGrid
         Left = 2
         Top = 15
-        Width = 608
+        Width = 772
         Height = 266
         Align = alClient
         DataSource = DM.dsDespMensalFunc
@@ -284,12 +289,20 @@ inherited FrmTelaCadInfMensalFuncionarios: TFrmTelaCadInfMensalFuncionarios
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited MainMenuPadrao: TMainMenu
-    Left = 294
-    Top = 188
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 140
     Top = 112
+  end
+  inherited MainMenuPadrao: TMainMenu
+    Left = 294
+    Top = 188
   end
 end

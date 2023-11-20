@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadArqTecnicoDesenho = class(TFrmTelaPaiParametros)
@@ -49,6 +49,7 @@ type
     procedure BtnProjetoClick(Sender: TObject);
     procedure Codigo1Click(Sender: TObject);
     procedure Descricao1Click(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -205,6 +206,13 @@ DM.qryArquivoTecnico.Params[2].AsString := 'Desenho';
   inherited;
 end;
 
+procedure TFrmTelaCadArqTecnicoDesenho.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 69;
+  inherited;
+
+end;
+
 procedure TFrmTelaCadArqTecnicoDesenho.Codigo1Click(Sender: TObject);
 begin
   inherited;
@@ -230,8 +238,8 @@ end;
 procedure TFrmTelaCadArqTecnicoDesenho.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadArqTecnicoDesenho.FormClose(Sender: TObject;

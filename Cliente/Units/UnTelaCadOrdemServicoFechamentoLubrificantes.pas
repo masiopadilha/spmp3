@@ -140,7 +140,7 @@ if (Key = #13) then
             DM.qryOrdemServicoEquipeLubrificantesUtilLUBRIFICANTE.AsString      := DM.FValorCombo;
             DM.qryOrdemServicoEquipeLubrificantesUtil.Post;
 
-            FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageIndex := 115;
+            FrmTelaCadOrdemServicoFechamento.BtnSalvar.ImageName := 'Operacional\naosalvo';
             FrmTelaCadOrdemServicoFechamento.PAuxiliares.Font.Color := clRed;
             FrmTelaCadOrdemServicoFechamento.PAuxiliares.Caption := 'GRAVE O REGISTRO PARA RECALCULAR O CUSTO DOS LUBRIFICANTES!!!';
 

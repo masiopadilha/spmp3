@@ -1,11 +1,10 @@
 inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
-  ClientHeight = 621
-  ClientWidth = 1008
+  ClientHeight = 664
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
-    ExplicitWidth = 1008
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 467
     end
@@ -32,7 +31,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
+    Width = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -280,7 +279,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
+    Width = 1008
     inherited Label2: TLabel
       Width = 62
       Caption = 'CHASSI'
@@ -291,7 +290,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       Left = 4
       Top = 21
       Width = 1000
-      Height = 165
+      Height = 190
       Margins.Top = 20
       Align = alClient
       ExplicitTop = 144
@@ -326,8 +325,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PDiversos: TPanel
-    Width = 1004
-    Height = 197
+    Width = 1008
+    Height = 179
     inherited Label3: TLabel
       Width = 55
       Caption = 'PNEUS'
@@ -338,7 +337,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       Left = 4
       Top = 21
       Width = 1000
-      Height = 175
+      Height = 154
       Hint = 'Tecle ENTER nas colunas em negrito para as op'#231#245'es de cadastro.'
       Margins.Top = 20
       Align = alClient
@@ -361,32 +360,48 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 602
-    Width = 1008
+    Top = 645
+    Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 586
-    Width = 1008
+    Top = 629
+    Width = 1012
   end
   inherited PBase: TPanel
-    Top = 546
-    Width = 1004
+    Top = 589
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Atrelamento de Carrocerias'
       ImageIndex = 84
       OnClick = Button1Click
     end
     inherited Button2: TButton
+      Left = 854
       Hint = 'Pneus'
       DisabledImageIndex = 81
       ImageIndex = 80
       OnClick = Button2Click
+      ExplicitLeft = 854
     end
     inherited Button3: TButton
+      Left = 884
       Hint = 'Hist'#243'rico'
       DisabledImageIndex = 57
       ImageIndex = 58
       OnClick = Button3Click
+      ExplicitLeft = 884
+    end
+    inherited Button4: TButton
+      Left = 914
+      ExplicitLeft = 914
+    end
+    inherited Button5: TButton
+      Left = 944
+      ExplicitLeft = 944
+    end
+    inherited Button6: TButton
+      Left = 974
+      ExplicitLeft = 974
     end
   end
   object StringGrid1: TStringGrid [7]

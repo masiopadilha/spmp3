@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, System.DateUtils,
   Vcl.Mask, JvExMask, JvToolEdit, JvMaskEdit, JvDBControls, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadCalendMObra = class(TFrmTelaPaiParametros)
@@ -72,6 +72,8 @@ type
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
     LPrimeiroDataMes: TDateTime;
@@ -193,7 +195,7 @@ procedure TFrmTelaCadCalendMObra.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 23;
   inherited;
-
+DM.FDataSetRelat    := DmRelatorios.frxDBCalendMObra;
 end;
 
 procedure TFrmTelaCadCalendMObra.BtnNovoClick(Sender: TObject);
@@ -431,6 +433,19 @@ BtnCancelarHorario.Enabled := False;
 BtnExcluirHorario.Enabled := True;
 end;
 
+procedure TFrmTelaCadCalendMObra.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 23;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadCalendMObra.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBCalendMObra;
+end;
+
 procedure TFrmTelaCadCalendMObra.CalendarGridClick(Sender: TObject);
 var
 LDataClicada : TDateTime;
@@ -588,9 +603,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryCalendMObra;
 DM.FDataSourceParam := DM.dsCalendMObra;
-DM.FDataSetRelat    := DmRelatorios.frxDBCalendMObra;
 DM.FTela := 'CADCALENDMOBRA';
-DM.FTabela_auxiliar := 23;
 
 //Feriados
 DM.qryAuxiliar.Close;
@@ -671,8 +684,8 @@ end;
 procedure TFrmTelaCadCalendMObra.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadCalendMObra.TotalHorasMes;

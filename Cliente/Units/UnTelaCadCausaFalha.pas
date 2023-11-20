@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadCausaFalha = class(TFrmTelaPaiParametros)
@@ -23,6 +23,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,7 +50,7 @@ procedure TFrmTelaCadCausaFalha.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 9;
   inherited;
-
+DM.FDataSetRelat    := DmRelatorios.frxDBCausaFalha;
 end;
 
 procedure TFrmTelaCadCausaFalha.BtnNovoClick(Sender: TObject);
@@ -96,11 +98,24 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadCausaFalha.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 9;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadCausaFalha.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBCausaFalha;
+end;
+
 procedure TFrmTelaCadCausaFalha.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadCausaFalha.FormClose(Sender: TObject;
@@ -115,9 +130,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryCausaFalha;
 DM.FDataSourceParam := DM.dsCausaFalha;
-DM.FDataSetRelat    := DmRelatorios.frxDBCausaFalha;
 DM.FTela := 'CADCAUSASFALHA';
-DM.FTabela_auxiliar := 9;
 end;
 
 end.

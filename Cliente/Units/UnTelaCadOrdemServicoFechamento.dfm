@@ -1,54 +1,22 @@
 inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
-    inherited LCadastro: TLabel
-      Left = 691
-      ExplicitLeft = 691
-    end
-    inherited LCadastroPor: TLabel
-      Left = 647
-      ExplicitLeft = 647
-    end
     inherited LblDataCad: TDBText
-      Left = 734
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 734
     end
     inherited LblUsuCad: TDBText
-      Left = 734
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 734
-    end
-    inherited LAlteracao: TLabel
-      Left = 850
-      ExplicitLeft = 850
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 824
-      ExplicitLeft = 824
     end
     inherited LblDataAlt: TDBText
-      Left = 893
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 893
     end
     inherited LblUsuAlt: TDBText
-      Left = 893
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 893
-    end
-    inherited BtnExcluir: TButton
-      Visible = False
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 124
-    ExplicitWidth = 1004
     ExplicitHeight = 124
     object Label5: TLabel
       Left = 235
@@ -229,10 +197,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited PProgramacao: TPanel
-    Top = 179
-    Width = 1008
-    ExplicitTop = 179
-    ExplicitWidth = 1004
+    Top = 201
+    ExplicitTop = 201
     inherited Label2: TLabel
       Width = 132
       Caption = 'PROGRAMA'#199#195'O'
@@ -730,12 +696,10 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited PDiversos: TPanel
-    Top = 373
-    Width = 1008
-    Height = 172
-    ExplicitTop = 373
-    ExplicitWidth = 1004
-    ExplicitHeight = 169
+    Top = 420
+    Height = 165
+    ExplicitTop = 420
+    ExplicitHeight = 162
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -746,7 +710,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Left = 5
       Top = 26
       Width = 998
-      Height = 141
+      Height = 134
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -809,23 +773,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
         end>
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

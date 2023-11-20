@@ -1,8 +1,10 @@
 inherited FrmTelaCadAreas: TFrmTelaCadAreas
   Caption = #193'reas'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LblDataAlt: TDBText
       DataSource = DM.dsAreas
     end
@@ -15,26 +17,34 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
     inherited LblUsuCad: TDBText
       DataSource = DM.dsAreas
     end
+    inherited LCadastro: TLabel
+      Left = 553
+      ExplicitLeft = 553
+    end
+    inherited LCadastroPor: TLabel
+      Left = 515
+      ExplicitLeft = 515
+    end
   end
   inherited PCentro: TPanel
     Left = 4
-    Top = 53
-    Width = 616
-    Height = 316
+    Top = 75
+    Width = 776
+    Height = 244
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     ExplicitLeft = 4
-    ExplicitTop = 53
-    ExplicitWidth = 616
-    ExplicitHeight = 316
+    ExplicitTop = 75
+    ExplicitWidth = 784
+    ExplicitHeight = 244
     object PCAreas: TPageControl
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 608
-      Height = 308
+      Width = 768
+      Height = 236
       ActivePage = TSAreas
       Align = alClient
       Style = tsFlatButtons
@@ -46,46 +56,44 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
         Margins.Right = 2
         Margins.Bottom = 2
         Caption = #193'reas'
-        object Label2: TLabel
-          Left = 190
-          Top = 60
-          Width = 44
-          Height = 16
-          Caption = 'C'#243'digo:'
-        end
-        object Label4: TLabel
-          Left = 174
-          Top = 90
-          Width = 60
-          Height = 16
-          Alignment = taRightJustify
-          Caption = 'Descri'#231#227'o:'
-        end
         object Label1: TLabel
-          Left = 163
-          Top = 122
+          Left = 432
+          Top = 80
           Width = 71
           Height = 16
           Alignment = taRightJustify
           Caption = 'Ftr. Marcha:'
         end
-        object EdtCodigo: TDBEdit
-          Tag = 555
-          Left = 238
-          Top = 58
-          Width = 125
+        object Label4: TLabel
+          Left = 195
+          Top = 80
+          Width = 60
+          Height = 16
+          Alignment = taRightJustify
+          Caption = 'Descri'#231#227'o:'
+        end
+        object Label2: TLabel
+          Left = 64
+          Top = 80
+          Width = 44
+          Height = 16
+          Caption = 'C'#243'digo:'
+        end
+        object EdtFtrMarcha: TDBEdit
+          Left = 432
+          Top = 97
+          Width = 91
           Height = 24
-          CharCase = ecUpperCase
-          DataField = 'CODIGO'
+          DataField = 'FATORMARCHADM'
           DataSource = DM.dsAreas
-          ReadOnly = True
-          TabOrder = 0
-          OnExit = EdtCodigoExit
+          MaxLength = 14
+          TabOrder = 2
+          OnExit = TabNextTab1AfterTabChange
           OnKeyPress = FormKeyPress
         end
         object EdtDescricao: TDBEdit
-          Left = 238
-          Top = 89
+          Left = 195
+          Top = 97
           Width = 230
           Height = 24
           DataField = 'DESCRICAO'
@@ -94,24 +102,10 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
           OnExit = TabNextTab1AfterTabChange
           OnKeyPress = FormKeyPress
         end
-        object ChbAtivoNF: TDBCheckBox
-          Left = 198
-          Top = 149
-          Width = 58
-          Height = 17
-          Alignment = taLeftJustify
-          Caption = 'Ativo:'
-          DataField = 'ATIVO'
-          DataSource = DM.dsAreas
-          TabOrder = 3
-          ValueChecked = 'S'
-          ValueUnchecked = 'N'
-          OnExit = TabNextTab1AfterTabChange
-        end
         object ChbVisivelNF: TDBCheckBox
-          Left = 298
-          Top = 149
-          Width = 65
+          Left = 605
+          Top = 101
+          Width = 71
           Height = 17
           Alignment = taLeftJustify
           Caption = 'Vis'#237'vel:'
@@ -122,80 +116,72 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
           ValueUnchecked = 'N'
           OnExit = TabNextTab1AfterTabChange
         end
-        object EdtFtrMarcha: TDBEdit
-          Left = 238
-          Top = 120
+        object ChbAtivoNF: TDBCheckBox
+          Left = 530
+          Top = 101
+          Width = 63
+          Height = 17
+          Alignment = taLeftJustify
+          Caption = 'Ativo:'
+          DataField = 'ATIVO'
+          DataSource = DM.dsAreas
+          TabOrder = 3
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+          OnExit = TabNextTab1AfterTabChange
+        end
+        object EdtCodigo: TDBEdit
+          Tag = 555
+          Left = 64
+          Top = 97
           Width = 125
           Height = 24
-          DataField = 'FATORMARCHADM'
+          CharCase = ecUpperCase
+          DataField = 'CODIGO'
           DataSource = DM.dsAreas
-          MaxLength = 14
-          TabOrder = 2
-          OnExit = TabNextTab1AfterTabChange
+          ReadOnly = True
+          TabOrder = 0
+          OnExit = EdtCodigoExit
           OnKeyPress = FormKeyPress
         end
       end
       object TSCelulas: TTabSheet
         Caption = 'C'#233'lulas'
         ImageIndex = 1
-        object Label3: TLabel
-          Left = 190
-          Top = 60
-          Width = 44
-          Height = 16
-          Caption = 'C'#243'digo:'
-        end
-        object Label5: TLabel
-          Left = 174
-          Top = 90
-          Width = 60
-          Height = 16
-          Alignment = taRightJustify
-          Caption = 'Descri'#231#227'o:'
-        end
         object Label6: TLabel
-          Left = 204
-          Top = 120
+          Left = 431
+          Top = 80
           Width = 30
           Height = 16
           Alignment = taRightJustify
           Caption = 'Tipo:'
         end
         object Label7: TLabel
-          Left = 163
-          Top = 150
+          Left = 562
+          Top = 80
           Width = 71
           Height = 16
           Alignment = taRightJustify
           Caption = 'Ftr. Marcha:'
         end
-        object EdtCodCelula: TDBEdit
-          Tag = 555
-          Left = 238
-          Top = 58
-          Width = 125
-          Height = 24
-          CharCase = ecUpperCase
-          DataField = 'CODIGO'
-          DataSource = DM.dsCelulas
-          ReadOnly = True
-          TabOrder = 0
-          OnExit = EdtCodCelulaExit
-          OnKeyPress = FormKeyPress
+        object Label3: TLabel
+          Left = 64
+          Top = 80
+          Width = 44
+          Height = 16
+          Caption = 'C'#243'digo:'
         end
-        object EdtDescCelula: TDBEdit
-          Left = 238
-          Top = 89
-          Width = 230
-          Height = 24
-          DataField = 'DESCRICAO'
-          DataSource = DM.dsCelulas
-          TabOrder = 1
-          OnKeyPress = FormKeyPress
+        object Label5: TLabel
+          Left = 195
+          Top = 80
+          Width = 60
+          Height = 16
+          Alignment = taRightJustify
+          Caption = 'Descri'#231#227'o:'
         end
         object EdtFtrMarchaCel: TDBEdit
-          Left = 238
-          Top = 149
+          Left = 562
+          Top = 97
           Width = 125
           Height = 24
           DataField = 'FATORMARCHADM'
@@ -205,8 +191,8 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
           OnKeyPress = FormKeyPress
         end
         object CBTipo: TDBComboBox
-          Left = 238
-          Top = 120
+          Left = 431
+          Top = 98
           Width = 125
           Height = 22
           Style = csOwnerDrawFixed
@@ -223,50 +209,96 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
           TabOrder = 2
           OnKeyPress = FormKeyPress
         end
+        object EdtCodCelula: TDBEdit
+          Tag = 555
+          Left = 64
+          Top = 97
+          Width = 125
+          Height = 24
+          CharCase = ecUpperCase
+          DataField = 'CODIGO'
+          DataSource = DM.dsCelulas
+          ReadOnly = True
+          TabOrder = 0
+          OnExit = EdtCodigoExit
+          OnKeyPress = FormKeyPress
+        end
+        object EdtDescCelula: TDBEdit
+          Left = 195
+          Top = 97
+          Width = 230
+          Height = 24
+          DataField = 'DESCRICAO'
+          DataSource = DM.dsCargos
+          TabOrder = 1
+          OnExit = TabNextTab1AfterTabChange
+          OnKeyPress = FormKeyPress
+        end
       end
       object TSLinhas: TTabSheet
         Caption = 'Linhas'
         ImageIndex = 2
-        object Label9: TLabel
-          Left = 174
-          Top = 90
+        object Label8: TLabel
+          Left = 195
+          Top = 80
           Width = 60
           Height = 16
           Alignment = taRightJustify
           Caption = 'Descri'#231#227'o:'
         end
-        object Label8: TLabel
-          Left = 190
-          Top = 60
+        object Label9: TLabel
+          Left = 64
+          Top = 80
           Width = 44
           Height = 16
           Caption = 'C'#243'digo:'
         end
+        object EdtDescLinha: TDBEdit
+          Left = 195
+          Top = 97
+          Width = 230
+          Height = 24
+          DataField = 'DESCRICAO'
+          DataSource = DM.dsLinhas
+          TabOrder = 0
+          OnExit = TabNextTab1AfterTabChange
+          OnKeyPress = FormKeyPress
+        end
         object EdtCodLinha: TDBEdit
           Tag = 555
-          Left = 238
-          Top = 58
+          Left = 64
+          Top = 97
           Width = 125
           Height = 24
           CharCase = ecUpperCase
           DataField = 'CODIGO'
           DataSource = DM.dsLinhas
           ReadOnly = True
-          TabOrder = 0
-          OnExit = EdtCodLinhaExit
-          OnKeyPress = FormKeyPress
-        end
-        object EdtDescLinha: TDBEdit
-          Left = 238
-          Top = 89
-          Width = 230
-          Height = 24
-          DataField = 'DESCRICAO'
-          DataSource = DM.dsLinhas
           TabOrder = 1
+          OnExit = EdtCodigoExit
           OnKeyPress = FormKeyPress
         end
       end
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
+  end
+  inherited PopupMenuRelat: TPopupMenu
+    Left = 212
+    Top = 32
+  end
+  inherited ActionList1: TActionList
+    Left = 378
+    Top = 27
+  end
+  inherited MainMenuPadrao: TMainMenu
+    Left = 294
+    Top = 28
   end
 end

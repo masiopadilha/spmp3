@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, JvExMask,
   JvToolEdit, JvMaskEdit, JvDBControls, Vcl.Mask, System.DateUtils, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadCalendEquip = class(TFrmTelaPaiParametros)
@@ -67,6 +67,8 @@ type
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -170,7 +172,7 @@ procedure TFrmTelaCadCalendEquip.BtnImprimirClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 24;
   inherited;
-
+DM.FDataSetRelat    := DmRelatorios.frxDBCalendEquip;
 end;
 
 procedure TFrmTelaCadCalendEquip.BtnNovoClick(Sender: TObject);
@@ -347,7 +349,7 @@ PAuxiliares.Font.Color := clBlack;
 PAuxiliares.Caption := EmptyStr;
 
 if DM.qryCalendEquip.IsEmpty then Exit;
-if DM.qryCalendEquipCODIGO.AsString = EmptyStr then begin BtnSalvar.SetFocus; Exit; end;
+if DM.qryCalendEquipCODIGO.AsString = EmptyStr then begin btnSalvar.SetFocus; Exit; end;
 
 if EdtHoraIni1.Text <> '  :  ' then DM.qryCalendEquipSeqHoraHORAINI1.AsString := EdtHoraIni1.Text;
 if EdtHoraIni2.Text <> '  :  ' then DM.qryCalendEquipSeqHoraHORAINI2.AsString := EdtHoraIni2.Text;
@@ -385,6 +387,19 @@ BtnNovoHorario.Enabled := True;
 BtnSalvarHorario.Enabled := False;
 BtnCancelarHorario.Enabled := False;
 BtnExcluirHorario.Enabled := True;
+end;
+
+procedure TFrmTelaCadCalendEquip.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 24;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadCalendEquip.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBCalendEquip;
 end;
 
 procedure TFrmTelaCadCalendEquip.CalendarGridClick(Sender: TObject);
@@ -566,8 +581,8 @@ end;
 procedure TFrmTelaCadCalendEquip.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadCalendEquip.FormClose(Sender: TObject;
@@ -586,9 +601,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryCalendEquip;
 DM.FDataSourceParam := DM.dsCalendEquip;
-DM.FDataSetRelat    := DmRelatorios.frxDBCalendEquip;
 DM.FTela := 'CADCALENDEQUIP';
-DM.FTabela_auxiliar := 24;
 
 //Feriados
 DM.qryAuxiliar.Close;

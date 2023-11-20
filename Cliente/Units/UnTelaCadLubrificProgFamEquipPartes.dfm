@@ -1,21 +1,25 @@
 inherited FrmTelaCadLubrificProgFamEquipPartes: TFrmTelaCadLubrificProgFamEquipPartes
   Caption = 'Partes a Inspecionar'
+  ClientHeight = 304
+  ClientWidth = 488
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 484
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 446
+      ExplicitLeft = 446
     end
   end
   inherited PCentro: TPanel
+    Width = 482
+    Height = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 474
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -45,7 +49,6 @@ inherited FrmTelaCadLubrificProgFamEquipPartes: TFrmTelaCadLubrificProgFamEquipP
       OnTitleClick = GrdCadastroTitleClick
       Columns = <
         item
-          Color = clWhite
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Descri'#231#227'o'
@@ -59,16 +62,22 @@ inherited FrmTelaCadLubrificProgFamEquipPartes: TFrmTelaCadLubrificProgFamEquipP
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 484
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 484
     inherited BtnOK: TButton
       Left = 100
       Visible = False
       ExplicitLeft = 100
     end
     inherited BtnFechar: TButton
-      Left = 213
+      Left = 205
       OnClick = BtnFecharClick
-      ExplicitLeft = 213
+      ExplicitLeft = 205
     end
   end
 end

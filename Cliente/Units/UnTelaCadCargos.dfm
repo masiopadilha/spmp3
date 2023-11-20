@@ -1,8 +1,10 @@
 inherited FrmTelaCadCargos: TFrmTelaCadCargos
   Caption = 'Cargos'
-  PixelsPerInch = 96
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 780
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -57,16 +59,18 @@ inherited FrmTelaCadCargos: TFrmTelaCadCargos
     end
   end
   inherited PCentro: TPanel
+    Width = 780
+    Height = 248
     object Label2: TLabel
-      Left = 190
-      Top = 90
+      Left = 64
+      Top = 96
       Width = 44
       Height = 16
       Caption = 'C'#243'digo:'
     end
     object Label4: TLabel
-      Left = 174
-      Top = 120
+      Left = 195
+      Top = 96
       Width = 60
       Height = 16
       Alignment = taRightJustify
@@ -74,8 +78,8 @@ inherited FrmTelaCadCargos: TFrmTelaCadCargos
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 238
-      Top = 88
+      Left = 64
+      Top = 113
       Width = 125
       Height = 24
       CharCase = ecUpperCase
@@ -87,8 +91,8 @@ inherited FrmTelaCadCargos: TFrmTelaCadCargos
       OnKeyPress = FormKeyPress
     end
     object EdtDescricao: TDBEdit
-      Left = 238
-      Top = 119
+      Left = 195
+      Top = 113
       Width = 230
       Height = 24
       DataField = 'DESCRICAO'
@@ -97,5 +101,13 @@ inherited FrmTelaCadCargos: TFrmTelaCadCargos
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 352
+    Width = 784
+  end
+  inherited PAuxiliares: TPanel
+    Top = 325
+    Width = 780
   end
 end

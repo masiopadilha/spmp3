@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadFamiliaRecursos = class(TFrmTelaPaiParametros)
@@ -14,6 +14,8 @@ type
     EdtCodigo: TDBEdit;
     Label4: TLabel;
     EdtDescricao: TDBEdit;
+    ChbAtivoNF: TDBCheckBox;
+    ChbVisivelNF: TDBCheckBox;
     Label35: TLabel;
     EdtCampo1: TDBEdit;
     Label8: TLabel;
@@ -36,8 +38,6 @@ type
     EdtCampo10: TDBEdit;
     Label7: TLabel;
     EdtCampo11: TDBEdit;
-    ChbAtivoNF: TDBCheckBox;
-    ChbVisivelNF: TDBCheckBox;
     Label13: TLabel;
     EdtCampo12: TDBEdit;
     procedure BtnCancelarClick(Sender: TObject);
@@ -48,6 +48,8 @@ type
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,6 +73,7 @@ end;
 
 procedure TFrmTelaCadFamiliaRecursos.BtnConsultarClick(Sender: TObject);
 begin
+DM.FTabela_auxiliar := 8;
   inherited;
 if DM.qryFamRecursos.IsEmpty = False then
   begin
@@ -116,9 +119,8 @@ end;
 
 procedure TFrmTelaCadFamiliaRecursos.BtnImprimirClick(Sender: TObject);
 begin
-DM.FTabela_auxiliar := 8;
   inherited;
-
+DM.FDataSetRelat    := DmRelatorios.frxDBFamRecursos;
 end;
 
 procedure TFrmTelaCadFamiliaRecursos.BtnNovoClick(Sender: TObject);
@@ -180,11 +182,24 @@ DM.FDataSetParam.Params[0].AsString := EdtCodigo.Text;
 EdtCodigo.ReadOnly := True;
 end;
 
+procedure TFrmTelaCadFamiliaRecursos.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 8;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadFamiliaRecursos.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat    := DmRelatorios.frxDBFamRecursos;
+end;
+
 procedure TFrmTelaCadFamiliaRecursos.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadFamiliaRecursos.FormClose(Sender: TObject;
@@ -200,9 +215,7 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryFamRecursos;
 DM.FDataSourceParam := DM.dsFamRecursos;
-DM.FDataSetRelat    := DmRelatorios.frxDBFamRecursos;
 DM.FTela := 'CADFAMILIARECURSOS';
-DM.FTabela_auxiliar := 8;
 end;
 
 end.

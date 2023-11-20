@@ -6,47 +6,49 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
+  System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, JvExDBGrids, JvDBGrid,
+  Vcl.WinXCtrls;
 
 type
   TFrmTelaCadGrupoIndustrial = class(TFrmTelaPaiParametros)
     PCGrupoIndustrial: TPageControl;
     TSGrupo: TTabSheet;
-    TSUnidade: TTabSheet;
-    TSAdmCorp: TTabSheet;
-    TSAdmUnid: TTabSheet;
     Label4: TLabel;
     EdtDescGrupo: TDBEdit;
+    TSUnidade: TTabSheet;
     Label2: TLabel;
-    EdtCodUnidade: TDBEdit;
     Label1: TLabel;
+    LblGrupo: TDBText;
+    EdtCodUnidade: TDBEdit;
     EdtDescUnidade: TDBEdit;
     ChbAtivoNF: TDBCheckBox;
     ChbVisivelNF: TDBCheckBox;
     ChbTransf: TDBCheckBox;
+    TSAdmCorp: TTabSheet;
     Label3: TLabel;
     Label5: TLabel;
-    EdtCodAdmCorp: TDBEdit;
-    EdtDescAdmCorp: TDBEdit;
     Label6: TLabel;
     Label7: TLabel;
-    Label8: TLabel;
-    EdtCodAdmUnid: TDBEdit;
-    Label9: TLabel;
-    EdtDescAdmUnid: TDBEdit;
-    Label10: TLabel;
-    Label11: TLabel;
-    LblGrupo: TDBText;
     LblGrupoAdmCorp: TDBText;
     LblUnidAdmCorp: TDBText;
-    LblGrupoAdmUnid: TDBText;
-    LblUnidAdmUnid: TDBText;
+    Label13: TLabel;
+    EdtCodAdmCorp: TDBEdit;
+    EdtDescAdmCorp: TDBEdit;
     EdtSenhaAdmCorp: TEdit;
     EdtConfSenhaAdmCorp: TEdit;
+    TSAdmUnid: TTabSheet;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    LblGrupoAdmUnid: TDBText;
+    LblUnidAdmUnid: TDBText;
+    Label12: TLabel;
+    EdtCodAdmUnid: TDBEdit;
+    EdtDescAdmUnid: TDBEdit;
     EdtSenhaAdmUnid: TEdit;
     EdtConfSenhaAdmUnid: TEdit;
-    Label12: TLabel;
-    Label13: TLabel;
     procedure PCGrupoIndustrialChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -59,6 +61,7 @@ type
     procedure EdtCodAdmCorpExit(Sender: TObject);
     procedure EdtCodAdmUnidExit(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,7 +106,7 @@ case  PCGrupoIndustrial.TabIndex of
       LNovoUsuario := False;
     end;
 end;
-BtnSalvar.ImageIndex := 2;
+btnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadGrupoIndustrial.BtnConsultarClick(Sender: TObject);
@@ -163,7 +166,7 @@ end;
 procedure TFrmTelaCadGrupoIndustrial.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadGrupoIndustrial.BtnNovoClick(Sender: TObject);
@@ -283,7 +286,7 @@ PAuxiliares.Caption := EmptyStr;
         EdtCodAdmUnid.SetFocus;
       end;
   end;
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadGrupoIndustrial.BtnSalvarClick(Sender: TObject);
@@ -325,7 +328,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
         end;
       1:
         begin
@@ -379,7 +382,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
         end;
       2:
         begin
@@ -510,7 +513,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
 
           EdtSenhaAdmCorp.Clear;
           EdtConfSenhaAdmCorp.Clear;
@@ -639,7 +642,7 @@ if DM.RetornaDataHoraServidor = True then
           PAuxiliares.Font.Color := clGreen;
           PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
           ControleBotoes(2);
-          BtnSalvar.ImageIndex := 2;
+          BtnSalvar.ImageName := 'Operacional\salvar';
 
           EdtSenhaAdmUnid.Clear;
           EdtConfSenhaAdmUnid.Clear;
@@ -657,25 +660,80 @@ BtnConsultar.Enabled := True;
 BtnImprimir.Enabled := True;
 end;
 
+procedure TFrmTelaCadGrupoIndustrial.ButConsultarClick(Sender: TObject);
+begin
+LNovoUsuario := False;
+case PCGrupoIndustrial.TabIndex of
+  0: DM.FTabela_auxiliar := 0;
+  1:
+    begin
+      if DM.qryGruposCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUM GRUPO SELECIONADO!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[0] := DM.qryGruposCODIGO.AsString;
+      DM.FTabela_auxiliar := 1;
+    end;
+  2:
+    begin
+      if DM.qryGruposCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUM GRUPO SELECIONADO!!!';
+          Exit;
+        end;
+      if DM.qryUnidadesCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA UNIDADE SELECIONADA!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[0] := DM.qryUnidadesCODIGO.AsString;
+      DM.FTabela_auxiliar := 2;
+    end;
+  3:
+    begin
+      if DM.qryGruposCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUM GRUPO SELECIONADO!!!';
+          Exit;
+        end;
+      if DM.qryUnidadesCODIGO.AsString = EmptyStr then
+        begin
+          PAuxiliares.Font.Color := clBlack;
+          PAuxiliares.Caption := 'NENHUMA UNIDADE SELECIONADA!!!';
+          Exit;
+        end;
+      DM.FParamAuxiliar[0] := DM.qryUnidadesCODIGO.AsString;
+      DM.FTabela_auxiliar := 3;
+    end;
+end;
+  inherited;
+
+end;
+
 procedure TFrmTelaCadGrupoIndustrial.EdtCodAdmCorpExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadGrupoIndustrial.EdtCodAdmUnidExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadGrupoIndustrial.EdtCodUnidadeExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 if (DM.VerificaDuplo(EdtCodUnidade.Text) = True) and (DM.FAlterando = False) then
   begin
     EdtCodUnidade.SetFocus;

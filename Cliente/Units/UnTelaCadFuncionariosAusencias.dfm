@@ -1,8 +1,18 @@
 inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
   Caption = 'Aus'#234'ncias do Funcion'#225'rio'
-  PixelsPerInch = 96
+  ClientHeight = 374
+  ClientWidth = 788
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 784
+    inherited LAlteracao: TLabel
+      Left = 655
+      ExplicitLeft = 655
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 677
+      ExplicitLeft = 677
+    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsFuncionariosAusencias
     end
@@ -15,11 +25,21 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
     inherited LblUsuCad: TDBText
       DataSource = DM.dsFuncionariosAusencias
     end
+    inherited LCadastro: TLabel
+      Left = 553
+      ExplicitLeft = 553
+    end
+    inherited LCadastroPor: TLabel
+      Left = 515
+      ExplicitLeft = 515
+    end
   end
   inherited PCentro: TPanel
+    Width = 784
+    Height = 251
     object LblDataConsulta: TLabel
-      Left = 387
-      Top = 235
+      Left = 311
+      Top = 225
       Width = 91
       Height = 16
       Alignment = taCenter
@@ -27,32 +47,32 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
       Visible = False
     end
     object Label2: TLabel
-      Left = 99
-      Top = 90
+      Left = 64
+      Top = 78
       Width = 42
       Height = 16
       Alignment = taRightJustify
       Caption = 'Motivo:'
     end
     object Label1: TLabel
-      Left = 106
-      Top = 119
+      Left = 64
+      Top = 125
       Width = 35
       Height = 16
       Alignment = taRightJustify
       Caption = 'In'#237'cio:'
     end
     object Label3: TLabel
-      Left = 115
-      Top = 151
+      Left = 171
+      Top = 125
       Width = 26
       Height = 16
       Alignment = taRightJustify
       Caption = 'Fim:'
     end
     object PPeriodo: TPanel
-      Left = 387
-      Top = 215
+      Left = 311
+      Top = 205
       Width = 194
       Height = 18
       Align = alCustom
@@ -99,8 +119,8 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
       end
     end
     object CalendarGrid: TStringGrid
-      Left = 386
-      Top = 88
+      Left = 310
+      Top = 78
       Width = 193
       Height = 125
       BorderStyle = bsNone
@@ -135,8 +155,8 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
         27)
     end
     object EdtDescricao: TDBEdit
-      Left = 145
-      Top = 88
+      Left = 64
+      Top = 95
       Width = 230
       Height = 24
       DataField = 'MOTIVO'
@@ -146,8 +166,8 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
       OnKeyPress = FormKeyPress
     end
     object EdtInicio: TJvDBDateEdit
-      Left = 145
-      Top = 119
+      Left = 64
+      Top = 142
       Width = 101
       Height = 24
       DataField = 'INICIO'
@@ -157,8 +177,8 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtFim: TJvDBDateEdit
-      Left = 145
-      Top = 150
+      Left = 171
+      Top = 142
       Width = 101
       Height = 24
       DataField = 'FIM'
@@ -167,5 +187,13 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
       TabOrder = 4
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 355
+    Width = 788
+  end
+  inherited PAuxiliares: TPanel
+    Top = 328
+    Width = 784
   end
 end

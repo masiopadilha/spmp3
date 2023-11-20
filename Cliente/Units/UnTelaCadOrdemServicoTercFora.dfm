@@ -1,16 +1,16 @@
 inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   Caption = 'Servi'#231'os Terceirizados fora da Unidade'
-  ClientHeight = 624
+  ClientHeight = 664
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      Left = 691
+      Left = 695
       ExplicitLeft = 691
     end
     inherited LCadastroPor: TLabel
-      Left = 647
+      Left = 651
       ExplicitLeft = 647
     end
     inherited LblDataCad: TDBText
@@ -24,11 +24,11 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       ExplicitLeft = 733
     end
     inherited LAlteracao: TLabel
-      Left = 853
+      Left = 857
       ExplicitLeft = 853
     end
     inherited LAlteradoPor: TLabel
-      Left = 827
+      Left = 831
       ExplicitLeft = 827
     end
     inherited LblDataAlt: TDBText
@@ -44,7 +44,6 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 91
       Top = 31
@@ -285,7 +284,6 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 391
-    ExplicitWidth = 1004
     ExplicitHeight = 391
     inherited Label2: TLabel
       Width = 194
@@ -413,7 +411,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Servi'#231'o'
-          Width = 199
+          Width = 308
           Visible = True
         end
         item
@@ -492,7 +490,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Servi'#231'o'
-          Width = 199
+          Width = 323
           Visible = True
         end
         item
@@ -531,7 +529,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Servi'#231'o'
-          Width = 199
+          Width = 311
           Visible = True
         end
         item
@@ -562,22 +560,16 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     ExplicitHeight = 0
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 645
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 629
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 589
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
   end
   inherited TimerLetreiro: TTimer
     Left = 442

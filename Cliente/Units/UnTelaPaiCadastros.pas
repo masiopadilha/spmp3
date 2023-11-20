@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.DateUtils, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Data.DB, DataSnap.DBClient,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, Data.SqlExpr, FireDAC.Comp.Client,
-  Vcl.Buttons;
+  Vcl.Buttons, System.ImageList, Vcl.ImgList, Vcl.VirtualImageList,
+  Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFrmTelaPaiCadastros = class(TForm)
@@ -49,14 +50,14 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    BtnNovo: TButton;
-    BtnSalvar: TButton;
-    BtnCancelar: TButton;
-    BtnExcluir: TButton;
-    BtnConsultar: TButton;
-    BtnImprimir: TButton;
-    BtnAjuda: TButton;
-    BtnSair: TButton;
+    BtnNovo1: TButton;
+    BtnSalvar1: TButton;
+    BtnCancelar1: TButton;
+    BtnExcluir1: TButton;
+    BtnConsultar1: TButton;
+    BtnImprimir1: TButton;
+    BtnAjuda1: TButton;
+    BtnSair1: TButton;
     Oculto1: TMenuItem;
     Botao11: TMenuItem;
     Botao21: TMenuItem;
@@ -81,15 +82,16 @@ type
     Button6: TButton;
     ActionList1: TActionList;
     TabNextTab1: TNextTab;
-    BtnImagem: TButton;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
-    BitBtn6: TBitBtn;
-    BitBtn7: TBitBtn;
-    BitBtn8: TBitBtn;
+    BtnImagem1: TButton;
+    btnNovo: TBitBtn;
+    btnSalvar: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnExcluir: TBitBtn;
+    btnConsultar: TBitBtn;
+    btnImprimir: TBitBtn;
+    Imagem1: TMenuItem;
+    btnAjuda: TBitBtn;
+    btnSair: TBitBtn;
     procedure MostrarValorHint;
     procedure ControleBotoes(Indice: SmallInt);
 
@@ -109,17 +111,9 @@ type
     procedure MmCancelarClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
-    procedure BtnSairClick(Sender: TObject);
-    procedure BtnNovoClick(Sender: TObject);
     procedure BtnMaisClick(Sender: TObject);
-    procedure BtnExcluirClick(Sender: TObject);
-    procedure BtnConsultarClick(Sender: TObject);
-    procedure BtnCancelarClick(Sender: TObject);
-    procedure BtnAjudaClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure BtnSalvarClick(Sender: TObject);
-    procedure BtnImprimirClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Botao11Click(Sender: TObject);
     procedure Botao21Click(Sender: TObject);
@@ -131,6 +125,15 @@ type
     procedure Completo1Click(Sender: TObject);
     procedure TabNextTab1AfterTabChange(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure btnNovoClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure btnConsultarClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure Imagem1Click(Sender: TObject);
+    procedure btnAjudaClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -244,8 +247,8 @@ end;
 
 procedure TFrmTelaPaiCadastros.TabNextTab1AfterTabChange(Sender: TObject);
 begin
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaPaiCadastros.TimerAlertasTimer(Sender: TObject);
@@ -261,72 +264,14 @@ else
   LblAlertas.left := PAlertas.width;
 end;
 
-procedure TFrmTelaPaiCadastros.Botao11Click(Sender: TObject);
-begin
-Button1.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.Botao21Click(Sender: TObject);
-begin
-Button2.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.Botao31Click(Sender: TObject);
-begin
-Button3.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.Botao41Click(Sender: TObject);
-begin
-Button4.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.Botao51Click(Sender: TObject);
-begin
-Button5.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.Botao61Click(Sender: TObject);
-begin
-Button6.OnClick(Sender);
-end;
-
-procedure TFrmTelaPaiCadastros.BtnAjudaClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnAjudaClick(Sender: TObject);
 begin
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := EmptyStr;
 HtmlHelp(0, Pchar(ExtractFilePath(Application.ExeName) + 'Ajuda.chm' + '::/C/SPMP-Fontes/SPMP3/Manual/HTML/'+Screen.ActiveForm.Name+'/'+Screen.ActiveForm.Name+'.html'), $0000,0);
 end;
 
-procedure TFrmTelaPaiCadastros.BtnCancelarClick(Sender: TObject);
-begin
-PAuxiliares.Font.Color := clBlue;
-PAuxiliares.Caption    := '';
-
-if DM.FDataSetParam.Active = False then Exit;
-
-with DM.FDataSetParam as TFDQuery do
-  begin
-    DM.FDataSetParam.Cancel;
-    if DM.FDataSetParam.IsEmpty = True then
-      begin
-        ControleBotoes(0);
-        DM.FAlterando := False;
-        DM.FDataSetParam.Close;
-      end
-    else
-      begin
-        ControleBotoes(2);
-        DM.FAlterando := True;
-        DM.FDataSetParam.Edit;
-      end;
-  end;
-PAuxiliares.Font.Color := clGray;
-PAuxiliares.Caption := EmptyStr;
-BtnSalvar.ImageIndex := 2;
-end;
-
-procedure TFrmTelaPaiCadastros.BtnConsultarClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnConsultarClick(Sender: TObject);
 var
 c:SmallInt;
 begin
@@ -376,10 +321,76 @@ DM.FAlterando := True;
 if DM.FDataSetParam.IsEmpty = False then
    ControleBotoes(2)
 else
-   ControleBotoes(0);
+   ControleBotoes(0);end;
+
+procedure TFrmTelaPaiCadastros.Botao11Click(Sender: TObject);
+begin
+Button1.OnClick(Sender);
 end;
 
-procedure TFrmTelaPaiCadastros.BtnExcluirClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.Botao21Click(Sender: TObject);
+begin
+Button2.OnClick(Sender);
+end;
+
+procedure TFrmTelaPaiCadastros.Botao31Click(Sender: TObject);
+begin
+Button3.OnClick(Sender);
+end;
+
+procedure TFrmTelaPaiCadastros.Botao41Click(Sender: TObject);
+begin
+Button4.OnClick(Sender);
+end;
+
+procedure TFrmTelaPaiCadastros.Botao51Click(Sender: TObject);
+begin
+Button5.OnClick(Sender);
+end;
+
+procedure TFrmTelaPaiCadastros.Botao61Click(Sender: TObject);
+begin
+Button6.OnClick(Sender);
+end;
+
+procedure TFrmTelaPaiCadastros.BtnMaisClick(Sender: TObject);
+begin
+  Try
+    ObservacoesInputBox('SPMP','Observações:');
+  Except
+    Application.MessageBox('Não foi possível abrir a caixa de diálogo de mais informações!','SPMP', MB_OK + MB_ICONERROR);
+  End;
+end;
+
+procedure TFrmTelaPaiCadastros.btnCancelarClick(Sender: TObject);
+begin
+PAuxiliares.Font.Color := clBlue;
+PAuxiliares.Caption    := '';
+
+if DM.FDataSetParam.Active = False then Exit;
+
+with DM.FDataSetParam as TFDQuery do
+  begin
+    DM.FDataSetParam.Cancel;
+    if DM.FDataSetParam.IsEmpty = True then
+      begin
+        ControleBotoes(0);
+        DM.FAlterando := False;
+        DM.FDataSetParam.Close;
+      end
+    else
+      begin
+        ControleBotoes(2);
+        DM.FAlterando := True;
+        DM.FDataSetParam.Edit;
+      end;
+  end;
+PAuxiliares.Font.Color := clGray;
+PAuxiliares.Caption := EmptyStr;
+btnSalvar.ImageName := 'Operacional\salvar';
+end;
+
+procedure TFrmTelaPaiCadastros.btnExcluirClick(Sender: TObject);
 begin
 PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption    := '';
@@ -418,10 +429,10 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
         End;
       end;
   end;
-BtnSalvar.ImageIndex := 2;
+btnSalvar.ImageName := 'Operacional\salvar';
 end;
 
-procedure TFrmTelaPaiCadastros.BtnImprimirClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnImprimirClick(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
@@ -431,16 +442,7 @@ PAuxiliares.Caption := EmptyStr;
 PopupMenuRelat.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
 end;
 
-procedure TFrmTelaPaiCadastros.BtnMaisClick(Sender: TObject);
-begin
-  Try
-    ObservacoesInputBox('SPMP','Observações:');
-  Except
-    Application.MessageBox('Não foi possível abrir a caixa de diálogo de mais informações!','SPMP', MB_OK + MB_ICONERROR);
-  End;
-end;
-
-procedure TFrmTelaPaiCadastros.BtnNovoClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnNovoClick(Sender: TObject);
 var
 c:SmallInt;
 begin
@@ -481,16 +483,16 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageIndex := 2;
+btnSalvar.ImageName := 'Operacional\salvar';
 end;
 
-procedure TFrmTelaPaiCadastros.BtnSairClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnSairClick(Sender: TObject);
 begin
 //BtnCancelar.OnClick(Sender);
 Close;
 end;
 
-procedure TFrmTelaPaiCadastros.BtnSalvarClick(Sender: TObject);
+procedure TFrmTelaPaiCadastros.btnSalvarClick(Sender: TObject);
 begin
 PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption    := '';
@@ -535,7 +537,7 @@ PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageIndex := 2;
+btnSalvar.ImageName := 'Operacional\salvar';
 DM.MSGAguarde('', False);
 end;
 
@@ -628,11 +630,11 @@ begin
     0://Vazio
       begin
         BtnNovo.Enabled      := True;
-        BtnSalvar.Enabled    := False;
+        btnSalvar.Enabled    := False;
         BtnCancelar.Enabled  := False;
         BtnExcluir.Enabled   := False;
         BtnConsultar.Enabled := True;
-        BtnImagem.Enabled    := False;
+        //ButImagem.Enabled    := False;
         BtnSair.Enabled      := True;
         Button1.Enabled      := True;
         Button2.Enabled      := True;
@@ -644,11 +646,11 @@ begin
     1://Incluindo
       begin
         BtnNovo.Enabled      := False;
-        BtnSalvar.Enabled    := True;
+        btnSalvar.Enabled    := True;
         BtnCancelar.Enabled  := True;
         BtnExcluir.Enabled   := False;
         BtnConsultar.Enabled := False;
-        BtnImagem.Enabled    := False;
+        //ButImagem.Enabled    := False;
         BtnSair.Enabled      := False;
 
         Button1.Enabled      := False;
@@ -661,11 +663,11 @@ begin
     2://Consultando_Editando
       begin
         BtnNovo.Enabled      := True;
-        BtnSalvar.Enabled    := True;
+        btnSalvar.Enabled    := True;
         BtnCancelar.Enabled  := True;
         BtnExcluir.Enabled   := True;
         BtnConsultar.Enabled := True;
-        BtnImagem.Enabled    := True;
+        //ButImagem.Enabled    := True;
         BtnSair.Enabled      := True;
 
         Button1.Enabled      := True;
@@ -759,11 +761,16 @@ procedure TFrmTelaPaiCadastros.FormMouseMove(Sender: TObject;
 begin
 //if DM.FDConnSPMP3.ConnectionState <> csStateClosed then
 //  begin
-//    if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-//    else BtnSalvar.ImageIndex := 2;
+//if DM.FDataSetParam.Modified = True then btnSalvar.ImageName := 'Operacional\naosalvo'
+//else btnSalvar.ImageName := 'Operacional\salvar';
 //  end;
 
 MostrarValorHint;
+end;
+
+procedure TFrmTelaPaiCadastros.Imagem1Click(Sender: TObject);
+begin
+BtnImagem1.OnClick(Sender);
 end;
 
 procedure TFrmTelaPaiCadastros.Individual1Click(Sender: TObject);
@@ -780,7 +787,7 @@ case DM.FTabela_auxiliar of
   361: DmRelatorios.frxRPecasRepIndividual.ShowReport();
   401: DmRelatorios.frxRSolicTrabalhoIndividual.ShowReport();
   411: DmRelatorios.frxRPlanoTrabalhoIndividual.ShowReport();
-  451: DmRelatorios.frxROrdemServico.ShowReport();   //masio-temp
+  451: DmRelatorios.frxROrdemServico.ShowReport();
   461: DmRelatorios.frxRRecrusosIndividual.ShowReport();
   641: DmRelatorios.frxRLubrificantesIndividual.ShowReport();
   651: DmRelatorios.frxROrdemServicoTercFora.ShowReport();
@@ -828,8 +835,8 @@ end;
 
 procedure TFrmTelaPaiCadastros.MmSalvarClick(Sender: TObject);
 begin
-BtnSalvar.SetFocus;
-BtnSalvar.OnClick(Sender);
+btnSalvar.SetFocus;
+btnSalvar.OnClick(Sender);
 end;
 
 end.

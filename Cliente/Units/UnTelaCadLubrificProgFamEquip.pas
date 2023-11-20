@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB,
   Vcl.Mask, JvExStdCtrls, JvRichEdit, JvDBRichEdit, System.Actions,
-  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons, System.ImageList,
+  Vcl.ImgList, Vcl.VirtualImageList;
 
 type
   TFrmTelaCadLubrificProgFamEquip = class(TFrmTelaPaiCadastros)
@@ -77,6 +78,7 @@ type
     procedure BtnManutencaoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure EdtCodLubrificacaoKeyPress(Sender: TObject; var Key: Char);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -354,6 +356,21 @@ if DM.qryLubrificProgFamEquipPlanoTrab.IsEmpty = False then
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadLubrificProgFamEquip.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar  := 35;
+  inherited;
+if DM.qryLubrificProgFamEquip.IsEmpty = False then
+  begin
+    DM.qryLubrificProgFamEquipPartes.Close;
+//    DM.qryLubrificProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
+//    DM.qryLubrificProgFamEquipPartes.Params[1].AsString := DM.qryLubrificProgFamEquipCODIGO.AsString;
+    DM.qryLubrificProgFamEquipPartes.Open;
+    DM.qryLubrificProgFamEquipItensTodos.Open;
+    DM.qryLubrificProgFamEquipPlanoTrab.Open;
+  end;
+end;
+
 procedure TFrmTelaCadLubrificProgFamEquip.Button1Click(Sender: TObject);
 begin
   inherited;
@@ -440,8 +457,8 @@ procedure TFrmTelaCadLubrificProgFamEquip.EdtCodLubrificacaoExit(
   Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.EdtCodLubrificacaoKeyPress(
@@ -491,7 +508,6 @@ begin
 DM.FTela := 'CADLUBRIFICPROG';
 DM.FDataSetParam    := DM.qryLubrificProgFamEquip;
 DM.FDataSourceParam := DM.dsLubrificProgFamEquip;
-DM.FTabela_auxiliar  := 35;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.FormKeyPress(Sender: TObject;

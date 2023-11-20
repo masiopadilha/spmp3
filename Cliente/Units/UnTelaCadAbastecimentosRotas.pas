@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.Param,
+  Vcl.Buttons;
 
 type
   TFrmTelaCadAbastecimentosRotas = class(TFrmTelaPaiParametros)
@@ -67,7 +68,7 @@ PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption := 'NOVO REGISTRO';
 DM.FAlterando := False;
 ControleBotoes(1);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAbastecimentosRotas.BtnSalvarClick(Sender: TObject);
@@ -122,7 +123,7 @@ DM.qryAbastecimentosRotas.Params[1].AsInteger := DM.qryAbastecimentosRotasCODIGO
 
 DM.FAlterando := True;
 ControleBotoes(2);
-BtnSalvar.ImageIndex := 2;
+BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadAbastecimentosRotas.FormClose(Sender: TObject;

@@ -1,17 +1,8 @@
 inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
   Caption = 'Viagens'
-  ClientHeight = 424
-  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
     ParentFont = False
-    inherited LAlteracao: TLabel
-      Left = 494
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 516
-    end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsViagens
     end
@@ -24,19 +15,11 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
     inherited LblUsuCad: TDBText
       DataSource = DM.dsViagens
     end
-    inherited LCadastro: TLabel
-      Left = 388
-    end
-    inherited LCadastroPor: TLabel
-      Left = 350
-    end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 323
     object Label24: TLabel
-      Left = 146
-      Top = 41
+      Left = 64
+      Top = 37
       Width = 31
       Height = 16
       Alignment = taRightJustify
@@ -49,8 +32,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label25: TLabel
-      Left = 442
-      Top = 42
+      Left = 328
+      Top = 58
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -63,8 +46,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label14: TLabel
-      Left = 140
-      Top = 72
+      Left = 64
+      Top = 82
       Width = 37
       Height = 16
       Alignment = taRightJustify
@@ -77,8 +60,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label23: TLabel
-      Left = 311
-      Top = 73
+      Left = 192
+      Top = 105
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -91,8 +74,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label11: TLabel
-      Left = 115
-      Top = 103
+      Left = 213
+      Top = 82
       Width = 62
       Height = 16
       Alignment = taRightJustify
@@ -105,15 +88,15 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label27: TLabel
-      Left = 103
-      Top = 134
+      Left = 344
+      Top = 82
       Width = 74
       Height = 16
       Caption = 'Tanque (%):'
     end
     object Label29: TLabel
-      Left = 538
-      Top = 72
+      Left = 192
+      Top = 150
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -126,8 +109,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label15: TLabel
-      Left = 349
-      Top = 70
+      Left = 64
+      Top = 127
       Width = 55
       Height = 16
       Alignment = taRightJustify
@@ -140,8 +123,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 342
-      Top = 103
+      Left = 213
+      Top = 127
       Width = 62
       Height = 16
       Alignment = taRightJustify
@@ -154,45 +137,45 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object Label28: TLabel
-      Left = 330
-      Top = 134
+      Left = 344
+      Top = 127
       Width = 74
       Height = 16
       Caption = 'Tanque (%):'
     end
     object Label9: TLabel
-      Left = 105
-      Top = 166
+      Left = 64
+      Top = 172
       Width = 72
       Height = 16
       Alignment = taRightJustify
       Caption = 'Urbano (%):'
     end
     object Label10: TLabel
-      Left = 313
-      Top = 166
+      Left = 217
+      Top = 172
       Width = 91
       Height = 16
       Alignment = taRightJustify
       Caption = 'Rodovi'#225'rio (%):'
     end
     object Label13: TLabel
-      Left = 86
-      Top = 196
+      Left = 344
+      Top = 172
       Width = 91
       Height = 16
       Alignment = taRightJustify
       Caption = 'Carregado (%):'
     end
     object LTotal: TLabel
-      Left = 339
+      Left = 500
       Top = 197
       Width = 65
       Height = 16
       Caption = 'Total (km):'
     end
     object LblTotalPercorrido: TDBText
-      Left = 408
+      Left = 569
       Top = 198
       Width = 118
       Height = 16
@@ -207,8 +190,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       ParentFont = False
     end
     object EdtRota: TDBEdit
-      Left = 181
-      Top = 39
+      Left = 64
+      Top = 54
       Width = 230
       Height = 24
       TabStop = False
@@ -221,8 +204,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       OnKeyPress = FormKeyPress
     end
     object BtnRota: TButton
-      Left = 412
-      Top = 36
+      Left = 297
+      Top = 51
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -234,8 +217,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       OnClick = BtnRotaClick
     end
     object EdtDataPartida: TJvDBDateEdit
-      Left = 181
-      Top = 70
+      Left = 64
+      Top = 99
       Width = 125
       Height = 24
       DataField = 'DATAPARTIDA'
@@ -250,8 +233,8 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       TabOrder = 2
     end
     object EdtTanqueSaida: TDBEdit
-      Left = 181
-      Top = 132
+      Left = 344
+      Top = 99
       Width = 125
       Height = 24
       DataField = 'TANQUESAIDA'
@@ -263,13 +246,13 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       Font.Style = []
       MaxLength = 14
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtDataChegada: TJvDBDateEdit
-      Left = 408
-      Top = 70
+      Left = 64
+      Top = 144
       Width = 125
       Height = 24
       DataField = 'DATACHEGADA'
@@ -281,32 +264,14 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       Font.Style = []
       ParentFont = False
       ShowNullDate = False
-      TabOrder = 4
+      TabOrder = 5
     end
     object EdtChegada: TDBEdit
-      Left = 408
-      Top = 101
+      Left = 213
+      Top = 144
       Width = 125
       Height = 24
       DataField = 'CONTADORCHEGADA'
-      DataSource = DM.dsViagens
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      MaxLength = 14
-      ParentFont = False
-      TabOrder = 5
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
-    end
-    object EdtTanqueChegada: TDBEdit
-      Left = 408
-      Top = 132
-      Width = 125
-      Height = 24
-      DataField = 'TANQUECHEGADA'
       DataSource = DM.dsViagens
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -319,45 +284,63 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtUrbano: TDBEdit
-      Left = 181
-      Top = 163
+    object EdtTanqueChegada: TDBEdit
+      Left = 344
+      Top = 144
       Width = 125
       Height = 24
-      DataField = 'URBANO'
+      DataField = 'TANQUECHEGADA'
       DataSource = DM.dsViagens
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
       MaxLength = 14
+      ParentFont = False
       TabOrder = 7
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtRodoviario: TDBEdit
-      Left = 408
-      Top = 163
+    object EdtUrbano: TDBEdit
+      Left = 64
+      Top = 189
       Width = 125
       Height = 24
-      DataField = 'RODOVIARIO'
+      DataField = 'URBANO'
       DataSource = DM.dsViagens
       MaxLength = 14
       TabOrder = 8
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
-    object EdtCarregado: TDBEdit
-      Left = 181
-      Top = 195
+    object EdtRodoviario: TDBEdit
+      Left = 213
+      Top = 189
       Width = 125
       Height = 24
-      DataField = 'CARREGADO'
+      DataField = 'RODOVIARIO'
       DataSource = DM.dsViagens
       MaxLength = 14
       TabOrder = 9
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+    object EdtCarregado: TDBEdit
+      Left = 344
+      Top = 189
+      Width = 125
+      Height = 24
+      DataField = 'CARREGADO'
+      DataSource = DM.dsViagens
+      MaxLength = 14
+      TabOrder = 10
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
     object EdtSaida: TDBEdit
-      Left = 181
-      Top = 100
+      Left = 213
+      Top = 99
       Width = 125
       Height = 24
       DataField = 'CONTADORSAIDA'
@@ -369,15 +352,15 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       Font.Style = []
       MaxLength = 14
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 3
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object GBCombustivel: TGroupBox
-      Left = 88
-      Top = 230
+      Left = 489
+      Top = 51
       Width = 220
-      Height = 58
+      Height = 67
       Caption = 'Combustivel:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -446,10 +429,10 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       end
     end
     object GBLubrificante: TGroupBox
-      Left = 314
-      Top = 230
+      Left = 489
+      Top = 124
       Width = 220
-      Height = 58
+      Height = 67
       Caption = 'Lubrificante:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -517,13 +500,5 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
         ParentFont = False
       end
     end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 405
-    Width = 628
-  end
-  inherited PAuxiliares: TPanel
-    Top = 378
-    Width = 624
   end
 end

@@ -6,17 +6,17 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiParametros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
 
 type
   TFrmTelaCadContadores = class(TFrmTelaPaiParametros)
+    Label6: TLabel;
+    EdtProgramacao: TDBEdit;
+    BtnProgramacao: TButton;
     Label2: TLabel;
     EdtCodigo: TDBEdit;
     Label4: TLabel;
     EdtDescricao: TDBEdit;
-    Label6: TLabel;
-    EdtProgramacao: TDBEdit;
-    BtnProgramacao: TButton;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -26,6 +26,8 @@ type
     procedure BtnImprimirClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnProgramacaoClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
+    procedure butImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,9 +59,8 @@ end;
 
 procedure TFrmTelaCadContadores.BtnImprimirClick(Sender: TObject);
 begin
-DM.FTabela_auxiliar := 39;
   inherited;
-
+DM.FDataSetRelat := DmRelatorios.frxDBContadores;
 end;
 
 procedure TFrmTelaCadContadores.BtnNovoClick(Sender: TObject);
@@ -109,7 +110,6 @@ else
   end;
 DM.FDataSetParam    := DM.qryContadores;
 DM.FDataSourceParam := DM.dsContadores;
-DM.FDataSetRelat    := DmRelatorios.frxDBContadores;
 DM.FTela            := 'CADPONTOSINSPECAO';
 DM.FTabela_auxiliar := 39;
 end;
@@ -151,11 +151,24 @@ DM.qryContadores.Params[1].AsString := DM.FCodEmpresa;
   inherited;
 end;
 
+procedure TFrmTelaCadContadores.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 39;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadContadores.butImprimirClick(Sender: TObject);
+begin
+  inherited;
+DM.FDataSetRelat := DmRelatorios.frxDBContadores;
+end;
+
 procedure TFrmTelaCadContadores.EdtCodigoExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadContadores.FormClose(Sender: TObject;
@@ -169,9 +182,7 @@ procedure TFrmTelaCadContadores.FormCreate(Sender: TObject);
 begin
   inherited;
 DM.FDataSetParam := DM.qryContadores;
-DM.FDataSetRelat := DmRelatorios.frxDBContadores;
 DM.FTela := 'CADPONTOSINSPECAO';
-DM.FTabela_auxiliar := 39;
 end;
 
 end.

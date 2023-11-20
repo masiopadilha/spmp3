@@ -1,16 +1,14 @@
 inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
   Caption = 'Produ'#231#227'o Mensal'
-  ClientHeight = 424
-  ClientWidth = 628
+  ClientHeight = 371
+  ClientWidth = 784
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
+    Width = 780
     inherited LAlteracao: TLabel
-      Left = 494
       Visible = False
     end
     inherited LAlteradoPor: TLabel
-      Left = 516
       Visible = False
     end
     inherited LblDataAlt: TDBText
@@ -30,67 +28,65 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       Visible = False
     end
     inherited LCadastro: TLabel
-      Left = 388
       Visible = False
     end
     inherited LCadastroPor: TLabel
-      Left = 350
       Visible = False
     end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 323
+    Width = 780
+    Height = 248
     object Label32: TLabel
-      Left = 203
-      Top = 60
+      Left = 64
+      Top = 73
       Width = 30
       Height = 16
       Alignment = taRightJustify
       Caption = 'Tipo:'
     end
     object Label29: TLabel
-      Left = 184
-      Top = 90
+      Left = 195
+      Top = 73
       Width = 49
       Height = 16
       Alignment = taRightJustify
       Caption = 'Produto:'
     end
     object Label30: TLabel
-      Left = 183
-      Top = 121
+      Left = 431
+      Top = 73
       Width = 50
       Height = 16
       Alignment = taRightJustify
       Caption = 'Qtde (t):'
     end
     object Label5: TLabel
-      Left = 201
-      Top = 151
+      Left = 64
+      Top = 119
       Width = 32
       Height = 16
       Alignment = taRightJustify
       Caption = #193'rea:'
     end
     object Label1: TLabel
-      Left = 206
-      Top = 182
+      Left = 269
+      Top = 119
       Width = 28
       Height = 16
       Alignment = taRightJustify
       Caption = 'M'#234's:'
     end
     object Label2: TLabel
-      Left = 333
-      Top = 182
+      Left = 350
+      Top = 119
       Width = 27
       Height = 16
       Caption = 'Ano:'
     end
     object CBTipo: TDBComboBox
-      Left = 238
-      Top = 59
+      Left = 64
+      Top = 91
       Width = 125
       Height = 22
       Style = csOwnerDrawFixed
@@ -103,8 +99,8 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtProduto: TDBEdit
-      Left = 238
-      Top = 88
+      Left = 195
+      Top = 91
       Width = 230
       Height = 24
       DataField = 'PRODFABRICADO'
@@ -113,8 +109,8 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtQtde: TDBEdit
-      Left = 238
-      Top = 119
+      Left = 431
+      Top = 91
       Width = 125
       Height = 24
       DataField = 'TOTAL'
@@ -124,9 +120,9 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnKeyPress = FormKeyPress
     end
     object EdtArea: TDBEdit
-      Left = 238
-      Top = 150
-      Width = 230
+      Left = 64
+      Top = 137
+      Width = 166
       Height = 24
       Color = clBtnFace
       Ctl3D = True
@@ -140,8 +136,8 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnKeyPress = FormKeyPress
     end
     object BtnArea: TButton
-      Left = 469
-      Top = 147
+      Left = 234
+      Top = 135
       Width = 28
       Height = 28
       DisabledImageIndex = 14
@@ -152,8 +148,8 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnClick = BtnAreaClick
     end
     object CBMes: TDBComboBox
-      Left = 238
-      Top = 181
+      Left = 269
+      Top = 138
       Width = 75
       Height = 22
       Style = csOwnerDrawFixed
@@ -176,8 +172,8 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
       OnExit = TabNextTab1AfterTabChange
     end
     object CBAno: TDBComboBox
-      Left = 364
-      Top = 181
+      Left = 350
+      Top = 138
       Width = 75
       Height = 22
       Style = csOwnerDrawFixed
@@ -205,11 +201,11 @@ inherited FrmTelaCadInfMensalProducaoMensal: TFrmTelaCadInfMensalProducaoMensal
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 405
-    Width = 628
+    Top = 352
+    Width = 784
   end
   inherited PAuxiliares: TPanel
-    Top = 378
-    Width = 624
+    Top = 325
+    Width = 780
   end
 end

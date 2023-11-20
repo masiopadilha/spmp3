@@ -3,12 +3,14 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
+      Left = 661
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
+      Left = 683
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -43,12 +45,14 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       DataSource = DM.dsUsuarios
     end
     inherited LCadastro: TLabel
+      Left = 558
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
+      Left = 520
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -56,54 +60,52 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
     end
   end
   inherited PCentro: TPanel
-    ExplicitWidth = 618
-    ExplicitHeight = 332
     object Label1: TLabel
-      Left = 172
-      Top = 62
+      Left = 64
+      Top = 73
       Width = 57
       Height = 16
       Caption = 'Matr'#237'cula:'
     end
     object Label2: TLabel
-      Left = 195
-      Top = 89
+      Left = 454
+      Top = 73
       Width = 34
       Height = 16
       Caption = 'Perfil:'
     end
     object Label3: TLabel
-      Left = 185
-      Top = 116
+      Left = 64
+      Top = 129
       Width = 44
       Height = 16
       Caption = 'C'#243'digo:'
       FocusControl = EdtCodigo
     end
     object Label6: TLabel
-      Left = 188
-      Top = 170
+      Left = 324
+      Top = 129
       Width = 41
       Height = 16
       Caption = 'Senha:'
     end
     object Label7: TLabel
-      Left = 123
-      Top = 197
+      Left = 454
+      Top = 129
       Width = 106
       Height = 16
       Caption = 'Confirme a senha:'
     end
     object Label4: TLabel
       Left = 194
-      Top = 143
+      Top = 129
       Width = 35
       Height = 16
       Caption = 'Login:'
       FocusControl = EdtLogin
     end
     object Label12: TLabel
-      Left = 363
+      Left = 324
       Top = 174
       Width = 53
       Height = 11
@@ -116,8 +118,8 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 190
-      Top = 225
+      Left = 584
+      Top = 129
       Width = 39
       Height = 16
       Alignment = taRightJustify
@@ -125,20 +127,20 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
     end
     object EdtCodigo: TDBEdit
       Tag = 555
-      Left = 234
-      Top = 114
+      Left = 64
+      Top = 147
       Width = 125
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
       DataSource = DM.dsUsuarios
-      TabOrder = 3
+      TabOrder = 5
       OnExit = EdtCodigoExit
       OnKeyPress = FormKeyPress
     end
     object EdtFuncionario: TDBEdit
-      Left = 361
-      Top = 60
+      Left = 191
+      Top = 90
       Width = 216
       Height = 24
       Color = clBtnFace
@@ -159,57 +161,57 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       Caption = 'Tempor'#225'rio:'
       DataField = 'TEMPORARIO'
       DataSource = DM.dsUsuarios
-      TabOrder = 8
+      TabOrder = 10
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       Visible = False
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtDataFim: TJvDBDateEdit
-      Left = 234
-      Top = 223
+      Left = 584
+      Top = 147
       Width = 125
       Height = 24
       DataField = 'DATAFIM'
       DataSource = DM.dsUsuarios
       ButtonWidth = 27
       ShowNullDate = False
-      TabOrder = 7
+      TabOrder = 9
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtLogin: TDBEdit
-      Left = 234
-      Top = 141
+      Left = 194
+      Top = 147
       Width = 125
       Height = 24
       DataField = 'NOME'
       DataSource = DM.dsUsuarios
-      TabOrder = 4
+      TabOrder = 6
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtSenha: TEdit
-      Left = 234
-      Top = 168
+      Left = 324
+      Top = 147
       Width = 125
       Height = 24
       PasswordChar = '*'
-      TabOrder = 5
+      TabOrder = 7
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtConfSenha: TEdit
-      Left = 234
-      Top = 195
+      Left = 454
+      Top = 147
       Width = 125
       Height = 24
       PasswordChar = '*'
-      TabOrder = 6
+      TabOrder = 8
       OnKeyPress = FormKeyPress
     end
     object BtnFuncionario: TButton
-      Left = 578
-      Top = 57
+      Left = 410
+      Top = 88
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -219,25 +221,25 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 9
+      TabOrder = 2
       OnClick = BtnFuncionarioClick
     end
     object EdtNivelAcesso: TDBEdit
-      Left = 234
-      Top = 87
+      Left = 454
+      Top = 90
       Width = 200
       Height = 24
       Color = clBtnFace
       DataField = 'NIVELACESSO'
       DataSource = DM.dsUsuarios
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 3
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnNivel: TButton
-      Left = 436
-      Top = 85
+      Left = 658
+      Top = 88
       Width = 28
       Height = 28
       Hint = 'Consultar'
@@ -247,13 +249,13 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 10
+      TabOrder = 4
       OnClick = BtnNivelClick
     end
     object EdtMatricula: TDBEdit
       Tag = 555
-      Left = 234
-      Top = 60
+      Left = 64
+      Top = 90
       Width = 125
       Height = 24
       TabStop = False
@@ -267,11 +269,15 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       OnKeyPress = FormKeyPress
     end
   end
-  inherited MainMenuPadrao: TMainMenu
-    Left = 390
-    Top = 140
-  end
   inherited PopupMenuRelat: TPopupMenu
     Top = 16
+  end
+  inherited ActionList1: TActionList
+    Left = 314
+    Top = 19
+  end
+  inherited MainMenuPadrao: TMainMenu
+    Left = 238
+    Top = 20
   end
 end

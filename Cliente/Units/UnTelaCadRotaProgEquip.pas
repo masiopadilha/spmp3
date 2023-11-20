@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, JvExMask,
   JvToolEdit, JvDBControls, Vcl.Grids, Vcl.DBGrids, Data.DB, Datasnap.DBClient,
-  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons,
+  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
 
 type
   TFrmTelaCadRotaProgEquip = class(TFrmTelaPaiCadastros)
@@ -44,6 +45,7 @@ type
     procedure EdtCodRotaExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -256,6 +258,39 @@ DM.qryRotasSequencia.First;
 DM.MSGAguarde('', False);
 end;
 
+procedure TFrmTelaCadRotaProgEquip.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar := 84;
+  inherited;
+if DM.qryRotasCODIGO.AsString = '' then Exit;
+
+DM.qryRotasSequencia.Open;
+DM.qryRotasSequenciaInsp.Open;
+DM.qryRotasSequenciaInspItens.Open;
+DM.qryRotasSequenciaInspItensEsp.Open;
+
+if DM.qryRotasDATAINICIO.AsString <> EmptyStr then
+  begin
+    LDataProgIni := DM.qryRotasDATAINICIO.AsDateTime;
+    DM.qryRotasRELATORIO.AsString := 'N';
+  end;
+
+CDValidaEquip.Close; CDValidaEquip.CreateDataSet;
+while not DM.qryRotasSequencia.Eof = True do
+  begin
+    CDValidaEquip.Append;
+    CDValidaEquipID.AsInteger       := CDValidaEquip.RecordCount + 1;
+    CDValidaEquipCODAREA.AsString   := DM.qryRotasSequenciaCODAREA.AsString;
+    CDValidaEquipCODCELULA.AsString := DM.qryRotasSequenciaCODCELULA.AsString;
+    CDValidaEquipCODLINHA.AsString  := DM.qryRotasSequenciaCODLINHA.AsString;
+    CDValidaEquipSEQUENCIA.AsString := DM.qryRotasSequenciaSEQUENCIA.AsString;
+    CDValidaEquip.Post;
+
+    DM.qryRotasSequencia.Next;
+  end;
+DM.qryRotasSequencia.First;
+end;
+
 procedure TFrmTelaCadRotaProgEquip.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBRotaGeral;
@@ -267,8 +302,8 @@ end;
 procedure TFrmTelaCadRotaProgEquip.EdtCodRotaExit(Sender: TObject);
 begin
   inherited;
-if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
-else BtnSalvar.ImageIndex := 2;
+if DM.FDataSetParam.Modified = True then BtnSalvar.ImageName := 'Operacional\naosalvo'
+else BtnSalvar.ImageName := 'Operacional\salvar';
 end;
 
 procedure TFrmTelaCadRotaProgEquip.FormClose(Sender: TObject;
@@ -289,7 +324,6 @@ begin
 DM.FDataSetParam    := DM.qryRotas;
 DM.FDataSourceParam := DM.dsRotas;
 DM.FTela := 'CADMANUTPROGEQUIP';
-DM.FTabela_auxiliar := 84;
 end;
 
 procedure TFrmTelaCadRotaProgEquip.GrdSequenciaDblClick(Sender: TObject);

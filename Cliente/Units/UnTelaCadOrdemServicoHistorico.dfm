@@ -1,14 +1,14 @@
 inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   Caption = 'Hist'#243'rico de Ordens de Servi'#231'o'
-  ClientHeight = 644
+  ClientHeight = 684
   ClientWidth = 1012
-  Constraints.MaxHeight = 680
+  Constraints.MaxHeight = 720
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 1024
   OnCreate = FormCreate
   ExplicitWidth = 1024
-  ExplicitHeight = 680
+  ExplicitHeight = 720
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
@@ -28,8 +28,8 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       Caption = 'Cadastro:'
     end
     inherited BtnAjuda: TButton
-      Left = 970
-      ExplicitLeft = 966
+      Left = 972
+      ExplicitLeft = 968
     end
     object EdtData1: TDateTimePicker
       Left = 124
@@ -65,7 +65,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       OnClick = BtnConsultarClick
     end
     object BtnImprimir: TButton
-      Left = 941
+      Left = 938
       Top = 17
       Width = 28
       Height = 28
@@ -118,12 +118,12 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
   end
   inherited PCentro: TPanel
     Width = 1006
-    Height = 505
+    Height = 545
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 503
+      Height = 543
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -132,7 +132,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       Left = 4
       Top = 4
       Width = 998
-      Height = 497
+      Height = 537
       Hint = 'D'#234' duplo-clique para visualizar a O.S.'
       Align = alClient
       Color = 14671839
@@ -279,13 +279,13 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
+    Top = 617
     Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 604
+    Top = 644
     Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
@@ -295,8 +295,8 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       ExplicitLeft = 177
     end
     inherited BtnFechar: TButton
-      Left = 466
-      ExplicitLeft = 466
+      Left = 467
+      ExplicitLeft = 467
     end
   end
   object PopupMenuRelat: TPopupMenu

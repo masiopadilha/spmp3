@@ -1,30 +1,15 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  ClientHeight = 624
+  ClientHeight = 664
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    DesignSize = (
-      1008
-      45)
-    inherited LCadastro: TLabel
-      Left = 722
-    end
-    inherited LCadastroPor: TLabel
-      Left = 678
-    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsManutProgFamEquip
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsManutProgFamEquip
-    end
-    inherited LAlteracao: TLabel
-      Left = 873
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 847
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsManutProgFamEquip
@@ -36,7 +21,6 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   inherited PIdentificacao: TPanel
     Width = 1008
     Height = 123
-    ExplicitWidth = 1004
     ExplicitHeight = 123
     object Label5: TLabel
       Left = 50
@@ -379,11 +363,10 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
   end
   inherited PProgramacao: TPanel
-    Top = 178
+    Top = 200
     Width = 1008
     Height = 65
-    ExplicitTop = 178
-    ExplicitWidth = 1004
+    ExplicitTop = 200
     ExplicitHeight = 65
     inherited Label2: TLabel
       Width = 132
@@ -485,12 +468,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
   end
   inherited PDiversos: TPanel
-    Top = 247
+    Top = 269
     Width = 1008
     Height = 113
     Align = alTop
-    ExplicitTop = 247
-    ExplicitWidth = 1004
+    ExplicitTop = 269
     ExplicitHeight = 113
     inherited Label3: TLabel
       Width = 179
@@ -562,24 +544,21 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 563
+    Top = 603
     Width = 1012
-    ExplicitTop = 560
-    ExplicitWidth = 1008
+    ExplicitTop = 600
   end
   inherited PAlertas: TPanel
-    Top = 547
+    Top = 587
     Width = 1012
     TabOrder = 7
-    ExplicitTop = 544
-    ExplicitWidth = 1008
+    ExplicitTop = 584
   end
   inherited PBase: TPanel
-    Top = 584
+    Top = 624
     Width = 1008
     TabOrder = 5
-    ExplicitTop = 581
-    ExplicitWidth = 1004
+    ExplicitTop = 621
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -596,9 +575,9 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
-    Top = 365
+    Top = 387
     Width = 1006
-    Height = 171
+    Height = 196
     Align = alTop
     TabOrder = 4
     ExplicitWidth = 1002
@@ -624,7 +603,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Left = 4
       Top = 21
       Width = 998
-      Height = 146
+      Height = 171
       Margins.Top = 20
       Align = alClient
       Color = 14671839

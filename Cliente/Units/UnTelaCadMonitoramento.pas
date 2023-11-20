@@ -77,6 +77,7 @@ type
     procedure BtnPlanoTrabClick(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure edtPlanoTrabDblClick(Sender: TObject);
+    procedure ButConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -346,6 +347,56 @@ DM.qryMonitoramento.Refresh;
 if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 
 DM.MSGAguarde('', False);
+end;
+
+procedure TFrmTelaCadMonitoramento.ButConsultarClick(Sender: TObject);
+begin
+DM.FTabela_auxiliar  := 86;
+  inherited;
+if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
+  begin
+    GrdCadastro.DataSource        := DM.dsMonitMedicoesPtosInsp;
+
+    BtnPonto.Enabled := True;
+    BtnPontoLocal.Enabled := True;
+    BtnContador.Enabled := False;
+    GrafMonit.Series[0].Clear;
+
+    edtCodEquip.Text  := '';
+    edtDescEquip.Text := '';
+    EdtLimInfMax.Text := '';
+    EdtLimInf.Text    := '';
+    EdtLimSup.Text    := '';
+    EdtLimSupMax.Text := '';
+
+    EdtLimInfMax.Color := clBtnFace; EdtLimInfMax.Font.Color := clBlack;
+    EdtLimInf.Color    := clBtnFace; EdtLimInf.Font.Color := clBlack;
+    EdtLimSup.Color    := clBtnFace; EdtLimSup.Font.Color := clBlack;
+    EdtLimSupMax.Color := clBtnFace; EdtLimSupMax.Font.Color := clBlack;
+  end
+else
+if DM.qryMonitoramentoTIPOPONTO.AsString = 'Contador' then
+  begin
+    GrdCadastro.DataSource        := DM.dsMonitMedicoesCont;
+
+    BtnPonto.Enabled := False;
+    BtnPontoLocal.Enabled := False;
+    BtnContador.Enabled := True;
+    GrafMonit.Series[0].Clear;
+
+    edtCodEquip.Text  := '';
+    edtDescEquip.Text := '';
+    EdtLimInfMax.Text := '';
+    EdtLimInf.Text    := '';
+    EdtLimSup.Text    := '';
+    EdtLimSupMax.Text := '';
+
+    EdtLimInfMax.Color := clBtnFace; EdtLimInfMax.Font.Color := clBlack;
+    EdtLimInf.Color    := clBtnFace; EdtLimInf.Font.Color := clBlack;
+    EdtLimSup.Color    := clBtnFace; EdtLimSup.Font.Color := clBlack;
+    EdtLimSupMax.Color := clBtnFace; EdtLimSupMax.Font.Color := clBlack;
+  end;
+
 end;
 
 procedure TFrmTelaCadMonitoramento.Button1Click(Sender: TObject);

@@ -1,10 +1,9 @@
 inherited FrmTelaCadArqTecnicoLiteraturaParam: TFrmTelaCadArqTecnicoLiteraturaParam
   Caption = 'Par'#226'metro'
-  ClientHeight = 181
-  Constraints.MaxHeight = 240
+  ClientHeight = 219
+  Constraints.MaxHeight = 300
   Constraints.MinHeight = 240
-  ExplicitHeight = 240
-  PixelsPerInch = 96
+  ExplicitHeight = 275
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText
@@ -21,19 +20,19 @@ inherited FrmTelaCadArqTecnicoLiteraturaParam: TFrmTelaCadArqTecnicoLiteraturaPa
     end
   end
   inherited PCentro: TPanel
-    Height = 80
-    ExplicitHeight = 80
+    Height = 96
+    ExplicitHeight = 58
     object Label4: TLabel
-      Left = 190
-      Top = 31
+      Left = 64
+      Top = 29
       Width = 60
       Height = 16
       Alignment = taRightJustify
       Caption = 'Descri'#231#227'o:'
     end
     object EdtDescricao: TDBEdit
-      Left = 253
-      Top = 29
+      Left = 64
+      Top = 47
       Width = 230
       Height = 24
       DataField = 'DESCRICAO'
@@ -44,11 +43,11 @@ inherited FrmTelaCadArqTecnicoLiteraturaParam: TFrmTelaCadArqTecnicoLiteraturaPa
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 162
+    Top = 200
     ExplicitTop = 162
   end
   inherited PAuxiliares: TPanel
-    Top = 135
+    Top = 173
     ExplicitTop = 135
   end
 end
