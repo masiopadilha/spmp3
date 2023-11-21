@@ -584,10 +584,19 @@ begin
         end;
       78, 780://Abastecimentos
         begin
-          DM.qryAuxiliar.SQL.Add('SELECT `controlecombustivel`.`CODIGO`, `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`, `controlecombustivel`.`PLACA`, `contadores`.`DESCRICAO` AS `CONTADOR`'
-                                  +  ' , `controlecombustivel`.`CONTADORATUAL` AS `CONTADOR` FROM `controlecombustivel` INNER JOIN `equipamentos` ON (`controlecombustivel`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
-                                  +  ' INNER JOIN `contadores` ON (`controlecombustivel`.`CODCONTADOR` = `contadores`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `contadores`.`CODEMPRESA`)'
-                                  +  ' WHERE (`equipamentos`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `controlecombustivel`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `EQUIPAMENTO` ASC');
+          if DM.FParamAuxiliar[1] <> 'PLACA' then
+          begin
+            DM.qryAuxiliar.SQL.Add('SELECT `controlecombustivel`.`CODIGO`, `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`, `controlecombustivel`.`PLACA`, `contadores`.`DESCRICAO` AS `CONTADOR`'
+                                    +  ' , `controlecombustivel`.`CONTADORATUAL` AS `CONTADOR` FROM `controlecombustivel` INNER JOIN `equipamentos` ON (`controlecombustivel`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                                    +  ' INNER JOIN `contadores` ON (`controlecombustivel`.`CODCONTADOR` = `contadores`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `contadores`.`CODEMPRESA`)'
+                                    +  ' WHERE (`equipamentos`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `controlecombustivel`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `EQUIPAMENTO` ASC');
+          end else
+          begin
+            DM.qryAuxiliar.SQL.Add('SELECT `controlecombustivel`.`CODIGO`, `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`, `controlecombustivel`.`PLACA`, `contadores`.`DESCRICAO` AS `CONTADOR`'
+                                    +  ' , `controlecombustivel`.`CONTADORATUAL` AS `CONTADOR` FROM `controlecombustivel` INNER JOIN `equipamentos` ON (`controlecombustivel`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                                    +  ' INNER JOIN `contadores` ON (`controlecombustivel`.`CODCONTADOR` = `contadores`.`CODIGO`) AND (`controlecombustivel`.`CODEMPRESA` = `contadores`.`CODEMPRESA`)'
+                                    +  ' WHERE (`controlecombustivel`.`PLACA` LIKE :descricao AND `controlecombustivel`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') ORDER BY `EQUIPAMENTO` ASC');
+          end;
         end;
       79, 7900://Rotas de Abastecimentos
         begin

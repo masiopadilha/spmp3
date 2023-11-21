@@ -35,7 +35,7 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 973
+      Left = 977
       TabOrder = 3
       ExplicitLeft = 973
     end
@@ -243,7 +243,7 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6
-        TextHint = 'Pr'#231'eo'
+        TextHint = 'Pre'#231'o'
         OnKeyPress = EdtPrecoCombustKeyPress
       end
       object EdtQtdeCombust: TEdit
@@ -301,7 +301,6 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 935
       ExplicitHeight = 13
     end
   end

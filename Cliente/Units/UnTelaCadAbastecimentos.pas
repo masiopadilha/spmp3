@@ -38,6 +38,7 @@ type
     EdtTanque: TDBEdit;
     Label7: TLabel;
     aaaaaa1: TMenuItem;
+    Placa1: TMenuItem;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -67,6 +68,7 @@ type
     procedure BtnExcluirClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure aaaaaa1Click(Sender: TObject);
+    procedure Placa1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -629,29 +631,29 @@ with GrdAbastCombust do
     GrdAbastCombust.Columns[6].Visible := False;
     GrdAbastCombust.Columns[7].Visible := False;
     GrdAbastCombust.Columns[8].Visible := False;
-    GrdAbastCombust.Columns[9].Title.Caption    := 'Combust�vel';
+    GrdAbastCombust.Columns[9].Title.Caption    := 'Combustível';
     GrdAbastCombust.Columns[10].Title.Caption   := 'Data';
     GrdAbastCombust.Columns[10].Title.Alignment := taCenter;
     if DM.qryAbastecimentosTIPO.AsString = 'Equipamento' then
       begin
-        GrdAbastCombust.Columns[11].Title.Caption   := 'Hor�metro';
+        GrdAbastCombust.Columns[11].Title.Caption   := 'Horímetro';
         GrdAbastCombust.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastCombust.Columns[].Title.Caption := 'l/h';
       end
     else
-    if DM.qryAbastecimentosTIPO.AsString = 'Ve�culo' then
+    if DM.qryAbastecimentosTIPO.AsString = 'Veículo' then
       begin
-        GrdAbastCombust.Columns[11].Title.Caption   := 'Od�metro';
+        GrdAbastCombust.Columns[11].Title.Caption   := 'Odômetro';
         GrdAbastCombust.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastCombust.Columns[].Title.Caption := 'km/l';
       end;
     GrdAbastCombust.Columns[12].Title.Caption   := 'Qtde.';
     GrdAbastCombust.Columns[12].Title.Alignment := taCenter;
-    GrdAbastCombust.Columns[13].Title.Caption   := 'Pre�o';
+    GrdAbastCombust.Columns[13].Title.Caption   := 'Preço';
     GrdAbastCombust.Columns[13].Title.Alignment := taCenter;
     GrdAbastCombust.Columns[14].Title.Caption   := 'Total';
     GrdAbastCombust.Columns[14].Title.Alignment := taCenter;
-    GrdAbastCombust.Columns[15].Title.Caption   := 'Funcion�rio';
+    GrdAbastCombust.Columns[15].Title.Caption   := 'Funcionário';
     GrdAbastCombust.Columns[16].Title.Caption   := 'Rota';
     GrdAbastCombust.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastCombust.Columns[17].Title.Alignment := taCenter;
@@ -694,24 +696,24 @@ with GrdAbastLubrific do
     GrdAbastLubrific.Columns[10].Title.Alignment := taCenter;
     if DM.qryAbastecimentosTIPO.AsString = 'Equipamento' then
       begin
-        GrdAbastLubrific.Columns[11].Title.Caption   := 'Hor�metro';
+        GrdAbastLubrific.Columns[11].Title.Caption   := 'Horímetro';
         GrdAbastLubrific.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastLubrific.Columns[].Title.Caption := 'l/h';
       end
     else
-    if DM.qryAbastecimentosTIPO.AsString = 'Ve�culo' then
+    if DM.qryAbastecimentosTIPO.AsString = 'Veículo' then
       begin
-        GrdAbastLubrific.Columns[11].Title.Caption   := 'Od�metro';
+        GrdAbastLubrific.Columns[11].Title.Caption   := 'Odímetro';
         GrdAbastLubrific.Columns[11].Title.Alignment := taCenter;
 //        GrdAbastLubrific.Columns[].Title.Caption := 'km/l';
       end;
     GrdAbastLubrific.Columns[12].Title.Caption   := 'Qtde.';
     GrdAbastLubrific.Columns[12].Title.Alignment := taCenter;
-    GrdAbastLubrific.Columns[13].Title.Caption   := 'Pre�o';
+    GrdAbastLubrific.Columns[13].Title.Caption   := 'Preço';
     GrdAbastLubrific.Columns[13].Title.Alignment := taCenter;
     GrdAbastLubrific.Columns[14].Title.Caption   := 'Total';
     GrdAbastLubrific.Columns[14].Title.Alignment := taCenter;
-    GrdAbastLubrific.Columns[15].Title.Caption   := 'Funcion�rio';
+    GrdAbastLubrific.Columns[15].Title.Caption   := 'Funcionário';
     GrdAbastLubrific.Columns[16].Title.Caption   := 'Rota';
     GrdAbastLubrific.Columns[17].Title.Caption   := 'Consumo';
     GrdAbastLubrific.Columns[17].Title.Alignment := taCenter;
@@ -744,5 +746,13 @@ begin
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 BtnEquipamento.OnClick(Sender);
 end;
+procedure TFrmTelaCadAbastecimentos.Placa1Click(Sender: TObject);
+begin
+  inherited;
+DM.FParamAuxiliar[1] := 'PLACA';
+BtnConsultar.OnClick(Sender);
+
+end;
+
 end.
 

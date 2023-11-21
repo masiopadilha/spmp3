@@ -27,6 +27,7 @@ type
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
     procedure BtnCentroCustoClick(Sender: TObject);
+    procedure BtnConsultarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,9 +87,16 @@ DM.FTela            := 'CADOFICINAS';
 DM.FTabela_auxiliar := 20;
 end;
 
-procedure TFrmTelaCadOficinas.BtnImprimirClick(Sender: TObject);
+procedure TFrmTelaCadOficinas.BtnConsultarClick(Sender: TObject);
 begin
 DM.FTabela_auxiliar := 20;
+  inherited;
+
+end;
+
+procedure TFrmTelaCadOficinas.BtnImprimirClick(Sender: TObject);
+begin
+DM.FDataSetRelat    := DmRelatorios.frxDBOficina;
   inherited;
 
 end;
@@ -166,7 +174,6 @@ begin
   inherited;
 DM.FDataSetParam    := DM.qryOficinas;
 DM.FDataSourceParam := DM.dsOficinas;
-DM.FDataSetRelat    := DmRelatorios.frxDBOficina;
 DM.FTela := 'CADOFICINAS';
 DM.FTabela_auxiliar := 20;
 end;

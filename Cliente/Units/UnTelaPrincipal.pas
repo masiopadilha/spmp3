@@ -233,6 +233,7 @@ type
     PorFamilia2: TMenuItem;
     Area5: TMenuItem;
     AlterarFamilia1: TMenuItem;
+    Area6: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -396,6 +397,7 @@ type
     procedure PorFamilia2Click(Sender: TObject);
     procedure Area5Click(Sender: TObject);
     procedure AlterarFamilia1Click(Sender: TObject);
+    procedure Area6Click(Sender: TObject);
   private
     { Private declarations }
 //    procedure CheckUpdateVersion;
@@ -653,6 +655,27 @@ if DM.ConsultarCombo <> '' then
                            + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `areas`.`CODIGO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `lubrificprogequipamento`.`DESCRICAO`');
     DM.qryAuxiliar.Open;
     DmRelatorios.frxRLubrificProgEquipGeral.ShowReport();
+  end;
+
+end;
+
+procedure TFrmTelaPrincipal.Area6Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` and `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxREquipGeral.ShowReport();
   end;
 
 end;
@@ -1548,8 +1571,11 @@ if DM.ConsultarCombo <> '' then
     DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
     DM.qryAuxiliar.Close;
     DM.qryAuxiliar.SQL.Clear;
-    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP FROM `equipamentos`'
-                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` and `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+
     DM.qryAuxiliar.Open;
     DmRelatorios.frxREquipGeral.ShowReport();
   end;
@@ -2591,8 +2617,10 @@ if not Assigned(DmRelatorios) then
 DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
 DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP FROM `equipamentos`'
-                       +  ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`) WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
+DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` and `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
 DM.qryAuxiliar.Open;
 DmRelatorios.frxREquipGeral.ShowReport();
 end;

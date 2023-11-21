@@ -46090,7 +46090,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     TabOrder = 0
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 674
+    ExplicitTop = 586
     ExplicitWidth = 1008
     object LblAlertas: TLabel
       Left = 1005
@@ -46126,7 +46126,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       item
         Width = 15
       end>
-    ExplicitTop = 690
+    ExplicitTop = 602
     ExplicitWidth = 1008
   end
   object ProgressBar1: TProgressBar
@@ -46792,6 +46792,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         object Familia2: TMenuItem
           Caption = 'Fam'#237'lia'
           OnClick = Familia2Click
+        end
+        object Area6: TMenuItem
+          Caption = #193'rea'
+          OnClick = Area6Click
         end
       end
       object ManutencaoProgramada2: TMenuItem

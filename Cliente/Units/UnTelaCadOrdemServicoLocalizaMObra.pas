@@ -4,7 +4,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Stan.Param,
-  Vcl.WinXCtrls, Vcl.Menus;
+  Vcl.WinXCtrls, Vcl.Menus, System.DateUtils;
 type
   TFrmTelaCadOrdemServicoLocalizaMObra = class(TFrmTelaPaiOkCancel)
     GrdMObra: TDBGrid;
@@ -70,13 +70,27 @@ DM.qryOrdemServicoLocalizaMObra.Params[0].AsString := DM.FCodEmpresa;
 DM.qryOrdemServicoLocalizaMObra.Open;
 DM.qryOrdemServicoLocalizaMObraOSProg.Close;
 DM.qryOrdemServicoLocalizaMObraOSProg.Params[0].AsString := DM.FCodEmpresa;
-DM.qryOrdemServicoLocalizaMObraOSProg.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
-DM.qryOrdemServicoLocalizaMObraOSProg.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
+if Assigned(FrmTelaCadOrdemServicoGerencia) then
+begin
+  DM.qryOrdemServicoLocalizaMObraOSProg.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
+  DM.qryOrdemServicoLocalizaMObraOSProg.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
+end else
+begin
+  DM.qryOrdemServicoLocalizaMObraOSProg.Params[1].AsString := FormatDateTime('yyyy/mm/dd hh:mm:ss', StartOfTheDay(IncDay(DM.FDataHoraServidor, (DaysInMonth(DM.FDataHoraServidor) * -1))));
+  DM.qryOrdemServicoLocalizaMObraOSProg.Params[2].AsString := FormatDateTime('yyyy/mm/dd hh:mm:ss', EndOfTheDay(DM.FDataHoraServidor));
+end;
 DM.qryOrdemServicoLocalizaMObraOSProg.Open;
 DM.qryOrdemServicoLocalizaMObraOSExec.Close;
 DM.qryOrdemServicoLocalizaMObraOSExec.Params[0].AsString := DM.FCodEmpresa;
-DM.qryOrdemServicoLocalizaMObraOSExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
-DM.qryOrdemServicoLocalizaMObraOSExec.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
+if Assigned(FrmTelaCadOrdemServicoGerencia) then
+begin
+  DM.qryOrdemServicoLocalizaMObraOSExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData1.Date) + ' 00:00:00';
+  DM.qryOrdemServicoLocalizaMObraOSExec.Params[2].AsString := FormatDateTime('yyyy/mm/dd', FrmTelaCadOrdemServicoGerencia.EdtData2.Date) + ' 23:59:59';
+end else
+begin
+  DM.qryOrdemServicoLocalizaMObraOSExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd hh:mm:ss', StartOfTheDay(IncDay(DM.FDataHoraServidor, (DaysInMonth(DM.FDataHoraServidor) * -1))));
+  DM.qryOrdemServicoLocalizaMObraOSExec.Params[2].AsString := FormatDateTime('yyyy/mm/dd hh:mm:ss', EndOfTheDay(DM.FDataHoraServidor));
+end;
 DM.qryOrdemServicoLocalizaMObraOSExec.Open;
 end;
 procedure TFrmTelaCadOrdemServicoLocalizaMObra.GrdMObraKeyPress(

@@ -1,11 +1,10 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
-  ClientHeight = 621
-  ClientWidth = 1008
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1004
-    ExplicitWidth = 1008
+    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsAbastecimentos
     end
@@ -20,7 +19,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1004
+    Width = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -293,7 +292,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1004
+    Width = 1008
     Height = 194
     ExplicitHeight = 194
     inherited Label2: TLabel
@@ -326,8 +325,8 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Width = 1004
-    Height = 193
+    Width = 1008
+    Height = 196
     ExplicitTop = 349
     ExplicitHeight = 193
     inherited Label3: TLabel
@@ -359,16 +358,16 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 602
-    Width = 1008
+    Top = 605
+    Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 586
-    Width = 1008
+    Top = 589
+    Width = 1012
   end
   inherited PBase: TPanel
-    Top = 546
-    Width = 1004
+    Top = 549
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Abastecimentos'
       DisabledImageIndex = 110
@@ -435,6 +434,10 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     object aaaaaa1: TMenuItem
       Caption = 'Descri'#231#227'o'
       OnClick = aaaaaa1Click
+    end
+    object Placa1: TMenuItem
+      Caption = 'Placa'
+      OnClick = Placa1Click
     end
   end
   object PopupMenuConsEquip: TPopupMenu
