@@ -6,20 +6,16 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 510
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 502
     end
     inherited LAlteradoPor: TLabel
-      Left = 532
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 524
     end
     inherited LblDataAlt: TDBText
       Margins.Left = 4
@@ -50,20 +46,16 @@ inherited FrmTelaCadUsuarios: TFrmTelaCadUsuarios
       DataSource = DM.dsUsuarios
     end
     inherited LCadastro: TLabel
-      Left = 404
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 396
     end
     inherited LCadastroPor: TLabel
-      Left = 366
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 358
     end
   end
   inherited PCentro: TPanel

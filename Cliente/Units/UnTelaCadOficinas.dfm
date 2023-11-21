@@ -1,7 +1,10 @@
 inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
   Caption = 'Oficinas'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -56,6 +59,8 @@ inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
       Left = 190
       Top = 92
@@ -160,5 +165,13 @@ inherited FrmTelaCadOficinas: TFrmTelaCadOficinas
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

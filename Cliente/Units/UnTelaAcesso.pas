@@ -463,7 +463,8 @@ if (Screen.Width < 1024) or (Screen.Height < 600) then
     Application.Terminate;
   end;
 
-LblVersao.Caption := DM.GetVersion(Application.ExeName);
+DM.GetVersion(Application.ExeName);
+LblVersao.Caption := DM.FVersaoMacro;
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);

@@ -6,14 +6,12 @@ inherited FrmTelaCadTipoProgramacao: TFrmTelaCadTipoProgramacao
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 502
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 524
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -48,14 +46,12 @@ inherited FrmTelaCadTipoProgramacao: TFrmTelaCadTipoProgramacao
       DataSource = DM.dsTipoProgramacao
     end
     inherited LCadastro: TLabel
-      Left = 396
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 358
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4

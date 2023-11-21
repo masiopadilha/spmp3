@@ -1,13 +1,10 @@
 inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
   Caption = 'Almoxarifados'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    inherited LAlteracao: TLabel
-      Left = 506
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 528
-    end
+    Width = 624
     inherited LblDataAlt: TDBText
       DataSource = DM.dsAlmoxarifado
     end
@@ -20,14 +17,10 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
     inherited LblUsuCad: TDBText
       DataSource = DM.dsAlmoxarifado
     end
-    inherited LCadastro: TLabel
-      Left = 400
-    end
-    inherited LCadastroPor: TLabel
-      Left = 362
-    end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 190
       Top = 60
@@ -197,9 +190,15 @@ inherited FrmTelaCadAlmoxarifados: TFrmTelaCadAlmoxarifados
     end
   end
   inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

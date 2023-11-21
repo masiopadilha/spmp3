@@ -3,14 +3,12 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
-      Left = 506
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 528
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -45,14 +43,12 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
       DataSource = DM.dsCentroCusto
     end
     inherited LCadastro: TLabel
-      Left = 400
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 362
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4

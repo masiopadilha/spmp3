@@ -5649,7 +5649,7 @@ type
     FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
     FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
     FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
-    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha: String;
+    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro: String;
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
     FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
     FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
@@ -5880,10 +5880,14 @@ begin
         VerQueryValue (Pt, '\', Pt2, Size2);
         with TVSFixedFileInfo (Pt2^) do
           begin
+            FVersaoMacro := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+                            IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                            IntToStr (HiWord (dwFileVersionLS));
+
             Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
-                      IntToStr (LoWord (dwFileVersionMS)) + '.' +
-                      IntToStr (HiWord (dwFileVersionLS)) + '.' +
-                      IntToStr (LoWord (dwFileVersionLS));
+                   IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                   IntToStr (HiWord (dwFileVersionLS)) + '.' +
+                   IntToStr (LoWord (dwFileVersionLS));
 //            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
             FVersaoMaquina := StrToInt(StringReplace(Ver, '.', '',[rfReplaceAll]));
             Result := Ver;

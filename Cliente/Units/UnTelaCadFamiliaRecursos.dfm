@@ -1,16 +1,17 @@
 inherited FrmTelaCadFamiliaRecursos: TFrmTelaCadFamiliaRecursos
   Caption = 'Fam'#237'lias de Recursos'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 506
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 528
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -45,14 +46,12 @@ inherited FrmTelaCadFamiliaRecursos: TFrmTelaCadFamiliaRecursos
       DataSource = DM.dsFamRecursos
     end
     inherited LCadastro: TLabel
-      Left = 400
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 362
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -60,6 +59,8 @@ inherited FrmTelaCadFamiliaRecursos: TFrmTelaCadFamiliaRecursos
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
       Left = 79
       Top = 60
@@ -500,5 +501,13 @@ inherited FrmTelaCadFamiliaRecursos: TFrmTelaCadFamiliaRecursos
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

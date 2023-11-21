@@ -6,20 +6,16 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 504
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 500
     end
     inherited LAlteradoPor: TLabel
-      Left = 526
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 522
     end
     inherited LblDataAlt: TDBText
       Margins.Left = 4
@@ -50,20 +46,16 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
       DataSource = DM.dsTipoManutencao
     end
     inherited LCadastro: TLabel
-      Left = 398
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 394
     end
     inherited LCadastroPor: TLabel
-      Left = 360
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 356
     end
   end
   inherited PCentro: TPanel
