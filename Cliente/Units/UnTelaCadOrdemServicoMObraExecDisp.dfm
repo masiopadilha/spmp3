@@ -1,31 +1,26 @@
 inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
   BorderIcons = [biMinimize, biMaximize]
   Caption = 'M'#227'o de Obra Dispon'#237'vel'
-  ClientHeight = 304
   ClientWidth = 628
   Constraints.MaxWidth = 640
   Constraints.MinWidth = 640
   OnCreate = FormCreate
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 640
   TextHeight = 16
   inherited PTop: TPanel
     Width = 624
-    ExplicitWidth = 618
+    ExplicitWidth = 620
     inherited BtnAjuda: TButton
-      Left = 593
-      ExplicitLeft = 587
+      Left = 589
+      ExplicitLeft = 589
     end
   end
   inherited PCentro: TPanel
     Width = 622
-    Height = 165
-    ExplicitWidth = 616
+    ExplicitWidth = 618
     inherited RGTelas: TRadioGroup
       Left = 494
       Width = 1
-      Height = 163
       ExplicitLeft = 494
       ExplicitWidth = 1
     end
@@ -147,8 +142,8 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
       Color = 14671839
       ParentBackground = False
       TabOrder = 2
-      ExplicitLeft = 492
-      ExplicitHeight = 146
+      ExplicitLeft = 494
+      ExplicitHeight = 154
       object ImgFotoFunc: TImage
         AlignWithMargins = True
         Left = 5
@@ -178,14 +173,12 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
     Width = 624
-    ExplicitWidth = 618
+    ExplicitWidth = 620
   end
   inherited PBotoes: TPanel
-    Top = 264
     Width = 624
-    ExplicitWidth = 618
+    ExplicitWidth = 620
     inherited BtnOK: TButton
       Left = 232
       ModalResult = 0

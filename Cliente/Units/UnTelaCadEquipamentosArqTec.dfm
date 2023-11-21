@@ -1,12 +1,11 @@
 inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
   Caption = 'Literaturas T'#233'cnicas'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 498
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -20,16 +19,12 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnAjuda: TButton
-      Left = 465
-      ExplicitLeft = 465
-    end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 496
-    Height = 154
+    Width = 500
+    Height = 157
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -39,8 +34,8 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
     ExplicitWidth = 496
     ExplicitHeight = 154
     inherited RGTelas: TRadioGroup
-      Width = 494
-      Height = 152
+      Width = 498
+      Height = 155
       Margins.Left = 3
       Margins.Top = 3
       Margins.Right = 3
@@ -52,8 +47,8 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 488
-      Height = 146
+      Width = 492
+      Height = 149
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -112,8 +107,8 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
   end
   inherited PAuxiliares: TPanel
     Left = 3
-    Top = 231
-    Width = 498
+    Top = 234
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -124,8 +119,8 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
   end
   inherited PBotoes: TPanel
     Left = 3
-    Top = 260
-    Width = 498
+    Top = 263
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3

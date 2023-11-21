@@ -1,27 +1,16 @@
 inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamentoMObra
   Caption = 'Fechamento de M'#227'o de Obra'
   ClientHeight = 374
-  ClientWidth = 508
   Constraints.MaxHeight = 410
   Constraints.MinHeight = 410
   OnCreate = FormCreate
   ExplicitHeight = 410
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 504
-    inherited BtnAjuda: TButton
-      Left = 506
-      ExplicitLeft = 502
-    end
-  end
   inherited PCentro: TPanel
-    Width = 502
     Height = 235
-    ExplicitWidth = 498
     ExplicitHeight = 232
     inherited RGTelas: TRadioGroup
       Height = 233
-      ExplicitWidth = 496
       ExplicitHeight = 230
     end
     object Panel1: TPanel
@@ -47,8 +36,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         Margins.Bottom = 2
         Align = alClient
         TabOrder = 3
-        ExplicitLeft = 160
-        ExplicitWidth = 5
+        ExplicitHeight = 98
       end
       object GrdEquipe: TDBGrid
         AlignWithMargins = True
@@ -83,11 +71,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Alignment = taRightJustify
             Expanded = False
             FieldName = 'CODEQUIPE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Equipe'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -100,11 +83,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
           item
             Expanded = False
             FieldName = 'TEMPO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Tempo'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -296,15 +274,11 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   end
   inherited PAuxiliares: TPanel
     Top = 307
-    Width = 504
     ExplicitTop = 304
-    ExplicitWidth = 500
   end
   inherited PBotoes: TPanel
     Top = 334
-    Width = 504
     ExplicitTop = 331
-    ExplicitWidth = 500
     inherited BtnOK: TButton
       Left = 100
       Visible = False

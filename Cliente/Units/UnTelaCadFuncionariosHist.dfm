@@ -116,7 +116,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
         'Utilidades')
     end
     object BtnImprimir: TButton
-      Left = 941
+      Left = 939
       Top = 17
       Width = 28
       Height = 28

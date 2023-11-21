@@ -1,33 +1,32 @@
 inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamentoPecas
   Caption = 'Fechamento de Pe'#231'as da O.S.'
-  ClientWidth = 524
+  ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
   OnCreate = FormCreate
   ExplicitWidth = 540
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 487
-      ExplicitLeft = 487
+      Left = 489
+      ExplicitLeft = 489
     end
   end
   inherited PCentro: TPanel
-    Width = 518
+    Width = 522
     ExplicitWidth = 518
     inherited RGTelas: TRadioGroup
-      Width = 516
+      Width = 520
       ExplicitWidth = 516
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 510
-      Height = 154
+      Width = 514
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -129,11 +128,11 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
   end
   inherited PBotoes: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnOK: TButton
       Left = 100

@@ -1,12 +1,11 @@
 inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
   Caption = 'Medidores do Equipamento'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 498
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -20,16 +19,12 @@ inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnAjuda: TButton
-      Left = 465
-      ExplicitLeft = 465
-    end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 496
-    Height = 154
+    Width = 500
+    Height = 157
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -39,8 +34,8 @@ inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
     ExplicitWidth = 496
     ExplicitHeight = 154
     inherited RGTelas: TRadioGroup
-      Width = 494
-      Height = 152
+      Width = 498
+      Height = 155
       Margins.Left = 3
       Margins.Top = 3
       Margins.Right = 3
@@ -52,30 +47,34 @@ inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 488
-      Height = 146
+      Width = 492
+      Height = 149
       Align = alClient
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 488
+      ExplicitHeight = 146
       object RadioGroup1: TRadioGroup
         Left = 1
         Top = 1
-        Width = 486
-        Height = 144
+        Width = 490
+        Height = 147
         Margins.Left = 2
         Margins.Top = 2
         Margins.Right = 2
         Margins.Bottom = 2
         Align = alClient
         TabOrder = 0
+        ExplicitWidth = 486
+        ExplicitHeight = 144
       end
       object GrdCadastro: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
-        Width = 480
-        Height = 138
+        Width = 484
+        Height = 141
         Hint = 
           'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
           'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -147,8 +146,8 @@ inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
   end
   inherited PAuxiliares: TPanel
     Left = 3
-    Top = 231
-    Width = 498
+    Top = 234
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -159,8 +158,8 @@ inherited FrmTelaCadEquipamentosContadores: TFrmTelaCadEquipamentosContadores
   end
   inherited PBotoes: TPanel
     Left = 3
-    Top = 260
-    Width = 498
+    Top = 263
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3

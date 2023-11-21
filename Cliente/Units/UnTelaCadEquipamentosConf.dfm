@@ -1,7 +1,7 @@
 inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   Caption = 'Confiabilidade do Equipamento'
-  ClientHeight = 341
-  ClientWidth = 364
+  ClientHeight = 344
+  ClientWidth = 368
   Constraints.MaxHeight = 380
   Constraints.MaxWidth = 380
   Constraints.MinHeight = 380
@@ -9,12 +9,11 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   OnCreate = FormCreate
   ExplicitWidth = 380
   ExplicitHeight = 380
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 358
+    Width = 362
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -29,15 +28,15 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 324
-      ExplicitLeft = 324
+      Left = 326
+      ExplicitLeft = 326
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 356
-    Height = 194
+    Width = 360
+    Height = 197
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -47,15 +46,13 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
     ExplicitWidth = 356
     ExplicitHeight = 194
     inherited RGTelas: TRadioGroup
-      Width = 354
-      Height = 192
+      Width = 358
+      Height = 195
       Margins.Left = 3
       Margins.Top = 3
       Margins.Right = 3
       Margins.Bottom = 3
       TabOrder = 3
-      ExplicitLeft = 0
-      ExplicitTop = 3
       ExplicitWidth = 354
       ExplicitHeight = 192
     end
@@ -177,8 +174,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   end
   inherited PAuxiliares: TPanel
     Left = 3
-    Top = 271
-    Width = 358
+    Top = 274
+    Width = 362
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -189,8 +186,8 @@ inherited FrmTelaCadEquipamentosConf: TFrmTelaCadEquipamentosConf
   end
   inherited PBotoes: TPanel
     Left = 3
-    Top = 300
-    Width = 358
+    Top = 303
+    Width = 362
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3

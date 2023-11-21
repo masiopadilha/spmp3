@@ -1,12 +1,11 @@
 inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFechamentoRecursos
   Caption = 'Fechamento de Recursos da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 469
+      ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
@@ -18,10 +17,10 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
-      Left = 155
+      Left = 159
       Top = 4
       Width = 339
-      Height = 154
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -74,6 +73,7 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
+          Width = 64
           Visible = True
         end
         item
@@ -97,7 +97,7 @@ inherited FrmTelaCadOrdemServicoFechamentoRecursos: TFrmTelaCadOrdemServicoFecha
       Left = 4
       Top = 4
       Width = 150
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alLeft
       Ctl3D = False

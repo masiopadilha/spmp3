@@ -1,22 +1,21 @@
 inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
   Caption = 'Paralisa'#231#245'es da O.S.'
-  ClientWidth = 524
+  ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
   OnCreate = FormCreate
   ExplicitWidth = 540
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 487
-      ExplicitLeft = 487
+      Left = 489
+      ExplicitLeft = 489
     end
   end
   inherited PCentro: TPanel
-    Width = 518
+    Width = 522
     ExplicitWidth = 518
     inherited RGTelas: TRadioGroup
       Left = 252
@@ -29,7 +28,7 @@ inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
       Left = 4
       Top = 4
       Width = 245
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para paralisar ou executar a O.S.'
       Align = alLeft
       DataSource = DM.dsOrdemServicoParalisacoes
@@ -68,22 +67,24 @@ inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
     end
     object MMotivo: TDBMemo
       AlignWithMargins = True
-      Left = 251
+      Left = 255
       Top = 4
       Width = 263
-      Height = 154
+      Height = 157
       Align = alRight
       DataField = 'MOTIVOPARALISACAO'
       DataSource = DM.dsOrdemServicoParalisacoes
       TabOrder = 2
+      ExplicitLeft = 251
+      ExplicitHeight = 154
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
   end
   inherited PBotoes: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnOK: TButton
       Left = 100

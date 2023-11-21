@@ -1,12 +1,17 @@
 inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUnidAditivos
   Caption = 'Aditivos'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    inherited BtnAjuda: TButton
+      Left = 469
+      ExplicitLeft = 469
+    end
+  end
   inherited PCentro: TPanel
     inherited RGTelas: TRadioGroup
       Left = 267
-      Width = 0
+      Width = 1
       ExplicitLeft = 267
       ExplicitWidth = 0
     end
@@ -15,7 +20,7 @@ inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUni
       Left = 4
       Top = 4
       Width = 260
-      Height = 154
+      Height = 157
       Align = alLeft
       DataSource = DM.dsOrdemServicoTercUnidAditivos
       TabOrder = 1
@@ -54,14 +59,16 @@ inherited FrmTelaCadOrdemServicoTercUnidAditivos: TFrmTelaCadOrdemServicoTercUni
     end
     object MMotivo: TDBMemo
       AlignWithMargins = True
-      Left = 267
+      Left = 271
       Top = 4
       Width = 227
-      Height = 154
+      Height = 157
       Align = alRight
       DataField = 'MOTIVO'
       DataSource = DM.dsOrdemServicoTercUnidAditivos
       TabOrder = 2
+      ExplicitLeft = 267
+      ExplicitHeight = 154
     end
   end
   inherited PBotoes: TPanel

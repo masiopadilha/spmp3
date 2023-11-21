@@ -1,7 +1,7 @@
 inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
   Caption = 'Hist'#243'rico do Pneu'
-  ClientHeight = 561
-  ClientWidth = 784
+  ClientHeight = 564
+  ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -10,11 +10,11 @@ inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 747
-      ExplicitLeft = 747
+      Left = 748
+      ExplicitLeft = 748
     end
     object Button6: TButton
       Left = 717
@@ -37,13 +37,13 @@ inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
     end
   end
   inherited PCentro: TPanel
-    Width = 778
-    Height = 422
+    Width = 782
+    Height = 425
     ExplicitWidth = 778
     ExplicitHeight = 422
     inherited RGTelas: TRadioGroup
-      Width = 776
-      Height = 420
+      Width = 780
+      Height = 423
       ExplicitWidth = 776
       ExplicitHeight = 420
     end
@@ -51,8 +51,8 @@ inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 770
-      Height = 414
+      Width = 774
+      Height = 417
       Align = alClient
       Color = 14671839
       DataSource = DM.dsPneusChassiPneusHist
@@ -203,14 +203,14 @@ inherited FrmTelaCadPneusChassiPneusHist: TFrmTelaCadPneusChassiPneusHist
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 494
-    Width = 780
+    Top = 497
+    Width = 784
     ExplicitTop = 494
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Top = 521
-    Width = 780
+    Top = 524
+    Width = 784
     ExplicitTop = 521
     ExplicitWidth = 780
     inherited BtnOK: TButton

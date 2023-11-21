@@ -14,7 +14,7 @@ inherited FrmTelaCadPneusChassiPneus: TFrmTelaCadPneusChassiPneus
     Width = 544
     ExplicitWidth = 540
     inherited BtnAjuda: TButton
-      Left = 510
+      Left = 506
       ExplicitLeft = 506
     end
     object Button6: TButton

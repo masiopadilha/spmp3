@@ -1,33 +1,32 @@
 inherited FrmTelaCadPneusChassiAtrelamentoHist: TFrmTelaCadPneusChassiAtrelamentoHist
   Caption = 'Hist'#243'rico'
-  ClientWidth = 684
+  ClientWidth = 688
   Constraints.MaxWidth = 700
   Constraints.MinWidth = 700
   OnCreate = FormCreate
   ExplicitWidth = 700
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 680
+    Width = 684
     ExplicitWidth = 680
     inherited BtnAjuda: TButton
-      Left = 647
-      ExplicitLeft = 647
+      Left = 649
+      ExplicitLeft = 649
     end
   end
   inherited PCentro: TPanel
-    Width = 678
+    Width = 682
     ExplicitWidth = 678
     inherited RGTelas: TRadioGroup
-      Width = 676
+      Width = 680
       ExplicitWidth = 676
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 670
-      Height = 154
+      Width = 674
+      Height = 157
       Align = alClient
       DataSource = DM.dsPneusChassiAtrelamentoHist
       Font.Charset = DEFAULT_CHARSET
@@ -53,7 +52,7 @@ inherited FrmTelaCadPneusChassiAtrelamentoHist: TFrmTelaCadPneusChassiAtrelament
           Title.Font.Height = -12
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = []
-          Width = 147
+          Width = 134
           Visible = True
         end
         item
@@ -137,11 +136,11 @@ inherited FrmTelaCadPneusChassiAtrelamentoHist: TFrmTelaCadPneusChassiAtrelament
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 680
+    Width = 684
     ExplicitWidth = 680
   end
   inherited PBotoes: TPanel
-    Width = 680
+    Width = 684
     ExplicitWidth = 680
     inherited BtnOK: TButton
       Left = 176

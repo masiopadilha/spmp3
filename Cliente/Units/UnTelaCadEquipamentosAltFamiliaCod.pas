@@ -1,12 +1,9 @@
 unit UnTelaCadEquipamentosAltFamiliaCod;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Mask, Vcl.DBCtrls, FireDac.Stan.Param;
-
 type
   TFrmTelaCadEquipamentosAltFamiliaCod = class(TFrmTelaPaiOKCancel)
     pBase: TPanel;
@@ -28,16 +25,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamiliaCod;
-
 implementation
-
 {$R *.dfm}
-
 uses UnDM;
-
 procedure TFrmTelaCadEquipamentosAltFamiliaCod.BtnEquipamentoClick(
   Sender: TObject);
 begin
@@ -54,18 +46,50 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         edtNovoAntigo.SetFocus;
       end;
   end
-
 end;
-
 procedure TFrmTelaCadEquipamentosAltFamiliaCod.BtnOKClick(Sender: TObject);
 var
  Mensagem: PChar;
 begin
   inherited;
-  if edtCodAntigo.Text = MaskEdit1.Text then Exit;
-  if edtNovoAntigo.Text = MaskEdit1.Text then Exit;
+  if edtCodAntigo.Text = MaskEdit1.Text then
+  begin
+    edtCodAntigo.SetFocus;
+    Exit;
+  end;
+  if edtNovoAntigo.Text = MaskEdit1.Text then
+  begin
+    edtNovoAntigo.SetFocus;
+    Exit;
+  end;
   if DM.FCodCombo = '' then Exit;
+  DM.qryAuxiliar2.Close;
+  DM.qryAuxiliar2.SQL.Clear;
+  DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `familiaequipamento` WHERE CODIGO = :antigocodfamilia';
+  DM.qryAuxiliar2.Params[0].AsString := edtCodAntigo.Text;
+  DM.qryAuxiliar2.Open;
+  if DM.qryAuxiliar2.IsEmpty = True then
+  begin
+    Mensagem := PChar('Famíla antiga não identificada!');
+    Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    DM.qryAuxiliar2.Close;
+    Exit;
+  end;
 
+  DM.qryAuxiliar2.Close;
+  DM.qryAuxiliar2.SQL.Clear;
+  DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `familiaequipamento` WHERE CODIGO = :novocodfamilia';
+  DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
+  DM.qryAuxiliar2.Open;
+  if DM.qryAuxiliar2.IsEmpty = True then
+  begin
+    Mensagem := PChar('Equipamento novo não identificado!');
+    Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    DM.qryAuxiliar2.Close;
+    Exit;
+  end;
+
+  DM.qryAuxiliar2.Close;
   try
     DM.qryAltCodFamilia.Close;
     DM.qryAltCodFamilia.Params.ParamByName('NEWCODE').AsString := edtNovoAntigo.Text;
@@ -82,7 +106,6 @@ begin
     end;
   end;
 end;
-
 procedure TFrmTelaCadEquipamentosAltFamiliaCod.edtCodAntigoKeyPress(
   Sender: TObject; var Key: Char);
 begin
@@ -101,7 +124,6 @@ If Key = #13 Then
     End;
   End
 end;
-
 procedure TFrmTelaCadEquipamentosAltFamiliaCod.FormShow(Sender: TObject);
 begin
   inherited;
@@ -109,5 +131,4 @@ begin
   edtNovoAntigo.EditMask := DM.qryFormatoCodigoFAMILIAEQUIPAMENTO.AsString;
   MaskEdit1.EditMask     := DM.qryFormatoCodigoFAMILIAEQUIPAMENTO.AsString;
 end;
-
 end.

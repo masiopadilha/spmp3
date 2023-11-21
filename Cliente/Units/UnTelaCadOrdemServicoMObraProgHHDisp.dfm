@@ -1,23 +1,13 @@
 inherited FrmTelaCadOrdemServicoMObraProgHHDisp: TFrmTelaCadOrdemServicoMObraProgHHDisp
   Caption = 'Homem/Hora Dispon'#237'vel'
-  ClientHeight = 304
-  ClientWidth = 508
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 504
     inherited BtnAjuda: TButton
-      Left = 473
-      ExplicitLeft = 467
+      Left = 469
+      ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
-    Width = 502
-    Height = 165
-    inherited RGTelas: TRadioGroup
-      Height = 163
-    end
     object GrdHHDisp: TDBGrid
       AlignWithMargins = True
       Left = 4
@@ -73,13 +63,7 @@ inherited FrmTelaCadOrdemServicoMObraProgHHDisp: TFrmTelaCadOrdemServicoMObraPro
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 504
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 504
     inherited BtnOK: TButton
       Visible = False
     end

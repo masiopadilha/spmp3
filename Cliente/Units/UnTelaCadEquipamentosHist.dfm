@@ -61,7 +61,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       OnClick = BtnConsultarClick
     end
     object BtnImprimir: TButton
-      Left = 942
+      Left = 940
       Top = 15
       Width = 28
       Height = 28

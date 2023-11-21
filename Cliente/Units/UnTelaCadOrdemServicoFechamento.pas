@@ -373,6 +373,24 @@ procedure TFrmTelaCadOrdemServicoFechamento.BtnSalvarClick(Sender: TObject);
 var
   LSalario, LHOficiais, LHomemHora, LHENormal, LHEFeriado, LPercHENormal, LPercHEFeriado, LCusto, LTotalHH : Real;
 begin
+if (DM.qryUsuarioPInclusao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O INÍCIO DA O.S.!'; EdtDataInicioReal.SetFocus; Exit;

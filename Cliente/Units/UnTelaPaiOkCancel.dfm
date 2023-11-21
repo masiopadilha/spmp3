@@ -11600,7 +11600,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 494
+    ExplicitWidth = 500
     DesignSize = (
       504
       60)
@@ -12039,7 +12039,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
         9B19924EEEF97F3E0AAB43077639F50000000049454E44AE426082}
     end
     object BtnAjuda: TButton
-      Left = 502
+      Left = 467
       Top = 17
       Width = 28
       Height = 28
@@ -12053,7 +12053,6 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
       ShowHint = True
       TabOrder = 0
       OnClick = BtnAjudaClick
-      ExplicitLeft = 466
     end
   end
   object PCentro: TPanel
@@ -12066,21 +12065,21 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 496
-    ExplicitHeight = 154
+    ExplicitWidth = 498
+    ExplicitHeight = 162
     object RGTelas: TRadioGroup
       Left = 1
       Top = 1
       Width = 500
-      Height = 161
+      Height = 163
       Margins.Left = 2
       Margins.Top = 2
       Margins.Right = 2
       Margins.Bottom = 2
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 494
-      ExplicitHeight = 152
+      ExplicitWidth = 496
+      ExplicitHeight = 160
     end
   end
   object PAuxiliares: TPanel
@@ -12103,8 +12102,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     ParentBackground = False
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 226
-    ExplicitWidth = 498
+    ExplicitTop = 234
+    ExplicitWidth = 500
   end
   object PBotoes: TPanel
     AlignWithMargins = True
@@ -12124,8 +12123,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     Font.Style = []
     ParentFont = False
     TabOrder = 3
-    ExplicitTop = 253
-    ExplicitWidth = 498
+    ExplicitTop = 261
+    ExplicitWidth = 500
     object BtnOK: TButton
       Left = 171
       Top = 6

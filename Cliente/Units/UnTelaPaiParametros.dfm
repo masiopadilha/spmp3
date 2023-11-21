@@ -11618,7 +11618,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Width = 52
       Height = 13
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Alterado:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11633,7 +11633,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Width = 30
       Height = 13
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Data:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11645,9 +11645,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
     object LblDataAlt: TDBText
       Left = 552
       Top = 23
-      Width = 70
-      Height = 14
-      Anchors = [akLeft]
+      Width = 49
+      Height = 13
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'DATAULTALT'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -11659,9 +11660,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
     object LblDataCad: TDBText
       Left = 424
       Top = 23
-      Width = 70
-      Height = 14
-      Anchors = [akLeft]
+      Width = 55
+      Height = 13
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'DATACADASTRO'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -11673,9 +11675,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
     object LblUsuAlt: TDBText
       Left = 552
       Top = 6
-      Width = 70
-      Height = 14
-      Anchors = [akLeft]
+      Width = 44
+      Height = 13
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'CODUSUARIOALT'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -11689,9 +11692,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
     object LblUsuCad: TDBText
       Left = 424
       Top = 6
-      Width = 70
-      Height = 14
-      Anchors = [akLeft]
+      Width = 50
+      Height = 13
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'CODUSUARIOCAD'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -11708,7 +11712,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Width = 30
       Height = 13
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Data:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11723,7 +11727,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Width = 68
       Height = 13
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Cadastrado:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText

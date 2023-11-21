@@ -11611,12 +11611,12 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       1008
       45)
     object LCadastro: TLabel
-      Left = 718
+      Left = 726
       Top = 23
       Width = 36
       Height = 16
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Data:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11624,15 +11624,14 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 722
     end
     object LCadastroPor: TLabel
-      Left = 674
+      Left = 682
       Top = 9
       Width = 80
       Height = 16
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Cadastrado:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11640,14 +11639,13 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 678
     end
     object LblDataCad: TDBText
       Left = 764
       Top = 24
       Width = 64
       Height = 16
-      Anchors = [akLeft]
+      Anchors = [akTop, akRight]
       AutoSize = True
       DataField = 'DATACADASTRO'
       Font.Charset = DEFAULT_CHARSET
@@ -11660,9 +11658,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     object LblUsuCad: TDBText
       Left = 764
       Top = 10
-      Width = 80
-      Height = 13
-      Anchors = [akLeft]
+      Width = 59
+      Height = 16
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'CODUSUARIOCAD'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -11674,12 +11673,12 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ShowHint = True
     end
     object LAlteracao: TLabel
-      Left = 869
+      Left = 877
       Top = 23
       Width = 36
       Height = 16
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Data:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11687,15 +11686,14 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 873
     end
     object LAlteradoPor: TLabel
-      Left = 843
+      Left = 851
       Top = 9
       Width = 62
       Height = 16
       Alignment = taRightJustify
-      Anchors = [akRight]
+      Anchors = [akTop, akRight]
       Caption = 'Alterado:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -11703,14 +11701,13 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 847
     end
     object LblDataAlt: TDBText
       Left = 915
       Top = 23
       Width = 57
       Height = 16
-      Anchors = [akLeft]
+      Anchors = [akTop, akRight]
       AutoSize = True
       DataField = 'DATAULTALT'
       Font.Charset = DEFAULT_CHARSET
@@ -11723,9 +11720,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     object LblUsuAlt: TDBText
       Left = 915
       Top = 9
-      Width = 80
-      Height = 13
-      Anchors = [akLeft]
+      Width = 52
+      Height = 16
+      Anchors = [akTop, akRight]
+      AutoSize = True
       DataField = 'CODUSUARIOALT'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

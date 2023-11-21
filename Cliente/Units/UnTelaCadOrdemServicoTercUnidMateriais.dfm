@@ -1,12 +1,11 @@
 inherited FrmTelaCadOrdemServicoTercUnidMateriais: TFrmTelaCadOrdemServicoTercUnidMateriais
   Caption = 'Materiais'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 469
+      ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
@@ -14,8 +13,8 @@ inherited FrmTelaCadOrdemServicoTercUnidMateriais: TFrmTelaCadOrdemServicoTercUn
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Align = alClient
       DataSource = DM.dsOrdemServicoTercUnidMateriais
       DrawingStyle = gdsClassic

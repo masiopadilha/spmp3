@@ -1,15 +1,20 @@
 inherited FrmTelaCadAlertas: TFrmTelaCadAlertas
   Caption = 'Alertas'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    inherited BtnAjuda: TButton
+      Left = 469
+      ExplicitLeft = 469
+    end
+  end
   inherited PCentro: TPanel
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Align = alClient
       DataSource = DM.dsAlertas
       TabOrder = 1

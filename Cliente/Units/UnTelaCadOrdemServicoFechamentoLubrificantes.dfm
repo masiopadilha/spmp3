@@ -1,15 +1,20 @@
 inherited FrmTelaCadOrdemServicoFechamentoLubrificantes: TFrmTelaCadOrdemServicoFechamentoLubrificantes
   Caption = 'Fechamento de Lubrificantes da O.S.'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    inherited BtnAjuda: TButton
+      Left = 468
+      ExplicitLeft = 468
+    end
+  end
   inherited PCentro: TPanel
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 490
-      Height = 154
+      Width = 494
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'

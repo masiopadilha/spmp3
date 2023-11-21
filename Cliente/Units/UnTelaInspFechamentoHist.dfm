@@ -35,9 +35,9 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 968
+      Left = 969
       TabOrder = 4
-      ExplicitLeft = 964
+      ExplicitLeft = 969
     end
     object BtnImprimir: TButton
       Left = 938

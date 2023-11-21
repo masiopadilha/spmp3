@@ -16,9 +16,9 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     Width = 391
     ExplicitWidth = 387
     inherited BtnAjuda: TButton
-      Left = 348
+      Left = 354
       Visible = False
-      ExplicitLeft = 344
+      ExplicitLeft = 354
     end
   end
   inherited PCentro: TPanel
@@ -374,12 +374,10 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   inherited PBotoes: TPanel
     AlignWithMargins = False
     Left = 0
-    Top = 264
     Width = 395
     Height = 0
     Visible = False
     ExplicitLeft = 0
-    ExplicitTop = 261
     ExplicitWidth = 391
     ExplicitHeight = 0
     inherited BtnOK: TButton

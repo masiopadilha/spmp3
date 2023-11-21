@@ -1,7 +1,7 @@
 inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
   Caption = 'Paradas dos Equipamento'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -9,14 +9,13 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
-      Left = 971
-      ExplicitLeft = 971
+      Left = 973
+      ExplicitLeft = 973
     end
     object BtnConsultar: TButton
       Left = 942
@@ -35,13 +34,13 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 502
+    Width = 1006
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
-      Width = 1000
-      Height = 500
+      Width = 1004
+      Height = 503
       ExplicitWidth = 1000
       ExplicitHeight = 500
     end
@@ -67,8 +66,8 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 994
-      Height = 494
+      Width = 998
+      Height = 497
       Align = alClient
       DataSource = DSDados
       DrawingStyle = gdsClassic
@@ -90,14 +89,14 @@ inherited FrmTelaParadasDiarias: TFrmTelaParadasDiarias
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
-    Width = 1004
+    Top = 577
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 601
-    Width = 1004
+    Top = 604
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

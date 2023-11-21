@@ -1,7 +1,7 @@
 inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   Caption = 'Entrada/Sa'#237'da de M'#227'o de Obra'
-  ClientHeight = 386
-  ClientWidth = 769
+  ClientHeight = 389
+  ClientWidth = 773
   Constraints.MaxHeight = 425
   Constraints.MaxWidth = 785
   Constraints.MinHeight = 425
@@ -9,24 +9,23 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   OnCreate = FormCreate
   ExplicitWidth = 785
   ExplicitHeight = 425
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 765
+    Width = 769
     ExplicitWidth = 765
     inherited BtnAjuda: TButton
-      Left = 732
-      ExplicitLeft = 732
+      Left = 734
+      ExplicitLeft = 734
     end
   end
   inherited PCentro: TPanel
-    Width = 763
-    Height = 247
+    Width = 767
+    Height = 250
     ExplicitWidth = 763
     ExplicitHeight = 247
     inherited RGTelas: TRadioGroup
-      Width = 435
-      Height = 245
+      Width = 439
+      Height = 248
       TabOrder = 4
       ExplicitWidth = 435
       ExplicitHeight = 245
@@ -231,10 +230,10 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
     end
     object GrdMovimen: TDBGrid
       AlignWithMargins = True
-      Left = 439
+      Left = 443
       Top = 4
       Width = 320
-      Height = 239
+      Height = 242
       Hint = 
         'Tecle ENTER para entrada de m'#227'o de obra ou d'#234' duplo-clique para ' +
         'libera-la.'
@@ -309,14 +308,14 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 319
-    Width = 765
+    Top = 322
+    Width = 769
     ExplicitTop = 319
     ExplicitWidth = 765
   end
   inherited PBotoes: TPanel
-    Top = 346
-    Width = 765
+    Top = 349
+    Width = 769
     ExplicitTop = 346
     ExplicitWidth = 765
     inherited BtnOK: TButton

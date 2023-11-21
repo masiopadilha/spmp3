@@ -1,20 +1,20 @@
 inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerramentas
   Caption = 'Caixa de Ferramentas'
-  ClientWidth = 524
+  ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
   OnCreate = FormCreate
   ExplicitWidth = 540
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 488
-      ExplicitLeft = 488
+      Left = 489
+      ExplicitLeft = 489
     end
     object BtnImprimir: TButton
-      Left = 459
+      Left = 456
       Top = 17
       Width = 28
       Height = 28
@@ -30,18 +30,18 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
     end
   end
   inherited PCentro: TPanel
-    Width = 518
+    Width = 522
     ExplicitWidth = 518
     inherited RGTelas: TRadioGroup
-      Width = 516
+      Width = 520
       ExplicitWidth = 516
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 510
-      Height = 154
+      Width = 514
+      Height = 157
       Hint = 
         'Tecle ENTER para incluir um registro ou efetue o duplo-clique pa' +
         'ra exclu'#237'-lo'
@@ -146,11 +146,11 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
   end
   inherited PBotoes: TPanel
-    Width = 520
+    Width = 524
     ExplicitWidth = 520
     inherited BtnOK: TButton
       Left = 182

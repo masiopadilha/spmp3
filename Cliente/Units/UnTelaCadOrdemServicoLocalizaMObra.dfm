@@ -18,8 +18,8 @@ inherited FrmTelaCadOrdemServicoLocalizaMObra: TFrmTelaCadOrdemServicoLocalizaMO
       1008
       60)
     inherited BtnAjuda: TButton
-      Left = 981
-      ExplicitLeft = 977
+      Left = 973
+      ExplicitLeft = 973
     end
     object BtnImprimir: TButton
       Left = 941

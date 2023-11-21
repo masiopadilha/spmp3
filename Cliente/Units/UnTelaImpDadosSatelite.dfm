@@ -1,29 +1,36 @@
 inherited FrmTelaImpDadosSatelite: TFrmTelaImpDadosSatelite
   Caption = 'Importar dados do sat'#233'lite'
-  ClientHeight = 341
+  ClientHeight = 344
   Constraints.MaxHeight = 380
   Constraints.MinHeight = 380
   ExplicitHeight = 380
-  PixelsPerInch = 96
   TextHeight = 16
+  inherited PTop: TPanel
+    inherited BtnAjuda: TButton
+      Left = 469
+      ExplicitLeft = 469
+    end
+  end
   inherited PCentro: TPanel
-    Height = 202
+    Height = 205
     ExplicitHeight = 202
     inherited RGTelas: TRadioGroup
-      Height = 200
+      Height = 203
       ExplicitHeight = 200
     end
     object PBase: TPanel
       Left = 1
       Top = 1
-      Width = 496
-      Height = 200
+      Width = 500
+      Height = 203
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 496
+      ExplicitHeight = 200
       object Label5: TLabel
         Left = 11
         Top = 13
@@ -305,11 +312,11 @@ inherited FrmTelaImpDadosSatelite: TFrmTelaImpDadosSatelite
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 274
+    Top = 277
     ExplicitTop = 274
   end
   inherited PBotoes: TPanel
-    Top = 301
+    Top = 304
     ExplicitTop = 301
     inherited BtnOK: TButton
       Caption = 'Atualizar'

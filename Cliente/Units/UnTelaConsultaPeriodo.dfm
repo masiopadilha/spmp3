@@ -1,8 +1,8 @@
 inherited FrmTelaConsultaPeriodo: TFrmTelaConsultaPeriodo
   BorderStyle = bsDialog
   Caption = 'Per'#237'odo de Consulta'
-  ClientHeight = 161
-  ClientWidth = 324
+  ClientHeight = 164
+  ClientWidth = 328
   Constraints.MaxHeight = 200
   Constraints.MaxWidth = 340
   Constraints.MinHeight = 200
@@ -12,22 +12,24 @@ inherited FrmTelaConsultaPeriodo: TFrmTelaConsultaPeriodo
   ExplicitHeight = 200
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 320
-    ExplicitWidth = 330
+    Width = 324
+    ExplicitWidth = 320
     inherited BtnAjuda: TButton
+      Left = 288
       Visible = False
+      ExplicitLeft = 288
     end
   end
   inherited PCentro: TPanel
-    Width = 318
-    Height = 45
-    ExplicitWidth = 328
-    ExplicitHeight = 55
+    Width = 322
+    Height = 48
+    ExplicitWidth = 318
+    ExplicitHeight = 45
     inherited RGTelas: TRadioGroup
       Width = 320
       Height = 46
-      ExplicitWidth = 326
-      ExplicitHeight = 53
+      ExplicitWidth = 316
+      ExplicitHeight = 43
     end
     object CBMes: TComboBox
       Left = 85
@@ -81,18 +83,18 @@ inherited FrmTelaConsultaPeriodo: TFrmTelaConsultaPeriodo
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 117
-    Width = 320
+    Top = 120
+    Width = 324
     Height = 0
-    ExplicitTop = 127
-    ExplicitWidth = 330
+    ExplicitTop = 117
+    ExplicitWidth = 320
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
-    Top = 121
-    Width = 320
-    ExplicitTop = 131
-    ExplicitWidth = 330
+    Top = 124
+    Width = 324
+    ExplicitTop = 121
+    ExplicitWidth = 320
     inherited BtnOK: TButton
       Left = 86
       OnClick = BtnOKClick

@@ -1,23 +1,17 @@
 inherited FrmTelaCadOrdemServicoRecursos: TFrmTelaCadOrdemServicoRecursos
   Caption = 'Recursos da O.S.'
-  ClientHeight = 304
-  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 504
     inherited BtnAjuda: TButton
-      Left = 467
-      ExplicitLeft = 467
+      Left = 469
+      ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
-    Width = 502
-    Height = 165
     inherited RGTelas: TRadioGroup
       Left = 157
       Width = 1
-      Height = 163
       ExplicitLeft = 157
       ExplicitWidth = 1
     end
@@ -111,7 +105,7 @@ inherited FrmTelaCadOrdemServicoRecursos: TFrmTelaCadOrdemServicoRecursos
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 195
+          Width = 233
           Visible = True
         end
         item
@@ -124,13 +118,7 @@ inherited FrmTelaCadOrdemServicoRecursos: TFrmTelaCadOrdemServicoRecursos
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 504
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 504
     inherited BtnOK: TButton
       Left = 100
       ModalResult = 0

@@ -3,27 +3,22 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
   OnShow = FormShow
   TextHeight = 16
   inherited PTop: TPanel
-    ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 506
+      Left = 510
       ExplicitLeft = 506
     end
   end
   inherited PCentro: TPanel
-    ExplicitWidth = 502
-    ExplicitHeight = 165
-    inherited RGTelas: TRadioGroup
-      Height = 160
-    end
     object pBase: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 494
-      Height = 154
+      Height = 157
       Align = alClient
       TabOrder = 1
       ExplicitWidth = 490
+      ExplicitHeight = 154
       object Label1: TLabel
         Left = 29
         Top = 64
@@ -128,11 +123,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
       end
     end
   end
-  inherited PAuxiliares: TPanel
-    ExplicitTop = 237
-  end
   inherited PBotoes: TPanel
-    ExplicitTop = 264
     inherited BtnOK: TButton
       OnClick = BtnOKClick
     end

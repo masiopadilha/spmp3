@@ -1,22 +1,21 @@
 inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamEquipPartesItens
   Caption = 'Itens a Inspecionar'
-  ClientWidth = 784
+  ClientWidth = 788
   Constraints.MaxWidth = 800
   Constraints.MinWidth = 800
   OnCreate = FormCreate
   ExplicitWidth = 800
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 747
-      ExplicitLeft = 747
+      Left = 748
+      ExplicitLeft = 748
     end
   end
   inherited PCentro: TPanel
-    Width = 778
+    Width = 782
     ExplicitWidth = 778
     inherited RGTelas: TRadioGroup
       Left = 207
@@ -29,7 +28,7 @@ inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamE
       Left = 4
       Top = 4
       Width = 200
-      Height = 154
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -72,10 +71,10 @@ inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamE
     end
     object GrdItens: TDBGrid
       AlignWithMargins = True
-      Left = 205
+      Left = 209
       Top = 4
       Width = 569
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alRight
       DataSource = DM.dsLubrificProgFamEquipItens
@@ -165,11 +164,11 @@ inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamE
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited BtnOK: TButton
       Left = 100

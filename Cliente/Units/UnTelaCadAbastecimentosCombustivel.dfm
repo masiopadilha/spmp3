@@ -1,7 +1,7 @@
 inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombustivel
   Caption = 'Combust'#237'vel'
-  ClientHeight = 381
-  ClientWidth = 1008
+  ClientHeight = 384
+  ClientWidth = 1012
   Constraints.MaxHeight = 420
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 420
@@ -9,11 +9,10 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
   OnCreate = FormCreate
   ExplicitWidth = 1024
   ExplicitHeight = 420
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
-    ExplicitWidth = 880
+    Width = 1008
+    ExplicitWidth = 1004
     object Label3: TLabel [1]
       Left = 125
       Top = 33
@@ -36,9 +35,9 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 971
+      Left = 973
       TabOrder = 3
-      ExplicitLeft = 847
+      ExplicitLeft = 973
     end
     object BtnConsultar: TButton
       Left = 403
@@ -77,11 +76,11 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 244
+    Width = 1006
+    Height = 247
     Margins.Bottom = 1
-    ExplicitWidth = 878
-    ExplicitHeight = 164
+    ExplicitWidth = 1002
+    ExplicitHeight = 244
     inherited RGTelas: TRadioGroup
       Left = 188
       Width = 0
@@ -95,16 +94,17 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Left = 1
       Top = 1
       Width = 210
-      Height = 242
+      Height = 245
       Margins.Right = 1
       Align = alLeft
       TabOrder = 1
+      ExplicitHeight = 242
       object GrdCombustivel: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
         Width = 202
-        Height = 234
+        Height = 237
         Align = alClient
         DataSource = DM.dsAbastecimentosCombust
         DrawingStyle = gdsClassic
@@ -143,19 +143,21 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       end
     end
     object PDireita: TPanel
-      Left = 214
+      Left = 218
       Top = 1
       Width = 787
-      Height = 242
+      Height = 245
       Margins.Left = 1
       Align = alRight
       TabOrder = 2
+      ExplicitLeft = 214
+      ExplicitHeight = 242
       object GrdAbastCombust: TDBGrid
         AlignWithMargins = True
         Left = 4
         Top = 4
         Width = 779
-        Height = 205
+        Height = 208
         Margins.Bottom = 32
         Align = alClient
         Color = clBtnFace
@@ -280,12 +282,13 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 314
-    Width = 1004
-    ExplicitWidth = 880
+    Top = 317
+    Width = 1008
+    ExplicitTop = 314
+    ExplicitWidth = 1004
     object LblCustoTotal: TDBText
       AlignWithMargins = True
-      Left = 935
+      Left = 939
       Top = 4
       Width = 65
       Height = 15
@@ -298,14 +301,15 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 811
+      ExplicitLeft = 935
       ExplicitHeight = 13
     end
   end
   inherited PBotoes: TPanel
-    Top = 341
-    Width = 1004
-    ExplicitWidth = 880
+    Top = 344
+    Width = 1008
+    ExplicitTop = 341
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 0
       Visible = False

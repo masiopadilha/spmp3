@@ -21,7 +21,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       ExplicitTop = 15
     end
     object Button6: TButton
-      Left = 942
+      Left = 940
       Top = 15
       Width = 28
       Height = 28

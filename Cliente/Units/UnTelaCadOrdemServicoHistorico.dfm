@@ -65,7 +65,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       OnClick = BtnConsultarClick
     end
     object BtnImprimir: TButton
-      Left = 941
+      Left = 937
       Top = 17
       Width = 28
       Height = 28

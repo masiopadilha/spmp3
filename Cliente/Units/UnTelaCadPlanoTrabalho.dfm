@@ -1,26 +1,38 @@
 inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
   Hint = 'Next|Go to the next tab'
   Caption = 'Plano de Trabalho'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    inherited LCadastro: TLabel
+      ExplicitLeft = 730
+    end
+    inherited LCadastroPor: TLabel
+      ExplicitLeft = 686
+    end
     inherited LblDataCad: TDBText
       DataSource = DM.dsPlanoTrabalho
+      ExplicitLeft = 768
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPlanoTrabalho
+      ExplicitLeft = 768
+    end
+    inherited LAlteracao: TLabel
+      ExplicitLeft = 881
+    end
+    inherited LAlteradoPor: TLabel
+      ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPlanoTrabalho
+      ExplicitLeft = 919
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsPlanoTrabalho
+      ExplicitLeft = 919
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 63
     ExplicitHeight = 63
     object Label4: TLabel
@@ -118,7 +130,6 @@ inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
   end
   inherited PProgramacao: TPanel
     Top = 118
-    Width = 1008
     Height = 424
     ExplicitTop = 118
     ExplicitHeight = 424
@@ -157,18 +168,6 @@ inherited FrmTelaCadPlanoTrabalho: TFrmTelaCadPlanoTrabalho
     Align = alNone
     ExplicitWidth = 300
     ExplicitHeight = 0
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-  end
-  inherited PBase: TPanel
-    Top = 549
-    Width = 1008
   end
   inherited MainMenuPadrao: TMainMenu
     object Formatar1: TMenuItem

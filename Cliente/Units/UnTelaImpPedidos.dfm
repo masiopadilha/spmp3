@@ -1,56 +1,58 @@
 inherited FrmTelaImpPedidos: TFrmTelaImpPedidos
   Caption = 'Pedidos de Materiais'
-  ClientWidth = 664
+  ClientWidth = 668
   Constraints.MaxWidth = 680
   Constraints.MinWidth = 680
   OnCreate = FormCreate
   ExplicitWidth = 680
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 660
+    Width = 664
     ExplicitWidth = 660
     inherited BtnAjuda: TButton
-      Left = 627
-      ExplicitLeft = 627
+      Left = 628
+      ExplicitLeft = 628
     end
     object BtnArquivo: TButton
-      Left = 597
-      Top = 13
+      Left = 596
+      Top = 17
       Width = 28
       Height = 28
       Hint = 'Importar dados'
       DisabledImageIndex = 113
       ImageAlignment = iaCenter
       ImageIndex = 113
+      Images = DM.ImageListBotoes
       TabOrder = 1
       OnClick = BtnArquivoClick
     end
   end
   inherited PCentro: TPanel
-    Width = 658
+    Width = 662
     ExplicitWidth = 658
     inherited RGTelas: TRadioGroup
-      Width = 656
+      Width = 660
       ExplicitWidth = 656
     end
     object PBase: TPanel
       Left = 1
       Top = 1
-      Width = 656
-      Height = 160
+      Width = 660
+      Height = 163
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 656
+      ExplicitHeight = 160
       object DBGrid1: TDBGrid
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 650
-        Height = 154
+        Width = 654
+        Height = 157
         Margins.Left = 1
         Margins.Top = 1
         Margins.Right = 1
@@ -185,11 +187,11 @@ inherited FrmTelaImpPedidos: TFrmTelaImpPedidos
     end
   end
   inherited PAuxiliares: TPanel
-    Width = 660
+    Width = 664
     ExplicitWidth = 660
   end
   inherited PBotoes: TPanel
-    Width = 660
+    Width = 664
     ExplicitWidth = 660
     inherited BtnOK: TButton
       Left = 252

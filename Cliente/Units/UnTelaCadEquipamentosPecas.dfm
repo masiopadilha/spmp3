@@ -1,12 +1,11 @@
 inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   Caption = 'Pe'#231'as do Equipamento'
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PTop: TPanel
     Left = 3
     Top = 3
-    Width = 498
+    Width = 502
     Margins.Left = 3
     Margins.Top = 3
     Margins.Right = 3
@@ -20,15 +19,11 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
       Margins.Right = 4
       Margins.Bottom = 4
     end
-    inherited BtnAjuda: TButton
-      Left = 465
-      ExplicitLeft = 465
-    end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 70
-    Width = 496
+    Width = 500
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -37,7 +32,7 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
     ExplicitTop = 70
     ExplicitWidth = 496
     inherited RGTelas: TRadioGroup
-      Width = 494
+      Width = 498
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
@@ -48,8 +43,8 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 488
-      Height = 154
+      Width = 492
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -150,8 +145,8 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   end
   inherited PAuxiliares: TPanel
     Left = 1
-    Top = 237
-    Width = 502
+    Top = 240
+    Width = 506
     Margins.Left = 1
     Margins.Top = 1
     Margins.Right = 1
@@ -162,8 +157,8 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   end
   inherited PBotoes: TPanel
     Left = 1
-    Top = 262
-    Width = 502
+    Top = 265
+    Width = 506
     Margins.Left = 1
     Margins.Top = 1
     Margins.Right = 1

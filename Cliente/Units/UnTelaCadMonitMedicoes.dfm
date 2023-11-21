@@ -1,7 +1,7 @@
 inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   Caption = 'Medi'#231#245'es do Equipamento'
-  ClientHeight = 341
-  ClientWidth = 514
+  ClientHeight = 344
+  ClientWidth = 518
   Constraints.MaxHeight = 380
   Constraints.MaxWidth = 530
   Constraints.MinHeight = 380
@@ -11,23 +11,23 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
   ExplicitHeight = 380
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 510
-    ExplicitWidth = 504
+    Width = 514
+    ExplicitWidth = 510
     inherited BtnAjuda: TButton
-      Left = 497
-      ExplicitLeft = 487
+      Left = 479
+      ExplicitLeft = 479
     end
   end
   inherited PCentro: TPanel
-    Width = 508
-    Height = 202
-    ExplicitWidth = 502
-    ExplicitHeight = 185
+    Width = 512
+    Height = 205
+    ExplicitWidth = 508
+    ExplicitHeight = 202
     inherited RGTelas: TRadioGroup
       Width = 510
       Height = 203
-      ExplicitWidth = 500
-      ExplicitHeight = 183
+      ExplicitWidth = 506
+      ExplicitHeight = 200
     end
     object Panel1: TPanel
       Left = 1
@@ -37,8 +37,8 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 500
-      ExplicitHeight = 183
+      ExplicitWidth = 506
+      ExplicitHeight = 200
       object Label7: TLabel
         Left = 5
         Top = 6
@@ -70,7 +70,7 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       end
       object EdtFuncionario: TEdit
         Left = 5
-        Top = 173
+        Top = 176
         Width = 258
         Height = 24
         Color = clBtnFace
@@ -81,7 +81,7 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       end
       object EdtData: TDateTimePicker
         Left = 296
-        Top = 175
+        Top = 178
         Width = 89
         Height = 21
         Date = 44816.000000000000000000
@@ -90,7 +90,7 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       end
       object BtnCadastrar: TButton
         Left = 481
-        Top = 173
+        Top = 177
         Width = 22
         Height = 23
         Hint = 'Cadastrar'
@@ -105,7 +105,7 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       end
       object BtnEquipamento: TButton
         Left = 265
-        Top = 173
+        Top = 176
         Width = 25
         Height = 24
         Hint = 'Consultar'
@@ -120,7 +120,7 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
       end
       object EdtMedicao: TEdit
         Left = 392
-        Top = 173
+        Top = 176
         Width = 84
         Height = 24
         TabOrder = 5
@@ -150,16 +150,16 @@ inherited FrmTelaCadMonitMedicoes: TFrmTelaCadMonitMedicoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 274
-    Width = 510
-    ExplicitTop = 257
-    ExplicitWidth = 504
+    Top = 277
+    Width = 514
+    ExplicitTop = 274
+    ExplicitWidth = 510
   end
   inherited PBotoes: TPanel
-    Top = 301
-    Width = 510
-    ExplicitTop = 284
-    ExplicitWidth = 504
+    Top = 304
+    Width = 514
+    ExplicitTop = 301
+    ExplicitWidth = 510
     inherited BtnOK: TButton
       Left = 35
       Visible = False
