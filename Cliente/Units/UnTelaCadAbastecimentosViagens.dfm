@@ -1,39 +1,38 @@
 inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
   Caption = 'Viagens'
-  ClientHeight = 424
-  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
     ParentFont = False
     inherited LAlteracao: TLabel
-      Left = 494
+      ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 516
+      ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsViagens
+      ExplicitLeft = 560
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsViagens
+      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsViagens
+      ExplicitLeft = 560
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsViagens
+      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
-      Left = 388
+      ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 350
+      ExplicitLeft = 361
     end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 323
     object Label24: TLabel
       Left = 146
       Top = 41
@@ -377,7 +376,7 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       Left = 88
       Top = 230
       Width = 220
-      Height = 58
+      Height = 67
       Caption = 'Combustivel:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -449,7 +448,7 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
       Left = 314
       Top = 230
       Width = 220
-      Height = 58
+      Height = 67
       Caption = 'Lubrificante:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -517,13 +516,5 @@ inherited FrmTelaCadAbastecimentosViagens: TFrmTelaCadAbastecimentosViagens
         ParentFont = False
       end
     end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 405
-    Width = 628
-  end
-  inherited PAuxiliares: TPanel
-    Top = 378
-    Width = 624
   end
 end

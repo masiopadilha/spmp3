@@ -1,6 +1,5 @@
 inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
   Caption = 'Kit de Pe'#231'as de Reposi'#231#227'o'
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
     inherited LblDataAlt: TDBText
@@ -81,7 +80,7 @@ inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
       AlignWithMargins = True
       Left = 4
       Top = 36
-      Width = 612
+      Width = 616
       Height = 280
       Hint = 
         'Tecle ENTER na(s) coluna(s) para incluir um registro ou efetue o' +
@@ -188,6 +187,24 @@ inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
           Visible = True
         end>
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Panels = <
+      item
+        Text = ' Usu'#225'rio:'
+        Width = 105
+      end
+      item
+        Width = 135
+      end
+      item
+        Text = ' Empresa:'
+        Width = 165
+      end
+      item
+        Text = ' Grupo:'
+        Width = 190
+      end>
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 382

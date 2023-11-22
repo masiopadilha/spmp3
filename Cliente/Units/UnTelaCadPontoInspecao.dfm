@@ -6,28 +6,40 @@ inherited FrmTelaCadPontoInspecao: TFrmTelaCadPontoInspecao
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 502
+      Left = 506
+      ExplicitLeft = 502
     end
     inherited LAlteradoPor: TLabel
-      Left = 524
+      Left = 528
+      ExplicitLeft = 524
     end
     inherited LblDataAlt: TDBText
+      Left = 560
       DataSource = DM.dsPontosInspecao
+      ExplicitLeft = 560
     end
     inherited LblDataCad: TDBText
+      Left = 432
       DataSource = DM.dsPontosInspecao
+      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
+      Left = 560
       DataSource = DM.dsPontosInspecao
+      ExplicitLeft = 560
     end
     inherited LblUsuCad: TDBText
+      Left = 432
       DataSource = DM.dsPontosInspecao
+      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
-      Left = 396
+      Left = 400
+      ExplicitLeft = 396
     end
     inherited LCadastroPor: TLabel
-      Left = 358
+      Left = 362
+      ExplicitLeft = 358
     end
   end
   inherited PCentro: TPanel

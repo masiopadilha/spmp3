@@ -3,60 +3,72 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LAlteracao: TLabel
-      Left = 506
+      Left = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 528
+      Left = 527
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
+      ExplicitLeft = 556
     end
     inherited LblDataCad: TDBText
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
+      ExplicitLeft = 428
     end
     inherited LblUsuAlt: TDBText
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
+      ExplicitLeft = 556
     end
     inherited LblUsuCad: TDBText
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
+      ExplicitLeft = 428
     end
     inherited LCadastro: TLabel
-      Left = 400
+      Left = 399
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 362
+      Left = 361
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 361
     end
   end
   inherited PCentro: TPanel

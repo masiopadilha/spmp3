@@ -212,6 +212,8 @@ if DM.FDataSetParam.IsEmpty = False then
 
     DM.ExibeFoto(DM.qryPneusChassiImagens, 'IMAGEM', ImgChassi);
     DM.qryPneusChassiPosicoes.Open;
+    DM.qryPneusChassiPosicoes.Last;
+    DM.qryPneusChassiPosicoes.First;
     DM.qryPneusChassiPosicoes.Edit;
 
     LOdometro := DM.qryPneusChassiCONTADOR.AsInteger;

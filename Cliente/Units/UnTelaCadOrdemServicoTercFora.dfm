@@ -6,45 +6,44 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      Left = 691
+      Left = 695
       ExplicitLeft = 691
     end
     inherited LCadastroPor: TLabel
-      Left = 647
+      Left = 651
       ExplicitLeft = 647
     end
     inherited LblDataCad: TDBText
-      Left = 733
+      Left = 737
       DataSource = DM.dsOrdemServicoTercFora
       ExplicitLeft = 733
     end
     inherited LblUsuCad: TDBText
-      Left = 733
+      Left = 737
       DataSource = DM.dsOrdemServicoTercFora
       ExplicitLeft = 733
     end
     inherited LAlteracao: TLabel
-      Left = 853
+      Left = 857
       ExplicitLeft = 853
     end
     inherited LAlteradoPor: TLabel
-      Left = 827
+      Left = 831
       ExplicitLeft = 827
     end
     inherited LblDataAlt: TDBText
-      Left = 895
+      Left = 899
       DataSource = DM.dsOrdemServicoTercFora
       ExplicitLeft = 895
     end
     inherited LblUsuAlt: TDBText
-      Left = 895
+      Left = 899
       DataSource = DM.dsOrdemServicoTercFora
       ExplicitLeft = 895
     end
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 91
       Top = 31
@@ -285,7 +284,6 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 391
-    ExplicitWidth = 1004
     ExplicitHeight = 391
     inherited Label2: TLabel
       Width = 194
@@ -564,20 +562,14 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
     Top = 589
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 549
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
   end
   inherited TimerLetreiro: TTimer
     Left = 442

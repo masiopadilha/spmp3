@@ -1,65 +1,82 @@
 inherited FrmTelaCadFeriados: TFrmTelaCadFeriados
   Caption = 'Feriados'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 506
+      Left = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 528
+      Left = 527
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFeriados
+      ExplicitLeft = 560
     end
     inherited LblDataCad: TDBText
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFeriados
+      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFeriados
+      ExplicitLeft = 560
     end
     inherited LblUsuCad: TDBText
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFeriados
+      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
-      Left = 400
+      Left = 399
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 362
+      Left = 361
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 361
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
       Left = 182
       Top = 90
@@ -120,5 +137,13 @@ inherited FrmTelaCadFeriados: TFrmTelaCadFeriados
       EditMask = '!00/00;1;_'
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

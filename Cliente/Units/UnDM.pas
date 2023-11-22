@@ -6813,9 +6813,9 @@ if FrmTelaCadPneusChassi <> nil then
             begin BtnPneu.Left := 58; BtnPneu.Top := 24; end;
           if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
             begin BtnPneu.Left := 58; BtnPneu.Top := 126; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Direito'   then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito'   then
             begin BtnPneu.Left := 163; BtnPneu.Top := 24; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Esquerdo'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo'  then
             begin BtnPneu.Left := 163; BtnPneu.Top := 126; end;
         end;
       if (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Duplo') or (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Frontal') or (DM.qryPneusChassiCHASSI.AsString = 'Carro de Passeio C/Diferencial Trazeiro') then
@@ -6824,112 +6824,112 @@ if FrmTelaCadPneusChassi <> nil then
             begin BtnPneu.Left := 25; BtnPneu.Top := 19; end;
           if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Dianteiro Lado Esquerdo' then
             begin BtnPneu.Left := 25; BtnPneu.Top := 97; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Direito'   then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito'   then
             begin BtnPneu.Left := 172; BtnPneu.Top := 19; end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Esquerdo'  then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo'  then
             begin BtnPneu.Left := 172; BtnPneu.Top := 97; end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 1 Eixo' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 2 Eixos' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
         end;
       if DM.qryPneusChassiCHASSI.AsString = 'Carroceria de Carreta C/ 3 Eixos' then
         begin
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '1° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 124; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 172; BtnPneu.Top := 89;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 24;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 98;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 33;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 229; BtnPneu.Top := 89;
             end;
@@ -6944,27 +6944,27 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 92;
             end;
@@ -6972,15 +6972,15 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '4° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 92;
             end;
@@ -6995,27 +6995,27 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 25;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo' then
             begin
               BtnPneu.Left := 75; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 233; BtnPneu.Top := 92;
             end;
@@ -7030,35 +7030,35 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 170; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 232; BtnPneu.Top := 92;
             end;
@@ -7073,21 +7073,21 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 22; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
-              BtnPneu.Left := 232; BtnPneu.Top := 27;
+              BtnPneu.Left := 170; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
-              BtnPneu.Left := 232; BtnPneu.Top := 101;
+              BtnPneu.Left := 170; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
-              BtnPneu.Left := 232; BtnPneu.Top := 36;
+              BtnPneu.Left := 170; BtnPneu.Top := 36;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
-              BtnPneu.Left := 232; BtnPneu.Top := 92;
+              BtnPneu.Left := 170; BtnPneu.Top := 92;
             end;
         end;
       if (DM.qryPneusChassiCHASSI.AsString = 'Ônibus C/ 2 Eixos') then
@@ -7100,19 +7100,19 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 100;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 95;
             end;
@@ -7127,35 +7127,35 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 24; BtnPneu.Top := 100;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 215; BtnPneu.Top := 95;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 31;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 86;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 95;
             end;
@@ -7170,19 +7170,19 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 00; BtnPneu.Top := 114;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 200; BtnPneu.Top := 23;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 200; BtnPneu.Top := 124;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 270; BtnPneu.Top := 23;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 270; BtnPneu.Top := 124;
             end;
@@ -7197,35 +7197,35 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 20; BtnPneu.Top := 105;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 213; BtnPneu.Top := 92;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 27;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Externo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Externo' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 101;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Direito Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Direito Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 37;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3º Eixo Tras. Lado Esquerdo Interno' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '3° Eixo Tras. Lado Esquerdo Interno' then
             begin
               BtnPneu.Left := 273; BtnPneu.Top := 92;
             end;
@@ -7240,19 +7240,19 @@ if FrmTelaCadPneusChassi <> nil then
               begin
                 BtnPneu.Left := 20; BtnPneu.Top := 105;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Externo' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Externo' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 27;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Externo' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Externo' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 101;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Direito Interno' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Direito Interno' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 37;
               end;
-            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Tras. Lado Esquerdo Interno' then
+            if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Tras. Lado Esquerdo Interno' then
               begin
                 BtnPneu.Left := 273; BtnPneu.Top := 92;
               end;
@@ -7326,11 +7326,11 @@ if FrmTelaCadPneusChassi <> nil then
             begin
               BtnPneu.Left := 12; BtnPneu.Top := 112;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Direito' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Direito' then
             begin
               BtnPneu.Left := 145; BtnPneu.Top := 21;
             end;
-          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2º Eixo Traseiro Lado Esquerdo' then
+          if DM.qryPneusChassiPosicoesPOSICAO.AsString = '2° Eixo Traseiro Lado Esquerdo' then
             begin
               BtnPneu.Left := 145; BtnPneu.Top := 123;
             end;

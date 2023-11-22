@@ -1,78 +1,77 @@
 inherited FrmTelaCadImagens: TFrmTelaCadImagens
   Caption = 'Imagens'
-  ClientHeight = 424
-  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
     inherited LAlteracao: TLabel
-      Left = 502
+      Left = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 524
+      Left = 527
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
-      Width = 75
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
-      ExplicitWidth = 75
+      ExplicitLeft = 556
     end
     inherited LblDataCad: TDBText
-      Width = 77
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
-      ExplicitWidth = 77
+      ExplicitLeft = 428
     end
     inherited LblUsuAlt: TDBText
-      Width = 75
+      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
-      ExplicitWidth = 75
+      ExplicitLeft = 556
     end
     inherited LblUsuCad: TDBText
-      Width = 77
+      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsImagens
-      ExplicitWidth = 77
+      ExplicitLeft = 428
     end
     inherited LCadastro: TLabel
-      Left = 396
+      Left = 399
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 358
+      Left = 361
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 361
     end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 323
     object Label2: TLabel
       Left = 44
       Top = 73
@@ -252,14 +251,6 @@ inherited FrmTelaCadImagens: TFrmTelaCadImagens
       OnClick = BtnLimparEquipClick
       OnExit = TabNextTab1AfterTabChange
     end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 405
-    Width = 628
-  end
-  inherited PAuxiliares: TPanel
-    Top = 378
-    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 350
