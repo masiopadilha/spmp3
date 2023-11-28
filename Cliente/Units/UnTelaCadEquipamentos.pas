@@ -1100,6 +1100,7 @@ begin
     DM.qryAuxiliar2.FieldByName('CODEQUIPAMENTO').AsString       := DM.qryEquipamentosCODIGO.AsString;
     DM.qryAuxiliar2.FieldByName('CODMANUTPROGFAMEQUIP').AsString := DM.qryClonarManutCODMANUTPROGFAMEQUIP.AsString;
     DM.qryAuxiliar2.FieldByName('DESCRICAO').AsString            := DM.qryClonarManutDESCRICAO.AsString;
+    DM.qryAuxiliar2.FieldByName('MATRICULA').AsString            := DM.qryClonarManutMATRICULA.AsString;
     DM.qryAuxiliar2.FieldByName('CRITICIDADE').AsString          := DM.qryClonarManutCRITICIDADE.AsString;
     DM.qryAuxiliar2.FieldByName('FREQUENCIA1').AsString          := DM.qryClonarManutFREQUENCIA1.AsString;
     DM.qryAuxiliar2.FieldByName('DTAINICIO1').AsString           := DM.qryClonarManutDTAINICIO1.AsString;
@@ -1142,6 +1143,7 @@ begin
     DM.qryAuxiliar2.FieldByName('CODEMPRESA').AsString           := DM.FCodEmpresa;
     DM.qryAuxiliar2.FieldByName('CODEQUIPAMENTO').AsString       := DM.qryEquipamentosCODIGO.AsString;
     DM.qryAuxiliar2.FieldByName('CODLUBRIFICPROGFAMEQUIP').AsString := DM.qryClonarLubrificCODLUBRIFICPROGFAMEQUIP.AsString;
+    DM.qryAuxiliar2.FieldByName('MATRICULA').AsString            := DM.qryClonarLubrificMATRICULA.AsString;
     DM.qryAuxiliar2.FieldByName('DESCRICAO').AsString            := DM.qryClonarLubrificDESCRICAO.AsString;
     DM.qryAuxiliar2.FieldByName('CRITICIDADE').AsString          := DM.qryClonarLubrificCRITICIDADE.AsString;
     DM.qryAuxiliar2.FieldByName('FREQUENCIA1').AsString          := DM.qryClonarLubrificFREQUENCIA1.AsString;

@@ -5558,6 +5558,8 @@ type
     qryAltCodFamilia: TFDQuery;
     qryConfigsversion: TIntegerField;
     qryConfigsautoupdate: TBooleanField;
+    qryClonarLubrificMATRICULA: TStringField;
+    qryClonarManutMATRICULA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

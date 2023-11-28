@@ -25,13 +25,11 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       DataSource = DM.dsEquipamentos
     end
     inherited LblUsuCad: TDBText
-      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitWidth = 87
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -53,13 +51,11 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       DataSource = DM.dsEquipamentos
     end
     inherited LblUsuAlt: TDBText
-      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitWidth = 87
     end
     inherited BtnNovo: TButton
       Margins.Left = 4

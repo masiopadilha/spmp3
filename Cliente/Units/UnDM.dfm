@@ -53870,6 +53870,7 @@ object DM: TDM
       '    , `manutprogequipamento`.`REPROGRAMAR1`'
       '    , `manutprogequipamento`.`GRUPOINSP`'
       '    , `manutprogequipamento`.`DTAINICIO1`'
+      '    , `manutprogequipamento`.`MATRICULA`'
       '    '
       'FROM'
       '    `manutprogequipamento`'
@@ -53952,6 +53953,12 @@ object DM: TDM
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
     end
+    object qryClonarManutMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Size = 9
+    end
   end
   object dsClonarManut: TDataSource
     DataSet = qryClonarManut
@@ -53974,6 +53981,7 @@ object DM: TDM
       '    , `lubrificprogequipamento`.`REPROGRAMAR1`'
       '    , `lubrificprogequipamento`.`GRUPOINSP`'
       '    , `lubrificprogequipamento`.`DTAINICIO1`'
+      '    , `lubrificprogequipamento`.`MATRICULA`'
       ''
       ''
       'FROM'
@@ -54057,6 +54065,12 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DTAINICIO1'
       Origin = 'DTAINICIO1'
+    end
+    object qryClonarLubrificMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Size = 9
     end
   end
   object dsClonarLubrific: TDataSource
