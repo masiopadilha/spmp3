@@ -419,4 +419,32 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       ExplicitLeft = 465
     end
   end
+  object PopupMenuRelat: TPopupMenu
+    Left = 684
+    Top = 16
+    object Ficha1: TMenuItem
+      Caption = 'Ficha'
+    end
+    object Lista1: TMenuItem
+      Caption = 'Lista'
+      object Simples1: TMenuItem
+        Caption = 'Simples'
+      end
+      object Completa1: TMenuItem
+        Caption = 'Completa'
+      end
+      object MaodeObra1: TMenuItem
+        Caption = 'M'#227'o de Obra'
+      end
+      object Inspecoes1: TMenuItem
+        Caption = 'Inspe'#231#245'es'
+      end
+      object Exportar1: TMenuItem
+        Caption = 'Exportar Excel (.csv)'
+      end
+    end
+    object Checklist1: TMenuItem
+      Caption = 'Checklist'
+    end
+  end
 end

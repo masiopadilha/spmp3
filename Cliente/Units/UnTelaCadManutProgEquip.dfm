@@ -1,10 +1,7 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -25,13 +22,11 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuCad: TDBText
-      Width = 88
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitWidth = 88
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -53,13 +48,11 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuAlt: TDBText
-      Width = 88
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitWidth = 88
     end
     inherited BtnNovo: TButton
       Margins.Left = 4
@@ -111,8 +104,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -352,9 +343,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 122
-    ExplicitWidth = 1004
     ExplicitHeight = 122
     inherited Label2: TLabel
       Width = 132
@@ -580,10 +569,8 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 277
-    Width = 1008
     Height = 268
     ExplicitTop = 277
-    ExplicitWidth = 1004
     ExplicitHeight = 265
     inherited Label3: TLabel
       Width = 93
@@ -778,23 +765,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
       ImageIndex = 104
@@ -802,17 +773,22 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited MainMenuPadrao: TMainMenu
-    Left = 280
-    Top = 22
+    Left = 768
+    Top = 158
   end
   inherited TimerLetreiro: TTimer
-    Top = 22
+    Left = 768
+    Top = 219
   end
   inherited TimerAlertas: TTimer
-    Left = 410
-    Top = 22
+    Left = 858
+    Top = 219
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 172
+  end
+  inherited ActionList1: TActionList
+    Left = 858
+    Top = 158
   end
 end

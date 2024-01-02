@@ -9,7 +9,7 @@ uses
   Vcl.ComCtrls, Data.DB, FireDAC.Stan.Param, JvExComCtrls, JvDateTimePicker,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus;
 
 type
   TFrmTelaCadFuncionariosHist = class(TFrmTelaPaiOkCancel)
@@ -25,6 +25,15 @@ type
     CBConsSimples: TComboBox;
     GrdFuncionarios: TDBGrid;
     BtnImprimir: TButton;
+    PopupMenuRelat: TPopupMenu;
+    Ficha1: TMenuItem;
+    Lista1: TMenuItem;
+    Simples1: TMenuItem;
+    Completa1: TMenuItem;
+    MaodeObra1: TMenuItem;
+    Inspecoes1: TMenuItem;
+    Exportar1: TMenuItem;
+    Checklist1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnConsultarClick(Sender: TObject);
@@ -111,11 +120,13 @@ begin
   inherited;
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
-  DmRelatorios.frxRFuncionariosHist.ShowReport();
-  if DM.FParamAuxiliar[0] <> '' then
-    DM.qryFuncionariosHist.Locate('MATRICULA', DM.FParamAuxiliar[0], [])
-  else
-    DM.qryFuncionariosHist.First;
+
+DmRelatorios.frxRFuncionariosHist.ShowReport();
+
+if DM.FParamAuxiliar[0] <> '' then
+  DM.qryFuncionariosHist.Locate('MATRICULA', DM.FParamAuxiliar[0], [])
+else
+  DM.qryFuncionariosHist.First;
 end;
 
 procedure TFrmTelaCadFuncionariosHist.CBConsSimplesChange(Sender: TObject);
