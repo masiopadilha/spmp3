@@ -1212,29 +1212,37 @@ GrdRota.Columns[Column.Index].Title.Font.Size := 9;
 
 GrdRota.Columns[0].Visible := False;
 GrdRota.Columns[1].Visible := False;
+GrdRota.Columns[2].Visible := False;
+GrdRota.Columns[3].Visible := False;
+GrdRota.Columns[4].Visible := False;
 GrdRota.Columns[5].Visible := False;
-GrdRota.Columns[6].Visible := False;
-GrdRota.Columns[9].Visible := False;
-GrdRota.Columns[10].Visible := False;
 
-GrdRota.Columns[2].Title.Font.Style:= [fsBold];
-GrdRota.Columns[2].Title.Caption   := 'OS';
-GrdRota.Columns[2].Title.Alignment := taCenter;
-GrdRota.Columns[2].Alignment       := taCenter;
-GrdRota.Columns[3].Title.Caption   := 'Rota';
-DM.qryRotaPeriodicas.Fields[3].DisplayWidth := 25;
-GrdRota.Columns[4].Title.Caption   := 'Freq.';
-GrdRota.Columns[4].Title.Alignment := taCenter;
-GrdRota.Columns[4].Alignment       := taCenter;
-DM.qryRotaPeriodicas.Fields[4].DisplayWidth := 8;
-GrdRota.Columns[7].Title.Caption   := 'Vencida';
+GrdRota.Columns[6].Title.Font.Style:= [fsBold];
+GrdRota.Columns[6].Title.Alignment := taCenter;
 GrdRota.Columns[7].Title.Alignment := taCenter;
-GrdRota.Columns[7].Alignment       := taCenter;
-DM.qryRotaPeriodicas.Fields[7].DisplayWidth := 10;
-GrdRota.Columns[8].Title.Caption   := 'Situação';
-GrdRota.Columns[8].Title.Alignment := taCenter;
-GrdRota.Columns[8].Alignment       := taCenter;
-DM.qryRotaPeriodicas.Fields[8].DisplayWidth := 18;
+//GrdRota.Columns[3].Title.Alignment := taCenter;
+//GrdRota.Columns[4].Title.Alignment := taCenter;
+//GrdRota.Columns[5].Title.Alignment := taCenter;
+//GrdRota.Columns[6].Title.Font.Style:= [fsBold];
+
+//GrdRota.Columns[6].Title.Caption   := 'OS';
+//GrdRota.Columns[6].Title.Alignment := taCenter;
+//GrdRota.Columns[6].Alignment       := taCenter;
+//DM.qryRotaPeriodicas.Fields[6].DisplayWidth := 9;
+//GrdRota.Columns[7].Title.Caption   := 'Situação';
+//GrdRota.Columns[7].Title.Alignment := taCenter;
+//GrdRota.Columns[7].Alignment       := taCenter;
+//DM.qryRotaPeriodicas.Fields[7].DisplayWidth := 18;
+//GrdRota.Columns[7].Title.Caption   := 'Rota';
+//DM.qryRotaPeriodicas.Fields[8].DisplayWidth := 25;
+//GrdRota.Columns[9].Title.Caption   := 'Freq.';
+//GrdRota.Columns[9].Title.Alignment := taCenter;
+//GrdRota.Columns[9].Alignment       := taCenter;
+//DM.qryRotaPeriodicas.Fields[9].DisplayWidth := 8;
+//GrdRota.Columns[10].Title.Caption   := 'Vencida';
+//GrdRota.Columns[10].Title.Alignment := taCenter;
+//GrdRota.Columns[10].Alignment       := taCenter;
+//DM.qryRotaPeriodicas.Fields[10].DisplayWidth := 10;
 
 if (Column.Field.FieldName = 'SITUACAOOS') then
   begin

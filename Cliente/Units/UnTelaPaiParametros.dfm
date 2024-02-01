@@ -11612,7 +11612,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       624
       45)
     object LAlteracao: TLabel
-      Left = 505
+      Left = 509
       Top = 6
       Width = 52
       Height = 13
@@ -11628,7 +11628,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ExplicitLeft = 497
     end
     object LAlteradoPor: TLabel
-      Left = 527
+      Left = 531
       Top = 23
       Width = 30
       Height = 13
@@ -11644,7 +11644,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ExplicitLeft = 519
     end
     object LblDataAlt: TDBText
-      Left = 560
+      Left = 564
       Top = 23
       Width = 49
       Height = 13
@@ -11657,10 +11657,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 556
+      ExplicitLeft = 560
     end
     object LblDataCad: TDBText
-      Left = 432
+      Left = 436
       Top = 23
       Width = 55
       Height = 13
@@ -11673,10 +11673,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 428
+      ExplicitLeft = 432
     end
     object LblUsuAlt: TDBText
-      Left = 560
+      Left = 564
       Top = 6
       Width = 44
       Height = 13
@@ -11691,10 +11691,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 556
+      ExplicitLeft = 560
     end
     object LblUsuCad: TDBText
-      Left = 432
+      Left = 436
       Top = 6
       Width = 50
       Height = 13
@@ -11709,10 +11709,10 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 428
+      ExplicitLeft = 432
     end
     object LCadastro: TLabel
-      Left = 399
+      Left = 403
       Top = 23
       Width = 30
       Height = 13
@@ -11728,7 +11728,7 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ExplicitLeft = 391
     end
     object LCadastroPor: TLabel
-      Left = 361
+      Left = 365
       Top = 6
       Width = 68
       Height = 13

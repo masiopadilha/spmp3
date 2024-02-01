@@ -1,38 +1,38 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
+  ClientHeight = 624
+  ClientWidth = 1012
   OnShow = FormShow
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
-      ExplicitLeft = 730
+      ExplicitLeft = 738
     end
     inherited LCadastroPor: TLabel
-      ExplicitLeft = 686
+      ExplicitLeft = 694
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
-      ExplicitLeft = 768
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
-      ExplicitLeft = 768
     end
     inherited LAlteracao: TLabel
-      ExplicitLeft = 881
+      ExplicitLeft = 889
     end
     inherited LAlteradoPor: TLabel
-      ExplicitLeft = 855
+      ExplicitLeft = 863
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsSolicitacaoTrab
-      ExplicitLeft = 919
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsSolicitacaoTrab
-      ExplicitLeft = 919
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label5: TLabel
       Left = 57
       Top = 32
@@ -217,6 +217,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 165
     ExplicitHeight = 165
     inherited Label2: TLabel
@@ -515,6 +516,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PDiversos: TPanel
     Top = 320
+    Width = 1008
     Height = 225
     ExplicitTop = 320
     ExplicitHeight = 222
@@ -611,14 +613,17 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited StatusBar1: TStatusBar
     Top = 563
+    Width = 1012
     ExplicitTop = 560
   end
   inherited PAlertas: TPanel
     Top = 547
+    Width = 1012
     ExplicitTop = 544
   end
   inherited PBase: TPanel
     Top = 584
+    Width = 1008
     ExplicitTop = 581
   end
   inherited TimerAlertas: TTimer
@@ -626,6 +631,10 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 208
+    object Matricula1: TMenuItem
+      Caption = 'Matr'#237'cula'
+      OnClick = Matricula1Click
+    end
   end
   object PopupMenuCons: TPopupMenu
     Left = 162

@@ -1,37 +1,50 @@
 inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
+  Hint = 'Criar inspe'#231#245'es nos equipamentos da fam'#237'lia.'
   Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lia de Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
-      ExplicitLeft = 730
+      Left = 746
+      ExplicitLeft = 742
     end
     inherited LCadastroPor: TLabel
-      ExplicitLeft = 686
+      Left = 702
+      ExplicitLeft = 698
     end
     inherited LblDataCad: TDBText
+      Left = 784
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 768
+      ExplicitLeft = 780
     end
     inherited LblUsuCad: TDBText
+      Left = 784
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 768
+      ExplicitLeft = 780
     end
     inherited LAlteracao: TLabel
-      ExplicitLeft = 881
+      Left = 897
+      ExplicitLeft = 893
     end
     inherited LAlteradoPor: TLabel
-      ExplicitLeft = 855
+      Left = 871
+      ExplicitLeft = 867
     end
     inherited LblDataAlt: TDBText
+      Left = 935
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 919
+      ExplicitLeft = 931
     end
     inherited LblUsuAlt: TDBText
+      Left = 935
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 919
+      ExplicitLeft = 931
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 123
     ExplicitHeight = 123
     object Label5: TLabel
@@ -376,6 +389,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   end
   inherited PProgramacao: TPanel
     Top = 178
+    Width = 1008
     Height = 65
     ExplicitTop = 178
     ExplicitHeight = 65
@@ -480,6 +494,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 247
+    Width = 1008
     Height = 113
     Align = alTop
     ExplicitTop = 247
@@ -545,7 +560,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
           Title.Caption = 'Descri'#231#227'o'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
-          Title.Font.Height = -12
+          Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
           Width = 282
@@ -553,11 +568,21 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
         end>
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
   inherited PAlertas: TPanel
+    Top = 547
+    Width = 1012
     TabOrder = 7
+    ExplicitTop = 544
   end
   inherited PBase: TPanel
+    Top = 565
+    Width = 1008
     TabOrder = 5
+    ExplicitTop = 562
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -570,13 +595,18 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       ImageIndex = 104
       OnClick = Button2Click
     end
+    inherited Button3: TButton
+      Hint = 'Criar inspe'#231#245'es nos equipamentos da fam'#237'lia.'
+      ImageIndex = 124
+      OnClick = Button3Click
+    end
   end
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
     Top = 365
     Width = 1006
-    Height = 171
+    Height = 179
     Align = alTop
     TabOrder = 4
     ExplicitWidth = 1002
@@ -602,7 +632,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Left = 4
       Top = 21
       Width = 998
-      Height = 146
+      Height = 154
       Margins.Top = 20
       Align = alClient
       Color = 14671839

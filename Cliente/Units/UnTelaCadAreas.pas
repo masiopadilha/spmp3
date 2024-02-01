@@ -106,7 +106,7 @@ case PCAreas.TabIndex of
           PAuxiliares.Caption := 'NENHUMA ÁREA SELECIONADA!!!';
           Exit;
         end;
-      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
+      DM.FParamAuxiliar[18] := DM.qryAreasCODIGO.AsString;
       DM.FTabela_auxiliar := 16;
       DM.qryLinhas.Close;
     end;
@@ -124,8 +124,8 @@ case PCAreas.TabIndex of
           PAuxiliares.Caption := 'NENHUMA CÉLULA SELECIONADA!!!';
           Exit;
         end;
-      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
-      DM.FParamAuxiliar[2] := DM.qryCelulasCODIGO.AsString;
+      DM.FParamAuxiliar[18] := DM.qryAreasCODIGO.AsString;
+      DM.FParamAuxiliar[19] := DM.qryCelulasCODIGO.AsString;
       DM.FTabela_auxiliar := 17;
     end;
   3:
@@ -148,9 +148,9 @@ case PCAreas.TabIndex of
           PAuxiliares.Caption := 'NENHUMA LINHA SELECIONADA!!!';
           Exit;
         end;
-      DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
-      DM.FParamAuxiliar[2] := DM.qryCelulasCODIGO.AsString;
-      DM.FParamAuxiliar[3] := DM.qryLinhasCODIGO.AsString;
+      DM.FParamAuxiliar[18] := DM.qryAreasCODIGO.AsString;
+      DM.FParamAuxiliar[19] := DM.qryCelulasCODIGO.AsString;
+      DM.FParamAuxiliar[20] := DM.qryLinhasCODIGO.AsString;
       DM.FTabela_auxiliar := 18;
     end;
 end;
@@ -401,7 +401,7 @@ if DM.RetornaDataHoraServidor = True then
                   Exit;
                 end;
               DM.FTabela_auxiliar  := 16;
-              DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
+              DM.FParamAuxiliar[18] := DM.qryAreasCODIGO.AsString;
               if (DM.VerificaDuplo(EdtCodCelula.Text) = True) and (DM.FAlterando = False) then
                 begin
                   EdtCodCelula.SetFocus;
@@ -446,8 +446,8 @@ if DM.RetornaDataHoraServidor = True then
                   Exit;
                 end;
               DM.FTabela_auxiliar := 17;
-              DM.FParamAuxiliar[1] := DM.qryAreasCODIGO.AsString;
-              DM.FParamAuxiliar[2] := DM.qryCelulasCODIGO.AsString;
+              DM.FParamAuxiliar[18] := DM.qryAreasCODIGO.AsString;
+              DM.FParamAuxiliar[19] := DM.qryCelulasCODIGO.AsString;
               if (DM.VerificaDuplo(EdtCodLinha.Text) = True) and (DM.FAlterando = False) then
                 begin
                   EdtCodLinha.SetFocus;

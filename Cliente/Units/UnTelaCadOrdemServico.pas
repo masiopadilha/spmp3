@@ -265,9 +265,9 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
       begin
         DM.qryOrdemServicoCODEQUIPAMENTO.AsString := DM.FCodCombo;
         DM.qryOrdemServicoEQUIPAMENTO.AsString    := DM.FValorCombo;
-        DM.qryOrdemServicoAREA.AsString := DM.FParamAuxiliar[2];
-        DM.qryOrdemServicoCELULA.AsString := DM.FParamAuxiliar[3];
-        DM.qryOrdemServicoLINHA.AsString := DM.FParamAuxiliar[4];
+        DM.qryOrdemServicoAREA.AsString := DM.FParamAuxiliar[5];
+        DM.qryOrdemServicoCELULA.AsString := DM.FParamAuxiliar[7];
+        DM.qryOrdemServicoLINHA.AsString := DM.FParamAuxiliar[9];
       end;
   end
 else

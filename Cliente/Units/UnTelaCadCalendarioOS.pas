@@ -81,6 +81,11 @@ begin
   DM.qryDataHoraServidor.Refresh;
   DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
 
+  DM.qryTotalHomemHora.Close;
+  DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
+  DM.qryTotalHomemHora.Open;
+  DM.qryTotalHomemHoraSeqHora.Open;
+
   //Feriados
   DM.FTela := 'CADCALENDARIOOS';
   DM.qryAuxiliar.Close;
@@ -179,14 +184,6 @@ begin
   inherited;
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
-//  DM.qryProgramadasExecucao.Close;
-//  DM.qryProgramadasExecucao.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryProgramadasExecucao.Params[1].AsString := FormatDateTime('yyyy/mm/dd', LPrimeiroDataMes );
-//  DM.qryProgramadasExecucao.Params[2].AsString := FormatDateTime('yyyy/mm/dd', LUltimaDataMes);
-//  DM.qryProgramadasExecucao.Params[3].AsString := '%%';
-//  DM.qryProgramadasExecucao.Open;
-//  DM.qryProgramadasExecucaoMObra.Open;
-
 
   case CBConsSimples.ItemIndex of
     0:

@@ -8,7 +8,7 @@ uses
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage, System.DateUtils, Data.DB;
 
 type
-  TFrmTelaCadOrdemServicoPecas = class(TFrmTelaPaiOkCancel)
+  TFrmTelaCadOrdemServicoPecas = class(TFrmTelaPaiOKCancel)
     GrdCadastro: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -136,7 +136,7 @@ if (Key = #13) then
               DM.qryOrdemServicoEquipePecasCODORDEMSERVICO.AsString   := DM.FParamAuxiliar[0];
               DM.qryOrdemServicoEquipePecasREFERENCIA.AsString        := DM.FParamAuxiliar[2];
               DM.qryOrdemServicoEquipePecasCODPECASREPOSICAO.AsString := DM.FCodCombo;
-              DM.qryOrdemServicoEquipePecasQTDESOLIC.AsInteger        := 0;
+              DM.qryOrdemServicoEquipePecasQTDESOLIC.AsInteger        := 1;
               DM.qryOrdemServicoEquipePecasPECA.AsString              := DM.FValorCombo;
               DM.qryOrdemServicoEquipePecasENTRADA.AsDateTime         := DM.FDataHoraServidor;
               DM.qryOrdemServicoEquipePecas.Post;

@@ -42,7 +42,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
       begin
         EdtCodEquipamento.Text := DM.FCodCombo;
         EdtDescEquipamento.Text := DM.FValorCombo;
-        edtCodAntigo.Text := DM.FParamAuxiliar[6];
+        edtCodAntigo.Text := DM.FParamAuxiliar[2];
         edtNovoAntigo.SetFocus;
       end;
   end

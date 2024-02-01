@@ -290,9 +290,6 @@ type
     frxDBOrdemServicoImagens: TfrxDBDataset;
     frxDBOrdemServicoGeral: TfrxDBDataset;
     frxDBOrdemServicoGeralMObraProg: TfrxDBDataset;
-    frxRInspConsLubrific1: TfrxReport;
-    frxRInspConsRotas1: TfrxReport;
-    frxRInspConsManut1: TfrxReport;
     frxDBOrdemServicoGeralMObraUtil: TfrxDBDataset;
     frxDBOrdemServicoGeralManut: TfrxDBDataset;
     frxDBOrdemServicoGeralLubrific: TfrxDBDataset;
@@ -329,7 +326,9 @@ type
     frxRChecklistLubrificProgEquip: TfrxReport;
     frxREquipamentosHist: TfrxReport;
     frxXLSExport1: TfrxXLSExport;
-    frxReport1: TfrxReport;
+    frxRInspConsLubrific1: TfrxReport;
+    frxRInspConsManut1: TfrxReport;
+    frxRInspConsRotas1: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

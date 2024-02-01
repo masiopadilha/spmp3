@@ -25,13 +25,11 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       DataSource = DM.dsLubrificProgEquip
     end
     inherited LblUsuCad: TDBText
-      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitWidth = 87
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -53,13 +51,11 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       DataSource = DM.dsLubrificProgEquip
     end
     inherited LblUsuAlt: TDBText
-      Width = 87
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitWidth = 87
     end
     inherited BtnNovo: TButton
       Width = 27
@@ -114,7 +110,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -355,7 +350,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 122
-    ExplicitWidth = 1004
     ExplicitHeight = 122
     inherited Label2: TLabel
       Width = 132
@@ -572,7 +566,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     Width = 1008
     Height = 268
     ExplicitTop = 277
-    ExplicitWidth = 1004
     ExplicitHeight = 265
     inherited Label3: TLabel
       Width = 93
@@ -773,8 +766,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
     Top = 589
@@ -783,8 +774,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ExplicitTop = 586
-    ExplicitWidth = 1008
     inherited LblAlertas: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -795,8 +784,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   inherited PBase: TPanel
     Top = 549
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4
@@ -810,6 +797,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Bottom = 4
     end
     inherited Button1: TButton
+      Hint = 'Itens Espec'#237'ficos a Inspecionar'
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -818,16 +806,24 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       OnClick = Button1Click
     end
     inherited Button2: TButton
+      Hint = 'Pe'#231'as da Lubrifica'#231#227'o.'
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      DisabledImageIndex = 81
+      ImageIndex = 80
+      OnClick = Button2Click
     end
     inherited Button3: TButton
+      Hint = 'Recursos da Lubrifica'#231#227'o.'
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      DisabledImageIndex = 38
+      ImageIndex = 37
+      OnClick = Button3Click
     end
     inherited Button4: TButton
       Margins.Left = 4

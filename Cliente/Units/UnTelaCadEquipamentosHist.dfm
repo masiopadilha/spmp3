@@ -120,7 +120,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       ExplicitWidth = 994
       ExplicitHeight = 494
       object Label8: TLabel
-        Left = 515
+        Left = 427
         Top = 38
         Width = 66
         Height = 16
@@ -128,7 +128,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'Parado (h):'
       end
       object Label10: TLabel
-        Left = 651
+        Left = 563
         Top = 5
         Width = 59
         Height = 16
@@ -136,7 +136,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'Terceiros:'
       end
       object Label11: TLabel
-        Left = 785
+        Left = 697
         Top = 5
         Width = 37
         Height = 16
@@ -144,7 +144,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'Custo:'
       end
       object LblHorasParadas: TLabel
-        Left = 515
+        Left = 427
         Top = 53
         Width = 28
         Height = 16
@@ -157,7 +157,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ParentFont = False
       end
       object LblCustoTerc: TLabel
-        Left = 651
+        Left = 563
         Top = 21
         Width = 28
         Height = 16
@@ -170,7 +170,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ParentFont = False
       end
       object LblTotalParadas: TLabel
-        Left = 515
+        Left = 427
         Top = 21
         Width = 16
         Height = 16
@@ -183,7 +183,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ParentFont = False
       end
       object Label13: TLabel
-        Left = 515
+        Left = 427
         Top = 5
         Width = 69
         Height = 16
@@ -191,7 +191,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'N'#186' Paradas:'
       end
       object Label1: TLabel
-        Left = 785
+        Left = 697
         Top = 38
         Width = 108
         Height = 16
@@ -199,7 +199,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'Custo + Auxiliares:'
       end
       object LblCustoTotal: TLabel
-        Left = 785
+        Left = 697
         Top = 53
         Width = 49
         Height = 16
@@ -212,7 +212,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 651
+        Left = 563
         Top = 38
         Width = 65
         Height = 16
@@ -220,7 +220,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         Caption = 'Altera'#231#245'es:'
       end
       object LblCustoAlt: TLabel
-        Left = 651
+        Left = 563
         Top = 53
         Width = 49
         Height = 16
@@ -278,7 +278,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ParentFont = False
       end
       object LblCusto: TDBText
-        Left = 785
+        Left = 697
         Top = 21
         Width = 55
         Height = 16
@@ -303,6 +303,48 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         ExplicitWidth = 984
         object TSManutencoes: TTabSheet
           Caption = 'Manuten'#231#245'es'
+          object lblTotalManutProg: TLabel
+            Left = 326
+            Top = 169
+            Width = 81
+            Height = 16
+            Alignment = taRightJustify
+            Caption = 'Programadas:'
+          end
+          object lblDBTotalManutProg: TLabel
+            Left = 411
+            Top = 169
+            Width = 8
+            Height = 16
+            Caption = '0'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblTotalManutExec: TLabel
+            Left = 455
+            Top = 169
+            Width = 69
+            Height = 16
+            Alignment = taRightJustify
+            Caption = 'Executadas:'
+          end
+          object lblDBTotalManutExec: TLabel
+            Left = 528
+            Top = 169
+            Width = 8
+            Height = 16
+            Caption = '0'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
           object GrdManutencoes: TDBGrid
             Left = 2
             Top = 0
@@ -356,7 +398,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Left = 324
             Top = 0
             Width = 651
-            Height = 187
+            Height = 167
             DataSource = DM.dsEquipamentoManutHist
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -377,6 +419,48 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         object TSLubrificacoes: TTabSheet
           Caption = 'Lubrifica'#231#245'es'
           ImageIndex = 1
+          object lblTotalLubrificProg: TLabel
+            Left = 326
+            Top = 169
+            Width = 81
+            Height = 16
+            Alignment = taRightJustify
+            Caption = 'Programadas:'
+          end
+          object lblDBTotalLubrificProg: TLabel
+            Left = 411
+            Top = 169
+            Width = 8
+            Height = 16
+            Caption = '0'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lblTotalLubrificExec: TLabel
+            Left = 455
+            Top = 169
+            Width = 69
+            Height = 16
+            Alignment = taRightJustify
+            Caption = 'Executadas:'
+          end
+          object lblDBTotalLubrificExec: TLabel
+            Left = 528
+            Top = 169
+            Width = 8
+            Height = 16
+            Caption = '0'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
           object GrdManutencoes2: TDBGrid
             Left = 2
             Top = 0
@@ -430,7 +514,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Left = 324
             Top = 0
             Width = 651
-            Height = 187
+            Height = 167
             DataSource = DM.dsEquipamentoLubrificHist
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText

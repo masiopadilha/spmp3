@@ -246,6 +246,8 @@ procedure TFrmTelaPaiCadastros.TabNextTab1AfterTabChange(Sender: TObject);
 begin
 if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
+PAuxiliares.Font.Color := clGreen;
+PAuxiliares.Caption := EmptyStr;
 end;
 
 procedure TFrmTelaPaiCadastros.TimerAlertasTimer(Sender: TObject);

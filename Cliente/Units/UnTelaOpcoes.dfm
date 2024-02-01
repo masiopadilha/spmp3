@@ -15,8 +15,8 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
     Width = 384
     ExplicitWidth = 380
     inherited BtnAjuda: TButton
-      Left = 361
-      ExplicitLeft = 357
+      Left = 351
+      ExplicitLeft = 351
     end
   end
   inherited PCentro: TPanel
@@ -154,14 +154,14 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
     ExplicitTop = 329
     ExplicitWidth = 380
     inherited BtnOK: TButton
-      Left = 116
+      Left = 114
       OnClick = BtnOKClick
-      ExplicitLeft = 116
+      ExplicitLeft = 114
     end
     inherited BtnFechar: TButton
-      Left = 198
+      Left = 195
       OnClick = BtnFecharClick
-      ExplicitLeft = 198
+      ExplicitLeft = 195
     end
   end
 end

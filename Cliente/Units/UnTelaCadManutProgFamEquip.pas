@@ -77,6 +77,7 @@ type
     procedure BtnManutencaoClick(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure EdtCodManutencaoKeyPress(Sender: TObject; var Key: Char);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -94,7 +95,7 @@ uses UnTelaConsulta, UnTelaCadFamiliaEquipamento,
   UnTelaCadMonitoramento, UnTelaCadTipoProgramacao,
   UnDmRelatorios, UnTelaCadManutProgFamEquipPartes,
   UnTelaCadManutProgFamEquipPartesItens, UnDM, UnTelaCadOficinas,
-  UnTelaCadTipoManutencao;
+  UnTelaCadTipoManutencao, UnTelaCadManutProgFamEquipClonagem;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -415,6 +416,35 @@ begin
     DM.FTela            := 'CADMANUTPROG';
     DM.FTabela_auxiliar := 34;
   End;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.Button3Click(Sender: TObject);
+begin
+  inherited;
+  Try
+    DM.FParamAuxiliar[0] := DM.qryManutProgFamEquipCODIGO.AsString;
+    if DM.FParamAuxiliar[0] = EmptyStr then
+      begin
+        BtnConsultar.OnClick(Sender);
+        DM.FParamAuxiliar[0] := DM.qryManutProgFamEquipCODIGO.AsString;
+      end;
+    if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+
+    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    Application.CreateForm(TFrmTelaCadManutProgFamEquipClonagem, FrmTelaCadManutProgFamEquipClonagem);
+    FrmTelaCadManutProgFamEquipClonagem.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadManutProgFamEquipClonagem);
+    DM.FDataSetParam    := DM.qryManutProgFamEquip;
+    DM.FDataSourceParam := DM.dsManutProgFamEquip;
+    DM.FTela            := 'CADMANUTPROG';
+    DM.FTabela_auxiliar := 34;
+  End;
+
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.Completo1Click(Sender: TObject);

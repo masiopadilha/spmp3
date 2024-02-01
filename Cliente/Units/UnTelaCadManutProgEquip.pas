@@ -66,6 +66,8 @@ type
     procedure BtnFamiliaClick(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,7 +85,8 @@ implementation
 uses UnTelaCadEquipamentosEsp, UnTelaConsulta,
   UnTelaCadFamiliaEquipamento, UnTelaCadManutProgFamEquip,
   UnDmRelatorios, UnTelaCadFuncionarios, UnDM,
-  UnTelaCadManutProgEquipPartesItensEsp;
+  UnTelaCadManutProgEquipPartesItensEsp, UnTelaCadManutProgEquipPecas,
+  UnTelaCadManutProgEquipRecursos, UnTelaCadEquipamentos;
 
 procedure TFrmTelaCadManutProgEquip.BtnCancelarClick(Sender: TObject);
 begin
@@ -105,21 +108,14 @@ if DM.qryManutProgEquipCODMANUTPROGFAMEQUIP.AsString <> EmptyStr then
     DM.qryManutProgEquipPartes.Open;
 
     DM.qryManutProgEquipItens.Close;
-//        qryManutProgEquipItens.Params[0].AsString := CodEmpresa;
-//        qryManutProgEquipItens.Params[1].AsString := qryManutProgEquipCODMANUTPROGFAMEQUIP.AsString;
     DM.qryManutProgEquipItens.Open;
 
     DM.qryManutProgEquipItensEsp.Close;
-//        qryManutProgEquipItensEsp.Params[0].AsString := CodEmpresa;
-//        qryManutProgEquipItensEsp.Params[1].AsString := qryManutProgEquipCODIGO.AsString;
     DM.qryManutProgEquipItensEsp.Open;
     DM.qryManutProgEquipItensEsp.Edit;
 
-  DM.qryManutProgEquipPlanoTrab.Close;
-//  DM.qryManutProgEquipPlanoTrab.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryManutProgEquipPlanoTrab.Params[1].AsString := DM.qryManutProgEquip.FieldByName('CODMANUTPROGFAMEQUIP').AsString;
-  DM.qryManutProgEquipPlanoTrab.Open;
-
+    DM.qryManutProgEquipPlanoTrab.Close;
+    DM.qryManutProgEquipPlanoTrab.Open;
   end
 else
   begin
@@ -163,6 +159,8 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryManutProgEquipItensEsp.Open;
         DM.qryManutProgEquipItensEsp.Edit;
       end;
+    if FrmTelaCadEquipamentos <> nil then
+      DM.FParamAuxiliar[0] := FrmTelaCadEquipamentos.EdtCodEquip.Text
   end
 else
   begin
@@ -266,10 +264,6 @@ if DM.qryManutProgEquipCODMANUTPROGFAMEQUIP.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FAMÍLIA DO REGISTRO!'; EdtDescFamilia.SetFocus; Exit;
   end;
-//if DM.qryManutProgEquipMATRICULA.IsNull = True then
-  //begin
-    //PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O RESPONSÁVEL DO REGISTRO!'; EdtDescResponsavel.SetFocus; Exit;
-  //end;
 if DM.qryManutProgEquipCRITICIDADE.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CRITICIDADE DO REGISTRO!'; CBCriticidade.SetFocus; Exit;
@@ -289,21 +283,10 @@ if (DM.qryManutProgEquipDTAINICIO1.AsDateTime > 0) and (DM.qryManutProgEquipGRUP
 //Se alterar a data de início
 if LDataProgIni <> 0 then
   begin
-    if LDataProgIni <>DM.qryManutProgEquipDTAINICIO1.AsDateTime then
+    if (LDataProgIni <> DM.qryManutProgEquipDTAINICIO1.AsDateTime) and (DM.qryManutProgEquipGRUPOINSP.AsString = 'N') then
       begin
         DM.qryManutProgEquip.Edit;
         DM.qryManutProgEquipRELATORIO.AsString := 'N';
-
-//        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Programação' then //Processo normal, irá vencer na data informada independente de qualquer coisa
-//          begin
-//           DM.qryManutProgEquip.Edit;
-//           DM.qryManutProgEquipRELATORIO.AsString := 'N'
-//          end;
-//        if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Execução' then
-//          begin
-//            if DM.qryManutProgEquipRELATORIO.AsString = 'S' then
-//              Application.MessageBox('A manutenção será reprogramada apenas após o fechamento de todas as manutenções anteriores a essa ainda não fechadas!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-//          end;
       end;
   end;
 
@@ -333,9 +316,9 @@ if (LblProgramarPor.Caption <> EmptyStr) then
   end
 else
   begin
-   DM.qryManutProgEquipFREQUENCIA2.Clear;
-   DM.qryManutProgEquipLEITURA.Clear;
-   DM.qryManutProgEquipREPROGRAMAR2.Clear;
+    DM.qryManutProgEquipFREQUENCIA2.Clear;
+    DM.qryManutProgEquipLEITURA.Clear;
+    DM.qryManutProgEquipREPROGRAMAR2.Clear;
   end;
 
 DM.MSGAguarde('');
@@ -344,50 +327,45 @@ if DM.FEmpTransf = True then
   begin
     if DM.qryEquipamentos.Active = False then
       begin
-       DM.qryEquipamentos.Close;
-       DM.qryEquipamentos.Params[0].AsString := DM.qryManutProgEquipCODEQUIPAMENTO.AsString;
-       DM.qryEquipamentos.Params[1].AsString := DM.FCodEmpresa;
-       DM.qryEquipamentos.Open;
+        DM.qryEquipamentos.Close;
+        DM.qryEquipamentos.Params[0].AsString := DM.qryManutProgEquipCODEQUIPAMENTO.AsString;
+        DM.qryEquipamentos.Params[1].AsString := DM.FCodEmpresa;
+        DM.qryEquipamentos.Open;
       end;
-   DM.qryEquipEmRota.Close;
-   DM.qryEquipEmRota.Params[0].AsString := DM.FCodEmpresa;
-   DM.qryEquipEmRota.Params[1].AsString :=DM.qryEquipamentosCODLOCALIZACAO.AsString;
-   DM.qryEquipEmRota.Params[2].AsString :=DM.qryEquipamentosCODCELULA.AsString;
-   DM.qryEquipEmRota.Params[3].AsString :=DM.qryEquipamentosCODLINHA.AsString;
-   DM.qryEquipEmRota.Params[4].AsString :=DM.qryEquipamentosSEQUENCIA.AsString;
-   DM.qryEquipEmRota.Params[5].AsString :=DM.qryManutProgEquipFREQUENCIA1.AsString;
-   DM.qryEquipEmRota.Open;
+    DM.qryEquipEmRota.Close;
+    DM.qryEquipEmRota.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryEquipEmRota.Params[1].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+    DM.qryEquipEmRota.Params[2].AsString := DM.qryEquipamentosCODCELULA.AsString;
+    DM.qryEquipEmRota.Params[3].AsString := DM.qryEquipamentosCODLINHA.AsString;
+    DM.qryEquipEmRota.Params[4].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
+    DM.qryEquipEmRota.Params[5].AsString := DM.qryManutProgEquipFREQUENCIA1.AsString;
+    DM.qryEquipEmRota.Open;
     if (DM.qryEquipEmRotaCODIGO.IsNull = False) and (DM.qryManutProgEquipGRUPOINSP.AsString = 'S') then
       begin
-       DM.qryManutProgEquip.Edit;
-       DM.qryManutProgEquipGRUPOINSP.AsString    := 'S';
-       DM.qryManutProgEquipREPROGRAMAR1.AsString :=DM.qryEquipEmRotaREPROGRAMAR.AsString;
-       DM.qryManutProgEquipROTA.AsString         :=DM.qryEquipEmRotaROTA.AsString;
-       DM.qryManutProgEquipDTAINICIO1.AsString   :=DM.qryEquipEmRotaDATAINICIO.AsString;
-       DM.qryManutProgEquipRELATORIO.AsString    :=DM.qryEquipEmRotaRELATORIO.AsString;
+        DM.qryManutProgEquip.Edit;
+        DM.qryManutProgEquipGRUPOINSP.AsString    := 'S';
+        DM.qryManutProgEquipREPROGRAMAR1.AsString :=DM.qryEquipEmRotaREPROGRAMAR.AsString;
+        DM.qryManutProgEquipROTA.AsString         :=DM.qryEquipEmRotaROTA.AsString;
+        DM.qryManutProgEquipDTAINICIO1.AsString   :=DM.qryEquipEmRotaDATAINICIO.AsString;
+        DM.qryManutProgEquipRELATORIO.AsString    :=DM.qryEquipEmRotaRELATORIO.AsString;
       end;
-   DM.qryEquipEmRota.Close;
+    DM.qryEquipEmRota.Close;
   end;
 
 DM.qryManutProgEquip.Params[0].AsString := EdtCodManutencao.Text;
 DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
 DM.qryManutProgEquip.Params[2].AsString := DM.FParamAuxiliar[0];
 
-if DM.qryManutProgEquipItensEsp.IsEmpty = False then
+if DM.qryLubrificProgEquipItensEsp.IsEmpty = False then
   begin
-    if DM.qryManutProgEquipCODIGO.AsString <> '' then
+    if DM.qryLubrificProgEquipCODIGO.AsString <> '' then
       begin
-        DM.qryManutProgEquip.Edit;
-        DM.qryManutProgEquip.Post;
+        DM.qryLubrificProgEquip.Edit;
+        DM.qryLubrificProgEquip.Post;
       end;
 
-   DM.qryManutProgEquipItensEsp.Edit;
-   DM.qryManutProgEquipItensEsp.Post;
-
-    //DM.qryManutProgEquipItensEsp.Close;
-    //DM.qryManutProgEquipItensEsp.Params[0].AsString := DM.FCodEmpresa;
-    //DM.qryManutProgEquipItensEsp.Params[1].AsString :=DM.qryManutProgEquipCODIGO.AsString;
-    //DM.qryManutProgEquipItensEsp.Open;
+   DM.qryLubrificProgEquipItensEsp.Edit;
+   DM.qryLubrificProgEquipItensEsp.Post;
   end;
 
   inherited;
@@ -427,10 +405,76 @@ begin
     FreeAndNil(FrmTelaCadManutProgEquipPartesItensEsp);
     DM.FDataSetParam    := DM.qryManutProgEquip;
     DM.FDataSourceParam := DM.dsManutProgEquip;
+    DM.FParamAuxiliar[0]:= FrmTelaCadEquipamentos.EdtCodEquip.Text;
     DM.FTela            := 'CADMANUTPROGEQUIP';
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
     DM.FTabela_auxiliar := 32;
+    DM.FAlterando := True;
   End;
+end;
+
+procedure TFrmTelaCadManutProgEquip.Button2Click(Sender: TObject);
+begin
+  inherited;
+  Try
+    DM.FParamAuxiliar[0] := DM.qryManutProgEquipCODIGO.AsString;
+    if DM.FParamAuxiliar[0] = EmptyStr then
+      begin
+        BtnConsultar.OnClick(Sender);
+        DM.FParamAuxiliar[0] := DM.qryManutProgEquipCODIGO.AsString;
+      end;
+    if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+
+    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    Application.CreateForm(TFrmTelaCadManutProgEquipPecas, FrmTelaCadManutProgEquipPecas);
+    FrmTelaCadManutProgEquipPecas.Caption := 'Peças da O.S.: '+ DM.qryOrdemServicoCODIGO.AsString;
+    FrmTelaCadManutProgEquipPecas.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadManutProgEquipPecas);
+    DM.FDataSetParam    := DM.qryManutProgEquip;
+    DM.FDataSourceParam := DM.dsManutProgEquip;
+    DM.FParamAuxiliar[0]:= FrmTelaCadEquipamentos.EdtCodEquip.Text;
+    DM.FTela            := 'CADMANUTPROGEQUIP';
+    DM.FTabela_auxiliar := 32;
+    DM.FAlterando := True;
+  End;
+end;
+
+procedure TFrmTelaCadManutProgEquip.Button3Click(Sender: TObject);
+begin
+  inherited;
+  Try
+    DM.FParamAuxiliar[0] := DM.qryManutProgEquipCODIGO.AsString;
+    if DM.FParamAuxiliar[0] = EmptyStr then
+      begin
+        BtnConsultar.OnClick(Sender);
+        DM.FParamAuxiliar[0] := DM.qryManutProgEquipCODIGO.AsString;
+      end;
+    if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+
+    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    Application.CreateForm(TFrmTelaCadManutProgEquipRecursos, FrmTelaCadManutProgEquipRecursos);
+    FrmTelaCadManutProgEquipRecursos.Caption := 'Recursos da O.S.: '+ FormatFloat('#000000', DM.qryOrdemServicoCODIGO.AsInteger);
+    FrmTelaCadManutProgEquipRecursos.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadManutProgEquipRecursos);
+    DM.FDataSetParam    := DM.qryManutProgEquip;
+    DM.FDataSourceParam := DM.dsManutProgEquip;
+    DM.FTela            := 'CADMANUTPROGEQUIP';
+    DM.FParamAuxiliar[0]:= FrmTelaCadEquipamentos.EdtCodEquip.Text;
+    DM.FTabela_auxiliar := 32;
+    DM.FAlterando := True;
+  End;
+
 end;
 
 procedure TFrmTelaCadManutProgEquip.Completo1Click(Sender: TObject);

@@ -326,12 +326,12 @@ if CDPermissoesUsuPESSOAL.AsString = 'N' then
     LTexto := PChar('Deseja realmente criar um grupo de permissões individual para o usuário: '+CDPermissoesUsuNOME.AsString+' ?');
     if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONWARNING) = IDYes then
       begin
-//        DM.qryAuxiliar.Close;
-//        DM.qryAuxiliar.SQL.Clear;
-//        DM.qryAuxiliar.SQL.Add('SELECT MAX(`CODIGO`) FROM `sam_spmp`.`permissoes_acesso`');
-//        DM.qryAuxiliar.Open;
-//        LNovoCodigo := DM.qryAuxiliar.FieldByName('MAX(`CODIGO`)').AsInteger + 1;
-//        DM.qryAuxiliar.Close;
+        DM.qryAuxiliar.Close;
+        DM.qryAuxiliar.SQL.Clear;
+        DM.qryAuxiliar.SQL.Add('SELECT (MAX(CODIGO) + 1) NOVOID FROM permissoes_acesso');
+        DM.qryAuxiliar.Open;
+        LNovoCodigo := DM.qryAuxiliar.FieldByName('NOVOID').AsInteger;
+        DM.qryAuxiliar.Close;
 
         for I := 0 to 3 do
           begin
@@ -396,10 +396,10 @@ if CDPermissoesUsuPESSOAL.AsString = 'N' then
         if DM.qryUsuarios.IsEmpty = False then
           begin
             DM.qryUsuarios.Edit;
-            DM.qryUsuariosCODPERMISSAOACESSO.AsInteger :=  CDPermissoesUsuCODIGO.AsInteger;
-            DM.qryUsuariosCODPERMISSAOALTERACAO.AsInteger := CDPermissoesUsuCODIGO.AsInteger;
-            DM.qryUsuariosCODPERMISSAOINCLUSAO.AsInteger := CDPermissoesUsuCODIGO.AsInteger;
-            DM.qryUsuariosCODPERMISSAOEXCLUSAO.AsInteger := CDPermissoesUsuCODIGO.AsInteger;
+            DM.qryUsuariosCODPERMISSAOACESSO.AsInteger :=  LNovoCodigo;
+            DM.qryUsuariosCODPERMISSAOALTERACAO.AsInteger := LNovoCodigo;
+            DM.qryUsuariosCODPERMISSAOINCLUSAO.AsInteger := LNovoCodigo;
+            DM.qryUsuariosCODPERMISSAOEXCLUSAO.AsInteger := LNovoCodigo;
             DM.qryUsuarios.Post;
           end;
 

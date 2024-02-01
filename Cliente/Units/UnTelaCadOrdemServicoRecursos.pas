@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Data.DB;
 
 type
-  TFrmTelaCadOrdemServicoRecursos = class(TFrmTelaPaiOkCancel)
+  TFrmTelaCadOrdemServicoRecursos = class(TFrmTelaPaiOKCancel)
     GrdEquipe: TDBGrid;
     GrdEquipeRecursos: TDBGrid;
     procedure BtnOKClick(Sender: TObject);

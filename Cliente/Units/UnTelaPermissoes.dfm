@@ -1,7 +1,7 @@
 inherited FrmTelaPermissoes: TFrmTelaPermissoes
   Caption = 'Permiss'#245'es de Usu'#225'rios'
-  ClientHeight = 561
-  ClientWidth = 784
+  ClientHeight = 564
+  ClientWidth = 788
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 800
   Constraints.MinHeight = 600
@@ -11,7 +11,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 780
+    Width = 784
     ExplicitWidth = 780
     inherited Image1: TImage
       Margins.Left = 4
@@ -21,14 +21,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
     end
     inherited BtnAjuda: TButton
       Left = 748
-      ExplicitLeft = 748
+      ExplicitLeft = 744
     end
   end
   inherited PCentro: TPanel
     Left = 2
     Top = 66
-    Width = 780
-    Height = 424
+    Width = 784
+    Height = 427
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -280,14 +280,15 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             006F006C0065002000640065002000460072006F00740061002E00340000005F
             0000005F000000FFFFFFFFFFFFFFFF5F0000000000000000000000010B520065
             006C0061007400F300720069006F0073002E00}
+          ExplicitHeight = 389
         end
       end
       object GBPermissoes: TGroupBox
         AlignWithMargins = True
-        Left = 253
+        Left = 257
         Top = 5
         Width = 514
-        Height = 406
+        Height = 409
         Align = alRight
         Caption = 'Permiss'#245'es:'
         Color = 14671839
@@ -300,12 +301,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         ParentColor = False
         ParentFont = False
         TabOrder = 1
+        ExplicitLeft = 253
+        ExplicitHeight = 406
         object GrdPermissoes: TDBGrid
           AlignWithMargins = True
           Left = 5
           Top = 15
           Width = 507
-          Height = 340
+          Height = 343
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 5
@@ -331,13 +334,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         object PBotes: TPanel
           AlignWithMargins = True
           Left = 5
-          Top = 363
+          Top = 366
           Width = 506
           Height = 40
           Margins.Right = 1
           Margins.Bottom = 1
           Align = alBottom
           TabOrder = 1
+          ExplicitTop = 363
           object btnAtualizar: TButton
             AlignWithMargins = True
             Left = 4
@@ -406,14 +410,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 494
-    Width = 780
+    Top = 497
+    Width = 784
     ExplicitTop = 494
     ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Top = 521
-    Width = 780
+    Top = 524
+    Width = 784
     ExplicitTop = 521
     ExplicitWidth = 780
     inherited BtnOK: TButton

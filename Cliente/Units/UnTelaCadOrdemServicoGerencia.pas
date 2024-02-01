@@ -253,23 +253,31 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARAL
     BtnParalisacao.OnClick(Sender);
     Exit;
   end;
+
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
+
 if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
   or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA')
     or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')
       or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') then Exit;
+
 if DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString = EmptyStr Then
   begin
     PAuxiliares.Font.Color  := clRed;
     PAuxiliares.Caption     := 'CADASTRO DA ORDEM DE SERVIÇO INCOMPLETO!';
     Exit;
   end;
+
 if Application.MessageBox('Deseja realmente executar a O.S.?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDNo then Exit;
+
 Timer1.Enabled := False;
+
 DM.MSGAguarde('');
+
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
+
 if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
   with DM.qryOrdemServico do
     begin
@@ -279,6 +287,7 @@ if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) an
       Open;
       Edit;
     end;
+
 DM.qryOrdemServicoEquipe.Open;
 DM.qryOrdemServicoEquipeMObra.Open;
 if DM.qryOrdemServicoEquipeMObra.IsEmpty = True Then
@@ -288,28 +297,19 @@ if DM.qryOrdemServicoEquipeMObra.IsEmpty = True Then
     DM.MSGAguarde('', False);
     Exit;
   end;
-if DM.qryOrdemServicoEquipe.Active = False then
-  DM.qryOrdemServicoEquipe.Open;
-if DM.qryOrdemServicoEquipeMObra.Active = False then
-  DM.qryOrdemServicoEquipeMObra.Open;
-if DM.qryOrdemServicoEquipePecas.Active = False then
-  DM.qryOrdemServicoEquipePecas.Open;
-if DM.qryOrdemServicoEquipeLubrificantes.Active = False then
-  DM.qryOrdemServicoEquipeLubrificantes.Open;
-if DM.qryOrdemServicoEquipeRecursos.Active = False then
-  DM.qryOrdemServicoEquipeRecursos.Open;
-if DM.qryOrdemServicoEquipeMObraUtil.Active = False then
-  DM.qryOrdemServicoEquipeMObraUtil.Open;
-if DM.qryOrdemServicoEquipePecasUtil.Active = False then
-  DM.qryOrdemServicoEquipePecasUtil.Open;
-if DM.qryOrdemServicoEquipeRecursosUtil.Active = False then
-  DM.qryOrdemServicoEquipeRecursosUtil.Open;
-if DM.qryOrdemServicoEquipeLubrificantesUtil.Active = False then
-  DM.qryOrdemServicoEquipeLubrificantesUtil.Open;
-if DM.qryOrdemServicoMObraProg.Active = False then
-  DM.qryOrdemServicoMObraProg.Open;
-if DM.qryOrdemServicoMObraExec.Active = False then
-  DM.qryOrdemServicoMObraExec.Open;
+
+if DM.qryOrdemServicoEquipe.Active                  = False then DM.qryOrdemServicoEquipe.Open;
+if DM.qryOrdemServicoEquipeMObra.Active             = False then DM.qryOrdemServicoEquipeMObra.Open;
+if DM.qryOrdemServicoEquipePecas.Active             = False then DM.qryOrdemServicoEquipePecas.Open;
+if DM.qryOrdemServicoEquipeLubrificantes.Active     = False then DM.qryOrdemServicoEquipeLubrificantes.Open;
+if DM.qryOrdemServicoEquipeRecursos.Active          = False then DM.qryOrdemServicoEquipeRecursos.Open;
+if DM.qryOrdemServicoEquipeMObraUtil.Active         = False then DM.qryOrdemServicoEquipeMObraUtil.Open;
+if DM.qryOrdemServicoEquipePecasUtil.Active         = False then DM.qryOrdemServicoEquipePecasUtil.Open;
+if DM.qryOrdemServicoEquipeRecursosUtil.Active      = False then DM.qryOrdemServicoEquipeRecursosUtil.Open;
+if DM.qryOrdemServicoEquipeLubrificantesUtil.Active = False then DM.qryOrdemServicoEquipeLubrificantesUtil.Open;
+if DM.qryOrdemServicoMObraProg.Active               = False then DM.qryOrdemServicoMObraProg.Open;
+if DM.qryOrdemServicoMObraExec.Active               = False then DM.qryOrdemServicoMObraExec.Open;
+
 if DM.qryOrdemServicoEquipeMObraCODCALENDARIO.IsNull = True Then
   begin
     Try
@@ -328,6 +328,7 @@ if DM.qryOrdemServicoEquipeMObraCODCALENDARIO.IsNull = True Then
         Exit;
       end;
   end;
+
 DM.qryOrdemServicoMObraDisp.Close;
 DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
 DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
@@ -337,6 +338,7 @@ if DM.qryOrdemServicoEXECAUTONOMO.AsString = 'S' then
 else
   DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
 DM.qryOrdemServicoMObraDisp.Open;
+
 //Verifica a disponibilidade das peças solicitadas no estoque
 LPecas := 'As seguintes peças não estão disponíveis no estoque:' + #13;
 LSemEstoque := False;
@@ -349,6 +351,7 @@ while not DM.qryOrdemServicoEquipePecas.Eof do
       end;
     DM.qryOrdemServicoEquipePecas.Next;
   end;
+
 if LSemEstoque = True then
   begin
     //Caso deseje continuar com a OS mesmo sem peças no estoque, a qtde solicitada para a OS é zerada.
@@ -368,6 +371,7 @@ if LSemEstoque = True then
           end;
       end;
   end;
+
 if LSemEstoque = False then
   begin
     DM.qryOrdemServicoEquipePecas.First;
@@ -410,6 +414,7 @@ while not DM.qryOrdemServicoEquipeLubrificantes.Eof do
       end;
     DM.qryOrdemServicoEquipeLubrificantes.Next;
   end;
+
 if LSemEstoque = True then
   begin
     //Caso deseje continuar com a OS mesmo sem peças no estoque, a qtde solicitada para a OS é zerada.
@@ -429,6 +434,7 @@ if LSemEstoque = True then
           end;
       end;
   end;
+
 if LSemEstoque = False then
   begin
     DM.qryOrdemServicoEquipeLubrificantes.First;
@@ -458,13 +464,13 @@ if LSemEstoque = False then
       end;
     DM.qryOrdemServicoEquipeLubrificantesUtil.Close;
   end;
+
 if DM.qryOrdemServicoMObraProg.IsEmpty = False then
   begin
     while not DM.qryOrdemServicoEquipeMObra.Eof = True do
       begin
         while not DM.qryOrdemServicoMObraProg.Eof = True do
           begin
-//            if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA;OCUPADO', VarArrayOf([DM.qryOrdemServicoMObraProgMATRICULA.AsString, 'N']), []) = True then
             if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA', DM.qryOrdemServicoMObraProgMATRICULA.AsString, []) = True then
               begin
                 if DM.qryOrdemServicoMObraProgOCUPADO.AsString = 'S' then
@@ -485,6 +491,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
                         DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
                         DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
                         DM.qryOrdemServicoEquipeMObraUtil.Post;
+
                         DM.qryOrdemServicoMObraExec.Append;
                         DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
                         DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
@@ -494,6 +501,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
                         DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
                         DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
                         DM.qryOrdemServicoMObraExec.Post;
+
                         //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
                         DM.qryAuxiliar.Close;
                         DM.qryAuxiliar.SQL.Clear;
@@ -524,6 +532,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
                     DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
                     DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
                     DM.qryOrdemServicoEquipeMObraUtil.Post;
+
                     DM.qryOrdemServicoMObraExec.Append;
                     DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
                     DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
@@ -533,6 +542,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
                     DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
                     DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
                     DM.qryOrdemServicoMObraExec.Post;
+
                     //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
                     DM.qryAuxiliar.Close;
                     DM.qryAuxiliar.SQL.Clear;
@@ -553,6 +563,7 @@ if DM.qryOrdemServicoMObraProg.IsEmpty = False then
         DM.qryOrdemServicoEquipeMObra.Next;
       end;
   end;
+
 while not DM.qryOrdemServicoEquipe.Eof do
   begin
     while not DM.qryOrdemServicoEquipeRecursos.Eof do
@@ -566,6 +577,7 @@ while not DM.qryOrdemServicoEquipe.Eof do
             DM.qryOrdemServicoEquipeRecursosUtilQTDESOLIC.AsInteger        := DM.qryOrdemServicoEquipeRecursosQTDESOLIC.AsInteger;
             DM.qryOrdemServicoEquipeRecursosUtilENTRADA.AsDateTime         := DM.FDataHoraServidor;
             DM.qryOrdemServicoEquipeRecursosUtil.Post;
+
             DM.qryRecursos.Close;
             DM.qryRecursos.Params[0].AsString := DM.qryOrdemServicoEquipeRecursosCODRECURSO.AsString;
             DM.qryRecursos.Params[1].AsString := DM.FCodEmpresa;
@@ -581,6 +593,7 @@ while not DM.qryOrdemServicoEquipe.Eof do
       end;
     DM.qryOrdemServicoEquipe.Next;
   end;
+
 //Se a O.S. estiver paralisada não assumir uma nova hora de início.
 DM.qryOrdemServico.Edit;
 if DM.qryOrdemServicoSITUACAO.AsString <> 'PARALISADA' then
@@ -590,10 +603,12 @@ if DM.qryOrdemServicoSITUACAO.AsString <> 'PARALISADA' then
   end;
 DM.qryOrdemServicoSITUACAO.AsString := 'EXECUCAO';
 DM.qryOrdemServico.Post;
+
 DM.qryOrdemServicoGerencia.Edit;
 DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'EXECUCAO';
 DM.qryOrdemServicoGerenciaDATAINICIOREAL.AsDateTime := DM.FDataHoraServidor;
 DM.qryOrdemServicoGerencia.Post;
+
 //Localiza e atualiza o status da Solic. de Trab
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin
@@ -608,6 +623,7 @@ if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
         DM.qrySolicitacaoTrab.Post;
       end;
   end;
+
 DM.MSGAguarde('', False);
 
 DM.qryOrdemServicoEquipeMObra.Close;
@@ -628,8 +644,10 @@ DM.qryPecasReposicao.Close;
 DM.qryRecursos.Close;
 DM.qrySolicitacaoTrab.Close;
 DM.qryAuxiliar.Close;
+
 Timer1.Enabled := True;
 end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.BtnFamiliaEquipClick(Sender: TObject);
 begin
   inherited;
@@ -1542,7 +1560,7 @@ if (Key = #13) and (GrdOrdemServico.SelectedIndex = 2) then
       FrmTelaAuxiliar.ShowModal;
     Finally
       DM.FParamAuxiliar[0] := DM.FCodCombo;
-      LEquipamento            := DM.FValorCombo;
+      LEquipamento         := DM.FValorCombo;
       FreeAndNil(FrmTelaAuxiliar);
       ConfigurarFiltros;
     End;

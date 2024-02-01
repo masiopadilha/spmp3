@@ -1589,9 +1589,9 @@ type
     qryRotaEquipVencSeqManutCODEMPRESA: TStringField;
     qryRotaEquipVencSeqManutDESCRICAO: TStringField;
     qryRotaEquipVencSeqManutDTAINICIO1: TDateTimeField;
-    qryRotaEquipVencSeqManutFREQUENCIA1: TSmallintField;
+    qryRotaEquipVencSeqManutFREQUENCIA: TSmallintField;
     qryRotaEquipVencSeqManutRELATORIO: TStringField;
-    qryRotaEquipVencSeqManutCODEQUIPAMENTO: TStringField;
+    qryRotaEquipVencSeqManutCODEQUIPATUAL: TStringField;
     qryRotaPeriodicas: TFDQuery;
     qryRotaPeriodicasCODIGO: TStringField;
     qryRotaPeriodicasCODEMPRESA: TStringField;
@@ -1699,7 +1699,6 @@ type
     qryRotasSequenciaInspCODEMPRESA: TStringField;
     qryRotasSequenciaInspCODEQUIPAMENTO: TStringField;
     qryRotasSequenciaInspDESCRICAO: TStringField;
-    qryRotasSequenciaInspFREQUENCIA1: TSmallintField;
     qryRotasSequenciaInspREPROGRAMAR1: TStringField;
     qryRotasSequenciaInspGRUPOINSP: TStringField;
     qryRotasSequenciaInspCODMANUTPROGFAMEQUIP: TStringField;
@@ -5560,6 +5559,155 @@ type
     qryConfigsautoupdate: TBooleanField;
     qryClonarLubrificMATRICULA: TStringField;
     qryClonarManutMATRICULA: TStringField;
+    qryManutProgEquipPecas: TFDQuery;
+    dsManutProgEquipPecas: TDataSource;
+    qryManutProgEquipRecursos: TFDQuery;
+    dsManutProgEquipRecursos: TDataSource;
+    qryManutProgEquipPecasCODIGO: TFDAutoIncField;
+    qryManutProgEquipPecasCODEMPRESA: TStringField;
+    qryManutProgEquipPecasCODMANUTPROGEQUIP: TStringField;
+    qryManutProgEquipPecasCODPECAREP: TStringField;
+    qryManutProgEquipPecasQUANTIDADE: TIntegerField;
+    qryManutProgEquipPecasREFERENCIA: TStringField;
+    qryManutProgEquipPecasESTOQUE: TIntegerField;
+    qryManutProgEquipPecasPECA: TStringField;
+    qryManutProgEquipRecursosCODIGO: TFDAutoIncField;
+    qryManutProgEquipRecursosCODEMPRESA: TStringField;
+    qryManutProgEquipRecursosCODMANUTPROGEQUIP: TStringField;
+    qryManutProgEquipRecursosCODRECURSO: TStringField;
+    qryManutProgEquipRecursosQUANTIDADE: TIntegerField;
+    qryManutProgEquipRecursosRECURSO: TStringField;
+    qryManutProgEquipRecursosESTOQUE: TIntegerField;
+    qryLubrificProgEquipPecas: TFDQuery;
+    dsLubrificProgEquipPecas: TDataSource;
+    qryLubrificProgEquipRecursos: TFDQuery;
+    dsLubrificProgEquipRecursos: TDataSource;
+    qryLubrificProgEquipRecursosCODIGO: TFDAutoIncField;
+    qryLubrificProgEquipRecursosCODEMPRESA: TStringField;
+    qryLubrificProgEquipRecursosCODLUBRIFICPROGEQUIP: TStringField;
+    qryLubrificProgEquipRecursosCODRECURSO: TStringField;
+    qryLubrificProgEquipRecursosQUANTIDADE: TIntegerField;
+    qryLubrificProgEquipRecursosRECURSO: TStringField;
+    qryLubrificProgEquipRecursosESTOQUE: TIntegerField;
+    qryLubrificProgEquipPecasCODIGO: TFDAutoIncField;
+    qryLubrificProgEquipPecasCODEMPRESA: TStringField;
+    qryLubrificProgEquipPecasCODLUBRIFICPROGEQUIP: TStringField;
+    qryLubrificProgEquipPecasCODPECAREP: TStringField;
+    qryLubrificProgEquipPecasQUANTIDADE: TIntegerField;
+    qryLubrificProgEquipPecasREFERENCIA: TStringField;
+    qryLubrificProgEquipPecasESTOQUE: TIntegerField;
+    qryLubrificProgEquipPecasPECA: TStringField;
+    qryRotasSequenciaInspFREQUENCIA: TSmallintField;
+    qryManutConsPecas: TFDQuery;
+    dsManutConsPecas: TDataSource;
+    qryManutConsRecursos: TFDQuery;
+    dsManutConsRecursos: TDataSource;
+    qryLubrificConsPecas: TFDQuery;
+    FDAutoIncField18: TFDAutoIncField;
+    StringField98: TStringField;
+    StringField99: TStringField;
+    StringField100: TStringField;
+    IntegerField24: TIntegerField;
+    StringField101: TStringField;
+    IntegerField25: TIntegerField;
+    StringField102: TStringField;
+    dsLubrificConsPecas: TDataSource;
+    qryLubrificConsRecursos: TFDQuery;
+    FDAutoIncField19: TFDAutoIncField;
+    StringField121: TStringField;
+    StringField122: TStringField;
+    StringField123: TStringField;
+    IntegerField26: TIntegerField;
+    StringField124: TStringField;
+    IntegerField27: TIntegerField;
+    dsLubrificConsRecursos: TDataSource;
+    qryManutConsRecursosCODIGO: TFDAutoIncField;
+    qryManutConsRecursosCODEMPRESA: TStringField;
+    qryManutConsRecursosCODMANUTPROGEQUIP: TStringField;
+    qryManutConsRecursosCODRECURSO: TStringField;
+    qryManutConsRecursosQUANTIDADE: TIntegerField;
+    qryManutConsRecursosRECURSO: TStringField;
+    qryManutConsRecursosESTOQUE: TIntegerField;
+    qryManutConsPecasCODIGO: TFDAutoIncField;
+    qryManutConsPecasCODEMPRESA: TStringField;
+    qryManutConsPecasCODMANUTPROGEQUIP: TStringField;
+    qryManutConsPecasCODPECAREP: TStringField;
+    qryManutConsPecasQUANTIDADE: TIntegerField;
+    qryManutConsPecasREFERENCIA: TStringField;
+    qryManutConsPecasESTOQUE: TIntegerField;
+    qryManutConsPecasPECA: TStringField;
+    qryRotaPeriodicasManutPecas: TFDQuery;
+    dsRotaPeriodicasManutPecas: TDataSource;
+    qryRotaPeriodicasManutRecursos: TFDQuery;
+    dsRotaPeriodicasManutRecursos: TDataSource;
+    qryRotaPeriodicasManutPecasCODIGO: TFDAutoIncField;
+    qryRotaPeriodicasManutPecasCODEMPRESA: TStringField;
+    qryRotaPeriodicasManutPecasCODMANUTPROGEQUIP: TStringField;
+    qryRotaPeriodicasManutPecasCODPECAREP: TStringField;
+    qryRotaPeriodicasManutPecasQUANTIDADE: TIntegerField;
+    qryRotaPeriodicasManutPecasREFERENCIA: TStringField;
+    qryRotaPeriodicasManutPecasESTOQUE: TIntegerField;
+    qryRotaPeriodicasManutPecasPECA: TStringField;
+    qryRotaPeriodicasManutRecursosCODIGO: TFDAutoIncField;
+    qryRotaPeriodicasManutRecursosCODEMPRESA: TStringField;
+    qryRotaPeriodicasManutRecursosCODMANUTPROGEQUIP: TStringField;
+    qryRotaPeriodicasManutRecursosCODRECURSO: TStringField;
+    qryRotaPeriodicasManutRecursosQUANTIDADE: TIntegerField;
+    qryRotaPeriodicasManutRecursosRECURSO: TStringField;
+    qryRotaPeriodicasManutRecursosESTOQUE: TIntegerField;
+    qryRotaEquipVencSeqManutPecas: TFDQuery;
+    dsRotaEquipVencSeqManutPecas: TDataSource;
+    qryRotaEquipVencSeqManutRecursos: TFDQuery;
+    dsRotaEquipVencSeqManutRecursos: TDataSource;
+    qryRotaEquipVencSeqManutPecasCODIGO: TFDAutoIncField;
+    qryRotaEquipVencSeqManutPecasCODEMPRESA: TStringField;
+    qryRotaEquipVencSeqManutPecasCODMANUTPROGEQUIP: TStringField;
+    qryRotaEquipVencSeqManutPecasCODPECAREP: TStringField;
+    qryRotaEquipVencSeqManutPecasQUANTIDADE: TIntegerField;
+    qryRotaEquipVencSeqManutPecasREFERENCIA: TStringField;
+    qryRotaEquipVencSeqManutPecasESTOQUE: TIntegerField;
+    qryRotaEquipVencSeqManutPecasPECA: TStringField;
+    qryRotaEquipVencSeqManutRecursosCODIGO: TFDAutoIncField;
+    qryRotaEquipVencSeqManutRecursosCODEMPRESA: TStringField;
+    qryRotaEquipVencSeqManutRecursosCODMANUTPROGEQUIP: TStringField;
+    qryRotaEquipVencSeqManutRecursosCODRECURSO: TStringField;
+    qryRotaEquipVencSeqManutRecursosQUANTIDADE: TIntegerField;
+    qryRotaEquipVencSeqManutRecursosRECURSO: TStringField;
+    qryRotaEquipVencSeqManutRecursosESTOQUE: TIntegerField;
+    qryRotaConsSeqManutPecas: TFDQuery;
+    dsRotaConsSeqManutPecas: TDataSource;
+    qryRotaConsSeqManutRecursos: TFDQuery;
+    dsRotaConsSeqManutRecursos: TDataSource;
+    qryRotaConsSeqManutPecasCODIGO: TFDAutoIncField;
+    qryRotaConsSeqManutPecasCODEMPRESA: TStringField;
+    qryRotaConsSeqManutPecasCODMANUTPROGEQUIP: TStringField;
+    qryRotaConsSeqManutPecasCODPECAREP: TStringField;
+    qryRotaConsSeqManutPecasQUANTIDADE: TIntegerField;
+    qryRotaConsSeqManutPecasREFERENCIA: TStringField;
+    qryRotaConsSeqManutPecasESTOQUE: TIntegerField;
+    qryRotaConsSeqManutPecasPECA: TStringField;
+    qryRotaConsSeqManutRecursosCODIGO: TFDAutoIncField;
+    qryRotaConsSeqManutRecursosCODEMPRESA: TStringField;
+    qryRotaConsSeqManutRecursosCODMANUTPROGEQUIP: TStringField;
+    qryRotaConsSeqManutRecursosCODRECURSO: TStringField;
+    qryRotaConsSeqManutRecursosQUANTIDADE: TIntegerField;
+    qryRotaConsSeqManutRecursosRECURSO: TStringField;
+    qryRotaConsSeqManutRecursosESTOQUE: TIntegerField;
+    qryProgramadasExecucaoMObraTOTALHOMEMHORAPROG: TBCDField;
+    qryProgramadasExecucaoMObraTOTALHOMEMHORAUTIL: TBCDField;
+    DSEquipamentosManutHistProgExec: TDataSource;
+    qryEquipamentosManutHistProgExec: TFDQuery;
+    qryEquipamentosHistCODEMPRESA: TStringField;
+    qryEquipamentosManutHistProgExectotal_programados: TLargeintField;
+    qryEquipamentosManutHistProgExectotal_executados: TFMTBCDField;
+    qryEquipamentosManutHistProgExecCODEMPRESA: TStringField;
+    qryEquipamentosManutHistProgExecCODEQUIPAMENTO: TStringField;
+    dsEquipamentosLubrificHistProgExec: TDataSource;
+    qryEquipamentosLubrificHistProgExec: TFDQuery;
+    qryEquipamentosLubrificHistProgExectotal_programados: TLargeintField;
+    qryEquipamentosLubrificHistProgExectotal_executados: TFMTBCDField;
+    qryEquipamentosLubrificHistProgExecCODEMPRESA: TStringField;
+    qryEquipamentosLubrificHistProgExecCODEQUIPAMENTO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5633,6 +5781,7 @@ type
     procedure qryManutPeriodicasHistItensEspCalcFields(DataSet: TDataSet);
     procedure qryFuncionariosHistAfterScroll(DataSet: TDataSet);
     procedure qryFuncionariosHistCalcFields(DataSet: TDataSet);
+    procedure qryRotasFREQUENCIAValidate(Sender: TField);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -5651,12 +5800,12 @@ type
     FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
     FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
     FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
-    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro: String;
+    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro, FPromptConsulta: String;
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
     FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
     FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
     FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms, FAutoUpdate: Boolean;
-    FParamAuxiliar: array[0..10] of String;
+    FParamAuxiliar: array[0..20] of String;
     FParametros : TArray<String>;
     FCustos : TArray<Real>;
     FTotalHHDisp, FTotalHorasFunc, FTotalHorasParadas : Real;
@@ -5722,7 +5871,8 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   UnTelaCadAbastecimentos, UnTelaInspConsulta, UnTelaInspFechamentoHist,
   UnTelaCadOrdemServicoHistorico, UnTelaCadPneusChassiRelat,
   UnTelaCadPneusChassi, UnTelaGerenciador, UnTelaCadFuncionariosHist,
-  UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia;
+  UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia,
+  UnTelaCadRotaProgEquip;
 
 {$R *.dfm}
 
@@ -7474,6 +7624,16 @@ if qryRotasDATAINICIO.AsString <> '' then
   qryRotasC_PROXINSP.AsDateTime := IncDay(qryRotasDATAINICIO.AsDateTime, qryRotasFREQUENCIA.AsInteger);
 end;
 
+procedure TDM.qryRotasFREQUENCIAValidate(Sender: TField);
+begin
+  if FrmTelaCadRotaProgEquip <> nil then
+  begin
+    DM.qryRotasSequenciaInsp.Close; DM.qryRotasSequenciaInsp.Open;
+    DM.qryRotasSequenciaInspItens.Close; DM.qryRotasSequenciaInspItens.Open;
+    DM.qryRotasSequenciaInspItensEsp.Close; DM.qryRotasSequenciaInspItensEsp.Open;
+  end;
+end;
+
 function TDM.VerificaPrimeiroAcesso:Boolean;
 var
   LSenhaAtual, LNovaSenha, LNovaSenhaConfirmacao : String;
@@ -7822,7 +7982,7 @@ begin
                 qryManutPeriodicasDESCRICAO.AsString            := qryRotasSequenciaInspDESCRICAO.AsString;
                 qryManutPeriodicasCODMANUTPROGFAMEQUIP.AsString := qryRotasSequenciaInspCODMANUTPROGFAMEQUIP.AsString;
                 qryManutPeriodicasREPROGRAMAR1.AsString         := qryRotasSequenciaInspREPROGRAMAR1.AsString;
-                qryManutPeriodicasFREQUENCIA1.AsString          := qryRotasSequenciaInspFREQUENCIA1.AsString;
+                qryManutPeriodicasFREQUENCIA1.AsString          := qryRotasSequenciaInspFREQUENCIA.AsString;
                 qryManutPeriodicasCODEQUIPAMENTO.AsString       := qryRotasSequenciaInspCODEQUIPAMENTO.AsString;
                 qryManutPeriodicasDTAINICIO1.AsString           := qryRotasDATAINICIO.AsString;
                 qryManutPeriodicasCODORDEMSERVICO.AsInteger     := CodOrdemServico;
@@ -9874,6 +10034,9 @@ if DM.FEmpTransf = True then
     qryRotaEquipVenc.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
     qryRotaEquipVenc.Params.ParamByName('DATA').AsString       := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor);
     qryRotaEquipVenc.Open;
+    qryRotaEquipVencSeq.Open;
+    qryRotaEquipVencSeqManut.Open;
+
   end;
 
   if (DM.qryManutVenc.IsEmpty = False) or (DM.qryLubrificVenc.IsEmpty = False) or (DM.qryRotaEquipVenc.IsEmpty = False) then

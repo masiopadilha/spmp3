@@ -115,8 +115,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           Left = 3
           Top = 3
           Width = 900
-          Height = 341
-          Align = alClient
+          Height = 199
+          Align = alTop
           DataSource = DM.dsRotaEquipVenc
           DrawingStyle = gdsClassic
           FixedColor = 14671839
@@ -136,6 +136,145 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           TitleFont.Style = []
           OnDrawColumnCell = GrdManutDrawColumnCell
           OnTitleClick = GrdManutTitleClick
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 205
+          Width = 906
+          Height = 142
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 1
+          object DBGrid1: TDBGrid
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 448
+            Height = 136
+            Align = alLeft
+            Color = clBtnFace
+            DataSource = DM.dsRotaEquipVencSeq
+            DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            StyleElements = [seFont, seBorder]
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'CODEQUIPATUAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'd. Equip.'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'EQUIPATUAL'
+                Title.Caption = 'Equipamento'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 283
+                Visible = True
+              end>
+          end
+          object DBGrid2: TDBGrid
+            AlignWithMargins = True
+            Left = 454
+            Top = 3
+            Width = 449
+            Height = 136
+            Align = alRight
+            Color = clBtnFace
+            DataSource = DM.dsRotaEquipVencSeqManut
+            DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            StyleElements = [seFont, seBorder]
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'CODIGO'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'digo'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DESCRICAO'
+                Title.Caption = 'Manuten'#231#227'o'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 172
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DTAINICIO1'
+                Title.Alignment = taCenter
+                Title.Caption = 'Programada'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'FREQUENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dias'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Visible = True
+              end>
+          end
         end
       end
     end

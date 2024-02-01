@@ -57,6 +57,7 @@ type
     PopupMenuCons: TPopupMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    Matricula1: TMenuItem;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;
@@ -78,6 +79,7 @@ type
     procedure MenuItem2Click(Sender: TObject);
     procedure Area1Click(Sender: TObject);
     procedure Equipamento1Click(Sender: TObject);
+    procedure Matricula1Click(Sender: TObject);
   private
     { Private declarations }
     LProgramadas: array[1..31] of Real;
@@ -199,7 +201,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
       begin
         DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString := DM.FCodCombo;
         DM.qrySolicitacaoTrabEQUIPAMENTO.AsString    := DM.FValorCombo;
-        DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString := DM.FParamAuxiliar[5]
+        DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString := DM.FParamAuxiliar[11]
       end;
   end
 else
@@ -537,6 +539,26 @@ DM.FDataSetRelat    := DmRelatorios.frxDBSolicTrabalhoIndividual;
 DM.FTabela_auxiliar := 401;
   inherited;
 
+end;
+
+procedure TFrmTelaCadSolicitacaoTrab.Matricula1Click(Sender: TObject);
+begin
+  DM.FParamAuxiliar[2] := 'Matrícula';
+  DM.FTabela_auxiliar := 300;
+  DM.FNomeConsulta := 'Solicitantes';
+  DM.FParamAuxiliar[1] := 'NOME';
+  if DM.ConsultarCombo <> EmptyStr then
+    begin
+      DM.FDataSetRelat := DmRelatorios.frxDBSolicTrabalhoGeral;
+      DM.FParamAuxiliar[3] := DM.FCodCombo;
+      DM.FDataSetRelat.DataSet := DM.qryAuxiliar;
+      DM.FTabela_auxiliar := 40;
+      Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
+      FrmTelaAuxiliar.BtnConsultar.OnClick(Sender);
+      DmRelatorios.frxRSolicTrabalhoGeral.ShowReport();
+      DM.FParamAuxiliar[2] := '';
+    end;
+  inherited;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.MenuItem1Click(Sender: TObject);

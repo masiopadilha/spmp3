@@ -201,6 +201,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 150;
     DM.FNomeConsulta := 'Áreas';
+    DM.FPromptConsulta := 'Informe a área a ser consultada';
     if DM.ConsultarCombo <> EmptyStr then
       begin
         DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -340,7 +341,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         PAuxiliares.Caption := 'NENHUMA ÁREA SELECIONADA!!!';
         Exit;
       end;
-    DM.FParamAuxiliar[1] := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+    DM.FParamAuxiliar[18] := DM.qryEquipamentosCODLOCALIZACAO.AsString;
     DM.FTabela_auxiliar := 160;
     DM.FNomeConsulta := 'Células';
     DM.qryEquipamentos.Edit;
@@ -771,8 +772,8 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         PAuxiliares.Caption := 'NENHUMA CÉLULA SELECIONADA!!!';
         Exit;
       end;
-    DM.FParamAuxiliar[1] := DM.qryEquipamentosCODLOCALIZACAO.AsString;
-    DM.FParamAuxiliar[2] := DM.qryEquipamentosCODCELULA.AsString;
+    DM.FParamAuxiliar[18] := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+    DM.FParamAuxiliar[19] := DM.qryEquipamentosCODCELULA.AsString;
     DM.FTabela_auxiliar := 170;
     DM.FNomeConsulta := 'Linhas';
     DM.qryEquipamentos.Edit;
@@ -1108,7 +1109,7 @@ begin
     DM.qryAuxiliar2.FieldByName('RELATORIO').AsString            := 'N';
     DM.qryAuxiliar2.FieldByName('GRUPOINSP').AsString            := DM.qryClonarManutGRUPOINSP.AsString;
     DM.qryAuxiliar2.FieldByName('DATACADASTRO').AsDateTime       := DM.FDataHoraServidor;
-    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodEmpresa;
+    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodUsuario;
     DM.qryAuxiliar2.Post;
 
     DM.qryClonarManut.Next;
@@ -1152,7 +1153,7 @@ begin
     DM.qryAuxiliar2.FieldByName('RELATORIO').AsString            := 'N';
     DM.qryAuxiliar2.FieldByName('GRUPOINSP').AsString            := DM.qryClonarLubrificGRUPOINSP.AsString;
     DM.qryAuxiliar2.FieldByName('DATACADASTRO').AsDateTime       := DM.FDataHoraServidor;
-    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodEmpresa;
+    DM.qryAuxiliar2.FieldByName('CODUSUARIOCAD').AsString        := DM.FCodUsuario;
     DM.qryAuxiliar2.Post;
 
     DM.qryClonarLubrific.Next;
@@ -1393,6 +1394,7 @@ begin
   inherited;
 DM.FParamAuxiliar[1] := 'CODIGO';
 DM.FParamAuxiliar[2] := '';
+DM.FPromptConsulta := 'Informe o código a ser consultado';
 BtnConsultar.OnClick(Sender);
 end;
 
@@ -1414,7 +1416,7 @@ begin
         Exit;
       end;
 
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
+    DM.FParamAuxiliar[0] := EdtCodEquip.Text;
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -1431,6 +1433,7 @@ begin
     DM.FDataSetParam    := DM.qryEquipamentos;
     DM.FDataSourceParam := DM.dsEquipamentos;
     DM.FTabela_auxiliar := 25;
+    DM.FAlterando := True;
   End;
 end;
 
@@ -1438,7 +1441,7 @@ procedure TFrmTelaCadEquipamentos.Contadores1Click(Sender: TObject);
 begin
   inherited;
   Try
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
+    DM.FParamAuxiliar[0] := EdtCodEquip.Text;
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -1455,6 +1458,7 @@ begin
     DM.FDataSetParam    := DM.qryEquipamentos;
     DM.FDataSourceParam := DM.dsEquipamentos;
     DM.FTabela_auxiliar := 25;
+    DM.FAlterando := True;
   End;
 end;
 
@@ -1463,6 +1467,7 @@ begin
   inherited;
 DM.FParamAuxiliar[1] := 'DESCRICAO';
 DM.FParamAuxiliar[2] := '';
+DM.FPromptConsulta := 'Informe a descrição a ser consultada';
 BtnConsultar.OnClick(Sender);
 end;
 
@@ -1861,6 +1866,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 600;
     DM.FNomeConsulta := 'Famílias de Equipamentos';
+    DM.FPromptConsulta := 'Informe a família a ser consultada';
     if DM.ConsultarCombo <> EmptyStr then
       begin
         DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -1912,7 +1918,7 @@ procedure TFrmTelaCadEquipamentos.Lubrificacoes1Click(Sender: TObject);
 begin
   inherited;
   Try
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
+    DM.FParamAuxiliar[0] := EdtCodEquip.Text;
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -1923,13 +1929,14 @@ begin
       end;
     if DM.AplicarMascara(DM.qryLubrificProgEquipCODIGO, DM.qryFormatoCodigoLUBRIFICPROGEQUIPAMENTO, FrmTelaCadLubrificProgEquip) = False then exit;
     Application.CreateForm(TFrmTelaCadLubrificProgEquip, FrmTelaCadLubrificProgEquip);
-    //FrmTelaCadLubrificProgEquip.Caption := 'Lubrificação Programada do Equipamento: '+ DM.qryEquipamentosDESCRICAO.AsString;
+    FrmTelaCadLubrificProgEquip.Caption := 'Lubrificação Programada do Equipamento: '+ DM.qryEquipamentosDESCRICAO.AsString;
     FrmTelaCadLubrificProgEquip.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadLubrificProgEquip);
     DM.FDataSetParam    := DM.qryEquipamentos;
     DM.FDataSourceParam := DM.dsEquipamentos;
     DM.FTabela_auxiliar := 25;
+    DM.FAlterando := True;
   End;
 end;
 
@@ -1937,7 +1944,7 @@ procedure TFrmTelaCadEquipamentos.Manutencoes1Click(Sender: TObject);
 begin
   inherited;
   Try
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
+    DM.FParamAuxiliar[0] := EdtCodEquip.Text;
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -1948,13 +1955,14 @@ begin
       end;
     if DM.AplicarMascara(DM.qryManutProgEquipCODIGO, DM.qryFormatoCodigoMANUTPROGEQUIPAMENTO, FrmTelaCadManutProgEquip) = False then exit;
     Application.CreateForm(TFrmTelaCadManutProgEquip, FrmTelaCadManutProgEquip);
-    //FrmTelaCadManutProgEquip.Caption := 'Manutenção Programada do Equipamento: '+ DM.qryEquipamentosDESCRICAO.AsString;
+    FrmTelaCadManutProgEquip.Caption := 'Manutenção Programada do Equipamento: '+ DM.qryEquipamentosDESCRICAO.AsString;
     FrmTelaCadManutProgEquip.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadManutProgEquip);
     DM.FDataSetParam    := DM.qryEquipamentos;
     DM.FDataSourceParam := DM.dsEquipamentos;
     DM.FTabela_auxiliar := 25;
+    DM.FAlterando := True;
   End;
 end;
 
@@ -1962,7 +1970,7 @@ procedure TFrmTelaCadEquipamentos.PontosInspecao1Click(Sender: TObject);
 begin
   inherited;
   Try
-    DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
+    DM.FParamAuxiliar[0] := EdtCodEquip.Text;
     if DM.FParamAuxiliar[0] = EmptyStr then BtnConsultar.OnClick(Sender);
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -1979,6 +1987,7 @@ begin
     DM.FDataSetParam    := DM.qryEquipamentos;
     DM.FDataSourceParam := DM.dsEquipamentos;
     DM.FTabela_auxiliar := 25;
+    DM.FAlterando := True;
   End;
 end;
 

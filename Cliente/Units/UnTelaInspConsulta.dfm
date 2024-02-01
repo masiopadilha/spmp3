@@ -28,7 +28,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
     inherited BtnAjuda: TButton
       Left = 972
-      ExplicitLeft = 972
+      ExplicitLeft = 968
     end
     object BtnImprimir: TButton
       Left = 941
@@ -97,7 +97,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ExplicitWidth = 998
       ExplicitHeight = 426
       object TSManut: TTabSheet
-        Caption = 'Manutenc'
+        Caption = 'Manutenc'#245'es'
         object PFundoManut: TPanel
           Left = 0
           Top = 0
@@ -393,9 +393,9 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 988
+            Width = 538
             Height = 392
-            Align = alClient
+            Align = alLeft
             DataSource = DM.dsRotaCons
             DrawingStyle = gdsClassic
             Font.Charset = DEFAULT_CHARSET
@@ -413,6 +413,145 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnDrawColumnCell = GrdManutDrawColumnCell
+          end
+          object Panel2: TPanel
+            Left = 544
+            Top = 0
+            Width = 450
+            Height = 398
+            Align = alClient
+            BevelOuter = bvNone
+            TabOrder = 1
+            object DBGrid1: TDBGrid
+              AlignWithMargins = True
+              Left = 3
+              Top = 3
+              Width = 444
+              Height = 240
+              Align = alTop
+              Color = clBtnFace
+              DataSource = DM.dsRotaConsSeq
+              DrawingStyle = gdsClassic
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -13
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              StyleElements = [seFont, seBorder]
+              Columns = <
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'CODEQUIPATUAL'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'C'#243'd. Equip.'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'EQUIPATUAL'
+                  Title.Caption = 'Equipamento'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Width = 283
+                  Visible = True
+                end>
+            end
+            object DBGrid2: TDBGrid
+              AlignWithMargins = True
+              Left = 3
+              Top = 249
+              Width = 444
+              Height = 449
+              Align = alTop
+              Color = clBtnFace
+              DataSource = DM.dsRotaConsSeqManut
+              DrawingStyle = gdsClassic
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -13
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              StyleElements = [seFont, seBorder]
+              Columns = <
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'CODIGO'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'C'#243'digo'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCRICAO'
+                  Title.Caption = 'Manuten'#231#227'o'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Width = 172
+                  Visible = True
+                end
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'DTAINICIO1'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Programada'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Visible = True
+                end
+                item
+                  Alignment = taCenter
+                  Expanded = False
+                  FieldName = 'FREQUENCIA1'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Dias'
+                  Title.Font.Charset = DEFAULT_CHARSET
+                  Title.Font.Color = clWindowText
+                  Title.Font.Height = -11
+                  Title.Font.Name = 'Tahoma'
+                  Title.Font.Style = []
+                  Visible = True
+                end>
+            end
           end
         end
       end
@@ -599,15 +738,15 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton
-      Left = 423
+      Left = 425
       Caption = 'Executar'
       ModalResult = 0
       OnClick = BtnOKClick
-      ExplicitLeft = 423
+      ExplicitLeft = 425
     end
     inherited BtnFechar: TButton
-      Left = 505
-      ExplicitLeft = 505
+      Left = 508
+      ExplicitLeft = 508
     end
   end
   object FDMemTManut: TFDMemTable
@@ -1427,6 +1566,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     Top = 333
   end
   object DSMemTRota: TDataSource
+    DataSet = FDMemTRota
     Left = 857
     Top = 436
   end
@@ -1555,13 +1695,15 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   object DSMemTRotaSeq: TDataSource
+    DataSet = FDMemTRotaSeq
     Left = 876
     Top = 436
   end
   object FDMemTRotaSeqManut: TFDMemTable
-    IndexFieldNames = 'CODEMPRESA;CODEQUIPAMENTO'
+    IndexFieldNames = 'CODEMPRESA'
     MasterSource = DSMemTRotaSeq
-    MasterFields = 'CODEMPRESA;CODEQUIPATUAL'
+    MasterFields = 'CODEMPRESA'
+    DetailFields = 'CODEMPRESA'
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -1622,6 +1764,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   object DSMemTRotaSeqManut: TDataSource
+    DataSet = FDMemTRotaSeqManut
     Left = 895
     Top = 436
   end
@@ -1732,6 +1875,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   object DSMemTRotaSeqManutItens: TDataSource
+    DataSet = FDMemTRotaSeqManutItens
     Left = 914
     Top = 436
   end
@@ -1842,6 +1986,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   object DSMemTRotaSeqManutItensEsp: TDataSource
+    DataSet = FDMemTRotaSeqManutItensEsp
     Left = 933
     Top = 436
   end

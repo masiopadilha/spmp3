@@ -1,14 +1,19 @@
 inherited FrmTelaCadOrdemServicoRecursos: TFrmTelaCadOrdemServicoRecursos
   Caption = 'Recursos da O.S.'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     inherited BtnAjuda: TButton
-      Left = 469
-      ExplicitLeft = 469
+      Left = 475
+      ExplicitLeft = 471
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
     inherited RGTelas: TRadioGroup
       Left = 157
       Width = 1
@@ -118,7 +123,13 @@ inherited FrmTelaCadOrdemServicoRecursos: TFrmTelaCadOrdemServicoRecursos
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 504
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 504
     inherited BtnOK: TButton
       Left = 100
       ModalResult = 0

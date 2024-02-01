@@ -53,8 +53,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 966
-      ExplicitLeft = 962
+      Left = 962
+      ExplicitLeft = 958
     end
     object CBPeriodo: TComboBox
       Left = 738

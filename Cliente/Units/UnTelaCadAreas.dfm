@@ -6,39 +6,35 @@ inherited FrmTelaCadAreas: TFrmTelaCadAreas
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 505
+      Left = 509
       ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 527
+      Left = 531
       ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
-      Left = 560
+      Left = 564
       DataSource = DM.dsAreas
-      ExplicitLeft = 560
     end
     inherited LblDataCad: TDBText
-      Left = 432
+      Left = 436
       DataSource = DM.dsAreas
-      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
-      Left = 560
+      Left = 564
       DataSource = DM.dsAreas
-      ExplicitLeft = 560
     end
     inherited LblUsuCad: TDBText
-      Left = 432
+      Left = 436
       DataSource = DM.dsAreas
-      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
-      Left = 399
+      Left = 403
       ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 361
+      Left = 365
       ExplicitLeft = 361
     end
   end

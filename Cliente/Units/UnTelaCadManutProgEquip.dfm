@@ -1,7 +1,10 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -104,6 +107,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -135,7 +139,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Criticidade:'
     end
     object Label16: TLabel
-      Left = 750
+      Left = 767
       Top = 62
       Width = 31
       Height = 16
@@ -143,7 +147,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Rota:'
     end
     object LblRota: TDBText
-      Left = 784
+      Left = 801
       Top = 62
       Width = 204
       Height = 16
@@ -185,7 +189,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 731
+      Left = 748
       Top = 64
       Width = 6
       Height = 13
@@ -282,7 +286,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     object CBCriticidade: TDBComboBox
       Left = 606
       Top = 60
-      Width = 120
+      Width = 136
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'CRITICIDADE'
@@ -343,6 +347,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 122
     ExplicitHeight = 122
     inherited Label2: TLabel
@@ -569,6 +574,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 277
+    Width = 1008
     Height = 268
     ExplicitTop = 277
     ExplicitHeight = 265
@@ -765,11 +771,33 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
       ImageIndex = 104
       OnClick = Button1Click
+    end
+    inherited Button2: TButton
+      Hint = 'Pe'#231'as da Manuten'#231#227'o.'
+      DisabledImageIndex = 81
+      ImageIndex = 80
+      OnClick = Button2Click
+    end
+    inherited Button3: TButton
+      Hint = 'Recursos da Manuten'#231#227'o.'
+      DisabledImageIndex = 38
+      ImageIndex = 37
+      OnClick = Button3Click
     end
   end
   inherited MainMenuPadrao: TMainMenu

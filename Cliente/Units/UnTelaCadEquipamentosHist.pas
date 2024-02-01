@@ -59,6 +59,14 @@ type
     EdtData1: TJvDateTimePicker;
     Label5: TLabel;
     EdtData2: TJvDateTimePicker;
+    lblTotalManutProg: TLabel;
+    lblDBTotalManutProg: TLabel;
+    lblTotalManutExec: TLabel;
+    lblDBTotalManutExec: TLabel;
+    lblTotalLubrificProg: TLabel;
+    lblDBTotalLubrificProg: TLabel;
+    lblTotalLubrificExec: TLabel;
+    lblDBTotalLubrificExec: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CBPeriodoChange(Sender: TObject);
@@ -423,9 +431,26 @@ DM.qryEquipamentoLubrificHist.Params[1].AsString := FormatDateTime('yyyy/mm/dd',
 DM.qryEquipamentoLubrificHist.Params[2].AsString := DM.FCodEmpresa;
 DM.qryEquipamentoLubrificHist.Params[3].AsString := DM.qryEquipamentosCODIGO.AsString;
 DM.qryEquipamentoLubrificHist.Open;
+//--------------------------------------------------------------------------------------------------------------
+DM.qryEquipamentosManutHistProgExec.Close;
+DM.qryEquipamentosManutHistProgExec.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+DM.qryEquipamentosManutHistProgExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+DM.qryEquipamentosManutHistProgExec.Params[2].AsString := DM.FCodEmpresa;
+DM.qryEquipamentosManutHistProgExec.Params[3].AsString := DM.qryEquipamentosCODIGO.AsString;
+DM.qryEquipamentosManutHistProgExec.Open;
+lblDBTotalManutProg.Caption := FormatFloat('00', DM.qryEquipamentosManutHistProgExectotal_programados.AsFloat);
+lblDBTotalManutExec.Caption := FormatFloat('00', DM.qryEquipamentosManutHistProgExectotal_executados.AsFloat);
+
+DM.qryEquipamentosLubrificHistProgExec.Close;
+DM.qryEquipamentosLubrificHistProgExec.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+DM.qryEquipamentosLubrificHistProgExec.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+DM.qryEquipamentosLubrificHistProgExec.Params[2].AsString := DM.FCodEmpresa;
+DM.qryEquipamentosLubrificHistProgExec.Params[3].AsString := DM.qryEquipamentosCODIGO.AsString;
+DM.qryEquipamentosLubrificHistProgExec.Open;
+lblDBTotalLubrificProg.Caption := FormatFloat('00', DM.qryEquipamentosLubrificHistProgExectotal_programados.AsFloat);
+lblDBTotalLubrificExec.Caption := FormatFloat('00', DM.qryEquipamentosLubrificHistProgExectotal_executados.AsFloat);
+
 //-------------------------------------------------Verifica se o equipamento possui auxiliares para ser contabilizados os custos---------------------------------------
-
-
 
 DM.qryEquipamentosArvore.Close;
 DM.qryEquipamentosArvore.SQL.Clear;

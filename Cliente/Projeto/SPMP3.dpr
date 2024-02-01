@@ -160,7 +160,13 @@ uses
   UnTelaGerenciador in '..\Units\UnTelaGerenciador.pas' {FrmTelaGerenciador},
   UnDmAlertas in '..\Units\UnDmAlertas.pas' {DMAlertas: TDataModule},
   UnTelaCadEquipamentosAltCod in '..\Units\UnTelaCadEquipamentosAltCod.pas' {FrmTelaCadEquipamentosAltCod},
-  UnTelaCadEquipamentosAltFamiliaCod in '..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas' {FrmTelaCadEquipamentosAltFamiliaCod};
+  UnTelaCadEquipamentosAltFamiliaCod in '..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas' {FrmTelaCadEquipamentosAltFamiliaCod},
+  UnTelaCadManutProgEquipPecas in '..\Units\UnTelaCadManutProgEquipPecas.pas' {FrmTelaCadManutProgEquipPecas},
+  UnTelaCadManutProgEquipRecursos in '..\Units\UnTelaCadManutProgEquipRecursos.pas' {FrmTelaCadManutProgEquipRecursos},
+  UnTelaCadLubrificProgEquipPecas in '..\Units\UnTelaCadLubrificProgEquipPecas.pas' {FrmTelaCadLubrificProgEquipPecas},
+  UnTelaCadLubrificProgEquipRecursos in '..\Units\UnTelaCadLubrificProgEquipRecursos.pas' {FrmTelaCadLubrificProgEquipRecursos},
+  UnTelaCadManutProgFamEquipClonagem in '..\Units\UnTelaCadManutProgFamEquipClonagem.pas' {FrmTelaCadManutProgFamEquipClonagem},
+  UnTelaCadLubrificProgFamEquipClonagem in '..\Units\UnTelaCadLubrificProgFamEquipClonagem.pas' {FrmTelaCadLubrificProgFamEquipClonagem};
 
 {$R *.res}
 begin
@@ -182,6 +188,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
+  Application.CreateForm(TFrmTelaCadLubrificProgFamEquipClonagem, FrmTelaCadLubrificProgFamEquipClonagem);
   FrmTelaAcesso.ShowModal;
   if DM.FAcessoLiberado = True then
     begin

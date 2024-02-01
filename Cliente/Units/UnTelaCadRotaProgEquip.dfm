@@ -2,6 +2,7 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
   Caption = 'Rotas de Manuten'#231#227'o'
   ClientHeight = 624
   ClientWidth = 1012
+  KeyPreview = False
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
@@ -17,11 +18,14 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsRotas
     end
+    inherited BtnConsultar: TButton
+      Width = 28
+      ExplicitWidth = 28
+    end
   end
   inherited PIdentificacao: TPanel
     Width = 1008
     Height = 65
-    ExplicitWidth = 1004
     ExplicitHeight = 65
     object Label4: TLabel
       Left = 96
@@ -84,7 +88,6 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     Width = 1008
     Height = 65
     ExplicitTop = 120
-    ExplicitWidth = 1004
     ExplicitHeight = 65
     inherited Label2: TLabel
       Width = 132
@@ -158,7 +161,7 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     object EdtDias: TDBEdit
       Left = 127
       Top = 30
-      Width = 125
+      Width = 124
       Height = 24
       DataField = 'FREQUENCIA'
       DataSource = DM.dsRotas
@@ -200,84 +203,11 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     Width = 1008
     Height = 356
     ExplicitTop = 189
-    ExplicitWidth = 1004
     ExplicitHeight = 353
-    object GrdSequencia: TDBGrid
-      Left = 1
-      Top = 1
-      Width = 1006
-      Height = 192
-      Align = alTop
-      DataSource = DM.dsRotasSequencia
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -13
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      StyleElements = [seFont]
-      OnDblClick = GrdSequenciaDblClick
-      OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = GrdSequenciaKeyPress
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'AREA'
-          ReadOnly = True
-          Title.Caption = #193'rea'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -13
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 231
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CELULA'
-          ReadOnly = True
-          Title.Caption = 'C'#233'lula'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -13
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 197
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LINHA'
-          ReadOnly = True
-          Title.Caption = 'Linha'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -13
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 150
-          Visible = True
-        end
-        item
-          Color = clBtnFace
-          Expanded = False
-          FieldName = 'EQUIPATUAL'
-          ReadOnly = True
-          Title.Caption = 'Equipamento Atual'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -13
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 383
-          Visible = True
-        end>
-    end
     object GrdInspecoes: TDBGrid
-      Left = 1
+      Left = 3
       Top = 194
-      Width = 296
+      Width = 294
       Height = 157
       Color = 14671839
       DataSource = DM.dsRotasSequenciaInsp
@@ -310,7 +240,7 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     object DBGrid1: TDBGrid
       Left = 299
       Top = 194
-      Width = 704
+      Width = 706
       Height = 157
       Color = 14671839
       DataSource = DM.dsRotasSequenciaInspItens
@@ -370,30 +300,97 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
           Visible = True
         end>
     end
+    object GrdSequencia: TDBGrid
+      Left = 3
+      Top = 28
+      Width = 1002
+      Height = 120
+      Hint = 
+        'Tecle ENTER nas colunas em negrito'#39' para incluir o equipamento n' +
+        'a rota.'
+      DataSource = DM.dsRotasSequencia
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnDblClick = GrdSequencia1DblClick
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = GrdSequencia1KeyPress
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'AREA'
+          ReadOnly = True
+          Title.Caption = #193'rea'
+          Width = 158
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CELULA'
+          ReadOnly = True
+          Title.Caption = 'C'#233'lula'
+          Width = 162
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LINHA'
+          ReadOnly = True
+          Title.Caption = 'Linha'
+          Width = 145
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'CODEQUIPATUAL'
+          ReadOnly = True
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Equipamento'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EQUIPATUAL'
+          ReadOnly = True
+          Title.Caption = 'Equipamento atual'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -13
+          Title.Font.Name = 'Tahoma'
+          Title.Font.Style = [fsBold]
+          Width = 352
+          Visible = True
+        end>
+    end
   end
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
     Top = 589
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 549
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
   end
   object CDValidaEquip: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 514
-    Top = 245
+    Top = 141
     object CDValidaEquipID: TIntegerField
       FieldName = 'ID'
     end
