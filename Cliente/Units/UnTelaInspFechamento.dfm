@@ -128,7 +128,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Width = 988
         Height = 460
         Margins.Top = 30
-        ActivePage = TSRota
+        ActivePage = TSManut
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -335,7 +335,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             AlignWithMargins = True
             Left = 1
             Top = 1
-            Width = 410
+            Width = 488
             Height = 150
             Margins.Left = 1
             Margins.Top = 1
@@ -365,9 +365,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           end
           object GrdRotaManut: TDBGrid
             AlignWithMargins = True
-            Left = 413
+            Left = 491
             Top = 1
-            Width = 562
+            Width = 488
             Height = 150
             Margins.Left = 1
             Margins.Top = 1

@@ -706,7 +706,7 @@ end;
 procedure TFrmTelaCadOrdemServicoFechamento.Button4Click(Sender: TObject);
 begin
   inherited;
-  if (not DM.qryOrdemServicoCODMANUTPROGEQUIP.IsNull = True) or (not DM.qryOrdemServicoCODLUBRIFICPROGEQUIP.IsNull = True) then
+  if (not DM.qryOrdemServicoCODMANUTPROGEQUIP.IsNull = True) or (not DM.qryOrdemServicoCODLUBRIFICPROGEQUIP.IsNull = True) or (DM.qryOrdemServicoROTAEQUIP.AsString = 'S') then
     Try
       if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
@@ -714,7 +714,7 @@ begin
         Exit;
       end;
       Application.CreateForm(TFrmTelaInspFechamento, FrmTelaInspFechamento);
-      if not DM.qryOrdemServicoCODMANUTPROGEQUIP.IsNull = True then
+      if not (DM.qryOrdemServicoCODMANUTPROGEQUIP.IsNull = True) and (DM.qryOrdemServicoROTAEQUIP.AsString <> 'S') then
         begin
           if DM.qryManutPeriodicas.Locate('CODORDEMSERVICO', DM.qryOrdemServicoCODIGO.AsString, []) = False then
             begin
@@ -729,7 +729,7 @@ begin
             end;
         end
       else
-      if not DM.qryOrdemServicoCODLUBRIFICPROGEQUIP.IsNull = True then
+      if not (DM.qryOrdemServicoCODLUBRIFICPROGEQUIP.IsNull = True) and (DM.qryOrdemServicoROTAEQUIP.AsString <> 'S') then
         begin
           FrmTelaInspFechamento.PCInspecoes.TabIndex := 1;
           if DM.qryLubrificPeriodicas.Locate('CODORDEMSERVICO', DM.qryOrdemServicoCODIGO.AsString, []) = False then
@@ -742,6 +742,22 @@ begin
               DM.qryLubrificPeriodicas.Edit;
               DM.qryLubrificPeriodicasSITUACAOOS.AsString := 'FECHADA';
               DM.qryLubrificPeriodicas.Post;
+            end;
+        end
+      else
+      if DM.qryOrdemServicoROTAEQUIP.AsString = 'S' then
+        begin
+          FrmTelaInspFechamento.PCInspecoes.TabIndex := 2;
+          if DM.qryRotaPeriodicas.Locate('CODORDEMSERVICO', DM.qryOrdemServicoCODIGO.AsString, []) = False then
+            begin
+              Application.MessageBox('Rota já fechada, não está mais disponível para alteração.', 'SPMP3', mb_OK + MB_ICONINFORMATION);
+              Exit;
+            end
+          else
+            begin
+              DM.qryRotaPeriodicas.Edit;
+              DM.qryRotaPeriodicasSITUACAOOS.AsString := 'FECHADA';
+              DM.qryRotaPeriodicas.Post;
             end;
         end;
       FrmTelaInspFechamento.ShowModal;

@@ -5,6 +5,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    ExplicitWidth = 1008
     inherited LCadastro: TLabel
       Left = 694
       Top = 24
@@ -748,7 +749,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     Width = 1008
     Height = 172
     ExplicitTop = 373
-    ExplicitHeight = 169
+    ExplicitWidth = 1008
+    ExplicitHeight = 172
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -758,7 +760,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       AlignWithMargins = True
       Left = 5
       Top = 26
-      Width = 998
+      Width = 994
       Height = 141
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
@@ -825,14 +827,17 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
+    ExplicitTop = 605
   end
   inherited PAlertas: TPanel
     Top = 589
     Width = 1012
+    ExplicitTop = 589
   end
   inherited PBase: TPanel
     Top = 549
     Width = 1008
+    ExplicitTop = 549
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

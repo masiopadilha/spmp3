@@ -15154,27 +15154,38 @@ object DM: TDM
       
         '        ON (`manutprogequipamentohist`.`CODORDEMSERVICO` = `orde' +
         'mservico`.`CODIGO`)'
+      '        '
       'WHERE (`rotasequipamento`.`CODEMPRESA` = :codempresa'
+      '    AND `manutprogequipamentohist`.`SITUACAO` = :situacao'
       
         '    AND `manutprogequipamentohist`.`FREQUENCIA1` = `rotasequipam' +
         'ento`.`FREQUENCIA`'
       '    AND `manutprogequipamentohist`.`SITUACAO` = '#39'ABERTA'#39
-      '    AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39')'
+      '    AND `ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39
+      
+        '    AND `manutprogequipamentohist`.`DTAINICIO1` >= DATE_ADD(CURD' +
+        'ATE(), INTERVAL -18 MONTH))'
+      '    '
       
         'GROUP BY `rotasequipamento`.`CODIGO`, `rotasequipamento`.`CODEMP' +
         'RESA`, `rotasequipamento`.`FREQUENCIA`, `rotasequipamento`.`DESC' +
         'RICAO`, `rotasequipamento`.`REPROGRAMAR`, `rotasequipamento`.`RE' +
         'LATORIO`, `manutprogequipamentohist`.`DTAINICIO1`, `manutprogequ' +
         'ipamentohist`.`SITUACAO`, `SITUACAOOS`'
+      ''
       
-        'ORDER BY `rotasequipamento`.`DESCRICAO` DESC, `manutprogequipame' +
-        'ntohist`.`DTAINICIO1` DESC;')
+        'ORDER BY `ordemservico`.`CODIGO` DESC, `rotasequipamento`.`DESCR' +
+        'ICAO` DESC;')
     Left = 1796
     Top = 585
     ParamData = <
       item
         Name = 'CODEMPRESA'
         DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'SITUACAO'
         ParamType = ptInput
       end>
     object qryRotaPeriodicasCODIGO: TStringField
@@ -15220,6 +15231,7 @@ object DM: TDM
       Size = 9
     end
     object qryRotaPeriodicasCODORDEMSERVICO: TFDAutoIncField
+      Alignment = taCenter
       DisplayLabel = 'O.S.'
       DisplayWidth = 8
       FieldName = 'CODORDEMSERVICO'
@@ -15240,7 +15252,7 @@ object DM: TDM
     object qryRotaPeriodicasDESCRICAO: TStringField
       AutoGenerateValue = arDefault
       DisplayLabel = 'Inspe'#231#227'o'
-      DisplayWidth = 35
+      DisplayWidth = 20
       FieldName = 'DESCRICAO'
       Origin = 'DESCRICAO'
       ProviderFlags = [pfInUpdate]
@@ -15256,6 +15268,7 @@ object DM: TDM
       ProviderFlags = [pfInUpdate]
     end
     object qryRotaPeriodicasDTAINICIO1: TDateTimeField
+      Alignment = taCenter
       AutoGenerateValue = arDefault
       DisplayLabel = 'Vencida'
       DisplayWidth = 10
@@ -15266,6 +15279,10 @@ object DM: TDM
     end
   end
   object qryRotaPeriodicasManut: TFDQuery
+    IndexFieldNames = 'CODORDEMSERVICO'
+    MasterSource = dsRotaPeriodicas
+    MasterFields = 'CODORDEMSERVICO'
+    DetailFields = 'CODORDEMSERVICO'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -15311,8 +15328,13 @@ object DM: TDM
         'os`.`MATRICULA`) AND (`manutprogequipamentohist`.`CODEMPRESA` = ' +
         '`funcionarios`.`CODEMPRESA`)'
       '        '
-      'WHERE (`manutprogequipamentohist`.`CODEMPRESA` = :codempresa'
-      '    AND `rotasequipamentoseq`.`CODROTA` = :codrota'
+      
+        'WHERE (`manutprogequipamentohist`.`CODORDEMSERVICO` = :codordems' +
+        'ervico'
+      ' '
+      '-- `manutprogequipamentohist`.`CODEMPRESA` = :codempresa'
+      '--    AND `rotasequipamentoseq`.`CODROTA` = :codigo'
+      ''
       '    AND `manutprogequipamentohist`.`GRUPOINSP` = '#39'S'#39
       '    AND `manutprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA'#39')'
       ''
@@ -15321,12 +15343,7 @@ object DM: TDM
     Top = 585
     ParamData = <
       item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'CODROTA'
+        Name = 'CODORDEMSERVICO'
         DataType = ftString
         ParamType = ptInput
       end>
@@ -15479,6 +15496,10 @@ object DM: TDM
   end
   object qryRotaPeriodicasManutItens: TFDQuery
     OnCalcFields = qryRotaPeriodicasManutItensCalcFields
+    IndexFieldNames = 'HISTORICO'
+    MasterSource = dsRotaPeriodicasManut
+    MasterFields = 'INDICE'
+    DetailFields = 'HISTORICO'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -15512,7 +15533,7 @@ object DM: TDM
         '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
         'utprogfamequippartes`.`CODMANUTPROGFAMEQUIP`) AND (`manutprogequ' +
         'ipamento`.`CODEMPRESA` = `manutprogfamequippartes`.`CODEMPRESA`)'
-      ' WHERE (`manutprogequiphistitens`.`HISTORICO` = :historico)'
+      ' WHERE (`manutprogequiphistitens`.`HISTORICO` = :indice)'
       
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO`, `manutprogequiph' +
         'istitens`.`ITEM`')
@@ -15520,8 +15541,8 @@ object DM: TDM
     Top = 585
     ParamData = <
       item
-        Name = 'HISTORICO'
-        DataType = ftInteger
+        Name = 'INDICE'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryRotaPeriodicasManutItensINDICE: TFDAutoIncField
@@ -15571,6 +15592,13 @@ object DM: TDM
       FieldName = 'CODPARTE'
       Origin = 'CODPARTE'
       ProviderFlags = [pfInUpdate]
+    end
+    object qryRotaPeriodicasManutItensPARTE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'PARTE'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 80
     end
     object qryRotaPeriodicasManutItensITEM: TStringField
       AutoGenerateValue = arDefault
@@ -15636,40 +15664,41 @@ object DM: TDM
       ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object qryRotaPeriodicasManutItensPARTE: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'PARTE'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      Size = 80
-    end
     object qryRotaPeriodicasManutItensEXECUTADO_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'EXECUTADO_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensBOM_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'BOM_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensREGULAR_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'REGULAR_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensRUIM_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'RUIM_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
   end
   object qryRotaPeriodicasManutItensEsp: TFDQuery
     OnCalcFields = qryRotaPeriodicasManutItensEspCalcFields
+    IndexFieldNames = 'INDICE'
+    MasterSource = dsRotaPeriodicasManut
+    MasterFields = 'INDICE'
+    DetailFields = 'INDICE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -15710,7 +15739,7 @@ object DM: TDM
         '`.`CODEMPRESA` = `manutprogfamequippartes`.`CODEMPRESA`) AND (`m' +
         'anutprogfamequippartes`.`CODIGO` = `manutprogequiphistitensesp`.' +
         '`CODPARTE`)'
-      'WHERE (`manutprogequiphistitensesp`.`HISTORICO` = :historico)'
+      'WHERE (`manutprogequiphistitensesp`.`HISTORICO` = :indice)'
       
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC, `manutprogeq' +
         'uiphistitensesp`.`DESCINSPECAO` ASC;')
@@ -15718,8 +15747,8 @@ object DM: TDM
     Top = 585
     ParamData = <
       item
-        Name = 'HISTORICO'
-        DataType = ftInteger
+        Name = 'INDICE'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryRotaPeriodicasManutItensEspINDICE: TIntegerField
@@ -15846,24 +15875,28 @@ object DM: TDM
       FieldKind = fkCalculated
       FieldName = 'EXECUTADO_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensEspBOM_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'BOM_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensEspREGULAR_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'REGULAR_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
     object qryRotaPeriodicasManutItensEspRUIM_CHK: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'RUIM_CHK'
       ProviderFlags = []
+      Visible = False
       Calculated = True
     end
   end
@@ -33673,17 +33706,27 @@ object DM: TDM
         '    , IF(`ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39', `manutprogequ' +
         'ipamentohist`.`REPROGRAMAR1`, `lubrificprogequipamentohist`.`REP' +
         'ROGRAMAR1`) AS REPROGRAMAR'
-      '    , ('
+      
+        '    , IF((`ordemservico`.`ROTAEQUIP` = '#39'S'#39') AND (`manutprogequip' +
+        'amentohist`.`DESCRICAO` <> '#39#39'), `manutprogequipamentohist`.`DESC' +
+        'RICAO`, '#39#39') AS DESCINSPECAO'
+      
+        '    , IF((`ordemservico`.`ROTAEQUIP` = '#39'S'#39') AND (`lubrificprogeq' +
+        'uipamentohist`.`DESCRICAO` <> '#39#39'), `lubrificprogequipamentohist`' +
+        '.`DESCRICAO`, '#39#39') AS DESCINSPECAO    , ('
       #9'CASE '
       #9'    WHEN `ordemservico`.`SOLICTRAB` = '#39'ST'#39' THEN '#39'ST'#39
       
-        '            WHEN `ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39' THEN '#39 +
-        'MP'#39
+        '                   WHEN `ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39 +
+        ' THEN '#39'MP'#39
       
-        '            WHEN `ordemservico`.`CODLUBRIFICPROGEQUIP` <> '#39#39' THE' +
-        'N '#39'LP'#39
-      '            ELSE '#39'MN'#39
-      #9'END) AS ORIGEM'
+        '                   WHEN `ordemservico`.`CODLUBRIFICPROGEQUIP` <>' +
+        ' '#39#39' THEN '#39'LP'#39
+      
+        '                   WHEN `ordemservico`.`ROTAEQUIP` = '#39'S'#39' THEN '#39'R' +
+        'P'#39'            '
+      '               ELSE '#39'MN'#39
+      #9' END) AS ORIGEM'
       'FROM'
       '    `ordemservico`'
       '    LEFT JOIN `equipamentos` '
@@ -33722,6 +33765,8 @@ object DM: TDM
         ','#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE' +
         '(:data2,'#39'%Y/%m/%d %T'#39')))'
       '       )'
+      ''
+      'GROUP BY `ordemservico`.`CODIGO`'
       ''
       'ORDER BY `ordemservico`.DATACADASTRO DESC;')
     Left = 369

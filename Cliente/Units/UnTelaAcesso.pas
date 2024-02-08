@@ -135,9 +135,6 @@ if DM.FNomeUsuario = 'sam_spmp' then
     //Descobrir IPLocal
     wVersionRequested := MAKEWORD(1, 1); WSAStartup(wVersionRequested, wsaData); GetHostName(@s, 128); p := GetHostByName(@s); WSACleanup;
     DM.FEstacao     := String(p^.h_Name);
-
-
-//    DM.FCodEmpresa  := DM.qryUsuarioCODEMPRESA.AsString;
   end
 else
 //Usuário normal
@@ -232,9 +229,6 @@ else
       end;
     End;
 
-    //ExtractFilePath(Application.ExeName) + 'ajuda.chm'
-    //HelpFile := DM.LocalExe+'Ajuda\Ajuda.chm';
-
     try
       //Descobrir IPLocal
       wVersionRequested := MAKEWORD(1, 1); WSAStartup(wVersionRequested, wsaData); GetHostName(@s, 128); p := GetHostByName(@s); WSACleanup;
@@ -255,11 +249,6 @@ else
 
       if LowerCase(DM.FNomeUsuario) <> 'sam_spmp' then
         begin
-//          DM.qryUsuario.Close;
-//          DM.qryUsuario.Params[0].AsString := DM.FNomeUsuario;
-//          DM.qryUsuario.Open;
-
-    //      if (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) > DateOf(DM.FDataHoraServidor)) and (DM.qryUsuarioTEMPORARIO.AsString = 'S') then
           if (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) > 0) and (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) < DateOf(DM.FDataHoraServidor)) then
             begin
               Application.MessageBox('Período de acesso interrompido para esse usuário', 'SPMP3', MB_OK+MB_ICONSTOP);
@@ -322,11 +311,6 @@ else
              end;
           DM.qryUnidadesCorp.Close;
 
-    //      DM.qryMovimentacaoUsuarios.Close;
-    //      DM.qryMovimentacaoUsuarios.Params[0].AsString := DM.FCodEmpresa;
-    //      DM.qryMovimentacaoUsuarios.Params[1].AsString := DM.FCodUsuario;
-    //      DM.qryMovimentacaoUsuarios.Open;
-
           DM.qryAcesso.Append;
           DM.qryAcessoCODEMPRESA.AsString    := DM.FCodEmpresa;
           DM.qryAcessoUSUARIO.AsString       := DM.FNomeUsuario;
@@ -341,7 +325,6 @@ else
           else DM.FEmpTransf := False;
 
           DM.qryUsuarioUnidades.Close;
-
 
           if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
             begin
@@ -464,7 +447,7 @@ if (Screen.Width < 1024) or (Screen.Height < 600) then
   end;
 
 DM.GetVersion(Application.ExeName);
-LblVersao.Caption := DM.FVersaoMacro;
+LblVersao.Caption := DM.FVersaoMacro + ' beta';
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);

@@ -196,8 +196,6 @@ PAuxiliares.Font.Color := clBlack;
                     begin
                       DM.qryManutProgEquip.Edit;
                       DM.qryManutProgEquipRELATORIO.AsString    := 'N';
-//                      DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryManutProgEquipDTAINICIO1.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
-//                      DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.FDataHoraServidor, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
                       DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryManutPeriodicasDATAEXECUCAO.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
                       DM.qryManutProgEquip.Post;
                     end;
@@ -510,7 +508,6 @@ PAuxiliares.Font.Color := clBlack;
                         begin
                           DM.qryManutProgEquip.Edit;
                           DM.qryManutProgEquipRELATORIO.AsString    := 'N';
-                          //DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryManutProgEquipDTAINICIO1.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
                           DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryRotaPeriodicasManutDATAEXECUCAO.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
                           DM.qryManutProgEquip.Post;
                         end;
@@ -523,7 +520,6 @@ PAuxiliares.Font.Color := clBlack;
                         begin
                           DM.qryRotas.Edit;
                           DM.qryRotasRELATORIO.AsString    := 'N';
-                          //DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryManutProgEquipDTAINICIO1.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
                           DM.qryRotasDATAINICIO.AsDateTime := IncDay(DM.FDataHoraServidor, DM.qryRotasFREQUENCIA.AsInteger);
                           DM.qryRotas.Post;
                         end;
@@ -617,12 +613,14 @@ PAuxiliares.Font.Color := clBlack;
 
                   DM.qryRotaPeriodicasManut.Edit;
                   DM.qryRotaPeriodicasManut.Post;
-                  DM.qryRotaPeriodicasManut.Refresh;
+                  DM.qryRotaPeriodicas.Refresh;
                   //DM.qryRotaPeriodicasManut.Delete;
                   TSRota.Caption := 'Rotas ('+IntToStr(DM.qryRotaPeriodicasManut.RecordCount)+')';
 
                   Timer1.Enabled := True;
                   hora_futura := IncMinute(Now, 5);
+
+                  DM.qryRotaPeriodicasManut.Next;
                 end;
             End;
         end;
@@ -971,6 +969,7 @@ begin
     begin
       DM.qryRotaPeriodicas.Close;
       DM.qryRotaPeriodicas.Params[0].AsString := DM.FCodEmpresa;
+      DM.qryRotaPeriodicas.Params[1].AsString := 'ABERTA';
       DM.qryRotaPeriodicas.Open;
       DM.qryRotaPeriodicasManut.Open;
       DM.qryRotaPeriodicasManutItens.Open;
@@ -1220,8 +1219,9 @@ GrdRota.Columns[5].Visible := False;
 GrdRota.Columns[6].Title.Font.Style:= [fsBold];
 GrdRota.Columns[6].Title.Alignment := taCenter;
 GrdRota.Columns[7].Title.Alignment := taCenter;
+GrdRota.Columns[9].Title.Alignment := taCenter;
+GrdRota.Columns[10].Title.Alignment := taCenter;
 //GrdRota.Columns[3].Title.Alignment := taCenter;
-//GrdRota.Columns[4].Title.Alignment := taCenter;
 //GrdRota.Columns[5].Title.Alignment := taCenter;
 //GrdRota.Columns[6].Title.Font.Style:= [fsBold];
 
@@ -1476,7 +1476,30 @@ procedure TFrmTelaInspFechamento.GrdRotaManutItensDrawColumnCell(
   State: TGridDrawState);
 begin
   inherited;
-GrdRotaManutItens.Columns[Column.Index].Title.Font.Size := 9;
+//GrdRotaManutItens.Columns[Column.Index].Title.Font.Size := 9;
+//
+//GrdRotaManutItens.Columns[0].Visible  := False;
+//GrdRotaManutItens.Columns[1].Visible  := False;
+//GrdRotaManutItens.Columns[2].Visible  := False;
+//GrdRotaManutItens.Columns[3].Visible  := False;
+//GrdRotaManutItens.Columns[4].Visible  := False;
+//GrdRotaManutItens.Columns[5].Visible  := False;
+//GrdRotaManutItens.Columns[6].Visible  := False;
+//GrdRotaManutItens.Columns[7].Visible  := False;
+//GrdRotaManutItens.Columns[11].Visible  := False;
+//GrdRotaManutItens.Columns[13].Visible  := False;
+//
+//GrdRotaManutItens.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItens.Fields[8].DisplayWidth  := 23;
+//GrdRotaManutItens.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItens.Fields[9].DisplayWidth  := 30;
+//GrdRotaManutItens.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItens.Fields[10].DisplayWidth := 45;
+//GrdRotaManutItens.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItens.Fields[12].DisplayWidth := 5;  GrdRotaManutItens.Columns[12].Title.Alignment := taCenter;
+//GrdRotaManutItens.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItens.Fields[14].DisplayWidth := 5;  GrdRotaManutItens.Columns[14].Title.Alignment := taCenter;
+//GrdRotaManutItens.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItens.Fields[15].DisplayWidth := 5;  GrdRotaManutItens.Columns[15].Title.Alignment := taCenter;
+//GrdRotaManutItens.Columns[16].Title.Caption   := 'Regular';   DM.qryRotaPeriodicasManutItens.Fields[16].DisplayWidth := 5;  GrdRotaManutItens.Columns[16].Title.Alignment := taCenter;
+//GrdRotaManutItens.Columns[17].Title.Caption   := 'Ruim';      DM.qryRotaPeriodicasManutItens.Fields[17].DisplayWidth := 5;  GrdRotaManutItens.Columns[17].Title.Alignment := taCenter;
+//
+//
+//
 
 GrdRotaManutItens.Columns[0].Visible  := False;
 GrdRotaManutItens.Columns[1].Visible  := False;
@@ -1488,10 +1511,6 @@ GrdRotaManutItens.Columns[6].Visible  := False;
 GrdRotaManutItens.Columns[7].Visible  := False;
 GrdRotaManutItens.Columns[11].Visible  := False;
 GrdRotaManutItens.Columns[13].Visible  := False;
-//GrdRotaManutItens.Columns[18].Visible  := False;
-//GrdRotaManutItens.Columns[19].Visible  := False;
-//GrdRotaManutItens.Columns[20].Visible  := False;
-//GrdRotaManutItens.Columns[21].Visible  := False;
 
 GrdRotaManutItens.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItens.Fields[8].DisplayWidth  := 23;
 GrdRotaManutItens.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItens.Fields[9].DisplayWidth  := 30;

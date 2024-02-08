@@ -919,7 +919,7 @@ begin
                   end;
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
-                                                              , EmptyStr, EmptyStr, EmptyStr, EmptyStr, 'N'
+                                                              , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
                 DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 

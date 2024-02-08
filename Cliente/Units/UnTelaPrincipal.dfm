@@ -46826,6 +46826,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
           Caption = #193'rea'
           OnClick = Area4Click
         end
+        object NaoProgramadas1: TMenuItem
+          Caption = 'N'#227'o Programadas'
+          OnClick = NaoProgramadas1Click
+        end
       end
       object LubrificacaoProgramada2: TMenuItem
         Caption = 'Lubrifica'#231#227'o Programada'
@@ -46854,6 +46858,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         object Area5: TMenuItem
           Caption = #193'rea'
           OnClick = Area5Click
+        end
+        object NaoProgramadas2: TMenuItem
+          Caption = 'N'#227'o Programadas'
+          OnClick = NaoProgramadas2Click
         end
       end
       object ModeObra2: TMenuItem
