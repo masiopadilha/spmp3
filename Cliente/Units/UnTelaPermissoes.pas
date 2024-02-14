@@ -42,6 +42,7 @@ type
     procedure BtnGrupoClick(Sender: TObject);
     procedure BtnPadraoClick(Sender: TObject);
     procedure TVTelasClick(Sender: TObject);
+    procedure GrdPermissoesKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -57,7 +58,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnTelaConsulta;
 
 procedure TFrmTelaPermissoes.GrdPermissoesCellClick(Column: TColumn);
 begin
@@ -201,7 +202,7 @@ GrdPermissoes.Columns[0].Title.Font.Size := 7; GrdPermissoes.Columns[1].Title.Fo
 GrdPermissoes.Columns[3].Title.Font.Size := 7; GrdPermissoes.Columns[4].Title.Font.Size := 7; GrdPermissoes.Columns[5].Title.Font.Size := 7;
 GrdPermissoes.Columns[6].Title.Font.Size := 7; GrdPermissoes.Columns[7].Title.Font.Size := 7;
 
-GrdPermissoes.Columns[0].Title.Font.Style := []; GrdPermissoes.Columns[1].Title.Font.Style := []; GrdPermissoes.Columns[2].Title.Font.Style := [];
+GrdPermissoes.Columns[0].Title.Font.Style := []; GrdPermissoes.Columns[1].Title.Font.Style := [fsBold]; GrdPermissoes.Columns[2].Title.Font.Style := [];
 GrdPermissoes.Columns[3].Title.Font.Style := []; GrdPermissoes.Columns[4].Title.Font.Style := []; GrdPermissoes.Columns[5].Title.Font.Style := [];
 GrdPermissoes.Columns[6].Title.Font.Style := []; GrdPermissoes.Columns[7].Title.Font.Style := [];
 
@@ -249,6 +250,26 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
     else
     if (CDPermissoesUsuPESSOAL.AsString = 'N') then
       ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 10, Rect.Top + 1, 2)
+  end;
+end;
+
+procedure TFrmTelaPermissoes.GrdPermissoesKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+if (Key = #13) and (GrdPermissoes.SelectedIndex = 1) then
+  begin
+    DM.FTabela_auxiliar := 2900;
+    Try
+      Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
+      FrmTelaAuxiliar.ShowModal;
+    Finally
+
+      if DM.FCodCombo <> '' then
+        CDPermissoesUsu.Locate('NOME', DM.FValorCombo, []);
+
+      FreeAndNil(FrmTelaAuxiliar);
+    End;
   end;
 end;
 

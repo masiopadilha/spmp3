@@ -309,6 +309,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
           Top = 15
           Width = 507
           Height = 343
+          Hint = 'Tecle ENTER na coluna '#39'Usu'#225'rio'#39' para realizar a pesquisa.'
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 5
@@ -321,7 +322,9 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
           Font.Style = []
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
+          ParentShowHint = False
           ReadOnly = True
+          ShowHint = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -330,6 +333,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
           TitleFont.Style = [fsBold]
           OnCellClick = GrdPermissoesCellClick
           OnDrawColumnCell = GrdPermissoesDrawColumnCell
+          OnKeyPress = GrdPermissoesKeyPress
         end
         object PBotes: TPanel
           AlignWithMargins = True

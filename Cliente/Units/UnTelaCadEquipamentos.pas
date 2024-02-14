@@ -867,200 +867,210 @@ begin
 //inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
+
 if DM.qryEquipamentosCODIGO.AsString = EmptyStr then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodEquip.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodEquip.SetFocus; Exit;
+end;
+
 DM.FTabela_auxiliar := 25;
+
 if (DM.VerificaDuplo(EdtCodEquip.Text) = True) and (DM.FAlterando = False) then
-  begin
-    EdtCodEquip.SetFocus;
-    PAuxiliares.Font.Color := clBlack;
-    PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
-    Exit;
-  end;
+begin
+  EdtCodEquip.SetFocus;
+  PAuxiliares.Font.Color := clBlack;
+  PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
+  Exit;
+end;
+
 if DM.qryEquipamentosDESCRICAO.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO REGISTRO!'; EdtDescricao.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO REGISTRO!'; EdtDescricao.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODFAMILIAEQUIP.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FAMÍLIA DO REGISTRO!'; EdtDescFamiliaEquip.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FAMÍLIA DO REGISTRO!'; EdtDescFamiliaEquip.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODFABRICANTE.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FABRICANTE DO REGISTRO!'; EdtDescFabricante.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FABRICANTE DO REGISTRO!'; EdtDescFabricante.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODFORNECEDOR.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FORNCEDOR DO REGISTRO!'; EdtDescFornecedor.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FORNCEDOR DO REGISTRO!'; EdtDescFornecedor.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODCALENDARIO.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CALENDÁRIO DO REGISTRO!'; EdtCalendario.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CALENDÁRIO DO REGISTRO!'; EdtCalendario.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODCLASSE.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CLASSE DO REGISTRO!'; EdtClasse.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CLASSE DO REGISTRO!'; EdtClasse.SetFocus; Exit;
+end;
+
 if DM.qryEquipamentosCODCENTROCUSTO.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CENTRO DE CUSTO DO REGISTRO!'; EdtCentroCusto.SetFocus;
-    Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CENTRO DE CUSTO DO REGISTRO!'; EdtCentroCusto.SetFocus;
+  Exit;
+end;
+
 if DM.qryEquipamentosDATAINIFUNC.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE FUNCIONAMENTO DO REGISTRO!'; EdtFuncionamento.SetFocus; Exit;
-  end;
+begin
+  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE FUNCIONAMENTO DO REGISTRO!'; EdtFuncionamento.SetFocus; Exit;
+end;
 
 LSequenciaNova  := DM.qryEquipamentosSEQUENCIA.AsInteger;
 
 if DM.FEmpTransf = True then //Se for empresa de transformação
-  begin
-    if DM.qryEquipamentosOPERANDO.AsString = 'S' then //Se estiver operando
-      begin
-        if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then //Se for primário
-          begin
-            if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
-              end;
-            if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
-              end;
-            if (DM.qryEquipamentosCODLINHA.AsString = EmptyStr) then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A LINHA DO REGISTRO!'; EdtLinha.SetFocus; Exit;
-              end;
-            if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaPrim.SetFocus; Exit;
-              end;
+begin
+  if DM.qryEquipamentosOPERANDO.AsString = 'S' then //Se estiver operando
+    begin
+      if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then //Se for primário
+        begin
+          if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
+            end;
+          if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
+            end;
+          if (DM.qryEquipamentosCODLINHA.AsString = EmptyStr) then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A LINHA DO REGISTRO!'; EdtLinha.SetFocus; Exit;
+            end;
+          if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaPrim.SetFocus; Exit;
+            end;
 
-            if LSequenciaNova <> LSequenciaAtual then
-              begin
-                DM.qryEquipamentosChecaLocal.Close;
-                DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
-                DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
-                DM.qryEquipamentosChecaLocal.Params[2].AsString := DM.qryEquipamentosCODLINHA.AsString;
-                DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
-                DM.qryEquipamentosChecaLocal.Open;
-                if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
-                  begin
-                    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaPrim.SetFocus; Exit;
-                  end;
-                DM.qryEquipamentosChecaLocal.Close;
-              end;
-            LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
-          end
-        else //Se for secundário
-          begin
-            if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
-              end;
-            if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
-              end;
-            if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaSec.SetFocus; Exit;
-              end;
+          if LSequenciaNova <> LSequenciaAtual then
+            begin
+              DM.qryEquipamentosChecaLocal.Close;
+              DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+              DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
+              DM.qryEquipamentosChecaLocal.Params[2].AsString := DM.qryEquipamentosCODLINHA.AsString;
+              DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
+              DM.qryEquipamentosChecaLocal.Open;
+              if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
+                begin
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaPrim.SetFocus; Exit;
+                end;
+              DM.qryEquipamentosChecaLocal.Close;
+            end;
+          LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
+        end
+      else //Se for secundário
+        begin
+          if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
+            end;
+          if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
+            end;
+          if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaSec.SetFocus; Exit;
+            end;
 
-            if LSequenciaNova <> LSequenciaAtual then
-              begin
-                DM.qryEquipamentosChecaLocal.Close;
-                DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
-                DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
-                DM.qryEquipamentosChecaLocal.Params[2].AsString := EmptyStr;
-                DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
-                DM.qryEquipamentosChecaLocal.Open;
-                if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
-                  begin
-                    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaSec.SetFocus; Exit;
-                  end;
-                DM.qryEquipamentosChecaLocal.Close;
-              end;
+          if LSequenciaNova <> LSequenciaAtual then
+            begin
+              DM.qryEquipamentosChecaLocal.Close;
+              DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+              DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
+              DM.qryEquipamentosChecaLocal.Params[2].AsString := EmptyStr;
+              DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
+              DM.qryEquipamentosChecaLocal.Open;
+              if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
+                begin
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaSec.SetFocus; Exit;
+                end;
+              DM.qryEquipamentosChecaLocal.Close;
+            end;
 
-            DM.qryEquipamentosCODLINHA.Clear;
-            LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
-          end;
-      end
-    else
-      begin
-        DM.qryEquipamentosCODLOCALIZACAO.Clear;
-        DM.qryEquipamentosCODCELULA.Clear;
-        DM.qryEquipamentosCODLINHA.Clear;
-        DM.qryEquipamentosSEQUENCIA.Clear;
+          DM.qryEquipamentosCODLINHA.Clear;
+          LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
+        end;
+    end
+  else
+    begin
+      DM.qryEquipamentosCODLOCALIZACAO.Clear;
+      DM.qryEquipamentosCODCELULA.Clear;
+      DM.qryEquipamentosCODLINHA.Clear;
+      DM.qryEquipamentosSEQUENCIA.Clear;
 
-        DM.qryEquipamentosAREA.Clear;
-        DM.qryEquipamentosCELULA.Clear;
-        DM.qryEquipamentosLINHA.Clear;
-      end;
-  end
-else
-  begin
-    if DM.qryEquipamentosOPERANDO.AsString = 'S' then //Se estiver operando
-      begin
-        if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then //Se for primário
-          begin
-            if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
-              end;
-            if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
-              end;
-          end
-        else //Se for secundário
-          begin
-            if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
-              end;
-            if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
-              end;
-            if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
-              begin
-                PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaSec.SetFocus; Exit;
-              end;
+      DM.qryEquipamentosAREA.Clear;
+      DM.qryEquipamentosCELULA.Clear;
+      DM.qryEquipamentosLINHA.Clear;
+    end;
+end else
+begin
+  if DM.qryEquipamentosOPERANDO.AsString = 'S' then //Se estiver operando
+    begin
+      if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then //Se for primário
+        begin
+          if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
+            end;
+          if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
+            end;
+        end
+      else //Se for secundário
+        begin
+          if DM.qryEquipamentosCODLOCALIZACAO.IsNull = True then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A ÁREA DO REGISTRO!'; EdtArea.SetFocus; Exit;
+            end;
+          if DM.qryEquipamentosCODCELULA.AsString = EmptyStr then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A CÉLULA DO REGISTRO!'; EdtCelula.SetFocus; Exit;
+            end;
+          if (DM.qryEquipamentosSEQUENCIA.AsString = EmptyStr) then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A SEQUÊNCIA DO REGISTRO!'; EdtSequenciaSec.SetFocus; Exit;
+            end;
 
-            if LSequenciaNova <> LSequenciaAtual then
-              begin
-                DM.qryEquipamentosChecaLocal.Close;
-                DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
-                DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
-                DM.qryEquipamentosChecaLocal.Params[2].AsString := EmptyStr;
-                DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
-                DM.qryEquipamentosChecaLocal.Open;
-                if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
-                  begin
-                    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaSec.SetFocus; Exit;
-                  end;
-                DM.qryEquipamentosChecaLocal.Close;
-              end;
+          if LSequenciaNova <> LSequenciaAtual then
+            begin
+              DM.qryEquipamentosChecaLocal.Close;
+              DM.qryEquipamentosChecaLocal.Params[0].AsString := DM.qryEquipamentosCODLOCALIZACAO.AsString;
+              DM.qryEquipamentosChecaLocal.Params[1].AsString := DM.qryEquipamentosCODCELULA.AsString;
+              DM.qryEquipamentosChecaLocal.Params[2].AsString := EmptyStr;
+              DM.qryEquipamentosChecaLocal.Params[3].AsString := DM.qryEquipamentosSEQUENCIA.AsString;
+              DM.qryEquipamentosChecaLocal.Open;
+              if DM.qryEquipamentosChecaLocalCODIGO.AsString <> EmptyStr then
+                begin
+                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'JÁ EXISTE UM EQUIPAMENTO NESSA POSIÇÃO: '+ QuotedStr(DM.qryEquipamentosChecaLocalCODIGO.AsString); EdtSequenciaSec.SetFocus; Exit;
+                end;
+              DM.qryEquipamentosChecaLocal.Close;
+            end;
 
-            DM.qryEquipamentosCODLINHA.Clear;
-            LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
-          end;
-      end
-    else
-      begin
-        DM.qryEquipamentosCODLOCALIZACAO.Clear;
-        DM.qryEquipamentosCODCELULA.Clear;
-        DM.qryEquipamentosCODLINHA.Clear;
-        DM.qryEquipamentosSEQUENCIA.Clear;
+          DM.qryEquipamentosCODLINHA.Clear;
+          LSequenciaAtual := DM.qryEquipamentosSEQUENCIA.AsInteger;
+        end;
+    end
+  else
+    begin
+      DM.qryEquipamentosCODLOCALIZACAO.Clear;
+      DM.qryEquipamentosCODCELULA.Clear;
+      DM.qryEquipamentosCODLINHA.Clear;
+      DM.qryEquipamentosSEQUENCIA.Clear;
 
-        DM.qryEquipamentosAREA.Clear;
-        DM.qryEquipamentosCELULA.Clear;
-        DM.qryEquipamentosLINHA.Clear;
-      end;
-  end;
+      DM.qryEquipamentosAREA.Clear;
+      DM.qryEquipamentosCELULA.Clear;
+      DM.qryEquipamentosLINHA.Clear;
+    end;
+end;
 
 DM.MSGAguarde('');
 
@@ -1104,7 +1114,7 @@ begin
     DM.qryAuxiliar2.FieldByName('MATRICULA').AsString            := DM.qryClonarManutMATRICULA.AsString;
     DM.qryAuxiliar2.FieldByName('CRITICIDADE').AsString          := DM.qryClonarManutCRITICIDADE.AsString;
     DM.qryAuxiliar2.FieldByName('FREQUENCIA1').AsString          := DM.qryClonarManutFREQUENCIA1.AsString;
-    DM.qryAuxiliar2.FieldByName('DTAINICIO1').AsString           := DM.qryClonarManutDTAINICIO1.AsString;
+//    DM.qryAuxiliar2.FieldByName('DTAINICIO1').AsString           := DM.qryClonarManutDTAINICIO1.AsString;
     DM.qryAuxiliar2.FieldByName('REPROGRAMAR1').AsString         := DM.qryClonarManutREPROGRAMAR1.AsString;
     DM.qryAuxiliar2.FieldByName('RELATORIO').AsString            := 'N';
     DM.qryAuxiliar2.FieldByName('GRUPOINSP').AsString            := DM.qryClonarManutGRUPOINSP.AsString;
