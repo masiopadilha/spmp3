@@ -776,6 +776,11 @@ procedure TFrmTelaPrincipal.Button1Click(Sender: TObject);
 //
 //  direc, name, repli, line, dir: String;
 begin
+//    DM.qryTotalHomemHora.Close;
+//    DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
+//    DM.qryTotalHomemHora.Open;
+//    DM.qryTotalHomemHoraSeqHora.Open;
+
 //  amount1 := 1234.567;
 //
 //  // Display in a Currency format

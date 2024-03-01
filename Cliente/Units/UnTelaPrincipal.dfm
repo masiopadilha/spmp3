@@ -46138,8 +46138,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Visible = False
   end
   object Button1: TButton
-    Left = 872
-    Top = 478
+    Left = 840
+    Top = 264
     Width = 75
     Height = 25
     Caption = 'Executar'

@@ -438,21 +438,21 @@ end;
 
 procedure TFrmTelaAcesso.FormCreate(Sender: TObject);
 var
-LDiasRestantes : SmallInt;
+  LDiasRestantes : SmallInt;
 begin
-if (Screen.Width < 1024) or (Screen.Height < 600) then
+  if (Screen.Width < 1024) or (Screen.Height < 600) then
   begin
     Application.MessageBox('A resolução mínima para execução do SPMP é 1024 x 600!', 'SPMP3', MB_OK + MB_ICONSTOP);
     Application.Terminate;
   end;
 
-DM.GetVersion(Application.ExeName);
-LblVersao.Caption := DM.FVersaoMacro + ' beta';
+  DM.GetVersion(Application.ExeName);
+  LblVersao.Caption := DM.FVersaoMacro + ' beta';
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-if Key = #13 then
+  if Key = #13 then
   begin
     Key := #0;
     SelectNext(ActiveControl, True, True);

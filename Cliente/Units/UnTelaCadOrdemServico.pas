@@ -1003,7 +1003,8 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase
 
 if (DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA')
   or (DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA')
-    or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA') then
+    or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA')
+      or (DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA') then
     begin
       Try
         if DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat = 0 then

@@ -11594,6 +11594,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 429
     object Image1: TImage
       Left = 2
       Top = 2

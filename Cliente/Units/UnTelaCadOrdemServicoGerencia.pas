@@ -1461,7 +1461,13 @@ if (Column.Field.FieldName = 'SITUACAO') then
       end;
     if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA')then
       begin
-        GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clWhite;
+        if (GrdOrdemServico.DataSource.DataSet.FieldByName('DATAPROGINI').AsDateTime < DM.FDataHoraServidor) then
+        begin
+          GrdOrdemServico.Canvas.Brush.Color := clRed; GrdOrdemServico.Canvas.Font.Color := clWhite;
+        end else
+        begin
+          GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clWhite;
+        end;
       end;
     if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')then
       begin
