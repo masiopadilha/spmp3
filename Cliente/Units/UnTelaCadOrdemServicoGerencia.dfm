@@ -405,14 +405,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TabOrder = 1
       ExplicitWidth = 994
       object chkNProg: TCheckBox
-        Left = 6
+        Left = 8
         Top = 5
         Width = 95
         Height = 18
         Caption = 'Cadastradas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -420,14 +420,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkProg: TCheckBox
-        Left = 210
+        Left = 194
         Top = 5
         Width = 100
         Height = 18
         Caption = 'Programadas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -435,14 +435,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkExec: TCheckBox
-        Left = 320
+        Left = 295
         Top = 5
         Width = 99
         Height = 18
         Caption = 'Em Execu'#231#227'o'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -450,14 +450,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkLib: TCheckBox
-        Left = 429
+        Left = 395
         Top = 5
         Width = 80
         Height = 18
         Caption = 'Liberadas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -465,14 +465,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkFec: TCheckBox
-        Left = 519
+        Left = 476
         Top = 5
         Width = 79
         Height = 18
         Caption = 'Fechadas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -480,14 +480,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkPar: TCheckBox
-        Left = 608
+        Left = 556
         Top = 5
         Width = 91
         Height = 18
         Caption = 'Paralisadas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -495,14 +495,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkSolic: TCheckBox
-        Left = 709
+        Left = 648
         Top = 5
         Width = 112
         Height = 18
         Caption = 'Solic. Trabalho'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -510,14 +510,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chkRot: TCheckBox
-        Left = 831
+        Left = 759
         Top = 5
         Width = 60
         Height = 18
         Caption = 'Rotas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
@@ -525,27 +525,48 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnClick = chkNProgClick
       end
       object chbCanc: TCheckBox
-        Left = 901
+        Left = 820
         Top = 5
         Width = 89
         Height = 17
         Caption = 'Canceladas'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 9
         OnClick = chkNProgClick
       end
       object chkDetalhad: TCheckBox
-        Left = 111
+        Left = 104
         Top = 5
         Width = 89
         Height = 18
         Caption = 'Detalhadas'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnClick = chkNProgClick
+      end
+      object chbVenc: TCheckBox
+        Left = 910
+        Top = 5
+        Width = 78
+        Height = 17
+        Caption = 'Vencidas'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 10
         OnClick = chkNProgClick
       end
     end

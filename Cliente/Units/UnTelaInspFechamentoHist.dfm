@@ -37,7 +37,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     inherited BtnAjuda: TButton
       Left = 969
       TabOrder = 4
-      ExplicitLeft = 969
+      ExplicitLeft = 965
     end
     object BtnImprimir: TButton
       Left = 938
@@ -378,7 +378,8 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
         Items.Strings = (
           'Abertas'
           'Fechadas'
-          'Canceladas')
+          'Canceladas'
+          'Vencidas')
       end
     end
   end

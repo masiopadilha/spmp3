@@ -211,6 +211,24 @@ case PCInspecoes.ActivePageIndex of
             Exit;
           end;
 
+          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+          DM.qryManutVencOSVenc.Close;
+          DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutProgEquipCODIGO.AsString;
+          DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+          DM.qryManutVencOSVenc.Open;
+          while not DM.qryManutVencOSVenc.Eof = True do
+          begin
+            DM.qryAuxiliar.Close;
+            DM.qryAuxiliar.SQL.Clear;
+            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
+                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''FECHADA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
+            DM.qryAuxiliar.Execute;
+
+            DM.qryManutVencOSVenc.Next;
+          end;
+          DM.qryAuxiliar.Close;
+          DM.qryManutVencOSVenc.Close;
+
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                             , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                             , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
@@ -346,6 +364,25 @@ case PCInspecoes.ActivePageIndex of
             PAuxiliares.Caption := 'EXISTE UMA '+DM.qryLubrificProgEquipDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
             Exit;
           end;
+
+
+          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+          DM.qryLubrificVencOSVenc.Close;
+          DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificProgEquipCODIGO.AsString;
+          DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+          DM.qryLubrificVencOSVenc.Open;
+          while not DM.qryLubrificVencOSVenc.Eof = True do
+          begin
+            DM.qryAuxiliar.Close;
+            DM.qryAuxiliar.SQL.Clear;
+            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
+                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''FECHADA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
+            DM.qryAuxiliar.Execute;
+
+            DM.qryLubrificVencOSVenc.Next;
+          end;
+          DM.qryAuxiliar.Close;
+          DM.qryLubrificVencOSVenc.Close;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                             , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
@@ -645,24 +682,24 @@ end;
 procedure TFrmTelaInspVenc.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.qryManutVenc.Filtered := False;
-DM.qryManutVenc.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
-DM.qryManutVenc.Filtered := True;
+  DM.qryManutVenc.Filtered := False;
+  DM.qryManutVenc.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
+  DM.qryManutVenc.Filtered := True;
 
-DM.qryLubrificVenc.Filtered := False;
-DM.qryLubrificVenc.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
-DM.qryLubrificVenc.Filtered := True;
+  DM.qryLubrificVenc.Filtered := False;
+  DM.qryLubrificVenc.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
+  DM.qryLubrificVenc.Filtered := True;
 
-if DM.FEmpTransf = True then
-  begin
-    DM.qryRotaEquipVenc.Filtered := False;
-    DM.qryRotaEquipVenc.Filter   := 'DATAINICIO <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
-    DM.qryRotaEquipVenc.Filtered := True;
-  end;
+  if DM.FEmpTransf = True then
+    begin
+      DM.qryRotaEquipVenc.Filtered := False;
+      DM.qryRotaEquipVenc.Filter   := 'DATAINICIO <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
+      DM.qryRotaEquipVenc.Filtered := True;
+    end;
 
-ManutExec := False;
-LubrificExec := False;
-RotaExec := False;
+  ManutExec := False;
+  LubrificExec := False;
+  RotaExec := False;
 end;
 procedure TFrmTelaInspVenc.GrdManutDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);

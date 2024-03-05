@@ -167,6 +167,7 @@ if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'LIBERADA'      then begin PSituac
 if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
 if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
   begin

@@ -5708,6 +5708,12 @@ type
     qryEquipamentosLubrificHistProgExectotal_executados: TFMTBCDField;
     qryEquipamentosLubrificHistProgExecCODEMPRESA: TStringField;
     qryEquipamentosLubrificHistProgExecCODEQUIPAMENTO: TStringField;
+    qryManutVencOSVenc: TFDQuery;
+    qryLubrificVencOSVenc: TFDQuery;
+    DSManutVencOSVenc: TDataSource;
+    DSLubrificVencOSVenc: TDataSource;
+    qryManutVencOSVencCODORDEMSERVICO: TFDAutoIncField;
+    qryLubrificVencOSVencCODORDEMSERVICO: TFDAutoIncField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

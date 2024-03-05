@@ -213,7 +213,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
-end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.BtnFalhaClick(Sender: TObject);
 begin
@@ -798,6 +798,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin
