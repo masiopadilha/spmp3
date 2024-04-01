@@ -391,14 +391,17 @@ DM.MSGAguarde('');
 
 if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
   begin
-    DM.qrySolicitacaoTrabSITUACAO_1.AsString       := 'CADASTRADA';
+    DM.qrySolicitacaoTrabSITUACAO_1.AsString       := 'SOLICITADA';
 
     DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
                                                                             , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
-                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento', DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString, DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString, EmptyStr, EmptyStr);
-    PSituacao.Caption    := 'CADASTRADA';
-    PSituacao.Color      := clRed;
-    PSituacao.Font.Color := clYellow;
+                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento'
+                                                                            , DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString
+                                                                            , DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString
+                                                                            , EmptyStr, EmptyStr);
+    PSituacao.Caption := 'SOLICITADA';
+    PSituacao.Color := clWhite;
+    PSituacao.Font.Color := clBlack;
   end;
 
   inherited;
