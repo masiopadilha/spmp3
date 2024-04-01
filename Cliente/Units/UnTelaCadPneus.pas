@@ -297,6 +297,15 @@ end;
 
 procedure TFrmTelaCadPneus.BtnSalvarClick(Sender: TObject);
 begin
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryPneusCODIGO.AsString = EmptyStr then

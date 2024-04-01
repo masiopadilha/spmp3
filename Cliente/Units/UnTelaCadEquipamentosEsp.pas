@@ -46,6 +46,27 @@ begin
 DM.qryEquipamentosEsp.Close;
 DM.qryEquipamentosEsp.Open;
 DM.qryEquipamentosEsp.Edit;
+
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdCadastro.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 end;
 
 procedure TFrmTelaCadEquipamentosEsp.GrdCadastroDblClick(Sender: TObject);
@@ -66,6 +87,26 @@ begin
   inherited;
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      GrdCadastro.ReadOnly := True;
+      Exit;
+    end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      GrdCadastro.ReadOnly := True;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
     DM.FTabela_auxiliar := 300;
 
     if (GrdCadastro.SelectedIndex = 0) then

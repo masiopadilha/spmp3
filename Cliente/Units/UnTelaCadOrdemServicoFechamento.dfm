@@ -2,57 +2,56 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
   TextHeight = 16
   inherited PControle: TPanel
-    ExplicitWidth = 1008
     inherited LCadastro: TLabel
-      Left = 694
+      Left = 702
       Top = 24
       ExplicitLeft = 694
       ExplicitTop = 24
     end
     inherited LCadastroPor: TLabel
-      Left = 650
+      Left = 658
       Top = 10
       ExplicitLeft = 650
       ExplicitTop = 10
     end
     inherited LblDataCad: TDBText
-      Left = 732
+      Left = 740
       Top = 25
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 732
+      ExplicitLeft = 736
       ExplicitTop = 25
     end
     inherited LblUsuCad: TDBText
-      Left = 732
+      Left = 740
       Top = 11
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 732
+      ExplicitLeft = 736
       ExplicitTop = 11
     end
     inherited LAlteracao: TLabel
-      Left = 845
+      Left = 853
       Top = 24
       ExplicitLeft = 845
       ExplicitTop = 24
     end
     inherited LAlteradoPor: TLabel
-      Left = 819
+      Left = 827
       Top = 10
       ExplicitLeft = 819
       ExplicitTop = 10
     end
     inherited LblDataAlt: TDBText
-      Left = 883
+      Left = 891
       Top = 24
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 883
+      ExplicitLeft = 887
       ExplicitTop = 24
     end
     inherited LblUsuAlt: TDBText
-      Left = 883
+      Left = 891
       Top = 10
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 883
+      ExplicitLeft = 887
       ExplicitTop = 10
     end
     inherited BtnExcluir: TButton
@@ -61,7 +60,6 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PIdentificacao: TPanel
     Height = 124
-    ExplicitWidth = 1008
     ExplicitHeight = 124
     object Label5: TLabel
       Left = 235
@@ -244,7 +242,6 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   inherited PProgramacao: TPanel
     Top = 179
     ExplicitTop = 179
-    ExplicitWidth = 1008
     inherited Label2: TLabel
       Width = 132
       Caption = 'PROGRAMA'#199#195'O'
@@ -743,10 +740,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   end
   inherited PDiversos: TPanel
     Top = 373
-    Height = 169
+    Height = 172
     ExplicitTop = 373
-    ExplicitWidth = 1008
-    ExplicitHeight = 172
+    ExplicitHeight = 169
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -756,7 +752,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       AlignWithMargins = True
       Left = 5
       Top = 26
-      Width = 994
+      Width = 998
       Height = 141
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
@@ -820,17 +816,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
         end>
     end
   end
-  inherited StatusBar1: TStatusBar
-    ExplicitTop = 605
-    ExplicitWidth = 1012
-  end
-  inherited PAlertas: TPanel
-    ExplicitTop = 589
-    ExplicitWidth = 1012
-  end
   inherited PBase: TPanel
-    ExplicitTop = 549
-    ExplicitWidth = 1008
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28
@@ -869,8 +855,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     Top = 3
   end
   object PopupMenuPecas: TPopupMenu
-    Left = 630
-    Top = 418
+    Left = 854
+    Top = 498
     object PecasdeReposicao1: TMenuItem
       Caption = 'Pe'#231'as de Reposi'#231#227'o'
       OnClick = PecasdeReposicao1Click

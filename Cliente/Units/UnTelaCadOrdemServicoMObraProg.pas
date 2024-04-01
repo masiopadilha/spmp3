@@ -158,6 +158,13 @@ if (DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA') or (DM.qryOrdemServicoSI
     DM.qryOrdemServicoDATAPROGINI.AsString := LDataConsultaIni;
     DM.qryOrdemServicoDATAPROGFIN.AsString := LDataConsultaFin;
     DM.qryOrdemServico.Post;
+
+    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+      begin
+        DM.qryOrdemServicoGerencia.Edit;
+        DM.qryOrdemServicoGerenciaDATAPROGINI.AsString := LDataConsultaIni;
+        DM.qryOrdemServicoGerencia.Post;
+      end;
   end;
 end;
 

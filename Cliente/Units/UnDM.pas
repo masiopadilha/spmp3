@@ -5714,6 +5714,20 @@ type
     DSLubrificVencOSVenc: TDataSource;
     qryManutVencOSVencCODORDEMSERVICO: TFDAutoIncField;
     qryLubrificVencOSVencCODORDEMSERVICO: TFDAutoIncField;
+    qryFuncionarioHistSimples: TFDQuery;
+    dsFuncionarioHistSimples: TDataSource;
+    qryFuncionarioHistSimplesCODORDEMSERVICO: TIntegerField;
+    qryFuncionarioHistSimplesMATRICULA: TStringField;
+    qryFuncionarioHistSimplesNOME: TStringField;
+    qryFuncionarioHistSimplesTOTALHOMEMHORA: TFMTBCDField;
+    qryFuncionarioHistSimplesDATAPROGINI: TDateTimeField;
+    qryFuncionarioHistSimplesDATAFECHAMENTO: TDateTimeField;
+    qryFuncionarioHistSimplesAREA: TStringField;
+    qryFuncionarioHistSimplesCELULA: TStringField;
+    qryManutProgEquipATIVO: TStringField;
+    qryManutProgEquipVISIVEL: TStringField;
+    qryLubrificProgEquipATIVO: TStringField;
+    qryLubrificProgEquipVISIVEL: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5788,6 +5802,8 @@ type
     procedure qryFuncionariosHistAfterScroll(DataSet: TDataSet);
     procedure qryFuncionariosHistCalcFields(DataSet: TDataSet);
     procedure qryRotasFREQUENCIAValidate(Sender: TField);
+    procedure qryManutPeriodicasAfterScroll(DataSet: TDataSet);
+    procedure qryLubrificPeriodicasAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -5878,7 +5894,7 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   UnTelaCadOrdemServicoHistorico, UnTelaCadPneusChassiRelat,
   UnTelaCadPneusChassi, UnTelaGerenciador, UnTelaCadFuncionariosHist,
   UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia,
-  UnTelaCadRotaProgEquip;
+  UnTelaCadRotaProgEquip, UnTelaInspFechamento;
 
 {$R *.dfm}
 
@@ -6517,6 +6533,23 @@ if FrmTelaInspConsulta <> nil then
   end;
 end;
 
+procedure TDM.qryLubrificPeriodicasAfterScroll(DataSet: TDataSet);
+begin
+  if FrmTelaInspFechamento <> nil then
+  begin
+    with FrmTelaInspFechamento do
+    begin
+      EdtMatricula.Clear;
+      EdtResponsavel.Clear;
+
+      if EdtMatricula.Text = '' then
+        EdtMatricula.Text := qryLubrificPeriodicasMATRICULAOS.AsString;
+      if EdtResponsavel.Text = '' then
+        EdtResponsavel.Text := qryLubrificPeriodicasFUNCIONARIOOS.AsString;
+    end;
+  end;
+end;
+
 procedure TDM.qryLubrificPeriodicasCalcFields(DataSet: TDataSet);
 begin
 if FrmTelaInspFechamentoHist <> nil then
@@ -6666,6 +6699,22 @@ if FrmTelaInspConsulta <> nil then
           7: qryManutConsPERIODO.AsString := 'Próximos 365 dias';
         end;
       end;
+  end;
+end;
+
+procedure TDM.qryManutPeriodicasAfterScroll(DataSet: TDataSet);
+begin
+  if FrmTelaInspFechamento <> nil then
+  begin
+    with FrmTelaInspFechamento do
+    begin
+      EdtMatricula.Clear;
+      EdtResponsavel.Clear;
+      if EdtMatricula.Text = '' then
+        EdtMatricula.Text := qryManutPeriodicasMATRICULAOS.AsString;
+      if EdtResponsavel.Text = '' then
+        EdtResponsavel.Text := qryManutPeriodicasFUNCIONARIOOS.AsString;
+    end;
   end;
 end;
 

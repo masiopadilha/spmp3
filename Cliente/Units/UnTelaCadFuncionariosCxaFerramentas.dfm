@@ -1,5 +1,6 @@
 inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerramentas
   Caption = 'Caixa de Ferramentas'
+  ClientHeight = 304
   ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
@@ -10,7 +11,7 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
     Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 489
+      Left = 493
       ExplicitLeft = 489
     end
     object BtnImprimir: TButton
@@ -31,10 +32,11 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
   end
   inherited PCentro: TPanel
     Width = 522
-    ExplicitWidth = 518
+    Height = 165
+    ExplicitWidth = 522
     inherited RGTelas: TRadioGroup
       Width = 520
-      ExplicitWidth = 516
+      ExplicitWidth = 520
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
@@ -53,6 +55,7 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
@@ -146,12 +149,14 @@ inherited FrmTelaCadFuncionariosCxaFerramentas: TFrmTelaCadFuncionariosCxaFerram
     end
   end
   inherited PAuxiliares: TPanel
+    Top = 237
     Width = 524
-    ExplicitWidth = 520
+    ExplicitWidth = 524
   end
   inherited PBotoes: TPanel
+    Top = 264
     Width = 524
-    ExplicitWidth = 520
+    ExplicitWidth = 524
     inherited BtnOK: TButton
       Left = 182
       OnClick = BtnOKClick

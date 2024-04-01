@@ -53,6 +53,8 @@ type
     EdtDescResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label21: TLabel;
+    ChbAtivoNF: TDBCheckBox;
+    Label22: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -188,14 +190,15 @@ begin
   inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 
-DM.qryManutProgEquipCODEMPRESA.AsString      := DM.FCodEmpresa;
-DM.qryManutProgEquipCODEQUIPAMENTO.AsString  := DM.FParamAuxiliar[0];
-DM.qryManutProgEquipDATACADASTRO.AsDateTime  := DM.FDataHoraServidor;
-DM.qryManutProgEquipDATAULTALT.AsDateTime    := DM.FDataHoraServidor;
-DM.qryManutProgEquipCODUSUARIOCAD.AsString   := DM.FCodUsuario;
-DM.qryManutProgEquipCODUSUARIOALT.AsString   := DM.FCodUsuario;
-DM.qryManutProgEquipGRUPOINSP.AsString       := 'N';
-DM.qryManutProgEquipRELATORIO.AsString       := 'N';
+DM.qryManutProgEquipCODEMPRESA.AsString     := DM.FCodEmpresa;
+DM.qryManutProgEquipCODEQUIPAMENTO.AsString := DM.FParamAuxiliar[0];
+DM.qryManutProgEquipDATACADASTRO.AsDateTime := DM.FDataHoraServidor;
+DM.qryManutProgEquipDATAULTALT.AsDateTime   := DM.FDataHoraServidor;
+DM.qryManutProgEquipCODUSUARIOCAD.AsString  := DM.FCodUsuario;
+DM.qryManutProgEquipCODUSUARIOALT.AsString  := DM.FCodUsuario;
+DM.qryManutProgEquipGRUPOINSP.AsString      := 'N';
+DM.qryManutProgEquipRELATORIO.AsString      := 'N';
+DM.qryManutProgEquipATIVO.AsString          := 'N';
 
 DM.qryManutProgEquipItens.Close;
 
@@ -244,6 +247,16 @@ procedure TFrmTelaCadManutProgEquip.BtnSalvarClick(Sender: TObject);
 begin
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryManutProgEquipCODIGO.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodManutencao.SetFocus; Exit;
@@ -271,6 +284,10 @@ if DM.qryManutProgEquipCRITICIDADE.IsNull = True then
 if (DM.qryManutProgEquipFREQUENCIA1.IsNull = True) or (DM.qryManutProgEquipFREQUENCIA1.AsInteger <= 0) then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O PERÍODO EM DIAS PARA A MANUTENÇÃO!'; EdtDias.SetFocus; Exit;
+  end;
+if (DM.qryManutProgEquipDTAINICIO1.IsNull = True) then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE PROGRAMAÇÃO PARA A MANUTENÇÃO!'; EdtInicio.SetFocus; Exit;
   end;
 if DM.qryManutProgEquipREPROGRAMAR1.IsNull = True then
   begin
@@ -398,6 +415,16 @@ begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
     Application.CreateForm(TFrmTelaCadManutProgEquipPartesItensEsp, FrmTelaCadManutProgEquipPartesItensEsp);
     FrmTelaCadManutProgEquipPartesItensEsp.Caption := 'Itens Específicos da Manutenção: '+ DM.qryManutProgEquipDESCRICAO.AsString;
     FrmTelaCadManutProgEquipPartesItensEsp.ShowModal;
@@ -430,6 +457,15 @@ begin
         Exit;
       end;
 
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
     Application.CreateForm(TFrmTelaCadManutProgEquipPecas, FrmTelaCadManutProgEquipPecas);
     FrmTelaCadManutProgEquipPecas.Caption := 'Peças da O.S.: '+ DM.qryOrdemServicoCODIGO.AsString;
     FrmTelaCadManutProgEquipPecas.ShowModal;
@@ -459,6 +495,15 @@ begin
     if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
         Exit;
       end;
 

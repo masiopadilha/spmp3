@@ -1,10 +1,7 @@
 inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   Caption = 'Lubrifica'#231#227'o Programada do Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -23,6 +20,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       Margins.Left = 4
@@ -30,6 +28,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
+      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -49,6 +48,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       Margins.Left = 4
@@ -56,6 +56,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
+      ExplicitLeft = 927
     end
     inherited BtnNovo: TButton
       Width = 27
@@ -109,7 +110,8 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
+    Height = 116
+    ExplicitHeight = 116
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -169,7 +171,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       ParentFont = False
     end
     object Label16: TLabel
-      Left = 750
+      Left = 777
       Top = 62
       Width = 31
       Height = 16
@@ -177,9 +179,9 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Caption = 'Rota:'
     end
     object LblRota: TDBText
-      Left = 784
+      Left = 811
       Top = 62
-      Width = 204
+      Width = 177
       Height = 16
       DataField = 'ROTA'
       DataSource = DM.dsLubrificProgEquip
@@ -199,7 +201,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Caption = 'Respons'#225'vel:'
     end
     object Label12: TLabel
-      Left = 731
+      Left = 758
       Top = 64
       Width = 6
       Height = 13
@@ -216,7 +218,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Tag = 555
       Left = 127
       Top = 30
-      Width = 125
+      Width = 100
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
@@ -242,7 +244,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     object CBCriticidade: TDBComboBox
       Left = 606
       Top = 60
-      Width = 120
+      Width = 146
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'CRITICIDADE'
@@ -260,7 +262,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Tag = 555
       Left = 127
       Top = 60
-      Width = 125
+      Width = 100
       Height = 24
       TabStop = False
       CharCase = ecUpperCase
@@ -346,10 +348,25 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       TabOrder = 7
       OnClick = BtnResponsavelClick
     end
+    object ChbAtivoNF: TDBCheckBox
+      Left = 87
+      Top = 92
+      Width = 58
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Ativo:'
+      DataField = 'ATIVO'
+      DataSource = DM.dsLubrificProgEquip
+      TabOrder = 9
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
+    end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
+    Top = 171
     Height = 122
+    ExplicitTop = 171
     ExplicitHeight = 122
     inherited Label2: TLabel
       Width = 132
@@ -482,6 +499,20 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label22: TLabel
+      Left = 487
+      Top = 48
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object EdtDias: TDBEdit
       Left = 127
       Top = 44
@@ -562,11 +593,10 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PDiversos: TPanel
-    Top = 277
-    Width = 1008
-    Height = 268
-    ExplicitTop = 277
-    ExplicitHeight = 265
+    Top = 297
+    Height = 248
+    ExplicitTop = 297
+    ExplicitHeight = 245
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -581,29 +611,29 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 238
+      Height = 218
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 996
-      ExplicitHeight = 235
+      ExplicitHeight = 215
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 207
+          Height = 187
           Align = alClient
           TabOrder = 0
           ExplicitWidth = 988
-          ExplicitHeight = 204
+          ExplicitHeight = 184
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 205
+            Height = 185
             Align = alClient
             Color = 14671839
             DataSource = DM.dsLubrificProgEquipItens
@@ -629,7 +659,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
                 Expanded = False
                 FieldName = 'ITEM'
                 Title.Caption = 'Item'
-                Width = 78
+                Width = 199
                 Visible = True
               end
               item
@@ -648,6 +678,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
                   'N')
                 Title.Alignment = taCenter
                 Title.Caption = 'Parado'
+                Width = 73
                 Visible = True
               end
               item
@@ -678,14 +709,14 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 207
+          Height = 187
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 205
+            Height = 185
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839
@@ -760,16 +791,12 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
   end
   inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -782,8 +809,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

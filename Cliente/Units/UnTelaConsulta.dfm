@@ -30,8 +30,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 979
-      ExplicitLeft = 975
+      Left = 971
+      ExplicitLeft = 971
     end
   end
   inherited PCentro: TPanel
@@ -95,13 +95,19 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
       Align = alClient
       DataSource = DM.dsAuxiliar
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -13
+      TitleFont.Height = -12
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnDrawColumnCell = GrdAuxiliarDrawColumnCell

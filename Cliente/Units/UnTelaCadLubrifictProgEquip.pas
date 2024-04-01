@@ -49,6 +49,8 @@ type
     EdtDescResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label12: TLabel;
+    ChbAtivoNF: TDBCheckBox;
+    Label22: TLabel;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -174,14 +176,15 @@ procedure TFrmTelaCadLubrificProgEquip.BtnNovoClick(Sender: TObject);
 begin
   inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-DM.qryLubrificProgEquipCODEMPRESA.AsString      := DM.FCodEmpresa;
-DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString  := DM.FParamAuxiliar[0];
-DM.qryLubrificProgEquipDATACADASTRO.AsDateTime  := DM.FDataHoraServidor;
-DM.qryLubrificProgEquipDATAULTALT.AsDateTime    := DM.FDataHoraServidor;
-DM.qryLubrificProgEquipCODUSUARIOCAD.AsString   := DM.FCodUsuario;
-DM.qryLubrificProgEquipCODUSUARIOALT.AsString   := DM.FCodUsuario;
-DM.qryLubrificProgEquipGRUPOINSP.AsString       := 'N';
-DM.qryLubrificProgEquipRELATORIO.AsString       := 'N';
+DM.qryLubrificProgEquipCODEMPRESA.AsString     := DM.FCodEmpresa;
+DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString := DM.FParamAuxiliar[0];
+DM.qryLubrificProgEquipDATACADASTRO.AsDateTime := DM.FDataHoraServidor;
+DM.qryLubrificProgEquipDATAULTALT.AsDateTime   := DM.FDataHoraServidor;
+DM.qryLubrificProgEquipCODUSUARIOCAD.AsString  := DM.FCodUsuario;
+DM.qryLubrificProgEquipCODUSUARIOALT.AsString  := DM.FCodUsuario;
+DM.qryLubrificProgEquipGRUPOINSP.AsString      := 'N';
+DM.qryLubrificProgEquipRELATORIO.AsString      := 'N';
+DM.qryLubrificProgEquipATIVO.AsString          := 'N';
 EdtCodLubrificacao.ReadOnly := False;
 EdtCodLubrificacao.SetFocus;
 end;
@@ -225,6 +228,16 @@ procedure TFrmTelaCadLubrificProgEquip.BtnSalvarClick(Sender: TObject);
 begin
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryLubrificProgEquipCODIGO.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodLubrificacao.SetFocus; Exit;
@@ -252,6 +265,10 @@ if DM.qryLubrificProgEquipCRITICIDADE.IsNull = True then
 if (DM.qryLubrificProgEquipFREQUENCIA1.IsNull = True) or (DM.qryLubrificProgEquipFREQUENCIA1.AsInteger <= 0) then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O PERÍODO EM DIAS PARA A LUBRIFICAÇÃO!'; EdtDias.SetFocus; Exit;
+  end;
+if (DM.qryLubrificProgEquipDTAINICIO1.IsNull = True) then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE PROGRAMAÇÃO PARA A LUBRIFICAÇÃO!'; EdtInicio.SetFocus; Exit;
   end;
 if DM.qryLubrificProgEquipREPROGRAMAR1.IsNull = True then
   begin
@@ -371,12 +388,24 @@ begin
         BtnConsultar.OnClick(Sender);
         DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
       end;
+
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+
     if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
     Application.CreateForm(TFrmTelaCadLubrificProgEquipPartesItensEsp, FrmTelaCadLubrificProgEquipPartesItensEsp);
     FrmTelaCadLubrificProgEquipPartesItensEsp.Caption := 'Itens Específicos da Lubrificação: '+ DM.qryLubrificProgEquipDESCRICAO.AsString;
     FrmTelaCadLubrificProgEquipPartesItensEsp.ShowModal;
@@ -405,6 +434,15 @@ begin
     if (DM.qryUsuarioPAcessoCADLubrificPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
         Exit;
       end;
 
@@ -437,6 +475,15 @@ begin
     if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
         Exit;
       end;
 

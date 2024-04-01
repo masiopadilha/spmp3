@@ -127,11 +127,14 @@ end;
 procedure TFrmTelaCadManutProgFamEquip.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
-DM.qryManutProgFamEquipPlanoTrab.Close;
-DM.qryManutProgFamEquipPartes.Close;
-DM.qryManutProgFamEquipItens.Close;
-DM.qryManutProgFamEquipItensTodos.Close;
-DM.qryManutProgEquipItens.Close;
+  if DM.qryManutProgFamEquip.IsEmpty = True then
+  begin
+    DM.qryManutProgFamEquipPlanoTrab.Close;
+    DM.qryManutProgFamEquipPartes.Close;
+    DM.qryManutProgFamEquipItens.Close;
+    DM.qryManutProgFamEquipItensTodos.Close;
+    DM.qryManutProgEquipItens.Close;
+  end;
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnFamiliaClick(Sender: TObject);
@@ -312,6 +315,16 @@ procedure TFrmTelaCadManutProgFamEquip.BtnSalvarClick(Sender: TObject);
 begin
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryManutProgFamEquipCODIGO.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodManutencao.SetFocus; Abort;

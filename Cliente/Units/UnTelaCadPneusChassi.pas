@@ -325,6 +325,15 @@ procedure TFrmTelaCadPneusChassi.BtnSalvarClick(Sender: TObject);
 var
 I:SmallInt;
 begin
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 
@@ -396,6 +405,24 @@ var
 Texto: PChar;
 begin
   inherited;
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
   Try
     if (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Frontal') and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Trazeiro') and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Duplo') then
       begin
@@ -424,6 +451,24 @@ end;
 procedure TFrmTelaCadPneusChassi.Button2Click(Sender: TObject);
 begin
   inherited;
+if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 try
   DM.qryPneusChassiPneus.Filtered := False;
   Application.CreateForm(TFrmTelaCadPneusChassiPneus, FrmTelaCadPneusChassiPneus);

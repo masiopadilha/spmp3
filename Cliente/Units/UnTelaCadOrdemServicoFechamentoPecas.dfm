@@ -1,5 +1,6 @@
 inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamentoPecas
   Caption = 'Fechamento de Pe'#231'as da O.S.'
+  ClientHeight = 304
   ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
@@ -10,16 +11,17 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
     Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 489
+      Left = 493
       ExplicitLeft = 489
     end
   end
   inherited PCentro: TPanel
     Width = 522
-    ExplicitWidth = 518
+    Height = 165
+    ExplicitWidth = 522
     inherited RGTelas: TRadioGroup
       Width = 520
-      ExplicitWidth = 516
+      ExplicitWidth = 520
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
@@ -128,12 +130,14 @@ inherited FrmTelaCadOrdemServicoFechamentoPecas: TFrmTelaCadOrdemServicoFechamen
     end
   end
   inherited PAuxiliares: TPanel
+    Top = 237
     Width = 524
-    ExplicitWidth = 520
+    ExplicitWidth = 524
   end
   inherited PBotoes: TPanel
+    Top = 264
     Width = 524
-    ExplicitWidth = 520
+    ExplicitWidth = 524
     inherited BtnOK: TButton
       Left = 100
       Visible = False

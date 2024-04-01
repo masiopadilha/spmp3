@@ -12091,7 +12091,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Caption = 'Senha:'
     end
     object LblVersao: TLabel
-      Left = 401
+      Left = 396
       Top = 106
       Width = 29
       Height = 11

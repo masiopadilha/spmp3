@@ -447,7 +447,8 @@ begin
   end;
 
   DM.GetVersion(Application.ExeName);
-  LblVersao.Caption := DM.FVersaoMacro + ' beta';
+//  LblVersao.Caption := DM.FVersaoMacro + ' beta';
+  LblVersao.Caption := DM.FVersaoMacro;
 end;
 
 procedure TFrmTelaAcesso.FormKeyPress(Sender: TObject; var Key: Char);

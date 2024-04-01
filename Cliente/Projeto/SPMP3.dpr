@@ -200,11 +200,12 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
         Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
         if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade')
           or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
-            or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-              begin
-                DM.VerificarInspecoes;
-                DM.VerificarConfiabilidade;
-              end;
+            or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A')
+              or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+                begin
+                  DM.VerificarInspecoes;
+                  DM.VerificarConfiabilidade;
+                end;
         FrmTelaPrincipal.ShowModal;
       Finally
         FreeAndNil(FrmTelaPrincipal);

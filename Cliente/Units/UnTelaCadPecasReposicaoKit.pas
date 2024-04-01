@@ -63,7 +63,8 @@ end;
 procedure TFrmTelaCadPecasReposicaoKit.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
-DM.qryPecaReposicaoKitItens.Close;
+  if DM.qryPecaReposicaoKitItens.IsEmpty = True then
+    DM.qryPecaReposicaoKitItens.Close;
 end;
 
 procedure TFrmTelaCadPecasReposicaoKit.BtnNovoClick(Sender: TObject);
@@ -85,6 +86,12 @@ end;
 
 procedure TFrmTelaCadPecasReposicaoKit.BtnSalvarClick(Sender: TObject);
 begin
+  if (DM.qryUsuarioPAlteracaoCADRECURSOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryPecaReposicaoKitCODIGO.AsString = EmptyStr then
@@ -177,6 +184,18 @@ if DM.qryPecaReposicaoKitCODIGO.AsString = '' then Exit;
 
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusaoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Inclusão não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracaoCADPECASREP.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
     DM.FTabela_auxiliar := 62;
 
     if DM.qryPecaReposicaoKitCODIGO.AsString = EmptyStr then

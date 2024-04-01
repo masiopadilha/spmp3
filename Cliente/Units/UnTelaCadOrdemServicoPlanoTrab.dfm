@@ -1,14 +1,19 @@
 inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
   Caption = 'Planos de Trabalho da O.S.'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     inherited BtnAjuda: TButton
       Left = 469
       ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
@@ -90,7 +95,13 @@ inherited FrmTelaCadOrdemServicoPlanoTrab: TFrmTelaCadOrdemServicoPlanoTrab
         end>
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 504
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 504
     inherited BtnOK: TButton
       Left = 100
       Visible = False

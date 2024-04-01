@@ -1,5 +1,6 @@
 inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramInv
   Caption = 'Invent'#225'rio de Caixa de Ferramentas'
+  ClientHeight = 304
   ClientWidth = 608
   Constraints.MaxWidth = 620
   Constraints.MinWidth = 620
@@ -10,7 +11,7 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     Width = 604
     ExplicitWidth = 600
     inherited BtnAjuda: TButton
-      Left = 568
+      Left = 572
       ExplicitLeft = 568
     end
     object BtnImprimir: TButton
@@ -35,7 +36,8 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
   end
   inherited PCentro: TPanel
     Width = 602
-    ExplicitWidth = 598
+    Height = 165
+    ExplicitWidth = 602
     inherited RGTelas: TRadioGroup
       Left = 216
       Width = 0
@@ -190,12 +192,14 @@ inherited FrmTelaCadFuncionariosCxaFerramInv: TFrmTelaCadFuncionariosCxaFerramIn
     end
   end
   inherited PAuxiliares: TPanel
+    Top = 237
     Width = 604
-    ExplicitWidth = 600
+    ExplicitWidth = 604
   end
   inherited PBotoes: TPanel
+    Top = 264
     Width = 604
-    ExplicitWidth = 600
+    ExplicitWidth = 604
     inherited BtnOK: TButton
       Left = 100
       Visible = False

@@ -63,6 +63,25 @@ end;
 procedure TFrmTelaCadOrdemServicoPecas.FormCreate(Sender: TObject);
 begin
   inherited;
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdCadastro.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA')
   and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA')and (DM.qryOrdemServicoSITUACAO.AsString <> 'PROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') then
     begin
@@ -109,6 +128,25 @@ if (GrdCadastro.SelectedIndex = 3) then
 
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      GrdCadastro.ReadOnly := True;
+      Exit;
+    end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      GrdCadastro.ReadOnly := True;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
     DM.FTabela_auxiliar := 360;
 
     if (GrdCadastro.SelectedIndex = 1) then

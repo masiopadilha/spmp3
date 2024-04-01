@@ -91,6 +91,29 @@ if DM.qryOrdemServicoEquipeMObra.Active = True then
     DM.qryOrdemServicoTEMPOHOMEMHORAEXEC.AsFloat := LTotalHH;
     DM.qryOrdemServicoCUSTOMOBRA.AsFloat := LCusto;
     DM.qryOrdemServico.Post;
+
+    // Consulta o primeiro funcionário cadastrado e copia a matrícula para o fechamento da inspeção (caso seja uma)
+
+    if (DM.qryOrdemServicoCODMANUTPROGEQUIP.AsString <> '') or ((DM.qryOrdemServicoCODLUBRIFICPROGEQUIP.AsString <> '')) then
+    begin
+      DM.qryOrdemServicoEquipe.First;
+      DM.qryOrdemServicoEquipeMObra.First;
+      DM.qryOrdemServicoEquipeMObraUtil.First;
+      if DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString <> '' then
+      begin
+      with DM.qryAuxiliar do
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Add('UPDATE manutprogequipamentohist SET MATRICULA = :matricula WHERE CODORDEMSERVICO = :codordemservico AND CODEMPRESA = :codempresa AND (MATRICULA IS NULL OR MATRICULA <> '');');
+          SQL.Add('UPDATE lubrificprogequipamentohist SET MATRICULA = :matricula WHERE CODORDEMSERVICO = :codordemservico AND CODEMPRESA = :codempresa AND (MATRICULA IS NULL OR MATRICULA <> '');');
+          Params.ParamByName('matricula').AsString := DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString;
+          Params.ParamByName('codordemservico').AsString := DM.qryOrdemServicoCODIGO.AsString;
+          Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
+          Execute;
+        end;
+      end;
+    end;
   end;
 
 
@@ -106,6 +129,28 @@ procedure TFrmTelaCadOrdemServicoFechamentoMObra.FormCreate(Sender: TObject);
 begin
   inherited;
 //if DM.qryTotalHomemHora.Active = False then DM.qryTotalHomemHoraSeqHora.Open;
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdEquipe.ReadOnly := True;
+    GrdEquipeMObra.ReadOnly := True;
+    GrdEquipeMObraUtil.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdEquipe.ReadOnly := True;
+    GrdEquipeMObra.ReadOnly := True;
+    GrdEquipeMObraUtil.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
 
 DM.qryOrdemServicoEquipe.Open;
 DM.qryOrdemServicoEquipeMObra.Open;

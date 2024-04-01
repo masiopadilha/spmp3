@@ -354,6 +354,7 @@ begin
                                  + ', `manutprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP'
                                  + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
                                  + ', DATE_ADD(`manutprogequipamento`.`DTAINICIO1`, INTERVAL `manutprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                                 + ', `manutprogequipamento`.`ATIVO`'
                                  + ' FROM `manutprogequipamento`'
                                  + ' LEFT JOIN `usuario` ON (`manutprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
                                  + ' LEFT JOIN `usuario` AS `usuario_1` ON (`manutprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
@@ -378,6 +379,7 @@ begin
                                  + ', `lubrificprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP'
                                  + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
                                  + ', DATE_ADD(`lubrificprogequipamento`.`DTAINICIO1`, INTERVAL `lubrificprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                                 + ', `lubrificprogequipamento`.`ATIVO`'
                                  + ' FROM `lubrificprogequipamento`'
                                  + ' LEFT JOIN `usuario` ON (`lubrificprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
                                  + ' LEFT JOIN `usuario` AS `usuario_1` ON (`lubrificprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
@@ -749,10 +751,10 @@ begin
         GrdAuxiliar.Columns[0].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[0].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[0].DisplayLabel := 'Código';
-        DM.qryAuxiliar.Fields[0].DisplayWidth := 15;
+        DM.qryAuxiliar.Fields[0].DisplayWidth := 12;
         DM.qryAuxiliar.Fields[0].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[1].DisplayLabel := 'Descrição';
-        DM.qryAuxiliar.Fields[1].DisplayWidth := 50;
+        DM.qryAuxiliar.Fields[1].DisplayWidth := 45;
       end
     else
       begin
@@ -874,7 +876,7 @@ begin
 
           DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayLabel             := 'Programada';
           DM.qryAuxiliar.FieldByName('DTAINICIO1').Alignment                := taCenter;
-          DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayWidth             := 12;
+          DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayWidth             := 10;
           GrdAuxiliar.Columns[2].Title.Alignment                            := taCenter;
 
           DM.qryAuxiliar.FieldByName('FREQUENCIA1').DisplayLabel            := 'Dias';
@@ -888,15 +890,20 @@ begin
           if (DM.FTabela_auxiliar = 32) or (DM.FTabela_auxiliar = 321) then
           begin
             DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayLabel  := 'Família da Manutenção';
-            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 35;
+            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 38;
           end else
           begin
             DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayLabel  := 'Família da Lubrificação';
-            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 35;
+            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 38;
           end;
 
           DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayLabel            := 'Responsável';
-          DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayWidth            := 30;
+          DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayWidth            := 25;
+
+          DM.qryAuxiliar.FieldByName('ATIVO').DisplayLabel                  := 'Ativo';
+          DM.qryAuxiliar.FieldByName('ATIVO').Alignment                     := taCenter;
+          DM.qryAuxiliar.FieldByName('ATIVO').DisplayWidth                  := 5;
+          GrdAuxiliar.Columns[31].Title.Alignment                           := taCenter;
 
           DM.qryAuxiliar.Fields[1].Visible := False;
           DM.qryAuxiliar.Fields[2].Visible := False;

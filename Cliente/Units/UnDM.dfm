@@ -6865,6 +6865,8 @@ object DM: TDM
       '    , `lubrificprogequipamento`.`LEITURA`'
       '    , `lubrificprogequipamento`.`RELATORIO`'
       '    , `lubrificprogequipamento`.`GRUPOINSP`'
+      '    , `lubrificprogequipamento`.`ATIVO`'
+      '    , `lubrificprogequipamento`.`VISIVEL`'
       '    , `lubrificprogequipamento`.`DATACADASTRO`'
       '    , `lubrificprogequipamento`.`CODUSUARIOCAD`'
       '    , `lubrificprogequipamento`.`DATAULTALT`'
@@ -7070,6 +7072,20 @@ object DM: TDM
       FieldName = 'GRUPOINSP'
       Origin = 'GRUPOINSP'
       ProviderFlags = [pfInUpdate]
+      Size = 1
+    end
+    object qryLubrificProgEquipATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ATIVO'
+      Origin = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryLubrificProgEquipVISIVEL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'VISIVEL'
+      Origin = 'VISIVEL'
+      FixedChar = True
       Size = 1
     end
     object qryLubrificProgEquipDATACADASTRO: TDateTimeField
@@ -7877,6 +7893,8 @@ object DM: TDM
         ', '#39'%Y-%m-%d'#39')'
       '    AND `manutprogequipamento`.`RELATORIO` = '#39'N'#39
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'N'#39
+      '    AND `manutprogequipamento`.`ATIVO` = '#39'S'#39
+      ''
       ')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
     Left = 917
@@ -28746,6 +28764,7 @@ object DM: TDM
         'L'
       '    AND `manutprogequipamento`.`CODMANUTPROGFAMEQUIP` <> '#39#39
       '    AND `manutprogequipamento`.`DTAINICIO1` IS NOT NULL'
+      '    AND `manutprogequipamento`.`ATIVO` = '#39'S'#39
       ')'
       
         'GROUP BY `manutprogequipamento`.`CODIGO`, `manutprogequipamento`' +
@@ -29129,6 +29148,7 @@ object DM: TDM
         '    AND `lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` <> '#39 +
         #39
       '    AND `lubrificprogequipamento`.`DTAINICIO1` IS NOT NULL'
+      '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39
       ''
       ')'
       
@@ -29516,6 +29536,8 @@ object DM: TDM
     end
   end
   object qryManutPeriodicas: TFDQuery
+    AfterOpen = qryManutPeriodicasAfterScroll
+    AfterScroll = qryManutPeriodicasAfterScroll
     OnCalcFields = qryManutPeriodicasCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -29575,7 +29597,7 @@ object DM: TDM
       '    AND `manutprogequipamentohist`.`SITUACAO` = :situacao'
       '  --  AND `ordemservico`.`SITUACAO` = :situacaoos'
       '    AND `manutprogequipamentohist`.`GRUPOINSP` = '#39'N'#39
-      '    AND `manutprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA'#39
+      '--    AND `manutprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA'#39
       
         '    AND `manutprogequipamentohist`.`DTAINICIO1` >= DATE_ADD(CURD' +
         'ATE(), INTERVAL -18 MONTH)'
@@ -30239,6 +30261,8 @@ object DM: TDM
     end
   end
   object qryLubrificPeriodicas: TFDQuery
+    AfterOpen = qryLubrificPeriodicasAfterScroll
+    AfterScroll = qryLubrificPeriodicasAfterScroll
     OnCalcFields = qryLubrificPeriodicasCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -30293,20 +30317,22 @@ object DM: TDM
         '        ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) ' +
         'AND (`lubrificprogequipamentohist`.`CODEMPRESA` = `areas`.`CODEM' +
         'PRESA`)'
-      
-        '  WHERE (`lubrificprogequipamentohist`.`CODEMPRESA` = :codempres' +
-        'a'
+      ''
+      ' WHERE (`lubrificprogequipamentohist`.`CODEMPRESA` = :codempresa'
       '    AND `lubrificprogequipamentohist`.`SITUACAO` = :situacao'
+      '  --  AND `ordemservico`.`SITUACAO` = :situacaoos'
       '    AND `lubrificprogequipamentohist`.`GRUPOINSP` = '#39'N'#39
-      '    AND `lubrificprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA'#39
+      
+        '--    AND `lubrificprogequipamentohist`.`SITUACAO` <> '#39'CANCELADA' +
+        #39
       
         '    AND `lubrificprogequipamentohist`.`DTAINICIO1` >= DATE_ADD(C' +
         'URDATE(), INTERVAL -18 MONTH)'
       
         '   -- AND `lubrificprogequipamentohist`.`DTAINICIO1` <= CURDATE(' +
         ')'
+      ')'
       ''
-      '    )'
       
         'ORDER BY `lubrificprogequipamentohist`.`CODORDEMSERVICO` DESC, `' +
         'EQUIPAMENTO` DESC;')
@@ -30998,6 +31024,8 @@ object DM: TDM
       '    , `manutprogequipamento`.`LEITURA`'
       '    , `manutprogequipamento`.`RELATORIO`'
       '    , `manutprogequipamento`.`GRUPOINSP`'
+      '    , `manutprogequipamento`.`ATIVO`'
+      '    , `manutprogequipamento`.`VISIVEL`'
       '    , `manutprogequipamento`.`DATACADASTRO`'
       '    , `manutprogequipamento`.`CODUSUARIOCAD`'
       '    , `manutprogequipamento`.`DATAULTALT`'
@@ -31202,6 +31230,20 @@ object DM: TDM
       FieldName = 'GRUPOINSP'
       Origin = 'GRUPOINSP'
       ProviderFlags = [pfInUpdate]
+      Size = 1
+    end
+    object qryManutProgEquipATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ATIVO'
+      Origin = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryManutProgEquipVISIVEL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'VISIVEL'
+      Origin = 'VISIVEL'
+      FixedChar = True
       Size = 1
     end
     object qryManutProgEquipDATACADASTRO: TDateTimeField
@@ -32526,7 +32568,8 @@ object DM: TDM
         '    AND `lubrificprogequipamento`.`DTAINICIO1` <= DATE_FORMAT(:D' +
         'ATA, '#39'%Y-%m-%d'#39')'
       '    AND `lubrificprogequipamento`.`RELATORIO` = '#39'N'#39
-      '    AND `lubrificprogequipamento`.`GRUPOINSP` = '#39'N'#39')'
+      '    AND `lubrificprogequipamento`.`GRUPOINSP` = '#39'N'#39
+      '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39')'
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
     Left = 950
     Top = 376
@@ -36302,17 +36345,12 @@ object DM: TDM
       '    IF(:situacao=3,`ordemservico`.`SITUACAO` = '#39'LIBERADA'#39', '
       '    IF(:situacao=4,`ordemservico`.`SITUACAO` = '#39'FECHADA'#39', '
       '    IF(:situacao=5,`ordemservico`.`SITUACAO` = '#39'PARALISADA'#39', '
-      
-        '   -- IF(:situacao=6,`ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39' AN' +
-        'D `ordemservico`.`SOLICTRAB`= '#39'S'#39', '
-      
-        '   -- IF(:situacao=7,`ordemservico`.`SITUACAO` <> '#39'CANCELADA'#39' AN' +
-        'D `ordemservico`.`ROTAEQUIP` = '#39'S'#39', '
       '    IF(:situacao=6,`ordemservico`.`SOLICTRAB`= '#39'S'#39', '
       '    IF(:situacao=7,`ordemservico`.`ROTAEQUIP` = '#39'S'#39', '
       '    IF(:situacao=8,`ordemservico`.`SITUACAO` <> '#39#39','
+      '    IF(:situacao=9,`ordemservico`.`SITUACAO` = '#39'CANCELADA'#39', '
       
-        '    IF(:situacao=9,`ordemservico`.`SITUACAO` = '#39'CANCELADA'#39', '#39#39'))' +
+        '    IF(:situacao=10,`ordemservico`.`SITUACAO` = '#39'VENCIDA'#39', '#39#39')))' +
         '))))))))'
       '    )'
       ''
@@ -42582,6 +42620,7 @@ object DM: TDM
       '    INNER JOIN `grupos` '
       '        ON (`grupos`.`CODIGO` = `empresa`.`CODGRUPO`)'
       'WHERE (`usuarioempresascad`.`CODEMPRESAS` = :codempresas)'
+      'GROUP BY `usuarioempresascad`.`CODEMPRESA`'
       'ORDER BY `EMPRESA` ASC;')
     Left = 1171
     Top = 693
@@ -57404,6 +57443,7 @@ object DM: TDM
     object qryManutVencOSVencCODORDEMSERVICO: TFDAutoIncField
       FieldName = 'CODORDEMSERVICO'
       Origin = 'CODIGO'
+      ReadOnly = True
     end
   end
   object qryLubrificVencOSVenc: TFDQuery
@@ -57451,6 +57491,7 @@ object DM: TDM
     object qryLubrificVencOSVencCODORDEMSERVICO: TFDAutoIncField
       FieldName = 'CODORDEMSERVICO'
       Origin = 'CODIGO'
+      ReadOnly = True
     end
   end
   object DSManutVencOSVenc: TDataSource
@@ -57462,5 +57503,115 @@ object DM: TDM
     DataSet = qryLubrificVencOSVenc
     Left = 1039
     Top = 424
+  end
+  object qryFuncionarioHistSimples: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservicoequipemobrautil`.`CODORDEMSERVICO`'
+      '    , `funcionarios`.`MATRICULA`    '
+      '    , `funcionarios`.`NOME`'
+      
+        '    , SUM(`ordemservicoequipemobrautil`.`TOTALHOMEMHORA`) AS TOT' +
+        'ALHOMEMHORA'
+      '    , `ordemservico`.`DATAPROGINI`'
+      '    , `ordemservico`.`DATAFECHAMENTO`'
+      '    , `areas`.`DESCRICAO` AS `AREA`'
+      '    , `celulas`.`DESCRICAO` AS `CELULA`'
+      ''
+      'FROM'
+      '    `funcionarios`'
+      ''
+      '    INNER JOIN `ordemservicoequipemobrautil`'
+      
+        '        ON (`funcionarios`.`MATRICULA` = `ordemservicoequipemobr' +
+        'autil`.`MATRICULA`) AND (`funcionarios`.`CODEMPRESA` = `ordemser' +
+        'vicoequipemobrautil`.`CODEMPRESA`)'
+      '    INNER JOIN `ordemservico`'
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = `o' +
+        'rdemservico`.`CODIGO`)'
+      '    INNER JOIN `calendario` '
+      
+        '        ON (`funcionarios`.`CODCALENDARIO` = `calendario`.`CODIG' +
+        'O`) AND (`funcionarios`.`CODEMPRESA` = `calendario`.`CODEMPRESA`' +
+        ')'
+      '    INNER JOIN `areas` '
+      
+        '        ON (`funcionarios`.`CODAREA` = `areas`.`CODIGO`) AND (`f' +
+        'uncionarios`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+      '    INNER JOIN `celulas` '
+      
+        '        ON (`funcionarios`.`CODCELULA` = `celulas`.`CODIGO`) AND' +
+        ' (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMP' +
+        'RESA` = `areas`.`CODEMPRESA`)'
+      ''
+      'WHERE (`funcionarios`.`CODEMPRESA` = :codempresa)'
+      ''
+      
+        'GROUP BY `funcionarios`.`MATRICULA`, `ordemservicoequipemobrauti' +
+        'l`.`CODORDEMSERVICO`'
+      ''
+      'ORDER BY `funcionarios`.`NOME` ASC;')
+    Left = 1866
+    Top = 696
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryFuncionarioHistSimplesCODORDEMSERVICO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODORDEMSERVICO'
+      Origin = 'CODORDEMSERVICO'
+    end
+    object qryFuncionarioHistSimplesMATRICULA: TStringField
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object qryFuncionarioHistSimplesNOME: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Size = 200
+    end
+    object qryFuncionarioHistSimplesTOTALHOMEMHORA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALHOMEMHORA'
+      Origin = 'TOTALHOMEMHORA'
+      Precision = 38
+      Size = 2
+    end
+    object qryFuncionarioHistSimplesDATAPROGINI: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAPROGINI'
+      Origin = 'DATAPROGINI'
+    end
+    object qryFuncionarioHistSimplesDATAFECHAMENTO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFECHAMENTO'
+      Origin = 'DATAFECHAMENTO'
+    end
+    object qryFuncionarioHistSimplesAREA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'AREA'
+      Origin = 'AREA'
+      Size = 80
+    end
+    object qryFuncionarioHistSimplesCELULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CELULA'
+      Origin = 'CELULA'
+      Size = 80
+    end
+  end
+  object dsFuncionarioHistSimples: TDataSource
+    DataSet = qryFuncionarioHistSimples
+    Left = 1866
+    Top = 743
   end
 end

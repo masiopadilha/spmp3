@@ -1,22 +1,42 @@
 inherited FrmTelaCadRecursosKit: TFrmTelaCadRecursosKit
   Caption = 'Kit de Recursos'
-  PixelsPerInch = 96
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 513
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 535
+    end
     inherited LblDataAlt: TDBText
+      Left = 568
       DataSource = DM.dsRecursoKit
     end
     inherited LblDataCad: TDBText
+      Left = 440
       DataSource = DM.dsRecursoKit
     end
     inherited LblUsuAlt: TDBText
+      Left = 568
       DataSource = DM.dsRecursoKit
     end
     inherited LblUsuCad: TDBText
+      Left = 440
       DataSource = DM.dsRecursoKit
+    end
+    inherited LCadastro: TLabel
+      Left = 407
+    end
+    inherited LCadastroPor: TLabel
+      Left = 369
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 9
       Top = 10
@@ -81,8 +101,8 @@ inherited FrmTelaCadRecursosKit: TFrmTelaCadRecursosKit
       AlignWithMargins = True
       Left = 4
       Top = 36
-      Width = 612
-      Height = 280
+      Width = 616
+      Height = 283
       Hint = 
         'Tecle ENTER na(s) coluna(s) para incluir um registro ou efetue o' +
         ' duplo-clique para exclu'#237'-lo'
@@ -157,6 +177,14 @@ inherited FrmTelaCadRecursosKit: TFrmTelaCadRecursosKit
           Visible = True
         end>
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 406

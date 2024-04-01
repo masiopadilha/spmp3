@@ -6,28 +6,36 @@ inherited FrmTelaCadFuncionariosAusencias: TFrmTelaCadFuncionariosAusencias
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 502
+      Left = 506
+      ExplicitLeft = 502
     end
     inherited LAlteradoPor: TLabel
-      Left = 524
+      Left = 528
+      ExplicitLeft = 524
     end
     inherited LblDataAlt: TDBText
+      Left = 568
       DataSource = DM.dsFuncionariosAusencias
     end
     inherited LblDataCad: TDBText
+      Left = 440
       DataSource = DM.dsFuncionariosAusencias
     end
     inherited LblUsuAlt: TDBText
+      Left = 568
       DataSource = DM.dsFuncionariosAusencias
     end
     inherited LblUsuCad: TDBText
+      Left = 440
       DataSource = DM.dsFuncionariosAusencias
     end
     inherited LCadastro: TLabel
-      Left = 396
+      Left = 400
+      ExplicitLeft = 396
     end
     inherited LCadastroPor: TLabel
-      Left = 358
+      Left = 362
+      ExplicitLeft = 358
     end
   end
   inherited PCentro: TPanel

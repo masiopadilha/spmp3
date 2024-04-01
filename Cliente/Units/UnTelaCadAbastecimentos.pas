@@ -260,6 +260,15 @@ EdtDescEquipamento.SetFocus;
 end;
 procedure TFrmTelaCadAbastecimentos.BtnSalvarClick(Sender: TObject);
 begin
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
 
@@ -491,6 +500,24 @@ end;
 procedure TFrmTelaCadAbastecimentos.Button3Click(Sender: TObject);
 begin
   inherited;
+if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryAbastecimentosCombustAbast.IsEmpty = True then Exit;
 if Application.MessageBox('Deseja realmente efetuar a troca do medidor?', 'SPMP3', MB_YESNO + MB_ICONINFORMATION) = IDNo then Exit;
@@ -510,6 +537,24 @@ end;
 procedure TFrmTelaCadAbastecimentos.Button4Click(Sender: TObject);
 begin
   inherited;
+if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
   DM.FParamAuxiliar[0] := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
   if DM.FParamAuxiliar[0] = '' then BtnConsultar.OnClick(Sender);
   if DM.FParamAuxiliar[0] = '' then Exit;

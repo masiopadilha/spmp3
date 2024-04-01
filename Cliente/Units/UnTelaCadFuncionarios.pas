@@ -298,6 +298,8 @@ end;
 procedure TFrmTelaCadFuncionarios.BtnNovoClick(Sender: TObject);
 begin
   inherited;
+if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+
 DM.qryFuncionariosUSUARIO.AsString         := 'N';
 DM.qryFuncionariosATIVO.AsString           := 'S';
 DM.qryFuncionariosTERCEIRO.AsString        := 'N';

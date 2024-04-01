@@ -1,10 +1,7 @@
 inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   Caption = 'Recursos'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -13,9 +10,11 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsRecursos
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsRecursos
+      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       ExplicitLeft = 662
@@ -25,9 +24,11 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsRecursos
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsRecursos
+      ExplicitLeft = 927
     end
     inherited BtnConsultar: TButton
       Left = 151
@@ -35,8 +36,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 72
       Top = 32
@@ -313,8 +312,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -739,10 +736,8 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   end
   inherited PDiversos: TPanel
     Width = 780
-    Height = 200
     Align = alLeft
     ExplicitWidth = 780
-    ExplicitHeight = 197
     object Label15: TLabel
       Left = 97
       Top = 38
@@ -1136,23 +1131,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnKeyPress = FormKeyPress
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Ferramentas'
       DisabledImageIndex = 38

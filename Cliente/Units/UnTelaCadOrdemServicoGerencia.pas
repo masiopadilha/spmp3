@@ -1713,6 +1713,8 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
+if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
+
 if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
     Timer1.Enabled := False;

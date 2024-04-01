@@ -1,5 +1,7 @@
 inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
   Caption = 'Pe'#231'as do Equipamento'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
@@ -24,20 +26,21 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
     Left = 4
     Top = 70
     Width = 500
+    Height = 165
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     ExplicitLeft = 4
     ExplicitTop = 70
-    ExplicitWidth = 496
+    ExplicitWidth = 500
     inherited RGTelas: TRadioGroup
       Width = 498
       Margins.Left = 1
       Margins.Top = 1
       Margins.Right = 1
       Margins.Bottom = 1
-      ExplicitWidth = 494
+      ExplicitWidth = 498
     end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True

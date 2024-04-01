@@ -162,6 +162,18 @@ if DM.qryFuncionariosCxaFerramKIT.AsString = EmptyStr then
 
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Inclusão não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
     if DM.qryFuncionariosCxaFerramKIT.AsString = 'N' then
       DM.FTabela_auxiliar := 460
     else

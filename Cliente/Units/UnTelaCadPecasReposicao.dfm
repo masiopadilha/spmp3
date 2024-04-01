@@ -10,9 +10,11 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsPecasReposicao
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPecasReposicao
+      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       ExplicitLeft = 662
@@ -22,9 +24,11 @@ inherited FrmTelaCadPecasReposicao: TFrmTelaCadPecasReposicao
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPecasReposicao
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsPecasReposicao
+      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel

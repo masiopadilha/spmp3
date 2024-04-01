@@ -147,29 +147,41 @@ end;
 
 procedure TFrmTelaCadFuncionariosAusencias.BtnSalvarClick(Sender: TObject);
 begin
-if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-if DM.FDataSetParam.IsEmpty = True then Exit;
-if DM.qryFuncionariosAusenciasMOTIVO.AsString = EmptyStr then
-  begin
-    PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'INFORME O MOTIVO DA AUSÊNCIA!';
-    EdtDescricao.SetFocus;
-    Exit;
-  end;
-if DM.qryFuncionariosAusenciasINICIO.AsString = EmptyStr then
-  begin
-    PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'INFORME O INÍCIO DA AUSÊNCIA!';
-    EdtInicio.SetFocus;
-    Exit;
-  end;
-if DM.qryFuncionariosAusenciasFIM.AsString = EmptyStr then
-  begin
-    PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'INFORME O FIM DA AUSÊNCIA!';
-    EdtFim.SetFocus;
-    Exit;
-  end;
+  if (DM.qryUsuarioPInclusaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Inclusão não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+  if (DM.qryUsuarioPAlteracaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+  if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+  if DM.FDataSetParam.IsEmpty = True then Exit;
+  if DM.qryFuncionariosAusenciasMOTIVO.AsString = EmptyStr then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'INFORME O MOTIVO DA AUSÊNCIA!';
+      EdtDescricao.SetFocus;
+      Exit;
+    end;
+  if DM.qryFuncionariosAusenciasINICIO.AsString = EmptyStr then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'INFORME O INÍCIO DA AUSÊNCIA!';
+      EdtInicio.SetFocus;
+      Exit;
+    end;
+  if DM.qryFuncionariosAusenciasFIM.AsString = EmptyStr then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'INFORME O FIM DA AUSÊNCIA!';
+      EdtFim.SetFocus;
+      Exit;
+    end;
 
   inherited;
   DesenharCalendario;

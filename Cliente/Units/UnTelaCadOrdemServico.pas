@@ -303,9 +303,9 @@ begin
 //DM.qryOrdemServicoServSolic.Close;
 //DM.qryOrdemServicoServSolic.Open;
 
-if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+if (DM.qryUsuarioPExclusaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
     begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Application.MessageBox('Exclusão não permitida, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
       Exit;
     end;
 PAuxiliares.Font.Color := clGray;
@@ -612,6 +612,12 @@ end;
 
 procedure TFrmTelaCadOrdemServico.BtnSalvarClick(Sender: TObject);
 begin
+  if (DM.qryUsuarioPAlteracaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 
@@ -1047,7 +1053,7 @@ procedure TFrmTelaCadOrdemServico.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
+//FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
 
 DM.qryPlanoTrabalhoAut.Close;
 DM.qryOrdemServicoServSolic.Close;

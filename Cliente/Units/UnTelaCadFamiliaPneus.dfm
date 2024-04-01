@@ -6,36 +6,40 @@ inherited FrmTelaCadFamiliaPneus: TFrmTelaCadFamiliaPneus
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 502
+      Left = 506
+      ExplicitLeft = 502
     end
     inherited LAlteradoPor: TLabel
-      Left = 524
+      Left = 528
+      ExplicitLeft = 524
     end
     inherited LblDataAlt: TDBText
-      Width = 65
+      Left = 562
       DataSource = DM.dsFamPneus
-      ExplicitWidth = 65
+      ExplicitLeft = 562
     end
     inherited LblDataCad: TDBText
-      Width = 65
+      Left = 434
       DataSource = DM.dsFamPneus
-      ExplicitWidth = 65
+      ExplicitLeft = 434
     end
     inherited LblUsuAlt: TDBText
-      Width = 65
+      Left = 562
       DataSource = DM.dsFamPneus
-      ExplicitWidth = 65
+      ExplicitLeft = 562
     end
     inherited LblUsuCad: TDBText
-      Width = 65
+      Left = 434
       DataSource = DM.dsFamPneus
-      ExplicitWidth = 65
+      ExplicitLeft = 434
     end
     inherited LCadastro: TLabel
-      Left = 396
+      Left = 400
+      ExplicitLeft = 396
     end
     inherited LCadastroPor: TLabel
-      Left = 358
+      Left = 362
+      ExplicitLeft = 358
     end
   end
   inherited PCentro: TPanel

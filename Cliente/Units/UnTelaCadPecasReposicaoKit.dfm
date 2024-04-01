@@ -1,21 +1,42 @@
 inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
   Caption = 'Kit de Pe'#231'as de Reposi'#231#227'o'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 513
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 535
+    end
     inherited LblDataAlt: TDBText
+      Left = 568
       DataSource = DM.dsPecaReposicaoKit
     end
     inherited LblDataCad: TDBText
+      Left = 440
       DataSource = DM.dsPecaReposicaoKit
     end
     inherited LblUsuAlt: TDBText
+      Left = 568
       DataSource = DM.dsPecaReposicaoKit
     end
     inherited LblUsuCad: TDBText
+      Left = 440
       DataSource = DM.dsPecaReposicaoKit
+    end
+    inherited LCadastro: TLabel
+      Left = 407
+    end
+    inherited LCadastroPor: TLabel
+      Left = 369
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 9
       Top = 9
@@ -81,7 +102,7 @@ inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
       Left = 4
       Top = 36
       Width = 616
-      Height = 280
+      Height = 283
       Hint = 
         'Tecle ENTER na(s) coluna(s) para incluir um registro ou efetue o' +
         ' duplo-clique para exclu'#237'-lo'
@@ -189,6 +210,8 @@ inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
     end
   end
   inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
     Panels = <
       item
         Text = ' Usu'#225'rio:'
@@ -205,6 +228,10 @@ inherited FrmTelaCadPecasReposicaoKit: TFrmTelaCadPecasReposicaoKit
         Text = ' Grupo:'
         Width = 190
       end>
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 382

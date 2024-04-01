@@ -55,6 +55,27 @@ end;
 procedure TFrmTelaCadOrdemServicoFechamentoRecursos.FormCreate(Sender: TObject);
 begin
   inherited;
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdEquipe.ReadOnly := True;
+    GrdCadastro.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdEquipe.ReadOnly := True;
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 DM.qryOrdemServicoEquipe.Open;
 DM.qryOrdemServicoEquipeRecursosUtil.Open;
 end;
@@ -87,6 +108,27 @@ PAuxiliares.Caption := EmptyStr;
 
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      GrdEquipe.ReadOnly := True;
+      GrdCadastro.ReadOnly := True;
+      Exit;
+    end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      GrdEquipe.ReadOnly := True;
+      GrdCadastro.ReadOnly := True;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
     DM.FTabela_auxiliar := 460;
 
     Try

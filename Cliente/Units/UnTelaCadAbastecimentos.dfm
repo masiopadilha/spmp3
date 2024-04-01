@@ -1,25 +1,25 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsAbastecimentos
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsAbastecimentos
+      ExplicitLeft = 776
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsAbastecimentos
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsAbastecimentos
+      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -292,7 +292,6 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 194
     ExplicitHeight = 194
     inherited Label2: TLabel
@@ -325,7 +324,6 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Width = 1008
     Height = 196
     ExplicitTop = 349
     ExplicitHeight = 193
@@ -357,17 +355,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       OnKeyDown = FormKeyDown
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
     inherited Button1: TButton
       Hint = 'Abastecimentos'
       DisabledImageIndex = 110

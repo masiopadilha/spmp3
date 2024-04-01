@@ -14,8 +14,6 @@ type
     PBase: TPanel;
     GBTelas: TGroupBox;
     TVTelas: TTreeView;
-    GBPermissoes: TGroupBox;
-    GrdPermissoes: TDBGrid;
     ImageList1: TImageList;
     CDPermissoesUsu: TClientDataSet;
     CDPermissoesUsuMATRICULA: TStringField;
@@ -30,6 +28,10 @@ type
     CDPermissoesUsuNIVELACESSO: TStringField;
     CDPermissoesUsuCODNIVELACESSO: TStringField;
     CDPermissoesUsuCODUSUARIO: TStringField;
+    pBaseDireito: TPanel;
+    rgNivelAcesso: TRadioGroup;
+    GBPermissoes: TGroupBox;
+    GrdPermissoes: TDBGrid;
     PBotes: TPanel;
     btnAtualizar: TButton;
     BtnPadrao: TButton;
@@ -43,6 +45,7 @@ type
     procedure BtnPadraoClick(Sender: TObject);
     procedure TVTelasClick(Sender: TObject);
     procedure GrdPermissoesKeyPress(Sender: TObject; var Key: Char);
+    procedure rgNivelAcessoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +89,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesAcesso.Edit;
                        DM.qryPermissoesAcesso.FieldByName(LTela).AsString := 'S';
                        DM.qryPermissoesAcesso.Post;
+                       DM.qryPermissoesAcesso.Refresh;
                      end;
                  end
                else
@@ -96,6 +100,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesAcesso.Edit;
                        DM.qryPermissoesAcesso.FieldByName(LTela).AsString := 'N';
                        DM.qryPermissoesAcesso.Post;
+                       DM.qryPermissoesAcesso.Refresh;
                      end;
                  end;
                CDPermissoesUsu.Post;
@@ -111,6 +116,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesAlteracao.Edit;
                        DM.qryPermissoesAlteracao.FieldByName(LTela).AsString := 'S';
                        DM.qryPermissoesAlteracao.Post;
+                       DM.qryPermissoesAlteracao.Refresh;
                      end;
                  end
                else
@@ -121,6 +127,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesAlteracao.Edit;
                        DM.qryPermissoesAlteracao.FieldByName(LTela).AsString := 'N';
                        DM.qryPermissoesAlteracao.Post;
+                       DM.qryPermissoesAlteracao.Refresh;
                      end;
                  end;
                CDPermissoesUsu.Post;
@@ -136,6 +143,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesExclusao.Edit;
                        DM.qryPermissoesExclusao.FieldByName(LTela).AsString := 'S';
                        DM.qryPermissoesExclusao.Post;
+                       DM.qryPermissoesExclusao.Refresh;
                      end;
                  end
                else
@@ -146,6 +154,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesExclusao.Edit;
                        DM.qryPermissoesExclusao.FieldByName(LTela).AsString := 'N';
                        DM.qryPermissoesExclusao.Post;
+                       DM.qryPermissoesExclusao.Refresh;
                      end;
                  end;
                CDPermissoesUsu.Post;
@@ -161,6 +170,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesInclusao.Edit;
                        DM.qryPermissoesInclusao.FieldByName(LTela).AsString := 'S';
                        DM.qryPermissoesInclusao.Post;
+                       DM.qryPermissoesInclusao.Refresh;
                      end;
                  end
                else
@@ -171,6 +181,7 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
                        DM.qryPermissoesInclusao.Edit;
                        DM.qryPermissoesInclusao.FieldByName(LTela).AsString := 'N';
                        DM.qryPermissoesInclusao.Post;
+                       DM.qryPermissoesInclusao.Refresh;
                      end;
                  end;
                CDPermissoesUsu.Post;
@@ -198,9 +209,9 @@ begin
 if (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   Exit;
 
-GrdPermissoes.Columns[0].Title.Font.Size := 7; GrdPermissoes.Columns[1].Title.Font.Size := 7; GrdPermissoes.Columns[2].Title.Font.Size := 7;
-GrdPermissoes.Columns[3].Title.Font.Size := 7; GrdPermissoes.Columns[4].Title.Font.Size := 7; GrdPermissoes.Columns[5].Title.Font.Size := 7;
-GrdPermissoes.Columns[6].Title.Font.Size := 7; GrdPermissoes.Columns[7].Title.Font.Size := 7;
+GrdPermissoes.Columns[0].Title.Font.Size := 8; GrdPermissoes.Columns[1].Title.Font.Size := 8; GrdPermissoes.Columns[2].Title.Font.Size := 8;
+GrdPermissoes.Columns[3].Title.Font.Size := 8; GrdPermissoes.Columns[4].Title.Font.Size := 8; GrdPermissoes.Columns[5].Title.Font.Size := 8;
+GrdPermissoes.Columns[6].Title.Font.Size := 8; GrdPermissoes.Columns[7].Title.Font.Size := 8;
 
 GrdPermissoes.Columns[0].Title.Font.Style := []; GrdPermissoes.Columns[1].Title.Font.Style := [fsBold]; GrdPermissoes.Columns[2].Title.Font.Style := [];
 GrdPermissoes.Columns[3].Title.Font.Style := []; GrdPermissoes.Columns[4].Title.Font.Style := []; GrdPermissoes.Columns[5].Title.Font.Style := [];
@@ -224,13 +235,13 @@ if (Column.Field = CDPermissoesUsuPESSOAL) then
   begin
     if (Column.Field.AsString = 'S') then
       begin
-        GrdPermissoes.Canvas.Font.Color := clBlue;
+        GrdPermissoes.Canvas.Font.Color := clRed;
         GrdPermissoes.Canvas.Font.Style :=[fsBold];
       end
     else
     if (Column.Field.AsString = 'N') then
       begin
-        GrdPermissoes.Canvas.Font.Color := clRed;
+        GrdPermissoes.Canvas.Font.Color := clBlue;
         GrdPermissoes.Canvas.Font.Style := [fsbold];
       end;
     GrdPermissoes.Canvas.FillRect(Rect);
@@ -243,13 +254,13 @@ if ((Column.Field = CDPermissoesUsuACESSO) or (Column.Field = CDPermissoesUsuALT
     GrdPermissoes.Canvas.FillRect(Rect);
     GrdPermissoes.DefaultDrawDataCell(Rect, Column.Field, State);
     if (Column.Field.AsString = 'S') {and (CDPermissoesUsuPESSOAL.AsString = 'S')} then
-      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 10, Rect.Top + 1, 0)
+      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 15, Rect.Top + 1, 0)
     else
     if (Column.Field.AsString = 'N') or (Column.Field.AsString = EmptyStr) then
-      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 10, Rect.Top + 1, 1)
+      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 15, Rect.Top + 1, 1)
     else
     if (CDPermissoesUsuPESSOAL.AsString = 'N') then
-      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 10, Rect.Top + 1, 2)
+      ImageList1.Draw(GrdPermissoes.Canvas, Rect.Left + 15, Rect.Top + 1, 2)
   end;
 end;
 
@@ -270,6 +281,37 @@ if (Key = #13) and (GrdPermissoes.SelectedIndex = 1) then
 
       FreeAndNil(FrmTelaAuxiliar);
     End;
+  end;
+end;
+
+procedure TFrmTelaPermissoes.rgNivelAcessoClick(Sender: TObject);
+begin
+  inherited;
+  case rgNivelAcesso.ItemIndex of
+    0:
+      begin
+        CDPermissoesUsu.Filtered := False;
+      end;
+    1:
+      begin
+        CDPermissoesUsu.Filter := 'CODNIVELACESSO = ''CTM-00001''';
+        CDPermissoesUsu.Filtered := True;
+      end;
+    2:
+      begin
+        CDPermissoesUsu.Filter := 'CODNIVELACESSO = ''ECT-00001''';
+        CDPermissoesUsu.Filtered := True;
+      end;
+    3:
+      begin
+        CDPermissoesUsu.Filter := 'CODNIVELACESSO = ''ECT-00002''';
+        CDPermissoesUsu.Filtered := True;
+      end;
+    4:
+      begin
+        CDPermissoesUsu.Filter := 'CODNIVELACESSO = ''STB-00001''';
+        CDPermissoesUsu.Filtered := True;
+      end;
   end;
 end;
 

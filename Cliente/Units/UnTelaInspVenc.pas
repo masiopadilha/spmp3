@@ -221,7 +221,7 @@ case PCInspecoes.ActivePageIndex of
             DM.qryAuxiliar.Close;
             DM.qryAuxiliar.SQL.Clear;
             DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''FECHADA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
+                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
             DM.qryAuxiliar.Execute;
 
             DM.qryManutVencOSVenc.Next;
@@ -376,7 +376,7 @@ case PCInspecoes.ActivePageIndex of
             DM.qryAuxiliar.Close;
             DM.qryAuxiliar.SQL.Clear;
             DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''FECHADA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
+                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
             DM.qryAuxiliar.Execute;
 
             DM.qryLubrificVencOSVenc.Next;
@@ -457,9 +457,9 @@ case PCInspecoes.ActivePageIndex of
             if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
               DM.qryLubrificProgEquipLEITURA.AsInteger := DM.qryLubrificProgEquipLEITURA.AsInteger + DM.qryLubrificProgEquipFREQUENCIA2.AsInteger;
             DM.qryLubrificProgEquip.Post;
-            DM.qryManutVenc.Edit;
-            DM.qryManutVencDTAINICIO1.AsDateTime := DM.qryLubrificProgEquipDTAINICIO1.AsDateTime;
-            DM.qryManutVenc.Post;
+            DM.qryLubrificVenc.Edit;
+            DM.qryLubrificVencDTAINICIO1.AsDateTime := DM.qryLubrificProgEquipDTAINICIO1.AsDateTime;
+            DM.qryLubrificVenc.Post;
           end;
 
           //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
@@ -766,6 +766,7 @@ case PCInspecoes.ActivePageIndex of
       GrdLubrific.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 30;
       GrdLubrific.Columns[1].Title.Alignment := taCenter;
       GrdLubrific.Columns[1].Title.Font.Size := 9;
+      GrdLubrific.Columns[1].Title.Font.Style := [fsbold];
       GrdLubrific.Columns[1].Title.Caption   := 'Freq. (d)';
       GrdLubrific.DataSource.DataSet.FieldByName('FREQUENCIA1').DisplayWidth := 10;
       GrdLubrific.Columns[2].Title.Alignment := taCenter;

@@ -1,12 +1,17 @@
 inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamentoMObra
   Caption = 'Fechamento de M'#227'o de Obra'
   ClientHeight = 374
+  ClientWidth = 508
   Constraints.MaxHeight = 410
   Constraints.MinHeight = 410
   OnCreate = FormCreate
   ExplicitHeight = 410
   TextHeight = 16
+  inherited PTop: TPanel
+    Width = 504
+  end
   inherited PCentro: TPanel
+    Width = 502
     Height = 235
     ExplicitHeight = 232
     inherited RGTelas: TRadioGroup
@@ -51,7 +56,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         DrawingStyle = gdsClassic
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentCtl3D = False
@@ -75,7 +80,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Equipe'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
             Visible = True
@@ -87,7 +92,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Tempo'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
             Width = 53
@@ -109,7 +114,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         DrawingStyle = gdsClassic
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentCtl3D = False
@@ -135,7 +140,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Matr'#237'cula'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
             Visible = True
@@ -147,10 +152,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Nome'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 160
+            Width = 166
             Visible = True
           end
           item
@@ -160,7 +165,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'H Normal'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
             Width = 69
@@ -173,7 +178,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'HE Normal'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
             Width = 71
@@ -186,15 +191,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'HE Feriado'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
             Width = 70
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALARIO'
             Visible = True
           end>
       end
@@ -213,7 +213,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         DrawingStyle = gdsClassic
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentCtl3D = False
@@ -237,7 +237,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Cargo'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
             Width = 98
@@ -250,10 +250,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Homem/Hora'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
-            Width = 84
+            Width = 66
             Visible = True
           end
           item
@@ -263,10 +263,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             Title.Caption = 'Calend'#225'rio'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
-            Title.Font.Height = -12
+            Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 113
+            Width = 118
             Visible = True
           end>
       end
@@ -274,10 +274,12 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   end
   inherited PAuxiliares: TPanel
     Top = 307
+    Width = 504
     ExplicitTop = 304
   end
   inherited PBotoes: TPanel
     Top = 334
+    Width = 504
     ExplicitTop = 331
     inherited BtnOK: TButton
       Left = 100

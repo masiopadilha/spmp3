@@ -71,6 +71,7 @@ begin
     0:DM.qryManutPeriodicasHist.Params[1].AsString := 'ABERTA';
     1:DM.qryManutPeriodicasHist.Params[1].AsString := 'FECHADA';
     2:DM.qryManutPeriodicasHist.Params[1].AsString := 'CANCELADA';
+    3:DM.qryManutPeriodicasHist.Params[1].AsString := 'VENCIDA';
   end;
   DM.qryManutPeriodicasHist.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date);
   DM.qryManutPeriodicasHist.Params[3].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date);
@@ -84,6 +85,7 @@ begin
     0:DM.qryLubrificPeriodicasHist.Params[1].AsString := 'ABERTA';
     1:DM.qryLubrificPeriodicasHist.Params[1].AsString := 'FECHADA';
     2:DM.qryLubrificPeriodicasHist.Params[1].AsString := 'CANCELADA';
+    3:DM.qryLubrificPeriodicasHist.Params[1].AsString := 'VENCIDA';
   end;
   DM.qryLubrificPeriodicasHist.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date);
   DM.qryLubrificPeriodicasHist.Params[3].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date);
@@ -133,7 +135,7 @@ end;
 procedure TFrmTelaInspFechamentoHist.FormCreate(Sender: TObject);
 begin
   inherited;
-EdtData1.Date := DM.FDataHoraServidor;
+EdtData1.Date := IncMonth(DM.FDataHoraServidor, -1);
 EdtData2.Date := DM.FDataHoraServidor;
 end;
 

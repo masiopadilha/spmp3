@@ -48,6 +48,24 @@ end;
 procedure TFrmTelaCadAlertas.FormCreate(Sender: TObject);
 begin
   inherited;
+if (DM.qryUsuarioPInclusaoCADRELATORIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+if (DM.qryUsuarioPAlteracaoCADRELATORIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 DM.FDataSetParam := DM.qryAlertas;
 DM.FDataSourceParam := DM.dsAlertas;
 
