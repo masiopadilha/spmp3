@@ -5728,6 +5728,13 @@ type
     qryManutProgEquipVISIVEL: TStringField;
     qryLubrificProgEquipATIVO: TStringField;
     qryLubrificProgEquipVISIVEL: TStringField;
+    qryOrdemServicoEMAIL: TStringField;
+    qryOrdemServicoGerenciaEMAIL: TStringField;
+    qrySolicitacaoTrabEMAIL: TStringField;
+    qryConfigsemail: TStringField;
+    qryConfigssenhaemail: TStringField;
+    qryConfigsportaemail: TSmallintField;
+    qryConfigssmtp: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5822,7 +5829,8 @@ type
     FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
     FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
     FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
-    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro, FPromptConsulta: String;
+    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro, FPromptConsulta,
+    _EMAIL, _SENHA, _PORTA, _SMTP: String;
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
     FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
     FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
@@ -5841,7 +5849,7 @@ type
     function PasswordInputBox(const ACaption, APrompt:string): string;
     function VerificaPrimeiroAcesso:Boolean;
     function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao, Lubrificacao, Rota, SolicTrab, Matricula,
-                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado: String): Integer;
+                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado, Email: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
@@ -5875,6 +5883,7 @@ type
     procedure SetJPGCompression(ACompression: integer; const AInFile: string; const AOutFile: string);
     procedure RegistrarMovimentacao(Operacao, CodEmpresa, CodUsuario, Modulo, Estacao: String);
     procedure ConsultarAlertas;
+    procedure EnviarEmail(Msg, Destinario, OrdemServico: String);
 
 
   end;
@@ -5894,7 +5903,14 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   UnTelaCadOrdemServicoHistorico, UnTelaCadPneusChassiRelat,
   UnTelaCadPneusChassi, UnTelaGerenciador, UnTelaCadFuncionariosHist,
   UnTelaCadOrdemServicoFechamento, UnTelaCadOrdemServicoGerencia,
-  UnTelaCadRotaProgEquip, UnTelaInspFechamento;
+  UnTelaCadRotaProgEquip, UnTelaInspFechamento,
+  idSMTP,
+  idMessage,
+  idText,
+  idSSLOpenSSL,
+  idAttachmentFile,
+  idExplicitTLSClientServerBase ;
+
 
 {$R *.dfm}
 
@@ -7750,7 +7766,7 @@ end;
 
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
-  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado: String): Integer;
+  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado, Email: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -9119,6 +9135,10 @@ else
   DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
   DM.FVersaoBanco    := DM.qryConfigsversion.AsInteger;
   DM.FAutoUpdate     := DM.qryConfigsautoupdate.AsBoolean;
+  DM._EMAIL          := DM.qryConfigsemail.AsString;
+  DM._SENHA          := DM.qryConfigssenhaemail.AsString;
+  DM._PORTA          := DM.qryConfigsportaemail.AsString;
+  DM._SMTP           := DM.qryConfigssmtp.AsString;
 
 
   DM.GetVersion(Application.ExeName);
@@ -9631,7 +9651,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                               , DM.qryManutProgEquipEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
                 if DM.qryManutProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -9685,7 +9705,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                               , DM.qryLubrificProgEquipEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
 
                 if DM.qryLubrificProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -10160,7 +10180,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -10205,7 +10225,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -10250,7 +10270,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -10295,6 +10315,100 @@ begin
   DM.qryEquipamentosConf.Close;
   DM.qryEquipamentosConfOS.Close;
   DM.qryEquipamentosConfOSServ.Close;
+end;
+
+
+procedure TDM.EnviarEmail(Msg, Destinario, OrdemServico: String);
+const
+  _SOLICITADA = 'Olá, '
+                +#13+#13+'Gostaríamos de informar que recebemos a sua solicitação de serviço e em breve estaremos iniciando a análise.'
+                +#13+#13+'Pedimos que aguarde novas atualizações que serão enviadas em breve. Se surgirem dúvidas ou se precisar de mais detalhes, por favor, entre em contato com a equipe de manutenção.'
+                +#13+#13+'Agradecemos pela sua paciência e compreensão durante este processo.';
+var
+  LSMTP: TIdSMTP ;
+  LMessage: TIdMessage ;
+  LSocketSSL: TIdSSLIOHandlerSocketOpenSSL ;
+  LArquivoAnexo: String ;
+
+  LTextPart: TIdText;
+begin
+  LSMTP := TIdSMTP.Create( nil ) ;
+  LMessage := TIdMessage.Create( nil ) ;
+  LSocketSSL := TIdSSLIOHandlerSocketOpenSSL.Create( nil ) ;
+
+  // segurança
+  with LSocketSSL do
+  Begin
+    with SSLOptions do
+    BEgin
+      Mode := sslmClient ;
+      Method := sslvTLSv1_2 ;
+    End ;
+
+    Host := DM.qryConfigssmtp.AsString; // mail.spmp.maceio.br
+    Port := DM.qryConfigsportaemail.AsInteger; // 465
+  End ;
+
+  // SMTP
+  with LSMTP do
+  Begin
+    IOHandler := LSocketSSL ;
+    HOST := DM.qryConfigssmtp.AsString;
+    PORT := DM.qryConfigsportaemail.AsInteger;
+    AuthType := satDefault ;
+    UserName := DM.qryConfigsemail.AsString;
+    Password := DM.qryConfigssenhaemail.AsString;
+    UseTLS := utUseExplicitTLS ;
+  End ;
+
+  // Menssagem
+  with LMessage do
+  Begin
+    From.Address := DM.qryConfigsemail.AsString ;
+    From.Name := 'SPMP - FARMACE';
+    Recipients.Add ;
+    Recipients.Items[0].Address := Destinario;
+    if Msg = 'SOLICITAÇÃO CRIADA' then
+    begin
+      Subject := 'SOLICITAÇÃO REALIZADA';
+//      Body.Add(_SOLICITADA) ;
+    end;
+  End;
+
+// here we have initiated TIdtext object for plain text message in body//
+  lTextPart := TIdText.Create(lMessage.MessageParts);
+  lTextPart.ContentType := 'text/plain';
+
+// here we have initiated another TIdtext object for HTML text message in body//
+  lTextPart := TIdText.Create(lMessage.MessageParts);
+  lTextPart.ContentType := 'text/html';
+//  lTextPart.Body.Text := '<html><body><b>'+_SOLICITADA+'</b><img src="c:\spmp3\sam.jpg" ></body></html>';
+    if Msg = 'SOLICITAÇÃO CRIADA' then
+    begin
+      lTextPart.Body.Text := '<h3 style="color: #5e9ca0; text-align: center;"><span style="color: #008080;">SPMP - Sistema do Plano de Manuten&ccedil;&atilde;o Programada</span></h3>'
+                          + '<p><strong>Ol&aacute;,</strong></p>'
+                          + '<p><strong>Gostar&iacute;amos de informar que recebemos a sua solicita&ccedil;&atilde;o de servi&ccedil;o número: '+OrdemServico+', em breve estaremos iniciando a an&aacute;lise.</strong></p>'
+                          + '<p><strong>Pedimos que aguarde novas atualiza&ccedil;&otilde;es que ser&atilde;o enviadas em breve. Se surgirem d&uacute;vidas ou se precisar de mais detalhes, por favor, entre em contato com a equipe de manuten&ccedil;&atilde;o.</strong></p>'
+                          + '<p><strong>Agradecemos pela sua paci&ecirc;ncia e compreens&atilde;o durante este processo.</strong></p>'
+                          + '<p>&nbsp;</p>'
+                          + '<p><strong><img src="https://static.wixstatic.com/media/72e108_2b8e56da75744b8db620f790a9db3b82~mv2.png/v1/fill/w_141,h_53,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SAM_doc.png" alt="" /></strong></p>';
+    end;
+
+//  // Arquivos em anexo
+//  LArquivoAnexo := Trim( edtArquivoAnexo.Text ) ;
+//  if LArquivoAnexo <> EmptyStr then
+//    TIdAttachmentFile.Create( LMessage.MessageParts, LArquivoAnexo ) ;
+
+  Try
+    LSMTP.Connect ;
+    LSMTP.Send( LMessage ) ;
+
+    Application.MessageBox(PWideChar('Confirmação da solicitação enviada para o email: ' + Destinario), 'SPMP3', MB_OK + MB_ICONINFORMATION);
+  Except
+    ON E: Exception do
+      Showmessage( 'Ocorreu um erro ao enviar o email da solicitação. Mensagem de erro: ' +e.Message ) ;
+  End;
+
 end;
 
 end.

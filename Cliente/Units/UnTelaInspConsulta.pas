@@ -459,7 +459,7 @@ begin
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString
-                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString);
+                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr);
                 DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 DM.qryManutCons.Edit;
@@ -714,7 +714,7 @@ begin
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr);
 
                 DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
 
@@ -959,7 +959,7 @@ begin
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
                                                               , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
                 DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 if DM.qryRotaConsSeqManutPecas.IsEmpty = False then

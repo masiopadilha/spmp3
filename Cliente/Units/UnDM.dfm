@@ -33717,6 +33717,7 @@ object DM: TDM
       '    , `ordemservico`.`TEMPOEXECUTADO`'
       '    , `ordemservico`.`SITUACAO`'
       '    , `ordemservico`.`SOLICTRAB`'
+      '    , `ordemservico`.`EMAIL`'
       '    , `ordemservico`.`ROTAEQUIP`'
       '    , `ordemservico`.`CODMANUTPROGEQUIP`'
       '    , `ordemservico`.`CODLUBRIFICPROGEQUIP`'
@@ -33918,6 +33919,13 @@ object DM: TDM
       Origin = 'SOLICTRAB'
       ProviderFlags = []
       Size = 1
+    end
+    object qryOrdemServicoGerenciaEMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      Visible = False
+      Size = 80
     end
     object qryOrdemServicoGerenciaMATRICULA: TStringField
       AutoGenerateValue = arDefault
@@ -34592,6 +34600,7 @@ object DM: TDM
       '    , `ordemservico`.`RESPONSAVEL`'
       '    , `ordemservico`.`EXECAUTONOMO`'
       '    , `ordemservico`.`SOLICTRAB`'
+      '    , `ordemservico`.`EMAIL`'
       '    , `ordemservico`.`PROGMANUAL`'
       '    , `ordemservico`.`IMPORTANCIA`'
       '    , `ordemservico`.`SITUACAO`'
@@ -34918,6 +34927,12 @@ object DM: TDM
       Origin = 'SOLICTRAB'
       ProviderFlags = [pfInUpdate]
       Size = 1
+    end
+    object qryOrdemServicoEMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      Size = 80
     end
     object qryOrdemServicoPROGMANUAL: TStringField
       AutoGenerateValue = arDefault
@@ -41598,6 +41613,7 @@ object DM: TDM
       '    , `equipamentos`.`DESCRICAO`EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
       '    , `funcionarios`.`NOME`SOLICITANTE'
+      '    , `funcionarios`.`EMAIL`'
       '    , `ordemservico`.`SITUACAO`'
       '    , `oficinas`.`DESCRICAO` AS OFICINA'
       '    , `usuario`.`NOME`USUARIOCAD'
@@ -41788,6 +41804,13 @@ object DM: TDM
       Origin = 'NOME'
       ProviderFlags = []
       Size = 200
+    end
+    object qrySolicitacaoTrabEMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      ProviderFlags = []
+      Size = 80
     end
     object qrySolicitacaoTrabSITUACAO_1: TStringField
       AutoGenerateValue = arDefault
@@ -47850,16 +47873,7 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `id`'
-      '    , `tempoconsos`'
-      '    , `temposenhausu`'
-      '    , `qtdeminsenha`'
-      '    , `qtdelogintent`'
-      '    , `tempomaxocioso`'
-      '    , `dataultalt`'
-      '    , `codusuarioalt`'
-      '    , `version`'
-      '    , `autoupdate`'
+      '*'
       'FROM'
       '    `configs`')
     Left = 453
@@ -47919,6 +47933,29 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'autoupdate'
       Origin = 'autoupdate'
+    end
+    object qryConfigsemail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 80
+    end
+    object qryConfigssenhaemail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'senhaemail'
+      Origin = 'senhaemail'
+      Size = 30
+    end
+    object qryConfigsportaemail: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'portaemail'
+      Origin = 'portaemail'
+    end
+    object qryConfigssmtp: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'smtp'
+      Origin = 'smtp'
+      Size = 80
     end
   end
   object dsConfigs: TDataSource

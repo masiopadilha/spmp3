@@ -333,9 +333,9 @@ begin
       30, 300, 301://Funcionários
         begin
           if FrmTelaCadMonitMedicoes = nil then
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
           else
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
         end;
       31://Equipamentos Primários
         begin
@@ -868,6 +868,8 @@ begin
           DM.qryAuxiliar.Fields[1].DisplayWidth := 25;
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
           DM.qryAuxiliar.Fields[2].DisplayWidth := 20;
+          DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
+          DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
         end;
       32, 33, 321, 331://Manutenção/Lubrificação Programada do Equipamento
         begin
@@ -968,6 +970,8 @@ begin
             GrdAuxiliar.Columns[1].Title.Font.Style := [fsBold];
           DM.qryAuxiliar.Fields[2].DisplayWidth := 25;
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
+          DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
+          DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
         end;
       301://Funcionários Programados
         begin
@@ -1008,8 +1012,8 @@ begin
           DM.qryAuxiliar.Fields[4].DisplayWidth := 15;
           DM.qryAuxiliar.Fields[5].DisplayLabel := 'Equipamento';
           DM.qryAuxiliar.Fields[5].DisplayWidth := 30;
-  //        if  DM.FTabela_auxiliar = 40 then
-  //          DM.qryAuxiliar.Fields[6].Visible := False;
+          if  DM.FTabela_auxiliar = 40 then
+            DM.qryAuxiliar.Fields[6].Visible := False;
         end;
       41,410:
         begin
@@ -1447,7 +1451,7 @@ begin
   if EdtConsulta.Focused = True then Exit;
 
   case DM.FTabela_auxiliar of
-    28, 31, 87, 100, 110, 120, 130, 150, 160, 170, 200, 210, 220, 230, 240, 300, 301, 320, 330, 370, 380, 400, 420, 430, 440, 450, 460, 470, 490, 500, 5000, 600, 700, 800, 900, 6400, 7000, 7900, 8000, 8301, 8100, 9000, 9500://Combos e outras consultas
+    28, 31, 87, 100, 110, 120, 130, 150, 160, 170, 200, 210, 220, 230, 240, 320, 330, 370, 380, 400, 420, 430, 440, 450, 460, 470, 490, 500, 5000, 600, 700, 800, 900, 6400, 7000, 7900, 8000, 8301, 8100, 9000, 9500://Combos e outras consultas
       begin
         DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
@@ -1794,6 +1798,12 @@ begin
             Open;
             Edit;
           end;
+      end;
+    300, 301: //Funcionários
+      begin
+        DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
+        DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
+        DM.FParamAuxiliar[4] := DM.DSAuxiliar.DataSet.Fields[3].AsString;
       end;
     32://Manutenção Programada de Equipamento
       begin

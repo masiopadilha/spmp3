@@ -231,7 +231,7 @@ case PCInspecoes.ActivePageIndex of
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                             , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
           if DM.qryManutProgEquip.IsEmpty = False then
             DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -386,7 +386,7 @@ case PCInspecoes.ActivePageIndex of
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                             , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
+                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
 
           if DM.qryLubrificProgEquip.IsEmpty = False then
             DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -508,7 +508,7 @@ case PCInspecoes.ActivePageIndex of
           DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                             , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
           if DM.qryRotaEquipVenc.IsEmpty = False then
             DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaEquipVencCODIGO.AsString, DM.FCodOrdemServico);

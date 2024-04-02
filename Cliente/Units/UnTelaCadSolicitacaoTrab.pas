@@ -9,7 +9,7 @@ uses
   JvToolEdit, JvMaskEdit, JvDBControls, VclTee.TeeGDIPlus, VCLTee.TeEngine,
   VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, System.DateUtils, Data.DB,
   System.Actions, Vcl.ActnList, Vcl.ExtActns, Datasnap.DBClient, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons;
+  Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, System.RegularExpressions;
 
 type
   TFrmTelaCadSolicitacaoTrab = class(TFrmTelaPaiCadastros)
@@ -359,56 +359,82 @@ DM.FTabela_auxiliar := 40;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnSalvarClick(Sender: TObject);
+const
+  EmailRegexPattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+var
+  LEmail: String;
 begin
-if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-if DM.FDataSetParam.IsEmpty = True then Exit;
+  if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+  if DM.FDataSetParam.IsEmpty = True then Exit;
 
-if (DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA') then Exit;
+  if (DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA') then Exit;
 
-if DM.qrySolicitacaoTrabSOLICITANTE.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DO SERVIÇO!'; EdtDescSolicitante.SetFocus; Exit;
-  end;
-if DM.qrySolicitacaoTrabCODEQUIPAMENTO.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O EQUIPAMENTO DO SERVIÇO!'; EdtDescEquipamento.SetFocus; Exit;
-  end;
-if DM.qrySolicitacaoTrabDESCSERVICO.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO SERVIÇO!'; EdtServico.SetFocus; Exit;
-  end;
-if DM.qrySolicitacaoTrabPRIORIDADEPARADA.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DO SERVIÇO!'; CBPrioridade.SetFocus; Exit;
-  end;
-if DM.qrySolicitacaoTrabCODOFICINA.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO SERVIÇO!'; EdtOficina.SetFocus; Exit;
-  end;
+  if DM.qrySolicitacaoTrabSOLICITANTE.IsNull = True then
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DO SERVIÇO!'; EdtDescSolicitante.SetFocus; Exit;
+    end;
+  if DM.qrySolicitacaoTrabCODEQUIPAMENTO.IsNull = True then
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O EQUIPAMENTO DO SERVIÇO!'; EdtDescEquipamento.SetFocus; Exit;
+    end;
+  if DM.qrySolicitacaoTrabDESCSERVICO.IsNull = True then
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO SERVIÇO!'; EdtServico.SetFocus; Exit;
+    end;
+  if DM.qrySolicitacaoTrabPRIORIDADEPARADA.IsNull = True then
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DO SERVIÇO!'; CBPrioridade.SetFocus; Exit;
+    end;
+  if DM.qrySolicitacaoTrabCODOFICINA.IsNull = True then
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO SERVIÇO!'; EdtOficina.SetFocus; Exit;
+    end;
 
 
-DM.MSGAguarde('');
+  DM.MSGAguarde('');
 
-if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
-  begin
-    DM.qrySolicitacaoTrabSITUACAO_1.AsString       := 'SOLICITADA';
+  if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
+    begin
+      if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
+      begin
+        if Application.MessageBox('Deseja cadastrar um endereço de e-mail para receber atualizações sobre a sua solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+        begin
+          LEmail := DM.CampoInputBox('SPMP', 'Informe a chave fornecida pela SAM:');
+          if LEmail <> '' then
+            if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+              LEmail := '';
+        end;
+      end else
+      begin
+        LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
+        if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+          LEmail := '';
+      end;
 
-    DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
-                                                                            , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
-                                                                            , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento'
-                                                                            , DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString
-                                                                            , DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString
-                                                                            , EmptyStr, EmptyStr);
-    PSituacao.Caption := 'SOLICITADA';
-    PSituacao.Color := clWhite;
-    PSituacao.Font.Color := clBlack;
-  end;
+      DM.qrySolicitacaoTrabSITUACAO_1.AsString       := 'SOLICITADA';
 
-  inherited;
-DM.qrySolicitacaoTrab.Params[0].AsInteger := DM.qrySolicitacaoTrabCODIGO.AsInteger;
-DM.qrySolicitacaoTrab.Params[1].AsString  := DM.FCodEmpresa;
+      DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qrySolicitacaoTrabDESCSERVICO.AsString
+                                                                              , DM.qrySolicitacaoTrabCODEQUIPAMENTO.AsString, EmptyStr, EmptyStr, EmptyStr, 'S'
+                                                                              , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento'
+                                                                              , DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString
+                                                                              , DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString
+                                                                              , EmptyStr, EmptyStr, LEmail);
+      if LEmail <> '' then
+      begin
+        //EnviarEmail('SOLICITAÇÃO CRIADA');
+        DM.EnviarEmail('SOLICITAÇÃO CRIADA', LEmail, Format('%.*d', [6, DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger]));
+      end;
 
-DM.MSGAguarde('', False);
+      PSituacao.Caption := 'SOLICITADA';
+      PSituacao.Color := clWhite;
+      PSituacao.Font.Color := clBlack;
+    end;
+
+    inherited;
+  DM.qrySolicitacaoTrab.Params[0].AsInteger := DM.qrySolicitacaoTrabCODIGO.AsInteger;
+  DM.qrySolicitacaoTrab.Params[1].AsString  := DM.FCodEmpresa;
+
+  DM.MSGAguarde('', False);
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnSolicitanteClick(Sender: TObject);
@@ -426,6 +452,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
       begin
         DM.qrySolicitacaoTrabCODSOLICITANTE.AsString := DM.FCodCombo;
         DM.qrySolicitacaoTrabSOLICITANTE.AsString    := DM.FValorCombo;
+        DM.qrySolicitacaoTrabEMAIL.AsString          := DM.FParamAuxiliar[4];
       end;
   end
 else

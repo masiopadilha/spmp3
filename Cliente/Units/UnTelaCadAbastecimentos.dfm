@@ -4,19 +4,15 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   inherited PControle: TPanel
     inherited LblDataCad: TDBText
       DataSource = DM.dsAbastecimentos
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsAbastecimentos
-      ExplicitLeft = 776
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsAbastecimentos
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsAbastecimentos
-      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
@@ -324,7 +320,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Height = 196
+    Height = 193
     ExplicitTop = 349
     ExplicitHeight = 193
     inherited Label3: TLabel

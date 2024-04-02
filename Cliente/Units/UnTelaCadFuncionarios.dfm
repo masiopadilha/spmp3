@@ -1,5 +1,7 @@
 inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   Caption = 'Funcion'#225'rios'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   object ImgFotoFunc: TImage [0]
     Left = 769
@@ -15,6 +17,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     Stretch = True
   end
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 467
     end
@@ -23,11 +26,9 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsFuncionarios
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsFuncionarios
-      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       ExplicitLeft = 626
@@ -37,11 +38,9 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsFuncionarios
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsFuncionarios
-      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
@@ -429,6 +428,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
   end
   inherited PDiversos: TPanel
+    Width = 1008
+    Height = 200
     object Label12: TLabel
       Left = 335
       Top = 34
@@ -752,7 +753,17 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       OnExit = TabNextTab1AfterTabChange
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Caixa de Ferramentas e Ferramentaria'
       DisabledImageIndex = 38
