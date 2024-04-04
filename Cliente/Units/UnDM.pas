@@ -5735,6 +5735,7 @@ type
     qryConfigssenhaemail: TStringField;
     qryConfigsportaemail: TSmallintField;
     qryConfigssmtp: TStringField;
+    qryGerarOSEMAIL: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -7786,7 +7787,8 @@ if Observacoes  <> EmptyStr          then qryGerarOSOBSERVACOES.AsString        
 if tempototal   <> EmptyStr          then qryGerarOSTEMPOPREVISTO.AsFloat         := StrToFloat(tempototal);
 if Oficina      <> EmptyStr          then qryGerarOSCODOFICINA.AsString           := Oficina;
 if TipoManutencao <> EmptyStr        then qryGerarOSCODMANUTENCAO.AsString        := TipoManutencao;
-if EquipParado <> EmptyStr           then qryGerarOSEQUIPPARADO.AsString          := EquipParado;
+if EquipParado  <> EmptyStr          then qryGerarOSEQUIPPARADO.AsString          := EquipParado;
+if Email        <> EmptyStr          then qryGerarOSEMAIL.AsString                := Email;
 qryGerarOSCODEMPRESA.AsString        := CodEmpresa;
 qryGerarOSDESCRICAO.AsString         := Descricao;
 qryGerarOSATIVO.AsString             := 'S';
@@ -10368,31 +10370,38 @@ begin
     From.Name := 'SPMP - FARMACE';
     Recipients.Add ;
     Recipients.Items[0].Address := Destinario;
-    if Msg = 'SOLICITAÇÃO CRIADA' then
-    begin
-      Subject := 'SOLICITAÇÃO REALIZADA';
-//      Body.Add(_SOLICITADA) ;
-    end;
+    Subject := Msg;
+//  Body.Add(_SOLICITADA) ;
   End;
 
-// here we have initiated TIdtext object for plain text message in body//
+  // here we have initiated TIdtext object for plain text message in body//
   lTextPart := TIdText.Create(lMessage.MessageParts);
   lTextPart.ContentType := 'text/plain';
 
-// here we have initiated another TIdtext object for HTML text message in body//
+  // here we have initiated another TIdtext object for HTML text message in body//
   lTextPart := TIdText.Create(lMessage.MessageParts);
   lTextPart.ContentType := 'text/html';
-//  lTextPart.Body.Text := '<html><body><b>'+_SOLICITADA+'</b><img src="c:\spmp3\sam.jpg" ></body></html>';
-    if Msg = 'SOLICITAÇÃO CRIADA' then
-    begin
-      lTextPart.Body.Text := '<h3 style="color: #5e9ca0; text-align: center;"><span style="color: #008080;">SPMP - Sistema do Plano de Manuten&ccedil;&atilde;o Programada</span></h3>'
-                          + '<p><strong>Ol&aacute;,</strong></p>'
-                          + '<p><strong>Gostar&iacute;amos de informar que recebemos a sua solicita&ccedil;&atilde;o de servi&ccedil;o número: '+OrdemServico+', em breve estaremos iniciando a an&aacute;lise.</strong></p>'
-                          + '<p><strong>Pedimos que aguarde novas atualiza&ccedil;&otilde;es que ser&atilde;o enviadas em breve. Se surgirem d&uacute;vidas ou se precisar de mais detalhes, por favor, entre em contato com a equipe de manuten&ccedil;&atilde;o.</strong></p>'
-                          + '<p><strong>Agradecemos pela sua paci&ecirc;ncia e compreens&atilde;o durante este processo.</strong></p>'
-                          + '<p>&nbsp;</p>'
-                          + '<p><strong><img src="https://static.wixstatic.com/media/72e108_2b8e56da75744b8db620f790a9db3b82~mv2.png/v1/fill/w_141,h_53,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SAM_doc.png" alt="" /></strong></p>';
-    end;
+  //  lTextPart.Body.Text := '<html><body><b>'+_SOLICITADA+'</b><img src="c:\spmp3\sam.jpg" ></body></html>';
+  if Msg = 'SOLICITAÇÃO CRIADA' then
+  begin
+    lTextPart.Body.Text := '<h3 style="color: #5e9ca0; text-align: center;"><span style="color: #008080;">SPMP - Sistema do Plano de Manuten&ccedil;&atilde;o Programada</span></h3>'
+                        + '<p><strong>Ol&aacute;,</strong></p>'
+                        + '<p><strong>Gostar&iacute;amos de informar que recebemos a sua solicita&ccedil;&atilde;o de servi&ccedil;o número: '+OrdemServico+', em breve estaremos iniciando a an&aacute;lise.</strong></p>'
+                        + '<p><strong>Pedimos que aguarde novas atualiza&ccedil;&otilde;es que ser&atilde;o enviadas em breve. Se surgirem d&uacute;vidas ou se precisar de mais detalhes, por favor, entre em contato com a equipe de manuten&ccedil;&atilde;o.</strong></p>'
+                        + '<p><strong>Agradecemos pela sua paci&ecirc;ncia e compreens&atilde;o durante este processo.</strong></p>'
+                        + '<p>&nbsp;</p>'
+                        + '<p><strong><img src="https://static.wixstatic.com/media/72e108_2b8e56da75744b8db620f790a9db3b82~mv2.png/v1/fill/w_141,h_53,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SAM_doc.png" alt="" /></strong></p>';
+  end else
+  if Msg = 'SOLICITAÇÃO CONCLUÍDA' then
+  begin
+    lTextPart.Body.Text := '<h3 style="color: #5e9ca0; text-align: center;"><span style="color: #008080;">SPMP - Sistema do Plano de Manuten&ccedil;&atilde;o Programada</span></h3>'
+                        + '<p><strong>Ol&aacute;,</strong></p>'
+                        + '<p><strong>Estamos muito felizes em informar que o servi&ccedil;o que voc&ecirc; solicitou, n&uacute;mero: '+OrdemServico+', foi conclu&iacute;do com sucesso pela nossa equipe de manuten&ccedil;&atilde;o.</strong></p>'
+                        + '<p><strong>Se precisar de mais alguma coisa ou tiver alguma outra solicita&ccedil;&atilde;o, por favor, n&atilde;o hesite em entrar em contato. Estamos sempre aqui para ajudar!</strong></p>'
+                        + '<p><strong>Agradecemos pela sua paci&ecirc;ncia e compreens&atilde;o durante este processo.</strong></p>'
+                        + '<p>&nbsp;</p>'
+                        + '<p><strong><img src="https://static.wixstatic.com/media/72e108_2b8e56da75744b8db620f790a9db3b82~mv2.png/v1/fill/w_141,h_53,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SAM_doc.png" alt="" /></strong></p>';
+  end;
 
 //  // Arquivos em anexo
 //  LArquivoAnexo := Trim( edtArquivoAnexo.Text ) ;
@@ -10403,10 +10412,13 @@ begin
     LSMTP.Connect ;
     LSMTP.Send( LMessage ) ;
 
-    Application.MessageBox(PWideChar('Confirmação da solicitação enviada para o email: ' + Destinario), 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    if Msg = 'SOLICITAÇÃO CRIADA' then
+      Application.MessageBox(PWideChar('Confirmação da solicitação enviada para o email: ' + Destinario), 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    if Msg = 'SOLICITAÇÃO CONCLUÍDA' then
+      Application.MessageBox(PWideChar('Email enviado para: ' + Destinario + ' com sucesso!'), 'SPMP3', MB_OK + MB_ICONINFORMATION);
   Except
     ON E: Exception do
-      Showmessage( 'Ocorreu um erro ao enviar o email da solicitação. Mensagem de erro: ' +e.Message ) ;
+      Showmessage( 'Ocorreu um erro ao enviar o email para o funcionário. Mensagem de erro: ' +e.Message ) ;
   End;
 
 end;

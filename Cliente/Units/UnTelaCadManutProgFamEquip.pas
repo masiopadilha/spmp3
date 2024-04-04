@@ -130,10 +130,10 @@ begin
   if DM.qryManutProgFamEquip.IsEmpty = True then
   begin
     DM.qryManutProgFamEquipPlanoTrab.Close;
-    DM.qryManutProgFamEquipPartes.Close;
     DM.qryManutProgFamEquipItens.Close;
     DM.qryManutProgFamEquipItensTodos.Close;
     DM.qryManutProgEquipItens.Close;
+    DM.qryManutProgFamEquipPartes.Close;
   end;
 end;
 

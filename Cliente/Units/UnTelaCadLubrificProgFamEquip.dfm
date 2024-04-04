@@ -4,40 +4,40 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 750
+      Left = 758
       ExplicitLeft = 742
     end
     inherited LCadastroPor: TLabel
-      Left = 706
+      Left = 714
       ExplicitLeft = 698
     end
     inherited LblDataCad: TDBText
-      Left = 788
+      Left = 796
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 784
+      ExplicitLeft = 792
     end
     inherited LblUsuCad: TDBText
-      Left = 788
+      Left = 796
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 784
+      ExplicitLeft = 792
     end
     inherited LAlteracao: TLabel
-      Left = 901
+      Left = 909
       ExplicitLeft = 893
     end
     inherited LAlteradoPor: TLabel
-      Left = 875
+      Left = 883
       ExplicitLeft = 867
     end
     inherited LblDataAlt: TDBText
-      Left = 939
+      Left = 947
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 935
+      ExplicitLeft = 943
     end
     inherited LblUsuAlt: TDBText
-      Left = 939
+      Left = 947
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 935
+      ExplicitLeft = 943
     end
   end
   inherited PIdentificacao: TPanel
@@ -248,6 +248,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsLubrificProgFamEquip

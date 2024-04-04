@@ -49,8 +49,8 @@ type
     EdtDescResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label12: TLabel;
-    ChbAtivoNF: TDBCheckBox;
     Label22: TLabel;
+    DBCheckBox1: TDBCheckBox;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -121,9 +121,9 @@ begin
   inherited;
 if DM.qryLubrificProgEquip.IsEmpty = True then
   begin
-    DM.qryLubrificProgEquipPartes.Close;
-    DM.qryLubrificProgEquipItens.Close;
     DM.qryLubrificProgEquipItensEsp.Close;
+    DM.qryLubrificProgEquipItens.Close;
+    DM.qryLubrificProgEquipPartes.Close;
   end;
 end;
 procedure TFrmTelaCadLubrificProgEquip.BtnFamiliaClick(Sender: TObject);

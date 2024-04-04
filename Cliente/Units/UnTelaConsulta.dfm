@@ -30,8 +30,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 971
-      ExplicitLeft = 971
+      Left = 979
+      ExplicitLeft = 975
     end
   end
   inherited PCentro: TPanel
@@ -97,7 +97,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       DataSource = DM.dsAuxiliar
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]

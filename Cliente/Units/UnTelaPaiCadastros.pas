@@ -405,7 +405,7 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
           if DM.FDataSetParam.IsEmpty = False then
             begin
               DM.FDataSetParam.Delete;
-              DM.FDataSetParam.Close;
+//              DM.FDataSetParam.Close;
               PAuxiliares.Font.Color := clRed;
               PAuxiliares.Caption := 'REGISTRO EXCLUÍDO COM SUCESSO!!!';
               ControleBotoes(0);

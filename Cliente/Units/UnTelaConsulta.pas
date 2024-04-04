@@ -874,7 +874,7 @@ begin
       32, 33, 321, 331://Manutenção/Lubrificação Programada do Equipamento
         begin
           DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayLabel              := 'Descrição';
-          DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayWidth              := 35;
+          DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayWidth              := 50;
 
           DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayLabel             := 'Programada';
           DM.qryAuxiliar.FieldByName('DTAINICIO1').Alignment                := taCenter;
@@ -892,11 +892,11 @@ begin
           if (DM.FTabela_auxiliar = 32) or (DM.FTabela_auxiliar = 321) then
           begin
             DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayLabel  := 'Família da Manutenção';
-            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 38;
+            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 45;
           end else
           begin
             DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayLabel  := 'Família da Lubrificação';
-            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 38;
+            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 45;
           end;
 
           DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayLabel            := 'Responsável';

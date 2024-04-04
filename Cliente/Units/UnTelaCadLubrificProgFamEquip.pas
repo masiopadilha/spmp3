@@ -127,10 +127,10 @@ begin
   if DM.qryLubrificProgFamEquip.IsEmpty = True then
   begin
     DM.qryLubrificProgFamEquipPlanoTrab.Close;
-    DM.qryLubrificProgFamEquipPartes.Close;
     DM.qryLubrificProgFamEquipItens.Close;
     DM.qryLubrificProgFamEquipItensTodos.Close;
     DM.qryLubrificProgEquipItens.Close;
+    DM.qryLubrificProgFamEquipPartes.Close;
   end;
 end;
 

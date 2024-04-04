@@ -3,40 +3,40 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 746
+      Left = 754
       ExplicitLeft = 730
     end
     inherited LCadastroPor: TLabel
-      Left = 702
+      Left = 710
       ExplicitLeft = 686
     end
     inherited LblDataCad: TDBText
-      Left = 784
+      Left = 792
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 780
+      ExplicitLeft = 788
     end
     inherited LblUsuCad: TDBText
-      Left = 784
+      Left = 792
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 780
+      ExplicitLeft = 788
     end
     inherited LAlteracao: TLabel
-      Left = 897
+      Left = 905
       ExplicitLeft = 881
     end
     inherited LAlteradoPor: TLabel
-      Left = 871
+      Left = 879
       ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
-      Left = 935
+      Left = 943
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 931
+      ExplicitLeft = 939
     end
     inherited LblUsuAlt: TDBText
-      Left = 935
+      Left = 943
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 931
+      ExplicitLeft = 939
     end
   end
   inherited PIdentificacao: TPanel
@@ -157,6 +157,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsManutProgFamEquip

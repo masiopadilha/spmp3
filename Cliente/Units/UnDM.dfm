@@ -4777,7 +4777,8 @@ object DM: TDM
       '    , `CODUSUARIOALT`'
       '    , `OBSERVACOES`'
       '    , `CODOFICINA` '
-      '    , `CODMANUTENCAO` '
+      '    , `CODMANUTENCAO`'
+      '    , `EMAIL`'
       ''
       ''
       'FROM'
@@ -5049,6 +5050,12 @@ object DM: TDM
       FieldName = 'CODMANUTENCAO'
       Origin = 'CODMANUTENCAO'
       Size = 9
+    end
+    object qryGerarOSEMAIL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      Size = 80
     end
   end
   object qryImagens: TFDQuery

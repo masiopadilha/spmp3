@@ -397,9 +397,9 @@ begin
     begin
       if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
       begin
-        if Application.MessageBox('Deseja cadastrar um endereço de e-mail para receber atualizações sobre a sua solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+        if Application.MessageBox('Deseja informar um endereço de e-mail para receber atualizações sobre a sua solicitação?', 'SPMP3', MB_YESNO) = IDYes then
         begin
-          LEmail := DM.CampoInputBox('SPMP', 'Informe a chave fornecida pela SAM:');
+          LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
           if LEmail <> '' then
             if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
               LEmail := '';

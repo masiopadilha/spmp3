@@ -132,9 +132,9 @@ begin
   inherited;
 if DM.qryManutProgEquip.IsEmpty = True then
   begin
-   DM.qryManutProgEquipPartes.Close;
-   DM.qryManutProgEquipItens.Close;
    DM.qryManutProgEquipItensEsp.Close;
+   DM.qryManutProgEquipItens.Close;
+   DM.qryManutProgEquipPartes.Close;
   end;
 end;
 

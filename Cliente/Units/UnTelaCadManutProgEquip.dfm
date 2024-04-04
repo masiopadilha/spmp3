@@ -20,7 +20,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       Margins.Left = 4
@@ -28,7 +27,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -48,7 +46,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       Margins.Left = 4
@@ -56,7 +53,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsManutProgEquip
-      ExplicitLeft = 927
     end
     inherited BtnNovo: TButton
       Margins.Left = 4
@@ -231,6 +227,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsManutProgEquip
