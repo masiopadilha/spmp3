@@ -66,41 +66,41 @@ var
   LSenhaAtual, LNovaSenha, LNovaSenhaConfirmacao: String;
   Mensagem: PChar;
 begin
-if DM.FDatabase  = '' then
+  if DM.FDatabase  = '' then
   begin
     Mensagem := PChar('Não foi possível a conexão com o banco de dados!');
     Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONERROR);
     Exit;
   end;
 
-if EdtLogin.Text = EmptyStr then
+  if EdtLogin.Text = EmptyStr then
   begin
     EdtLogin.SetFocus;
     DM.MSGAguarde('', False);
     Exit;
   end;
 
-if EdtSenha.Text = EmptyStr then
+  if EdtSenha.Text = EmptyStr then
   begin
     EdtSenha.SetFocus;
     DM.MSGAguarde('', False);
     Exit;
   end;
 
-DM.RetornaDataHoraServidor;
+  DM.RetornaDataHoraServidor;
 
-//Tratar chave já expirada
-if DM.LicencaExpirada =  True then
+  //Tratar chave já expirada
+  if DM.LicencaExpirada =  True then
   begin
     Application.Terminate;
     Exit;
   end;
 
-DM.MSGAguarde();
+  DM.MSGAguarde();
 
-DM.qryUsuariosAtivos.Close;
-DM.qryUsuariosAtivos.Open;                                         //Depois, tirar os acessos a mais da Farmace
-if (DM.FNumUsuarios > 0) and (DM.qryUsuariosAtivos.RecordCount >= (DM.FNumUsuarios + 1)) then
+  DM.qryUsuariosAtivos.Close;
+  DM.qryUsuariosAtivos.Open;                                        //Depois, tirar os acessos a mais da Farmace
+  if (DM.FNumUsuarios > 0) and (DM.qryUsuariosAtivos.RecordCount >= (DM.FNumUsuarios + 1)) then
   begin
     Application.MessageBox('Limite de conexões simultâneas alcançado.', 'SPMP3', MB_OK + MB_ICONASTERISK);
     DM.MSGAguarde('', False);
@@ -108,21 +108,21 @@ if (DM.FNumUsuarios > 0) and (DM.qryUsuariosAtivos.RecordCount >= (DM.FNumUsuari
     Exit;
   end;
 
-DM.FAcessoLiberado := False;
+  DM.FAcessoLiberado := False;
 
-DM.FNomeUsuario := EdtLogin.Text;
-DM.FPassword := EdtSenha.Text;
+  DM.FNomeUsuario := EdtLogin.Text;
+  DM.FPassword := EdtSenha.Text;
 
-//Usuário Adm da SAM
-if DM.FNomeUsuario = 'sam_spmp' then
+  //Usuário Adm da SAM
+  if DM.FNomeUsuario = 'sam_spmp' then
   begin
     if DM.FPassword <> EdtSenha.Text then //Senha de administrador SAM (mesma do banco)
-      begin
-        Application.MessageBox('Senha incorreta.', 'SPMP3', MB_ICONASTERISK + MB_OK);
-        EdtSenha.SetFocus;
-        DM.MSGAguarde('', False);
-        Exit;
-      end;
+    begin
+      Application.MessageBox('Senha incorreta.', 'SPMP3', MB_ICONASTERISK + MB_OK);
+      EdtSenha.SetFocus;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
 
     DM.FCodUsuario  := 'PDR-0000';
     DM.FCodAcesso   := '0';
@@ -135,92 +135,81 @@ if DM.FNomeUsuario = 'sam_spmp' then
     //Descobrir IPLocal
     wVersionRequested := MAKEWORD(1, 1); WSAStartup(wVersionRequested, wsaData); GetHostName(@s, 128); p := GetHostByName(@s); WSACleanup;
     DM.FEstacao     := String(p^.h_Name);
-  end
-else
-//Usuário normal
-  begin
-
+  end else
+  begin //Usuário normal
     Try
       DM.qryLogin.Close;
       DM.qryLogin.Params[0].AsString := DM.FNomeUsuario;
       DM.qryLogin.Open;
 
-      //qLogin := 0;
+      if DM.qryLogin.IsEmpty = False then //Usuário informado localizado
+      begin
+        qLogin := DM.qryLoginBLOQUEIO.AsInteger;
 
-      //Usuário informado localizado
-      if DM.qryLogin.IsEmpty = False then
-        begin
-          if (DM.Crypt('D', DM.qryLoginSENHA.AsString)) = DM.FPassword then
-            begin
-              if Dm.SenhaExpirada = False then
-                begin
-
-                  DM.qryLogin.Edit;
-                  DM.qryLoginBLOQUEIO.AsInteger := 0;
-                  DM.qryLogin.Post;
-
-                  qLogin := DM.qryLoginBLOQUEIO.AsInteger;
-                end
-              else
-                qLogin := -6;
-            end
-          else
-          //usuário não identificado
-          if DM.qryLoginNOME.AsString = '' then
-            begin
-              qLogin := -5;
-            end
-          else
-          //Bloqueia login após 5 tentativas incorretas
-            begin
-              DM.qryLogin.Edit;
-              DM.qryLoginBLOQUEIO.AsInteger := DM.qryLoginBLOQUEIO.AsInteger + 1;
-              DM.qryLogin.Post;
-
-              qLogin := DM.qryLoginBLOQUEIO.AsInteger;
-            end;
-        end else
-        begin
-          qLogin := -5;
-        end;
-
-
-      DM.qryLogin.Close;
-
-      //Usuário informado não localizado
-      if (qLogin = -5) then
-        begin
-          Application.MessageBox('Usuário não identificado', 'SPMP3', MB_ICONASTERISK + MB_OK);
-          DM.MSGAguarde('', False);
-          Exit;
-        end;
-      //Senha Expirada
-      if (qLogin = -6) then
-        begin
-          Application.MessageBox('Senha precisa ser alterada', 'SPMP3', MB_ICONASTERISK + MB_OK);
-          DM.MSGAguarde('', False);
-          Exit;
-        end;
-
-      DM.qryUsuario.Close;
-      DM.qryUsuario.Params[0].AsString := DM.FNomeUsuario;
-      DM.qryUsuario.Open;
-
-      if (qLogin > 0) and (qLogin <= DM.FQtdeLoginTent) then
-        begin
-          MessageDlg('Login e/ou senha incorreto(s)!'+#13+IntToStr(qLogin)+'º tentativa de 5.'+#13+'Após a 5º tentativa incorreta o usuário será bloqueado.', mtWarning, [mbOK], 0);
-          //Application.MessageBox('Login e/ou senha incorretos!', 'SPMP3', MB_OK+MB_ICONSTOP);
-          EdtLogin.SetFocus;
-          DM.MSGAguarde('', False);
-          Exit;
-        end
-      else
-      if (qLogin > DM.FQtdeLoginTent) then
+        if (qLogin > DM.FQtdeLoginTent) then
         begin
           MessageDlg('Login bloqueado!'+#13+'Contacte o administrador do sistema para liberar o acesso.', mtError, [mbOK], 0);
           DM.MSGAguarde('', False);
           Exit;
         end;
+
+        if (DM.Crypt('D', DM.qryLoginSENHA.AsString)) = DM.FPassword then
+        begin //Usuário e senha corretos
+          DM.qryLogin.Edit;
+          DM.qryLoginBLOQUEIO.AsInteger := 0;
+          DM.qryLogin.Post;
+
+          qLogin := 0;
+
+          if Dm.SenhaExpirada = True then
+            qLogin := -6; //Senha expirada
+        end else
+        begin //Bloqueia login após 5 tentativas incorretas
+          DM.qryLogin.Edit;
+          DM.qryLoginBLOQUEIO.AsInteger := DM.qryLoginBLOQUEIO.AsInteger + 1;
+          DM.qryLogin.Post;
+
+          qLogin := DM.qryLoginBLOQUEIO.AsInteger;
+        end;
+      end else
+        qLogin := -5; //Usuário informado não localizado
+
+
+      //Usuário informado não localizado
+      if (qLogin = -5) then
+      begin
+        Application.MessageBox('Usuário não identificado', 'SPMP3', MB_ICONASTERISK + MB_OK);
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+      //Senha Expirada
+      if (qLogin = -6) then
+      begin
+        Application.MessageBox('Senha precisa ser alterada', 'SPMP3', MB_ICONASTERISK + MB_OK);
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
+
+      if (qLogin > 0) and (qLogin <= DM.FQtdeLoginTent) then
+      begin
+        MessageDlg('Login e/ou senha incorreto(s)!'+#13+IntToStr(qLogin)+'º tentativa de 5.'+#13+'Após a 5º tentativa incorreta o usuário será bloqueado.', mtWarning, [mbOK], 0);
+        EdtLogin.SetFocus;
+        DM.MSGAguarde('', False);
+        Exit;
+      end else
+      if (qLogin > DM.FQtdeLoginTent) then
+      begin
+        MessageDlg('Login bloqueado!'+#13+'Contacte o administrador do sistema para liberar o acesso.', mtError, [mbOK], 0);
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
+      DM.qryLogin.Close;
+
+      DM.qryUsuario.Close;
+      DM.qryUsuario.Params[0].AsString := DM.FNomeUsuario;
+      DM.qryUsuario.Open;
     Except on E: Exception do
       begin
         DM.GravaLog('Falha ao  realizar o login! ', E.ClassName, E.Message);
@@ -228,6 +217,7 @@ else
         DM.MSGAguarde('', False);
       end;
     End;
+
 
     try
       //Descobrir IPLocal
@@ -237,106 +227,103 @@ else
       DM.qryAcesso.Params[0].AsString := EdtLogin.Text;
       DM.qryAcesso.Open;
       if (DM.qryAcessoATIVO.AsString = 'S') and (DM.qryAcessoESTACAO.AsString <> string(p^.h_name)) then
+      begin
+        if MinutesBetween(DM.FDataHoraServidor, DM.qryAcessoDATAACESSO.AsDateTime) < 720 then
         begin
-          if MinutesBetween(DM.FDataHoraServidor, DM.qryAcessoDATAACESSO.AsDateTime) < 720 then
-            begin
-              LMensagem := PChar('LOGIN EM USO!!' + #13 + #13 + 'Um acesso ativo desse usuário foi detectado na estação: ' + DM.qryAcessoESTACAO.AsString);
-              Application.MessageBox(LMensagem, 'SPMP3' ,MB_OK+MB_ICONERROR);
-              DM.MSGAguarde('', False);
-              Exit;
-            end;
+          LMensagem := PChar('LOGIN EM USO!!' + #13 + #13 + 'Um acesso ativo desse usuário foi detectado na estação: ' + DM.qryAcessoESTACAO.AsString);
+          Application.MessageBox(LMensagem, 'SPMP3' ,MB_OK+MB_ICONERROR);
+          DM.MSGAguarde('', False);
+          Exit;
         end;
+      end;
 
       if LowerCase(DM.FNomeUsuario) <> 'sam_spmp' then
+      begin
+        if (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) > 0) and (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) < DateOf(DM.FDataHoraServidor)) then
         begin
-          if (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) > 0) and (DateOf(DM.qryUsuarioDATAFIM.AsDateTime) < DateOf(DM.FDataHoraServidor)) then
-            begin
-              Application.MessageBox('Período de acesso interrompido para esse usuário', 'SPMP3', MB_OK+MB_ICONSTOP);
-              EdtLogin.SetFocus;
-              DM.MSGAguarde('', False);
-              Exit;
-            end;
+          Application.MessageBox('Período de acesso interrompido para esse usuário', 'SPMP3', MB_OK+MB_ICONSTOP);
+          EdtLogin.SetFocus;
+          DM.MSGAguarde('', False);
+          Exit;
+        end;
 
-          if DM.VerificaPrimeiroAcesso = False then
-            begin
-              //Application.Terminate;
-              DM.MSGAguarde('', False);
-              Exit;
-            end;
+        if DM.VerificaPrimeiroAcesso = False then
+        begin
+          //Application.Terminate;
+          DM.MSGAguarde('', False);
+          Exit;
+        end;
 
-          DM.FAcessoLiberado := True;
+        DM.FAcessoLiberado := True;
 
-          DM.qryUsuario.Edit;
-          DM.qryUsuarioLOGADO.AsString       := 'S';
-          DM.qryUsuarioQUEDAENERGIA.AsString := 'S';
-          DM.qryUsuario.Post;
+        DM.qryUsuario.Edit;
+        DM.qryUsuarioLOGADO.AsString       := 'S';
+        DM.qryUsuarioQUEDAENERGIA.AsString := 'S';
+        DM.qryUsuario.Post;
 
 
-          DM.FCodUsuario  := DM.qryUsuarioCODIGO.AsString;
-          DM.FNomeUsuario := DM.qryUsuarioNOME.AsString;
-          DM.FCodAcesso   := DM.qryUsuarioCODPERMISSAOACESSO.AsString;
-          DM.FCodAlteracao:= DM.qryUsuarioCODPERMISSAOALTERACAO.AsString;
-          DM.FCodExclusao := DM.qryUsuarioCODPERMISSAOEXCLUSAO.AsString;
-          DM.FCodInclusao := DM.qryUsuarioCODPERMISSAOINCLUSAO.AsString;
-          DM.FNivelAcesso := DM.qryUsuarioNIVELACESSO.AsString;
-          DM.FEstacao     := String(p^.h_Name);
+        DM.FCodUsuario  := DM.qryUsuarioCODIGO.AsString;
+        DM.FNomeUsuario := DM.qryUsuarioNOME.AsString;
+        DM.FCodAcesso   := DM.qryUsuarioCODPERMISSAOACESSO.AsString;
+        DM.FCodAlteracao:= DM.qryUsuarioCODPERMISSAOALTERACAO.AsString;
+        DM.FCodExclusao := DM.qryUsuarioCODPERMISSAOEXCLUSAO.AsString;
+        DM.FCodInclusao := DM.qryUsuarioCODPERMISSAOINCLUSAO.AsString;
+        DM.FNivelAcesso := DM.qryUsuarioNIVELACESSO.AsString;
+        DM.FEstacao     := String(p^.h_Name);
 
-          DM.qryUsuarioUnidades.Close;
-          DM.qryUsuarioUnidades.Params[0].AsString := DM.qryUsuarioCODEMPRESAS.AsString;
-          DM.qryUsuarioUnidades.Open;
+        DM.qryUsuarioUnidades.Close;
+        DM.qryUsuarioUnidades.Params[0].AsString := DM.qryUsuarioCODEMPRESAS.AsString;
+        DM.qryUsuarioUnidades.Open;
 
-          DM.qryUnidadesCorp.Close;
-          DM.qryUnidadesCorp.Params[0].AsString := DM.qryUsuarioCODEMPRESAS.AsString;
-          DM.qryUnidadesCorp.Open;
+        DM.qryUnidadesCorp.Close;
+        DM.qryUnidadesCorp.Params[0].AsString := DM.qryUsuarioCODEMPRESAS.AsString;
+        DM.qryUnidadesCorp.Open;
 
-          if DM.qryUsuarioUnidades.RecordCount > 1 then
-            begin
-              try
-                Application.CreateForm(TFrmTelaAcessoUnidade, FrmTelaAcessoUnidade);
-                FrmTelaAcessoUnidade.ShowModal;
-              finally
-                FreeAndNil(FrmTelaAcessoUnidade);
-                DM.FCodEmpresa  := DM.qryUnidadesCorpCODEMPRESA.AsString;
-                DM.FNomeEmpresa := DM.qryUnidadesCorpEMPRESA.AsString;
-                DM.FCodGrupo    := DM.qryUnidadesCorpCODGRUPO.AsString;
-                DM.FNomeGrupo   := DM.qryUnidadesCorpGRUPO.AsString;
-              end;
-            end
-           else
-             begin
-               DM.FCodEmpresa  := DM.qryUsuarioCODEMPRESA.AsString;
-               DM.FNomeEmpresa := DM.qryUsuarioEMPRESA.AsString;
-               DM.FCodGrupo    := DM.qryUsuarioCODGRUPO.AsString;
-               DM.FNomeGrupo   := DM.qryUsuarioGRUPO.AsString;
-             end;
-          DM.qryUnidadesCorp.Close;
+        if DM.qryUsuarioUnidades.RecordCount > 1 then
+        begin
+          try
+            Application.CreateForm(TFrmTelaAcessoUnidade, FrmTelaAcessoUnidade);
+            FrmTelaAcessoUnidade.ShowModal;
+          finally
+            FreeAndNil(FrmTelaAcessoUnidade);
+            DM.FCodEmpresa  := DM.qryUnidadesCorpCODEMPRESA.AsString;
+            DM.FNomeEmpresa := DM.qryUnidadesCorpEMPRESA.AsString;
+            DM.FCodGrupo    := DM.qryUnidadesCorpCODGRUPO.AsString;
+            DM.FNomeGrupo   := DM.qryUnidadesCorpGRUPO.AsString;
+          end;
+        end else
+        begin
+          DM.FCodEmpresa  := DM.qryUsuarioCODEMPRESA.AsString;
+          DM.FNomeEmpresa := DM.qryUsuarioEMPRESA.AsString;
+          DM.FCodGrupo    := DM.qryUsuarioCODGRUPO.AsString;
+          DM.FNomeGrupo   := DM.qryUsuarioGRUPO.AsString;
+        end;
+        DM.qryUnidadesCorp.Close;
 
-          DM.qryAcesso.Append;
-          DM.qryAcessoCODEMPRESA.AsString    := DM.FCodEmpresa;
-          DM.qryAcessoUSUARIO.AsString       := DM.FNomeUsuario;
-          DM.qryAcessoDATAACESSO.AsDateTime  := DM.FDataHoraServidor;
-          DM.qryAcessoHORAENTRADA.AsDateTime := DM.FDataHoraServidor;
-          DM.qryAcessoESTACAO.AsString       := DM.FEstacao;
-          DM.qryAcessoATIVO.AsString         := 'S';
-          DM.qryAcessoPERIODO.AsInteger      := 0;
-          DM.qryAcesso.Post;
+        DM.qryAcesso.Append;
+        DM.qryAcessoCODEMPRESA.AsString    := DM.FCodEmpresa;
+        DM.qryAcessoUSUARIO.AsString       := DM.FNomeUsuario;
+        DM.qryAcessoDATAACESSO.AsDateTime  := DM.FDataHoraServidor;
+        DM.qryAcessoHORAENTRADA.AsDateTime := DM.FDataHoraServidor;
+        DM.qryAcessoESTACAO.AsString       := DM.FEstacao;
+        DM.qryAcessoATIVO.AsString         := 'S';
+        DM.qryAcessoPERIODO.AsInteger      := 0;
+        DM.qryAcesso.Post;
 
-          if DM.qryUsuarioUnidadesTRANSFORMACAO.AsString = 'S' then DM.FEmpTransf := True
-          else DM.FEmpTransf := False;
+        if DM.qryUsuarioUnidadesTRANSFORMACAO.AsString = 'S' then DM.FEmpTransf := True
+        else DM.FEmpTransf := False;
 
-          DM.qryUsuarioUnidades.Close;
+        DM.qryUsuarioUnidades.Close;
 
-          if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-            begin
-              DMAlertas.GerencOrdemServico.Enabled := False;
-              DMAlertas.FechamInsp.Enabled := False;
-              DMAlertas.MaodeObraServ.Enabled := False;
-              DMAlertas.Auditoria.Enabled := False;
-              DMAlertas.Opcoes.Enabled := False;
-            end;
-
-        end
-      else
+        if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+        begin
+          DMAlertas.GerencOrdemServico.Enabled := False;
+          DMAlertas.FechamInsp.Enabled := False;
+          DMAlertas.MaodeObraServ.Enabled := False;
+          DMAlertas.Auditoria.Enabled := False;
+          DMAlertas.Opcoes.Enabled := False;
+        end;
+      end else
         DM.FEmpTransf := True;
     except
       on E: Exception do
@@ -346,10 +333,10 @@ else
         DM.MSGAguarde('', False);
       end;
     end;
-  End;
+  end;
 
-DM.MSGAguarde('', False);
-Close;
+  DM.MSGAguarde('', False);
+  Close;
 end;
 
 procedure TFrmTelaAcesso.btnLicencaClick(Sender: TObject);
