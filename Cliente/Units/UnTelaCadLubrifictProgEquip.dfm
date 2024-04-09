@@ -20,7 +20,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 776
+      ExplicitLeft = 780
     end
     inherited LblUsuCad: TDBText
       Margins.Left = 4
@@ -28,7 +28,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 776
+      ExplicitLeft = 780
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -48,7 +48,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 927
+      ExplicitLeft = 931
     end
     inherited LblUsuAlt: TDBText
       Margins.Left = 4
@@ -56,7 +56,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 927
+      ExplicitLeft = 931
     end
     inherited BtnNovo: TButton
       Width = 27

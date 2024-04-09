@@ -118,13 +118,48 @@ end;
 
 procedure TFrmTelaCadLubrificProgEquip.BtnExcluirClick(Sender: TObject);
 begin
-  inherited;
-if DM.qryLubrificProgEquip.IsEmpty = True then
+//  inherited;
+PAuxiliares.Font.Color := clBlue;
+PAuxiliares.Caption    := '';
+
+if DM.qryLubrificProgEquip.Active = False then Exit;
+
+if DM.qryLubrificProgEquip.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
-    DM.qryLubrificProgEquipItensEsp.Close;
-    DM.qryLubrificProgEquipItens.Close;
-    DM.qryLubrificProgEquipPartes.Close;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
+    Exit;
   end;
+
+if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+  begin
+    Try
+      if DM.qryLubrificProgEquip.IsEmpty = False then
+        begin
+          DM.qryLubrificProgEquipItensEsp.Close;
+          DM.qryLubrificProgEquipItens.Close;
+          DM.qryLubrificProgEquipPartes.Close;
+
+          DM.qryLubrificProgEquip.Delete;
+          DM.qryLubrificProgEquip.Close;
+
+          PAuxiliares.Font.Color := clRed;
+          PAuxiliares.Caption := 'REGISTRO EXCLUÍDO COM SUCESSO!!!';
+          ControleBotoes(0);
+        end;
+    Except
+      on E: Exception do
+      begin
+        DM.GravaLog('Falha ao excluir o registro. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao excluir o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        PAuxiliares.Caption := EmptyStr;
+      end;
+    End;
+
+  end;
+BtnSalvar.ImageIndex := 2;
 end;
 procedure TFrmTelaCadLubrificProgEquip.BtnFamiliaClick(Sender: TObject);
 begin

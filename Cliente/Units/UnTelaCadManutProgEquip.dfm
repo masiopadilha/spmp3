@@ -3,18 +3,21 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
+      Left = 738
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
+      Left = 694
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LblDataCad: TDBText
+      Left = 776
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -22,6 +25,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuCad: TDBText
+      Left = 776
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -29,18 +33,21 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LAlteracao: TLabel
+      Left = 889
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
+      Left = 863
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LblDataAlt: TDBText
+      Left = 927
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -48,6 +55,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuAlt: TDBText
+      Left = 927
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
