@@ -1184,7 +1184,7 @@ begin
 
   DM.qryEquipamentos.Edit;
 end;
-//  inherited;
+  inherited;
 
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
