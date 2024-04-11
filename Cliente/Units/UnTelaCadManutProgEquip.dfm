@@ -3,21 +3,21 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 738
+      Left = 742
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LCadastroPor: TLabel
-      Left = 694
+      Left = 698
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LblDataCad: TDBText
-      Left = 776
+      Left = 780
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -25,7 +25,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuCad: TDBText
-      Left = 776
+      Left = 780
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -33,21 +33,21 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LAlteracao: TLabel
-      Left = 889
+      Left = 893
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LAlteradoPor: TLabel
-      Left = 863
+      Left = 867
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited LblDataAlt: TDBText
-      Left = 927
+      Left = 931
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -55,7 +55,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       DataSource = DM.dsManutProgEquip
     end
     inherited LblUsuAlt: TDBText
-      Left = 927
+      Left = 931
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -808,21 +808,37 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PBase: TPanel
     inherited Button1: TButton
+      Left = 853
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
       ImageIndex = 104
+      TabOrder = 3
       OnClick = Button1Click
+      ExplicitLeft = 853
     end
     inherited Button2: TButton
+      Left = 882
       Hint = 'Pe'#231'as da Manuten'#231#227'o.'
       DisabledImageIndex = 81
       ImageIndex = 80
+      TabOrder = 4
       OnClick = Button2Click
+      ExplicitLeft = 882
     end
     inherited Button3: TButton
+      Left = 911
       Hint = 'Recursos da Manuten'#231#227'o.'
       DisabledImageIndex = 38
       ImageIndex = 37
+      TabOrder = 5
       OnClick = Button3Click
+      ExplicitLeft = 911
+    end
+    inherited Button4: TButton
+      Left = 824
+      ImageIndex = 27
+      TabOrder = 2
+      OnClick = Button4Click
+      ExplicitLeft = 824
     end
   end
   inherited MainMenuPadrao: TMainMenu

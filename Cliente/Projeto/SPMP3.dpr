@@ -166,7 +166,9 @@ uses
   UnTelaCadLubrificProgEquipPecas in '..\Units\UnTelaCadLubrificProgEquipPecas.pas' {FrmTelaCadLubrificProgEquipPecas},
   UnTelaCadLubrificProgEquipRecursos in '..\Units\UnTelaCadLubrificProgEquipRecursos.pas' {FrmTelaCadLubrificProgEquipRecursos},
   UnTelaCadManutProgFamEquipClonagem in '..\Units\UnTelaCadManutProgFamEquipClonagem.pas' {FrmTelaCadManutProgFamEquipClonagem},
-  UnTelaCadLubrificProgFamEquipClonagem in '..\Units\UnTelaCadLubrificProgFamEquipClonagem.pas' {FrmTelaCadLubrificProgFamEquipClonagem};
+  UnTelaCadLubrificProgFamEquipClonagem in '..\Units\UnTelaCadLubrificProgFamEquipClonagem.pas' {FrmTelaCadLubrificProgFamEquipClonagem},
+  UnTelaCadManutProgEquipMObra in '..\Units\UnTelaCadManutProgEquipMObra.pas' {FrmTelaCadManutProgEquipMObra},
+  UnTelaCadLubrificProgEquipMObra in '..\Units\UnTelaCadLubrificProgEquipMObra.pas' {FrmTelaCadLubrificProgEquipMObra};
 
 {$R *.res}
 begin
@@ -188,7 +190,6 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
-  Application.CreateForm(TFrmTelaCadLubrificProgFamEquipClonagem, FrmTelaCadLubrificProgFamEquipClonagem);
   FrmTelaAcesso.ShowModal;
   if DM.FAcessoLiberado = True then
     begin

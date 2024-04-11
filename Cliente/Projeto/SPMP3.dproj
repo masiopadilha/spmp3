@@ -647,6 +647,14 @@
             <Form>FrmTelaCadLubrificProgFamEquipClonagem</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadManutProgEquipMObra.pas">
+            <Form>FrmTelaCadManutProgEquipMObra</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadLubrificProgEquipMObra.pas">
+            <Form>FrmTelaCadLubrificProgEquipMObra</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
