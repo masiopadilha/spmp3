@@ -66,6 +66,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,7 +80,7 @@ implementation
 uses UnTelaCadLubrificProgFamEquip, UnDmRelatorios, UnTelaConsulta,
   UnTelaCadFuncionarios, UnDM, UnTelaCadLubrificProgEquipPartesItensEsp,
   UnTelaCadEquipamentos, UnTelaCadLubrificProgEquipPecas,
-  UnTelaCadLubrificProgEquipRecursos;
+  UnTelaCadLubrificProgEquipRecursos, UnTelaCadLubrificProgEquipMObra;
 procedure TFrmTelaCadLubrificProgEquip.BtnCancelarClick(Sender: TObject);
 begin
   inherited;
@@ -90,6 +91,7 @@ end;
 procedure TFrmTelaCadLubrificProgEquip.BtnConsultarClick(Sender: TObject);
 begin
   DM.FTabela_auxiliar := 33;
+  DM.FParamAuxiliar[0] := DM.qryEquipamentosCODIGO.AsString;
   inherited;
 if DM.qryLubrificProgEquipCODLUBRIFICPROGFAMEQUIP.AsString <> EmptyStr then
   begin
@@ -118,13 +120,44 @@ end;
 
 procedure TFrmTelaCadLubrificProgEquip.BtnExcluirClick(Sender: TObject);
 begin
-  inherited;
-if DM.qryLubrificProgEquip.IsEmpty = True then
+PAuxiliares.Font.Color := clBlue;
+PAuxiliares.Caption    := '';
+
+if DM.qryLubrificProgEquip.Active = False then Exit;
+
+if DM.qryLubrificProgEquip.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
-    DM.qryLubrificProgEquipItensEsp.Close;
-    DM.qryLubrificProgEquipItens.Close;
-    DM.qryLubrificProgEquipPartes.Close;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
+    Exit;
   end;
+
+if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+  begin
+    Try
+      if DM.qryLubrificProgEquip.IsEmpty = False then
+        begin
+          DM.qryLubrificProgEquipItensEsp.Close;
+          DM.qryLubrificProgEquipItens.Close;
+          DM.qryLubrificProgEquipPartes.Close;
+          DM.qryLubrificProgEquip.Delete;
+          PAuxiliares.Font.Color := clRed;
+          PAuxiliares.Caption := 'REGISTRO EXCLUÍDO COM SUCESSO!!!';
+          ControleBotoes(0);
+        end;
+    Except
+      on E: Exception do
+      begin
+        DM.GravaLog('Falha ao excluir o registro. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+        Application.MessageBox('Falha ao excluir o registro!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        PAuxiliares.Caption := EmptyStr;
+      end;
+    End;
+  end;
+BtnSalvar.ImageIndex := 2;
+//  inherited;
 end;
 procedure TFrmTelaCadLubrificProgEquip.BtnFamiliaClick(Sender: TObject);
 begin
@@ -384,10 +417,9 @@ begin
   Try
     DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
     if DM.FParamAuxiliar[0] = EmptyStr then
-      begin
-        BtnConsultar.OnClick(Sender);
-        DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
-      end;
+      BtnConsultar.OnClick(Sender);
+
+    DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
 
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
@@ -425,10 +457,10 @@ begin
   Try
     DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
     if DM.FParamAuxiliar[0] = EmptyStr then
-      begin
-        BtnConsultar.OnClick(Sender);
-        DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
-      end;
+      BtnConsultar.OnClick(Sender);
+
+    DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
+
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
     if (DM.qryUsuarioPAcessoCADLubrificPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -466,10 +498,10 @@ begin
   Try
     DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
     if DM.FParamAuxiliar[0] = EmptyStr then
-      begin
-        BtnConsultar.OnClick(Sender);
-        DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
-      end;
+      BtnConsultar.OnClick(Sender);
+
+    DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
+
     if DM.FParamAuxiliar[0] = EmptyStr then Exit;
 
     if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -498,6 +530,42 @@ begin
     DM.FParamAuxiliar[0]:= FrmTelaCadEquipamentos.EdtCodEquip.Text;
     DM.FTabela_auxiliar := 33;
     DM.FAlterando := True;
+  End;
+end;
+
+procedure TFrmTelaCadLubrificProgEquip.Button4Click(Sender: TObject);
+begin
+  inherited;
+  Try
+    if DM.FParamAuxiliar[0] = EmptyStr then
+      BtnConsultar.OnClick(Sender);
+
+    DM.FParamAuxiliar[0] := DM.qryLubrificProgEquipCODIGO.AsString;
+
+    if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+
+    if (DM.qryUsuarioPAcessoCADLUBRIFICPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        DM.FDataSetParam.Cancel;
+        PAuxiliares.Font.Color := clRed;
+        PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+        DM.MSGAguarde('', False);
+        Exit;
+      end;
+
+    Application.CreateForm(TFrmTelaCadLubrificProgEquipMObra, FrmTelaCadLubrificProgEquipMObra);
+    FrmTelaCadLubrificProgEquipMObra.Caption := 'Mão de Obra da Lubrificação: '+ DM.qryLubrificProgEquipCODIGO.AsString;
+    FrmTelaCadLubrificProgEquipMObra.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadLubrificProgEquipMObra);
+    DM.FDataSetParam    := DM.qryLubrificProgEquip;
+    DM.FDataSourceParam := DM.dsLubrificProgEquip;
   End;
 end;
 

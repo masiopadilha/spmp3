@@ -60,7 +60,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           FixedColor = 14671839
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
@@ -91,7 +91,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           FixedColor = 14671839
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
@@ -122,7 +122,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           FixedColor = 14671839
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -12
           Font.Name = 'Tahoma'
           Font.Style = []
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]

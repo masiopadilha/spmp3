@@ -438,28 +438,174 @@ begin
                   end;
 
 
-                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-                DM.qryManutVencOSVenc.Close;
-                DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutConsCODIGO.AsString;
-                DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-                DM.qryManutVencOSVenc.Open;
-                while not DM.qryManutVencOSVenc.Eof = True do
-                begin
-                  DM.qryAuxiliar.Close;
-                  DM.qryAuxiliar.SQL.Clear;
-                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                          + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
-                  DM.qryAuxiliar.Execute;
-
-                  DM.qryManutVencOSVenc.Next;
-                end;
-                DM.qryAuxiliar.Close;
-                DM.qryManutVencOSVenc.Close;
+//                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+//                DM.qryManutVencOSVenc.Close;
+//                DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutConsCODIGO.AsString;
+//                DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+//                DM.qryManutVencOSVenc.Open;
+//                while not DM.qryManutVencOSVenc.Eof = True do
+//                begin
+//                  DM.qryAuxiliar.Close;
+//                  DM.qryAuxiliar.SQL.Clear;
+//                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
+//                                          + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
+//                  DM.qryAuxiliar.Execute;
+//
+//                  DM.qryManutVencOSVenc.Next;
+//                end;
+//                DM.qryAuxiliar.Close;
+//                DM.qryManutVencOSVenc.Close;
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString
                                                               , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr);
+
+                //Verifica se existe mão de obra cadastrada na manutenção
+                if DM.qryManutConsEquipe.IsEmpty = False then
+                begin
+                  DM.qryOrdemServico.Close;
+                  DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                  DM.qryOrdemServico.Params[1].AsInteger := DM.FCodOrdemServico;
+                  DM.qryOrdemServico.Open;
+                  if DM.qryOrdemServico.IsEmpty = False then
+                  begin
+                    DM.qryOrdemServico.Edit;
+                    DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+                    DM.qryOrdemServico.Post;
+
+                    DM.qryOrdemServicoEquipe.Open;
+                    DM.qryOrdemServicoEquipeMObra.Open;
+
+                    DM.qryManutConsEquipe.First;
+                    while not DM.qryManutConsEquipe.Eof = True do
+                    begin
+                      DM.qryOrdemServicoEquipe.Append;
+                      DM.qryOrdemServicoEquipeCODEMPRESA.AsString       := DM.FCodEmpresa;
+                      DM.qryOrdemServicoEquipeCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                      DM.qryOrdemServicoEquipeCODEQUIPE.AsString        := DM.qryManutConsEquipeCODEQUIPE.AsString;
+                      DM.qryOrdemServicoEquipeTEMPO.AsFloat             := DM.qryManutConsEquipeTEMPO.AsFloat;
+                      DM.qryOrdemServicoEquipe.Post;
+
+                      DM.qryManutConsEquipeMObra.First;
+                      while not DM.qryManutConsEquipeMObra.Eof = True do
+                      begin
+                        DM.qryOrdemServicoEquipeMObra.Append;
+                        DM.qryOrdemServicoEquipeMObraCODEMPRESA.AsString       := DM.FCodEmpresa;
+                        DM.qryOrdemServicoEquipeMObraCODEQUIPE.AsInteger       := DM.qryOrdemServicoEquipeCODIGO.AsInteger;
+                        DM.qryOrdemServicoEquipeMObraCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                        DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryManutConsEquipeMObraCODCARGO.AsString;
+                        DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutConsEquipeMObraTOTALHOMEMHORA.AsFloat;
+                        DM.qryOrdemServicoEquipeMObra.Post;
+
+                        DM.qryManutConsEquipeMObra.Next;
+                      end;
+                      DM.qryManutConsEquipe.Next;
+                    end;
+                    DM.qryOrdemServicoEquipe.Close;
+                    DM.qryOrdemServicoEquipeMObra.Close;
+                  end;
+                  DM.qryOrdemServico.Close;
+                end else
+                begin //Se não existir mão de obra cadastrada, questionar se o usuário quer cadastrar a última mão de obra lançada na manutenção
+                  DM.qryAuxiliar.Close;
+                  DM.qryAuxiliar.SQL.Text := 'SELECT MAX(`CODIGO`) AS `CODIGO` FROM `ordemservico` WHERE `CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
+                                             + ' AND (`CODMANUTPROGEQUIP` = ' + QuotedStr(DM.qryManutConsCODIGO.AsString) + ') AND `SITUACAO` = ''FECHADA''';
+                  DM.qryAuxiliar.Open;
+                  if DM.qryAuxiliar.FieldByName('CODIGO').AsInteger > 0 then
+                  begin
+                    if Application.MessageBox('Mão de obra da manutenção não cadastrada, deseja importar a última mão de obra utilizada?', 'SPMP3', MB_YESNO) = IDYes then
+                    begin
+                      //Cadastrar mão de obra da última OS no cadastro da mão de obra da manutenção
+                      DM.qryOrdemServico.Close;
+                      DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                      DM.qryOrdemServico.Params[1].AsInteger := DM.qryAuxiliar.FieldByName('CODIGO').AsInteger;
+                      DM.qryOrdemServico.Open;
+                      if DM.qryOrdemServico.IsEmpty = False then
+                      begin
+                        DM.qryOrdemServicoEquipe.Open;
+                        DM.qryOrdemServicoEquipeMObra.Open;
+
+                        DM.qryOrdemServicoEquipe.First;
+                        while not DM.qryOrdemServicoEquipe.Eof = True do
+                        begin
+                          DM.qryManutConsEquipe.Append;
+                          DM.qryManutConsEquipeCODEMPRESA.AsString        := DM.FCodEmpresa;
+                          DM.qryManutConsEquipeCODEQUIPE.AsString         := DM.qryOrdemServicoEquipeCODEQUIPE.AsString;
+                          DM.qryManutConsEquipeCODMANUTPROGEQUIP.AsString := DM.qryManutConsCODIGO.AsString;
+                          DM.qryManutConsEquipeTEMPO.AsFloat              := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+                          DM.qryManutConsEquipe.Post;
+
+                          DM.qryOrdemServicoEquipeMObra.First;
+                          while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+                          begin
+                            DM.qryManutConsEquipeMObra.Append;
+                            DM.qryManutConsEquipeMObraCODEMPRESA.AsString        := DM.FCodEmpresa;
+                            DM.qryManutConsEquipeMObraCODEQUIPE.AsInteger        := DM.qryManutConsEquipeCODIGO.AsInteger;
+                            DM.qryManutConsEquipeMObraCODMANUTPROGEQUIP.AsString := DM.qryManutConsCODIGO.AsString;
+                            DM.qryManutConsEquipeMObraCODCARGO.AsString          := DM.qryOrdemServicoEquipeMObraCODCARGO.AsString;
+                            DM.qryManutConsEquipeMObraTOTALHOMEMHORA.AsFloat     := DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryManutConsEquipeMObra.Post;
+
+                            DM.qryOrdemServicoEquipeMObra.Next;
+                          end;
+
+                          DM.qryOrdemServicoEquipe.Next;
+                        end;
+                        DM.qryOrdemServicoEquipe.Close;
+                        DM.qryOrdemServicoEquipeMObra.Close;
+                      end;
+                      DM.qryOrdemServico.Close;
+
+                      //Cadastrar mão de obra da manutenção na nova OS
+                      DM.qryOrdemServico.Close;
+                      DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                      DM.qryOrdemServico.Params[1].AsInteger := DM.FCodOrdemServico;
+                      DM.qryOrdemServico.Open;
+                      if DM.qryOrdemServico.IsEmpty = False then
+                      begin
+                        DM.qryOrdemServico.Edit;
+                        DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+                        DM.qryOrdemServico.Post;
+
+                        DM.qryOrdemServicoEquipe.Open;
+                        DM.qryOrdemServicoEquipeMObra.Open;
+
+                        DM.qryManutConsEquipe.First;
+                        while not DM.qryManutConsEquipe.Eof = True do
+                        begin
+                          DM.qryOrdemServicoEquipe.Append;
+                          DM.qryOrdemServicoEquipeCODEMPRESA.AsString       := DM.FCodEmpresa;
+                          DM.qryOrdemServicoEquipeCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                          DM.qryOrdemServicoEquipeCODEQUIPE.AsString        := DM.qryManutConsEquipeCODEQUIPE.AsString;
+                          DM.qryOrdemServicoEquipeTEMPO.AsFloat             := DM.qryManutConsEquipeTEMPO.AsFloat;
+                          DM.qryOrdemServicoEquipe.Post;
+
+                          DM.qryManutConsEquipeMObra.First;
+                          while not DM.qryManutConsEquipeMObra.Eof = True do
+                          begin
+                            DM.qryOrdemServicoEquipeMObra.Append;
+                            DM.qryOrdemServicoEquipeMObraCODEMPRESA.AsString       := DM.FCodEmpresa;
+                            DM.qryOrdemServicoEquipeMObraCODEQUIPE.AsInteger       := DM.qryOrdemServicoEquipeCODIGO.AsInteger;
+                            DM.qryOrdemServicoEquipeMObraCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                            DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryManutConsEquipeMObraCODCARGO.AsString;
+                            DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutConsEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryOrdemServicoEquipeMObra.Post;
+
+                            DM.qryManutConsEquipeMObra.Next;
+                          end;
+
+                          DM.qryManutConsEquipe.Next;
+                        end;
+                        DM.qryOrdemServicoEquipe.Close;
+                        DM.qryOrdemServicoEquipeMObra.Close;
+                      end;
+                      DM.qryOrdemServico.Close;
+                    end;
+                  end;
+                end;
+
+
                 DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 DM.qryManutCons.Edit;
@@ -694,27 +840,172 @@ begin
                   end;
 
                 //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-                DM.qryLubrificVencOSVenc.Close;
-                DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificConsCODIGO.AsString;
-                DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-                DM.qryLubrificVencOSVenc.Open;
-                while not DM.qryLubrificVencOSVenc.Eof = True do
-                begin
-                  DM.qryAuxiliar.Close;
-                  DM.qryAuxiliar.SQL.Clear;
-                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                          + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
-                  DM.qryAuxiliar.Execute;
-
-                  DM.qryLubrificVencOSVenc.Next;
-                end;
-                DM.qryAuxiliar.Close;
-                DM.qryLubrificVencOSVenc.Close;
+//                DM.qryLubrificVencOSVenc.Close;
+//                DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificConsCODIGO.AsString;
+//                DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+//                DM.qryLubrificVencOSVenc.Open;
+//                while not DM.qryLubrificVencOSVenc.Eof = True do
+//                begin
+//                  DM.qryAuxiliar.Close;
+//                  DM.qryAuxiliar.SQL.Clear;
+//                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
+//                                          + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
+//                  DM.qryAuxiliar.Execute;
+//
+//                  DM.qryLubrificVencOSVenc.Next;
+//                end;
+//                DM.qryAuxiliar.Close;
+//                DM.qryLubrificVencOSVenc.Close;
 
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr);
+
+
+                //Verifica se existe mão de obra cadastrada na lubrificação
+                if DM.qryLubrificConsEquipe.IsEmpty = False then
+                begin
+                  DM.qryOrdemServico.Close;
+                  DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                  DM.qryOrdemServico.Params[1].AsInteger := DM.FCodOrdemServico;
+                  DM.qryOrdemServico.Open;
+                  if DM.qryOrdemServico.IsEmpty = False then
+                  begin
+                    DM.qryOrdemServico.Edit;
+                    DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+                    DM.qryOrdemServico.Post;
+
+                    DM.qryOrdemServicoEquipe.Open;
+                    DM.qryOrdemServicoEquipeMObra.Open;
+
+                    DM.qryLubrificConsEquipe.First;
+                    while not DM.qryLubrificConsEquipe.Eof = True do
+                    begin
+                      DM.qryOrdemServicoEquipe.Append;
+                      DM.qryOrdemServicoEquipeCODEMPRESA.AsString       := DM.FCodEmpresa;
+                      DM.qryOrdemServicoEquipeCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                      DM.qryOrdemServicoEquipeCODEQUIPE.AsString        := DM.qryLubrificConsEquipeCODEQUIPE.AsString;
+                      DM.qryOrdemServicoEquipeTEMPO.AsFloat             := DM.qryLubrificConsEquipeTEMPO.AsFloat;
+                      DM.qryOrdemServicoEquipe.Post;
+
+                      DM.qryLubrificConsEquipeMObra.First;
+                      while not DM.qryLubrificConsEquipeMObra.Eof = True do
+                      begin
+                        DM.qryOrdemServicoEquipeMObra.Append;
+                        DM.qryOrdemServicoEquipeMObraCODEMPRESA.AsString       := DM.FCodEmpresa;
+                        DM.qryOrdemServicoEquipeMObraCODEQUIPE.AsInteger       := DM.qryOrdemServicoEquipeCODIGO.AsInteger;
+                        DM.qryOrdemServicoEquipeMObraCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                        DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryLubrificConsEquipeMObraCODCARGO.AsString;
+                        DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificConsEquipeMObraTOTALHOMEMHORA.AsFloat;
+                        DM.qryOrdemServicoEquipeMObra.Post;
+
+                        DM.qryLubrificConsEquipeMObra.Next;
+                      end;
+                      DM.qryLubrificConsEquipe.Next;
+                    end;
+                    DM.qryOrdemServicoEquipe.Close;
+                    DM.qryOrdemServicoEquipeMObra.Close;
+                  end;
+                  DM.qryOrdemServico.Close;
+                end else
+                begin //Se não existir mão de obra cadastrada, questionar se o usuário quer cadastrar a última mão de obra lançada na lubrificação
+                  DM.qryAuxiliar.Close;
+                  DM.qryAuxiliar.SQL.Text := 'SELECT MAX(`CODIGO`) AS `CODIGO` FROM `ordemservico` WHERE `CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
+                                             + ' AND (`CODLUBRIFICPROGEQUIP` = ' + QuotedStr(DM.qryLubrificConsCODIGO.AsString) + ') AND `SITUACAO` = ''FECHADA''';
+                  DM.qryAuxiliar.Open;
+                  if DM.qryAuxiliar.FieldByName('CODIGO').AsInteger > 0 then
+                  begin
+                    if Application.MessageBox('Mão de obra da lubrificação não cadastrada, deseja importar a última mão de obra utilizada?', 'SPMP3', MB_YESNO) = IDYes then
+                    begin
+                      //Cadastrar mão de obra da última OS no cadastro da mão de obra da lubrificação
+                      DM.qryOrdemServico.Close;
+                      DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                      DM.qryOrdemServico.Params[1].AsInteger := DM.qryAuxiliar.FieldByName('CODIGO').AsInteger;
+                      DM.qryOrdemServico.Open;
+                      if DM.qryOrdemServico.IsEmpty = False then
+                      begin
+                        DM.qryOrdemServicoEquipe.Open;
+                        DM.qryOrdemServicoEquipeMObra.Open;
+
+                        DM.qryOrdemServicoEquipe.First;
+                        while not DM.qryOrdemServicoEquipe.Eof = True do
+                        begin
+                          DM.qryLubrificConsEquipe.Append;
+                          DM.qryLubrificConsEquipeCODEMPRESA.AsString        := DM.FCodEmpresa;
+                          DM.qryLubrificConsEquipeCODEQUIPE.AsString         := DM.qryOrdemServicoEquipeCODEQUIPE.AsString;
+                          DM.qryLubrificConsEquipeCODLUBRIFICPROGEQUIP.AsString := DM.qryLubrificConsCODIGO.AsString;
+                          DM.qryLubrificConsEquipeTEMPO.AsFloat              := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+                          DM.qryLubrificConsEquipe.Post;
+
+                          DM.qryOrdemServicoEquipeMObra.First;
+                          while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+                          begin
+                            DM.qryLubrificConsEquipeMObra.Append;
+                            DM.qryLubrificConsEquipeMObraCODEMPRESA.AsString        := DM.FCodEmpresa;
+                            DM.qryLubrificConsEquipeMObraCODEQUIPE.AsInteger        := DM.qryLubrificConsEquipeCODIGO.AsInteger;
+                            DM.qryLubrificConsEquipeMObraCODLUBRIFICPROGEQUIP.AsString := DM.qryLubrificConsCODIGO.AsString;
+                            DM.qryLubrificConsEquipeMObraCODCARGO.AsString          := DM.qryOrdemServicoEquipeMObraCODCARGO.AsString;
+                            DM.qryLubrificConsEquipeMObraTOTALHOMEMHORA.AsFloat     := DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryLubrificConsEquipeMObra.Post;
+
+                            DM.qryOrdemServicoEquipeMObra.Next;
+                          end;
+
+                          DM.qryOrdemServicoEquipe.Next;
+                        end;
+                        DM.qryOrdemServicoEquipe.Close;
+                        DM.qryOrdemServicoEquipeMObra.Close;
+                      end;
+                      DM.qryOrdemServico.Close;
+
+                      //Cadastrar mão de obra da lubrificação na nova OS
+                      DM.qryOrdemServico.Close;
+                      DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
+                      DM.qryOrdemServico.Params[1].AsInteger := DM.FCodOrdemServico;
+                      DM.qryOrdemServico.Open;
+                      if DM.qryOrdemServico.IsEmpty = False then
+                      begin
+                        DM.qryOrdemServico.Edit;
+                        DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+                        DM.qryOrdemServico.Post;
+
+                        DM.qryOrdemServicoEquipe.Open;
+                        DM.qryOrdemServicoEquipeMObra.Open;
+
+                        DM.qryLubrificConsEquipe.First;
+                        while not DM.qryLubrificConsEquipe.Eof = True do
+                        begin
+                          DM.qryOrdemServicoEquipe.Append;
+                          DM.qryOrdemServicoEquipeCODEMPRESA.AsString       := DM.FCodEmpresa;
+                          DM.qryOrdemServicoEquipeCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                          DM.qryOrdemServicoEquipeCODEQUIPE.AsString        := DM.qryLubrificConsEquipeCODEQUIPE.AsString;
+                          DM.qryOrdemServicoEquipeTEMPO.AsFloat             := DM.qryLubrificConsEquipeTEMPO.AsFloat;
+                          DM.qryOrdemServicoEquipe.Post;
+
+                          DM.qryLubrificConsEquipeMObra.First;
+                          while not DM.qryLubrificConsEquipeMObra.Eof = True do
+                          begin
+                            DM.qryOrdemServicoEquipeMObra.Append;
+                            DM.qryOrdemServicoEquipeMObraCODEMPRESA.AsString       := DM.FCodEmpresa;
+                            DM.qryOrdemServicoEquipeMObraCODEQUIPE.AsInteger       := DM.qryOrdemServicoEquipeCODIGO.AsInteger;
+                            DM.qryOrdemServicoEquipeMObraCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
+                            DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryLubrificConsEquipeMObraCODCARGO.AsString;
+                            DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificConsEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryOrdemServicoEquipeMObra.Post;
+
+                            DM.qryLubrificConsEquipeMObra.Next;
+                          end;
+
+                          DM.qryLubrificConsEquipe.Next;
+                        end;
+                        DM.qryOrdemServicoEquipe.Close;
+                        DM.qryOrdemServicoEquipeMObra.Close;
+                      end;
+                      DM.qryOrdemServico.Close;
+                    end;
+                  end;
+                end;
 
                 DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
 
@@ -1556,6 +1847,8 @@ DM.qryManutConsItensEsp.Close;
 DM.qryManutConsPlanoTrab.Close;
 DM.qryManutConsPecas.Close;
 DM.qryManutConsRecursos.Close;
+DM.qryManutConsEquipe.Close;
+DM.qryManutConsEquipeMObra.Close;
 
 DM.qryLubrificCons.Close;
 DM.qryLubrificConsItens.Close;
@@ -1563,6 +1856,8 @@ DM.qryLubrificConsItensEsp.Close;
 DM.qryLubrificConsPlanoTrab.Close;
 DM.qryLubrificConsPecas.Close;
 DM.qryLubrificConsRecursos.Close;
+DM.qryLubrificConsEquipe.Close;
+DM.qryLubrificConsEquipeMObra.Close;
 
 DM.qryRotaCons.Close;
 DM.qryRotaConsSeq.Close;
@@ -1579,12 +1874,16 @@ begin
   DM.qryManutCons.Open;
   DM.qryManutConsPecas.Open;
   DM.qryManutConsRecursos.Open;
+  DM.qryManutConsEquipe.Open;
+  DM.qryManutConsEquipeMObra.Open;
 
   DM.qryLubrificCons.Close;
   DM.qryLubrificCons.Params[0].AsString := DM.FCodEmpresa;
   DM.qryLubrificCons.Open;
   DM.qryLubrificConsPecas.Open;
   DM.qryLubrificConsRecursos.Open;
+  DM.qryLubrificConsEquipe.Open;
+  DM.qryLubrificConsEquipeMObra.Open;
 
   if DM.FEmpTransf = True then
     begin

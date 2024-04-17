@@ -20,7 +20,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       Margins.Left = 4
@@ -28,7 +27,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       Margins.Left = 4
@@ -48,7 +46,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       Margins.Left = 4
@@ -56,7 +53,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsLubrificProgEquip
-      ExplicitLeft = 927
     end
     inherited BtnNovo: TButton
       Width = 27
@@ -823,15 +819,19 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Bottom = 4
     end
     inherited Button1: TButton
+      Left = 853
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       ImageIndex = 104
+      TabOrder = 3
       OnClick = Button1Click
+      ExplicitLeft = 853
     end
     inherited Button2: TButton
+      Left = 882
       Hint = 'Pe'#231'as da Lubrifica'#231#227'o.'
       Margins.Left = 4
       Margins.Top = 4
@@ -839,9 +839,12 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Bottom = 4
       DisabledImageIndex = 81
       ImageIndex = 80
+      TabOrder = 4
       OnClick = Button2Click
+      ExplicitLeft = 882
     end
     inherited Button3: TButton
+      Left = 911
       Hint = 'Recursos da Lubrifica'#231#227'o.'
       Margins.Left = 4
       Margins.Top = 4
@@ -849,13 +852,21 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Bottom = 4
       DisabledImageIndex = 38
       ImageIndex = 37
+      TabOrder = 5
       OnClick = Button3Click
+      ExplicitLeft = 911
     end
     inherited Button4: TButton
+      Left = 824
+      Hint = 'M'#227'o de Obra da Lubrifica'#231#227'o.'
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ImageIndex = 27
+      TabOrder = 2
+      OnClick = Button4Click
+      ExplicitLeft = 824
     end
     inherited Button5: TButton
       Margins.Left = 4
