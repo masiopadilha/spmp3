@@ -35,9 +35,9 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 977
+      Left = 981
       TabOrder = 3
-      ExplicitLeft = 973
+      ExplicitLeft = 977
     end
     object BtnConsultar: TButton
       Left = 403

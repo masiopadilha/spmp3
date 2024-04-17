@@ -532,12 +532,15 @@ end;
 procedure TFrmTelaCadEquipamentos.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
-DM.qryFamEquipamento.Close;
-DM.qryFamEquipamento.Open;
-DM.qryEquipamentosDados.Close;
-DM.qryEquipamentosDadosR.Close;
-DM.qryEquipamentosDados.Open;
-DM.qryEquipamentosDadosR.Open;
+  if PAuxiliares.Caption = '' then
+  begin
+    DM.qryFamEquipamento.Close;
+    DM.qryFamEquipamento.Open;
+    DM.qryEquipamentosDados.Close;
+    DM.qryEquipamentosDadosR.Close;
+    DM.qryEquipamentosDados.Open;
+    DM.qryEquipamentosDadosR.Open;
+  end;
 end;
 
 procedure TFrmTelaCadEquipamentos.BtnFabricanteClick(Sender: TObject);
@@ -864,9 +867,17 @@ procedure TFrmTelaCadEquipamentos.BtnSalvarClick(Sender: TObject);
 var
  randomNum: Integer;
 begin
-//inherited;
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
 
 if DM.qryEquipamentosCODIGO.AsString = EmptyStr then
 begin
@@ -1174,7 +1185,12 @@ begin
   DM.qryEquipamentos.Edit;
 end;
   inherited;
-if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
+
+PAuxiliares.Font.Color := clGreen;
+PAuxiliares.Caption := 'REGISTRO GRAVADO COM SUCESSO!!!';
+DM.FAlterando := True;
+ControleBotoes(2);
+BtnSalvar.ImageIndex := 2;
 
 EdtCodEquip.ReadOnly := True;
 

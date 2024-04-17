@@ -100,9 +100,9 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       Width = 119
       Height = 22
       Style = csOwnerDrawFixed
-      ItemIndex = 8
+      ItemIndex = 4
       TabOrder = 6
-      Text = 'Todas'
+      Text = 'Fechadas'
       Items.Strings = (
         'N'#227'o Programadas'
         'Programadas'
@@ -113,7 +113,8 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
         'Solic. Trabalho'
         'Rotas'
         'Todas'
-        'Canceladas')
+        'Canceladas'
+        'Vencidas')
     end
   end
   inherited PCentro: TPanel

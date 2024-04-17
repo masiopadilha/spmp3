@@ -419,32 +419,53 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       ExplicitLeft = 465
     end
   end
+  object grid: TJvStringGrid
+    Left = 725
+    Top = 432
+    Width = 244
+    Height = 97
+    FixedRows = 0
+    TabOrder = 4
+    Visible = False
+    Alignment = taLeftJustify
+    FixedFont.Charset = DEFAULT_CHARSET
+    FixedFont.Color = clWindowText
+    FixedFont.Height = -12
+    FixedFont.Name = 'Segoe UI'
+    FixedFont.Style = []
+    RowHeights = (
+      24
+      21
+      24
+      24
+      24)
+  end
   object PopupMenuRelat: TPopupMenu
-    Left = 684
-    Top = 16
-    object Ficha1: TMenuItem
-      Caption = 'Ficha'
+    Left = 884
+    Top = 24
+    object Completa1: TMenuItem
+      Caption = 'Completa'
+      OnClick = Completa1Click
     end
-    object Lista1: TMenuItem
-      Caption = 'Lista'
-      object Simples1: TMenuItem
-        Caption = 'Simples'
-      end
-      object Completa1: TMenuItem
-        Caption = 'Completa'
-      end
-      object MaodeObra1: TMenuItem
-        Caption = 'M'#227'o de Obra'
-      end
-      object Inspecoes1: TMenuItem
-        Caption = 'Inspe'#231#245'es'
-      end
-      object Exportar1: TMenuItem
-        Caption = 'Exportar Excel (.csv)'
-      end
+    object Exportar1: TMenuItem
+      Caption = 'Exportar Excel (.csv)'
+      OnClick = Exportar1Click
     end
-    object Checklist1: TMenuItem
-      Caption = 'Checklist'
-    end
+  end
+  object FDMemTFuncSimplesExcel: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 787
+    Top = 251
+  end
+  object DSFuncSimplesExcel: TDataSource
+    DataSet = FDMemTFuncSimplesExcel
+    Left = 787
+    Top = 307
   end
 end

@@ -10,12 +10,14 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 734
     end
     inherited LCadastroPor: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 690
     end
     inherited LblDataCad: TDBText
       Margins.Left = 4
@@ -36,12 +38,14 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 885
     end
     inherited LAlteradoPor: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 859
     end
     inherited LblDataAlt: TDBText
       Margins.Left = 4
@@ -255,6 +259,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsEquipamentos

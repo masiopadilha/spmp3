@@ -1,10 +1,7 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -107,7 +104,8 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
+    Height = 97
+    ExplicitHeight = 97
     inherited Label1: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -123,7 +121,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Manuten'#231#227'o:'
     end
     object Label6: TLabel
-      Left = 78
+      Left = 77
       Top = 62
       Width = 46
       Height = 16
@@ -131,7 +129,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Fam'#237'lia:'
     end
     object Label7: TLabel
-      Left = 536
+      Left = 502
       Top = 62
       Width = 65
       Height = 16
@@ -139,7 +137,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Criticidade:'
     end
     object Label16: TLabel
-      Left = 767
+      Left = 820
       Top = 62
       Width = 31
       Height = 16
@@ -147,9 +145,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Caption = 'Rota:'
     end
     object LblRota: TDBText
-      Left = 801
+      Left = 854
       Top = 62
-      Width = 204
+      Width = 134
       Height = 16
       DataField = 'ROTA'
       DataSource = DM.dsManutProgEquip
@@ -161,7 +159,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       ParentFont = False
     end
     object Label17: TLabel
-      Left = 490
+      Left = 452
       Top = 33
       Width = 6
       Height = 13
@@ -175,7 +173,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       ParentFont = False
     end
     object Label18: TLabel
-      Left = 516
+      Left = 478
       Top = 64
       Width = 6
       Height = 13
@@ -189,7 +187,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       ParentFont = False
     end
     object Label12: TLabel
-      Left = 748
+      Left = 724
       Top = 64
       Width = 6
       Height = 13
@@ -203,7 +201,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       ParentFont = False
     end
     object Label20: TLabel
-      Left = 525
+      Left = 491
       Top = 32
       Width = 76
       Height = 16
@@ -214,7 +212,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Tag = 555
       Left = 127
       Top = 30
-      Width = 125
+      Width = 87
       Height = 24
       CharCase = ecUpperCase
       DataField = 'CODIGO'
@@ -225,10 +223,11 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object EdtDescManutencao: TDBEdit
-      Left = 254
+      Left = 216
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsManutProgEquip
@@ -241,7 +240,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Tag = 555
       Left = 127
       Top = 60
-      Width = 125
+      Width = 87
       Height = 24
       TabStop = False
       CharCase = ecUpperCase
@@ -255,7 +254,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object EdtDescFamilia: TDBEdit
-      Left = 254
+      Left = 216
       Top = 60
       Width = 230
       Height = 24
@@ -271,7 +270,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object BtnFamilia: TButton
-      Left = 485
+      Left = 447
       Top = 57
       Width = 28
       Height = 28
@@ -284,9 +283,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnClick = BtnFamiliaClick
     end
     object CBCriticidade: TDBComboBox
-      Left = 606
+      Left = 572
       Top = 60
-      Width = 136
+      Width = 146
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'CRITICIDADE'
@@ -301,7 +300,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object EdtCodResponsavel: TDBEdit
-      Left = 606
+      Left = 572
       Top = 29
       Width = 120
       Height = 24
@@ -317,9 +316,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       OnKeyPress = FormKeyPress
     end
     object EdtDescResponsavel: TDBEdit
-      Left = 728
+      Left = 695
       Top = 29
-      Width = 230
+      Width = 263
       Height = 24
       Color = clBtnFace
       Ctl3D = True
@@ -345,10 +344,25 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       TabOrder = 7
       OnClick = BtnResponsavelClick
     end
+    object ChbAtivoNF: TDBCheckBox
+      Left = 746
+      Top = 62
+      Width = 58
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Ativo:'
+      DataField = 'ATIVO'
+      DataSource = DM.dsManutProgEquip
+      TabOrder = 9
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      OnExit = TabNextTab1AfterTabChange
+    end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
+    Top = 152
     Height = 122
+    ExplicitTop = 152
     ExplicitHeight = 122
     inherited Label2: TLabel
       Width = 132
@@ -495,6 +509,20 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Font.Style = []
       ParentFont = False
     end
+    object Label22: TLabel
+      Left = 487
+      Top = 48
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object EdtDias: TDBEdit
       Left = 127
       Top = 44
@@ -573,11 +601,10 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PDiversos: TPanel
-    Top = 277
-    Width = 1008
-    Height = 268
-    ExplicitTop = 277
-    ExplicitHeight = 265
+    Top = 278
+    Height = 267
+    ExplicitTop = 278
+    ExplicitHeight = 264
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -592,29 +619,29 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 238
+      Height = 237
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 996
-      ExplicitHeight = 235
+      ExplicitHeight = 234
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 207
+          Height = 206
           Align = alClient
           TabOrder = 0
           ExplicitWidth = 988
-          ExplicitHeight = 204
+          ExplicitHeight = 203
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 205
+            Height = 204
             Align = alClient
             Color = 14671839
             DataSource = DM.dsManutProgEquipItens
@@ -690,14 +717,14 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 207
+          Height = 206
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 205
+            Height = 204
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839
@@ -771,17 +798,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
     inherited Button1: TButton
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
       ImageIndex = 104

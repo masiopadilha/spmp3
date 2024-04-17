@@ -430,8 +430,6 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   inherited PDiversos: TPanel
     Width = 1008
     Height = 200
-    ExplicitWidth = 1004
-    ExplicitHeight = 197
     object Label12: TLabel
       Left = 335
       Top = 34
@@ -758,20 +756,14 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
     Top = 589
     Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 549
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'Caixa de Ferramentas e Ferramentaria'
       DisabledImageIndex = 38
@@ -824,8 +816,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     Top = 152
   end
   object PopupMenuFerram: TPopupMenu
-    Left = 602
-    Top = 396
+    Left = 826
+    Top = 508
     object MenuItem2: TMenuItem
       Caption = 'Caixa de Ferramentas'
       OnClick = MenuItem2Click

@@ -255,6 +255,12 @@ end;
 
 procedure TFrmTelaCadLubrificantes.BtnSalvarClick(Sender: TObject);
 begin
+  if (DM.qryUsuarioPAlteracaoCADLUBRIFICANTES.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 if DM.qryLubrificantesCODIGO.AsString = EmptyStr then

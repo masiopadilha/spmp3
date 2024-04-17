@@ -1,18 +1,18 @@
 inherited FrmTelaPermissoes: TFrmTelaPermissoes
   Caption = 'Permiss'#245'es de Usu'#225'rios'
-  ClientHeight = 564
-  ClientWidth = 788
-  Constraints.MaxHeight = 600
-  Constraints.MaxWidth = 800
-  Constraints.MinHeight = 600
+  ClientHeight = 644
+  ClientWidth = 1012
+  Constraints.MaxHeight = 700
+  Constraints.MaxWidth = 1024
+  Constraints.MinHeight = 680
   Constraints.MinWidth = 800
   OnCreate = FormCreate
-  ExplicitWidth = 800
-  ExplicitHeight = 600
+  ExplicitWidth = 1024
+  ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 784
-    ExplicitWidth = 780
+    Width = 1008
+    ExplicitWidth = 880
     inherited Image1: TImage
       Margins.Left = 4
       Margins.Top = 4
@@ -20,51 +20,51 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 748
-      ExplicitLeft = 744
+      Left = 972
+      ExplicitLeft = 844
     end
   end
   inherited PCentro: TPanel
     Left = 2
     Top = 66
-    Width = 784
-    Height = 427
+    Width = 1008
+    Height = 507
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
     ExplicitLeft = 2
     ExplicitTop = 66
-    ExplicitWidth = 780
-    ExplicitHeight = 424
+    ExplicitWidth = 880
+    ExplicitHeight = 504
     inherited RGTelas: TRadioGroup
-      Width = 782
-      Height = 425
+      Width = 1006
+      Height = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitWidth = 778
-      ExplicitHeight = 422
+      ExplicitWidth = 878
+      ExplicitHeight = 502
     end
     object PBase: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 776
-      Height = 419
+      Width = 1000
+      Height = 499
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 772
-      ExplicitHeight = 416
+      ExplicitWidth = 872
+      ExplicitHeight = 496
       object GBTelas: TGroupBox
         AlignWithMargins = True
         Left = 5
         Top = 5
-        Width = 250
-        Height = 409
+        Width = 318
+        Height = 489
         Align = alLeft
         Caption = 'Telas do Sistema:'
         Font.Charset = ANSI_CHARSET
@@ -74,12 +74,12 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 406
         object TVTelas: TTreeView
-          Left = 2
-          Top = 15
-          Width = 246
-          Height = 392
+          AlignWithMargins = True
+          Left = 5
+          Top = 18
+          Width = 308
+          Height = 466
           Hint = 'D'#234' duplo-clique para liberar a permiss'#227'o para a tela.'
           Align = alClient
           AutoExpand = True
@@ -280,150 +280,193 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             006F006C0065002000640065002000460072006F00740061002E00340000005F
             0000005F000000FFFFFFFFFFFFFFFF5F0000000000000000000000010B520065
             006C0061007400F300720069006F0073002E00}
-          ExplicitHeight = 389
+          ExplicitWidth = 298
         end
       end
-      object GBPermissoes: TGroupBox
+      object pBaseDireito: TPanel
         AlignWithMargins = True
-        Left = 257
+        Left = 326
         Top = 5
-        Width = 514
-        Height = 409
-        Align = alRight
-        Caption = 'Permiss'#245'es:'
-        Color = 14671839
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentBackground = False
-        ParentColor = False
-        ParentFont = False
+        Width = 669
+        Height = 489
+        Margins.Left = 0
+        Align = alClient
         TabOrder = 1
-        ExplicitLeft = 253
-        ExplicitHeight = 406
-        object GrdPermissoes: TDBGrid
+        ExplicitLeft = 312
+        ExplicitTop = 32
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object rgNivelAcesso: TRadioGroup
           AlignWithMargins = True
-          Left = 5
-          Top = 15
-          Width = 507
-          Height = 343
-          Hint = 'Tecle ENTER na coluna '#39'Usu'#225'rio'#39' para realizar a pesquisa.'
-          Margins.Top = 0
-          Margins.Right = 0
-          Margins.Bottom = 5
-          Align = alClient
-          DataSource = DSPermissoesUsu
+          Left = 4
+          Top = 4
+          Width = 661
+          Height = 68
+          Align = alTop
+          Caption = 'Perfil:'
+          Columns = 4
+          Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ItemIndex = 0
+          Items.Strings = (
+            'Todos'
+            'Controlador de Manuten'#231#227'o'
+            'Executante de Trabalho A'
+            'Executante de Trabalho B'
+            'Solicitante de Trabalho')
+          ParentCtl3D = False
           ParentFont = False
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = [fsBold]
-          OnCellClick = GrdPermissoesCellClick
-          OnDrawColumnCell = GrdPermissoesDrawColumnCell
-          OnKeyPress = GrdPermissoesKeyPress
+          OnClick = rgNivelAcessoClick
         end
-        object PBotes: TPanel
+        object GBPermissoes: TGroupBox
           AlignWithMargins = True
-          Left = 5
-          Top = 366
-          Width = 506
-          Height = 40
-          Margins.Right = 1
-          Margins.Bottom = 1
-          Align = alBottom
+          Left = 4
+          Top = 75
+          Width = 661
+          Height = 410
+          Margins.Top = 0
+          Align = alClient
+          Caption = 'Permiss'#245'es:'
+          Color = 14671839
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
           TabOrder = 1
-          ExplicitTop = 363
-          object btnAtualizar: TButton
+          ExplicitTop = 65
+          ExplicitHeight = 420
+          object GrdPermissoes: TDBGrid
             AlignWithMargins = True
-            Left = 4
-            Top = 6
-            Width = 28
-            Height = 28
-            Hint = 'Atualizar'
-            Margins.Top = 5
-            Margins.Bottom = 5
-            Align = alLeft
-            DisabledImageIndex = 78
-            ImageAlignment = iaCenter
-            ImageIndex = 78
-            Images = DM.ImageListBotoes
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            Visible = False
-          end
-          object BtnPadrao: TButton
-            AlignWithMargins = True
-            Left = 333
-            Top = 6
-            Width = 82
-            Height = 28
-            Hint = 'Definir permiss'#245'es padr'#227'o para o usu'#225'rio.'
-            Margins.Top = 5
-            Margins.Bottom = 5
-            Align = alRight
-            Caption = 'Padr'#227'o'
+            Left = 5
+            Top = 15
+            Width = 654
+            Height = 341
+            Hint = 'Tecle ENTER na coluna '#39'Usu'#225'rio'#39' para realizar a pesquisa.'
+            Margins.Top = 0
+            Margins.Right = 0
+            Align = alClient
+            DataSource = DSPermissoesUsu
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ParentShowHint = False
+            ReadOnly = True
             ShowHint = True
-            TabOrder = 1
-            OnClick = BtnPadraoClick
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -13
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = [fsBold]
+            OnCellClick = GrdPermissoesCellClick
+            OnDrawColumnCell = GrdPermissoesDrawColumnCell
+            OnKeyPress = GrdPermissoesKeyPress
           end
-          object BtnGrupo: TButton
+          object PBotes: TPanel
             AlignWithMargins = True
-            Left = 421
-            Top = 6
-            Width = 81
-            Height = 28
-            Hint = 'Criar um novo grupo de permiss'#245'es para o usu'#225'rio.'
-            Margins.Top = 5
-            Margins.Bottom = 5
-            Align = alRight
-            Caption = 'Personalisar'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
-            Font.Style = [fsBold]
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 2
-            OnClick = BtnGrupoClick
+            Left = 5
+            Top = 362
+            Width = 651
+            Height = 40
+            Margins.Bottom = 6
+            Align = alBottom
+            TabOrder = 1
+            ExplicitTop = 401
+            ExplicitWidth = 659
+            object btnAtualizar: TButton
+              AlignWithMargins = True
+              Left = 4
+              Top = 6
+              Width = 28
+              Height = 28
+              Hint = 'Atualizar'
+              Margins.Top = 5
+              Margins.Bottom = 5
+              Align = alLeft
+              DisabledImageIndex = 78
+              ImageAlignment = iaCenter
+              ImageIndex = 78
+              Images = DM.ImageListBotoes
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              Visible = False
+            end
+            object BtnPadrao: TButton
+              AlignWithMargins = True
+              Left = 478
+              Top = 6
+              Width = 82
+              Height = 28
+              Hint = 'Definir permiss'#245'es padr'#227'o para o usu'#225'rio.'
+              Margins.Top = 5
+              Margins.Bottom = 5
+              Align = alRight
+              Caption = 'Padr'#227'o'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 1
+              OnClick = BtnPadraoClick
+              ExplicitLeft = 486
+            end
+            object BtnGrupo: TButton
+              AlignWithMargins = True
+              Left = 566
+              Top = 6
+              Width = 81
+              Height = 28
+              Hint = 'Criar um novo grupo de permiss'#245'es para o usu'#225'rio.'
+              Margins.Top = 5
+              Margins.Bottom = 5
+              Align = alRight
+              Caption = 'Personalisar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnClick = BtnGrupoClick
+              ExplicitLeft = 574
+            end
           end
         end
       end
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 497
-    Width = 784
-    ExplicitTop = 494
-    ExplicitWidth = 780
+    Top = 577
+    Width = 1008
+    ExplicitTop = 574
+    ExplicitWidth = 880
   end
   inherited PBotoes: TPanel
-    Top = 524
-    Width = 784
-    ExplicitTop = 521
-    ExplicitWidth = 780
+    Top = 604
+    Width = 1008
+    ExplicitTop = 601
+    ExplicitWidth = 880
     inherited BtnOK: TButton
       Left = 50
       Margins.Left = 4
@@ -434,12 +477,12 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
       ExplicitLeft = 50
     end
     inherited BtnFechar: TButton
-      Left = 352
+      Left = 467
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 352
+      ExplicitLeft = 467
     end
   end
   object ImageList1: TImageList

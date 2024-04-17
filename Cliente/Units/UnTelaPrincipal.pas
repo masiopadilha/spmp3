@@ -501,6 +501,11 @@ begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
+    if (DM.qryUsuarioPAlteracaoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
     Application.CreateForm(TFrmTelaCadEquipamentosAltCod, FrmTelaCadEquipamentosAltCod);
     FrmTelaCadEquipamentosAltCod.ShowModal;
   Finally
@@ -514,6 +519,11 @@ begin
     if (DM.qryUsuarioPAcessoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    if (DM.qryUsuarioPAlteracaoCADEQUIPAMENTOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadEquipamentosAltFamiliaCod, FrmTelaCadEquipamentosAltFamiliaCod);
@@ -1609,7 +1619,7 @@ end;
 procedure TFrmTelaPrincipal.Fechamento1Click(Sender: TObject);
 begin
   Try
-    if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    if (DM.qryUsuarioPAcessoCADFECHAMANUT.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
@@ -1857,10 +1867,9 @@ begin
   StatusBar1.Panels[1].Text := DM.FNivelAcesso;
   StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
   StatusBar1.Panels[3].Text := DM.FNomeGrupo;
-//  StatusBar1.Panels[4].Text := DM.GetVersion(Application.ExeName);
-  StatusBar1.Panels[4].Text := DM.FVersaoMacro + ' beta';
+//  StatusBar1.Panels[4].Text := DM.FVersaoMacro + ' beta';
+  StatusBar1.Panels[4].Text := DM.FVersaoMacro;
 
-//  StatusBar1.Panels[4].Text := DM.FVersao;
 
   if DM.FDiasRestantes < 36500 then
     lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'

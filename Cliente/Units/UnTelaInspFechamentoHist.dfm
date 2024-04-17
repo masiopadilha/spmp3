@@ -14,19 +14,19 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     Width = 1008
     ExplicitWidth = 1004
     object Label1: TLabel [1]
-      Left = 284
+      Left = 324
       Top = 33
       Width = 7
       Height = 16
       Caption = 'a'
     end
     object Label3: TLabel [2]
-      Left = 125
+      Left = 137
       Top = 33
-      Width = 46
+      Width = 73
       Height = 13
       Alignment = taRightJustify
-      Caption = 'Per'#237'odo:'
+      Caption = 'Programada:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -37,7 +37,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     inherited BtnAjuda: TButton
       Left = 969
       TabOrder = 4
-      ExplicitLeft = 969
+      ExplicitLeft = 965
     end
     object BtnImprimir: TButton
       Left = 938
@@ -55,7 +55,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       OnClick = BtnImprimirClick
     end
     object BtnConsultar: TButton
-      Left = 403
+      Left = 443
       Top = 28
       Width = 28
       Height = 28
@@ -70,7 +70,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       OnClick = BtnConsultarClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 175
+      Left = 215
       Top = 29
       Width = 105
       Height = 24
@@ -80,7 +80,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       DropDownDate = 44778.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 296
+      Left = 336
       Top = 30
       Width = 105
       Height = 24
@@ -132,7 +132,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
           Expanded = False
           FieldName = 'DTAINICIO1'
           Title.Alignment = taCenter
-          Title.Caption = 'Vencimento'
+          Title.Caption = 'Programada'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -12
@@ -235,7 +235,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
           Expanded = False
           FieldName = 'DTAINICIO1'
           Title.Alignment = taCenter
-          Title.Caption = 'Vencimento'
+          Title.Caption = 'Programada'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -12
@@ -378,7 +378,8 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
         Items.Strings = (
           'Abertas'
           'Fechadas'
-          'Canceladas')
+          'Canceladas'
+          'Vencidas')
       end
     end
   end

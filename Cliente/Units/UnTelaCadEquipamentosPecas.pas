@@ -50,9 +50,30 @@ end;
 procedure TFrmTelaCadEquipamentosPecas.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.qryEquipamentosPecas.Close;
-DM.qryEquipamentosPecas.Open;
-DM.qryEquipamentosPecas.Edit;
+  DM.qryEquipamentosPecas.Close;
+  DM.qryEquipamentosPecas.Open;
+  DM.qryEquipamentosPecas.Edit;
+
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdCadastro.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 end;
 
 procedure TFrmTelaCadEquipamentosPecas.GrdCadastroDblClick(Sender: TObject);
@@ -80,6 +101,26 @@ if (GrdCadastro.SelectedIndex = 3) or (GrdCadastro.SelectedIndex = 4) then
 
 if (Key = #13) then
   begin
+    if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      GrdCadastro.ReadOnly := True;
+      Exit;
+    end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      DM.FDataSetParam.Cancel;
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      GrdCadastro.ReadOnly := True;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
     DM.FTabela_auxiliar := 360;
 
     if (GrdCadastro.SelectedIndex = 1) then

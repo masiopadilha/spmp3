@@ -111,6 +111,7 @@ type
     procedure rgStatusClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure EdtMatriculaKeyPress(Sender: TObject; var Key: Char);
+    procedure PCInspecoesChange(Sender: TObject);
   private
     hora_futura: TDateTime;
     { Private declarations }
@@ -254,9 +255,9 @@ PAuxiliares.Font.Color := clBlack;
               //Gerar OS com itens problemáticos
               if CDItensProb.RecordCount > 0 then
                 begin
-                  LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (Retorno)'
+                  LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
                                                                 , DM.qryManutPeriodicasCODEQUIPAMENTO.AsString, DM.qryManutPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, EmptyStr, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
 
                   DM.qryManutPeriodicas.Edit;
@@ -409,9 +410,9 @@ PAuxiliares.Font.Color := clBlack;
             //Gerar OS com itens problemáticos
             if CDItensProb.RecordCount > 0 then
               begin
-                LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (Retorno)'
+                LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
                                                               , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryLubrificProgEquipCODOFICINA.AsString, EmptyStr, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
@@ -578,9 +579,9 @@ PAuxiliares.Font.Color := clBlack;
                   //Gerar OS com itens problemáticos
                   if CDItensProb.RecordCount > 0 then
                     begin
-                      LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (Retorno)'
+                      LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (CORRETIVA)'
                                                                     , DM.qryRotaPeriodicasManutCODEQUIPAMENTO.AsString, DM.qryRotaPeriodicasManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString);
+                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, EmptyStr, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
 
                       DM.qryRotaPeriodicasManut.Edit;
@@ -982,6 +983,9 @@ if PCInspecoes.Pages[2].TabVisible = True then
   TSRota.Caption := 'Rotas ('+IntToStr(DM.qryRotaPeriodicas.RecordCount)+')';
 
 hora_futura := IncMinute(Now, 5);
+
+EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
+EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
 end;
 
 procedure TFrmTelaInspFechamento.FormKeyDown(Sender: TObject; var Key: Word;
@@ -1723,6 +1727,28 @@ if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(F
      GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 1);
    end;
 
+end;
+
+procedure TFrmTelaInspFechamento.PCInspecoesChange(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+      begin
+        EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
+        EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
+      end;
+    1:
+      begin
+        EdtMatricula.Text := DM.qryLubrificPeriodicasMATRICULAOS.AsString;
+        EdtResponsavel.Text := DM.qryLubrificPeriodicasFUNCIONARIOOS.AsString;
+      end;
+    2:
+      begin
+        EdtMatricula.Clear;
+        EdtResponsavel.Clear;
+      end;
+  end;
 end;
 
 procedure TFrmTelaInspFechamento.GrdItensManutCellClick(Column: TColumn);

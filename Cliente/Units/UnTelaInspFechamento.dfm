@@ -137,6 +137,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Font.Style = []
         ParentFont = False
         TabOrder = 6
+        OnChange = PCInspecoesChange
         ExplicitWidth = 984
         ExplicitHeight = 457
         object TSManut: TTabSheet

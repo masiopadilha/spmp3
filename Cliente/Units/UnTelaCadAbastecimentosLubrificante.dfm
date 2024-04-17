@@ -35,7 +35,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 973
+      Left = 977
       ExplicitLeft = 973
     end
     object BtnConsultar: TButton
@@ -283,7 +283,6 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 935
       ExplicitHeight = 13
     end
   end

@@ -94,6 +94,7 @@ case CBSituacao.ItemIndex of
   7:DM.qryOrdemServicoHistorico.Params[2].AsInteger := 7;
   8:DM.qryOrdemServicoHistorico.Params[2].AsInteger := 8;
   9:DM.qryOrdemServicoHistorico.Params[2].AsInteger := 9;
+  10:DM.qryOrdemServicoHistorico.Params[2].AsInteger := 10;
 end;
 DM.qryOrdemServicoHistorico.Open;
 DM.qryOrdemServicoHistorico.Filter   := '';

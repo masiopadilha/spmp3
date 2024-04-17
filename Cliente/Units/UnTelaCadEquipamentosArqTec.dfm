@@ -1,5 +1,7 @@
 inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
   Caption = 'Literaturas T'#233'cnicas'
+  ClientHeight = 304
+  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
   inherited PTop: TPanel
@@ -107,7 +109,6 @@ inherited FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec
   end
   inherited PAuxiliares: TPanel
     Left = 3
-    Top = 234
     Width = 502
     Margins.Left = 3
     Margins.Top = 3

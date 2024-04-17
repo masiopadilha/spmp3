@@ -69,12 +69,32 @@ procedure TFrmTelaCadLubrificProgFamEquipPartesItens.FormCreate(
   Sender: TObject);
 begin
   inherited;
-DM.qryLubrificProgFamEquipPartes.Close;
-//DM.qryLubrificProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
-//DM.qryLubrificProgFamEquipPartes.Params[1].AsString := DM.qryLubrificProgFamEquipCODIGO.AsString;
-DM.qryLubrificProgFamEquipPartes.Open;
-DM.qryLubrificProgFamEquipItens.Close;
-DM.qryLubrificProgFamEquipItens.Open;
+  DM.qryLubrificProgFamEquipPartes.Close;
+  //DM.qryLubrificProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
+  //DM.qryLubrificProgFamEquipPartes.Params[1].AsString := DM.qryLubrificProgFamEquipCODIGO.AsString;
+  DM.qryLubrificProgFamEquipPartes.Open;
+  DM.qryLubrificProgFamEquipItens.Close;
+  DM.qryLubrificProgFamEquipItens.Open;
+
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdItens.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdItens.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdCadastroKeyDown(

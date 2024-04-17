@@ -333,9 +333,9 @@ begin
       30, 300, 301://Funcionários
         begin
           if FrmTelaCadMonitMedicoes = nil then
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
           else
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
         end;
       31://Equipamentos Primários
         begin
@@ -354,6 +354,7 @@ begin
                                  + ', `manutprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `manutprogfamequipamento`.`DESCRICAO` DESCMANUTPROGFAMEQUIP'
                                  + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
                                  + ', DATE_ADD(`manutprogequipamento`.`DTAINICIO1`, INTERVAL `manutprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                                 + ', `manutprogequipamento`.`ATIVO`'
                                  + ' FROM `manutprogequipamento`'
                                  + ' LEFT JOIN `usuario` ON (`manutprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
                                  + ' LEFT JOIN `usuario` AS `usuario_1` ON (`manutprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
@@ -378,6 +379,7 @@ begin
                                  + ', `lubrificprogequipamento`.`OBSERVACOES`, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT, `lubrificprogfamequipamento`.`DESCRICAO` DESCLUBRIFICPROGFAMEQUIP'
                                  + ', `tipoprogramacao`.`DESCRICAO` AS `PROGRAMACAO2`, `equipamentos`.`DESCRICAO` EQUIPAMENTO, `funcionarios`.`NOME` RESPONSAVEL, `rotasequipamento`.`DESCRICAO` AS `ROTA`'
                                  + ', DATE_ADD(`lubrificprogequipamento`.`DTAINICIO1`, INTERVAL `lubrificprogequipamento`.`FREQUENCIA1` DAY) C_PROXINSP, `equipamentos`.`CODLOCALIZACAO` As CODAREA, `areas`.`DESCRICAO` AS DESCAREA'
+                                 + ', `lubrificprogequipamento`.`ATIVO`'
                                  + ' FROM `lubrificprogequipamento`'
                                  + ' LEFT JOIN `usuario` ON (`lubrificprogequipamento`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
                                  + ' LEFT JOIN `usuario` AS `usuario_1` ON (`lubrificprogequipamento`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
@@ -749,10 +751,10 @@ begin
         GrdAuxiliar.Columns[0].Title.Alignment  := taCenter;
         DM.qryAuxiliar.Fields[0].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[0].DisplayLabel := 'Código';
-        DM.qryAuxiliar.Fields[0].DisplayWidth := 15;
+        DM.qryAuxiliar.Fields[0].DisplayWidth := 12;
         DM.qryAuxiliar.Fields[0].Alignment    := taCenter;
         DM.qryAuxiliar.Fields[1].DisplayLabel := 'Descrição';
-        DM.qryAuxiliar.Fields[1].DisplayWidth := 50;
+        DM.qryAuxiliar.Fields[1].DisplayWidth := 45;
       end
     else
       begin
@@ -866,15 +868,17 @@ begin
           DM.qryAuxiliar.Fields[1].DisplayWidth := 25;
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
           DM.qryAuxiliar.Fields[2].DisplayWidth := 20;
+          DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
+          DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
         end;
       32, 33, 321, 331://Manutenção/Lubrificação Programada do Equipamento
         begin
           DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayLabel              := 'Descrição';
-          DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayWidth              := 35;
+          DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayWidth              := 50;
 
           DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayLabel             := 'Programada';
           DM.qryAuxiliar.FieldByName('DTAINICIO1').Alignment                := taCenter;
-          DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayWidth             := 12;
+          DM.qryAuxiliar.FieldByName('DTAINICIO1').DisplayWidth             := 10;
           GrdAuxiliar.Columns[2].Title.Alignment                            := taCenter;
 
           DM.qryAuxiliar.FieldByName('FREQUENCIA1').DisplayLabel            := 'Dias';
@@ -888,15 +892,20 @@ begin
           if (DM.FTabela_auxiliar = 32) or (DM.FTabela_auxiliar = 321) then
           begin
             DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayLabel  := 'Família da Manutenção';
-            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 35;
+            DM.qryAuxiliar.FieldByName('DESCMANUTPROGFAMEQUIP').DisplayWidth  := 45;
           end else
           begin
             DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayLabel  := 'Família da Lubrificação';
-            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 35;
+            DM.qryAuxiliar.FieldByName('DESCLUBRIFICPROGFAMEQUIP').DisplayWidth  := 45;
           end;
 
           DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayLabel            := 'Responsável';
-          DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayWidth            := 30;
+          DM.qryAuxiliar.FieldByName('RESPONSAVEL').DisplayWidth            := 25;
+
+          DM.qryAuxiliar.FieldByName('ATIVO').DisplayLabel                  := 'Ativo';
+          DM.qryAuxiliar.FieldByName('ATIVO').Alignment                     := taCenter;
+          DM.qryAuxiliar.FieldByName('ATIVO').DisplayWidth                  := 5;
+          GrdAuxiliar.Columns[31].Title.Alignment                           := taCenter;
 
           DM.qryAuxiliar.Fields[1].Visible := False;
           DM.qryAuxiliar.Fields[2].Visible := False;
@@ -961,6 +970,8 @@ begin
             GrdAuxiliar.Columns[1].Title.Font.Style := [fsBold];
           DM.qryAuxiliar.Fields[2].DisplayWidth := 25;
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
+          DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
+          DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
         end;
       301://Funcionários Programados
         begin
@@ -1001,8 +1012,8 @@ begin
           DM.qryAuxiliar.Fields[4].DisplayWidth := 15;
           DM.qryAuxiliar.Fields[5].DisplayLabel := 'Equipamento';
           DM.qryAuxiliar.Fields[5].DisplayWidth := 30;
-  //        if  DM.FTabela_auxiliar = 40 then
-  //          DM.qryAuxiliar.Fields[6].Visible := False;
+          if  DM.FTabela_auxiliar = 40 then
+            DM.qryAuxiliar.Fields[6].Visible := False;
         end;
       41,410:
         begin
@@ -1440,7 +1451,7 @@ begin
   if EdtConsulta.Focused = True then Exit;
 
   case DM.FTabela_auxiliar of
-    28, 31, 87, 100, 110, 120, 130, 150, 160, 170, 200, 210, 220, 230, 240, 300, 301, 320, 330, 370, 380, 400, 420, 430, 440, 450, 460, 470, 490, 500, 5000, 600, 700, 800, 900, 6400, 7000, 7900, 8000, 8301, 8100, 9000, 9500://Combos e outras consultas
+    28, 31, 87, 100, 110, 120, 130, 150, 160, 170, 200, 210, 220, 230, 240, 320, 330, 370, 380, 400, 420, 430, 440, 450, 460, 470, 490, 500, 5000, 600, 700, 800, 900, 6400, 7000, 7900, 8000, 8301, 8100, 9000, 9500://Combos e outras consultas
       begin
         DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
@@ -1787,6 +1798,12 @@ begin
             Open;
             Edit;
           end;
+      end;
+    300, 301: //Funcionários
+      begin
+        DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
+        DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
+        DM.FParamAuxiliar[4] := DM.DSAuxiliar.DataSet.Fields[3].AsString;
       end;
     32://Manutenção Programada de Equipamento
       begin

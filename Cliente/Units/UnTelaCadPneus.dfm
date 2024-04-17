@@ -1,26 +1,25 @@
 inherited FrmTelaCadPneus: TFrmTelaCadPneus
   Caption = 'Pneus'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LblDataCad: TDBText
       DataSource = DM.dsPneus
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPneus
+      ExplicitLeft = 776
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPneus
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsPneus
+      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 90
       Top = 33
@@ -304,8 +303,6 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -729,10 +726,6 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
     end
   end
   inherited PDiversos: TPanel
-    Width = 1008
-    Height = 200
-    ExplicitWidth = 1004
-    ExplicitHeight = 197
     object Label8: TLabel
       Left = 64
       Top = 38
@@ -920,23 +913,7 @@ inherited FrmTelaCadPneus: TFrmTelaCadPneus
       OnKeyPress = FormKeyPress
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
-  end
-  inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
-    ExplicitTop = 586
-    ExplicitWidth = 1008
-  end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Hint = 'ID dos Pneus'
       DisabledImageIndex = 81

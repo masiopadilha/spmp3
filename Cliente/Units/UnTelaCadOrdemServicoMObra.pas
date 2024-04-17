@@ -53,14 +53,12 @@ begin
           DM.qryOrdemServico.Edit;
           DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
           DM.qryOrdemServico.Post;
-
           if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
             begin
               DM.qryOrdemServicoGerencia.Edit;
               DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
               DM.qryOrdemServicoGerencia.Post;
             end;
-
           FrmTelaCadOrdemServico.PSituacao.Caption := 'DETALHADA';
           FrmTelaCadOrdemServico.PSituacao.Color := clYellow;
           FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
@@ -79,6 +77,28 @@ end;
 procedure TFrmTelaCadOrdemServicoMObra.FormCreate(Sender: TObject);
 begin
   inherited;
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdEquipe.ReadOnly := True;
+    GrdEquipeMObra.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdEquipe.ReadOnly := True;
+    GrdEquipeMObra.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') then
   begin
     PAuxiliares.Font.Color  := clRed;
@@ -150,6 +170,24 @@ if ((GrdEquipeMObra.SelectedIndex = 0) and (Key <> #13)) or (DM.qryOrdemServicoE
   end;
 if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
   begin
+    if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+      DM.MSGAguarde('', False);
+      GrdEquipeMObra.ReadOnly := True;
+      Exit;
+    end;
+
+    if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      PAuxiliares.Font.Color := clRed;
+      PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+      GrdEquipeMObra.ReadOnly := True;
+      DM.MSGAguarde('', False);
+      Exit;
+    end;
+
     DM.FTabela_auxiliar := 130;
     Try
       Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);

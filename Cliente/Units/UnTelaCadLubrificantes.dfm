@@ -4,15 +4,19 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
   inherited PControle: TPanel
     inherited LblDataCad: TDBText
       DataSource = DM.dsLubrificantes
+      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsLubrificantes
+      ExplicitLeft = 776
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsLubrificantes
+      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsLubrificantes
+      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
@@ -243,12 +247,13 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
       OwnerDraw = True
       TabOrder = 0
       OnDrawTab = PCLubrificanteDrawTab
+      ExplicitWidth = 996
       object TSOleo: TTabSheet
         Caption = #211'leo'
         object POleo: TPanel
           Left = 0
           Top = 0
-          Width = 988
+          Width = 992
           Height = 134
           Align = alClient
           BevelOuter = bvNone
@@ -496,13 +501,14 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
         object PGraxa: TPanel
           Left = 0
           Top = 0
-          Width = 988
+          Width = 992
           Height = 134
           Align = alClient
           BevelOuter = bvNone
           Color = 14671839
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 988
           object Label37: TLabel
             Left = 47
             Top = 12

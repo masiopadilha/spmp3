@@ -124,11 +124,14 @@ end;
 procedure TFrmTelaCadLubrificProgFamEquip.BtnExcluirClick(Sender: TObject);
 begin
   inherited;
-DM.qryLubrificProgFamEquipPlanoTrab.Close;
-DM.qryLubrificProgFamEquipPartes.Close;
-DM.qryLubrificProgFamEquipItens.Close;
-DM.qryLubrificProgFamEquipItensTodos.Close;
-DM.qryLubrificProgEquipItens.Close;
+  if DM.qryLubrificProgFamEquip.IsEmpty = True then
+  begin
+    DM.qryLubrificProgFamEquipPlanoTrab.Close;
+    DM.qryLubrificProgFamEquipItens.Close;
+    DM.qryLubrificProgFamEquipItensTodos.Close;
+    DM.qryLubrificProgEquipItens.Close;
+    DM.qryLubrificProgFamEquipPartes.Close;
+  end;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnFamiliaClick(Sender: TObject);
@@ -309,6 +312,16 @@ procedure TFrmTelaCadLubrificProgFamEquip.BtnSalvarClick(Sender: TObject);
 begin
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
+
+if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
 if DM.qryLubrificProgFamEquipCODIGO.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodLubrificacao.SetFocus; Exit;

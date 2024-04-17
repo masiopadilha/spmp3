@@ -44,6 +44,12 @@ uses UnDmRelatorios, UnTelaConsulta, UnDM;
 procedure TFrmTelaCadFuncionariosCxaFerramInv.Abrir1Click(Sender: TObject);
 begin
   inherited;
+    if (DM.qryUsuarioPInclusaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Inclusão não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption    := EmptyStr;
 if DM.qryFuncionariosCxaFerram.IsEmpty then
@@ -151,6 +157,12 @@ end;
 procedure TFrmTelaCadFuncionariosCxaFerramInv.Fechar1Click(Sender: TObject);
 begin
   inherited;
+  if (DM.qryUsuarioPAlteracaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption    := EmptyStr;
 
@@ -224,6 +236,18 @@ var
 LCampo : String;
 begin
   inherited;
+  if (DM.qryUsuarioPInclusaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Inclusão não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+  if (DM.qryUsuarioPAlteracaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 if DM.qryFuncionariosCxaFerramInv.IsEmpty = True then
   begin
     Key := #0;

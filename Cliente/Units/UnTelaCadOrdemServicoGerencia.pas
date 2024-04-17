@@ -93,6 +93,7 @@ type
     StringField14: TStringField;
     StringField15: TStringField;
     StringField16: TStringField;
+    chbVenc: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -145,7 +146,7 @@ type
 var
   FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia;
   LEquipamento, LCodOficina, LCodFamilia, LNProg, LDet, LProg, LExec,
-  LLib, LFec, LPar, LSolic, LRot, LCanc, LParado : String;
+  LLib, LFec, LPar, LSolic, LRot, LCanc, LVenc, LParado : String;
 implementation
 {$R *.dfm}
 uses UnTelaConsulta, UnTelaCadOrdemServico,
@@ -177,7 +178,7 @@ var
 LMotivo : String;
 begin
   inherited;
-if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+if (DM.qryUsuarioPExclusaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
@@ -930,191 +931,198 @@ begin
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.ConfigurarFiltros;
 begin
-GrdOrdemServico.DataSource.DataSet.Filtered := False;
-GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
-DM.qryOrdemServicoGerencia.IndexDefs.Clear;
+  GrdOrdemServico.DataSource.DataSet.Filtered := False;
+  GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
+  DM.qryOrdemServicoGerencia.IndexDefs.Clear;
 
-LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := ''; LParado := '';
+  LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := ''; LVenc := ''; LParado := '';
 
-if (chkNProg.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LDet := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
-  else
-    LDet := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LDet;
-
-if (chkDetalhad.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LNProg := ' (SITUACAO = ''DETALHADA'')'
-  else
-    LNProg := ' OR (SITUACAO = ''DETALHADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LNProg;
-
-if (chkProg.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LProg  := ' (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')'
-  else
-    LProg  := ' OR (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LProg;
-
-if (chkExec.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LExec  := ' (SITUACAO = ''EXECUCAO'')'
-  else
-    LExec  := ' OR (SITUACAO = ''EXECUCAO'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LExec;
-
-if (chkLib.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LLib   := ' (SITUACAO = ''LIBERADA'')'
-  else
-    LLib   := ' OR (SITUACAO = ''LIBERADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LLib;
-
-if (chkFec.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LFec   := ' (SITUACAO = ''FECHADA'')'
-  else
-    LFec   := ' OR (SITUACAO = ''FECHADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LFec;
-
-if (chkPar.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LPar   := ' (SITUACAO = ''PARALISADA'')'
-  else
-    LPar   := ' OR (SITUACAO = ''PARALISADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LPar;
-
-if (chkSolic.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    begin
-      LSolic := ' (SOLICTRAB = ''S'')';
-      if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-        GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
-    end
-  else
-    begin
-      LSolic := ' OR (SOLICTRAB = ''S'')';
-      if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-        GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
-    end;
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LSolic;
-
-if (chkRot.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    begin
-      LRot   := ' (ROTAEQUIP = ''S'')';
-      if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-        GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
-    end
-  else
-    begin
-      LRot   := ' OR (ROTAEQUIP = ''S'')';
-      if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-        GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
-    end;
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LRot ;
-
-
-if (chbCanc.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LCanc   := ' (SITUACAO = ''CANCELADA'')'
-  else
-    LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LCanc;
-
-if (chkParado.Checked = True) then
-  if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-    LParado   := ' (EQUIPPARADO = ''S'')'
-  else
-    LParado   := ' AND (EQUIPPARADO = ''S'')';
-GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LParado;
-
-
-if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-  GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
-
-if EdtFamiliaEquip.Text <> '' then
-  begin
-    if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-      GrdOrdemServico.DataSource.DataSet.Filter := 'CODFAMILIAEQUIP = ' + QuotedStr(LCodFamilia)
+  if (chkNProg.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LDet := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
     else
-      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODFAMILIAEQUIP = '+QuotedStr(LCodFamilia);
+      LDet := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LDet;
+
+  if (chkDetalhad.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LNProg := ' (SITUACAO = ''DETALHADA'')'
+    else
+      LNProg := ' OR (SITUACAO = ''DETALHADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LNProg;
+
+  if (chkProg.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LProg  := ' (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')'
+    else
+      LProg  := ' OR (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LProg;
+
+  if (chkExec.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LExec  := ' (SITUACAO = ''EXECUCAO'')'
+    else
+      LExec  := ' OR (SITUACAO = ''EXECUCAO'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LExec;
+
+  if (chkLib.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LLib   := ' (SITUACAO = ''LIBERADA'')'
+    else
+      LLib   := ' OR (SITUACAO = ''LIBERADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LLib;
+
+  if (chkFec.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LFec   := ' (SITUACAO = ''FECHADA'')'
+    else
+      LFec   := ' OR (SITUACAO = ''FECHADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LFec;
+
+  if (chkPar.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LPar   := ' (SITUACAO = ''PARALISADA'')'
+    else
+      LPar   := ' OR (SITUACAO = ''PARALISADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LPar;
+
+  if (chkSolic.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      begin
+        LSolic := ' (SOLICTRAB = ''S'')';
+        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
+          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+      end
+    else
+      begin
+        LSolic := ' OR (SOLICTRAB = ''S'')';
+        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
+          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+      end;
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LSolic;
+
+  if (chkRot.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      begin
+        LRot   := ' (ROTAEQUIP = ''S'')';
+        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
+          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+      end
+    else
+      begin
+        LRot   := ' OR (ROTAEQUIP = ''S'')';
+        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
+          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+      end;
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LRot ;
+
+
+  if (chbCanc.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LCanc   := ' (SITUACAO = ''CANCELADA'')'
+    else
+      LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LCanc;
+
+  if (chbVenc.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LVenc   := ' (SITUACAO = ''VENCIDA'')'
+    else
+      LVenc   := ' OR (SITUACAO = ''VENCIDA'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LVenc;
+
+  if (chkParado.Checked = True) then
+    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+      LParado   := ' (EQUIPPARADO = ''S'')'
+    else
+      LParado   := ' AND (EQUIPPARADO = ''S'')';
+  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LParado;
+
+
+  if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
+    GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+
+  if EdtFamiliaEquip.Text <> '' then
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'CODFAMILIAEQUIP = ' + QuotedStr(LCodFamilia)
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODFAMILIAEQUIP = '+QuotedStr(LCodFamilia);
+    end;
+
+  if edtOficina.Text <> '' then
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'CODOFICINA = ' + QuotedStr(LCodOficina)
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+    end;
+
+    if edtManutencao.Text <> ''  then
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'CODMANUTENCAO = ' + QuotedStr(LCodManutencao)
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODMANUTENCAO = ' + QuotedStr(LCodManutencao);
+    end;
+
+  case CBPrioridade.ItemIndex of
+    1:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Emergência'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Emergência''';
+      end;
+    2:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 12 hs'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 12 hs''';
+      end;
+    3:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 72 hs'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 72 hs''';
+      end;
+    4:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Semana'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Semana''';
+      end;
+    5:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Mês'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Mês''';
+      end;
+    6:
+      begin
+        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Acima de um mês'''
+        else
+          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Acima de um mês''';
+      end;
   end;
 
-if edtOficina.Text <> '' then
-  begin
-    if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-      GrdOrdemServico.DataSource.DataSet.Filter := 'CODOFICINA = ' + QuotedStr(LCodOficina)
-    else
-      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
-  end;
+  if LEquipamento <> EmptyStr then
+    begin
+      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
+        GrdOrdemServico.DataSource.DataSet.Filter := 'CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0])
+      else
+        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0]);
+    end;
 
-  if edtManutencao.Text <> ''  then
-  begin
-    if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-      GrdOrdemServico.DataSource.DataSet.Filter := 'CODMANUTENCAO = ' + QuotedStr(LCodManutencao)
-    else
-      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODMANUTENCAO = ' + QuotedStr(LCodManutencao);
-  end;
+  if GrdOrdemServico.DataSource.DataSet.Filter <> EmptyStr then
+    GrdOrdemServico.DataSource.DataSet.Filtered := True;
 
-case CBPrioridade.ItemIndex of
-  1:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Emergência'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Emergência''';
-    end;
-  2:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 12 hs'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 12 hs''';
-    end;
-  3:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 72 hs'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 72 hs''';
-    end;
-  4:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Semana'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Semana''';
-    end;
-  5:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Mês'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Mês''';
-    end;
-  6:
-    begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Acima de um mês'''
-      else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Acima de um mês''';
-    end;
-end;
-
-if LEquipamento <> EmptyStr then
-  begin
-    if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-      GrdOrdemServico.DataSource.DataSet.Filter := 'CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0])
-    else
-      GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0]);
-  end;
-
-if GrdOrdemServico.DataSource.DataSet.Filter <> EmptyStr then
-  GrdOrdemServico.DataSource.DataSet.Filtered := True;
-
-DM.qryOrdemServicoGerencia.First;
+  DM.qryOrdemServicoGerencia.First;
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.edtManutencaoDblClick(Sender: TObject);
 begin
@@ -1370,24 +1378,12 @@ procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDrawColumnCell(
   State: TGridDrawState);
 begin
   inherited;
-GrdOrdemServico.Columns[0].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[1].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[2].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[3].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[4].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[5].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[6].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[7].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[8].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[9].Title.Font.Size            := 9;
-GrdOrdemServico.Columns[10].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[11].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[12].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[13].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[14].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[15].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[16].Title.Font.Size           := 9;
-GrdOrdemServico.Columns[0].Title.Font.Style           := [fsbold];
+GrdOrdemServico.Columns[0].Title.Font.Size := 9; GrdOrdemServico.Columns[1].Title.Font.Size := 9; GrdOrdemServico.Columns[2].Title.Font.Size := 9;
+GrdOrdemServico.Columns[3].Title.Font.Size := 9; GrdOrdemServico.Columns[4].Title.Font.Size := 9; GrdOrdemServico.Columns[5].Title.Font.Size := 9;
+GrdOrdemServico.Columns[6].Title.Font.Size := 9; GrdOrdemServico.Columns[7].Title.Font.Size := 9; GrdOrdemServico.Columns[8].Title.Font.Size := 9;
+GrdOrdemServico.Columns[9].Title.Font.Size := 9; GrdOrdemServico.Columns[10].Title.Font.Size := 9; GrdOrdemServico.Columns[11].Title.Font.Size := 9;
+GrdOrdemServico.Columns[12].Title.Font.Size := 9; GrdOrdemServico.Columns[13].Title.Font.Size := 9; GrdOrdemServico.Columns[14].Title.Font.Size := 9;
+GrdOrdemServico.Columns[15].Title.Font.Size := 9; GrdOrdemServico.Columns[16].Title.Font.Size := 9; GrdOrdemServico.Columns[0].Title.Font.Style := [fsbold];
 GrdOrdemServico.Columns[0].Title.Alignment            := taCenter;
 DM.qryOrdemServicoGerenciaCODIGO.DisplayLabel         := 'Código';
 DM.qryOrdemServicoGerenciaCODIGO.DisplayWidth         := 8;
@@ -1428,15 +1424,13 @@ GrdOrdemServico.Columns[9].Title.Alignment            := taCenter;
 DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
 DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 14;
 DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
-GrdOrdemServico.Columns[10].Visible                   := False;
-GrdOrdemServico.Columns[11].Visible                   := False;
-GrdOrdemServico.Columns[12].Visible                   := False;
-GrdOrdemServico.Columns[13].Visible                   := False;
-GrdOrdemServico.Columns[14].Visible                   := False;
-GrdOrdemServico.Columns[15].Visible                   := False;
-GrdOrdemServico.Columns[16].Visible                   := False;
+GrdOrdemServico.Columns[10].Visible := False; GrdOrdemServico.Columns[11].Visible := False; GrdOrdemServico.Columns[12].Visible := False;
+GrdOrdemServico.Columns[13].Visible := False; GrdOrdemServico.Columns[14].Visible := False; GrdOrdemServico.Columns[15].Visible := False;
+GrdOrdemServico.Columns[16].Visible := False;
 if (Column.Field.FieldName = 'SITUACAO') then
   begin
+    GrdOrdemServico.Canvas.Font.Style := [fsBold];
+    GrdOrdemServico.Canvas.Font.Name := 'Calibri';
     if GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA' then
       begin
         if GrdOrdemServico.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> '' then
@@ -1461,13 +1455,7 @@ if (Column.Field.FieldName = 'SITUACAO') then
       end;
     if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA')then
       begin
-        if (GrdOrdemServico.DataSource.DataSet.FieldByName('DATAPROGINI').AsDateTime < DM.FDataHoraServidor) then
-        begin
-          GrdOrdemServico.Canvas.Brush.Color := clRed; GrdOrdemServico.Canvas.Font.Color := clWhite;
-        end else
-        begin
-          GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clWhite;
-        end;
+        GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clWhite;
       end;
     if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')then
       begin
@@ -1500,6 +1488,10 @@ if (Column.Field.FieldName = 'SITUACAO') then
     if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')then
       begin
         GrdOrdemServico.Canvas.Brush.Color := clBlack; GrdOrdemServico.Canvas.Font.Color  := $00FF8000;
+      end;
+    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')then
+      begin
+        GrdOrdemServico.Canvas.Brush.Color := clRed; GrdOrdemServico.Canvas.Font.Color := clWhite;
       end;
   end;
   if not odd(GrdOrdemServico.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'SITUACAO') then
@@ -1721,6 +1713,8 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
+if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
+
 if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
     Timer1.Enabled := False;

@@ -437,10 +437,29 @@ begin
                     Exit;
                   end;
 
+
+                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+                DM.qryManutVencOSVenc.Close;
+                DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutConsCODIGO.AsString;
+                DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+                DM.qryManutVencOSVenc.Open;
+                while not DM.qryManutVencOSVenc.Eof = True do
+                begin
+                  DM.qryAuxiliar.Close;
+                  DM.qryAuxiliar.SQL.Clear;
+                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
+                                          + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
+                  DM.qryAuxiliar.Execute;
+
+                  DM.qryManutVencOSVenc.Next;
+                end;
+                DM.qryAuxiliar.Close;
+                DM.qryManutVencOSVenc.Close;
+
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                               , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString
-                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString);
+                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr);
                 DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 DM.qryManutCons.Edit;
@@ -673,9 +692,29 @@ begin
                     PAuxiliares.Caption := 'EXISTE UMA '+DM.qryLubrificConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
                     Exit;
                   end;
+
+                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+                DM.qryLubrificVencOSVenc.Close;
+                DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificConsCODIGO.AsString;
+                DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+                DM.qryLubrificVencOSVenc.Open;
+                while not DM.qryLubrificVencOSVenc.Eof = True do
+                begin
+                  DM.qryAuxiliar.Close;
+                  DM.qryAuxiliar.SQL.Clear;
+                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
+                                          + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
+                  DM.qryAuxiliar.Execute;
+
+                  DM.qryLubrificVencOSVenc.Next;
+                end;
+                DM.qryAuxiliar.Close;
+                DM.qryLubrificVencOSVenc.Close;
+
+
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr);
 
                 DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificConsCODEQUIPAMENTO.AsString, DM.qryLubrificConsCODIGO.AsString, DM.FCodOrdemServico);
 
@@ -920,7 +959,7 @@ begin
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
                                                               , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
                 DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 if DM.qryRotaConsSeqManutPecas.IsEmpty = False then
@@ -1561,8 +1600,28 @@ end;
 
 procedure TFrmTelaInspConsulta.GrdLubrificKeyPress(Sender: TObject;
   var Key: Char);
+var
+  LFreqStr: String;
+  LFreqInt: Integer;
 begin
   inherited;
+  if (Key = #13) and (GrdLubrific.SelectedIndex = 1) then
+    begin
+    LFreqStr := DM.CampoInputBox('SPMP3', 'Informe a frequência a ser consultada:');
+    if LFreqStr <> EmptyStr then
+      begin
+        TryStrToInt(LFreqStr, LFreqInt);
+
+        if GrdLubrific.DataSource.DataSet.Filter <> '' then
+          GrdLubrific.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'AND FREQUENCIA1 = ' + QuotedStr(LFreqStr)
+        else
+          GrdLubrific.DataSource.DataSet.Filter := 'AND FREQUENCIA1 = ' + QuotedStr(LFreqStr);
+        GrdLubrific.DataSource.DataSet.Filtered := True;
+      end else
+      begin
+        GrdManut.DataSource.DataSet.Filtered := False;
+      end;
+    end;
   if (Key = #13) and ((GrdLubrific.SelectedIndex = 3) or (GrdLubrific.SelectedIndex = 4)) then
     begin
       DM.FTabela_auxiliar := 250;
@@ -1596,6 +1655,7 @@ begin
         GrdManut.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 35;
         GrdManut.Columns[1].Title.Alignment := taCenter;
         GrdManut.Columns[1].Title.Font.Size := 9;
+        GrdManut.Columns[1].Title.Font.Style := [fsbold];
         GrdManut.Columns[1].Title.Caption   := 'Freq. (d)';
         GrdManut.DataSource.DataSet.FieldByName('FREQUENCIA1').DisplayWidth := 10;
         GrdManut.Columns[2].Title.Alignment := taCenter;
@@ -1665,6 +1725,7 @@ begin
         GrdLubrific.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 35;
         GrdLubrific.Columns[1].Title.Alignment := taCenter;
         GrdLubrific.Columns[1].Title.Font.Size := 9;
+        GrdLubrific.Columns[1].Title.Font.Style := [fsbold];
         GrdLubrific.Columns[1].Title.Caption   := 'Freq. (d)';
         GrdLubrific.DataSource.DataSet.FieldByName('FREQUENCIA1').DisplayWidth := 10;
         GrdLubrific.Columns[2].Title.Alignment := taCenter;
@@ -1773,8 +1834,28 @@ begin
   end;
 end;
 procedure TFrmTelaInspConsulta.GrdManutKeyPress(Sender: TObject; var Key: Char);
+var
+  LFreqStr: String;
+  LFreqInt: Integer;
 begin
   inherited;
+  if (Key = #13) and (GrdManut.SelectedIndex = 1) then
+    begin
+    LFreqStr := DM.CampoInputBox('SPMP3', 'Informe a frequência a ser consultada:');
+    if LFreqStr <> EmptyStr then
+      begin
+        TryStrToInt(LFreqStr, LFreqInt);
+
+        if GrdManut.DataSource.DataSet.Filter <> '' then
+          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + 'AND FREQUENCIA1 = ' + QuotedStr(LFreqStr)
+        else
+          GrdManut.DataSource.DataSet.Filter := 'AND FREQUENCIA1 = ' + QuotedStr(LFreqStr);
+        GrdManut.DataSource.DataSet.Filtered := True;
+      end else
+      begin
+        GrdManut.DataSource.DataSet.Filtered := False;
+      end;
+    end;
   if (Key = #13) and ((GrdManut.SelectedIndex = 3) or (GrdManut.SelectedIndex = 4)) then
     begin
       DM.FTabela_auxiliar := 250;

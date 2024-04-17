@@ -1,49 +1,45 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
     inherited LCadastro: TLabel
-      Left = 742
+      Left = 754
       ExplicitLeft = 730
     end
     inherited LCadastroPor: TLabel
-      Left = 698
+      Left = 710
       ExplicitLeft = 686
     end
     inherited LblDataCad: TDBText
-      Left = 780
+      Left = 792
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 776
+      ExplicitLeft = 788
     end
     inherited LblUsuCad: TDBText
-      Left = 780
+      Left = 792
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 776
+      ExplicitLeft = 788
     end
     inherited LAlteracao: TLabel
-      Left = 893
+      Left = 905
       ExplicitLeft = 881
     end
     inherited LAlteradoPor: TLabel
-      Left = 867
+      Left = 879
       ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
-      Left = 931
+      Left = 943
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 927
+      ExplicitLeft = 939
     end
     inherited LblUsuAlt: TDBText
-      Left = 931
+      Left = 943
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 927
+      ExplicitLeft = 939
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 123
     ExplicitHeight = 123
     object Label5: TLabel
@@ -161,6 +157,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsManutProgFamEquip
@@ -388,7 +385,6 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PProgramacao: TPanel
     Top = 178
-    Width = 1008
     Height = 65
     ExplicitTop = 178
     ExplicitHeight = 65
@@ -493,7 +489,6 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 247
-    Width = 1008
     Height = 113
     Align = alTop
     ExplicitTop = 247
@@ -567,24 +562,15 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ExplicitLeft = 330
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-    ExplicitTop = 611
-    ExplicitWidth = 1012
-  end
   inherited PAlertas: TPanel
     Top = 547
-    Width = 1012
     TabOrder = 7
     ExplicitTop = 544
   end
   inherited PBase: TPanel
     Top = 565
-    Width = 1008
     TabOrder = 5
-    ExplicitTop = 549
-    ExplicitWidth = 1008
+    ExplicitTop = 562
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -611,6 +597,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     Height = 179
     Align = alTop
     TabOrder = 4
+    ExplicitWidth = 1002
     object Label7: TLabel
       Left = 7
       Top = 3

@@ -1,5 +1,6 @@
 inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramentaria
   Caption = 'Empr'#233'stimo de Ferramentas'
+  ClientHeight = 304
   ClientWidth = 793
   Constraints.MaxWidth = 805
   Constraints.MinWidth = 805
@@ -10,7 +11,7 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
     Width = 789
     ExplicitWidth = 785
     inherited BtnAjuda: TButton
-      Left = 754
+      Left = 758
       ExplicitLeft = 754
     end
     object BtnImprimir: TButton
@@ -31,11 +32,12 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
   end
   inherited PCentro: TPanel
     Width = 787
-    ExplicitWidth = 783
+    Height = 165
+    ExplicitWidth = 787
     inherited RGTelas: TRadioGroup
       Top = 160
       Width = 785
-      Height = 4
+      Height = 1
       ExplicitTop = 160
       ExplicitWidth = 781
       ExplicitHeight = 1
@@ -171,12 +173,14 @@ inherited FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramenta
     end
   end
   inherited PAuxiliares: TPanel
+    Top = 237
     Width = 789
-    ExplicitWidth = 785
+    ExplicitWidth = 789
   end
   inherited PBotoes: TPanel
+    Top = 264
     Width = 789
-    ExplicitWidth = 785
+    ExplicitWidth = 789
     inherited BtnOK: TButton
       Left = 100
       Visible = False

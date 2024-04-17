@@ -9,7 +9,7 @@ uses
   Vcl.ExtActns, Vcl.Buttons, Datasnap.DBClient, FireDAC.Stan.Param, Vcl.Grids,
   Vcl.DBGrids, JvExMask, JvToolEdit, JvMaskEdit, JvDBControls, JvExComCtrls,
   JvDateTimePicker, JvDBDateTimePicker, JvCheckedMaskEdit, JvDatePickerEdit,
-  JvDBDatePickerEdit;
+  JvDBDatePickerEdit, System.RegularExpressions;
 
 type
   TFrmTelaCadOrdemServicoFechamento = class(TFrmTelaPaiCadastros)
@@ -213,7 +213,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
-end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.BtnFalhaClick(Sender: TObject);
 begin
@@ -370,8 +370,11 @@ DM.FTabela_auxiliar := 45;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.BtnSalvarClick(Sender: TObject);
+const
+  EmailRegexPattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
 var
   LSalario, LHOficiais, LHomemHora, LHENormal, LHEFeriado, LPercHENormal, LPercHEFeriado, LCusto, LTotalHH : Real;
+  LEmail: String;
 begin
 if (DM.qryUsuarioPInclusao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
@@ -432,6 +435,25 @@ if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
         DM.qrySolicitacaoTrabSITUACAO.AsString := 'FECHADA';
         DM.qrySolicitacaoTrab.Post;
       end;
+
+    if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
+    begin
+      if Application.MessageBox('Deseja informar um endereço de e-mail para informar a conclusão da solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+      begin
+        LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
+        if LEmail <> '' then
+          if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+            LEmail := '';
+      end;
+    end else
+    begin
+      LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
+      if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+        LEmail := '';
+    end;
+
+    if LEmail <> '' then
+      DM.EnviarEmail('SOLICITAÇÃO CONCLUÍDA', LEmail, Format('%.*d', [6, DM.qryOrdemServicoCODIGO.AsInteger]));
   end;
 
 //Cálculo dos custos da O.S.
@@ -798,6 +820,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin

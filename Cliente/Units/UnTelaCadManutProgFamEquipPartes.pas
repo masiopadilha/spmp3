@@ -49,13 +49,33 @@ end;
 procedure TFrmTelaCadManutProgFamEquipPartes.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.FTela := 'CADMANUTPROG';
-DM.FDataSetParam    := DM.qryManutProgFamEquipPartes;
-DM.FDataSourceParam := DM.dsManutProgFamEquipPartes;
-DM.qryManutProgFamEquipPartes.Close;
-//DM.qryManutProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
-//DM.qryManutProgFamEquipPartes.Params[1].AsString := DM.qryManutProgFamEquipCODIGO.AsString;
-DM.qryManutProgFamEquipPartes.Open;
+  DM.FTela := 'CADMANUTPROG';
+  DM.FDataSetParam    := DM.qryManutProgFamEquipPartes;
+  DM.FDataSourceParam := DM.dsManutProgFamEquipPartes;
+  DM.qryManutProgFamEquipPartes.Close;
+  //DM.qryManutProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
+  //DM.qryManutProgFamEquipPartes.Params[1].AsString := DM.qryManutProgFamEquipCODIGO.AsString;
+  DM.qryManutProgFamEquipPartes.Open;
+
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA INCLUSÃO!';
+    DM.MSGAguarde('', False);
+    GrdCadastro.ReadOnly := True;
+    Exit;
+  end;
+
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    GrdCadastro.ReadOnly := True;
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
 end;
 
 procedure TFrmTelaCadManutProgFamEquipPartes.GrdCadastroDblClick(

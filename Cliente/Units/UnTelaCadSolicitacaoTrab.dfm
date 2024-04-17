@@ -626,8 +626,15 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     Width = 1008
     ExplicitTop = 581
   end
+  inherited MainMenuPadrao: TMainMenu
+    Top = 31
+  end
+  inherited TimerLetreiro: TTimer
+    Top = 31
+  end
   inherited TimerAlertas: TTimer
     Left = 362
+    Top = 31
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 208
@@ -635,6 +642,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Caption = 'Matr'#237'cula'
       OnClick = Matricula1Click
     end
+  end
+  inherited ActionList1: TActionList
+    Top = 31
   end
   object PopupMenuCons: TPopupMenu
     Left = 162

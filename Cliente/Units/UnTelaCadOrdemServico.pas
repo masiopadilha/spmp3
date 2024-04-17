@@ -243,6 +243,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 end;
 
 procedure TFrmTelaCadOrdemServico.BtnEquipamentoClick(Sender: TObject);
@@ -302,9 +303,9 @@ begin
 //DM.qryOrdemServicoServSolic.Close;
 //DM.qryOrdemServicoServSolic.Open;
 
-if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+if (DM.qryUsuarioPExclusaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
     begin
-      Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Application.MessageBox('Exclusão não permitida, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
       Exit;
     end;
 PAuxiliares.Font.Color := clGray;
@@ -611,6 +612,12 @@ end;
 
 procedure TFrmTelaCadOrdemServico.BtnSalvarClick(Sender: TObject);
 begin
+  if (DM.qryUsuarioPAlteracaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      Application.MessageBox('Alteração não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
 if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 if DM.FDataSetParam.IsEmpty = True then Exit;
 
@@ -967,6 +974,7 @@ if DM.qryOrdemServicoCODSOLICITACAOTRAB.IsNull = False then
           if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
           if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
           if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+          if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
           if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
             begin
@@ -1045,7 +1053,7 @@ procedure TFrmTelaCadOrdemServico.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
+//FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
 
 DM.qryPlanoTrabalhoAut.Close;
 DM.qryOrdemServicoServSolic.Close;
@@ -1081,6 +1089,7 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin
