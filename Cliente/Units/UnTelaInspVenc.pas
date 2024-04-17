@@ -213,23 +213,25 @@ case PCInspecoes.ActivePageIndex of
             Exit;
           end;
 
-          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-          DM.qryManutVencOSVenc.Close;
-          DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutProgEquipCODIGO.AsString;
-          DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-          DM.qryManutVencOSVenc.Open;
-          while not DM.qryManutVencOSVenc.Eof = True do
-          begin
-            DM.qryAuxiliar.Close;
-            DM.qryAuxiliar.SQL.Clear;
-            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
-            DM.qryAuxiliar.Execute;
-
-            DM.qryManutVencOSVenc.Next;
-          end;
-          DM.qryAuxiliar.Close;
-          DM.qryManutVencOSVenc.Close;
+//          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+//          DM.qryManutVencOSVenc.Close;
+//          DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutProgEquipCODIGO.AsString;
+//          DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+//          //DM.qryManutVencOSVenc.Params[2].AsString := FormatDateTime('yyyy/mm/dd', IncDay(DM.qryManutVencDTAINICIO1.AsDateTime, DM.qryManutVencFREQUENCIA1.AsInteger * (-1)));
+//          DM.qryManutVencOSVenc.Open;
+//
+//          while not DM.qryManutVencOSVenc.Eof = True do
+//          begin
+//            DM.qryAuxiliar.Close;
+//            DM.qryAuxiliar.SQL.Clear;
+//            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
+//                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
+//            DM.qryAuxiliar.Execute;
+//
+//            DM.qryManutVencOSVenc.Next;
+//          end;
+//          DM.qryAuxiliar.Close;
+//          DM.qryManutVencOSVenc.Close;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                             , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
@@ -518,23 +520,23 @@ case PCInspecoes.ActivePageIndex of
           end;
 
 
-          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-          DM.qryLubrificVencOSVenc.Close;
-          DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificProgEquipCODIGO.AsString;
-          DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-          DM.qryLubrificVencOSVenc.Open;
-          while not DM.qryLubrificVencOSVenc.Eof = True do
-          begin
-            DM.qryAuxiliar.Close;
-            DM.qryAuxiliar.SQL.Clear;
-            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
-                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
-            DM.qryAuxiliar.Execute;
-
-            DM.qryLubrificVencOSVenc.Next;
-          end;
-          DM.qryAuxiliar.Close;
-          DM.qryLubrificVencOSVenc.Close;
+//          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
+//          DM.qryLubrificVencOSVenc.Close;
+//          DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificProgEquipCODIGO.AsString;
+//          DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
+//          DM.qryLubrificVencOSVenc.Open;
+//          while not DM.qryLubrificVencOSVenc.Eof = True do
+//          begin
+//            DM.qryAuxiliar.Close;
+//            DM.qryAuxiliar.SQL.Clear;
+//            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
+//                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
+//            DM.qryAuxiliar.Execute;
+//
+//            DM.qryLubrificVencOSVenc.Next;
+//          end;
+//          DM.qryAuxiliar.Close;
+//          DM.qryLubrificVencOSVenc.Close;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                             , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
@@ -1177,4 +1179,7 @@ begin
   end;
 end;
 
+
+
 end.
+

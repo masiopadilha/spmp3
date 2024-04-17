@@ -378,6 +378,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Font.Style = []
       ParentFont = False
       ParentShowHint = False
+      PopupMenu = PopupMenuOS
       ReadOnly = True
       ShowHint = True
       TabOrder = 3
@@ -1028,6 +1029,14 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       DisplayLabel = 'Op.'
       FieldName = 'OPERACAO'
       Size = 2
+    end
+  end
+  object PopupMenuOS: TPopupMenu
+    Left = 675
+    Top = 347
+    object Vencida1: TMenuItem
+      Caption = 'Definir ordem de servi'#231'o como vencida'
+      OnClick = Vencida1Click
     end
   end
 end

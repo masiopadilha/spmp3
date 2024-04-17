@@ -94,6 +94,8 @@ type
     StringField15: TStringField;
     StringField16: TStringField;
     chbVenc: TCheckBox;
+    PopupMenuOS: TPopupMenu;
+    Vencida1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -134,6 +136,7 @@ type
     procedure Checklist1Click(Sender: TObject);
     procedure CBPrioridadeChange(Sender: TObject);
     procedure Exportar1Click(Sender: TObject);
+    procedure Vencida1Click(Sender: TObject);
   private
     { Private declarations }
     hora_futura: TDateTime;
@@ -1806,6 +1809,50 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     Timer1.Enabled := True;
   end;
 end;
+procedure TFrmTelaCadOrdemServicoGerencia.Vencida1Click(Sender: TObject);
+begin
+  inherited;
+  if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'CADASTRADA') OR (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'DETALHADA')
+    OR (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'PROGRAMADA')  OR (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'REPROGRAMADA')
+      OR (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'DESPROGRAMADA') OR (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'SOLICITADA') then
+      begin
+        if (DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '') then
+        begin
+          if Application.MessageBox('Deseja realmente definir a ordem de serviço como vencida?', 'SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = IDYes then
+          begin
+            DM.qryAuxiliar.Close;
+            DM.qryAuxiliar.SQL.Clear;
+            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';'
+                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';');
+            DM.qryAuxiliar.Execute;
+
+            DM.qryOrdemServicoGerencia.Edit;
+            DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'VENCIDA';
+            DM.qryOrdemServicoGerencia.Post;
+          end;
+        end else
+        if (DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '') then
+        begin
+          if Application.MessageBox('Deseja realmente definir a ordem de serviço como vencida?', 'SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = IDYes then
+          begin
+            DM.qryAuxiliar.Close;
+            DM.qryAuxiliar.SQL.Clear;
+            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';'
+                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';');
+            DM.qryAuxiliar.Execute;
+
+            DM.qryOrdemServicoGerencia.Edit;
+            DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'VENCIDA';
+            DM.qryOrdemServicoGerencia.Post;
+          end;
+        end else
+        begin
+          Application.MessageBox('A ordem de serviço não é um plano de manutenção/lubrificação', 'SPMP3', MB_ICONSTOP + MB_OK);
+          Exit;
+        end;
+      end;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.LiberarMaodeObraEmExecucao;
 var
 LTempoExec: Real;

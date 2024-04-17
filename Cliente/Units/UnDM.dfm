@@ -57456,20 +57456,27 @@ object DM: TDM
       '    INNER JOIN `manutprogequipamentohist` '
       
         '        ON (`ordemservico`.`CODMANUTPROGEQUIP` = `manutprogequip' +
-        'amentohist`.`CODIGO`) AND (`ordemservico`.`CODIGO` = `manutproge' +
-        'quipamentohist`.`CODORDEMSERVICO`)'
+        'amentohist`.`CODIGO`) '
+      
+        '            AND (`ordemservico`.`CODIGO` = `manutprogequipamento' +
+        'hist`.`CODORDEMSERVICO`)'
       
         'WHERE ((`ordemservico`.`SITUACAO` = '#39'CADASTRADA'#39') OR (`ordemserv' +
-        'ico`.`SITUACAO` = '#39'DETALHADA'#39') OR (`ordemservico`.`SITUACAO` = '#39 +
-        'PROGRAMADA'#39') '
+        'ico`.`SITUACAO` = '#39'DETALHADA'#39') '
       
-        '    OR (`ordemservico`.`SITUACAO` = '#39'REPROGRAMADA'#39') OR (`ordemse' +
-        'rvico`.`SITUACAO` = '#39'DESPROGRAMADA'#39'))'
+        '                 OR (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39')  ' +
+        'OR (`ordemservico`.`SITUACAO` = '#39'REPROGRAMADA'#39') '
+      
+        '                     OR (`ordemservico`.`SITUACAO` = '#39'DESPROGRAM' +
+        'ADA'#39'))'
       '    AND `ordemservico`.`CODMANUTPROGEQUIP` = :codmanutprogequip'
       '    AND `ordemservico`.`CODEMPRESA` = :codempresa'
       
         '    AND `manutprogequipamentohist`.`REPROGRAMAR1` = '#39'Programa'#231#227'o' +
         #39
+      
+        '    -- AND `manutprogequipamentohist`.`DTAINICIO1` < STR_TO_DATE' +
+        '(:data1,'#39'%Y/%m/%d'#39')'
       'ORDER BY `ordemservico`.`CODIGO` DESC;')
     Left = 1068
     Top = 376
@@ -57968,6 +57975,7 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryManutConsEquipeCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -58030,6 +58038,7 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryManutConsEquipeMObraCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -58106,6 +58115,7 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryLubrificConsEquipeCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -58168,6 +58178,7 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryLubrificConsEquipeMObraCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
