@@ -1732,23 +1732,23 @@ end;
 procedure TFrmTelaInspFechamento.PCInspecoesChange(Sender: TObject);
 begin
   inherited;
-  case PCInspecoes.ActivePageIndex of
-    0:
-      begin
-        EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
-        EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
-      end;
-    1:
-      begin
-        EdtMatricula.Text := DM.qryLubrificPeriodicasMATRICULAOS.AsString;
-        EdtResponsavel.Text := DM.qryLubrificPeriodicasFUNCIONARIOOS.AsString;
-      end;
-    2:
-      begin
-        EdtMatricula.Clear;
-        EdtResponsavel.Clear;
-      end;
-  end;
+//  case PCInspecoes.ActivePageIndex of
+//    0:
+//      begin
+//        EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
+//        EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
+//      end;
+//    1:
+//      begin
+//        EdtMatricula.Text := DM.qryLubrificPeriodicasMATRICULAOS.AsString;
+//        EdtResponsavel.Text := DM.qryLubrificPeriodicasFUNCIONARIOOS.AsString;
+//      end;
+//    2:
+//      begin
+//        EdtMatricula.Clear;
+//        EdtResponsavel.Clear;
+//      end;
+//  end;
 end;
 
 procedure TFrmTelaInspFechamento.GrdItensManutCellClick(Column: TColumn);

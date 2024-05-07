@@ -53,8 +53,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 962
-      ExplicitLeft = 958
+      Left = 966
+      ExplicitLeft = 962
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -373,7 +373,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       DataSource = DM.dsOrdemServicoGerencia
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -12
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -387,10 +387,12 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      StyleElements = [seFont, seBorder]
       OnDrawColumnCell = GrdOrdemServicoDrawColumnCell
       OnDblClick = GrdOrdemServicoDblClick
       OnKeyDown = GrdOrdemServicoKeyDown
       OnKeyPress = GrdOrdemServicoKeyPress
+      OnTitleClick = GrdOrdemServicoTitleClick
     end
     object PFiltros: TPanel
       AlignWithMargins = True
@@ -750,8 +752,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       end
     end
     object grid: TJvStringGrid
-      Left = 872
-      Top = 384
+      Left = 881
+      Top = 422
       Width = 116
       Height = 73
       FixedRows = 0
@@ -1037,6 +1039,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     object Vencida1: TMenuItem
       Caption = 'Definir ordem de servi'#231'o como vencida'
       OnClick = Vencida1Click
+    end
+    object DesafazerVencida1: TMenuItem
+      Caption = 'Definir ordem de servi'#231'o como n'#227'o vencida'
+      OnClick = DesafazerVencida1Click
     end
   end
 end

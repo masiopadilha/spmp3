@@ -29543,8 +29543,6 @@ object DM: TDM
     end
   end
   object qryManutPeriodicas: TFDQuery
-    AfterOpen = qryManutPeriodicasAfterScroll
-    AfterScroll = qryManutPeriodicasAfterScroll
     OnCalcFields = qryManutPeriodicasCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -30268,8 +30266,6 @@ object DM: TDM
     end
   end
   object qryLubrificPeriodicas: TFDQuery
-    AfterOpen = qryLubrificPeriodicasAfterScroll
-    AfterScroll = qryLubrificPeriodicasAfterScroll
     OnCalcFields = qryLubrificPeriodicasCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -33858,6 +33854,14 @@ object DM: TDM
       ProviderFlags = []
       Size = 200
     end
+    object qryOrdemServicoGerenciaEQUIPPARADO: TStringField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Parado'
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      Size = 1
+    end
     object qryOrdemServicoGerenciaDESCRICAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCRICAO'
@@ -33879,11 +33883,28 @@ object DM: TDM
       ProviderFlags = []
       Size = 40
     end
+    object qryOrdemServicoGerenciaOFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OFICINA'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOrdemServicoGerenciaTIPOMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPOMANUTENCAO'
+      Origin = 'TIPOMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
     object qryOrdemServicoGerenciaDATAPROGINI: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATAPROGINI'
       Origin = 'DATAPROGINI'
       ProviderFlags = []
+      Visible = False
       DisplayFormat = 'dd/mm/yyyy t'
     end
     object qryOrdemServicoGerenciaDATAINICIOREAL: TDateTimeField
@@ -33891,12 +33912,14 @@ object DM: TDM
       FieldName = 'DATAINICIOREAL'
       Origin = 'DATAINICIOREAL'
       ProviderFlags = []
+      Visible = False
       DisplayFormat = 'dd/mm/yyyy t'
     end
     object qryOrdemServicoGerenciaDATAFIMREAL: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATAFIMREAL'
       Origin = 'DATAFIMREAL'
+      Visible = False
       DisplayFormat = 'dd/mm/yyyy t'
     end
     object qryOrdemServicoGerenciaDATAFECHAMENTO: TDateTimeField
@@ -33904,6 +33927,7 @@ object DM: TDM
       FieldName = 'DATAFECHAMENTO'
       Origin = 'DATAFECHAMENTO'
       ProviderFlags = []
+      Visible = False
       DisplayFormat = 'dd/mm/yyyy'
     end
     object qryOrdemServicoGerenciaCODMANUTENCAO: TStringField
@@ -33911,6 +33935,7 @@ object DM: TDM
       FieldName = 'CODMANUTENCAO'
       Origin = 'CODMANUTENCAO'
       ProviderFlags = []
+      Visible = False
       Size = 9
     end
     object qryOrdemServicoGerenciaROTAEQUIP: TStringField
@@ -33918,6 +33943,7 @@ object DM: TDM
       FieldName = 'ROTAEQUIP'
       Origin = 'ROTAEQUIP'
       ProviderFlags = []
+      Visible = False
       Size = 1
     end
     object qryOrdemServicoGerenciaSOLICTRAB: TStringField
@@ -33925,6 +33951,7 @@ object DM: TDM
       FieldName = 'SOLICTRAB'
       Origin = 'SOLICTRAB'
       ProviderFlags = []
+      Visible = False
       Size = 1
     end
     object qryOrdemServicoGerenciaEMAIL: TStringField
@@ -33939,6 +33966,7 @@ object DM: TDM
       FieldName = 'MATRICULA'
       Origin = 'MATRICULA'
       ProviderFlags = []
+      Visible = False
       Size = 9
     end
     object qryOrdemServicoGerenciaIMPORTANCIA: TIntegerField
@@ -33946,23 +33974,17 @@ object DM: TDM
       FieldName = 'IMPORTANCIA'
       Origin = 'IMPORTANCIA'
       ProviderFlags = []
+      Visible = False
     end
     object qryOrdemServicoGerenciaTEMPOPREVISTO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPOPREVISTO'
       Origin = 'TEMPOPREVISTO'
       ProviderFlags = []
+      Visible = False
       DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
-    end
-    object qryOrdemServicoGerenciaTIPOMANUTENCAO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'TIPOMANUTENCAO'
-      Origin = 'TIPOMANUTENCAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
     end
     object qryOrdemServicoGerenciaCODOFICINA: TStringField
       AutoGenerateValue = arDefault
@@ -33978,13 +34000,6 @@ object DM: TDM
       Required = True
       Visible = False
       Size = 9
-    end
-    object qryOrdemServicoGerenciaEQUIPPARADO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'EQUIPPARADO'
-      Origin = 'EQUIPPARADO'
-      Visible = False
-      Size = 1
     end
     object qryOrdemServicoGerenciaCODMANUTPROGEQUIP: TStringField
       AutoGenerateValue = arDefault
@@ -34030,15 +34045,6 @@ object DM: TDM
       FieldName = 'OBSERVACOES'
       Origin = 'OBSERVACOES'
       Visible = False
-    end
-    object qryOrdemServicoGerenciaOFICINA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'OFICINA'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      ReadOnly = True
-      Visible = False
-      Size = 80
     end
     object qryOrdemServicoGerenciaCODFAMILIAEQUIP: TStringField
       AutoGenerateValue = arDefault
@@ -41596,39 +41602,19 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `solictrabalho`.`CODIGO`'
-      '    , `solictrabalho`.`CODEMPRESA`'
-      '    , `solictrabalho`.`CODEQUIPAMENTO`'
-      '    , `solictrabalho`.`CODSOLICITANTE`'
-      '    -- , `solictrabalho`.`CODCENTROCUSTO`'
-      '    , `solictrabalho`.`CODOFICINA`'
-      '    , `solictrabalho`.`DESCSERVICO`'
-      '    , `solictrabalho`.`TEMPOESTIMADO`'
-      '    , `solictrabalho`.`PRAZOSOLIC`'
-      '    , `solictrabalho`.`JUSTIFICATIVA`'
-      '    , `solictrabalho`.`DATASOLIC`'
-      '    , `solictrabalho`.`PRIORIDADEPARADA`'
-      '    , `solictrabalho`.`HORARIOSOLIC`'
-      '    , `solictrabalho`.`VALORPROG`'
-      '    , `solictrabalho`.`CODORDEMSERVICO`'
-      '    , `solictrabalho`.`SITUACAO`'
-      '    , `solictrabalho`.`DATACADASTRO`'
-      '    , `solictrabalho`.`CODUSUARIOCAD`'
-      '    , `solictrabalho`.`DATAULTALT`'
-      '    , `solictrabalho`.`CODUSUARIOALT`'
-      '    , `solictrabalho`.`OBSERVACOES`'
+      '    `solictrabalho`.*'
       '    , `equipamentos`.`DESCRICAO`EQUIPAMENTO'
-      '    , `equipamentos`.`CODCENTROCUSTO`'
       '    , `funcionarios`.`NOME`SOLICITANTE'
       '    , `funcionarios`.`EMAIL`'
       '    , `ordemservico`.`SITUACAO`'
       '    , `oficinas`.`DESCRICAO` AS OFICINA'
+      '    , `centrocusto`.`DESCRICAO` AS CENTROCUSTO'
       '    , `usuario`.`NOME`USUARIOCAD'
       '    , `usuario_1`.`NOME`USUARIOALT'
       ''
       'FROM'
       '    `solictrabalho`'
-      '   LEFT JOIN `equipamentos` '
+      '    LEFT JOIN `equipamentos` '
       
         '        ON (`solictrabalho`.`CODEQUIPAMENTO` = `equipamentos`.`C' +
         'ODIGO`) AND (`solictrabalho`.`CODEMPRESA` = `equipamentos`.`CODE' +
@@ -41643,6 +41629,10 @@ object DM: TDM
         '        ON (`solictrabalho`.`CODORDEMSERVICO` = `ordemservico`.`' +
         'CODIGO`) AND (`solictrabalho`.`CODEMPRESA` = `ordemservico`.`COD' +
         'EMPRESA`)'
+      '    LEFT JOIN `centrocusto` '
+      
+        '        ON (`solictrabalho`.`CODCENTROCUSTO` = `centrocusto`.`CO' +
+        'DIGO`)'
       '    LEFT JOIN `oficinas`'
       
         '        ON (`solictrabalho`.`CODEMPRESA` = `oficinas`.`CODEMPRES' +
@@ -41675,7 +41665,6 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object qrySolicitacaoTrabCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -41711,6 +41700,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'TEMPOESTIMADO'
       Origin = 'TEMPOESTIMADO'
+      DisplayFormat = '0.00'
       Precision = 16
       Size = 2
     end
@@ -41721,7 +41711,6 @@ object DM: TDM
     end
     object qrySolicitacaoTrabJUSTIFICATIVA: TStringField
       AutoGenerateValue = arDefault
-      DisplayWidth = 250
       FieldName = 'JUSTIFICATIVA'
       Origin = 'JUSTIFICATIVA'
       Size = 250
@@ -41748,7 +41737,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'VALORPROG'
       Origin = 'VALORPROG'
-      DisplayFormat = ',0.00'
+      DisplayFormat = '0.00'
       Precision = 16
       Size = 2
     end
@@ -41791,38 +41780,24 @@ object DM: TDM
       FieldName = 'OBSERVACOES'
       Origin = 'OBSERVACOES'
     end
-    object qrySolicitacaoTrabEQUIPAMENTO: TStringField
+    object qrySolicitacaoTrabCENTROCUSTO: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'EQUIPAMENTO'
+      FieldName = 'CENTROCUSTO'
       Origin = 'DESCRICAO'
-      ProviderFlags = []
-      Size = 200
-    end
-    object qrySolicitacaoTrabCODCENTROCUSTO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODCENTROCUSTO'
-      Origin = 'CODCENTROCUSTO'
-      ProviderFlags = []
-      Size = 9
-    end
-    object qrySolicitacaoTrabSOLICITANTE: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'SOLICITANTE'
-      Origin = 'NOME'
-      ProviderFlags = []
-      Size = 200
-    end
-    object qrySolicitacaoTrabEMAIL: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'EMAIL'
-      Origin = 'EMAIL'
       ProviderFlags = []
       Size = 80
     end
-    object qrySolicitacaoTrabSITUACAO_1: TStringField
+    object qrySolicitacaoTrabUSUARIOALT: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'SITUACAO_1'
-      Origin = 'SITUACAO'
+      FieldName = 'USUARIOALT'
+      Origin = 'NOME'
+      ProviderFlags = []
+      Size = 40
+    end
+    object qrySolicitacaoTrabUSUARIOCAD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'USUARIOCAD'
+      Origin = 'NOME'
       ProviderFlags = []
       Size = 40
     end
@@ -41833,19 +41808,40 @@ object DM: TDM
       ProviderFlags = []
       Size = 80
     end
-    object qrySolicitacaoTrabUSUARIOCAD: TStringField
+    object qrySolicitacaoTrabSITUACAO_1: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'USUARIOCAD'
-      Origin = 'NOME'
+      FieldName = 'SITUACAO_1'
+      Origin = 'SITUACAO'
       ProviderFlags = []
       Size = 40
     end
-    object qrySolicitacaoTrabUSUARIOALT: TStringField
+    object qrySolicitacaoTrabEMAIL: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'USUARIOALT'
+      FieldName = 'EMAIL'
+      Origin = 'EMAIL'
+      ProviderFlags = []
+      Size = 80
+    end
+    object qrySolicitacaoTrabSOLICITANTE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SOLICITANTE'
       Origin = 'NOME'
       ProviderFlags = []
-      Size = 40
+      Size = 200
+    end
+    object qrySolicitacaoTrabCODCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCENTROCUSTO'
+      Origin = 'CODCENTROCUSTO'
+      ProviderFlags = []
+      Size = 9
+    end
+    object qrySolicitacaoTrabEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPAMENTO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 200
     end
   end
   object qryCalendarioOSProgramadas: TFDQuery
