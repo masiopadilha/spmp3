@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, JvExGrids, JvStringGrid, IOUtils;
+  Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, JvExGrids, JvStringGrid, IOUtils,
+  JvFullColorSpaces, JvFullColorCtrls, JvDBGridFooter, JvExDBGrids, JvDBGrid;
 type
   TFrmTelaCadOrdemServicoGerencia = class(TFrmTelaPaiOKCancel)
     PFuncoes: TPanel;
@@ -96,6 +97,7 @@ type
     chbVenc: TCheckBox;
     PopupMenuOS: TPopupMenu;
     Vencida1: TMenuItem;
+    DesafazerVencida1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
@@ -137,12 +139,15 @@ type
     procedure CBPrioridadeChange(Sender: TObject);
     procedure Exportar1Click(Sender: TObject);
     procedure Vencida1Click(Sender: TObject);
+    procedure GrdOrdemServicoTitleClick(Column: TColumn);
+    procedure DesafazerVencida1Click(Sender: TObject);
   private
     { Private declarations }
     hora_futura: TDateTime;
 
     procedure LimpaGrid(Grid: TStringGrid);
     procedure CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
+    procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
   public
     { Public declarations }
   end;
@@ -1191,6 +1196,49 @@ begin
   end;
 end;
 
+procedure TFrmTelaCadOrdemServicoGerencia.DesafazerVencida1Click(
+  Sender: TObject);
+begin
+  inherited;
+  if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'VENCIDA') then
+    begin
+      if (DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '') then
+      begin
+        if Application.MessageBox('Deseja realmente definir a ordem de serviço como cadastrada?', 'SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = IDYes then
+        begin
+          DM.qryAuxiliar.Close;
+          DM.qryAuxiliar.SQL.Clear;
+          DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''CADASTRADA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';'
+                                  + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''ABERTA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';');
+          DM.qryAuxiliar.Execute;
+
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
+          DM.qryOrdemServicoGerencia.Post;
+        end;
+      end else
+      if (DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '') then
+      begin
+        if Application.MessageBox('Deseja realmente definir a ordem de serviço como cadastrada?', 'SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = IDYes then
+        begin
+          DM.qryAuxiliar.Close;
+          DM.qryAuxiliar.SQL.Clear;
+          DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''CADASTRADA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';'
+                                  + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''ABERTA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryOrdemServicoGerenciaCODIGO.AsString) + ';');
+          DM.qryAuxiliar.Execute;
+
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
+          DM.qryOrdemServicoGerencia.Post;
+        end;
+      end else
+      begin
+        Application.MessageBox('A ordem de serviço não é um plano de manutenção/lubrificação', 'SPMP3', MB_ICONSTOP + MB_OK);
+        Exit;
+      end;
+    end;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.Exportar1Click(Sender: TObject);
 var
   caminho: string;
@@ -1211,15 +1259,24 @@ begin
   end
   else
     begin;
+
       FDMemTOSSimplesExcel.Close;
       FDMemTOSSimplesExcel.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
+
+      FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').Visible          := True;
+      FDMemTOSSimplesExcel.FieldByName('DATAPROGINI').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('DATAFECHAMENTO').Visible        := True;
+      FDMemTOSSimplesExcel.FieldByName('DATAINICIOREAL').Visible        := True;
+      FDMemTOSSimplesExcel.FieldByName('DATAFIMREAL').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').Visible         := True;
+
       FDMemTOSSimplesExcel.FieldByName('CODIGO').DisplayLabel           := 'O.S';
       FDMemTOSSimplesExcel.FieldByName('CODIGO').Index                  := 0;
       FDMemTOSSimplesExcel.FieldByName('DESCRICAO').DisplayLabel        := 'Serviço';
       FDMemTOSSimplesExcel.FieldByName('DESCRICAO').Index               := 1;
       FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').DisplayLabel     := 'Cad.';
       FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').Index            := 2;
-      FDMemTOSSimplesExcel.FieldByName('PLANEJADA').Visible               := True;
+      FDMemTOSSimplesExcel.FieldByName('PLANEJADA').Visible             := True;
       FDMemTOSSimplesExcel.FieldByName('PLANEJADA').DisplayLabel        := 'Plan.';
       FDMemTOSSimplesExcel.FieldByName('PLANEJADA').Index               := 3;
       FDMemTOSSimplesExcel.FieldByName('DATAPROGINI').DisplayLabel      := 'Prog.';
@@ -1230,31 +1287,35 @@ begin
       FDMemTOSSimplesExcel.FieldByName('DATAFIMREAL').Index             := 6;
       FDMemTOSSimplesExcel.FieldByName('DATAFECHAMENTO').DisplayLabel   := 'Fecham.';
       FDMemTOSSimplesExcel.FieldByName('DATAFECHAMENTO').Index          := 7;
-      FDMemTOSSimplesExcel.FieldByName('CODEQUIPAMENTO').DisplayLabel   := 'Equipam.';
+      FDMemTOSSimplesExcel.FieldByName('CODEQUIPAMENTO').DisplayLabel   := 'Cód. Equipamento';
       FDMemTOSSimplesExcel.FieldByName('CODEQUIPAMENTO').Index          := 8;
+      FDMemTOSSimplesExcel.FieldByName('EQUIPAMENTO').DisplayLabel      := 'Equipamento';
+      FDMemTOSSimplesExcel.FieldByName('EQUIPAMENTO').Index             := 9;
+      FDMemTOSSimplesExcel.FieldByName('EQUIPPARADO').DisplayLabel      := 'Parado';
+      FDMemTOSSimplesExcel.FieldByName('EQUIPPARADO').Index             := 10;
       FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').Visible           := True;
       FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').DisplayLabel      := 'Centro/Custo';
-      FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').Index             := 9;
+      FDMemTOSSimplesExcel.FieldByName('CENTROCUSTO').Index             := 11;
       FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').DisplayLabel    := 'Prev. (hs)';
-      FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').Index           := 10;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOPREVISTO').Index           := 12;
       FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').Visible           := True;
       FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').DisplayLabel   := 'Exec. (hs)';
-      FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').Index          := 11;
+      FDMemTOSSimplesExcel.FieldByName('TEMPOEXECUTADO').Index          := 13;
       FDMemTOSSimplesExcel.FieldByName('SITUACAO').DisplayLabel         := 'Situação';
-      FDMemTOSSimplesExcel.FieldByName('SITUACAO').Index                := 12;
+      FDMemTOSSimplesExcel.FieldByName('SITUACAO').Index                := 14;
       FDMemTOSSimplesExcel.FieldByName('TIPOMANUTENCAO').DisplayLabel   := 'Tipo';
-      FDMemTOSSimplesExcel.FieldByName('TIPOMANUTENCAO').Index          := 13;
+      FDMemTOSSimplesExcel.FieldByName('TIPOMANUTENCAO').Index          := 15;
       FDMemTOSSimplesExcel.FieldByName('OFICINA').Visible               := True;
       FDMemTOSSimplesExcel.FieldByName('OFICINA').DisplayLabel          := 'Oficina';
-      FDMemTOSSimplesExcel.FieldByName('OFICINA').Index                 := 14;
-      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Visible           := True;
+      FDMemTOSSimplesExcel.FieldByName('OFICINA').Index                 := 16;
+      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Visible      := True;
       FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').DisplayLabel := 'Prioridade';
-      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Index        := 15;
+      FDMemTOSSimplesExcel.FieldByName('PRIORIDADEPARADA').Index        := 17;
       FDMemTOSSimplesExcel.FieldByName('ORIGEM').Visible                := True;
       FDMemTOSSimplesExcel.FieldByName('ORIGEM').DisplayLabel           := 'O';
-      FDMemTOSSimplesExcel.FieldByName('ORIGEM').Index                  := 16;
+      FDMemTOSSimplesExcel.FieldByName('ORIGEM').Index                  := 18;
 
-      FDMemTOSSimplesExcel.FieldByName('Equipamento').Visible           := False;
+//      FDMemTOSSimplesExcel.FieldByName('Equipamento').Visible           := False;
       FDMemTOSSimplesExcel.FieldByName('CODMANUTENCAO').Visible         := False;
       FDMemTOSSimplesExcel.FieldByName('ROTAEQUIP').Visible             := False;
       FDMemTOSSimplesExcel.FieldByName('MATRICULA').Visible             := False;
@@ -1381,55 +1442,103 @@ procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDrawColumnCell(
   State: TGridDrawState);
 begin
   inherited;
-GrdOrdemServico.Columns[0].Title.Font.Size := 9; GrdOrdemServico.Columns[1].Title.Font.Size := 9; GrdOrdemServico.Columns[2].Title.Font.Size := 9;
-GrdOrdemServico.Columns[3].Title.Font.Size := 9; GrdOrdemServico.Columns[4].Title.Font.Size := 9; GrdOrdemServico.Columns[5].Title.Font.Size := 9;
-GrdOrdemServico.Columns[6].Title.Font.Size := 9; GrdOrdemServico.Columns[7].Title.Font.Size := 9; GrdOrdemServico.Columns[8].Title.Font.Size := 9;
-GrdOrdemServico.Columns[9].Title.Font.Size := 9; GrdOrdemServico.Columns[10].Title.Font.Size := 9; GrdOrdemServico.Columns[11].Title.Font.Size := 9;
-GrdOrdemServico.Columns[12].Title.Font.Size := 9; GrdOrdemServico.Columns[13].Title.Font.Size := 9; GrdOrdemServico.Columns[14].Title.Font.Size := 9;
-GrdOrdemServico.Columns[15].Title.Font.Size := 9; GrdOrdemServico.Columns[16].Title.Font.Size := 9; GrdOrdemServico.Columns[0].Title.Font.Style := [fsbold];
 GrdOrdemServico.Columns[0].Title.Alignment            := taCenter;
 DM.qryOrdemServicoGerenciaCODIGO.DisplayLabel         := 'Código';
 DM.qryOrdemServicoGerenciaCODIGO.DisplayWidth         := 8;
 DM.qryOrdemServicoGerenciaCODIGO.Alignment            := taCenter;
+GrdOrdemServico.Columns[0].Title.Font.Style           := [fsbold];
+
 GrdOrdemServico.Columns[1].Title.Alignment            := taCenter;
 DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.DisplayLabel := 'Cód. Equip.';
-DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.DisplayWidth := 15;
+DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.DisplayWidth := 10;
 DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.Alignment    := taCenter;
+
 GrdOrdemServico.Columns[2].Title.Font.Style           := [fsbold];
 GrdOrdemServico.Columns[2].Title.Alignment            := taLeftJustify;
 DM.qryOrdemServicoGerenciaEQUIPAMENTO.DisplayLabel    := 'Equipamento';
 DM.qryOrdemServicoGerenciaEQUIPAMENTO.DisplayWidth    := 45;
-GrdOrdemServico.Columns[3].Title.Font.Style           := [fsbold];
-GrdOrdemServico.Columns[3].Title.Alignment            := taLeftJustify;
+
+GrdOrdemServico.Columns[4].Title.Font.Style           := [fsbold];
+GrdOrdemServico.Columns[4].Title.Alignment            := taLeftJustify;
 DM.qryOrdemServicoGerenciaDESCRICAO.DisplayLabel      := 'Descrição';
-DM.qryOrdemServicoGerenciaDESCRICAO.DisplayWidth      := 35;
-GrdOrdemServico.Columns[4].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayLabel   := 'Cadastro';
-DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayWidth   := 16;
-DM.qryOrdemServicoGerenciaDATACADASTRO.Alignment      := taCenter;
-GrdOrdemServico.Columns[5].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaSITUACAO.DisplayLabel       := 'Situação';
-DM.qryOrdemServicoGerenciaSITUACAO.DisplayWidth       := 15;
-DM.qryOrdemServicoGerenciaSITUACAO.Alignment          := taCenter;
+DM.qryOrdemServicoGerenciaDESCRICAO.DisplayWidth      := 37;
+
+if (chkProg.Checked = True) then
+begin
+  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible      := False;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible    := False;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible    := False;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible       := True;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Index         := 5;
+  GrdOrdemServico.Columns[5].Title.Alignment          := taCenter;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayLabel  := 'Programada';
+  DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayWidth  := 16;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Alignment     := taCenter;
+end else
+if (chkExec.Checked = True) and (chkProg.Checked = False) and (chkFec.Checked = False) then
+begin
+  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible        := False;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible         := False;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible      := False;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible      := True;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Index        := 5;
+  GrdOrdemServico.Columns[5].Title.Alignment            := taCenter;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayLabel := 'Início';
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayWidth := 16;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Alignment    := taCenter;
+end else
+if (chkFec.Checked = True) and (chkProg.Checked = False) and (chkExec.Checked = False) then
+begin
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible      := True;
+  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible        := False;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible         := False;
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible      := False;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Index        := 5;
+  GrdOrdemServico.Columns[5].Title.Alignment            := taCenter;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 16;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
+end else
+if (chkProg.Checked = False) and (chkExec.Checked = False) and (chkFec.Checked = False) then
+begin
+  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible    := False;
+  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible       := False;
+  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible    := False;
+  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible      := True;
+  GrdOrdemServico.Columns[5].Title.Alignment          := taCenter;
+  DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayLabel := 'Cadastro';
+  DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayWidth := 16;
+  DM.qryOrdemServicoGerenciaDATACADASTRO.Alignment    := taCenter;
+end;
+
 GrdOrdemServico.Columns[6].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayLabel    := 'Programada';
-DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayWidth    := 18;
-DM.qryOrdemServicoGerenciaDATAPROGINI.Alignment       := taCenter;
-GrdOrdemServico.Columns[7].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayLabel := 'Início';
-DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayWidth := 18;
-DM.qryOrdemServicoGerenciaDATAINICIOREAL.Alignment    := taCenter;
-GrdOrdemServico.Columns[8].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayLabel    := 'Fim';
-DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayWidth    := 18;
-DM.qryOrdemServicoGerenciaDATAFIMREAL.Alignment       := taCenter;
-GrdOrdemServico.Columns[9].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
-DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 14;
-DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
-GrdOrdemServico.Columns[10].Visible := False; GrdOrdemServico.Columns[11].Visible := False; GrdOrdemServico.Columns[12].Visible := False;
-GrdOrdemServico.Columns[13].Visible := False; GrdOrdemServico.Columns[14].Visible := False; GrdOrdemServico.Columns[15].Visible := False;
-GrdOrdemServico.Columns[16].Visible := False;
+DM.qryOrdemServicoGerenciaSITUACAO.DisplayLabel       := 'Situação';
+DM.qryOrdemServicoGerenciaSITUACAO.DisplayWidth       := 12;
+DM.qryOrdemServicoGerenciaSITUACAO.Alignment          := taCenter;
+
+DM.qryOrdemServicoGerenciaOFICINA.DisplayLabel        := 'Oficina';
+DM.qryOrdemServicoGerenciaOFICINA.DisplayWidth        := 18;
+
+DM.qryOrdemServicoGerenciaTIPOMANUTENCAO.DisplayLabel := 'Tipo de Manutenção';
+DM.qryOrdemServicoGerenciaTIPOMANUTENCAO.DisplayWidth := 18;
+
+//GrdOrdemServico.Columns[7].Title.Alignment            := taCenter;
+//DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayLabel    := 'Programada';
+//DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayWidth    := 18;
+//DM.qryOrdemServicoGerenciaDATAPROGINI.Alignment       := taCenter;
+//GrdOrdemServico.Columns[8].Title.Alignment            := taCenter;
+//DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayLabel := 'Início';
+//DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayWidth := 18;
+//DM.qryOrdemServicoGerenciaDATAINICIOREAL.Alignment    := taCenter;
+//GrdOrdemServico.Columns[9].Title.Alignment            := taCenter;
+//DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayLabel    := 'Fim';
+//DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayWidth    := 18;
+//DM.qryOrdemServicoGerenciaDATAFIMREAL.Alignment       := taCenter;
+//GrdOrdemServico.Columns[10].Title.Alignment            := taCenter;
+//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
+//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 14;
+//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
+
 if (Column.Field.FieldName = 'SITUACAO') then
   begin
     GrdOrdemServico.Canvas.Font.Style := [fsBold];
@@ -1500,7 +1609,8 @@ if (Column.Field.FieldName = 'SITUACAO') then
   if not odd(GrdOrdemServico.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'SITUACAO') then
         if not (gdSelected in State) then
           begin
-            GrdOrdemServico.Canvas.Brush.Color := $00F7F8F9;
+//            GrdOrdemServico.Canvas.Brush.Color := $00F7F8F9;
+            GrdOrdemServico.Canvas.Brush.Color := $00EAFAC0;
 //            GrdOrdemServico.Canvas.FillRect(Rect);
 //            GrdOrdemServico.DefaultDrawDataCell(rect,Column.Field,state);
         end;
@@ -1528,13 +1638,11 @@ if (Key = #13) and (GrdOrdemServico.SelectedIndex = 0) then
     LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
     if LCampo <> EmptyStr then
       begin
-//        DM.qryOrdemServicoGerencia.FetchOnDemand := True;
         if GrdOrdemServico.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
           Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
-//        DM.qryOrdemServicoGerencia.FetchOnDemand := False;
       end;
   end;
-if (Key = #13) and (GrdOrdemServico.SelectedIndex = 3) then
+if (Key = #13) and (GrdOrdemServico.SelectedIndex = 4) then
   begin
     LCampo :=DM.CampoInputBox('SPMP3', 'Informe a descrição da ordem de serviço:');
     if LCampo <> EmptyStr then
@@ -1567,6 +1675,56 @@ if (Key = #13) and (GrdOrdemServico.SelectedIndex = 2) then
     End;
   end;
 end;
+procedure TFrmTelaCadOrdemServicoGerencia.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
+var
+  sIndexName: string;
+  oOrdenacao: TFDSortOption;
+  i: smallint;
+begin
+  // retira a formatação em negrito de todas as colunas
+  for i := 0 to GrdOrdemServico.Columns.Count - 1 do
+    GrdOrdemServico.Columns[i].Title.Font.Style := [];
+
+  // configura a ordenação ascendente ou descendente
+  if TFDQuery(GrdOrdemServico.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
+  begin
+    sIndexName := Column.FieldName + '_DESC';
+    oOrdenacao := soDescending;
+  end
+  else
+  begin
+    sIndexName := Column.FieldName + '_ASC';
+    oOrdenacao := soNoCase;
+  end ;
+
+  // adiciona a ordenação no DataSet, caso não exista
+  if not Assigned(TFDQuery(GrdOrdemServico.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
+    TFDQuery(GrdOrdemServico.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
+
+  // formata o título da coluna em negrito
+  Column.Title.Font.Style := [fsBold];
+
+  // atribui a ordenação selecionada
+  TFDQuery(GrdOrdemServico.DataSource.DataSet).IndexName := sIndexName;
+
+  TFDQuery(GrdOrdemServico.DataSource.DataSet).First;
+end;
+procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoTitleClick(
+  Column: TColumn);
+begin
+  inherited;
+  try
+    CliqueNoTitulo(Column, TFDquery(GrdOrdemServico.DataSource.DataSet), GrdOrdemServico.DataSource.DataSet.Fields[1].Name);
+  except
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao ordenar o grid. FrmTelaCadOrdemServicoGerencia Linha: 1676', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
+  end;
+
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.Inspecoes1Click(Sender: TObject);
 begin
   inherited;
@@ -1930,4 +2088,6 @@ begin
   DM.qryOrdemServicoGerenciaRelatMObraProg.Filtered := False;
   DM.qryOrdemServicoGerenciaRelatMObraProg.Close;
 end;
+
+
 end.

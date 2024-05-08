@@ -218,8 +218,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PProgramacao: TPanel
     Width = 1008
-    Height = 165
-    ExplicitHeight = 165
+    Height = 186
+    ExplicitWidth = 1008
+    ExplicitHeight = 186
     inherited Label2: TLabel
       Width = 132
       Caption = 'PROGRAMA'#199#195'O'
@@ -234,15 +235,15 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Caption = 'Solicita'#231#227'o:'
     end
     object Label11: TLabel
-      Left = 654
-      Top = 88
+      Left = 517
+      Top = 115
       Width = 70
       Height = 16
       Alignment = taRightJustify
       Caption = 'Justificativa:'
     end
     object Label18: TLabel
-      Left = 516
+      Left = 490
       Top = 34
       Width = 6
       Height = 13
@@ -256,8 +257,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object lblCaracteres: TLabel
-      Left = 857
-      Top = 145
+      Left = 879
+      Top = 163
       Width = 121
       Height = 13
       Alignment = taRightJustify
@@ -270,16 +271,16 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object Label15: TLabel
-      Left = 661
-      Top = 32
+      Left = 59
+      Top = 66
       Width = 63
       Height = 16
       Alignment = taRightJustify
       Caption = 'Prioridade:'
     end
     object Label19: TLabel
-      Left = 889
-      Top = 34
+      Left = 297
+      Top = 71
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -292,16 +293,16 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ParentFont = False
     end
     object Label20: TLabel
-      Left = 681
-      Top = 60
+      Left = 80
+      Top = 138
       Width = 44
       Height = 16
       Alignment = taRightJustify
       Caption = 'Oficina:'
     end
     object Label28: TLabel
-      Left = 919
-      Top = 63
+      Left = 330
+      Top = 140
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -313,10 +314,18 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Font.Style = []
       ParentFont = False
     end
+    object Label21: TLabel
+      Left = 26
+      Top = 102
+      Width = 97
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Centro de Custo:'
+    end
     object EdtServico: TDBEdit
       Left = 127
       Top = 30
-      Width = 386
+      Width = 357
       Height = 24
       DataField = 'DESCSERVICO'
       DataSource = DM.dsSolicitacaoTrab
@@ -326,60 +335,60 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       OnMouseMove = PIdentificacaoMouseMove
     end
     object MJustificativa: TDBMemo
-      Left = 728
-      Top = 88
-      Width = 250
-      Height = 55
+      Left = 591
+      Top = 115
+      Width = 409
+      Height = 45
       DataField = 'JUSTIFICATIVA'
       DataSource = DM.dsSolicitacaoTrab
       MaxLength = 250
-      TabOrder = 4
+      TabOrder = 7
       OnChange = MJustificativaChange
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object GroupBox1: TGroupBox
-      Left = 55
-      Top = 60
-      Width = 470
-      Height = 84
+      Left = 517
+      Top = 21
+      Width = 483
+      Height = 86
       Caption = 'Sugest'#245'es:'
-      TabOrder = 1
+      TabOrder = 6
       object Label9: TLabel
-        Left = 315
-        Top = 24
+        Left = 323
+        Top = 22
         Width = 72
         Height = 16
         Alignment = taRightJustify
         Caption = 'Tempo (hs):'
       end
       object Label10: TLabel
-        Left = 9
-        Top = 54
+        Left = 10
+        Top = 49
         Width = 58
         Height = 16
         Alignment = taRightJustify
         Caption = 'Prazo (d):'
       end
       object Label12: TLabel
-        Left = 197
-        Top = 24
+        Left = 195
+        Top = 22
         Width = 32
         Height = 16
         Alignment = taRightJustify
         Caption = 'Hora:'
       end
       object Label13: TLabel
-        Left = 165
-        Top = 54
+        Left = 163
+        Top = 49
         Width = 64
         Height = 16
         Alignment = taRightJustify
         Caption = 'Valor (R$):'
       end
       object Label16: TLabel
-        Left = 36
-        Top = 24
+        Left = 37
+        Top = 22
         Width = 31
         Height = 16
         Alignment = taRightJustify
@@ -392,9 +401,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         ParentFont = False
       end
       object EdtTempo: TDBEdit
-        Left = 393
-        Top = 22
-        Width = 65
+        Left = 401
+        Top = 20
+        Width = 67
         Height = 24
         DataField = 'TEMPOESTIMADO'
         DataSource = DM.dsSolicitacaoTrab
@@ -405,8 +414,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         OnMouseMove = PIdentificacaoMouseMove
       end
       object EdtPrazo: TDBEdit
-        Left = 73
-        Top = 52
+        Left = 74
+        Top = 47
         Width = 78
         Height = 24
         DataField = 'PRAZOSOLIC'
@@ -418,9 +427,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         OnMouseMove = PIdentificacaoMouseMove
       end
       object EdtHorario: TJvDBMaskEdit
-        Left = 235
-        Top = 22
-        Width = 65
+        Left = 233
+        Top = 20
+        Width = 77
         Height = 24
         DataField = 'HORARIOSOLIC'
         DataSource = DM.dsSolicitacaoTrab
@@ -432,9 +441,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         OnMouseMove = PIdentificacaoMouseMove
       end
       object EdtValor: TDBEdit
-        Left = 235
-        Top = 52
-        Width = 65
+        Left = 233
+        Top = 47
+        Width = 77
         Height = 24
         DataField = 'VALORPROG'
         DataSource = DM.dsSolicitacaoTrab
@@ -445,8 +454,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         OnMouseMove = PIdentificacaoMouseMove
       end
       object EdtAquisicao: TJvDBDateEdit
-        Left = 73
-        Top = 22
+        Left = 74
+        Top = 20
         Width = 106
         Height = 24
         DataField = 'DATASOLIC'
@@ -465,9 +474,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       end
     end
     object CBPrioridade: TDBComboBox
-      Left = 728
-      Top = 30
-      Width = 155
+      Left = 127
+      Top = 65
+      Width = 165
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'PRIORIDADEPARADA'
@@ -479,13 +488,13 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
         'At'#233' 1 Semana'
         'At'#233' 1 M'#234's'
         'Acima de um m'#234's')
-      TabOrder = 2
+      TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtOficina: TDBEdit
-      Left = 728
-      Top = 58
-      Width = 155
+      Left = 127
+      Top = 136
+      Width = 165
       Height = 24
       Color = clBtnFace
       Ctl3D = True
@@ -493,14 +502,14 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       DataSource = DM.dsSolicitacaoTrab
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 4
       StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnOficina: TButton
-      Left = 889
-      Top = 55
+      Left = 297
+      Top = 134
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl'
@@ -513,11 +522,42 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       TabOrder = 5
       OnClick = BtnOficinaClick
     end
+    object EdtCentroCusto: TDBEdit
+      Left = 128
+      Top = 100
+      Width = 165
+      Height = 24
+      Color = clBtnFace
+      Ctl3D = True
+      DataField = 'CENTROCUSTO'
+      DataSource = DM.dsSolicitacaoTrab
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 2
+      StyleElements = [seFont, seClient]
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object BtnCentroCusto: TButton
+      Left = 297
+      Top = 98
+      Width = 28
+      Height = 28
+      Hint = 'Consultar/Cadastrar (Ctrl'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = BtnCentroCustoClick
+    end
   end
   inherited PDiversos: TPanel
-    Top = 320
+    Top = 341
     Width = 1008
-    Height = 225
+    Height = 204
     ExplicitTop = 320
     ExplicitHeight = 222
     inherited Label3: TLabel
@@ -530,7 +570,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Left = 5
       Top = 28
       Width = 998
-      Height = 192
+      Height = 171
       Margins.Left = 4
       Margins.Top = 27
       Margins.Right = 4
