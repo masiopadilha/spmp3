@@ -5802,6 +5802,15 @@ type
     qrySolicitacaoTrabCODUSUARIOALT: TStringField;
     qrySolicitacaoTrabOBSERVACOES: TBlobField;
     qrySolicitacaoTrabCENTROCUSTO: TStringField;
+    qryManutProgEquipItensTotalHH: TAggregateField;
+    qryManutProgEquipItensEspTotalHH: TAggregateField;
+    qryManutProgFamEquipItensTotalHH: TAggregateField;
+    qryLubrificProgEquipItensTotalHH: TAggregateField;
+    qryLubrificProgEquipItensEspTotalHH: TAggregateField;
+    qryChecklistLubrificItensTotalHH: TAggregateField;
+    qryChecklistLubrificItensEspTotalHH: TAggregateField;
+    qryChecklistManutItensEspTotalHH: TAggregateField;
+    qryChecklistManutItensTotalHH: TAggregateField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

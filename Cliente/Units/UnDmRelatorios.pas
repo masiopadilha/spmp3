@@ -214,7 +214,6 @@ type
     frxRLubrificFamEquipGeral: TfrxReport;
     frxRLubrificFamEquipIndividual: TfrxReport;
     frxRLubrificPeriodicas: TfrxReport;
-    frxRLubrificProgEquipGeral: TfrxReport;
     frxRLubrificProgEquipIndividual: TfrxReport;
     frxRLubrificantesGeral: TfrxReport;
     frxRLubrificantesIndividual: TfrxReport;
@@ -323,12 +322,13 @@ type
     frxDBChecklistLubrificItens: TfrxDBDataset;
     frxDBChecklistLubrificItensEsp: TfrxDBDataset;
     frxDBChecklistLubrificPlanoTrab: TfrxDBDataset;
-    frxRChecklistLubrificProgEquip: TfrxReport;
     frxREquipamentosHist: TfrxReport;
     frxXLSExport1: TfrxXLSExport;
     frxRInspConsLubrific1: TfrxReport;
     frxRInspConsManut1: TfrxReport;
     frxRInspConsRotas1: TfrxReport;
+    frxRLubrificProgEquipGeral: TfrxReport;
+    frxRChecklistLubrificProgEquip: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

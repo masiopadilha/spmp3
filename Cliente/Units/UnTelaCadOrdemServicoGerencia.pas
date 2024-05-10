@@ -723,6 +723,9 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnImpressaoClick(Sender: TObject);
 begin
   inherited;
+if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')
+  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA') Then Exit;
+
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
 

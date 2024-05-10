@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
   Vcl.DBCtrls, JvExMask, JvToolEdit, JvDBControls, Data.DB, System.DateUtils,
-  Vcl.ImgList, Datasnap.DBClient, Vcl.ComCtrls, System.ImageList, FireDAC.Stan.Param;
+  Vcl.ImgList, Datasnap.DBClient, Vcl.ComCtrls, System.ImageList, FireDAC.Stan.Param,
+  Vcl.Menus;
 
 type
   TFrmTelaInspFechamento = class(TFrmTelaPaiOkCancel)
@@ -15,8 +16,6 @@ type
     BtnLimpar: TButton;
     RGFiltro: TRadioGroup;
     ImageList1: TImageList;
-    Label11: TLabel;
-    Label2: TLabel;
     CDItensProb: TClientDataSet;
     CDItensProbCODITEM: TFloatField;
     CDItensProbCODPARTE: TFloatField;
@@ -47,13 +46,22 @@ type
     GrdRotaManutItens: TDBGrid;
     GrdRotaManutItensEsp: TDBGrid;
     Button6: TButton;
-    BtnFuncionario: TButton;
-    EdtExecucao: TJvDateEdit;
-    EdtMatricula: TEdit;
-    EdtResponsavel: TEdit;
-    rgStatus: TRadioGroup;
     Timer1: TTimer;
     Label1: TLabel;
+    Label11: TLabel;
+    EdtExecucao: TJvDateEdit;
+    Label2: TLabel;
+    EdtMatricula: TEdit;
+    EdtResponsavel: TEdit;
+    BtnFuncionario: TButton;
+    rgStatus: TRadioGroup;
+    PopupMenuItens: TPopupMenu;
+    Marcartodos1: TMenuItem;
+    Desmarcartodos1: TMenuItem;
+    PopupMenuItensEsp: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    BtnMaodeObra: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGFiltroClick(Sender: TObject);
@@ -112,6 +120,11 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure EdtMatriculaKeyPress(Sender: TObject; var Key: Char);
     procedure PCInspecoesChange(Sender: TObject);
+    procedure Marcartodos1Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure Desmarcartodos1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
+    procedure BtnMaodeObraClick(Sender: TObject);
   private
     hora_futura: TDateTime;
     { Private declarations }
@@ -659,6 +672,39 @@ else
 DM.FParamAuxiliar[1] := EmptyStr;
 end;
 
+procedure TFrmTelaInspFechamento.BtnMaodeObraClick(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+      begin
+        if DM.qryManutPeriodicasMATRICULAOS.AsString = '' then
+        begin
+          Application.MessageBox('Mão de obra da O.S. não localizada!', 'SPMP3', MB_OK+MB_ICONEXCLAMATION);
+          Exit;
+        end;
+        EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
+        EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
+      end;
+    1:
+      begin
+        if DM.qryLubrificPeriodicasMATRICULAOS.AsString = '' then
+        begin
+          Application.MessageBox('Mão de obra da O.S. não localizada!', 'SPMP3', MB_OK+MB_ICONEXCLAMATION);
+          Exit;
+        end;
+        EdtMatricula.Text := DM.qryLubrificPeriodicasMATRICULAOS.AsString;
+        EdtResponsavel.Text := DM.qryLubrificPeriodicasFUNCIONARIOOS.AsString;
+      end;
+    2:
+      begin
+        EdtMatricula.Clear;
+        EdtResponsavel.Clear;
+      end;
+  end;
+
+end;
+
 procedure TFrmTelaInspFechamento.Button6Click(Sender: TObject);
 begin
   inherited;
@@ -726,6 +772,116 @@ DM.qryManutPeriodicas.Filter := EmptyStr;
           DM.qryLubrificPeriodicas.Filtered := True;
       end;
   end;
+end;
+
+procedure TFrmTelaInspFechamento.Desmarcartodos1Click(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+    begin
+      if GrdItensManut.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryManutPeriodicasItens.First;
+        while not  DM.qryManutPeriodicasItens.Eof = True do
+        begin
+          DM.qryManutPeriodicasItens.Edit;
+          if GrdItensManut.SelectedIndex = 14 then
+          begin
+            DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 15 then
+          begin
+            DM.qryManutPeriodicasItensBOM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 16 then
+          begin
+            DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 17 then
+          begin
+            DM.qryManutPeriodicasItensRUIM.AsString := 'N';
+          end;
+          DM.qryManutPeriodicasItens.Post;
+
+          DM.qryManutPeriodicasItens.Next;
+        end;
+      end;
+    end;
+    1:
+    begin
+      if GrdItensLubrific.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryLubrificPeriodicasItens.First;
+        while not  DM.qryLubrificPeriodicasItens.Eof = True do
+        begin
+          DM.qryLubrificPeriodicasItens.Edit;
+          if GrdItensLubrific.SelectedIndex = 14 then
+          begin
+            DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 15 then
+          begin
+            DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 16 then
+          begin
+            DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 17 then
+          begin
+            DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
+          end;
+          DM.qryLubrificPeriodicasItens.Post;
+
+          DM.qryLubrificPeriodicasItens.Next;
+        end;
+      end;
+    end;
+    2:
+    begin
+      if GrdRotaManutItens.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryRotaPeriodicasManutItens.First;
+        while not  DM.qryRotaPeriodicasManutItens.Eof = True do
+        begin
+          DM.qryRotaPeriodicasManutItens.Edit;
+          if GrdItensManut.SelectedIndex = 14 then
+          begin
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 15 then
+          begin
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 16 then
+          begin
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 17 then
+          begin
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+          end;
+          DM.qryRotaPeriodicasManutItens.Post;
+
+          DM.qryRotaPeriodicasManutItens.Next;
+        end;
+      end;
+    end;
+  end;
+
 end;
 
 procedure TFrmTelaInspFechamento.EdtMatriculaKeyPress(Sender: TObject;
@@ -1729,26 +1885,386 @@ if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(F
 
 end;
 
+procedure TFrmTelaInspFechamento.Marcartodos1Click(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+    begin
+      if GrdItensManut.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryManutPeriodicasItens.First;
+        while not  DM.qryManutPeriodicasItens.Eof = True do
+        begin
+          DM.qryManutPeriodicasItens.Edit;
+          if GrdItensManut.SelectedIndex = 14 then
+          begin
+            DM.qryManutPeriodicasItensEXECUTADO.AsString := 'S';
+            DM.qryManutPeriodicasItensBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
+            DM.qryManutPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 15 then
+          begin
+            DM.qryManutPeriodicasItensBOM.AsString := 'S';
+            DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
+            DM.qryManutPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 16 then
+          begin
+            DM.qryManutPeriodicasItensREGULAR.AsString := 'S';
+            DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 17 then
+          begin
+            DM.qryManutPeriodicasItensRUIM.AsString := 'S';
+            DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
+          end;
+          DM.qryManutPeriodicasItens.Post;
+
+          DM.qryManutPeriodicasItens.Next;
+        end;
+      end;
+    end;
+    1:
+    begin
+      if GrdItensLubrific.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryLubrificPeriodicasItens.First;
+        while not  DM.qryLubrificPeriodicasItens.Eof = True do
+        begin
+          DM.qryLubrificPeriodicasItens.Edit;
+          if GrdItensLubrific.SelectedIndex = 14 then
+          begin
+            DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'S';
+            DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
+            DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 15 then
+          begin
+            DM.qryLubrificPeriodicasItensBOM.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
+            DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 16 then
+          begin
+            DM.qryLubrificPeriodicasItensREGULAR.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
+          end
+          else if GrdItensLubrific.SelectedIndex = 17 then
+          begin
+            DM.qryLubrificPeriodicasItensRUIM.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
+          end;
+          DM.qryLubrificPeriodicasItens.Post;
+
+          DM.qryLubrificPeriodicasItens.Next;
+        end;
+      end;
+    end;
+    2:
+    begin
+      if GrdRotaManutItens.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryRotaPeriodicasManutItens.First;
+        while not  DM.qryRotaPeriodicasManutItens.Eof = True do
+        begin
+          DM.qryRotaPeriodicasManutItens.Edit;
+          if GrdItensManut.SelectedIndex = 14 then
+          begin
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 15 then
+          begin
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 16 then
+          begin
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
+          end
+          else if GrdItensManut.SelectedIndex = 17 then
+          begin
+            DM.qryRotaPeriodicasManutItensRUIM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
+          end;
+          DM.qryRotaPeriodicasManutItens.Post;
+
+          DM.qryRotaPeriodicasManutItens.Next;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.MenuItem1Click(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+    begin
+      if GrdItensEspManut.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryManutPeriodicasItensEsp.First;
+        while not  DM.qryManutPeriodicasItensEsp.Eof = True do
+        begin
+          DM.qryManutPeriodicasItensEsp.Edit;
+          if GrdItensEspManut.SelectedIndex = 14 then
+          begin
+            DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'S';
+            DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
+            DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 15 then
+          begin
+            DM.qryManutPeriodicasItensEspBOM.AsString := 'S';
+            DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
+            DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 16 then
+          begin
+            DM.qryManutPeriodicasItensEspREGULAR.AsString := 'S';
+            DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 17 then
+          begin
+            DM.qryManutPeriodicasItensEspRUIM.AsString := 'S';
+            DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
+          end;
+          DM.qryManutPeriodicasItensEsp.Post;
+
+          DM.qryManutPeriodicasItensEsp.Next;
+        end;
+      end;
+    end;
+    1:
+    begin
+      if GrdItensEspLubrific.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryLubrificPeriodicasItensEsp.First;
+        while not  DM.qryLubrificPeriodicasItensEsp.Eof = True do
+        begin
+          DM.qryLubrificPeriodicasItensEsp.Edit;
+          if GrdItensEspLubrific.SelectedIndex = 14 then
+          begin
+            DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 15 then
+          begin
+            DM.qryLubrificPeriodicasItensEspBOM.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 16 then
+          begin
+            DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 17 then
+          begin
+            DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'S';
+            DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
+            DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
+          end;
+          DM.qryLubrificPeriodicasItensEsp.Post;
+
+          DM.qryLubrificPeriodicasItensEsp.Next;
+        end;
+      end;
+    end;
+    2:
+    begin
+      if GrdRotaManutItensEsp.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryRotaPeriodicasManutItensEsp.First;
+        while not  DM.qryRotaPeriodicasManutItensEsp.Eof = True do
+        begin
+          DM.qryRotaPeriodicasManutItensEsp.Edit;
+          if GrdItensEspManut.SelectedIndex = 14 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 15 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 16 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 17 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'S';
+            DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
+            DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
+          end;
+          DM.qryRotaPeriodicasManutItensEsp.Post;
+
+          DM.qryRotaPeriodicasManutItensEsp.Next;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.MenuItem2Click(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+    0:
+    begin
+      if GrdItensEspManut.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryManutPeriodicasItensEsp.First;
+        while not  DM.qryManutPeriodicasItensEsp.Eof = True do
+        begin
+          DM.qryManutPeriodicasItensEsp.Edit;
+          if GrdItensEspManut.SelectedIndex = 14 then
+          begin
+            DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 15 then
+          begin
+            DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 16 then
+          begin
+            DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 17 then
+          begin
+            DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
+          end;
+          DM.qryManutPeriodicasItensEsp.Post;
+
+          DM.qryManutPeriodicasItensEsp.Next;
+        end;
+      end;
+    end;
+    1:
+    begin
+      if GrdItensEspLubrific.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryLubrificPeriodicasItensEsp.First;
+        while not  DM.qryLubrificPeriodicasItensEsp.Eof = True do
+        begin
+          DM.qryLubrificPeriodicasItensEsp.Edit;
+          if GrdItensEspLubrific.SelectedIndex = 14 then
+          begin
+            DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 15 then
+          begin
+            DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 16 then
+          begin
+            DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
+          end
+          else if GrdItensEspLubrific.SelectedIndex = 17 then
+          begin
+            DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
+          end;
+          DM.qryLubrificPeriodicasItensEsp.Post;
+
+          DM.qryLubrificPeriodicasItensEsp.Next;
+        end;
+      end;
+    end;
+    2:
+    begin
+      if GrdRotaManutItensEsp.SelectedIndex in [14, 15,16,17] then
+      begin
+        DM.qryRotaPeriodicasManutItensEsp.First;
+        while not  DM.qryRotaPeriodicasManutItensEsp.Eof = True do
+        begin
+          DM.qryRotaPeriodicasManutItensEsp.Edit;
+          if GrdItensEspManut.SelectedIndex = 14 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 15 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 16 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
+          end
+          else if GrdItensEspManut.SelectedIndex = 17 then
+          begin
+            DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
+          end;
+          DM.qryRotaPeriodicasManutItensEsp.Post;
+
+          DM.qryRotaPeriodicasManutItensEsp.Next;
+        end;
+      end;
+    end;
+  end;
+end;
+
 procedure TFrmTelaInspFechamento.PCInspecoesChange(Sender: TObject);
 begin
   inherited;
-//  case PCInspecoes.ActivePageIndex of
-//    0:
-//      begin
-//        EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
-//        EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
-//      end;
-//    1:
-//      begin
-//        EdtMatricula.Text := DM.qryLubrificPeriodicasMATRICULAOS.AsString;
-//        EdtResponsavel.Text := DM.qryLubrificPeriodicasFUNCIONARIOOS.AsString;
-//      end;
-//    2:
-//      begin
-//        EdtMatricula.Clear;
-//        EdtResponsavel.Clear;
-//      end;
-//  end;
+  case PCInspecoes.ActivePageIndex of
+    0:
+      begin
+        BtnMaodeObra.Visible := True;
+      end;
+    1:
+      begin
+        BtnMaodeObra.Visible := True;
+      end;
+    2:
+      begin
+        BtnMaodeObra.Visible := False;
+      end;
+  end;
 end;
 
 procedure TFrmTelaInspFechamento.GrdItensManutCellClick(Column: TColumn);
