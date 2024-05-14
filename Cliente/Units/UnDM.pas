@@ -5802,6 +5802,17 @@ type
     qrySolicitacaoTrabCODUSUARIOALT: TStringField;
     qrySolicitacaoTrabOBSERVACOES: TBlobField;
     qrySolicitacaoTrabCENTROCUSTO: TStringField;
+    qryManutProgEquipItensTotalHH: TAggregateField;
+    qryManutProgEquipItensEspTotalHH: TAggregateField;
+    qryManutProgFamEquipItensTotalHH: TAggregateField;
+    qryLubrificProgEquipItensTotalHH: TAggregateField;
+    qryLubrificProgEquipItensEspTotalHH: TAggregateField;
+    qryChecklistLubrificItensTotalHH: TAggregateField;
+    qryChecklistLubrificItensEspTotalHH: TAggregateField;
+    qryChecklistManutItensEspTotalHH: TAggregateField;
+    qryChecklistManutItensTotalHH: TAggregateField;
+    qryOrdemServicoGerenciaTEMPOHOMEMHORA: TBCDField;
+    qryOrdemServicoGerenciaHHTOTAL: TAggregateField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5878,6 +5889,7 @@ type
     procedure qryRotasFREQUENCIAValidate(Sender: TField);
     procedure qryManutPeriodicasAfterScroll(DataSet: TDataSet);
     procedure qryLubrificPeriodicasAfterScroll(DataSet: TDataSet);
+    procedure dsOrdemServicoGerenciaDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -9233,6 +9245,19 @@ else
       DM.FVersaoBanco := DM.FVersaoMaquina;
     end;
   end;
+end;
+
+procedure TDM.dsOrdemServicoGerenciaDataChange(Sender: TObject; Field: TField);
+begin
+  if FrmTelaCadOrdemServicoGerencia <> nil then
+  begin
+    with FrmTelaCadOrdemServicoGerencia do
+    begin
+      StatusBar1.Panels[0].Text := Format('  %d of %d', [qryOrdemServicoGerencia.RecNo + 1, qryOrdemServicoGerencia.RecordCount]);
+      StatusBar1.Panels[1].Text := 'HH Total: ' + FormatCurr(',0.00', DM.qryOrdemServicoGerenciaHHTOTAL.Value);
+    end;
+  end;
+
 end;
 
 function TDM.TotalHomemHoraDisp(Data: TDateTime; Matricula, TipoCelula: String): Real;

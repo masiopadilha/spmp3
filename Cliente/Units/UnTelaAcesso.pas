@@ -63,8 +63,9 @@ var
   LMensagem : PChar;
   E: Exception;
   qLogin, I, LTentativa: SmallInt;
-  LSenhaAtual, LNovaSenha, LNovaSenhaConfirmacao: String;
+  LSenhaAtual, LNovaSenha, LNovaSenhaConfirmacao, Pasta: String;
   Mensagem: PChar;
+
 begin
   if DM.FDatabase  = '' then
   begin
@@ -325,6 +326,11 @@ begin
         end;
       end else
         DM.FEmpTransf := True;
+
+     Pasta := ExtractFilePath(Application.ExeName)+'Relatórios';
+     if not DirectoryExists(Pasta) then
+        ForceDirectories(Pasta);
+
     except
       on E: Exception do
       begin

@@ -14,15 +14,42 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   inherited PTop: TPanel
     Width = 1008
     ExplicitWidth = 1004
+    object Label11: TLabel [1]
+      Left = 130
+      Top = 9
+      Width = 58
+      Height = 16
+      Alignment = taRightJustify
+      Caption = 'Execu'#231#227'o:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel [2]
+      Left = 234
+      Top = 9
+      Width = 71
+      Height = 16
+      Caption = 'Funcion'#225'rio:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     inherited BtnAjuda: TButton
       Left = 971
-      Top = 15
-      ExplicitLeft = 967
-      ExplicitTop = 15
+      Top = 19
+      ExplicitLeft = 971
+      ExplicitTop = 19
     end
     object Button6: TButton
       Left = 940
-      Top = 15
+      Top = 19
       Width = 28
       Height = 28
       Hint = 'Hist'#243'rico do Equipamento F12'
@@ -39,6 +66,102 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       TabOrder = 1
       Visible = False
       OnClick = Button6Click
+    end
+    object EdtExecucao: TJvDateEdit
+      Left = 130
+      Top = 28
+      Width = 95
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ShowNullDate = False
+      TabOrder = 2
+    end
+    object EdtMatricula: TEdit
+      Left = 234
+      Top = 28
+      Width = 76
+      Height = 24
+      Color = 14671839
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 3
+      StyleElements = [seFont, seClient]
+      OnKeyPress = EdtMatriculaKeyPress
+    end
+    object EdtResponsavel: TEdit
+      Left = 312
+      Top = 28
+      Width = 185
+      Height = 24
+      Color = 14671839
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 4
+      StyleElements = [seFont, seClient]
+    end
+    object BtnFuncionario: TButton
+      Left = 499
+      Top = 27
+      Width = 26
+      Height = 26
+      Hint = 'Consultar/Cadastrar (Ctrl'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = BtnFuncionarioClick
+    end
+    object rgStatus: TRadioGroup
+      Left = 781
+      Top = 10
+      Width = 152
+      Height = 42
+      Caption = 'Filtro:'
+      Columns = 2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 0
+      Items.Strings = (
+        'Todas'
+        'Fechadas')
+      ParentFont = False
+      TabOrder = 6
+      OnClick = rgStatusClick
+    end
+    object BtnMaodeObra: TButton
+      Left = 529
+      Top = 27
+      Width = 26
+      Height = 26
+      Hint = 'Importar m'#227'o de obra da O.S.'
+      ImageAlignment = iaCenter
+      ImageIndex = 125
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 7
+      OnClick = BtnMaodeObraClick
     end
   end
   inherited PCentro: TPanel
@@ -64,33 +187,6 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       TabOrder = 1
       ExplicitWidth = 994
       ExplicitHeight = 494
-      object Label11: TLabel
-        Left = 13
-        Top = 8
-        Width = 58
-        Height = 16
-        Alignment = taRightJustify
-        Caption = 'Execu'#231#227'o:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 186
-        Top = 8
-        Width = 71
-        Height = 16
-        Caption = 'Funcion'#225'rio:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-      end
       object RGFiltro: TRadioGroup
         Left = 679
         Top = 540
@@ -108,7 +204,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           'A Vencer'
           'Todas')
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 1
         Visible = False
         OnClick = RGFiltroClick
       end
@@ -118,16 +214,15 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Width = 60
         Height = 22
         Caption = 'Limpar'
-        TabOrder = 4
+        TabOrder = 0
         Visible = False
       end
       object PCInspecoes: TPageControl
         AlignWithMargins = True
         Left = 5
-        Top = 32
+        Top = 5
         Width = 988
-        Height = 460
-        Margins.Top = 30
+        Height = 487
         ActivePage = TSManut
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -136,8 +231,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 2
         OnChange = PCInspecoesChange
+        ExplicitTop = 32
         ExplicitWidth = 984
         ExplicitHeight = 457
         object TSManut: TTabSheet
@@ -147,7 +243,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Left = 1
             Top = 1
             Width = 978
-            Height = 170
+            Height = 150
             Hint = 
               'Tecle ENTER na(s) coluna(s) em negrito para realizar uma consult' +
               'a.'
@@ -183,9 +279,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdItensManut: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 173
+            Top = 153
             Width = 978
-            Height = 153
+            Height = 200
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -200,6 +296,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            PopupMenu = PopupMenuItens
             ReadOnly = True
             TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
@@ -214,7 +311,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdItensEspManut: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 328
+            Top = 355
             Width = 978
             Height = 100
             Margins.Left = 1
@@ -231,6 +328,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            PopupMenu = PopupMenuItensEsp
             ReadOnly = True
             TabOrder = 2
             TitleFont.Charset = DEFAULT_CHARSET
@@ -251,7 +349,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Left = 1
             Top = 1
             Width = 978
-            Height = 170
+            Height = 150
             Hint = 
               'Tecle ENTER na(s) coluna(s) em negrito para realizar uma consult' +
               'a.'
@@ -263,14 +361,20 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Color = clBtnFace
             DataSource = DM.dsLubrificPeriodicas
             DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
             ParentShowHint = False
             ReadOnly = True
             ShowHint = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
+            TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             StyleElements = [seFont, seBorder]
@@ -281,9 +385,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdItensLubrific: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 173
+            Top = 153
             Width = 978
-            Height = 150
+            Height = 200
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -291,12 +395,19 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Align = alTop
             DataSource = DM.dsLubrificPeriodicasItens
             DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            PopupMenu = PopupMenuItens
             ReadOnly = True
             TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
+            TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = GrdItensLubrificCellClick
@@ -306,7 +417,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdItensEspLubrific: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 325
+            Top = 355
             Width = 978
             Height = 101
             Margins.Left = 1
@@ -316,12 +427,19 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Align = alTop
             DataSource = DM.dsLubrificPeriodicasItensEsp
             DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            PopupMenu = PopupMenuItensEsp
             ReadOnly = True
             TabOrder = 2
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
+            TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = GrdItensEspLubrificCellClick
@@ -391,9 +509,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdRotaManutItens: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 156
+            Top = 152
             Width = 978
-            Height = 170
+            Height = 201
             Margins.Left = 1
             Margins.Top = 1
             Margins.Right = 1
@@ -401,12 +519,19 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Align = alBottom
             DataSource = DM.dsRotaPeriodicasManutItens
             DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            PopupMenu = PopupMenuItens
             ReadOnly = True
             TabOrder = 2
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
+            TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = GrdRotaManutItensCellClick
@@ -416,7 +541,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
           object GrdRotaManutItensEsp: TDBGrid
             AlignWithMargins = True
             Left = 1
-            Top = 328
+            Top = 355
             Width = 978
             Height = 100
             Margins.Left = 1
@@ -426,12 +551,19 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             Align = alBottom
             DataSource = DM.dsRotaPeriodicasManutItensEsp
             DrawingStyle = gdsClassic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            PopupMenu = PopupMenuItensEsp
             ReadOnly = True
             TabOrder = 3
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
+            TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = GrdRotaManutItensEspCellClick
@@ -439,87 +571,6 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             OnDrawColumnCell = GrdRotaManutItensEspDrawColumnCell
           end
         end
-      end
-      object BtnFuncionario: TButton
-        Left = 526
-        Top = 5
-        Width = 26
-        Height = 26
-        Hint = 'Consultar/Cadastrar (Ctrl'
-        DisabledImageIndex = 14
-        ImageAlignment = iaCenter
-        ImageIndex = 14
-        Images = DM.ImageListBotoes
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        OnClick = BtnFuncionarioClick
-      end
-      object EdtExecucao: TJvDateEdit
-        Left = 75
-        Top = 5
-        Width = 95
-        Height = 24
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ShowNullDate = False
-        TabOrder = 0
-      end
-      object EdtMatricula: TEdit
-        Left = 261
-        Top = 6
-        Width = 76
-        Height = 24
-        Color = 14671839
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 1
-        StyleElements = [seFont, seClient]
-        OnKeyPress = EdtMatriculaKeyPress
-      end
-      object EdtResponsavel: TEdit
-        Left = 339
-        Top = 6
-        Width = 185
-        Height = 24
-        Color = 14671839
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 2
-        StyleElements = [seFont, seClient]
-      end
-      object rgStatus: TRadioGroup
-        Left = 817
-        Top = -1
-        Width = 172
-        Height = 40
-        Columns = 2
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ItemIndex = 0
-        Items.Strings = (
-          'Todas'
-          'Fechadas')
-        ParentFont = False
-        TabOrder = 7
-        OnClick = rgStatusClick
       end
     end
   end
@@ -785,7 +836,37 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 658
-    Top = 10
+    Left = 586
+    Top = 154
+  end
+  object PopupMenuItens: TPopupMenu
+    Images = ImageList1
+    Left = 752
+    Top = 327
+    object Marcartodos1: TMenuItem
+      Caption = 'Marcar todos'
+      ImageIndex = 0
+      OnClick = Marcartodos1Click
+    end
+    object Desmarcartodos1: TMenuItem
+      Caption = 'Desmarcar todos'
+      ImageIndex = 1
+      OnClick = Desmarcartodos1Click
+    end
+  end
+  object PopupMenuItensEsp: TPopupMenu
+    Images = ImageList1
+    Left = 752
+    Top = 471
+    object MenuItem1: TMenuItem
+      Caption = 'Marcar todos'
+      ImageIndex = 0
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Desmarcar todos'
+      ImageIndex = 1
+      OnClick = MenuItem2Click
+    end
   end
 end

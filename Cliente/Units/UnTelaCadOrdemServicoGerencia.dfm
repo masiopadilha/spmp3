@@ -124,7 +124,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Top = 0
       Height = 0
       Align = alNone
-      TabOrder = 4
+      TabOrder = 3
       ExplicitTop = 0
       ExplicitWidth = 500
       ExplicitHeight = 0
@@ -361,38 +361,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         TabOrder = 8
         OnClick = btnMObraClick
       end
-    end
-    object GrdOrdemServico: TDBGrid
-      AlignWithMargins = True
-      Left = 4
-      Top = 134
-      Width = 998
-      Height = 367
-      Hint = 'D'#234' duplo-clique para visualizar as informa'#231#245'es da O.S.'
-      Align = alClient
-      DataSource = DM.dsOrdemServicoGerencia
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ParentShowHint = False
-      PopupMenu = PopupMenuOS
-      ReadOnly = True
-      ShowHint = True
-      TabOrder = 3
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      StyleElements = [seFont, seBorder]
-      OnDrawColumnCell = GrdOrdemServicoDrawColumnCell
-      OnDblClick = GrdOrdemServicoDblClick
-      OnKeyDown = GrdOrdemServicoKeyDown
-      OnKeyPress = GrdOrdemServicoKeyPress
-      OnTitleClick = GrdOrdemServicoTitleClick
     end
     object PFiltros: TPanel
       AlignWithMargins = True
@@ -757,7 +725,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Width = 116
       Height = 73
       FixedRows = 0
-      TabOrder = 5
+      TabOrder = 4
       Visible = False
       Alignment = taLeftJustify
       FixedFont.Charset = DEFAULT_CHARSET
@@ -771,6 +739,200 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         24
         24
         24)
+    end
+    object DBGrid: TJvDBGrid
+      Left = 1
+      Top = 131
+      Width = 1004
+      Height = 354
+      Align = alClient
+      DataSource = DM.dsOrdemServicoGerencia
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 5
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridDrawColumnCell
+      OnDblClick = DBGridDblClick
+      OnKeyDown = DBGridKeyDown
+      OnKeyPress = DBGridKeyPress
+      OnTitleClick = DBGridTitleClick
+      TitleButtons = True
+      OnGetBtnParams = DBGridGetBtnParams
+      AlternateRowColor = 15727296
+      SortedField = 'CODIGO'
+      TitleArrow = True
+      SelectColumnsDialogStrings.Caption = 'Select columns'
+      SelectColumnsDialogStrings.OK = '&OK'
+      SelectColumnsDialogStrings.NoSelectionWarning = 'At least one column must be visible!'
+      EditControls = <>
+      RowsHeight = 17
+      TitleRowHeight = 19
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'CODIGO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'digo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 84
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'CODEQUIPAMENTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Equip.'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -12
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = []
+          Width = 108
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EQUIPAMENTO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Caption = 'Equipamento'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 256
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'EQUIPPARADO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Caption = 'Descri'#231#227'o'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'Segoe UI'
+          Title.Font.Style = [fsBold]
+          Width = 267
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DATACADASTRO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Cadastro'
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SITUACAO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Alignment = taCenter
+          Title.Caption = 'Situa'#231#227'o'
+          Width = 105
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OFICINA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Title.Caption = 'Oficina'
+          Width = 135
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPOMANUTENCAO'
+          Title.Caption = 'Tipo de Manuten'#231#227'o'
+          Width = 154
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TEMPOHOMEMHORA'
+          Title.Alignment = taCenter
+          Title.Caption = 'HH'
+          Width = 63
+          Visible = True
+        end>
+    end
+    object StatusBar1: TStatusBar
+      Left = 1
+      Top = 485
+      Width = 1004
+      Height = 19
+      Panels = <
+        item
+          Width = 30
+        end
+        item
+          Width = 100
+        end
+        item
+          Width = 70
+        end>
+      OnResize = StatusBar1Resize
+      ExplicitTop = 482
+      ExplicitWidth = 1000
     end
   end
   inherited PAuxiliares: TPanel
@@ -875,7 +1037,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   object DSOSSimplesExcel: TDataSource
     DataSet = FDMemTOSSimplesExcel
     Left = 907
-    Top = 331
+    Top = 275
   end
   object FDMemTOSSimplesExcel: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -1035,7 +1197,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   end
   object PopupMenuOS: TPopupMenu
     Left = 675
-    Top = 347
+    Top = 275
     object Vencida1: TMenuItem
       Caption = 'Definir ordem de servi'#231'o como vencida'
       OnClick = Vencida1Click

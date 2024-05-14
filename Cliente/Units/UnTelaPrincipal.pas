@@ -1815,6 +1815,7 @@ begin
   FreeAndNil(DMAlertas);
   FreeAndNil(DmRelatorios);
   FreeAndNil(DM);
+
   Application.Terminate;
 end;
 
@@ -1848,6 +1849,12 @@ procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
 var
   Handle: TextFile;
 begin
+if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
+    or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+        begin
+          DM.VerificarInspecoes;
+          DM.VerificarConfiabilidade;
+        end;
 //  try
 ////    DM.CheckUpdateVersion;
 //  except
@@ -3453,11 +3460,14 @@ begin
   ShowMessage(sWindowsDir);
 end;
 procedure TFrmTelaPrincipal.TimerOsciosoTimer(Sender: TObject);
+var
+  X: SmallInt;
 begin
-//Se oscioso por um tempo determinado, fechar o sistema
-//if DM.FMinutosInativo = 36000  then
+  //Se oscioso por um tempo determinado, fechar o sistema
+  //if DM.FMinutosInativo = 36000  then
   DM.FFecharForms := True;
-  Sair1Click(Sender);
+
+  Close;
 end;
 procedure TFrmTelaPrincipal.UsuariosAtivos1Click(Sender: TObject);
 begin

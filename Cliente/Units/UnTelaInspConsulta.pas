@@ -264,6 +264,12 @@ type
     Panel2: TPanel;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
+    FDMemTManutItensTotalHH: TAggregateField;
+    FDMemTManutItensEspTotalHH: TAggregateField;
+    FDMemTLubrificItensTotalHH: TAggregateField;
+    FDMemTLubrificItensEspTotalHH: TAggregateField;
+    FDMemTRotaSeqManutItensTotalHH: TAggregateField;
+    FDMemTRotaSeqManutItensEspTotalHH: TAggregateField;
     procedure BtnOKClick(Sender: TObject);
     procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -344,7 +350,6 @@ if not Assigned(DmRelatorios) then
         DM.MSGAguarde('', False);
         CBPeriodo.OnChange(Sender);
         chbTudo.Checked := False;
-        TSManut.Caption := 'Manutenções ('+ IntToStr(FDMemTManut.RecordCount)+')';
         chbTudo.Checked := False;
       end;
     1:

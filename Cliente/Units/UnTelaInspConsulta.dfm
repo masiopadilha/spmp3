@@ -31,7 +31,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ExplicitLeft = 968
     end
     object BtnImprimir: TButton
-      Left = 941
+      Left = 939
       Top = 17
       Width = 28
       Height = 28
@@ -1066,6 +1066,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTManutItens: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTManut
     MasterFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
     DetailFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -1145,6 +1146,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ProviderFlags = []
       Size = 80
     end
+    object FDMemTManutItensTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object DSMemTManutItens: TDataSource
     DataSet = FDMemTManutItens
@@ -1153,6 +1161,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTLubrificItens: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTLubrific
     MasterFields = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
     FetchOptions.AssignedValues = [evMode]
@@ -1226,6 +1235,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ProviderFlags = []
       Size = 80
     end
+    object FDMemTLubrificItensTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object DSMemTLubrificItens: TDataSource
     DataSet = FDMemTLubrificItens
@@ -1234,6 +1250,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTManutItensEsp: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTManut
     MasterFields = 'CODEMPRESA;CODIGO'
     FetchOptions.AssignedValues = [evMode]
@@ -1337,6 +1354,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ProviderFlags = []
       Size = 80
     end
+    object FDMemTManutItensEspTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object DSMemTManutItensEsp: TDataSource
     DataSet = FDMemTManutItensEsp
@@ -1399,6 +1423,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTLubrificItensEsp: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTLubrific
     MasterFields = 'CODEMPRESA;CODIGO'
     FetchOptions.AssignedValues = [evMode]
@@ -1504,6 +1529,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Origin = 'DESCRICAO'
       ProviderFlags = []
       Size = 80
+    end
+    object FDMemTLubrificItensEspTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
     end
   end
   object FDMemTLubrificPlanoTrab: TFDMemTable
@@ -1770,6 +1802,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTRotaSeqManutItens: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTRotaSeqManut
     MasterFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
     FetchOptions.AssignedValues = [evMode]
@@ -1873,6 +1906,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ProviderFlags = []
       Size = 80
     end
+    object FDMemTRotaSeqManutItensTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object DSMemTRotaSeqManutItens: TDataSource
     DataSet = FDMemTRotaSeqManutItens
@@ -1881,6 +1921,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   end
   object FDMemTRotaSeqManutItensEsp: TFDMemTable
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGEQUIP'
+    AggregatesActive = True
     MasterSource = DSMemTRotaSeqManut
     MasterFields = 'CODEMPRESA;CODIGO'
     FetchOptions.AssignedValues = [evMode]
@@ -1983,6 +2024,13 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       Origin = 'DESCRICAO'
       ProviderFlags = []
       Size = 80
+    end
+    object FDMemTRotaSeqManutItensEspTotalHH: TAggregateField
+      FieldName = 'TotalHH'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
     end
   end
   object DSMemTRotaSeqManutItensEsp: TDataSource
