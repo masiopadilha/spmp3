@@ -8,6 +8,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
   Constraints.MinHeight = 600
   Constraints.MinWidth = 940
   OnCreate = FormCreate
+  OnShow = FormShow
   ExplicitWidth = 940
   ExplicitHeight = 600
   TextHeight = 16
@@ -44,6 +45,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       ActivePage = TSManut
       Align = alClient
       TabOrder = 1
+      OnChange = PCInspecoesChange
+      OnChanging = PCInspecoesChanging
       ExplicitWidth = 910
       ExplicitHeight = 375
       object TSManut: TTabSheet
@@ -371,6 +374,15 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
         TabOrder = 3
         OnClick = BtnOficinaClick
       end
+    end
+    object chbTodos: TCheckBox
+      Left = 805
+      Top = 46
+      Width = 109
+      Height = 17
+      Caption = 'Selcionar todos'
+      TabOrder = 3
+      OnClick = chbTodosClick
     end
   end
   inherited PAuxiliares: TPanel

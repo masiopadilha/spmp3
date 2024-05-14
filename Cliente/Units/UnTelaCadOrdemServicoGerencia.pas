@@ -14,7 +14,6 @@ uses
 type
   TFrmTelaCadOrdemServicoGerencia = class(TFrmTelaPaiOKCancel)
     PFuncoes: TPanel;
-    GrdOrdemServico: TDBGrid;
     BtnCadastro: TButton;
     BtnProgramacao: TButton;
     BtnExecucao: TButton;
@@ -98,13 +97,12 @@ type
     PopupMenuOS: TPopupMenu;
     Vencida1: TMenuItem;
     DesafazerVencida1: TMenuItem;
+    DBGrid: TJvDBGrid;
+    StatusBar1: TStatusBar;
     procedure FormCreate(Sender: TObject);
-    procedure GrdOrdemServicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ConfigurarFiltros;
     procedure BtnCadastroClick(Sender: TObject);
     procedure BtnProgramacaoClick(Sender: TObject);
-    procedure GrdOrdemServicoDblClick(Sender: TObject);
-    procedure GrdOrdemServicoKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGConsSimplesClick(Sender: TObject);
     procedure BtnExecucaoClick(Sender: TObject);
@@ -120,7 +118,6 @@ type
     procedure Ficha1Click(Sender: TObject);
     procedure btnMObraClick(Sender: TObject);
     procedure LiberarMaodeObraEmExecucao;
-    procedure GrdOrdemServicoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure BtnOficinaClick(Sender: TObject);
     procedure EdtOficinaDblClick(Sender: TObject);
     procedure EdtFamiliaEquipDblClick(Sender: TObject);
@@ -139,10 +136,21 @@ type
     procedure CBPrioridadeChange(Sender: TObject);
     procedure Exportar1Click(Sender: TObject);
     procedure Vencida1Click(Sender: TObject);
-    procedure GrdOrdemServicoTitleClick(Column: TColumn);
     procedure DesafazerVencida1Click(Sender: TObject);
+    procedure DBGridGetBtnParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; var ASortMarker: TSortMarker;
+      IsDown: Boolean);
+    procedure DBGridTitleClick(Column: TColumn);
+    procedure StatusBar1Resize(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure DBGridKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBGridKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
+    Ascending:boolean;
     hora_futura: TDateTime;
 
     procedure LimpaGrid(Grid: TStringGrid);
@@ -193,9 +201,9 @@ if (DM.qryUsuarioPExclusaoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNo
       end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')
-  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA')
-    or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA') then
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')
+  or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA')
+    or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA') then
       begin
         if Application.MessageBox('Deseja realmente cancelar a O.S. ?','SPMP', MB_YESNO + MB_ICONWARNING) = MRYes then
           begin
@@ -203,7 +211,7 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADAS
               begin
                 Close;
                 Params[0].AsString  := DM.FCodEmpresa;
-                Params[1].AsInteger := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsInteger;
+                Params[1].AsInteger := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsInteger;
                 Open;
                 Edit;
               end;
@@ -257,7 +265,7 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOEXECUTAR.AsString <> 'S') and (LowerCase(
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
   begin
     BtnParalisacao.OnClick(Sender);
     Exit;
@@ -266,10 +274,10 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARAL
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
-  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA')
-    or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')
-      or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') then Exit;
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
+  or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA')
+    or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')
+      or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') then Exit;
 
 if DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString = EmptyStr Then
   begin
@@ -292,7 +300,7 @@ if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) an
     begin
       Close;
       Params[0].AsString := DM.FCodEmpresa;
-      Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+      Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
       Open;
       Edit;
     end;
@@ -684,15 +692,15 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOFECHAR.AsString <> 'S') and (LowerCase(DM
       end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
-  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA') then
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
+  or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA') then
     begin
       if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
         with DM.qryOrdemServico do
           begin
             Close;
             Params[0].AsString := DM.FCodEmpresa;
-            Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+            Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
             Open;
             Edit;
           end;
@@ -723,8 +731,8 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnImpressaoClick(Sender: TObject);
 begin
   inherited;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')
-  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA') Then Exit;
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')
+  or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA') Then Exit;
 
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
@@ -736,7 +744,7 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.BtnLiberacaoClick(Sender: TObject);
 begin
   inherited;
-if GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO' Then Exit;
+if DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO' Then Exit;
 if (DM.qryUsuarioPAcessoCADORDEMSERVICOLIBERAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
@@ -790,14 +798,14 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOPARALISAR.AsString <> 'S') and (LowerCase
       end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
     begin
       if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
         with DM.qryOrdemServico do
           begin
             Close;
             Params[0].AsString := DM.FCodEmpresa;
-            Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+            Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
             Open;
             Edit;
           end;
@@ -822,11 +830,11 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase
       end;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
-  or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')
-    or ((GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA') or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA'))
-      or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')
-        or (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA') then
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
+  or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA') or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')
+    or ((DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA') or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA'))
+      or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')
+        or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA') then
           begin
             Try
               if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
@@ -834,7 +842,7 @@ if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADAS
                   begin
                     Close;
                     Params[0].AsString := DM.FCodEmpresa;
-                    Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+                    Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
                     Open;
                     Edit;
                   end;
@@ -942,196 +950,196 @@ begin
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.ConfigurarFiltros;
 begin
-  GrdOrdemServico.DataSource.DataSet.Filtered := False;
-  GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
+  DBGrid.DataSource.DataSet.Filtered := False;
+  DBGrid.DataSource.DataSet.Filter := EmptyStr;
   DM.qryOrdemServicoGerencia.IndexDefs.Clear;
 
   LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := ''; LSolic := ''; LRot := ''; LCanc := ''; LVenc := ''; LParado := '';
 
   if (chkNProg.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LDet := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
     else
       LDet := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LDet;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LDet;
 
   if (chkDetalhad.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LNProg := ' (SITUACAO = ''DETALHADA'')'
     else
       LNProg := ' OR (SITUACAO = ''DETALHADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LNProg;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LNProg;
 
   if (chkProg.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LProg  := ' (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')'
     else
       LProg  := ' OR (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LProg;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LProg;
 
   if (chkExec.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LExec  := ' (SITUACAO = ''EXECUCAO'')'
     else
       LExec  := ' OR (SITUACAO = ''EXECUCAO'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LExec;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LExec;
 
   if (chkLib.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LLib   := ' (SITUACAO = ''LIBERADA'')'
     else
       LLib   := ' OR (SITUACAO = ''LIBERADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LLib;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LLib;
 
   if (chkFec.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LFec   := ' (SITUACAO = ''FECHADA'')'
     else
       LFec   := ' OR (SITUACAO = ''FECHADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LFec;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LFec;
 
   if (chkPar.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LPar   := ' (SITUACAO = ''PARALISADA'')'
     else
       LPar   := ' OR (SITUACAO = ''PARALISADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LPar;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LPar;
 
   if (chkSolic.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       begin
         LSolic := ' (SOLICTRAB = ''S'')';
-        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+        if DBGrid.DataSource.DataSet.Filter <> '' then
+          DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end
     else
       begin
         LSolic := ' OR (SOLICTRAB = ''S'')';
-        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+        if DBGrid.DataSource.DataSet.Filter <> '' then
+          DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end;
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LSolic;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LSolic;
 
   if (chkRot.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       begin
         LRot   := ' (ROTAEQUIP = ''S'')';
-        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+        if DBGrid.DataSource.DataSet.Filter <> '' then
+          DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end
     else
       begin
         LRot   := ' OR (ROTAEQUIP = ''S'')';
-        if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-          GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+        if DBGrid.DataSource.DataSet.Filter <> '' then
+          DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end;
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LRot ;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LRot ;
 
 
   if (chbCanc.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LCanc   := ' (SITUACAO = ''CANCELADA'')'
     else
       LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LCanc;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LCanc;
 
   if (chbVenc.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LVenc   := ' (SITUACAO = ''VENCIDA'')'
     else
       LVenc   := ' OR (SITUACAO = ''VENCIDA'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LVenc;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LVenc;
 
   if (chkParado.Checked = True) then
-    if GrdOrdemServico.DataSource.DataSet.Filter = '' then
+    if DBGrid.DataSource.DataSet.Filter = '' then
       LParado   := ' (EQUIPPARADO = ''S'')'
     else
       LParado   := ' AND (EQUIPPARADO = ''S'')';
-  GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + LParado;
+  DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LParado;
 
 
-  if GrdOrdemServico.DataSource.DataSet.Filter <> '' then
-    GrdOrdemServico.DataSource.DataSet.Filter := '(' + GrdOrdemServico.DataSource.DataSet.Filter + ')';
+  if DBGrid.DataSource.DataSet.Filter <> '' then
+    DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
 
   if EdtFamiliaEquip.Text <> '' then
     begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'CODFAMILIAEQUIP = ' + QuotedStr(LCodFamilia)
+      if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+        DBGrid.DataSource.DataSet.Filter := 'CODFAMILIAEQUIP = ' + QuotedStr(LCodFamilia)
       else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODFAMILIAEQUIP = '+QuotedStr(LCodFamilia);
+        DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND CODFAMILIAEQUIP = '+QuotedStr(LCodFamilia);
     end;
 
   if edtOficina.Text <> '' then
     begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'CODOFICINA = ' + QuotedStr(LCodOficina)
+      if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+        DBGrid.DataSource.DataSet.Filter := 'CODOFICINA = ' + QuotedStr(LCodOficina)
       else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+        DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
     end;
 
     if edtManutencao.Text <> ''  then
     begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'CODMANUTENCAO = ' + QuotedStr(LCodManutencao)
+      if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+        DBGrid.DataSource.DataSet.Filter := 'CODMANUTENCAO = ' + QuotedStr(LCodManutencao)
       else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODMANUTENCAO = ' + QuotedStr(LCodManutencao);
+        DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND CODMANUTENCAO = ' + QuotedStr(LCodManutencao);
     end;
 
   case CBPrioridade.ItemIndex of
     1:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Emergência'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Emergência'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Emergência''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Emergência''';
       end;
     2:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 12 hs'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 12 hs'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 12 hs''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 12 hs''';
       end;
     3:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 72 hs'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 72 hs'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 72 hs''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 72 hs''';
       end;
     4:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Semana'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Semana'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Semana''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Semana''';
       end;
     5:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Mês'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Até 1 Mês'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Mês''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Até 1 Mês''';
       end;
     6:
       begin
-        if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Acima de um mês'''
+        if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+          DBGrid.DataSource.DataSet.Filter := 'PRIORIDADEPARADA = ''Acima de um mês'''
         else
-          GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Acima de um mês''';
+          DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND PRIORIDADEPARADA = ''Acima de um mês''';
       end;
   end;
 
   if LEquipamento <> EmptyStr then
     begin
-      if GrdOrdemServico.DataSource.DataSet.Filter = EmptyStr then
-        GrdOrdemServico.DataSource.DataSet.Filter := 'CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0])
+      if DBGrid.DataSource.DataSet.Filter = EmptyStr then
+        DBGrid.DataSource.DataSet.Filter := 'CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0])
       else
-        GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0]);
+        DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND CODEQUIPAMENTO = '+QuotedStr(DM.FParamAuxiliar[0]);
     end;
 
-  if GrdOrdemServico.DataSource.DataSet.Filter <> EmptyStr then
-    GrdOrdemServico.DataSource.DataSet.Filtered := True;
+  if DBGrid.DataSource.DataSet.Filter <> EmptyStr then
+    DBGrid.DataSource.DataSet.Filtered := True;
 
   DM.qryOrdemServicoGerencia.First;
 end;
@@ -1355,8 +1363,8 @@ DM.qryOrdemServicoEquipePecasUtil.Close;
 DM.qryOrdemServico.Close;
 DM.qryOrdemServicoGerencia.Close;
 DM.qryAuxiliar.Close;
-GrdOrdemServico.DataSource.DataSet.Filtered := False;
-GrdOrdemServico.DataSource.DataSet.Filter := EmptyStr;
+DBGrid.DataSource.DataSet.Filtered := False;
+DBGrid.DataSource.DataSet.Filter := EmptyStr;
 Close;
 end;
 procedure TFrmTelaCadOrdemServicoGerencia.FormCreate(Sender: TObject);
@@ -1426,258 +1434,6 @@ begin
       Exit;
     end;
 end;
-procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDblClick(
-  Sender: TObject);
-begin
-  inherited;
-  with DM.qryOrdemServico do
-    begin
-      Close;
-      Params[0].AsString := DM.FCodEmpresa;
-      Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
-      Open;
-      Edit;
-    end;
-  BtnCadastro.OnClick(Sender);
-end;
-procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  inherited;
-GrdOrdemServico.Columns[0].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaCODIGO.DisplayLabel         := 'Código';
-DM.qryOrdemServicoGerenciaCODIGO.DisplayWidth         := 8;
-DM.qryOrdemServicoGerenciaCODIGO.Alignment            := taCenter;
-GrdOrdemServico.Columns[0].Title.Font.Style           := [fsbold];
-
-GrdOrdemServico.Columns[1].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.DisplayLabel := 'Cód. Equip.';
-DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.DisplayWidth := 10;
-DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.Alignment    := taCenter;
-
-GrdOrdemServico.Columns[2].Title.Font.Style           := [fsbold];
-GrdOrdemServico.Columns[2].Title.Alignment            := taLeftJustify;
-DM.qryOrdemServicoGerenciaEQUIPAMENTO.DisplayLabel    := 'Equipamento';
-DM.qryOrdemServicoGerenciaEQUIPAMENTO.DisplayWidth    := 45;
-
-GrdOrdemServico.Columns[4].Title.Font.Style           := [fsbold];
-GrdOrdemServico.Columns[4].Title.Alignment            := taLeftJustify;
-DM.qryOrdemServicoGerenciaDESCRICAO.DisplayLabel      := 'Descrição';
-DM.qryOrdemServicoGerenciaDESCRICAO.DisplayWidth      := 37;
-
-if (chkProg.Checked = True) then
-begin
-  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible      := False;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible    := False;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible    := False;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible       := True;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Index         := 5;
-  GrdOrdemServico.Columns[5].Title.Alignment          := taCenter;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayLabel  := 'Programada';
-  DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayWidth  := 16;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Alignment     := taCenter;
-end else
-if (chkExec.Checked = True) and (chkProg.Checked = False) and (chkFec.Checked = False) then
-begin
-  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible        := False;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible         := False;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible      := False;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible      := True;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Index        := 5;
-  GrdOrdemServico.Columns[5].Title.Alignment            := taCenter;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayLabel := 'Início';
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayWidth := 16;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Alignment    := taCenter;
-end else
-if (chkFec.Checked = True) and (chkProg.Checked = False) and (chkExec.Checked = False) then
-begin
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible      := True;
-  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible        := False;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible         := False;
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible      := False;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Index        := 5;
-  GrdOrdemServico.Columns[5].Title.Alignment            := taCenter;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 16;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
-end else
-if (chkProg.Checked = False) and (chkExec.Checked = False) and (chkFec.Checked = False) then
-begin
-  DM.qryOrdemServicoGerenciaDATAINICIOREAL.Visible    := False;
-  DM.qryOrdemServicoGerenciaDATAPROGINI.Visible       := False;
-  DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Visible    := False;
-  DM.qryOrdemServicoGerenciaDATACADASTRO.Visible      := True;
-  GrdOrdemServico.Columns[5].Title.Alignment          := taCenter;
-  DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayLabel := 'Cadastro';
-  DM.qryOrdemServicoGerenciaDATACADASTRO.DisplayWidth := 16;
-  DM.qryOrdemServicoGerenciaDATACADASTRO.Alignment    := taCenter;
-end;
-
-GrdOrdemServico.Columns[6].Title.Alignment            := taCenter;
-DM.qryOrdemServicoGerenciaSITUACAO.DisplayLabel       := 'Situação';
-DM.qryOrdemServicoGerenciaSITUACAO.DisplayWidth       := 12;
-DM.qryOrdemServicoGerenciaSITUACAO.Alignment          := taCenter;
-
-DM.qryOrdemServicoGerenciaOFICINA.DisplayLabel        := 'Oficina';
-DM.qryOrdemServicoGerenciaOFICINA.DisplayWidth        := 18;
-
-DM.qryOrdemServicoGerenciaTIPOMANUTENCAO.DisplayLabel := 'Tipo de Manutenção';
-DM.qryOrdemServicoGerenciaTIPOMANUTENCAO.DisplayWidth := 18;
-
-//GrdOrdemServico.Columns[7].Title.Alignment            := taCenter;
-//DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayLabel    := 'Programada';
-//DM.qryOrdemServicoGerenciaDATAPROGINI.DisplayWidth    := 18;
-//DM.qryOrdemServicoGerenciaDATAPROGINI.Alignment       := taCenter;
-//GrdOrdemServico.Columns[8].Title.Alignment            := taCenter;
-//DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayLabel := 'Início';
-//DM.qryOrdemServicoGerenciaDATAINICIOREAL.DisplayWidth := 18;
-//DM.qryOrdemServicoGerenciaDATAINICIOREAL.Alignment    := taCenter;
-//GrdOrdemServico.Columns[9].Title.Alignment            := taCenter;
-//DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayLabel    := 'Fim';
-//DM.qryOrdemServicoGerenciaDATAFIMREAL.DisplayWidth    := 18;
-//DM.qryOrdemServicoGerenciaDATAFIMREAL.Alignment       := taCenter;
-//GrdOrdemServico.Columns[10].Title.Alignment            := taCenter;
-//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayLabel := 'Fechada';
-//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.DisplayWidth := 14;
-//DM.qryOrdemServicoGerenciaDATAFECHAMENTO.Alignment    := taCenter;
-
-if (Column.Field.FieldName = 'SITUACAO') then
-  begin
-    GrdOrdemServico.Canvas.Font.Style := [fsBold];
-    GrdOrdemServico.Canvas.Font.Name := 'Calibri';
-    if GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA' then
-      begin
-        if GrdOrdemServico.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> '' then
-          begin GrdOrdemServico.Canvas.Brush.Color := clWhite; GrdOrdemServico.Canvas.Font.Color:= clBlack; end
-        else
-          begin GrdOrdemServico.Canvas.Brush.Color := $00F3F3F3; GrdOrdemServico.Canvas.Font.Color := clBlack end;
-      end;
-    if GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA' then
-      begin
-         GrdOrdemServico.Canvas.Brush.Color := clGray; GrdOrdemServico.Canvas.Font.Color:= clBlack;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') then
-      begin
-        if GrdOrdemServico.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> '' then
-          begin GrdOrdemServico.Canvas.Brush.Color := clYellow; GrdOrdemServico.Canvas.Font.Color := clRed end
-        else
-          begin GrdOrdemServico.Canvas.Brush.Color := $00BBFFFF; GrdOrdemServico.Canvas.Font.Color := clRed end;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clYellow; GrdOrdemServico.Canvas.Font.Color := clGreen;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clWhite;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clBlue; GrdOrdemServico.Canvas.Font.Color := clYellow;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clYellow; GrdOrdemServico.Canvas.Font.Color := clBlue;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REALIZADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clBlack; GrdOrdemServico.Canvas.Font.Color := clYellow;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clInfoBk; GrdOrdemServico.Canvas.Font.Color := clGreen;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clGreen; GrdOrdemServico.Canvas.Font.Color := clWhite;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clGray; GrdOrdemServico.Canvas.Font.Color := clBlack;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clRed; GrdOrdemServico.Canvas.Font.Color  := clYellow;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clBlack; GrdOrdemServico.Canvas.Font.Color  := $00FF8000;
-      end;
-    if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')then
-      begin
-        GrdOrdemServico.Canvas.Brush.Color := clRed; GrdOrdemServico.Canvas.Font.Color := clWhite;
-      end;
-  end;
-  if not odd(GrdOrdemServico.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'SITUACAO') then
-        if not (gdSelected in State) then
-          begin
-//            GrdOrdemServico.Canvas.Brush.Color := $00F7F8F9;
-            GrdOrdemServico.Canvas.Brush.Color := $00EAFAC0;
-//            GrdOrdemServico.Canvas.FillRect(Rect);
-//            GrdOrdemServico.DefaultDrawDataCell(rect,Column.Field,state);
-        end;
-//  if (GrdOrdemServico.DataSource.DataSet.FieldByName('SOLICTRAB').AsString = 'S') and (Column.Field.FieldName <> 'SITUACAO') then
-//    begin
-//      GrdOrdemServico.Canvas.Brush.Color := $00DDDDDD;
-//    end;
-  GrdOrdemServico.Canvas.FillRect(Rect);
-  GrdOrdemServico.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
-procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  inherited;
-if (Shift = [ssCtrl]) and (Key = 46) then
-  Key := 0;
-end;
-procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoKeyPress(
-  Sender: TObject; var Key: Char);
-var
-LCampo : String;
-begin
-  inherited;
-if (Key = #13) and (GrdOrdemServico.SelectedIndex = 0) then
-  begin
-    LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
-    if LCampo <> EmptyStr then
-      begin
-        if GrdOrdemServico.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
-      end;
-  end;
-if (Key = #13) and (GrdOrdemServico.SelectedIndex = 4) then
-  begin
-    LCampo :=DM.CampoInputBox('SPMP3', 'Informe a descrição da ordem de serviço:');
-    if LCampo <> EmptyStr then
-      begin
-        ConfigurarFiltros;
-        if GrdOrdemServico.DataSource.DataSet.Filter = '' then
-          GrdOrdemServico.DataSource.DataSet.Filter := 'DESCRICAO LIKE ' + QuotedStr('%' + LCampo + '%')
-        else
-          begin
-            GrdOrdemServico.DataSource.DataSet.Filter := GrdOrdemServico.DataSource.DataSet.Filter + ' AND DESCRICAO LIKE ' + QuotedStr('%' + LCampo + '%');
-          end;
-        GrdOrdemServico.DataSource.DataSet.Filtered := True;
-      end
-    else
-      ConfigurarFiltros;
-  end;
-if (Key = #13) and (GrdOrdemServico.SelectedIndex = 2) then
-  begin
-    LEquipamento := EmptyStr;
-    DM.FTabela_auxiliar := 250;
-    DM.FParamAuxiliar[1] := 'DESCRICAO';
-    Try
-      Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
-      FrmTelaAuxiliar.ShowModal;
-    Finally
-      DM.FParamAuxiliar[0] := DM.FCodCombo;
-      LEquipamento         := DM.FValorCombo;
-      FreeAndNil(FrmTelaAuxiliar);
-      ConfigurarFiltros;
-    End;
-  end;
-end;
 procedure TFrmTelaCadOrdemServicoGerencia.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
 var
   sIndexName: string;
@@ -1685,11 +1441,11 @@ var
   i: smallint;
 begin
   // retira a formatação em negrito de todas as colunas
-  for i := 0 to GrdOrdemServico.Columns.Count - 1 do
-    GrdOrdemServico.Columns[i].Title.Font.Style := [];
+  for i := 0 to DBGrid.Columns.Count - 1 do
+    DBGrid.Columns[i].Title.Font.Style := [];
 
   // configura a ordenação ascendente ou descendente
-  if TFDQuery(GrdOrdemServico.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
+  if TFDQuery(DBGrid.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
   begin
     sIndexName := Column.FieldName + '_DESC';
     oOrdenacao := soDescending;
@@ -1701,33 +1457,17 @@ begin
   end ;
 
   // adiciona a ordenação no DataSet, caso não exista
-  if not Assigned(TFDQuery(GrdOrdemServico.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
-    TFDQuery(GrdOrdemServico.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
+  if not Assigned(TFDQuery(DBGrid.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
+    TFDQuery(DBGrid.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
 
   // formata o título da coluna em negrito
   Column.Title.Font.Style := [fsBold];
 
   // atribui a ordenação selecionada
-  TFDQuery(GrdOrdemServico.DataSource.DataSet).IndexName := sIndexName;
+  TFDQuery(DBGrid.DataSource.DataSet).IndexName := sIndexName;
 
-  TFDQuery(GrdOrdemServico.DataSource.DataSet).First;
+  TFDQuery(DBGrid.DataSource.DataSet).First;
 end;
-procedure TFrmTelaCadOrdemServicoGerencia.GrdOrdemServicoTitleClick(
-  Column: TColumn);
-begin
-  inherited;
-  try
-    CliqueNoTitulo(Column, TFDquery(GrdOrdemServico.DataSource.DataSet), GrdOrdemServico.DataSource.DataSet.Fields[1].Name);
-  except
-    on E: Exception do
-    begin
-      DM.GravaLog('Falha ao ordenar o grid. FrmTelaCadOrdemServicoGerencia Linha: 1676', E.ClassName, E.Message);
-      Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
-    end;
-  end;
-
-end;
-
 procedure TFrmTelaCadOrdemServicoGerencia.Inspecoes1Click(Sender: TObject);
 begin
   inherited;
@@ -1753,6 +1493,182 @@ begin
   DM.qryOrdemServicoGerenciaRelatManut.Close;
   DM.qryOrdemServicoGerenciaRelatLubrific.Close;
 end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridDblClick(Sender: TObject);
+begin
+  inherited;
+  with DM.qryOrdemServico do
+    begin
+      Close;
+      Params[0].AsString := DM.FCodEmpresa;
+      Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
+      Open;
+      Edit;
+    end;
+  BtnCadastro.OnClick(Sender);
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+if (Column.Field.FieldName = 'SITUACAO') then
+  begin
+    DBGrid.Canvas.Font.Style := [fsBold];
+    DBGrid.Canvas.Font.Name := 'Calibri';
+    if DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'SOLICITADA' then
+      begin
+        if DBGrid.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> '' then
+          begin DBGrid.Canvas.Brush.Color := clWhite; DBGrid.Canvas.Font.Color:= clBlack; end
+        else
+          begin DBGrid.Canvas.Brush.Color := $00F3F3F3; DBGrid.Canvas.Font.Color := clBlack end;
+      end;
+    if DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA' then
+      begin
+         DBGrid.Canvas.Brush.Color := clGray; DBGrid.Canvas.Font.Color:= clBlack;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') then
+      begin
+        if DBGrid.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> '' then
+          begin DBGrid.Canvas.Brush.Color := clYellow; DBGrid.Canvas.Font.Color := clRed end
+        else
+          begin DBGrid.Canvas.Brush.Color := $00BBFFFF; DBGrid.Canvas.Font.Color := clRed end;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DETALHADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clYellow; DBGrid.Canvas.Font.Color := clGreen;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PROGRAMADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clBlue; DBGrid.Canvas.Font.Color := clWhite;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REPROGRAMADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clBlue; DBGrid.Canvas.Font.Color := clYellow;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'DESPROGRAMADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clYellow; DBGrid.Canvas.Font.Color := clBlue;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'REALIZADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clBlack; DBGrid.Canvas.Font.Color := clYellow;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO')then
+      begin
+        DBGrid.Canvas.Brush.Color := clInfoBk; DBGrid.Canvas.Font.Color := clGreen;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clGreen; DBGrid.Canvas.Font.Color := clWhite;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clGray; DBGrid.Canvas.Font.Color := clBlack;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clRed; DBGrid.Canvas.Font.Color  := clYellow;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clBlack; DBGrid.Canvas.Font.Color  := $00FF8000;
+      end;
+    if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')then
+      begin
+        DBGrid.Canvas.Brush.Color := clRed; DBGrid.Canvas.Font.Color := clWhite;
+      end;
+  end;
+
+  DBGrid.Canvas.FillRect(Rect);
+  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridGetBtnParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor;
+  var ASortMarker: TSortMarker; IsDown: Boolean);
+const
+  Direction: array[boolean] of TSortmarker = (smDown, smUp);
+begin
+  inherited;
+  if Field.FieldName = DBGrid.SortedField then
+    ASortMarker := Direction[Ascending]
+  else
+    ASortMarker := smNone;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  inherited;
+if (Shift = [ssCtrl]) and (Key = 46) then
+  Key := 0;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  LCampo : String;
+begin
+  inherited;
+  if (Key = #13) and (DBGrid.SelectedIndex = 0) then
+    begin
+      LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
+      if LCampo <> EmptyStr then
+        begin
+          if DBGrid.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
+            Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+        end;
+    end;
+  if (Key = #13) and (DBGrid.SelectedIndex = 4) then
+    begin
+      LCampo :=DM.CampoInputBox('SPMP3', 'Informe a descrição da ordem de serviço:');
+      if LCampo <> EmptyStr then
+        begin
+          ConfigurarFiltros;
+          if DBGrid.DataSource.DataSet.Filter = '' then
+            DBGrid.DataSource.DataSet.Filter := 'DESCRICAO LIKE ' + QuotedStr('%' + LCampo + '%')
+          else
+            begin
+              DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND DESCRICAO LIKE ' + QuotedStr('%' + LCampo + '%');
+            end;
+          DBGrid.DataSource.DataSet.Filtered := True;
+        end
+      else
+        ConfigurarFiltros;
+    end;
+  if (Key = #13) and (DBGrid.SelectedIndex = 2) then
+    begin
+      LEquipamento := EmptyStr;
+      DM.FTabela_auxiliar := 250;
+      DM.FParamAuxiliar[1] := 'DESCRICAO';
+      Try
+        Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
+        FrmTelaAuxiliar.ShowModal;
+      Finally
+        DM.FParamAuxiliar[0] := DM.FCodCombo;
+        LEquipamento         := DM.FValorCombo;
+        FreeAndNil(FrmTelaAuxiliar);
+        ConfigurarFiltros;
+      End;
+    end;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.DBGridTitleClick(Column: TColumn);
+begin
+  inherited;
+  try
+    CliqueNoTitulo(Column, TFDquery(DBGrid.DataSource.DataSet), DBGrid.DataSource.DataSet.Fields[1].Name);
+  except
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao ordenar o grid. FrmTelaCadOrdemServicoGerencia Linha: 1676', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
+  end;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.Ficha1Click(Sender: TObject);
 begin
   inherited;
@@ -1761,7 +1677,7 @@ if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) an
     begin
       Close;
       Params[0].AsString := DM.FCodEmpresa;
-      Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+      Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
       Open;
       Edit;
     end;
@@ -1800,7 +1716,7 @@ begin
       begin
         Close;
         Params[0].AsString := DM.FCodEmpresa;
-        Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+        Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
         Open;
         Edit;
       end;
@@ -1827,6 +1743,13 @@ begin
   Dm.FDMTOrdemServicoGerenciaRelat.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
   DmRelatorios.frxROrdemServicoGeral.ShowReport();
 end;
+procedure TFrmTelaCadOrdemServicoGerencia.StatusBar1Resize(Sender: TObject);
+begin
+  inherited;
+  StatusBar1.Panels[0].Width := ClientWidth - 100;
+  DM.dsOrdemServicoGerenciaDataChange(nil, nil);
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.Timer1Timer(Sender: TObject);
 var
   hora_atual, diferenca: TDateTime;
@@ -1877,7 +1800,7 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
-if (GrdOrdemServico.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
+if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
 
 if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
@@ -1890,7 +1813,7 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
         begin
           Close;
           Params[0].AsString := DM.FCodEmpresa;
-          Params[1].AsString := GrdOrdemServico.DataSource.DataSet.FieldByName('CODIGO').AsString;
+          Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
           Open;
           Edit;
         end;

@@ -168,7 +168,9 @@ uses
   UnTelaCadManutProgFamEquipClonagem in '..\Units\UnTelaCadManutProgFamEquipClonagem.pas' {FrmTelaCadManutProgFamEquipClonagem},
   UnTelaCadLubrificProgFamEquipClonagem in '..\Units\UnTelaCadLubrificProgFamEquipClonagem.pas' {FrmTelaCadLubrificProgFamEquipClonagem},
   UnTelaCadManutProgEquipMObra in '..\Units\UnTelaCadManutProgEquipMObra.pas' {FrmTelaCadManutProgEquipMObra},
-  UnTelaCadLubrificProgEquipMObra in '..\Units\UnTelaCadLubrificProgEquipMObra.pas' {FrmTelaCadLubrificProgEquipMObra};
+  UnTelaCadLubrificProgEquipMObra in '..\Units\UnTelaCadLubrificProgEquipMObra.pas' {FrmTelaCadLubrificProgEquipMObra},
+  unRelatorioPadrao in '..\Units\Report\unRelatorioPadrao.pas' {frmRelatorioPadrao},
+  unTelaInspVencRelatManut in '..\Units\Report\unTelaInspVencRelatManut.pas' {FrmTelaInspVencRelatManut};
 
 {$R *.res}
 begin
@@ -199,14 +201,6 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
       FreeAndNil(FrmTelaSplash);
       Try
         Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
-        if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade')
-          or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
-            or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A')
-              or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-                begin
-                  DM.VerificarInspecoes;
-                  DM.VerificarConfiabilidade;
-                end;
         FrmTelaPrincipal.ShowModal;
       Finally
         FreeAndNil(FrmTelaPrincipal);

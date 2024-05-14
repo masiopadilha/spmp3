@@ -24,6 +24,7 @@ type
     Panel2: TPanel;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
+    chbTodos: TCheckBox;
     procedure BtnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -34,6 +35,10 @@ type
     procedure edtOficinaDblClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
     procedure GrdManutTitleClick(Column: TColumn);
+    procedure FormShow(Sender: TObject);
+    procedure chbTodosClick(Sender: TObject);
+    procedure PCInspecoesChanging(Sender: TObject; var AllowChange: Boolean);
+    procedure PCInspecoesChange(Sender: TObject);
   private
     { Private declarations }
     procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
@@ -170,7 +175,7 @@ end;
 procedure TFrmTelaInspVenc.BtnOKClick(Sender: TObject);
 var
   I: SmallInt;
-  LInsp: String;
+  LInsp, Pasta: String;
   LTexto: PChar;
 begin
 if not Assigned(DmRelatorios) then
@@ -181,6 +186,8 @@ case PCInspecoes.ActivePageIndex of
   0:
     Begin
       if DM.qryManutVenc.IsEmpty = True then Exit;
+
+      GrdManut.SetFocus;
 
       for I := 0 to GrdManut.SelectedRows.Count - 1 do
       begin
@@ -195,6 +202,8 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdManut.SelectedRows.Count - 1 do
         begin
+          GrdManut.SelectedRows.CurrentRowSelected := True;
+
           DM.qryManutVenc.GotoBookmark(GrdManut.SelectedRows.Items[I]);
           DM.qryManutProgEquip.Close;
           DM.qryManutProgEquip.Params[0].AsString := DM.qryManutVencCODIGO.AsString;
@@ -212,26 +221,6 @@ case PCInspecoes.ActivePageIndex of
             PAuxiliares.Caption := 'EXISTE UMA '+DM.qryManutProgEquipDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
             Exit;
           end;
-
-//          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-//          DM.qryManutVencOSVenc.Close;
-//          DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutProgEquipCODIGO.AsString;
-//          DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-//          //DM.qryManutVencOSVenc.Params[2].AsString := FormatDateTime('yyyy/mm/dd', IncDay(DM.qryManutVencDTAINICIO1.AsDateTime, DM.qryManutVencFREQUENCIA1.AsInteger * (-1)));
-//          DM.qryManutVencOSVenc.Open;
-//
-//          while not DM.qryManutVencOSVenc.Eof = True do
-//          begin
-//            DM.qryAuxiliar.Close;
-//            DM.qryAuxiliar.SQL.Clear;
-//            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
-//                                    + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
-//            DM.qryAuxiliar.Execute;
-//
-//            DM.qryManutVencOSVenc.Next;
-//          end;
-//          DM.qryAuxiliar.Close;
-//          DM.qryManutVencOSVenc.Close;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                             , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
@@ -439,6 +428,12 @@ case PCInspecoes.ActivePageIndex of
 
           DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
 
+//          DmRelatorios.frxPDFExport1.DefaultPath := ExtractFilePath(Application.ExeName)+'Relatórios';
+//          DmRelatorios.frxPDFExport1.FileName    := DM.qryManutProgEquipCODORDEMSERVICO.AsString +'_'+DM.qryManutVencDESCRICAO.AsString +'.PDF';
+//          DmRelatorios.frxPDFExport1.ShowDialog  := False;
+//          DmRelatorios.frxRManutProgEquipIndividual.PrepareReport();
+//          DmRelatorios.frxRManutProgEquipIndividual.Export(DmRelatorios.frxPDFExport1);
+
           //Sendo a inspeção reprogramada pela 'programação', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
           if DM.qryManutProgEquipREPROGRAMAR1.AsString = 'Programação' then
           begin
@@ -500,6 +495,7 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
         begin
+          GrdLubrific.SelectedRows.CurrentRowSelected := True;
           DM.qryLubrificVenc.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
 
           DM.qryLubrificProgEquip.Close;
@@ -519,24 +515,6 @@ case PCInspecoes.ActivePageIndex of
             Exit;
           end;
 
-
-//          //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-//          DM.qryLubrificVencOSVenc.Close;
-//          DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificProgEquipCODIGO.AsString;
-//          DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-//          DM.qryLubrificVencOSVenc.Open;
-//          while not DM.qryLubrificVencOSVenc.Eof = True do
-//          begin
-//            DM.qryAuxiliar.Close;
-//            DM.qryAuxiliar.SQL.Clear;
-//            DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
-//                                    + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
-//            DM.qryAuxiliar.Execute;
-//
-//            DM.qryLubrificVencOSVenc.Next;
-//          end;
-//          DM.qryAuxiliar.Close;
-//          DM.qryLubrificVencOSVenc.Close;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                             , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
@@ -805,6 +783,7 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdRotas.SelectedRows.Count - 1 do
         begin
+          GrdRotas.SelectedRows.CurrentRowSelected := True;
           DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                             , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
@@ -940,6 +919,61 @@ end;
   inherited;
 end;
 
+procedure TFrmTelaInspVenc.chbTodosClick(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.TabIndex of
+    0:
+      begin
+        DM.qryManutVenc.First;
+        while not DM.qryManutVenc.Eof = True do
+        begin
+          GrdManut.DataSource.DataSet.RecNo := DM.qryManutVenc.RecNo;
+
+          if chbTodos.Checked = True then
+            GrdManut.SelectedRows.CurrentRowSelected := True
+          else
+            GrdManut.SelectedRows.CurrentRowSelected := False;
+
+          DM.qryManutVenc.Next;
+        end;
+        DM.qryManutVenc.First;
+      end;
+    1:
+      begin
+        DM.qryLubrificVenc.First;
+        while not DM.qryLubrificVenc.Eof = True do
+        begin
+          GrdLubrific.DataSource.DataSet.RecNo := DM.qryLubrificVenc.RecNo;
+
+          if chbTodos.Checked = True then
+            GrdLubrific.SelectedRows.CurrentRowSelected := True
+          else
+            GrdLubrific.SelectedRows.CurrentRowSelected := False;
+
+          DM.qryLubrificVenc.Next;
+        end;
+        DM.qryLubrificVenc.First;
+      end;
+    2:
+      begin
+        DM.qryRotaEquipVenc.First;
+        while not DM.qryRotaEquipVenc.Eof = True do
+        begin
+          GrdRotas.DataSource.DataSet.RecNo := DM.qryRotaEquipVenc.RecNo;
+
+          if chbTodos.Checked = True then
+            GrdRotas.SelectedRows.CurrentRowSelected := True
+          else
+            GrdRotas.SelectedRows.CurrentRowSelected := False;
+
+          DM.qryRotaEquipVenc.Next;
+        end;
+        DM.qryRotaEquipVenc.First;
+      end;
+  end;
+end;
+
 procedure TFrmTelaInspVenc.EdtFamiliaEquipDblClick(Sender: TObject);
 begin
   inherited;
@@ -1001,6 +1035,13 @@ begin
   LubrificExec := False;
   RotaExec := False;
 end;
+procedure TFrmTelaInspVenc.FormShow(Sender: TObject);
+begin
+  inherited;
+GrdManut.SetFocus;
+GrdManut.SelectedRows.CurrentRowSelected := True;
+end;
+
 procedure TFrmTelaInspVenc.GrdManutDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
@@ -1180,6 +1221,68 @@ begin
 end;
 
 
+
+procedure TFrmTelaInspVenc.PCInspecoesChange(Sender: TObject);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+   0:
+   begin
+    GrdManut.SetFocus;
+    GrdManut.SelectedRows.CurrentRowSelected := True;
+   end;
+   1:
+   begin
+     GrdLubrific.SetFocus;
+     GrdLubrific.SelectedRows.CurrentRowSelected := True;
+     chbTodos.Checked := False;
+   end;
+   2:
+   begin
+     GrdRotas.SetFocus;
+     GrdRotas.SelectedRows.CurrentRowSelected := True;
+     chbTodos.Checked := False;
+   end;
+  end;
+end;
+
+procedure TFrmTelaInspVenc.PCInspecoesChanging(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  inherited;
+  case PCInspecoes.ActivePageIndex of
+   0:
+   begin
+    GrdManut.DataSource.DataSet.DisableControls;
+    GrdManut.SelectedRows.Clear;
+    GrdManut.DataSource.DataSet.EnableControls;
+
+    GrdManut.SetFocus;
+    GrdManut.SelectedRows.CurrentRowSelected := True;
+   end;
+   1:
+   begin
+     GrdLubrific.DataSource.DataSet.DisableControls;
+     GrdLubrific.SelectedRows.Clear;
+     GrdLubrific.DataSource.DataSet.EnableControls;
+
+     GrdLubrific.SetFocus;
+     GrdLubrific.SelectedRows.CurrentRowSelected := True;
+     chbTodos.Checked := False;
+   end;
+   2:
+   begin
+     GrdRotas.DataSource.DataSet.DisableControls;
+     GrdRotas.SelectedRows.Clear;
+     GrdRotas.DataSource.DataSet.EnableControls;
+
+     GrdRotas.SetFocus;
+     GrdRotas.SelectedRows.CurrentRowSelected := True;
+     chbTodos.Checked := False;
+   end;
+  end;
+
+end;
 
 end.
 

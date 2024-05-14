@@ -74,6 +74,7 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
       Top = 30
       Width = 230
       Height = 24
+      CharCase = ecUpperCase
       Ctl3D = True
       DataField = 'DESCRICAO'
       DataSource = DM.dsRotas

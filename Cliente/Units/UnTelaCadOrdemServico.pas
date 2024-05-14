@@ -501,6 +501,7 @@ DM.qryOrdemServicoQTDEREPROG.AsFloat         := 0;
 DM.qryOrdemServicoTEMPOPREVISTO.AsFloat      := 0;
 DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat     := 0;
 DM.qryOrdemServicoTEMPOEXECUTADO.AsFloat     := 0;
+DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat     := 0;
 DM.qryOrdemServicoTEMPOHOMEMHORAEXEC.AsFloat := 0;
 
 PSituacao.Caption := 'CADASTRADA';

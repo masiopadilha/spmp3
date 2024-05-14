@@ -32904,6 +32904,7 @@ object DM: TDM
   end
   object dsOrdemServicoGerencia: TDataSource
     DataSet = qryOrdemServicoGerencia
+    OnDataChange = dsOrdemServicoGerenciaDataChange
     Left = 369
     Top = 531
   end
@@ -33751,6 +33752,7 @@ object DM: TDM
     end
   end
   object qryOrdemServicoGerencia: TFDQuery
+    AggregatesActive = True
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -33820,6 +33822,8 @@ object DM: TDM
         'P'#39'            '
       '               ELSE '#39'MN'#39
       #9' END) AS ORIGEM'
+      '    , `ordemservico`.`TEMPOHOMEMHORA`'
+      '  '
       'FROM'
       '    `ordemservico`'
       '    LEFT JOIN `equipamentos` '
@@ -34143,6 +34147,22 @@ object DM: TDM
       ReadOnly = True
       Visible = False
       Size = 2
+    end
+    object qryOrdemServicoGerenciaTEMPOHOMEMHORA: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TEMPOHOMEMHORA'
+      Origin = 'TEMPOHOMEMHORA'
+      Visible = False
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object qryOrdemServicoGerenciaHHTOTAL: TAggregateField
+      FieldName = 'HHTOTAL'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPOHOMEMHORA)'
     end
   end
   object qryOrdemServicoTercFora: TFDQuery

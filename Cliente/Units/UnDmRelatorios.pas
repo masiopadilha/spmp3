@@ -329,6 +329,7 @@ type
     frxRInspConsRotas1: TfrxReport;
     frxRLubrificProgEquipGeral: TfrxReport;
     frxRChecklistLubrificProgEquip: TfrxReport;
+    frxPDFExport1: TfrxPDFExport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);

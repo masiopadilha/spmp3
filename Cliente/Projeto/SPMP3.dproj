@@ -655,6 +655,14 @@
             <Form>FrmTelaCadLubrificProgEquipMObra</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Units\Report\unRelatorioPadrao.pas">
+            <Form>frmRelatorioPadrao</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\Report\unTelaInspVencRelatManut.pas">
+            <Form>FrmTelaInspVencRelatManut</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

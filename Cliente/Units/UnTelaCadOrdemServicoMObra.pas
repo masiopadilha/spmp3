@@ -64,6 +64,7 @@ begin
           FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
         end;
   DM.qryOrdemServico.Edit;
+  DM.qryOrdemServicoGerenciaTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat;
   DM.qryOrdemServico.Post;
   inherited;
 end;
