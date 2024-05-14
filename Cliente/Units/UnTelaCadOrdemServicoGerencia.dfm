@@ -922,21 +922,17 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Height = 19
       Panels = <
         item
-          Text = 'HH Total:'
           Width = 30
         end
         item
-          Text = 'Mensagem'
-          Width = 50
+          Width = 100
         end
         item
-          Text = 'Texto'
-          Width = 50
+          Width = 70
         end>
       OnResize = StatusBar1Resize
-      ExplicitLeft = 320
-      ExplicitTop = 392
-      ExplicitWidth = 0
+      ExplicitTop = 482
+      ExplicitWidth = 1000
     end
   end
   inherited PAuxiliares: TPanel

@@ -9,6 +9,9 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   TextHeight = 16
   inherited PTop: TPanel
     Width = 504
+    inherited BtnAjuda: TButton
+      Left = 471
+    end
   end
   inherited PCentro: TPanel
     Width = 502
@@ -78,11 +81,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'CODEQUIPE'
             Title.Alignment = taCenter
             Title.Caption = 'Equipe'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Visible = True
           end
           item
@@ -90,11 +88,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'TEMPO'
             Title.Alignment = taCenter
             Title.Caption = 'Tempo'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 53
             Visible = True
           end>
@@ -163,11 +156,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'TOTALHOMEMHORA'
             Title.Alignment = taCenter
             Title.Caption = 'H Normal'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 69
             Visible = True
           end
@@ -176,11 +164,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'QTDEHENORMAL'
             Title.Alignment = taCenter
             Title.Caption = 'HE Normal'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 71
             Visible = True
           end
@@ -189,11 +172,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'QTDEHEFERIADO'
             Title.Alignment = taCenter
             Title.Caption = 'HE Feriado'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 70
             Visible = True
           end>
@@ -248,11 +226,6 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
             FieldName = 'TOTALHOMEMHORA'
             Title.Alignment = taCenter
             Title.Caption = 'Homem/Hora'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 66
             Visible = True
           end

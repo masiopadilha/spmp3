@@ -46,46 +46,46 @@ var
   a,b,c: Real;
 begin
   inherited;
-FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
+  FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
 
 
-if DM.qryOrdemServicoEquipeMObra.Active = True then
+  if DM.qryOrdemServicoEquipeMObra.Active = True then
   begin
     LTotalHH := 0;
     LCusto   := 0;
 
     DM.qryOrdemServicoEquipe.First;
     while not DM.qryOrdemServicoEquipe.Eof = True do
+    begin
+      DM.qryOrdemServicoEquipeMObra.First;
+      while (not DM.qryOrdemServicoEquipeMObra.Eof = True) do
       begin
-        DM.qryOrdemServicoEquipeMObra.First;
-        while (not DM.qryOrdemServicoEquipeMObra.Eof = True) do
-          begin
-            DM.qryOrdemServicoEquipeMObraUtil.First;
-            while not (DM.qryOrdemServicoEquipeMObraUtil.Eof  = True) and (DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString <> EmptyStr) do
-              begin
-                LSalario       := DM.qryOrdemServicoEquipeMObraUtilSALARIO.AsFloat;
-                LHomemHora     := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
-                LHOficiais     := DM.qryOrdemServicoEquipeMObraUtilHOFICIAIS.AsFloat;
-                LHENormal      := DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat;
-                LHEFeriado     := DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
-                LPercHENormal  := DM.qryOrdemServicoEquipeMObraUtilHENORMAL.AsFloat/100;
-                LPercHEFeriado := DM.qryOrdemServicoEquipeMObraUtilHEFERIADO.AsFloat/100;
+        DM.qryOrdemServicoEquipeMObraUtil.First;
+        while not (DM.qryOrdemServicoEquipeMObraUtil.Eof  = True) and (DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString <> EmptyStr) do
+        begin
+          LSalario       := DM.qryOrdemServicoEquipeMObraUtilSALARIO.AsFloat;
+          LHomemHora     := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
+          LHOficiais     := DM.qryOrdemServicoEquipeMObraUtilHOFICIAIS.AsFloat;
+          LHENormal      := DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat;
+          LHEFeriado     := DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
+          LPercHENormal  := DM.qryOrdemServicoEquipeMObraUtilHENORMAL.AsFloat/100;
+          LPercHEFeriado := DM.qryOrdemServicoEquipeMObraUtilHEFERIADO.AsFloat/100;
 
-                LTotalHH := LTotalHH + DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
+          LTotalHH := LTotalHH + DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
 
-                a := ((LSalario/LHOficiais) * LHomemHora);
-                b := ((LSalario/LHOficiais) * (LHENormal * (1 + LPercHENormal)));
-                c := ((LSalario/LHOficiais) * (LHEFeriado * (1 + LPercHEFeriado)));
+          a := ((LSalario/LHOficiais) * LHomemHora);
+          b := ((LSalario/LHOficiais) * (LHENormal * (1 + LPercHENormal)));
+          c := ((LSalario/LHOficiais) * (LHEFeriado * (1 + LPercHEFeriado)));
+          LCusto   := LCusto + a + b + c;
 
-//                LCusto   := LCusto + ((LSalario/LHOficiais) * LHomemHora) + ((LSalario/LHOficiais) * (LHENormal * (1 + LPercHENormal))) + ((LSalario/LHOficiais) * (LHEFeriado * (1 + LPercHEFeriado)));
-                LCusto   := LCusto + a + b + c;
+          DM.qryOrdemServicoEquipeMObraUtil.Next;
+        end;
 
-                DM.qryOrdemServicoEquipeMObraUtil.Next;
-              end;
-            DM.qryOrdemServicoEquipeMObra.Next;
-          end;
-        DM.qryOrdemServicoEquipe.Next;
+        DM.qryOrdemServicoEquipeMObra.Next;
       end;
+
+      DM.qryOrdemServicoEquipe.Next;
+    end;
 
     DM.qryOrdemServico.Edit;
     DM.qryOrdemServicoTEMPOHOMEMHORAEXEC.AsFloat := LTotalHH;
@@ -101,7 +101,7 @@ if DM.qryOrdemServicoEquipeMObra.Active = True then
       DM.qryOrdemServicoEquipeMObraUtil.First;
       if DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString <> '' then
       begin
-      with DM.qryAuxiliar do
+        with DM.qryAuxiliar do
         begin
           Close;
           SQL.Clear;
@@ -116,13 +116,12 @@ if DM.qryOrdemServicoEquipeMObra.Active = True then
     end;
   end;
 
-
-DM.qryTotalHomemHoraSeqHora.Close;
-DM.qryOrdemServicoEquipe.Close;
-DM.qryOrdemServicoEquipeMObra.Close;
-DM.qryOrdemServicoEquipeMObraMovim.Close;
-DM.qryOrdemServicoEquipeMObraUtil.Close;
-DM.qryOrdemServicoMObraDisp.Close;
+  DM.qryTotalHomemHoraSeqHora.Close;
+  DM.qryOrdemServicoEquipe.Close;
+  DM.qryOrdemServicoEquipeMObra.Close;
+  DM.qryOrdemServicoEquipeMObraMovim.Close;
+  DM.qryOrdemServicoEquipeMObraUtil.Close;
+  DM.qryOrdemServicoMObraDisp.Close;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamentoMObra.FormCreate(Sender: TObject);
