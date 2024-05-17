@@ -754,6 +754,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Font.Style = []
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
+      PopupMenu = PopupMenuOS
       TabOrder = 5
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -922,10 +923,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Height = 19
       Panels = <
         item
-          Width = 30
+          Width = 100
         end
         item
-          Width = 100
+          Width = 130
         end
         item
           Width = 70

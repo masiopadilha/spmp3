@@ -219,7 +219,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 186
-    ExplicitWidth = 1008
     ExplicitHeight = 186
     inherited Label2: TLabel
       Width = 132
@@ -558,8 +557,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     Top = 341
     Width = 1008
     Height = 204
-    ExplicitTop = 320
-    ExplicitHeight = 222
+    ExplicitTop = 341
+    ExplicitHeight = 201
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -624,7 +623,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BevelOuter = bvLowered
       TabOrder = 0
       ExplicitWidth = 994
-      ExplicitHeight = 189
+      ExplicitHeight = 168
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object Series1: TBarSeries

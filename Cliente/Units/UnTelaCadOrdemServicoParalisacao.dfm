@@ -1,5 +1,6 @@
 inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
   Caption = 'Paralisa'#231#245'es da O.S.'
+  ClientHeight = 304
   ClientWidth = 528
   Constraints.MaxWidth = 540
   Constraints.MinWidth = 540
@@ -10,12 +11,13 @@ inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
     Width = 524
     ExplicitWidth = 520
     inherited BtnAjuda: TButton
-      Left = 489
+      Left = 493
       ExplicitLeft = 489
     end
   end
   inherited PCentro: TPanel
     Width = 522
+    Height = 165
     ExplicitWidth = 518
     inherited RGTelas: TRadioGroup
       Left = 252
@@ -80,10 +82,12 @@ inherited FrmTelaCadOrdemServicoParalisacao: TFrmTelaCadOrdemServicoParalisacao
     end
   end
   inherited PAuxiliares: TPanel
+    Top = 237
     Width = 524
     ExplicitWidth = 520
   end
   inherited PBotoes: TPanel
+    Top = 264
     Width = 524
     ExplicitWidth = 520
     inherited BtnOK: TButton
