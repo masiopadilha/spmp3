@@ -5813,6 +5813,11 @@ type
     qryChecklistManutItensTotalHH: TAggregateField;
     qryOrdemServicoGerenciaTEMPOHOMEMHORA: TBCDField;
     qryOrdemServicoGerenciaHHTOTAL: TAggregateField;
+    qryOrdemServicoGerenciaFUNCIONARIO: TStringField;
+    dsOrdemServicoUltParalisacao: TDataSource;
+    qryOrdemServicoUltParalisacao: TFDQuery;
+    qryOrdemServicoUltParalisacaoMOTIVOPARALISACAO: TStringField;
+    qryOrdemServicoUltParalisacaoCODIGO: TFDAutoIncField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -7853,6 +7858,7 @@ DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
 qryGerarOS.Close;
 qryGerarOS.Open;
 qryGerarOS.Append;
+if EquipParado = '' then EquipParado := 'S';
 if CodEquip     <> EmptyStr          then qryGerarOSCODEQUIPAMENTO.AsString       := CodEquip;
 if Matricula    <> EmptyStr          then qryGerarOSMATRICULA.AsString            := Matricula;
 if Manutencao   <> EmptyStr          then qryGerarOSCODMANUTPROGEQUIP.AsString    := Manutencao;
@@ -7887,6 +7893,8 @@ qryGerarOSCUSTOSECUNDARIOS.AsFloat   := 0;
 qryGerarOSQTDEREPROG.AsFloat         := 0;
 //qryGerarOSTEMPOPREVISTO.AsFloat      := 1;
 qryGerarOSTEMPOHOMEMHORA.AsFloat     := 0;
+qryGerarOSTEMPOHOMEMHORAEXEC.AsFloat := 0;
+qryGerarOSTEMPOPREVISTO.AsFloat      := 0;
 qryGerarOSTEMPOEXECUTADO.AsFloat     := 0;
 qryGerarOSTEMPOHOMEMHORAEXEC.AsFloat := 0;
 qryGerarOSDATACADASTRO.AsDateTime    := qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -9253,8 +9261,23 @@ begin
   begin
     with FrmTelaCadOrdemServicoGerencia do
     begin
-      StatusBar1.Panels[0].Text := Format('  %d of %d', [qryOrdemServicoGerencia.RecNo + 1, qryOrdemServicoGerencia.RecordCount]);
-      StatusBar1.Panels[1].Text := 'HH Total: ' + FormatCurr(',0.00', DM.qryOrdemServicoGerenciaHHTOTAL.Value);
+      StatusBar1.Panels[0].Text := 'HH Total: ' + FormatCurr(',0.00', DM.qryOrdemServicoGerenciaHHTOTAL.Value);
+
+      if ((qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '') or (qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '')) then
+        StatusBar1.Panels[1].Text := 'Planejada: ' + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('PLANEJADA').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA'    then StatusBar1.Panels[1].Text := 'Solicitada: '   + DM.qryOrdemServicoGerencia.FieldByName('FUNCIONARIO').AsString
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'DETALHADA'     then StatusBar1.Panels[1].Text := 'Cadastrada: '   + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATACADASTRO').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'PROGRAMADA'    then StatusBar1.Panels[1].Text := 'Programada: '   + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATACADASTRO').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'REPROGRAMADA'  then StatusBar1.Panels[1].Text := 'Reprogramada: ' + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATAPROGINI').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'DESPROGRAMADA' then StatusBar1.Panels[1].Text := 'Cadastrada: '   + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATACADASTRO').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'EXECUCAO'      then StatusBar1.Panels[1].Text := 'Iniciada: '     + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATAINICIOREAL').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA'      then StatusBar1.Panels[1].Text := 'Finalizada: '   + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATAFIMREAL').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then StatusBar1.Panels[1].Text := 'Fechamento: '   + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATAFECHAMENTO').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then StatusBar1.Panels[1].Text := 'Motivo: '       + DM.qryOrdemServicoUltParalisacao.FieldByName('MOTIVOPARALISACAO').AsString
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then StatusBar1.Panels[1].Text := 'Cancelada: '    + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('DATACANCEL').AsDateTime)
+      else if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then StatusBar1.Panels[1].Text := 'Planejada: '    + FormatDateTime('dd/mm/yyyy', DM.qryOrdemServicoGerencia.FieldByName('PLANEJADA').AsDateTime);
+
+      StatusBar1.Panels[2].Text := Format('%d of %d', [qryOrdemServicoGerencia.RecNo + 1, qryOrdemServicoGerencia.RecordCount]);
     end;
   end;
 

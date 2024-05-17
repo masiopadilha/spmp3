@@ -1014,7 +1014,7 @@ begin
       end
     else
       begin
-        LSolic := ' OR (SOLICTRAB = ''S'')';
+        LSolic := ' AND (SOLICTRAB = ''S'')';
         if DBGrid.DataSource.DataSet.Filter <> '' then
           DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end;
@@ -1029,7 +1029,7 @@ begin
       end
     else
       begin
-        LRot   := ' OR (ROTAEQUIP = ''S'')';
+        LRot   := ' AND (ROTAEQUIP = ''S'')';
         if DBGrid.DataSource.DataSet.Filter <> '' then
           DBGrid.DataSource.DataSet.Filter := '(' + DBGrid.DataSource.DataSet.Filter + ')';
       end;
@@ -1362,6 +1362,7 @@ DM.qryOrdemServicoEquipePlanoTrab.Close;
 DM.qryOrdemServicoEquipePecasUtil.Close;
 DM.qryOrdemServico.Close;
 DM.qryOrdemServicoGerencia.Close;
+DM.qryOrdemServicoUltParalisacao.Close;
 DM.qryAuxiliar.Close;
 DBGrid.DataSource.DataSet.Filtered := False;
 DBGrid.DataSource.DataSet.Filter := EmptyStr;
@@ -1426,6 +1427,7 @@ begin
       DM.qryOrdemServicoGerencia.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
       DM.qryOrdemServicoGerencia.Params[2].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
       DM.qryOrdemServicoGerencia.Open;
+      DM.qryOrdemServicoUltParalisacao.Open;
       ConfigurarFiltros;
     end
   else
@@ -1746,8 +1748,8 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.StatusBar1Resize(Sender: TObject);
 begin
   inherited;
-  StatusBar1.Panels[0].Width := ClientWidth - 100;
-  DM.dsOrdemServicoGerenciaDataChange(nil, nil);
+//  StatusBar1.Panels[0].Width := ClientWidth - 100;
+//  DM.dsOrdemServicoGerenciaDataChange(nil, nil);
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Timer1Timer(Sender: TObject);

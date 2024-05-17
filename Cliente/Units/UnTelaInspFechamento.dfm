@@ -44,7 +44,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     inherited BtnAjuda: TButton
       Left = 971
       Top = 19
-      ExplicitLeft = 971
+      ExplicitLeft = 967
       ExplicitTop = 19
     end
     object Button6: TButton
@@ -233,9 +233,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         ParentFont = False
         TabOrder = 2
         OnChange = PCInspecoesChange
-        ExplicitTop = 32
         ExplicitWidth = 984
-        ExplicitHeight = 457
+        ExplicitHeight = 484
         object TSManut: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencao: TDBGrid
@@ -304,6 +303,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            StyleElements = [seFont, seBorder]
             OnCellClick = GrdItensManutCellClick
             OnDrawDataCell = GrdItensManutDrawDataCell
             OnDrawColumnCell = GrdItensManutDrawColumnCell
@@ -336,6 +336,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleFont.Height = -9
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            StyleElements = [seFont, seBorder]
             OnCellClick = GrdItensEspManutCellClick
             OnDrawDataCell = GrdItensEspManutDrawDataCell
             OnDrawColumnCell = GrdItensEspManutDrawColumnCell

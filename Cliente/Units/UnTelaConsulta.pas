@@ -197,9 +197,9 @@ begin
       10, 100://Tipos de Manutenção
         begin
           if  DM.FTabela_auxiliar = 100 then
-            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao from tipomanutencao where descricao like :descricao and visivel = ''S'' order by tipomanutencao')
+            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao and visivel = ''S'' order by tipomanutencao')
           else
-            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao from tipomanutencao where descricao like :descricao order by tipomanutencao');
+            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao order by tipomanutencao');
         end;
       11, 110://Motivos de Parada
         begin
@@ -792,8 +792,14 @@ begin
         end;
       10, 100://Tipos de Manutenção
         begin
-          DM.qryAuxiliar.Fields[2].DisplayLabel := 'Tipo';
-          DM.qryAuxiliar.Fields[2].DisplayWidth := 30;
+          DM.qryAuxiliar.Fields[2].DisplayLabel              := 'Tipo';
+          DM.qryAuxiliar.Fields[2].DisplayWidth              := 30;
+          GrdAuxiliar.Columns[3].Title.Alignment             := taCenter;
+          DM.qryAuxiliar.FieldByName('ATIVO').DisplayLabel   := 'Ativo';
+          DM.qryAuxiliar.FieldByName('ATIVO').Alignment      := taCenter;
+          GrdAuxiliar.Columns[4].Title.Alignment             := taCenter;
+          DM.qryAuxiliar.FieldByName('VISIVEL').DisplayLabel := 'Visível';
+          DM.qryAuxiliar.FieldByName('VISIVEL').Alignment    := taCenter;
         end;
       25, 250://Equipamentos
         begin
