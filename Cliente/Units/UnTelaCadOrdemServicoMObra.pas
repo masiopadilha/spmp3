@@ -28,41 +28,46 @@ procedure TFrmTelaCadOrdemServicoMObra.BtnFecharClick(Sender: TObject);
 begin
   DM.qryOrdemServico.Edit;
   DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+
   DM.qryOrdemServicoEquipe.First;
   if DM.qryOrdemServicoEquipe.IsEmpty = False then
+  begin
+    while not DM.qryOrdemServicoEquipe.Eof = True do
     begin
-      while not DM.qryOrdemServicoEquipe.Eof = True do
+      if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
+      begin
+        DM.qryOrdemServicoEquipeMObra.First;
+        while not DM.qryOrdemServicoEquipeMObra.Eof = True do
         begin
-          if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
-            begin
-              DM.qryOrdemServicoEquipeMObra.First;
-              while not DM.qryOrdemServicoEquipeMObra.Eof = True do
-                begin
-                  DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
-                  DM.qryOrdemServicoEquipeMObra.Next;
-                end;
-            end
-          else
-            DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
-          DM.qryOrdemServicoEquipe.Next;
+          DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+          DM.qryOrdemServicoEquipeMObra.Next;
         end;
+      end else
+        DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+
+      DM.qryOrdemServicoEquipe.Next;
     end;
-    if (DM.qryOrdemServicoEquipeMObra.RecordCount > 0) and (DM.qryOrdemServicoCODMANUTENCAO.AsString <> '')
-      and ((DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA')) then
-        begin
-          DM.qryOrdemServico.Edit;
-          DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
-          DM.qryOrdemServico.Post;
-          if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-            begin
-              DM.qryOrdemServicoGerencia.Edit;
-              DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
-              DM.qryOrdemServicoGerencia.Post;
-            end;
-          FrmTelaCadOrdemServico.PSituacao.Caption := 'DETALHADA';
-          FrmTelaCadOrdemServico.PSituacao.Color := clYellow;
-          FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
-        end;
+  end;
+
+  if (DM.qryOrdemServicoEquipeMObra.RecordCount > 0) and (DM.qryOrdemServicoCODMANUTENCAO.AsString <> '')
+    and ((DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA') or (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA')) then
+    begin
+      DM.qryOrdemServico.Edit;
+      DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+      DM.qryOrdemServico.Post;
+
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+      begin
+        DM.qryOrdemServicoGerencia.Edit;
+        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+        DM.qryOrdemServicoGerencia.Post;
+      end;
+
+      FrmTelaCadOrdemServico.PSituacao.Caption := 'DETALHADA';
+      FrmTelaCadOrdemServico.PSituacao.Color := clYellow;
+      FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
+    end;
+
   DM.qryOrdemServico.Edit;
   DM.qryOrdemServicoGerenciaTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat;
   DM.qryOrdemServico.Post;
@@ -72,9 +77,10 @@ procedure TFrmTelaCadOrdemServicoMObra.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-DM.qryOrdemServicoEquipeMObra.Close;
-DM.qryOrdemServicoEquipe.Close;
+  DM.qryOrdemServicoEquipeMObra.Close;
+  DM.qryOrdemServicoEquipe.Close;
 end;
+
 procedure TFrmTelaCadOrdemServicoMObra.FormCreate(Sender: TObject);
 begin
   inherited;
