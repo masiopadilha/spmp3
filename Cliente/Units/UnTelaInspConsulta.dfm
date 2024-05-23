@@ -230,6 +230,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             TitleFont.Style = []
             OnDrawColumnCell = GrdManutDrawColumnCell
             OnKeyPress = GrdManutKeyPress
+            OnTitleClick = GrdManutTitleClick
           end
         end
       end

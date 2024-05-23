@@ -1,7 +1,7 @@
 inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   Caption = 'Consulta'
-  ClientHeight = 641
-  ClientWidth = 1008
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -15,7 +15,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   inherited PTop: TPanel
     Left = 4
     Top = 4
-    Width = 1000
+    Width = 1004
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -30,15 +30,15 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 983
-      ExplicitLeft = 979
+      Left = 971
+      ExplicitLeft = 971
     end
   end
   inherited PCentro: TPanel
     Left = 4
     Top = 147
-    Width = 1000
-    Height = 413
+    Width = 1004
+    Height = 416
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -117,8 +117,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PAuxiliares: TPanel
     Left = 4
-    Top = 568
-    Width = 1000
+    Top = 571
+    Width = 1004
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -130,8 +130,8 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
   end
   inherited PBotoes: TPanel
     Left = 4
-    Top = 599
-    Width = 1000
+    Top = 602
+    Width = 1004
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -163,7 +163,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     AlignWithMargins = True
     Left = 4
     Top = 72
-    Width = 1000
+    Width = 1004
     Height = 67
     Margins.Left = 4
     Margins.Top = 4
@@ -172,6 +172,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     Align = alTop
     TabOrder = 1
     Visible = False
+    ExplicitWidth = 1000
     object Label6: TLabel
       Left = 15
       Top = 8

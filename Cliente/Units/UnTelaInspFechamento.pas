@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
   Vcl.DBCtrls, JvExMask, JvToolEdit, JvDBControls, Data.DB, System.DateUtils,
   Vcl.ImgList, Datasnap.DBClient, Vcl.ComCtrls, System.ImageList, FireDAC.Stan.Param,
-  Vcl.Menus;
+  Vcl.Menus, JvExDBGrids, JvDBGrid;
 
 type
   TFrmTelaInspFechamento = class(TFrmTelaPaiOkCancel)
@@ -34,7 +34,6 @@ type
     PCInspecoes: TPageControl;
     TSManut: TTabSheet;
     TSLubrific: TTabSheet;
-    GrdManutencao: TDBGrid;
     GrdItensManut: TDBGrid;
     GrdItensEspManut: TDBGrid;
     GrdLubrificacao: TDBGrid;
@@ -62,13 +61,12 @@ type
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     BtnMaodeObra: TButton;
+    GrdManutencao: TJvDBGrid;
+    JvDBGrid1: TJvDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGFiltroClick(Sender: TObject);
     procedure ConfigurarFiltros;
-    procedure GrdManutencaoTitleClick(Column: TColumn);
-    procedure GrdManutencaoDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdItensManutDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdItensEspManutDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -80,7 +78,6 @@ type
       Field: TField; State: TGridDrawState);
     procedure GrdItensEspManutCellClick(Column: TColumn);
     procedure BtnOKClick(Sender: TObject);
-    procedure GrdManutencaoKeyPress(Sender: TObject; var Key: Char);
     procedure GrdLubrificacaoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdLubrificacaoKeyPress(Sender: TObject; var Key: Char);
@@ -125,6 +122,10 @@ type
     procedure Desmarcartodos1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure BtnMaodeObraClick(Sender: TObject);
+    procedure GrdManutencaoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdManutencaoKeyPress(Sender: TObject; var Key: Char);
+    procedure GrdManutencaoTitleClick(Column: TColumn);
   private
     hora_futura: TDateTime;
     { Private declarations }
@@ -1240,16 +1241,7 @@ end;
 procedure TFrmTelaInspFechamento.GrdManutencaoDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-GrdManutencao.Columns[Column.Index].Title.Font.Size := 9;
-GrdManutencao.Columns[0].Title.Alignment := taCenter;
-GrdManutencao.Columns[0].Title.Font.Style:= [fsBold];
-GrdManutencao.Columns[1].Title.Alignment := taCenter;
-GrdManutencao.Columns[3].Title.Alignment := taCenter;
-GrdManutencao.Columns[4].Title.Alignment := taCenter;
-GrdManutencao.Columns[5].Title.Alignment := taCenter;
-GrdManutencao.Columns[6].Title.Font.Style:= [fsBold];
-
-
+  inherited;
 if (Column.Field.FieldName = 'SITUACAOOS') then
   begin
     if GrdManutencao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA' then
@@ -1312,16 +1304,10 @@ if (Column.Field.FieldName = 'SITUACAOOS') then
       end;
   end;
 
-  if not odd(GrdManutencao.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'SITUACAOOS') then
-        if not (gdSelected in State) then
-          begin
-          GrdManutencao.Canvas.Brush.Color := $00E2E6E9;
-        end;
-
   GrdManutencao.Canvas.FillRect(Rect);
   GrdManutencao.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
 
+end;
 
 procedure TFrmTelaInspFechamento.GrdManutencaoKeyPress(Sender: TObject;
   var Key: Char);
@@ -1360,7 +1346,7 @@ end;
 procedure TFrmTelaInspFechamento.GrdManutencaoTitleClick(Column: TColumn);
 begin
   inherited;
-DM.qryManutPeriodicas.IndexFieldNames := Column.FieldName;
+  DM.qryManutPeriodicas.IndexFieldNames := Column.FieldName;
 end;
 
 procedure TFrmTelaInspFechamento.GrdRotaDrawColumnCell(Sender: TObject;

@@ -43,7 +43,9 @@ begin
           DM.qryOrdemServicoEquipeMObra.Next;
         end;
       end else
+      begin
         DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+      end;
 
       DM.qryOrdemServicoEquipe.Next;
     end;
@@ -68,9 +70,9 @@ begin
       FrmTelaCadOrdemServico.PSituacao.Font.Color := clGreen;
     end;
 
-  DM.qryOrdemServico.Edit;
+  DM.qryOrdemServicoGerencia.Edit;
   DM.qryOrdemServicoGerenciaTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat;
-  DM.qryOrdemServico.Post;
+  DM.qryOrdemServicoGerencia.Post;
   inherited;
 end;
 procedure TFrmTelaCadOrdemServicoMObra.FormClose(Sender: TObject;

@@ -81,7 +81,7 @@ if DM.qryFamPecasRep.IsEmpty = False then
 
     if DM.qryTotalFamiliasTOTAL2.AsInteger > 0 then
       begin
-        EdtDescricao.Enabled := False;
+//        EdtDescricao.Enabled := False;
         EdtCampo1.Enabled    := False;
         EdtCampo2.Enabled    := False;
         EdtCampo3.Enabled    := False;
