@@ -243,12 +243,12 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Caption = 'Centro de Custo:'
     end
     object Label10: TLabel
-      Left = 370
+      Left = 366
       Top = 63
-      Width = 60
+      Width = 64
       Height = 16
       Alignment = taRightJustify
-      Caption = 'Solicitado:'
+      Caption = 'Solicitante:'
     end
     object Label11: TLabel
       Left = 61

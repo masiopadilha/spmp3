@@ -7919,6 +7919,7 @@ object DM: TDM
       '    AND `manutprogequipamento`.`RELATORIO` = '#39'N'#39
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'N'#39
       '    AND `manutprogequipamento`.`ATIVO` = '#39'S'#39
+      '   AND `equipamentos`.`OPERANDO` = '#39'S'#39
       ''
       ')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
@@ -28733,9 +28734,6 @@ object DM: TDM
       '    , `celulas`.`DESCRICAO` AS `CELULA`'
       '    , `linhas`.`CODIGO` AS `CODLINHA`'
       '    , `linhas`.`DESCRICAO` AS `LINHA`'
-      
-        '    , IFNULL(SUM(mi.`TEMPO`), 0) + IFNULL(SUM(mie.`TEMPO`), 0) A' +
-        'S tempototal'
       'FROM'
       '    `manutprogequipamento`'
       '    INNER JOIN `equipamentos` '
@@ -28748,16 +28746,6 @@ object DM: TDM
         '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
         'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
         'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
-      '    INNER JOIN `manutprogfamequipitens` AS mi'
-      
-        '        ON `mi`.`CODMANUTPROGFAMEQUIP` = `manutprogequipamento`.' +
-        '`CODMANUTPROGFAMEQUIP` AND mi.`CODEMPRESA` = `manutprogequipamen' +
-        'to`.`CODEMPRESA`    '
-      '    LEFT JOIN `manutprogequipitensesp` AS mie'
-      
-        '        ON `mie`.`CODMANUTPROGEQUIP` = `manutprogequipamento`.`C' +
-        'ODIGO` AND mi.`CODEMPRESA` = `manutprogequipamento`.`CODEMPRESA`' +
-        '    '
       '    INNER JOIN `familiaequipamento` '
       
         '        ON ( `equipamentos`.`CODFAMILIAEQUIP` = `familiaequipame' +
@@ -28790,6 +28778,7 @@ object DM: TDM
       '    AND `manutprogequipamento`.`CODMANUTPROGFAMEQUIP` <> '#39#39
       '    AND `manutprogequipamento`.`DTAINICIO1` IS NOT NULL'
       '    AND `manutprogequipamento`.`ATIVO` = '#39'S'#39
+      '    AND `equipamentos`.`OPERANDO` = '#39'S'#39
       ')'
       
         'GROUP BY `manutprogequipamento`.`CODIGO`, `manutprogequipamento`' +
@@ -29065,16 +29054,6 @@ object DM: TDM
       Visible = False
       Calculated = True
     end
-    object qryManutConstempototal: TFMTBCDField
-      AutoGenerateValue = arDefault
-      FieldName = 'tempototal'
-      Origin = 'tempototal'
-      ProviderFlags = []
-      ReadOnly = True
-      Visible = False
-      Precision = 39
-      Size = 2
-    end
   end
   object qryLubrificCons: TFDQuery
     OnCalcFields = qryLubrificConsCalcFields
@@ -29114,9 +29093,6 @@ object DM: TDM
       '    , `celulas`.`DESCRICAO` AS `CELULA`'
       '    , `linhas`.`CODIGO` AS `CODLINHA`'
       '    , `linhas`.`DESCRICAO` AS `LINHA`'
-      
-        '    , IFNULL(SUM(mi.`TEMPO`), 0) + IFNULL(SUM(mie.`TEMPO`), 0) A' +
-        'S tempototal'
       'FROM'
       '    `lubrificprogequipamento`'
       '    INNER JOIN `equipamentos`'
@@ -29130,16 +29106,6 @@ object DM: TDM
         '= `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequip' +
         'amento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`' +
         ')'
-      '    INNER JOIN `lubrificprogfamequipitens` AS mi'
-      
-        '        ON `mi`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogequipam' +
-        'ento`.`CODLUBRIFICPROGFAMEQUIP` AND mi.`CODEMPRESA` = `lubrificp' +
-        'rogequipamento`.`CODEMPRESA`    '
-      '    LEFT JOIN `lubrificprogequipitensesp` AS mie'
-      
-        '        ON `mie`.`CODLUBRIFICPROGEQUIP` = `lubrificprogequipamen' +
-        'to`.`CODIGO` AND mi.`CODEMPRESA` = `lubrificprogequipamento`.`CO' +
-        'DEMPRESA`    '
       '    INNER JOIN `familiaequipamento`'
       
         '        ON ( `equipamentos`.`CODFAMILIAEQUIP` = `familiaequipame' +
@@ -29174,6 +29140,7 @@ object DM: TDM
         #39
       '    AND `lubrificprogequipamento`.`DTAINICIO1` IS NOT NULL'
       '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39
+      '    AND `equipamentos`.`OPERANDO` = '#39'S'#39
       ''
       ')'
       
@@ -29446,16 +29413,6 @@ object DM: TDM
       FieldName = 'C_PROXINSP'
       Visible = False
       Calculated = True
-    end
-    object qryLubrificConstempototal: TFMTBCDField
-      AutoGenerateValue = arDefault
-      FieldName = 'tempototal'
-      Origin = 'tempototal'
-      ProviderFlags = []
-      ReadOnly = True
-      Visible = False
-      Precision = 39
-      Size = 2
     end
   end
   object qryRotaCons: TFDQuery
@@ -32617,7 +32574,8 @@ object DM: TDM
         'ATA, '#39'%Y-%m-%d'#39')'
       '    AND `lubrificprogequipamento`.`RELATORIO` = '#39'N'#39
       '    AND `lubrificprogequipamento`.`GRUPOINSP` = '#39'N'#39
-      '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39')'
+      '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39
+      '    AND `equipamentos`.`OPERANDO` = '#39'S'#39')'
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
     Left = 1012
     Top = 376
@@ -33807,9 +33765,10 @@ object DM: TDM
       
         '    , IF((`ordemservico`.`ROTAEQUIP` = '#39'S'#39') AND (`lubrificprogeq' +
         'uipamentohist`.`DESCRICAO` <> '#39#39'), `lubrificprogequipamentohist`' +
-        '.`DESCRICAO`, '#39#39') AS DESCINSPECAO    , ('
+        '.`DESCRICAO`, '#39#39') AS DESCINSPECAO    '
+      '    , ('
       #9'CASE '
-      #9'    WHEN `ordemservico`.`SOLICTRAB` = '#39'ST'#39' THEN '#39'ST'#39
+      #9'    WHEN `ordemservico`.`SOLICTRAB` = '#39'S'#39' THEN '#39'ST'#39
       
         '                   WHEN `ordemservico`.`CODMANUTPROGEQUIP` <> '#39#39 +
         ' THEN '#39'MP'#39
@@ -33823,6 +33782,9 @@ object DM: TDM
       #9' END) AS ORIGEM'
       '    , `ordemservico`.`TEMPOHOMEMHORA`'
       '    , `funcionarios`.`NOME` AS FUNCIONARIO'
+      '    , `tipomanutencao`.`TIPOMANUTENCAO` AS `TIPO`'
+      '    , `ordemservico`.`DATACANCEL`'
+      ''
       '  '
       'FROM'
       '    `ordemservico`'
@@ -33868,9 +33830,7 @@ object DM: TDM
         '(:data2,'#39'%Y/%m/%d %T'#39')))'
       '       )'
       ''
-      'GROUP BY `ordemservico`.`CODIGO`'
-      ''
-      'ORDER BY `ordemservico`.DATACADASTRO DESC;')
+      'ORDER BY `ordemservico`.`DATACADASTRO`')
     Left = 369
     Top = 480
     ParamData = <
@@ -33889,6 +33849,16 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
       end>
+    object qryOrdemServicoGerenciaORIGEM: TStringField
+      Alignment = taCenter
+      AutoGenerateValue = arDefault
+      DisplayLabel = '*'
+      FieldName = 'ORIGEM'
+      Origin = 'ORIGEM'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 2
+    end
     object qryOrdemServicoGerenciaCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
@@ -33929,7 +33899,7 @@ object DM: TDM
       FieldName = 'DATACADASTRO'
       Origin = 'DATACADASTRO'
       ProviderFlags = []
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryOrdemServicoGerenciaSITUACAO: TStringField
       AutoGenerateValue = arDefault
@@ -33960,7 +33930,7 @@ object DM: TDM
       Origin = 'DATAPROGINI'
       ProviderFlags = []
       Visible = False
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy hh:mm'
     end
     object qryOrdemServicoGerenciaDATAINICIOREAL: TDateTimeField
       AutoGenerateValue = arDefault
@@ -33968,14 +33938,14 @@ object DM: TDM
       Origin = 'DATAINICIOREAL'
       ProviderFlags = []
       Visible = False
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryOrdemServicoGerenciaDATAFIMREAL: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATAFIMREAL'
       Origin = 'DATAFIMREAL'
       Visible = False
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryOrdemServicoGerenciaDATAFECHAMENTO: TDateTimeField
       AutoGenerateValue = arDefault
@@ -33983,7 +33953,7 @@ object DM: TDM
       Origin = 'DATAFECHAMENTO'
       ProviderFlags = []
       Visible = False
-      DisplayFormat = 'dd/mm/yyyy'
+      DisplayFormat = 'dd/mm/yy'
     end
     object qryOrdemServicoGerenciaCODMANUTENCAO: TStringField
       AutoGenerateValue = arDefault
@@ -34126,6 +34096,7 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       Visible = False
+      DisplayFormat = 'dd/mm/yy'
     end
     object qryOrdemServicoGerenciaFREQUENCIA: TSmallintField
       AutoGenerateValue = arDefault
@@ -34144,15 +34115,6 @@ object DM: TDM
       Visible = False
       Size = 40
     end
-    object qryOrdemServicoGerenciaORIGEM: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ORIGEM'
-      Origin = 'ORIGEM'
-      ProviderFlags = []
-      ReadOnly = True
-      Visible = False
-      Size = 2
-    end
     object qryOrdemServicoGerenciaTEMPOHOMEMHORA: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPOHOMEMHORA'
@@ -34169,6 +34131,21 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       Size = 200
+    end
+    object qryOrdemServicoGerenciaTIPO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPO'
+      Origin = 'TIPOMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Visible = False
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaDATACANCEL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATACANCEL'
+      Origin = 'DATACANCEL'
+      Visible = False
     end
     object qryOrdemServicoGerenciaHHTOTAL: TAggregateField
       FieldName = 'HHTOTAL'
@@ -49172,6 +49149,7 @@ object DM: TDM
   end
   object qryManutConsItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
+    AggregatesActive = True
     MasterSource = dsManutCons
     MasterFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
     DetailFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
@@ -49280,6 +49258,13 @@ object DM: TDM
       ReadOnly = True
       Size = 80
     end
+    object qryManutConsItenstempototal: TAggregateField
+      FieldName = 'tempototal'
+      Active = True
+      DisplayName = ''
+      DisplayFormat = ',0.00'
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object dsManutConsItens: TDataSource
     DataSet = qryManutConsItens
@@ -49288,6 +49273,7 @@ object DM: TDM
   end
   object qryLubrificConsItens: TFDQuery
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
+    AggregatesActive = True
     MasterSource = dsLubrificCons
     MasterFields = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
     Connection = FDConnSPMP3
@@ -49390,6 +49376,12 @@ object DM: TDM
       ProviderFlags = []
       Size = 80
     end
+    object qryLubrificConsItenstempototal: TAggregateField
+      FieldName = 'tempototal'
+      Active = True
+      DisplayName = ''
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object dsLubrificConsItens: TDataSource
     DataSet = qryLubrificConsItens
@@ -49399,6 +49391,7 @@ object DM: TDM
   object qryManutConsItensEsp: TFDQuery
     AfterInsert = qryManutProgEquipItensEspAfterInsert
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGEQUIP'
+    AggregatesActive = True
     MasterSource = dsManutCons
     MasterFields = 'CODEMPRESA;CODIGO'
     DetailFields = 'CODEMPRESA;CODMANUTPROGEQUIP'
@@ -49539,6 +49532,12 @@ object DM: TDM
       ProviderFlags = []
       Size = 80
     end
+    object qryManutConsItensEsptempototal: TAggregateField
+      FieldName = 'tempototal'
+      Active = True
+      DisplayName = ''
+      Expression = 'SUM(TEMPO)'
+    end
   end
   object dsManutConsItensEsp: TDataSource
     DataSet = qryManutConsItensEsp
@@ -49632,6 +49631,7 @@ object DM: TDM
   object qryLubrificConsItensEsp: TFDQuery
     AfterInsert = qryLubrificProgEquipItensEspAfterInsert
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGEQUIP'
+    AggregatesActive = True
     MasterSource = dsLubrificCons
     MasterFields = 'CODEMPRESA;CODIGO'
     Connection = FDConnSPMP3
@@ -49770,6 +49770,12 @@ object DM: TDM
       Origin = 'DESCRICAO'
       ProviderFlags = []
       Size = 80
+    end
+    object qryLubrificConsItensEsptempototal: TAggregateField
+      FieldName = 'tempototal'
+      Active = True
+      DisplayName = ''
+      Expression = 'SUM(TEMPO)'
     end
   end
   object dsLubrificConsItensEsp: TDataSource
@@ -58367,6 +58373,7 @@ object DM: TDM
       FieldName = 'CODIGO'
       Origin = 'CODIGO'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryOrdemServicoUltParalisacaoMOTIVOPARALISACAO: TStringField
       AutoGenerateValue = arDefault

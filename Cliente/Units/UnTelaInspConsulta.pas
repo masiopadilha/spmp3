@@ -292,7 +292,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure edtOficinaDblClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
+    procedure GrdManutTitleClick(Column: TColumn);
   private
+    procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
     { Private declarations }
   public
     { Public declarations }
@@ -395,6 +397,7 @@ var
   LTexto: PChar;
   LInsp: String;
   bmQuery : TBookmark;
+  TotalTempoInsp: Real;
 begin
   inherited;
   if not Assigned(DmRelatorios) then
@@ -461,9 +464,20 @@ begin
 //                DM.qryAuxiliar.Close;
 //                DM.qryManutVencOSVenc.Close;
 
+                TotalTempoInsp:= 0;
+                if (DM.qryManutConsItenstempototal.IsNull = False) and (DM.qryManutConsItensEsptempototal.isNull = False) then
+                  TotalTempoInsp:= DM.qryManutConsItenstempototal.Value + DM.qryManutConsItensEsptempototal.Value
+                else if (DM.qryManutConsItenstempototal.IsNull = True) and (DM.qryManutConsItensEsptempototal.isNull = False) then
+                  TotalTempoInsp:= DM.qryManutConsItensEsptempototal.Value
+                else if (DM.qryManutConsItenstempototal.IsNull = False) and (DM.qryManutConsItensEsptempototal.isNull = True) then
+                  TotalTempoInsp:= DM.qryManutConsItenstempototal.Value
+                else if (DM.qryManutConsItenstempototal.IsNull = True) and (DM.qryManutConsItensEsptempototal.isNull = True) then
+                  TotalTempoInsp:= 0;
+
+
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutConstempototal.AsString
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, FloatToStr(TotalTempoInsp)
                                                               , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr);
 
                 //Verifica se existe mão de obra cadastrada na manutenção
@@ -502,6 +516,10 @@ begin
                         DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryManutConsEquipeMObraCODCARGO.AsString;
                         DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutConsEquipeMObraTOTALHOMEMHORA.AsFloat;
                         DM.qryOrdemServicoEquipeMObra.Post;
+
+                        DM.qryOrdemServico.Edit;
+                        DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                        DM.qryOrdemServico.Post;
 
                         DM.qryManutConsEquipeMObra.Next;
                       end;
@@ -596,6 +614,10 @@ begin
                             DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryManutConsEquipeMObraCODCARGO.AsString;
                             DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutConsEquipeMObraTOTALHOMEMHORA.AsFloat;
                             DM.qryOrdemServicoEquipeMObra.Post;
+
+                            DM.qryOrdemServico.Edit;
+                            DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryOrdemServico.Post;
 
                             DM.qryManutConsEquipeMObra.Next;
                           end;
@@ -863,9 +885,20 @@ begin
 //                DM.qryLubrificVencOSVenc.Close;
 
 
+                TotalTempoInsp:= 0;
+                if (DM.qryLubrificConsItenstempototal.IsNull = False) and (DM.qryLubrificConsItensEsptempototal.isNull = False) then
+                  TotalTempoInsp:= DM.qryLubrificConsItenstempototal.Value + DM.qryLubrificConsItensEsptempototal.Value
+                else if (DM.qryLubrificConsItenstempototal.IsNull = True) and (DM.qryLubrificConsItensEsptempototal.isNull = False) then
+                  TotalTempoInsp:= DM.qryLubrificConsItensEsptempototal.Value
+                else if (DM.qryLubrificConsItenstempototal.IsNull = False) and (DM.qryLubrificConsItensEsptempototal.isNull = True) then
+                  TotalTempoInsp:= DM.qryLubrificConsItenstempototal.Value
+                else if (DM.qryLubrificConsItenstempototal.IsNull = True) and (DM.qryLubrificConsItensEsptempototal.isNull = True) then
+                  TotalTempoInsp:= 0;
+
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificConstempototal.AsString, DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr
+                                                              , FloatToStr(TotalTempoInsp), DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr);
 
 
                 //Verifica se existe mão de obra cadastrada na lubrificação
@@ -904,6 +937,10 @@ begin
                         DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryLubrificConsEquipeMObraCODCARGO.AsString;
                         DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificConsEquipeMObraTOTALHOMEMHORA.AsFloat;
                         DM.qryOrdemServicoEquipeMObra.Post;
+
+                        DM.qryOrdemServico.Edit;
+                        DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                        DM.qryOrdemServico.Post;
 
                         DM.qryLubrificConsEquipeMObra.Next;
                       end;
@@ -998,6 +1035,10 @@ begin
                             DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryLubrificConsEquipeMObraCODCARGO.AsString;
                             DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificConsEquipeMObraTOTALHOMEMHORA.AsFloat;
                             DM.qryOrdemServicoEquipeMObra.Post;
+
+                            DM.qryOrdemServico.Edit;
+                            DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                            DM.qryOrdemServico.Post;
 
                             DM.qryLubrificConsEquipeMObra.Next;
                           end;
@@ -1872,6 +1913,8 @@ DM.qryRotaConsSeqManutItensEsp.Close;
 end;
 
 procedure TFrmTelaInspConsulta.FormShow(Sender: TObject);
+var
+a: Double;
 begin
   inherited;
   DM.qryManutCons.Close;
@@ -2182,6 +2225,37 @@ begin
         CBPeriodo.OnChange(Sender);
     end;
 end;
+
+procedure TFrmTelaInspConsulta.GrdManutTitleClick(Column: TColumn);
+begin
+  inherited;
+  try
+    case PCInspecoes.ActivePageIndex of
+      0:
+      begin
+        if GrdManut.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+        CliqueNoTitulo(Column, TFDquery(GrdManut.DataSource.DataSet), GrdManut.DataSource.DataSet.Fields[1].Name, GrdManut);
+      end;
+      1:
+      begin
+        if GrdLubrific.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+        CliqueNoTitulo(Column, TFDquery(GrdLubrific.DataSource.DataSet), GrdLubrific.DataSource.DataSet.Fields[1].Name, GrdLubrific);
+      end;
+      2:
+      begin
+        if GrdRota.Columns[Column.Index].FieldName = 'C_DIASATRASO' then Exit;
+        CliqueNoTitulo(Column, TFDquery(GrdRota.DataSource.DataSet), GrdRota.DataSource.DataSet.Fields[1].Name, GrdRota);
+      end;
+    end;
+  except
+    on E: Exception do
+    begin
+      DM.GravaLog('Falha ao ordenar o grid. FrmTelaInspConsulta Linha: 2212', E.ClassName, E.Message);
+      Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+    end;
+  end;
+end;
+
 procedure TFrmTelaInspConsulta.PCInspecoesChange(Sender: TObject);
 begin
   inherited;
@@ -2202,4 +2276,41 @@ begin
       end;
   end;
 end;
+
+procedure TFrmTelaInspConsulta.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
+var
+  sIndexName: string;
+  oOrdenacao: TFDSortOption;
+  i: smallint;
+begin
+  // retira a formata��o em negrito de todas as colunas
+  for i := 0 to Grid.Columns.Count - 1 do
+    Grid.Columns[i].Title.Font.Style := [];
+
+  // configura a ordena��o ascendente ou descendente
+  if TFDQuery(Grid.DataSource.DataSet).IndexName = Column.FieldName + '_ASC' then
+  begin
+    sIndexName := Column.FieldName + '_DESC';
+    oOrdenacao := soDescending;
+  end
+  else
+  begin
+    sIndexName := Column.FieldName + '_ASC';
+    oOrdenacao := soNoCase;
+  end ;
+
+  // adiciona a ordena��o no DataSet, caso n�o exista
+  if not Assigned(TFDQuery(Grid.DataSource.DataSet).Indexes.FindIndex(sIndexName)) then
+    TFDQuery(Grid.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
+
+  // formata o t�tulo da coluna em negrito
+  Column.Title.Font.Style := [fsBold];
+
+  // atribui a ordena��o selecionada
+  TFDQuery(Grid.DataSource.DataSet).IndexName := sIndexName;
+
+  TFDQuery(Grid.DataSource.DataSet).First;
+end;
+
+
 end.

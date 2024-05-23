@@ -45,13 +45,18 @@ type
   public
     { Public declarations }
   end;
+
 var
   FrmTelaInspVenc: TFrmTelaInspVenc;
   LCodFamilia, LCodOficina: String;
   ManutExec, LubrificExec, RotaExec : Boolean;
+
 implementation
+
 {$R *.dfm}
+
 uses UnDmRelatorios, FireDAC.Comp.DataSet, UnDM;
+
 procedure TFrmTelaInspVenc.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
 var
   sIndexName: string;
@@ -137,7 +142,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Oficinas';
     if DM.ConsultarCombo <> EmptyStr then
       begin
-        LCodFamilia                             := DM.FCodCombo;
+        LCodOficina                             := DM.FCodCombo;
         edtOficina.Text                         := DM.FValorCombo;
         GrdManut.DataSource.DataSet.Filtered    := False;
         GrdManut.DataSource.DataSet.Filter      := EmptyStr;
@@ -149,14 +154,27 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
               GrdManut.DataSource.DataSet.Filter := 'CODOFICINA = '+QuotedStr(LCodOficina)
             else
               GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+
             if GrdManut.DataSource.DataSet.Filter <> EmptyStr then
+            begin
               GrdManut.DataSource.DataSet.Filtered := True;
+              TFDQuery(GrdManut.DataSource.DataSet).AddIndex('DTAINICIO1_ASC', 'DTAINICIO1', EmptyStr, [soNoCase]);
+              TFDQuery(GrdManut.DataSource.DataSet).IndexName := 'DTAINICIO1_ASC';
+              TFDQuery(GrdManut.DataSource.DataSet).First;
+            end;
+
             if GrdLubrific.DataSource.DataSet.Filter = EmptyStr then
               GrdLubrific.DataSource.DataSet.Filter := 'CODOFICINA = '+QuotedStr(LCodOficina)
             else
               GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODOFICINA = '+QuotedStr(LCodOficina);
+
             if GrdLubrific.DataSource.DataSet.Filter <> EmptyStr then
+            begin
               GrdLubrific.DataSource.DataSet.Filtered := True;
+              TFDQuery(GrdLubrific.DataSource.DataSet).AddIndex('DTAINICIO1_ASC', 'DTAINICIO1', EmptyStr, [soNoCase]);
+              TFDQuery(GrdLubrific.DataSource.DataSet).IndexName := 'DTAINICIO1_ASC';
+              TFDQuery(GrdLubrific.DataSource.DataSet).First;
+            end;
           end;
       end
     else
@@ -223,8 +241,11 @@ case PCInspecoes.ActivePageIndex of
           end;
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
-                                                            , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                            , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString
+                                            , EmptyStr, EmptyStr, 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                            , DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString
+                                            , DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString
+                                            , DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
           //Verifica se existe mão de obra cadastrada na manutenção
           if DM.qryManutProgEquipEquipe.IsEmpty = False then
@@ -263,11 +284,16 @@ case PCInspecoes.ActivePageIndex of
                   DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutProgEquipEquipeMObraTOTALHOMEMHORA.AsFloat;
                   DM.qryOrdemServicoEquipeMObra.Post;
 
+                  DM.qryOrdemServico.Edit;
+                  DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                  DM.qryOrdemServico.Post;
+
                   DM.qryManutProgEquipEquipeMObra.Next;
                 end;
 
                 DM.qryManutProgEquipEquipe.Next;
               end;
+
               DM.qryOrdemServicoEquipe.Close;
               DM.qryOrdemServicoEquipeMObra.Close;
             end;
@@ -357,6 +383,10 @@ case PCInspecoes.ActivePageIndex of
                       DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryManutProgEquipEquipeMObraCODCARGO.AsString;
                       DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryManutProgEquipEquipeMObraTOTALHOMEMHORA.AsFloat;
                       DM.qryOrdemServicoEquipeMObra.Post;
+
+                      DM.qryOrdemServico.Edit;
+                      DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                      DM.qryOrdemServico.Post;
 
                       DM.qryManutProgEquipEquipeMObra.Next;
                     end;
@@ -557,6 +587,10 @@ case PCInspecoes.ActivePageIndex of
                   DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificProgEquipEquipeMObraTOTALHOMEMHORA.AsFloat;
                   DM.qryOrdemServicoEquipeMObra.Post;
 
+                  DM.qryOrdemServico.Edit;
+                  DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                  DM.qryOrdemServico.Post;
+
                   DM.qryLubrificProgEquipEquipeMObra.Next;
                 end;
                 DM.qryLubrificProgEquipEquipe.Next;
@@ -650,6 +684,10 @@ case PCInspecoes.ActivePageIndex of
                       DM.qryOrdemServicoEquipeMObraCODCARGO.AsString         := DM.qryLubrificProgEquipEquipeMObraCODCARGO.AsString;
                       DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat    := DM.qryLubrificProgEquipEquipeMObraTOTALHOMEMHORA.AsFloat;
                       DM.qryOrdemServicoEquipeMObra.Post;
+
+                      DM.qryOrdemServico.Edit;
+                      DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+                      DM.qryOrdemServico.Post;
 
                       DM.qryLubrificProgEquipEquipeMObra.Next;
                     end;
@@ -991,6 +1029,10 @@ begin
   inherited;
   LCodOficina := '';
   EdtOficina.Text := '';
+  TFDQuery(GrdManut.DataSource.DataSet).DeleteIndexes;
+  TFDQuery(GrdLubrific.DataSource.DataSet).DeleteIndexes;
+  TFDQuery(GrdManut.DataSource.DataSet).First;
+  TFDQuery(GrdLubrific.DataSource.DataSet).First;
   GrdManut.DataSource.DataSet.Filtered    := False;
   GrdManut.DataSource.DataSet.Filter      := EmptyStr;
   GrdLubrific.DataSource.DataSet.Filtered := False;
@@ -1228,17 +1270,23 @@ begin
   case PCInspecoes.ActivePageIndex of
    0:
    begin
-    GrdManut.SetFocus;
-    GrdManut.SelectedRows.CurrentRowSelected := True;
+     Panel1.Visible := True;
+     chbTodos.Top := 46;
+     GrdManut.SetFocus;
+     GrdManut.SelectedRows.CurrentRowSelected := True;
    end;
    1:
    begin
+     chbTodos.Top := 46;
+     Panel1.Visible := True;
      GrdLubrific.SetFocus;
      GrdLubrific.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;
    end;
    2:
    begin
+     chbTodos.Top := 6;
+     Panel1.Visible := False;
      GrdRotas.SetFocus;
      GrdRotas.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;

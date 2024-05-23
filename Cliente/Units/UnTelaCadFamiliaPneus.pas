@@ -81,7 +81,7 @@ if DM.qryFamPneus.IsEmpty = False then
      Exit;
     if DM.qryTotalFamiliasTOTAL4.AsInteger > 0 then
       begin
-        EdtDescricao.Enabled := False;
+//        EdtDescricao.Enabled := False;
         EdtCampo1.Enabled    := False;
         EdtCampo2.Enabled    := False;
         EdtCampo3.Enabled    := False;
