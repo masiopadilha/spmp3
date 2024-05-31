@@ -51,128 +51,238 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       ExplicitHeight = 375
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
-        object GrdManut: TDBGrid
+        object GrdManut: TJvDBGrid
           AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 900
-          Height = 341
+          Left = 1
+          Top = 1
+          Width = 904
+          Height = 345
+          Margins.Left = 1
+          Margins.Top = 1
+          Margins.Right = 1
+          Margins.Bottom = 1
           Align = alClient
           DataSource = DM.dsManutVenc
-          DrawingStyle = gdsClassic
-          FixedColor = 14671839
-          Font.Charset = DEFAULT_CHARSET
+          Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
-          Font.Name = 'Tahoma'
+          Font.Name = 'Segoe UI'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
-          ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
+          TitleFont.Height = -12
+          TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
+          StyleElements = [seFont, seBorder]
           OnDrawColumnCell = GrdManutDrawColumnCell
+          OnKeyPress = GrdManutKeyPress
           OnTitleClick = GrdManutTitleClick
+          TitleButtons = True
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          AlternateRowColor = 15727296
+          SortedField = 'CODIGO'
+          TitleArrow = True
+          SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+          SelectColumnsDialogStrings.OK = '&OK'
+          SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+          EditControls = <>
+          RowsHeight = 19
+          TitleRowHeight = 19
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Descri'#231#227'o'
+              Width = 260
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FREQUENCIA1'
+              Title.Alignment = taCenter
+              Title.Caption = 'Freq. (d)'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DTAINICIO1'
+              Title.Alignment = taCenter
+              Title.Caption = 'Programada'
+              Width = 88
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'CODEQUIPAMENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Equip.'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'EQUIPAMENTO'
+              Title.Caption = 'Equipamento'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Segoe UI'
+              Title.Font.Style = [fsBold]
+              Width = 259
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'C_DIASATRASO'
+              Title.Alignment = taCenter
+              Visible = True
+            end>
         end
       end
       object TSLubrific: TTabSheet
         Caption = 'Lubrifica'#231#245'es'
         ImageIndex = 1
-        object GrdLubrific: TDBGrid
+        object GrdLubrific: TJvDBGrid
           AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 900
-          Height = 341
+          Left = 1
+          Top = 1
+          Width = 904
+          Height = 345
+          Margins.Left = 1
+          Margins.Top = 1
+          Margins.Right = 1
+          Margins.Bottom = 1
           Align = alClient
           DataSource = DM.dsLubrificVenc
-          DrawingStyle = gdsClassic
-          FixedColor = 14671839
-          Font.Charset = DEFAULT_CHARSET
+          Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
-          Font.Name = 'Tahoma'
+          Font.Name = 'Segoe UI'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
-          ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
+          TitleFont.Height = -12
+          TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
+          StyleElements = [seFont, seBorder]
           OnDrawColumnCell = GrdManutDrawColumnCell
           OnTitleClick = GrdManutTitleClick
+          TitleButtons = True
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          AlternateRowColor = 15727296
+          SortedField = 'CODIGO'
+          TitleArrow = True
+          SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+          SelectColumnsDialogStrings.OK = '&OK'
+          SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+          EditControls = <>
+          RowsHeight = 19
+          TitleRowHeight = 19
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Descri'#231#227'o'
+              Width = 260
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FREQUENCIA1'
+              Title.Alignment = taCenter
+              Title.Caption = 'Freq. (d)'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DTAINICIO1'
+              Title.Alignment = taCenter
+              Title.Caption = 'Programada'
+              Width = 88
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'CODEQUIPAMENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Equip.'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'EQUIPAMENTO'
+              Title.Caption = 'Equipamento'
+              Width = 259
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'C_DIASATRASO'
+              Title.Alignment = taCenter
+              Visible = True
+            end>
         end
       end
       object TSRotas: TTabSheet
         Caption = 'Rotas'
         ImageIndex = 2
-        object GrdRotas: TDBGrid
-          AlignWithMargins = True
-          Left = 3
-          Top = 3
-          Width = 900
-          Height = 199
-          Align = alTop
-          DataSource = DM.dsRotaEquipVenc
-          DrawingStyle = gdsClassic
-          FixedColor = 14671839
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          OnDrawColumnCell = GrdManutDrawColumnCell
-          OnTitleClick = GrdManutTitleClick
-        end
         object Panel2: TPanel
           Left = 0
-          Top = 205
+          Top = 130
           Width = 906
-          Height = 142
+          Height = 217
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          object DBGrid1: TDBGrid
+          ExplicitWidth = 902
+          ExplicitHeight = 214
+          object GrdRotasEquip: TJvDBGrid
             AlignWithMargins = True
-            Left = 3
+            Left = 1
             Top = 3
-            Width = 448
-            Height = 136
+            Width = 450
+            Height = 213
+            Margins.Left = 1
+            Margins.Bottom = 1
             Align = alLeft
             Color = clBtnFace
             DataSource = DM.dsRotaEquipVencSeq
-            DrawingStyle = gdsClassic
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
-            ReadOnly = True
-            TabOrder = 0
+            TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
-            TitleFont.Name = 'Tahoma'
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
             StyleElements = [seFont, seBorder]
+            OnTitleClick = GrdManutTitleClick
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 15727296
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
             Columns = <
               item
                 Alignment = taCenter
@@ -180,51 +290,55 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
                 FieldName = 'CODEQUIPATUAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Equip.'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
+                Width = 93
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'EQUIPATUAL'
                 Title.Caption = 'Equipamento'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
-                Width = 283
+                Width = 318
                 Visible = True
               end>
           end
-          object DBGrid2: TDBGrid
+          object GrdRotasEquipSeq: TJvDBGrid
             AlignWithMargins = True
-            Left = 454
+            Left = 457
             Top = 3
-            Width = 449
-            Height = 136
+            Width = 446
+            Height = 213
+            Margins.Left = 1
+            Margins.Bottom = 1
             Align = alRight
             Color = clBtnFace
             DataSource = DM.dsRotaEquipVencSeqManut
-            DrawingStyle = gdsClassic
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
-            ReadOnly = True
-            TabOrder = 1
+            TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -13
-            TitleFont.Name = 'Tahoma'
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
             StyleElements = [seFont, seBorder]
+            OnTitleClick = GrdManutTitleClick
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 15727296
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
             Columns = <
               item
                 Alignment = taCenter
@@ -232,52 +346,85 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
                 FieldName = 'CODIGO'
                 Title.Alignment = taCenter
                 Title.Caption = 'C'#243'digo'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'DESCRICAO'
                 Title.Caption = 'Manuten'#231#227'o'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
-                Width = 172
-                Visible = True
-              end
-              item
-                Alignment = taCenter
-                Expanded = False
-                FieldName = 'DTAINICIO1'
-                Title.Alignment = taCenter
-                Title.Caption = 'Programada'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
-                Visible = True
-              end
-              item
-                Alignment = taCenter
-                Expanded = False
-                FieldName = 'FREQUENCIA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Dias'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -11
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = []
+                Width = 349
                 Visible = True
               end>
           end
+        end
+        object GrdRotas: TJvDBGrid
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 902
+          Height = 126
+          Margins.Right = 1
+          Margins.Bottom = 1
+          Align = alTop
+          DataSource = DM.dsRotaEquipVenc
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ParentFont = False
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -12
+          TitleFont.Name = 'Segoe UI'
+          TitleFont.Style = []
+          StyleElements = [seFont, seBorder]
+          OnDrawColumnCell = GrdManutDrawColumnCell
+          OnTitleClick = GrdManutTitleClick
+          TitleButtons = True
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          AlternateRowColor = 15727296
+          SortedField = 'CODIGO'
+          TitleArrow = True
+          SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+          SelectColumnsDialogStrings.OK = '&OK'
+          SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+          EditControls = <>
+          RowsHeight = 19
+          TitleRowHeight = 19
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Descri'#231#227'o'
+              Width = 430
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FREQUENCIA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Freq. (d)'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATAINICIO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Programada'
+              Width = 88
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'C_DIASATRASO'
+              Title.Alignment = taCenter
+              Width = 59
+              Visible = True
+            end>
         end
       end
     end
@@ -376,11 +523,11 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       end
     end
     object chbTodos: TCheckBox
-      Left = 805
+      Left = 793
       Top = 46
-      Width = 109
+      Width = 118
       Height = 17
-      Caption = 'Selcionar todos'
+      Caption = 'Selecionar todos'
       TabOrder = 3
       OnClick = chbTodosClick
     end

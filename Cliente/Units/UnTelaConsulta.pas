@@ -197,9 +197,9 @@ begin
       10, 100://Tipos de Manutenção
         begin
           if  DM.FTabela_auxiliar = 100 then
-            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao and visivel = ''S'' order by tipomanutencao')
+            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao and visivel = ''S'' order by tipomanutencao, descricao')
           else
-            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao order by tipomanutencao');
+            DM.qryAuxiliar.SQL.Add('select codigo, descricao, tipomanutencao, ativo, visivel from tipomanutencao where descricao like :descricao order by tipomanutencao, descricao');
         end;
       11, 110://Motivos de Parada
         begin

@@ -376,6 +376,20 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
           Exit;
         end;
 
+        DM.qryRotasSequencia.First;
+        while not DM.qryRotasSequencia.Eof = True do
+        begin
+          if (DM.qryRotasSequenciaCODAREA.AsString = DM.FParamAuxiliar[4]) and (DM.qryRotasSequenciaCODCELULA.AsString = DM.FParamAuxiliar[6])
+            and (DM.qryRotasSequenciaCODLINHA.AsString = DM.FParamAuxiliar[8]) and (DM.qryRotasSequenciaSEQUENCIA.AsString = DM.FParamAuxiliar[10]) then
+            begin
+              Application.MessageBox('Equipamento já cadastrado na rota!', 'SPMP3', MB_OK + MB_ICONSTOP);
+              Abort;
+            end;
+
+          DM.qryRotasSequencia.Next;
+        end;
+
+
         DM.qryRotasSequencia.Append;
         DM.qryRotasSequenciaCODROTA.AsString       := DM.qryRotasCODIGO.AsString;
         DM.qryRotasSequenciaCODEMPRESA.AsString    := DM.FCodEmpresa;

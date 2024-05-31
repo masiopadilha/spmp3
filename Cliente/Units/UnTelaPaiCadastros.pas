@@ -715,7 +715,6 @@ StatusBar1.Panels[1].Text := DM.FNivelAcesso;
 StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
 StatusBar1.Panels[3].Text := DM.FNomeGrupo;
 
-LblAlertas.Caption := FrmTelaPrincipal.LblAlertas.Caption;
 DM.FAlterando := True;
 //DM.FDataHoraServidor := DM.DataHoraServidor;
 ControleBotoes(0);

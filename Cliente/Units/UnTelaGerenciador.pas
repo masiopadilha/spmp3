@@ -11,10 +11,6 @@ uses
 type
   TFrmTelaGerenciador = class(TFrmTelaPaiOKCancel)
     Panel1: TPanel;
-    BtnBackup: TBitBtn;
-    BtnBanco: TBitBtn;
-    BtnExtrair: TBitBtn;
-    BtnGravar: TBitBtn;
     CBBackup: TComboBox;
     CBFrequencia: TComboBox;
     EdtBackupMySQL: TJvDirectoryEdit;
@@ -32,6 +28,13 @@ type
     Label5: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    BtnGravar: TBitBtn;
+    BtnBanco: TBitBtn;
+    BtnBackup: TBitBtn;
+    BtnExtrair: TBitBtn;
+    edtHostFTP: TLabeledEdit;
+    edtSenhaFTP: TLabeledEdit;
+    edtUsernamFTP: TLabeledEdit;
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnBancoClick(Sender: TObject);
     procedure BtnBackupClick(Sender: TObject);
@@ -225,6 +228,22 @@ begin
         Exit;
       End;
     end;
+  if edtHostFTP.Text = '' then
+    begin
+      edtHostFTP.SetFocus;
+      Exit;
+    end;
+  if edtSenhaFTP.Text = '' then
+    begin
+      edtSenhaFTP.SetFocus;
+      Exit;
+    end;
+  if edtUsernamFTP.Text = '' then
+    begin
+      edtUsernamFTP.SetFocus;
+      Exit;
+    end;
+
 
   DeleteFile('C:\SPMP3\Gerenciador.exe');
   DeleteFile('C:\SPMP3\checkupdate.exe');
@@ -253,6 +272,9 @@ begin
   end;
   Ini.WriteString('ARQUIVOS', 'exeLocal', 'C:\SPMP3\SPMP3.exe');
   Ini.WriteString('ARQUIVOS', 'exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\update\SPMP3.exe');
+  Ini.WriteString('UPDATE', 'HostFTP', edtHostFTP.Text);
+  Ini.WriteString('UPDATE', 'PasswordFTP', DM.Crypt('C', edtSenhaFTP.Text));
+  Ini.WriteString('UPDATE', 'UsernameFTP', edtUsernamFTP.Text);
 
   Registro         := TRegistry.Create;
   Registro.RootKey := HKEY_LOCAL_MACHINE;
@@ -280,6 +302,9 @@ begin
       end;
       Registro.WriteString('exeLocal', 'C:\SPMP3\SPMP3.exe');
       Registro.WriteString('exeRemoto', '\\'+EdtHostName.Text+'\SPMP3\update\SPMP3.exe');
+      Registro.WriteString('HostFTP', edtHostFTP.Text);
+      Registro.WriteString('PasswordFTP', DM.Crypt('C', edtSenhaFTP.Text));
+      Registro.WriteString('UsernameFTP', edtUsernamFTP.Text);
     end;
   Registro.CloseKey;
 
@@ -342,6 +367,11 @@ if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
           else CBFrequencia.ItemIndex := 0;
 
           EdtBackupMySQL.Text := Ini.ReadString('Backup', 'Local', '');
+
+          edtHostFTP.Text := Ini.ReadString('UPDATE', 'HostFTP', '');
+          edtSenhaFTP.Text := Ini.ReadString('UPDATE', 'PasswordFTP', '');
+          edtUsernamFTP.Text := Ini.ReadString('UPDATE', 'UsernameFTP', '');
+
         Finally
           Ini.Free;
         end;

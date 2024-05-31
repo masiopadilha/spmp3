@@ -663,6 +663,23 @@
             <Form>FrmTelaInspVencRelatManut</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Units\UnTempoOcioso.pas">
+            <Form>frmSistemaOcioso</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadManutProgFamEquipConsulta.pas">
+            <Form>FrmTelaCadManutProgFamEquipConsulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas">
+            <Form>FrmTelaCadLubrificProgFamEquipConsulta</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <RcItem Include="..\updater.bat">
+            <ContainerId>ResourceItem</ContainerId>
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>updaterbat</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -741,6 +758,12 @@
             <Deployment Version="4">
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png" Configuration="Release" Class="UWP_DelphiLogo150"/>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png" Configuration="Release" Class="UWP_DelphiLogo44"/>
+                <DeployFile LocalName="..\updater.bat" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
@@ -752,6 +775,12 @@
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SPMP3.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="C:\SPMP3\updater.bat" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

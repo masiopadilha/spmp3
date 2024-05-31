@@ -11,8 +11,6 @@ object DM: TDM
       '    , `USUARIO`'
       '    , `DATAACESSO`'
       '    , `DATASAIDA`'
-      '    , `HORAENTRADA`'
-      '    , `HORASAIDA`'
       '    , `ESTACAO`'
       '    , `ATIVO`'
       '    , `PERIODO`'
@@ -58,16 +56,6 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DATASAIDA'
       Origin = 'DATASAIDA'
-    end
-    object qryAcessoHORAENTRADA: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'HORAENTRADA'
-      Origin = 'HORAENTRADA'
-    end
-    object qryAcessoHORASAIDA: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'HORASAIDA'
-      Origin = 'HORASAIDA'
     end
     object qryAcessoESTACAO: TStringField
       AutoGenerateValue = arDefault
@@ -6064,23 +6052,23 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `usuario`.`NOME`'
+      '    `usuario`.`CODIGO`'
+      '    , `usuario`.`MATRICULA`'
+      '    , `usuario`.`NOME`'
       '    , `usuario`.`SENHA`'
       '    , `usuario`.`BLOQUEIO`'
       '    , `usuario`.`SENHAALTERADA`'
       '    , `usuario`.`SENHAALTERADADATA`'
+      '    , `usuario`.`DATAFIM`    '
       '    , MAX(`acessos`.`DATAACESSO`) AS ULTIMOACESSO'
+      '    , NOW() AS NOVOACESSO'
       '    , DATEDIFF(NOW(), MAX(`acessos`.`DATAACESSO`)) DIFERENCA'
       'FROM'
       '    `usuario`'
+      '    '
       '    LEFT JOIN `acessos` '
-      '        ON (`usuario`.`NOME` = `acessos`.`USUARIO`)'
-      'WHERE (`usuario`.`NOME` = :usuario)'
-      
-        'GROUP BY `usuario`.`NOME`, `usuario`.`SENHA`, `usuario`.`BLOQUEI' +
-        'O`, `usuario`.`SENHAALTERADA`, `usuario`.`SENHAALTERADADATA`, `a' +
-        'cessos`.`DATAACESSO`'
-      'LIMIT 1;;')
+      '        ON (`usuario`.`NOME` = `acessos`.`USUARIO`)  '
+      'WHERE (`usuario`.`NOME` = :usuario)')
     Left = 399
     Top = 8
     ParamData = <
@@ -6090,6 +6078,19 @@ object DM: TDM
         ParamType = ptInput
         Value = ''
       end>
+    object qryLoginCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object qryLoginMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Size = 9
+    end
     object qryLoginNOME: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'NOME'
@@ -6107,20 +6108,6 @@ object DM: TDM
       FieldName = 'BLOQUEIO'
       Origin = 'BLOQUEIO'
     end
-    object qryLoginULTIMOACESSO: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'ULTIMOACESSO'
-      Origin = 'ULTIMOACESSO'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object qryLoginDIFERENCA: TLargeintField
-      AutoGenerateValue = arDefault
-      FieldName = 'DIFERENCA'
-      Origin = 'DIFERENCA'
-      ProviderFlags = []
-      ReadOnly = True
-    end
     object qryLoginSENHAALTERADA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'SENHAALTERADA'
@@ -6131,7 +6118,32 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'SENHAALTERADADATA'
       Origin = 'SENHAALTERADADATA'
-      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qryLoginDATAFIM: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFIM'
+      Origin = 'DATAFIM'
+    end
+    object qryLoginULTIMOACESSO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ULTIMOACESSO'
+      Origin = 'ULTIMOACESSO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryLoginNOVOACESSO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOVOACESSO'
+      Origin = 'NOVOACESSO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryLoginDIFERENCA: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'DIFERENCA'
+      Origin = 'DIFERENCA'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object qryLubrificantes: TFDQuery
@@ -7923,7 +7935,7 @@ object DM: TDM
       ''
       ')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 979
+    Left = 1024
     Top = 376
     ParamData = <
       item
@@ -8023,7 +8035,7 @@ object DM: TDM
         '        ON (`motivoparada`.`CODUSUARIOALT` = `usuario_1`.`CODIGO' +
         '`)'
       'WHERE (`motivoparada`.`CODIGO` = :codigo);')
-    Left = 1348
+    Left = 1393
     Top = 376
     ParamData = <
       item
@@ -8106,7 +8118,7 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT * FROM nivelacesso')
-    Left = 1405
+    Left = 1450
     Top = 376
     object qryNivelAcessoCODIGO: TStringField
       FieldName = 'CODIGO'
@@ -8185,7 +8197,7 @@ object DM: TDM
       '        ON (`oficinas`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
       'WHERE (`oficinas`.`CODIGO` = :codigo'
       '                 AND `oficinas`.`CODEMPRESA` = :codempresa);')
-    Left = 1593
+    Left = 1638
     Top = 376
     ParamData = <
       item
@@ -8396,7 +8408,7 @@ object DM: TDM
       '    AND `OPERANDO` = '#39'S'#39
       '    AND `CODEMPRESA` = :codempresa)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 1087
+    Left = 1151
     Top = 480
     ParamData = <
       item
@@ -8673,7 +8685,7 @@ object DM: TDM
         '    AND `ordemservico`.`DATAFIMREAL` >= STR_TO_DATE(:data1,'#39'%Y/%' +
         'm/%d'#39')    '
       ')')
-    Left = 1108
+    Left = 1172
     Top = 480
     ParamData = <
       item
@@ -8756,7 +8768,7 @@ object DM: TDM
       'WHERE (`pecasreposicaokit`.`CODEMPRESA` = :codempresa'
       '        AND `pecasreposicaokit`.`CODIGO` = :codigo)'
       'ORDER BY `pecasreposicaokit`.`DESCRICAO` ASC;')
-    Left = 1160
+    Left = 1224
     Top = 480
     ParamData = <
       item
@@ -8868,7 +8880,7 @@ object DM: TDM
       'WHERE (`pecasreposicaokititens`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicaokititens`.`CODKIT` = :codigo)'
       'ORDER BY `pecasreposicao`.`DESCRICAO` ASC;')
-    Left = 1181
+    Left = 1245
     Top = 480
     ParamData = <
       item
@@ -9020,7 +9032,7 @@ object DM: TDM
         'permissoes_acesso`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usuario`' +
         '.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1387
+    Left = 1451
     Top = 480
     ParamData = <
       item
@@ -9544,7 +9556,7 @@ object DM: TDM
       'SELECT * FROM permissoes_acesso'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 1438
+    Left = 1483
     Top = 376
     ParamData = <
       item
@@ -10126,7 +10138,7 @@ object DM: TDM
         'D `permissoes_alteracao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `us' +
         'uario`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1408
+    Left = 1472
     Top = 480
     ParamData = <
       item
@@ -10650,7 +10662,7 @@ object DM: TDM
       'SELECT * FROM permissoes_alteracao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 1471
+    Left = 1516
     Top = 376
     ParamData = <
       item
@@ -11232,7 +11244,7 @@ object DM: TDM
         ' `permissoes_exclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1429
+    Left = 1493
     Top = 480
     ParamData = <
       item
@@ -11756,7 +11768,7 @@ object DM: TDM
       'SELECT * FROM permissoes_exclusao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 1504
+    Left = 1549
     Top = 376
     ParamData = <
       item
@@ -12270,7 +12282,7 @@ object DM: TDM
         ' `permissoes_inclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1451
+    Left = 1515
     Top = 480
     ParamData = <
       item
@@ -12794,7 +12806,7 @@ object DM: TDM
       'SELECT * FROM permissoes_inclusao'
       'WHERE CODNIVELACESSO = :CODNIVELACESSO'
       'AND PESSOAL = '#39'N'#39)
-    Left = 1537
+    Left = 1582
     Top = 376
     ParamData = <
       item
@@ -15670,6 +15682,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -15870,6 +15883,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -27149,47 +27163,47 @@ object DM: TDM
   end
   object dsManutCons: TDataSource
     DataSet = qryManutCons
-    Left = 1330
+    Left = 1371
     Top = 317
   end
   object dsLubrificCons: TDataSource
     DataSet = qryLubrificCons
-    Left = 1617
+    Left = 1658
     Top = 317
   end
   object dsRotaCons: TDataSource
     DataSet = qryRotaCons
-    Left = 1904
+    Left = 1945
     Top = 317
   end
   object dsManutPeriodicas: TDataSource
     DataSet = qryManutPeriodicas
-    Left = 2155
+    Left = 2196
     Top = 316
   end
   object dsManutPeriodicasItens: TDataSource
     DataSet = qryManutPeriodicasItens
-    Left = 2188
+    Left = 2229
     Top = 316
   end
   object dsManutPeriodicasItensEsp: TDataSource
     DataSet = qryManutPeriodicasItensEsp
-    Left = 2221
+    Left = 2262
     Top = 316
   end
   object dsLubrificPeriodicas: TDataSource
     DataSet = qryLubrificPeriodicas
-    Left = 2254
+    Left = 2295
     Top = 316
   end
   object dsLubrificPeriodicasItens: TDataSource
     DataSet = qryLubrificPeriodicasItens
-    Left = 2287
+    Left = 2328
     Top = 316
   end
   object dsLubrificPeriodicasItensEsp: TDataSource
     DataSet = qryLubrificPeriodicasItensEsp
-    Left = 2320
+    Left = 2361
     Top = 316
   end
   object qryGrupos: TFDQuery
@@ -28785,7 +28799,7 @@ object DM: TDM
         '.`CODEMPRESA`'
       ''
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1330
+    Left = 1371
     Top = 269
     ParamData = <
       item
@@ -29148,7 +29162,7 @@ object DM: TDM
         'mento`.`CODEMPRESA`'
       ''
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1617
+    Left = 1658
     Top = 269
     ParamData = <
       item
@@ -29434,7 +29448,7 @@ object DM: TDM
       '                AND `rotasequipamento`.`RELATORIO` = '#39'N'#39
       '              )'
       'ORDER BY `rotasequipamento`.`DATAINICIO` ASC;')
-    Left = 1904
+    Left = 1945
     Top = 269
     ParamData = <
       item
@@ -29586,7 +29600,7 @@ object DM: TDM
       
         'ORDER BY `manutprogequipamentohist`.`CODORDEMSERVICO` DESC, `EQU' +
         'IPAMENTO` DESC;')
-    Left = 2155
+    Left = 2196
     Top = 268
     ParamData = <
       item
@@ -29889,7 +29903,7 @@ object DM: TDM
         'ORDER BY  `manutprogfamequippartes`.`DESCRICAO` ASC, `manutproge' +
         'quiphistitens`.`ITEM`, `manutprogequiphistitens`.`DESCINSPECAO` ' +
         'ASC;')
-    Left = 2188
+    Left = 2229
     Top = 268
     ParamData = <
       item
@@ -29978,6 +29992,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -30088,7 +30103,7 @@ object DM: TDM
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC , `manutproge' +
         'quiphistitensesp`.`ITEM`, `manutprogequiphistitensesp`.`DESCINSP' +
         'ECAO` ASC;')
-    Left = 2221
+    Left = 2262
     Top = 268
     ParamData = <
       item
@@ -30177,6 +30192,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -30314,7 +30330,7 @@ object DM: TDM
       
         'ORDER BY `lubrificprogequipamentohist`.`CODORDEMSERVICO` DESC, `' +
         'EQUIPAMENTO` DESC;')
-    Left = 2254
+    Left = 2295
     Top = 268
     ParamData = <
       item
@@ -30615,7 +30631,7 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitens`.`ITEM`, `lubrificprogequiphistitens`.`DESCI' +
         'NSPECAO` ASC;')
-    Left = 2287
+    Left = 2328
     Top = 268
     ParamData = <
       item
@@ -30704,6 +30720,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -30819,7 +30836,7 @@ object DM: TDM
         'ORDER BY `lubrificprogfamequippartes`.`DESCRICAO` ASC , `lubrifi' +
         'cprogequiphistitensesp`.`ITEM`, `lubrificprogequiphistitensesp`.' +
         '`DESCINSPECAO` ASC;')
-    Left = 2320
+    Left = 2361
     Top = 268
     ParamData = <
       item
@@ -30908,6 +30925,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -32577,7 +32595,7 @@ object DM: TDM
       '    AND `lubrificprogequipamento`.`ATIVO` = '#39'S'#39
       '    AND `equipamentos`.`OPERANDO` = '#39'S'#39')'
       'ORDER BY `lubrificprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1012
+    Left = 1057
     Top = 376
     ParamData = <
       item
@@ -32711,137 +32729,137 @@ object DM: TDM
   end
   object dsManutVenc: TDataSource
     DataSet = qryManutVenc
-    Left = 981
+    Left = 1026
     Top = 424
   end
   object dsLubrificVenc: TDataSource
     DataSet = qryLubrificVenc
-    Left = 1012
+    Left = 1057
     Top = 424
   end
   object dsMonitoramento: TDataSource
     DataSet = qryMonitoramento
-    Left = 1163
+    Left = 1208
     Top = 424
   end
   object dsMonitMedicoesPtosInsp: TDataSource
     DataSet = qryMonitMedicoesPtosInsp
-    Left = 1195
+    Left = 1240
     Top = 424
   end
   object dsMonitMedicoesCont: TDataSource
     DataSet = qryMonitMedicoesCont
-    Left = 1228
+    Left = 1273
     Top = 424
   end
   object dsMonitMedicoesContManut: TDataSource
     DataSet = qryMonitMedicoesContManut
-    Left = 1260
+    Left = 1305
     Top = 424
   end
   object dsMotivoParada: TDataSource
     DataSet = qryMotivoParada
-    Left = 1348
+    Left = 1393
     Top = 424
   end
   object dsNvelAcesso: TDataSource
     DataSet = qryNivelAcesso
-    Left = 1407
+    Left = 1452
     Top = 424
   end
   object dsPermissoesAcessoPadrao: TDataSource
     DataSet = qryPermissoesAcessoPadrao
-    Left = 1439
+    Left = 1484
     Top = 424
   end
   object dsPermissoesAlteracaoPadrao: TDataSource
     DataSet = qryPermissoesAlteracaoPadrao
-    Left = 1472
+    Left = 1517
     Top = 424
   end
   object dsPermissoesExclusaoPadrao: TDataSource
     DataSet = qryPermissoesExclusaoPadrao
-    Left = 1504
+    Left = 1549
     Top = 424
   end
   object dsPermissoesInclusaoPadrao: TDataSource
     DataSet = qryPermissoesInclusaoPadrao
-    Left = 1537
+    Left = 1582
     Top = 424
   end
   object dsOficinas: TDataSource
     DataSet = qryOficinas
-    Left = 1593
+    Left = 1638
     Top = 424
   end
   object dsOrdemServico: TDataSource
     DataSet = qryOrdemServico
-    Left = 1650
+    Left = 1695
     Top = 424
   end
   object dsOrdemServicoServSolic: TDataSource
     DataSet = qryOrdemServicoServSolic
-    Left = 1682
+    Left = 1727
     Top = 424
   end
   object dsOrdemServicoEquipe: TDataSource
     DataSet = qryOrdemServicoEquipe
-    Left = 1715
+    Left = 1760
     Top = 424
   end
   object dsOrdemServicoEquipeMObra: TDataSource
     DataSet = qryOrdemServicoEquipeMObra
-    Left = 1748
+    Left = 1793
     Top = 424
   end
   object dsOrdemServicoEquipePecas: TDataSource
     DataSet = qryOrdemServicoEquipePecas
-    Left = 1781
+    Left = 1826
     Top = 424
   end
   object dsOrdemServicoEquipeRecursos: TDataSource
     DataSet = qryOrdemServicoEquipeRecursos
-    Left = 1814
+    Left = 1859
     Top = 424
   end
   object dsOrdemServicoEquipePlanoTrab: TDataSource
     DataSet = qryOrdemServicoEquipePlanoTrab
-    Left = 1847
+    Left = 1892
     Top = 424
   end
   object dsOrdemServicoEquipeMObraUtil: TDataSource
     DataSet = qryOrdemServicoEquipeMObraUtil
-    Left = 1879
+    Left = 1924
     Top = 424
   end
   object dsOrdemServicoEquipePecasUtil: TDataSource
     DataSet = qryOrdemServicoEquipePecasUtil
-    Left = 1912
+    Left = 1957
     Top = 424
   end
   object dsOrdemServicoEquipeRecursosUtil: TDataSource
     DataSet = qryOrdemServicoEquipeRecursosUtil
-    Left = 1945
+    Left = 1990
     Top = 424
   end
   object dsOrdemServicoServExec: TDataSource
     DataSet = qryOrdemServicoServExec
-    Left = 1978
+    Left = 2023
     Top = 424
   end
   object dsOrdemServicoHistorico: TDataSource
     DataSet = qryOrdemServicoHistorico
-    Left = 2011
+    Left = 2056
     Top = 424
   end
   object dsOrdemServicoHistoricoServExec: TDataSource
     DataSet = qryOrdemServicoHistoricoServExec
-    Left = 2044
+    Left = 2089
     Top = 424
   end
   object dsOrdemServicoParalisacoes: TDataSource
     DataSet = qryOrdemServicoParalisacoes
-    Left = 2077
+    Left = 2122
     Top = 424
   end
   object dsOrdemServicoLocalizaMObra: TDataSource
@@ -32930,7 +32948,7 @@ object DM: TDM
         '`pontosinspecaoloc`.`CODEMPRESA`)'
       ' WHERE (`monitoramento`.`CODIGO` = :codigo'
       '    AND `monitoramento`.`CODEMPRESA` = :codempresa);')
-    Left = 1161
+    Left = 1206
     Top = 376
     ParamData = <
       item
@@ -33171,7 +33189,7 @@ object DM: TDM
         '    AND `monitoramentomedicoes`.`CODMONITORAMENTO` = :codmonitor' +
         'amento)'
       'ORDER BY `monitoramentomedicoes`.`CODIGO` DESC LIMIT 50;')
-    Left = 1194
+    Left = 1239
     Top = 376
     ParamData = <
       item
@@ -33427,7 +33445,7 @@ object DM: TDM
         '    AND `monitoramentomedicoes`.`CODMONITORAMENTO` = :codmonitor' +
         'amento)'
       'ORDER BY `monitoramentomedicoes`.`CODIGO` DESC LIMIT 50;')
-    Left = 1227
+    Left = 1272
     Top = 376
     ParamData = <
       item
@@ -33608,7 +33626,7 @@ object DM: TDM
       '    AND `manutprogequipamento`.`FREQUENCIA2` <> '#39#39
       '    AND `manutprogequipamento`.`FREQUENCIA2` IS NOT NULL)'
       'ORDER BY `MANUTENCAO` DESC;')
-    Left = 1260
+    Left = 1305
     Top = 376
     ParamData = <
       item
@@ -33830,7 +33848,7 @@ object DM: TDM
         '(:data2,'#39'%Y/%m/%d %T'#39')))'
       '       )'
       ''
-      'ORDER BY `ordemservico`.`DATACADASTRO`')
+      'ORDER BY `ordemservico`.`CODIGO` DESC')
     Left = 369
     Top = 480
     ParamData = <
@@ -34798,7 +34816,7 @@ object DM: TDM
         '`) AND (`ordemservico`.`CODEMPRESA` = `usuario_1`.`CODEMPRESA`)'
       ' WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
       'AND `ordemservico`.CODIGO = :codigo);')
-    Left = 1648
+    Left = 1693
     Top = 376
     ParamData = <
       item
@@ -35374,7 +35392,7 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservsolic`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1681
+    Left = 1726
     Top = 376
     ParamData = <
       item
@@ -35452,7 +35470,7 @@ object DM: TDM
       'FROM'
       '    `ordemservicoequipe`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1714
+    Left = 1759
     Top = 376
     ParamData = <
       item
@@ -35522,7 +35540,7 @@ object DM: TDM
         'lendario`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequipemobra`.`CODEQUIPE` = :codigo'
       ');')
-    Left = 1747
+    Left = 1792
     Top = 376
     ParamData = <
       item
@@ -35614,7 +35632,7 @@ object DM: TDM
         'eposicao`.`CODIGO`) AND (`ordemservicopecasrep`.`CODEMPRESA` = `' +
         'pecasreposicao`.`CODEMPRESA`)'
       'WHERE (`ordemservicopecasrep`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1780
+    Left = 1825
     Top = 376
     ParamData = <
       item
@@ -35711,7 +35729,7 @@ object DM: TDM
         's`.`CODIGO`) AND (`ordemservicoequiperecursos`.`CODEMPRESA` = `r' +
         'ecursos`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequiperecursos`.`CODEQUIPE`= :codigo);')
-    Left = 1813
+    Left = 1858
     Top = 376
     ParamData = <
       item
@@ -35802,7 +35820,7 @@ object DM: TDM
         'abalho`.`CODIGO`) AND (`ordemservicoplantrab`.`CODEMPRESA` = `pl' +
         'anotrabalho`.`CODEMPRESA`)'
       'WHERE (`ordemservicoplantrab`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1846
+    Left = 1891
     Top = 376
     ParamData = <
       item
@@ -35900,7 +35918,7 @@ object DM: TDM
         'SA` = `funcionarios`.`CODEMPRESA`)'
       ' WHERE (`ordemservicoequipemobrautil`.`CODEQUIPE` = :codequipe'
       'AND `ordemservicoequipemobrautil`.`CODCARGO` = :codcargo);')
-    Left = 1879
+    Left = 1924
     Top = 376
     ParamData = <
       item
@@ -36077,7 +36095,7 @@ object DM: TDM
         'casreposicao`.`CODIGO`) AND (`ordemservicopecasreputil`.`CODEMPR' +
         'ESA` = `pecasreposicao`.`CODEMPRESA`)'
       'WHERE (`ordemservicopecasreputil`.`CODORDEMSERVICO` = :codigo);')
-    Left = 1912
+    Left = 1957
     Top = 376
     ParamData = <
       item
@@ -36184,7 +36202,7 @@ object DM: TDM
         'ursos`.`CODIGO`) AND (`ordemservicoequiperecursosutil`.`CODEMPRE' +
         'SA` = `recursos`.`CODEMPRESA`)'
       'WHERE (`ordemservicoequiperecursosutil`.`CODEQUIPE` = :codigo);')
-    Left = 1945
+    Left = 1990
     Top = 376
     ParamData = <
       item
@@ -36280,7 +36298,7 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservexec`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 1978
+    Left = 2023
     Top = 376
     ParamData = <
       item
@@ -36439,7 +36457,7 @@ object DM: TDM
       '    )'
       ''
       'ORDER BY `ordemservico`.`DATACADASTRO` DESC;')
-    Left = 2011
+    Left = 2056
     Top = 376
     ParamData = <
       item
@@ -36677,7 +36695,7 @@ object DM: TDM
       'FROM'
       '    `ordemservicoservexec`'
       'WHERE (`CODORDEMSERVICO` = :codigo);')
-    Left = 2044
+    Left = 2089
     Top = 376
     ParamData = <
       item
@@ -36757,7 +36775,7 @@ object DM: TDM
       '    `ordemservicoparalisacao`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DATAPARALISACAO` ASC;')
-    Left = 2077
+    Left = 2122
     Top = 376
     ParamData = <
       item
@@ -37721,7 +37739,7 @@ object DM: TDM
         'WHERE (`ordemservicotercunidtarefas`.`CODORDEMSERVICO` = :codord' +
         'emservico)'
       'ORDER BY `ordemservicotercunidtarefas`.`DATAPROGINI` ASC;')
-    Left = 951
+    Left = 1015
     Top = 480
     ParamData = <
       item
@@ -37814,7 +37832,7 @@ object DM: TDM
       '   `ordemservicotercunidaditivos`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `CODIGO` DESC;')
-    Left = 971
+    Left = 1035
     Top = 480
     ParamData = <
       item
@@ -37892,7 +37910,7 @@ object DM: TDM
       '   `ordemservicotercunidmateriais`'
       'WHERE (`CODORDEMSERVICO` = :codigo)'
       'ORDER BY `DESCRICAO` ASC;')
-    Left = 992
+    Left = 1056
     Top = 480
     ParamData = <
       item
@@ -37964,7 +37982,7 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidrecursos`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 1013
+    Left = 1077
     Top = 480
     ParamData = <
       item
@@ -38035,7 +38053,7 @@ object DM: TDM
       
         'WHERE (`ordemservicotercunidpecasrep`.`CODORDEMSERVICO` = :codig' +
         'o);')
-    Left = 1035
+    Left = 1099
     Top = 481
     ParamData = <
       item
@@ -38148,7 +38166,7 @@ object DM: TDM
         'A`)'
       'WHERE (`pecasreposicao`.`CODIGO` = :codigo'
       '    AND `pecasreposicao`.`CODEMPRESA` = :codempresa);')
-    Left = 1232
+    Left = 1296
     Top = 480
     ParamData = <
       item
@@ -38372,7 +38390,7 @@ object DM: TDM
       'WHERE F.CODEMPRESA = :CODEMPRESA'
       'AND F.CODFAMILIAPECASREP = :CODFAMILIAPECASREP'
       'AND F.CODPECAREPOSICAO = :CODPECAREPOSICAO')
-    Left = 1253
+    Left = 1317
     Top = 480
     ParamData = <
       item
@@ -38525,7 +38543,7 @@ object DM: TDM
       'WHERE (`ordemservicopecasreputil`.`CODEMPRESA` = :codempresa'
       '    AND `pecasreposicao`.`CODIGO` = :codigo)'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1275
+    Left = 1339
     Top = 480
     ParamData = <
       item
@@ -38616,7 +38634,7 @@ object DM: TDM
       '    AND `equipamentos`.`CODIGO` = :codigo'
       ')'
       'ORDER BY `ordemservicopecasreputil`.`ENTRADA` DESC;')
-    Left = 1295
+    Left = 1359
     Top = 480
     ParamData = <
       item
@@ -38696,7 +38714,7 @@ object DM: TDM
       'AND `equipamentospecasrep`.`codempresa` = :codempresa '
       ''
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1316
+    Left = 1380
     Top = 480
     ParamData = <
       item
@@ -38775,7 +38793,7 @@ object DM: TDM
         #9'`equipamentos`.`CODIGO` = :codigo AND `equipamentospecasrep`.`c' +
         'odempresa` = :codempresa '
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1337
+    Left = 1401
     Top = 480
     ParamData = <
       item
@@ -42870,7 +42888,7 @@ object DM: TDM
         ')'
       'WHERE (`planotrabalho`.`CODIGO` = :codigo'
       '    AND `planotrabalho`.`CODEMPRESA` =:codempresa);')
-    Left = 1293
+    Left = 1338
     Top = 376
     ParamData = <
       item
@@ -42989,7 +43007,7 @@ object DM: TDM
   end
   object dsMonitoramentoPlanoTrab: TDataSource
     DataSet = qryMonitoramentoPlanoTrab
-    Left = 1293
+    Left = 1338
     Top = 424
   end
   object qryManutProgEquipPlanoTrab: TFDQuery
@@ -43160,9 +43178,137 @@ object DM: TDM
     Left = 669
     Top = 7
     Bitmap = {
-      494C01017E000007040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000400000000002000001002000000000000000
+      494C010183000007040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000001002000001002000000000000010
       0200000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FEFFFE017DBB
+      7AB449A145FB8DC48B9C00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000F9FBF90847A043FF47A0
+      43FF47A043FF47A043FF47A043FF000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FFFDFD04F9EF
+      F344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF34454A650F147A043FFACDC
+      BBFFAEDEBDFF47A043FF47A043FF91C68E9900000000EEEBE72D9C9078FF9C90
+      78FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C90
+      78FF9C9078FFFDFDFD0400000000000000000000000000000000000000000000
+      000000000000ACE2C876CFEFE044CFEFE044CFEFE04497CDD3769DD0D471CFEF
+      E044CFEFE044CFEFE04400000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FF47A043FF7BBF80FFBAE5
+      CBFFB4E1C4FFB3E1C4FF47A043FF4CA248F700000000BDB5A5AA9C9078FF9C90
+      78FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF4BBE6CFF1FD8
+      65FF9C9078FFDEDAD2550000000000000000000000000000000000000000F5FB
+      F80D4DC38DFC75CFA3D335D8FDFF4AC38BFF4AC38BFF1588A4FF0070AFFF4AC3
+      8BFF4AC38BFF4AC38BFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FF4BA146FF47A043FF47A0
+      43FF47A043FFB6E2C8FF83C48AFF7BBC7AB500000000BDB5A5AA9C9078FF9C90
+      78FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C9078FF9C90
+      78FF9C9078FFDEDAD25500000000000000000000000000000000BBE8D35E73CB
+      A0EFDCD8CFFF59BF8FEA39CFDDFF45B982FF45B982FF1789A0FF0070AFFF45B9
+      82FF45B982FF45B982FF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F4E1E683E9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFD3BFBEFF47A043FF47A0
+      43FF47A043FF47A043FF47A043FFFEFFFE0100000000BDB5A5AA6A604AFF645A
+      45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A
+      45FF6F644FFFDEDAD25500000000000000000000000000000000BCD4C1FDDCD8
+      CFFFD6C1B7FFB5513FFF937571FFB5513FFFB5513FFF2E7EA9FF0285C4FFAD56
+      47FFB5513FFFB5513FFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FFFDFD04F9EF
+      F344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF344E2E5DD5C49A0
+      45FD47A043FF51A54EF0FAFCFA0700000000000000008C8473CD645A45FF645A
+      45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A
+      45FF645A45FFC3BFB47200000000000000000000000000000000E6E3DCB5C88E
+      81EAC78D7FEFC88275CB35D8FDFFB5513FFFB5513FFF2A84B1FF0572A9FF7B76
+      7FFFB5513FFFB5513FFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF00000000000000000000000000000000DBD9D43A645A45FF645A
+      45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF645A
+      45FF645A45FF0000000000000000000000000000000000000000B65846F6D8CB
+      C1FFDCD8CFFFA03F31FF9F3F30FF9F3F30FF9F3F30FF14A6DDFF17C1F1FF8853
+      50FF9F3F30FF9F3F30FF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF0000000000000000000000000000000000000000645A45FF645A
+      45FF645A45FF645A45FF645A45FFA59378FFF3D8B5FF6E634CFF645A45FF645A
+      45FF645A45FF0000000000000000000000000000000000000000E0DDD5DCDCD8
+      CFFFBE58ACF2B538A4EF35D8FDFFB0279CFFB0279CFF3B58A9FF0070AFFFB027
+      9CFFB0279CFFB0279CFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F4E1E683E9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF0000000000000000000000000000000000000000645A45FF645A
+      45FF645A45FF665C46FF7A6E57FFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFF0D4
+      B3FF756C59E30000000000000000000000000000000000000000E3DDD8CFB028
+      9CFEDBD1CDFFC15CB0D235D8FDFFB0279CFFB0279CFF3B58A9FF0070AFFFB027
+      9CFFB0279CFFB0279CFF00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FFFDFD04F9EF
+      F344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF344F9EFF344F9EF
+      F344F8EFF34100000000000000000000000000000000000000008F897AB7645A
+      45FF645A45FFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDE
+      BBFFFBDEBBFFFCEDDD8100000000000000000000000000000000B947A6FEDCD8
+      CFFFDCD8CFFFA21F7BFFA21F7BFFA21F7BFFA21F7BFF0B6BABFF056DAEFFA21F
+      7BFFA21F7BFFA4227FFB00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF0000000000000000000000000000000000000000FBFBFB06645A
+      45FF645A45FFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDE
+      BBFFFBDEBBFFFCE2C3DE00000000000000000000000000000000E6E3DCB6D8C9
+      C9FFA21F7BFFA21F7BFFA21F7BFF9F207CFF016FAFFF32579FFFA21F7BFFA21F
+      7BFFC370ABA20000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F0D8E0AAE9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF0000000000000000000000000000000000000000000000000000
+      000000000000FDF7F038FBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDEBBFFFBDE
+      BBFFFDF2E5600000000000000000000000000000000000000000C88DB2D5A21F
+      7BFFA21F7BFFA21F7BFF6D398CFF0070AFFF842E85FFA21F7BFFA21F7BFFEED6
+      E82D000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000F4E1E683E9C4
+      D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4D1FFE9C4
+      D1FFE9C4D1FF0000000000000000000000000000000000000000000000000000
+      00000000000000000000FBE0BFEFFBDEBBFFFBDEBBFFFCE8CFB1FCEDD98BFDF6
+      EC45000000000000000000000000000000000000000000000000BA5A9EBBBA5A
+      9EBBBA5A9EBB4C66A8E3316AAAEDBA5A9EBBBA5A9EBBC16AA8A8000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FCEDDC80FCF1E26C00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000A0A19D00716B65006F6962006F6962006F69
       62006F696200716B6500A0A19D00000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -43175,113 +43321,113 @@ object DM: TDM
       3D00E29A3D00DF983C00604A3400000000000000000000000000FDF4DF2DFDEF
       D044FDEFD044FDEFD044FDEFD044FDEFD044FDEFD044FDEFD044E9DDC15BD2CC
       BA6800000000CBCAC74E5E574BEE000000000000000000000000000000000000
+      00000000000000000000F5FBFF0A008FE4FF3EB7FFC100000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000008B7D60FF8B7D60FF8B7D60FFC3BDAD82000000000000
       00000000000000000000000000000000000000000000A0A09D00706A64006D67
       62006D6762006D6762006D67620070573B00E29C4200E29A3D00E29A3D00E29A
       3D00E29A3D00E29A3D0070513000000000000000000000000000FBE1A87CF7C3
       4FFFF7C34FFFF7C34FFFF7C34FFFF7C34FFFF7C34FFF696660FFCAB69EFFF4D9
       B7FF7C7771FF868686C200000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF008FE4FF00A0FFFF3DB6FFC2000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000008B7D60FF8B7D60FF8B7D60FFAEA591B0000000000000
       000000000000000000000000000000000000000000005A432F00CC7F1E00CE81
       1E00CE811E00CE811E00CE811E00704F2500E7AA5900E4A04800E29A3D00E29A
       3D00E29A3D00E29A3D0070513000000000000000000000000000FFFFFE01F7C3
       4FFFF7C34FFFF7C34FFFF7C34FFFF7C34FFFC3A155FFEAD1B1FFFBDEBBFFFBDE
       BBFFFBDEBBFF636262FF00000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000006D574200D1852200CE81
+      0000000000000000000000A0FFFF008FE4FF00A0FFFF7FCEFF80000000000000
+      0000000000000000000000000000000000000000000000000000928569EFA298
+      7FCBF9F8F50E8F8165F68B7D60FF8B7D60FF8B7D60FF8B7D60FFC9C3B774CEC9
+      BD698B7D60FFFCFCFB060000000000000000000000006D574200D1852200CE81
       1E00CE811E00CE811E00CE811E00704F2500E7AA5A00E7AA5A00E4A24C00E29A
       3D00E29A3D00E29A3D007051300000000000000000000000000000000000FBE4
       B16FF7C34FFFF7C34FFFA15F07FFA27022FF765F3FFFFBDEBBFFFBDEBBFFFBDE
       BBFFFBDEBBFF90877CFF00000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E1993B00D58A
+      0000000000000000000000A0FFFF008FE4FF00A0FFFF3CB6FFC3000000000000
+      00000000000000000000000000000000000000000000E9E6E0318B7D60FF8B7D
+      60FF8B7D60FF81745AFF645A45FF645A45FF645A45FF6B614AFF8B7D60FF8B7D
+      60FF8B7D60FF918468F1000000000000000000000000705C4A00E1993B00D58A
       2900CE811E00CE811E00CE811E00704F2500E7AA5A00E2A65800E6A95A00E4A3
       4E00E29A3D00E29A3D0070513000000000000000000000000000000000000000
       0000FEF7EC1CCA902CFA2695D5FF0098FFFF168CDCFFD2BDA3FFFBDEBBFFFBDE
       BBFFFBDEBBFF616161FF00000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      0000000000000000000000A0FFFF008FE4FF00A0FFFF7FCEFF80000000000000
+      000000000000000000000000000000000000000000008B7D60FF8B7D60FF8B7D
+      60FF7E7258FF645A45FF645A45FF645A45FF645A45FF645A45FF645A45FF8B7D
+      60FF8B7D60FF8B7D60FFE6E4DE340000000000000000705C4A00E29A3D00E29A
       3D00D88E2D00CE811E00CE811E00704F2500E7AA5A00C5914D006F522B00E6A9
       5A00E4A04900E29A3D0070513000000000000000000000000000000000000000
       000000000000000000000098FFFF15A0FFFF0A9CFFFF727D86D6988D81FFC1AF
       99FF656463FFF5F5F50E00000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      0000000000000000000000A0FFFF008FE4FF00A0FFFF3CB6FFC3000000000000
+      00000000000000000000000000000000000000000000D8D4CA558B7D60FF8B7D
+      60FF645A45FF645A45FF6D6450EFF3F3F212C1BDB664645A45FF645A45FF7A6E
+      54FF8B7D60FF92856AEE000000000000000000000000705C4A00E29A3D00E29A
       3D00D5913900553812006E4510003C2A14007B5B30007A5A3000281D1000D39B
       5200E7A95A00E39E450070513000000000000000000000000000000000000000
       000000000000C8E8FF4D4DB7FFFF4DB7FFFF4DB7FFFF50B8FFFA000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      0000000000000000000000A0FFFF0094EDFF00A0FFFF00A0FFFF000000000000
+      0000000000000000000000000000000000000000000000000000E0DED5418B7D
+      60FF645A45FF645A45FF0000000000000000000000007E7563D5645A45FF675D
+      47FF8B7D60FF00000000000000000000000000000000705C4A00E29A3D00E29A
       3D00AB752E00A7722D00D78C2B00704F2500E7AA5A00BF8D4A00BD8B4A00E7AA
       5A00E7AA5A00E6A7560070523100000000000000000000000000000000000000
       0000000000004DB7FFFF4DB7FFFF4DB7FFFF4DB7FFFF4DB7FFFF9BD6FF8E0000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      0000000000000000000000000000000000000000000000000000000000007DCF
+      FF8200A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF000000000000000000000000000000000000000000000000E1DED7408B7D
+      60FF645A45FF645A45FFFCFCFB050000000000000000716855E9645A45FF695E
+      49FF8B7D60FF00000000000000000000000000000000705C4A00E29A3D00E29A
       3D00A9732E00A9732E00E19A3C0071502600E7AA5A00E7AA5A00E7AA5A00E7AA
       5A00E7AA5A00E7AA5A0071594000000000000000000000000000000000000000
       000043B3FFDC4DB7FFFF43A1E5FF4DB7FFFF4DB7FFFF4CB3FBFF4CB7FFFEECF8
-      FF15000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00D490
+      FF150000000000000000000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF86D1FF7900000000000000000000000000000000C2BAAA878B7D60FF8B7D
+      60FF645A45FF645A45FF645A45FFBFBBB3678F8778B9645A45FF645A45FF7F73
+      58FF8B7D60FF8B7D60FFF7F6F3120000000000000000705C4A00E29A3D00D490
       3900BA7F3200BA7F3200D490390072522800E7AA5A00E7AA5A00E7AA5A00E7AA
       5A00E7AA5A00E7AA5A00725F4D00000000000000000000000000000000000000
       000063839BC74DB7FFFF4DB7FFFF4DB7FFFF4DB7FFFF4DB7FFFF466981FFFCFE
-      FF03000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00D490
+      FF030000000000000000000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF28AEFFD700000000000000000000000000000000908366F38B7D60FF8B7D
+      60FF86785CFF645A45FF645A45FF645A45FF645A45FF645A45FF675D47FF8B7D
+      60FF8B7D60FF8B7D60FFE3DED83E0000000000000000705C4A00E29A3D00D490
       3900C7873500C7873500D490390073532900E7AA5A00E7AA5A00E7AA5A00E7AA
       5A00E7AA5A00E7AA5A0071604D00000000000000000000000000000000000000
       0000878787A04DB1F5FF4DB7FFFF4DB7FFFF4DB7FFFF4DB7FFFF456378FF0000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      00000000000000000000000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF07A2FFF800000000000000000000000000000000FAFAF90A8B7D60FF8B7D
+      60FF8B7D60FF897C5FFF695E48FF645A45FF645A45FF786C53FF8B7D60FF8B7D
+      60FF8B7D60FF8F8165F6000000000000000000000000705C4A00E29A3D00E29A
       3D00E29A3D00E29A3D00E29A3D0060452200E4A85900484B4200275371002753
       7100484B4300E4A8590063594E00000000000000000000000000000000000000
       0000C8C8C849424242FF424242FF456275FF4CACEEFF477B9EFF424242FF0000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000705C4A00E29A3D00E29A
+      00000000000000000000000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF9DDAFF620000000000000000000000000000000000A0FFFF00A0
+      FFFF32B2FFCD0000000000000000000000000000000000000000ABA18CB8C1BB
+      AC8500000000B3A996A78B7D60FF8B7D60FF8B7D60FF8B7D60FEE7E3DD35F7F6
+      F411988B72E2FCFCFB06000000000000000000000000705C4A00E29A3D00E29A
       3D00E29A3D00E29A3D00E29A3D00B17A310043393100747673006B7172006B71
       7200747673007D7C7800A2A3A000000000000000000000000000000000000000
       000000000000424242FF424242FF424242FF424242FF424242FFBDBDBD590000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF27AFFFD88CD4FF73AADFFF559BDAFF6475CCFF8A00A0FFFF00A0
+      FFFF99D9FF660000000000000000000000000000000000000000000000000000
+      000000000000000000008B7D60FF8B7D60FF8B7D60FFA2977FCC000000000000
       0000000000000000000000000000000000000000000063574C00DF983C004746
       3A0026516C0026516C0047463A00DF983C0063574C0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000606060D6424242FF424242FF00000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000C7E9
+      FF3800A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF20AB
+      FFDF000000000000000000000000000000000000000000000000000000000000
+      000000000000000000008B7D60FF8B7D60FF8B7D60FFB9B2A098000000000000
       00000000000000000000000000000000000000000000A1A2A0007D7C78007475
       73006B7071006B707100747573007D7C7800A2A3A00000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -47259,12 +47405,16 @@ object DM: TDM
       0000000000000000000000000000000000007F7F7F007F7F7F007F7F7F007F7F
       7F007F7F7F007F7F7F0000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000040000000000200000100010000000000001000000000000000000000
-      000000000000000000000000FFFFFF00FE01FFFC00000000FE01C00900000000
-      8001C003000000008001C003000000008001E003000000008001F00300000000
-      8001FC03000000008001F83F000000008001F81F000000008001F00F00000000
-      8001F00F000000008001F01F000000008001F01F000000008001F81F00000000
-      807FFC7F00000000807FFFFF00000000FC1F0000FC3FFFFFF0270000100FFFF3
+      2800000040000000100200000100010000000000801000000000000000000000
+      000000000000000000000000FFFFFF00FFC3FFFFFFFF0000FF81FFFFFFFF0000
+      C0008003F8030000C0008003E0030000C0008003C0030000C0008003C0030000
+      C0018003C0030000C0078007C0030000C007C007C0030000C007C007C0030000
+      C007C003C0030000C007C003C0070000C007F807C00F0000C007FC0FC03F0000
+      FFFFFE7FFFFF0000FFFFFFFFFFFF0000FE01FFFCFFFFFFFFFE01C009FC7FFC3F
+      8001C003FC3FFC3F8001C003FC3FC0038001E003FC3F80038001F003FC3F8001
+      8001FC03FC3F80038001F83FFC3FC3878001F81FE00FC1878001F00FE0078001
+      8001F00FE00780018001F01FE00780038001F01FE3C7C8038001F81FE007FC3F
+      807FFC7FE00FFC3F807FFFFFFFFFFFFFFC1F0000FC3FFFFFF0270000100FFFF3
       E4CB00000007FFE3D8F100000003FFC7987100000181FF89B872000001E1FF01
       307C000001E18223205C000081F11067000C00008F8138FF200C00008780387F
       4605000087803E7F9001000081808E7FA0030000C0008E7FC3470000E000C07F
@@ -49180,7 +49330,7 @@ object DM: TDM
         'tprogfamequip'
       ')'
       'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
-    Left = 1363
+    Left = 1404
     Top = 269
     ParamData = <
       item
@@ -49268,7 +49418,7 @@ object DM: TDM
   end
   object dsManutConsItens: TDataSource
     DataSet = qryManutConsItens
-    Left = 1363
+    Left = 1404
     Top = 317
   end
   object qryLubrificConsItens: TFDQuery
@@ -49301,7 +49451,7 @@ object DM: TDM
         ':codlubrificprogfamequip)'
       'ORDER BY `PARTE` ASC, `lubrificprogfamequipitens`.`ITEM`;'
       '')
-    Left = 1650
+    Left = 1691
     Top = 269
     ParamData = <
       item
@@ -49385,7 +49535,7 @@ object DM: TDM
   end
   object dsLubrificConsItens: TDataSource
     DataSet = qryLubrificConsItens
-    Left = 1650
+    Left = 1691
     Top = 317
   end
   object qryManutConsItensEsp: TFDQuery
@@ -49424,7 +49574,7 @@ object DM: TDM
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
       'ORDER BY `PARTE` ASC;')
-    Left = 1396
+    Left = 1437
     Top = 269
     ParamData = <
       item
@@ -49541,7 +49691,7 @@ object DM: TDM
   end
   object dsManutConsItensEsp: TDataSource
     DataSet = qryManutConsItensEsp
-    Left = 1396
+    Left = 1437
     Top = 317
   end
   object qryManutConsPlanoTrab: TFDQuery
@@ -49569,7 +49719,7 @@ object DM: TDM
         '    AND `manutprogfamequipplantrab`.`CODMANUTPROGFAMEQUIP` = :CO' +
         'DMANUTPROGFAMEQUIP'
       '    );')
-    Left = 1429
+    Left = 1470
     Top = 269
     ParamData = <
       item
@@ -49625,7 +49775,7 @@ object DM: TDM
   end
   object dsManutConsPlanoTrab: TDataSource
     DataSet = qryManutConsPlanoTrab
-    Left = 1429
+    Left = 1470
     Top = 317
   end
   object qryLubrificConsItensEsp: TFDQuery
@@ -49663,7 +49813,7 @@ object DM: TDM
         '    AND `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP` = :co' +
         'digo)'
       'ORDER BY `PARTE`;')
-    Left = 1683
+    Left = 1724
     Top = 269
     ParamData = <
       item
@@ -49780,7 +49930,7 @@ object DM: TDM
   end
   object dsLubrificConsItensEsp: TDataSource
     DataSet = qryLubrificConsItensEsp
-    Left = 1683
+    Left = 1724
     Top = 317
   end
   object qryLubrificConsPlanoTrab: TFDQuery
@@ -49808,7 +49958,7 @@ object DM: TDM
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
         ' = :CODLUBRIFICPROGFAMEQUIP'
       '    );')
-    Left = 1716
+    Left = 1757
     Top = 269
     ParamData = <
       item
@@ -49864,7 +50014,7 @@ object DM: TDM
   end
   object dsLubrificConsPlanoTrab: TDataSource
     DataSet = qryLubrificConsPlanoTrab
-    Left = 1716
+    Left = 1757
     Top = 317
   end
   object qryOrdemServicoMObraDisp: TFDQuery
@@ -51346,7 +51496,7 @@ object DM: TDM
       '    AND `rotasequipamentoseq`.`CODROTA` = :codigo'
       '    )'
       'ORDER BY `rotasequipamentoseq`.`CODIGO` ASC;')
-    Left = 1937
+    Left = 1978
     Top = 269
     ParamData = <
       item
@@ -51464,7 +51614,7 @@ object DM: TDM
   end
   object dsRotaConsSeq: TDataSource
     DataSet = qryRotaConsSeq
-    Left = 1937
+    Left = 1978
     Top = 317
   end
   object qryRotaConsSeqManut: TFDQuery
@@ -51496,7 +51646,7 @@ object DM: TDM
       '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipatual'
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'S'#39')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
-    Left = 1970
+    Left = 2011
     Top = 269
     ParamData = <
       item
@@ -51561,7 +51711,7 @@ object DM: TDM
   end
   object dsRotaConsSeqManut: TDataSource
     DataSet = qryRotaConsSeqManut
-    Left = 1970
+    Left = 2011
     Top = 317
   end
   object qryRotaConsSeqManutItens: TFDQuery
@@ -51593,7 +51743,7 @@ object DM: TDM
         'tprogfamequip'
       ')'
       'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
-    Left = 2003
+    Left = 2044
     Top = 269
     ParamData = <
       item
@@ -51673,7 +51823,7 @@ object DM: TDM
   end
   object dsRotaConsSeqManutItens: TDataSource
     DataSet = qryRotaConsSeqManutItens
-    Left = 2003
+    Left = 2044
     Top = 317
   end
   object qryRotaConsSeqManutItensEsp: TFDQuery
@@ -51708,7 +51858,7 @@ object DM: TDM
       'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
       'ORDER BY `PARTE` ASC;')
-    Left = 2036
+    Left = 2077
     Top = 269
     ParamData = <
       item
@@ -51810,7 +51960,7 @@ object DM: TDM
   end
   object dsRotaConsSeqManutItensEsp: TDataSource
     DataSet = qryRotaConsSeqManutItensEsp
-    Left = 2036
+    Left = 2077
     Top = 317
   end
   object qryCalendarioOSProgramadasMObra: TFDQuery
@@ -54266,7 +54416,7 @@ object DM: TDM
   object qryAuxiliar2: TFDQuery
     Connection = FDConnSPMP3
     Left = 999
-    Top = 13
+    Top = 7
   end
   object qryClonarLubrific: TFDQuery
     Connection = FDConnSPMP3
@@ -54632,7 +54782,7 @@ object DM: TDM
     Left = 781
     Top = 7
     Bitmap = {
-      494C010101000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54645,15 +54795,7 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000E79C
-      00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C
-      00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54661,7 +54803,7 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF00A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54669,7 +54811,15 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF00A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000E79C
+      00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C
+      00FFE79C00FF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF00A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54677,7 +54827,7 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFEBEBEBFFEBEBEBFFEBEBEBFFEBEAE9FFE79C00FFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF00A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54685,7 +54835,7 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFEBEBEBFFE79C00FFCE811EFFE79C00FFE79C00FFEBEAE9FFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000A0FFFF00A0FFFF0086D6FF00A0FFFF000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -54693,64 +54843,64 @@ object DM: TDM
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFEBEBEBFFCE811EFFCE811EFFCE811EFFE79C00FFEBEBEBFFE79C
       00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000263C3C009FFEFE00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF0099
+      F4F4000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFEBEBEBFFE79C00FFCE811EFFE79C00FFE79C00FFEBEBEBFFE79C
-      00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00FFE79C00FF0000000000000000000000000000000000000000000000000001
+      010100A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFEBEBEBFFE79C00FFE79C00FFE79C00FFCE811EFFEBEBEBFFE79C
-      00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00FFE79C00FF0000000000000000000000000000000000000000000000000062
+      9C9C00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFE79C00FFE79C
-      00FFE79C00FF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00FFE79C00FF0000000000000000000000000000000000000000000000000099
+      F4F400A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFCE811EFFCE81
-      1EFFCE811EFF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      1EFFCE811EFF0000000000000000000000000000000000000000000000000090
+      E5E500A0FFFF00A0FFFF00101A1A0000000000000000000000000072B5B500A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFEBEBEBFFEBEB
-      EBFFEBEBEBFF0000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      EBFFEBEBEBFF000000000000000000000000000000000000000000000000003D
+      626200A0FFFF00A0FFFF000000000000000000000000000000000000000000A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFEBEBEBFFEBEB
       EBFF000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0FFFF00A0
+      FFFF00A0FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000000000000000000000000000E79C
       00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFE79C00FFEBEBEBFF0000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000015212100619B9B0095EEEE0095EEEE0087D7D7004975750001
+      0101000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -56604,7 +56754,7 @@ object DM: TDM
         'cao`.`CODIGO`) AND (`manutprogequippecasrep`.`CODEMPRESA` = `pec' +
         'asreposicao`.`CODEMPRESA`)'
       ' WHERE (`manutprogequippecasrep`.`CODMANUTPROGEQUIP` = :codigo);')
-    Left = 1462
+    Left = 1503
     Top = 269
     ParamData = <
       item
@@ -56666,7 +56816,7 @@ object DM: TDM
   end
   object dsManutConsPecas: TDataSource
     DataSet = qryManutConsPecas
-    Left = 1462
+    Left = 1503
     Top = 317
   end
   object qryManutConsRecursos: TFDQuery
@@ -56687,7 +56837,7 @@ object DM: TDM
         'CODIGO`) AND (`manutprogequiprecursos`.`CODEMPRESA` = `recursos`' +
         '.`CODEMPRESA`)'
       'WHERE (`manutprogequiprecursos`.`CODMANUTPROGEQUIP` = :codigo);')
-    Left = 1495
+    Left = 1536
     Top = 269
     ParamData = <
       item
@@ -56742,7 +56892,7 @@ object DM: TDM
   end
   object dsManutConsRecursos: TDataSource
     DataSet = qryManutConsRecursos
-    Left = 1495
+    Left = 1536
     Top = 317
   end
   object qryLubrificConsPecas: TFDQuery
@@ -56766,7 +56916,7 @@ object DM: TDM
       
         ' WHERE (`lubrificprogequippecasrep`.`CODLUBRIFICPROGEQUIP` = :co' +
         'digo);')
-    Left = 1749
+    Left = 1790
     Top = 269
     ParamData = <
       item
@@ -56828,7 +56978,7 @@ object DM: TDM
   end
   object dsLubrificConsPecas: TDataSource
     DataSet = qryLubrificConsPecas
-    Left = 1749
+    Left = 1790
     Top = 317
   end
   object qryLubrificConsRecursos: TFDQuery
@@ -56851,7 +57001,7 @@ object DM: TDM
       
         'WHERE (`lubrificprogequiprecursos`.`CODLUBRIFICPROGEQUIP` = :cod' +
         'igo);')
-    Left = 1782
+    Left = 1823
     Top = 269
     ParamData = <
       item
@@ -56906,7 +57056,7 @@ object DM: TDM
   end
   object dsLubrificConsRecursos: TDataSource
     DataSet = qryLubrificConsRecursos
-    Left = 1782
+    Left = 1823
     Top = 317
   end
   object qryRotaPeriodicasManutPecas: TFDQuery
@@ -57258,7 +57408,7 @@ object DM: TDM
         'cao`.`CODIGO`) AND (`manutprogequippecasrep`.`CODEMPRESA` = `pec' +
         'asreposicao`.`CODEMPRESA`)'
       ' WHERE (`manutprogequippecasrep`.`CODMANUTPROGEQUIP` = :codigo);')
-    Left = 2069
+    Left = 2110
     Top = 269
     ParamData = <
       item
@@ -57323,7 +57473,7 @@ object DM: TDM
   end
   object dsRotaConsSeqManutPecas: TDataSource
     DataSet = qryRotaConsSeqManutPecas
-    Left = 2069
+    Left = 2110
     Top = 317
   end
   object qryRotaConsSeqManutRecursos: TFDQuery
@@ -57344,7 +57494,7 @@ object DM: TDM
         'CODIGO`) AND (`manutprogequiprecursos`.`CODEMPRESA` = `recursos`' +
         '.`CODEMPRESA`)'
       'WHERE (`manutprogequiprecursos`.`CODMANUTPROGEQUIP` = :codigo);')
-    Left = 2102
+    Left = 2143
     Top = 269
     ParamData = <
       item
@@ -57401,7 +57551,7 @@ object DM: TDM
   end
   object dsRotaConsSeqManutRecursos: TDataSource
     DataSet = qryRotaConsSeqManutRecursos
-    Left = 2102
+    Left = 2143
     Top = 317
   end
   object DSEquipamentosManutHistProgExec: TDataSource
@@ -57591,7 +57741,7 @@ object DM: TDM
         '    -- AND `manutprogequipamentohist`.`DTAINICIO1` < STR_TO_DATE' +
         '(:data1,'#39'%Y/%m/%d'#39')'
       'ORDER BY `ordemservico`.`CODIGO` DESC;')
-    Left = 1068
+    Left = 1113
     Top = 376
     ParamData = <
       item
@@ -57639,7 +57789,7 @@ object DM: TDM
         '    AND `lubrificprogequipamentohist`.`REPROGRAMAR1` = '#39'Programa' +
         #231#227'o'#39
       'ORDER BY `ordemservico`.`CODIGO` DESC;')
-    Left = 1101
+    Left = 1146
     Top = 376
     ParamData = <
       item
@@ -57660,12 +57810,12 @@ object DM: TDM
   end
   object DSManutVencOSVenc: TDataSource
     DataSet = qryManutVencOSVenc
-    Left = 1070
+    Left = 1115
     Top = 424
   end
   object DSLubrificVencOSVenc: TDataSource
     DataSet = qryLubrificVencOSVenc
-    Left = 1101
+    Left = 1146
     Top = 424
   end
   object qryFuncionarioHistSimples: TFDQuery
@@ -58071,7 +58221,7 @@ object DM: TDM
       '    `manutprogequipequipe`'
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODMANUTPROGEQUIP` = :codigo);')
-    Left = 1529
+    Left = 1570
     Top = 269
     ParamData = <
       item
@@ -58119,7 +58269,7 @@ object DM: TDM
   end
   object dsManutConsEquipe: TDataSource
     DataSet = qryManutConsEquipe
-    Left = 1530
+    Left = 1571
     Top = 317
   end
   object qryManutConsEquipeMObra: TFDQuery
@@ -58139,7 +58289,7 @@ object DM: TDM
         'ODIGO`)'
       'WHERE (`manutprogequipequipemobra`.`CODEQUIPE` = :codigo'
       ');')
-    Left = 1562
+    Left = 1603
     Top = 269
     ParamData = <
       item
@@ -58194,7 +58344,7 @@ object DM: TDM
   end
   object dsManutConsEquipeMObra: TDataSource
     DataSet = qryManutConsEquipeMObra
-    Left = 1563
+    Left = 1604
     Top = 317
   end
   object qryLubrificConsEquipe: TFDQuery
@@ -58210,7 +58360,7 @@ object DM: TDM
       '    `lubrificprogequipequipe`'
       'WHERE (`CODEMPRESA` = :codempresa'
       '    AND `CODLUBRIFICPROGEQUIP` = :codigo);')
-    Left = 1816
+    Left = 1857
     Top = 269
     ParamData = <
       item
@@ -58259,7 +58409,7 @@ object DM: TDM
   end
   object dsLubrificConsEquipe: TDataSource
     DataSet = qryLubrificConsEquipe
-    Left = 1817
+    Left = 1858
     Top = 317
   end
   object qryLubrificConsEquipeMObra: TFDQuery
@@ -58279,7 +58429,7 @@ object DM: TDM
         '.`CODIGO`)'
       'WHERE (`lubrificprogequipequipemobra`.`CODEQUIPE` = :codigo'
       ');')
-    Left = 1849
+    Left = 1890
     Top = 269
     ParamData = <
       item
@@ -58334,7 +58484,7 @@ object DM: TDM
   end
   object dsLubrificConsEquipeMObra: TDataSource
     DataSet = qryLubrificConsEquipeMObra
-    Left = 1850
+    Left = 1891
     Top = 317
   end
   object dsOrdemServicoUltParalisacao: TDataSource
@@ -58381,5 +58531,288 @@ object DM: TDM
       Origin = 'MOTIVOPARALISACAO'
       Size = 200
     end
+  end
+  object IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL
+    MaxLineAction = maException
+    Port = 0
+    DefaultPort = 0
+    SSLOptions.Method = sslvTLSv1_2
+    SSLOptions.SSLVersions = [sslvTLSv1_2]
+    SSLOptions.Mode = sslmUnassigned
+    SSLOptions.VerifyMode = []
+    SSLOptions.VerifyDepth = 0
+    Left = 1144
+    Top = 7
+  end
+  object IdHTTP: TIdHTTP
+    IOHandler = IdSSLIOHandlerSocketOpenSSL1
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 1304
+    Top = 8
+  end
+  object qryManutProgFamEquipCons: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
+      '    , `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`'
+      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
+      '    , `manutprogequipamento`.`CODIGO` AS `CODMANUTENCAO`'
+      '    , `manutprogequipamento`.`DESCRICAO` AS `MANUTENCAO`'
+      '    , `manutprogequipamento`.`FREQUENCIA1` AS `DIAS`'
+      '    , `manutprogequipamento`.`ATIVO`'
+      '    , `manutprogequipamento`.`DTAINICIO1` AS `PLANEJADA`'
+      '    , `manutprogfamequipamento`.`CODIGO` AS `CODMANUTFAMILIA`'
+      
+        '    , `manutprogfamequipamento`.`DESCRICAO` AS `DESCMANUTFAMILIA' +
+        '`'
+      '    , `tipomanutencao`.`CODIGO` AS `CODTIPOMANUTENCAO`'
+      'FROM'
+      '    `manutprogequipamento`'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`)'
+      '    INNER JOIN `equipamentos` '
+      
+        '        ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamen' +
+        'tos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equip' +
+        'amentos`.`CODEMPRESA`)'
+      '    INNER JOIN `tipomanutencao` '
+      
+        '        ON (`manutprogfamequipamento`.`CODMANUTENCAO` = `tipoman' +
+        'utencao`.`CODIGO`)'
+      '    INNER JOIN `centrocusto` '
+      
+        '        ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
+        'IGO`)'
+      'WHERE (`manutprogequipamento`.`CODEMPRESA` = :CODEMPRESA'
+      ')'
+      
+        'ORDER BY `CODEQUIPAMENTO` ASC, `DIAS` ASC, `DESCMANUTFAMILIA` AS' +
+        'C;')
+    Left = 963
+    Top = 376
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryManutProgFamEquipConsCODEQUIPAMENTO: TStringField
+      FieldName = 'CODEQUIPAMENTO'
+      Origin = 'CODEQUIPAMENTO'
+      Required = True
+    end
+    object qryManutProgFamEquipConsEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPAMENTO'
+      Origin = 'EQUIPAMENTO'
+      Size = 200
+    end
+    object qryManutProgFamEquipConsCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CENTROCUSTO'
+      Origin = 'CENTROCUSTO'
+      Size = 80
+    end
+    object qryManutProgFamEquipConsTIPOMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPOMANUTENCAO'
+      Origin = 'TIPOMANUTENCAO'
+      Size = 80
+    end
+    object qryManutProgFamEquipConsCODMANUTENCAO: TStringField
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
+      Required = True
+      Size = 9
+    end
+    object qryManutProgFamEquipConsMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MANUTENCAO'
+      Origin = 'MANUTENCAO'
+      Size = 80
+    end
+    object qryManutProgFamEquipConsDIAS: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'DIAS'
+      Origin = 'DIAS'
+    end
+    object qryManutProgFamEquipConsATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ATIVO'
+      Origin = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryManutProgFamEquipConsPLANEJADA: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'PLANEJADA'
+      Origin = 'PLANEJADA'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qryManutProgFamEquipConsCODMANUTFAMILIA: TStringField
+      FieldName = 'CODMANUTFAMILIA'
+      Origin = 'CODMANUTFAMILIA'
+      Required = True
+      Size = 9
+    end
+    object qryManutProgFamEquipConsDESCMANUTFAMILIA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCMANUTFAMILIA'
+      Origin = 'DESCMANUTFAMILIA'
+      Size = 80
+    end
+    object qryManutProgFamEquipConsCODTIPOMANUTENCAO: TStringField
+      FieldName = 'CODTIPOMANUTENCAO'
+      Origin = 'CODTIPOMANUTENCAO'
+      Required = True
+      Size = 9
+    end
+  end
+  object dsManutProgFamEquipCons: TDataSource
+    DataSet = qryManutProgFamEquipCons
+    Left = 963
+    Top = 424
+  end
+  object qryLubrificProgFamEquipCons: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`'
+      '    , `equipamentos`.`DESCRICAO` AS `EQUIPAMENTO`'
+      '    , `centrocusto`.`DESCRICAO` AS `CENTROCUSTO`'
+      '    , `tipomanutencao`.`DESCRICAO` AS `TIPOMANUTENCAO`'
+      '    , `lubrificprogequipamento`.`CODIGO` AS `CODLUBRIFICACAO`'
+      '    , `lubrificprogequipamento`.`DESCRICAO` AS `LUBRIFICACAO`'
+      '    , `lubrificprogequipamento`.`FREQUENCIA1` AS `DIAS`'
+      '    , `lubrificprogequipamento`.`ATIVO`'
+      '    , `lubrificprogequipamento`.`DTAINICIO1` AS `PLANEJADA`'
+      
+        '    , `lubrificprogfamequipamento`.`CODIGO` AS `CODLUBRIFICFAMIL' +
+        'IA`'
+      
+        '    , `lubrificprogfamequipamento`.`DESCRICAO` AS `DESCLUBRIFICF' +
+        'AMILIA`'
+      '    , `tipomanutencao`.`CODIGO` AS `CODTIPOMANUTENCAO`'
+      'FROM'
+      '    `lubrificprogequipamento`'
+      '    INNER JOIN `lubrificprogfamequipamento`'
+      
+        '        ON (`lubrificprogequipamento`.`CODlubrificprogFAMEQUIP` ' +
+        '= `lubrificprogfamequipamento`.`CODIGO`)'
+      '    INNER JOIN `equipamentos`'
+      
+        '        ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipa' +
+        'mentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = ' +
+        '`equipamentos`.`CODEMPRESA`)'
+      '    INNER JOIN `tipomanutencao`'
+      
+        '        ON (`lubrificprogfamequipamento`.`CODMANUTENCAO` = `tipo' +
+        'manutencao`.`CODIGO`)'
+      '    INNER JOIN `centrocusto`'
+      
+        '        ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
+        'IGO`)'
+      'WHERE (`lubrificprogequipamento`.`CODEMPRESA` = :CODEMPRESA'
+      ')'
+      
+        'ORDER BY `CODEQUIPAMENTO` ASC, `DIAS` ASC, `DESCLUBRIFICFAMILIA`' +
+        ' ASC;')
+    Left = 1312
+    Top = 269
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryLubrificProgFamEquipConsCODEQUIPAMENTO: TStringField
+      FieldName = 'CODEQUIPAMENTO'
+      Origin = 'CODEQUIPAMENTO'
+      Required = True
+    end
+    object qryLubrificProgFamEquipConsEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPAMENTO'
+      Origin = 'EQUIPAMENTO'
+      Size = 200
+    end
+    object qryLubrificProgFamEquipConsCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CENTROCUSTO'
+      Origin = 'CENTROCUSTO'
+      Size = 80
+    end
+    object qryLubrificProgFamEquipConsTIPOMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'TIPOMANUTENCAO'
+      Origin = 'TIPOMANUTENCAO'
+      Size = 80
+    end
+    object qryLubrificProgFamEquipConsCODLUBRIFICACAO: TStringField
+      FieldName = 'CODLUBRIFICACAO'
+      Origin = 'CODLUBRIFICACAO'
+      Required = True
+      Size = 9
+    end
+    object qryLubrificProgFamEquipConsLUBRIFICACAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'LUBRIFICACAO'
+      Origin = 'LUBRIFICACAO'
+      Size = 80
+    end
+    object qryLubrificProgFamEquipConsDIAS: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'DIAS'
+      Origin = 'DIAS'
+    end
+    object qryLubrificProgFamEquipConsATIVO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ATIVO'
+      Origin = 'ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryLubrificProgFamEquipConsPLANEJADA: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'PLANEJADA'
+      Origin = 'PLANEJADA'
+    end
+    object qryLubrificProgFamEquipConsCODLUBRIFICFAMILIA: TStringField
+      FieldName = 'CODLUBRIFICFAMILIA'
+      Origin = 'CODLUBRIFICFAMILIA'
+      Required = True
+      Size = 9
+    end
+    object qryLubrificProgFamEquipConsDESCLUBRIFICFAMILIA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DESCLUBRIFICFAMILIA'
+      Origin = 'DESCLUBRIFICFAMILIA'
+      Size = 80
+    end
+    object qryLubrificProgFamEquipConsCODTIPOMANUTENCAO: TStringField
+      FieldName = 'CODTIPOMANUTENCAO'
+      Origin = 'CODTIPOMANUTENCAO'
+      Required = True
+      Size = 9
+    end
+  end
+  object dsLubrificProgFamEquipCons: TDataSource
+    DataSet = qryLubrificProgFamEquipCons
+    Left = 1312
+    Top = 317
   end
 end

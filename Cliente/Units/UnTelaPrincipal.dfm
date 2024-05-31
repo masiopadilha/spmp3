@@ -46092,13 +46092,24 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     OnDblClick = PAlertasDblClick
     ExplicitTop = 586
     ExplicitWidth = 1008
-    object LblAlertas: TLabel
-      Left = 1005
-      Top = 1
-      Width = 62
-      Height = 13
-      Caption = 'Mensagem'
+    object LblTempoDesliga: TLabel
+      AlignWithMargins = True
+      Left = 1006
+      Top = 0
+      Width = 3
+      Height = 16
+      Margins.Left = 0
+      Margins.Top = 0
+      Margins.Bottom = 0
+      Align = alRight
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnDblClick = PAlertasDblClick
+      ExplicitHeight = 13
     end
   end
   object StatusBar1: TStatusBar
@@ -46359,11 +46370,27 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         Caption = 'Manuten'#231#245'es Programadas'
         object ManutencaoProgramadadeFamilias1: TMenuItem
           Caption = 'Manuten'#231#227'o Programada de Fam'#237'lias'
-          OnClick = ManutencaoProgramadadeFamilias1Click
+          object Cadastro7: TMenuItem
+            Caption = 'Cadastro'
+            Default = True
+            OnClick = Cadastro7Click
+          end
+          object Consulta2: TMenuItem
+            Caption = 'Consulta'
+            OnClick = Consulta2Click
+          end
         end
         object LubrificaoProgramadadeFamlias1: TMenuItem
           Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lias'
-          OnClick = LubrificaoProgramadadeFamlias1Click
+          object Cadastro9: TMenuItem
+            Caption = 'Cadastro'
+            Default = True
+            OnClick = Cadastro9Click
+          end
+          object Consulta3: TMenuItem
+            Caption = 'Consulta'
+            OnClick = Consulta3Click
+          end
         end
         object InspeeseManutenesPeridicas1: TMenuItem
           Caption = 'Inspe'#231#245'es e Manuten'#231#245'es Peri'#243'dicas'
@@ -46989,5 +47016,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     OnTimer = TimerOsciosoTimer
     Left = 584
     Top = 16
+  end
+  object TimerOscioso2: TTimer
+    OnTimer = TimerOscioso2Timer
+    Left = 584
+    Top = 72
   end
 end

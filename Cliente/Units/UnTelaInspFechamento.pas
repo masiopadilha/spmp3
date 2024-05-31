@@ -34,16 +34,7 @@ type
     PCInspecoes: TPageControl;
     TSManut: TTabSheet;
     TSLubrific: TTabSheet;
-    GrdItensManut: TDBGrid;
-    GrdItensEspManut: TDBGrid;
-    GrdLubrificacao: TDBGrid;
-    GrdItensLubrific: TDBGrid;
-    GrdItensEspLubrific: TDBGrid;
     TSRota: TTabSheet;
-    GrdRota: TDBGrid;
-    GrdRotaManut: TDBGrid;
-    GrdRotaManutItens: TDBGrid;
-    GrdRotaManutItensEsp: TDBGrid;
     Button6: TButton;
     Timer1: TTimer;
     Label1: TLabel;
@@ -62,55 +53,25 @@ type
     MenuItem2: TMenuItem;
     BtnMaodeObra: TButton;
     GrdManutencao: TJvDBGrid;
-    JvDBGrid1: TJvDBGrid;
+    GrdItensManut: TJvDBGrid;
+    GrdItensEspManut: TJvDBGrid;
+    GrdLubrificacao: TJvDBGrid;
+    GrdItensLubrific: TJvDBGrid;
+    GrdItensEspLubrific: TJvDBGrid;
+    GrdRota: TJvDBGrid;
+    GrdRotaManut: TJvDBGrid;
+    GrdRotaManutItens: TJvDBGrid;
+    GrdRotaManutItensEsp: TJvDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGFiltroClick(Sender: TObject);
     procedure ConfigurarFiltros;
-    procedure GrdItensManutDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdItensEspManutDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdItensManutCellClick(Column: TColumn);
-    procedure GrdItensManutDrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
-    procedure GrdItensEspManutDrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
-    procedure GrdItensEspManutCellClick(Column: TColumn);
     procedure BtnOKClick(Sender: TObject);
-    procedure GrdLubrificacaoDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdLubrificacaoKeyPress(Sender: TObject; var Key: Char);
-    procedure GrdLubrificacaoTitleClick(Column: TColumn);
-    procedure GrdItensLubrificDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdItensLubrificCellClick(Column: TColumn);
-    procedure GrdItensLubrificDrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
-    procedure GrdItensEspLubrificCellClick(Column: TColumn);
-    procedure GrdItensEspLubrificDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure GrdItensEspLubrificDrawDataCell(Sender: TObject;
-      const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure GrdRotaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdRotaManutItensCellClick(Column: TColumn);
-    procedure GrdRotaManutItensDrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
     procedure GrdRotaManutItensEspCellClick(Column: TColumn);
-    procedure GrdRotaManutItensEspDrawDataCell(Sender: TObject;
-      const Rect: TRect; Field: TField; State: TGridDrawState);
     procedure GrdRotaKeyPress(Sender: TObject; var Key: Char);
     procedure Button6Click(Sender: TObject);
-    procedure GrdRotaManutDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdRotaManutItensDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure GrdRotaManutItensEspDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
     procedure BtnFuncionarioClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure rgStatusClick(Sender: TObject);
@@ -126,6 +87,30 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdManutencaoKeyPress(Sender: TObject; var Key: Char);
     procedure GrdManutencaoTitleClick(Column: TColumn);
+    procedure GrdItensManutCellClick(Column: TColumn);
+    procedure GrdItensManutDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdItensEspManutCellClick(Column: TColumn);
+    procedure GrdItensEspManutDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdLubrificacaoDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdItensLubrificCellClick(Column: TColumn);
+    procedure GrdItensLubrificDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdLubrificacaoKeyPress(Sender: TObject; var Key: Char);
+    procedure GrdItensEspLubrificCellClick(Column: TColumn);
+    procedure GrdItensEspLubrificDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure GrdRotaManutKeyPress(Sender: TObject; var Key: Char);
+    procedure GrdRotaManutItensCellClick(Column: TColumn);
+    procedure GrdRotaManutItensDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure GrdRotaManutItensEspDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     hora_futura: TDateTime;
     { Private declarations }
@@ -909,176 +894,6 @@ if Key = #13 then
   end;
 end;
 
-procedure TFrmTelaInspFechamento.GrdItensLubrificCellClick(Column: TColumn);
-begin
-  inherited;
-if DM.qryLubrificPeriodicasItens.IsEmpty then Exit;
-if DM.qryLubrificPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
-
-if (GrdItensLubrific.SelectedIndex = 14) and (DM.qryLubrificPeriodicasItensEXECUTADO.AsString = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 14) and ((DM.qryLubrificPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'S';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 15) and (Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 15) and ((Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensBOM.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'S';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 16) and (Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 16) and ((Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensREGULAR.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'S';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 17) and (Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensLubrific.SelectedIndex = 17) and ((Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensRUIM.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItens.Edit;
-    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'S';
-    DM.qryLubrificPeriodicasItens.Post;
-    Exit;
-  end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensLubrificDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-GrdItensLubrific.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdItensLubrific.Columns[0].Visible  := False;  GrdItensLubrific.Columns[1].Visible  := False;
-GrdItensLubrific.Columns[2].Visible  := False;  GrdItensLubrific.Columns[3].Visible  := False;
-GrdItensLubrific.Columns[4].Visible  := False;  GrdItensLubrific.Columns[5].Visible  := False;
-GrdItensLubrific.Columns[6].Visible  := False;  GrdItensLubrific.Columns[7].Visible  := False;
-GrdItensLubrific.Columns[11].Visible  := False; GrdItensLubrific.Columns[13].Visible  := False;
-GrdItensLubrific.Columns[18].Visible  := False; GrdItensLubrific.Columns[19].Visible  := False;
-GrdItensLubrific.Columns[20].Visible  := False; GrdItensLubrific.Columns[21].Visible  := False;
-
-GrdItensLubrific.Columns[8].Title.Caption   := 'Parte';
-DM.qryLubrificPeriodicasItens.Fields[8].DisplayWidth := 23;
-GrdItensLubrific.Columns[9].Title.Caption   := 'Item';
-DM.qryLubrificPeriodicasItens.Fields[9].DisplayWidth := 30;
-GrdItensLubrific.Columns[10].Title.Caption   := 'Inspeção';
-DM.qryLubrificPeriodicasItens.Fields[10].DisplayWidth := 45;
-GrdItensLubrific.Columns[12].Title.Caption   := 'Tempo';
-GrdItensLubrific.Columns[12].Title.Alignment := taCenter;
-DM.qryLubrificPeriodicasItens.Fields[12].DisplayWidth := 5;
-GrdItensLubrific.Columns[14].Title.Caption   := 'Executado';
-GrdItensLubrific.Columns[14].Title.Alignment := taCenter;
-GrdItensLubrific.Columns[14].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItens.Fields[14].DisplayWidth := 5;
-GrdItensLubrific.Columns[15].Title.Caption   := 'Bom';
-GrdItensLubrific.Columns[15].Title.Alignment := taCenter;
-GrdItensLubrific.Columns[15].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItens.Fields[14].DisplayWidth := 5;
-GrdItensLubrific.Columns[16].Title.Caption   := 'Regular';
-GrdItensLubrific.Columns[16].Title.Alignment := taCenter;
-GrdItensLubrific.Columns[16].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItens.Fields[16].DisplayWidth := 5;
-GrdItensLubrific.Columns[17].Title.Caption   := 'Ruim';
-GrdItensLubrific.Columns[17].Title.Alignment := taCenter;
-GrdItensLubrific.Columns[17].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItens.Fields[17].DisplayWidth := 5;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensLubrificDrawDataCell(Sender: TObject;
-  const Rect: TRect; Field: TField; State: TGridDrawState);
-begin
-  inherited;
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 22, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 22, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
-   end;
-end;
-
 procedure TFrmTelaInspFechamento.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -1306,39 +1121,35 @@ if (Column.Field.FieldName = 'SITUACAOOS') then
 
   GrdManutencao.Canvas.FillRect(Rect);
   GrdManutencao.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-
 end;
 
 procedure TFrmTelaInspFechamento.GrdManutencaoKeyPress(Sender: TObject;
   var Key: Char);
 var
-LCampo : String;
+  LCampo : String;
 begin
   inherited;
-if (Key = #13) and (GrdManutencao.SelectedIndex = 0) then
+  if (Key = #13) and (GrdManutencao.SelectedIndex = 0) then
   begin
     LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
     if LCampo <> EmptyStr then
-      begin
-//        DM.qryManutPeriodicas.FetchOnDemand := True;
-        if GrdManutencao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
-      end;
+    begin
+      if GrdManutencao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
+        Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+    end;
   end;
-if (Key = #13) and (GrdManutencao.SelectedIndex = 6) then
+
+  if (Key = #13) and (GrdManutencao.SelectedIndex = 6) then
   begin
     DM.FTabela_auxiliar := 250;
     DM.FNomeConsulta    := 'Equipamentos';
     DM.FParamAuxiliar[1] := 'DESCRICAO';
     if DM.ConsultarCombo <> EmptyStr then
-      begin
-//        DM.qryManutPeriodicas.FetchOnDemand := True;
-        //DM.qryManutPeriodicas.Locate('EQUIPAMENTO', DM.FValorCombo, []);
-        DM.qryManutPeriodicas.Filtered := False;
-        DM.qryManutPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
-        DM.qryManutPeriodicas.Filtered := True;
-      end
-    else
+    begin
+      DM.qryManutPeriodicas.Filtered := False;
+      DM.qryManutPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
+      DM.qryManutPeriodicas.Filtered := True;
+    end else
       DM.qryManutPeriodicas.Filtered := False;
   end;
 end;
@@ -1353,44 +1164,7 @@ procedure TFrmTelaInspFechamento.GrdRotaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
-GrdRota.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdRota.Columns[0].Visible := False;
-GrdRota.Columns[1].Visible := False;
-GrdRota.Columns[2].Visible := False;
-GrdRota.Columns[3].Visible := False;
-GrdRota.Columns[4].Visible := False;
-GrdRota.Columns[5].Visible := False;
-
-GrdRota.Columns[6].Title.Font.Style:= [fsBold];
-GrdRota.Columns[6].Title.Alignment := taCenter;
-GrdRota.Columns[7].Title.Alignment := taCenter;
-GrdRota.Columns[9].Title.Alignment := taCenter;
-GrdRota.Columns[10].Title.Alignment := taCenter;
-//GrdRota.Columns[3].Title.Alignment := taCenter;
-//GrdRota.Columns[5].Title.Alignment := taCenter;
-//GrdRota.Columns[6].Title.Font.Style:= [fsBold];
-
-//GrdRota.Columns[6].Title.Caption   := 'OS';
-//GrdRota.Columns[6].Title.Alignment := taCenter;
-//GrdRota.Columns[6].Alignment       := taCenter;
-//DM.qryRotaPeriodicas.Fields[6].DisplayWidth := 9;
-//GrdRota.Columns[7].Title.Caption   := 'Situação';
-//GrdRota.Columns[7].Title.Alignment := taCenter;
-//GrdRota.Columns[7].Alignment       := taCenter;
-//DM.qryRotaPeriodicas.Fields[7].DisplayWidth := 18;
-//GrdRota.Columns[7].Title.Caption   := 'Rota';
-//DM.qryRotaPeriodicas.Fields[8].DisplayWidth := 25;
-//GrdRota.Columns[9].Title.Caption   := 'Freq.';
-//GrdRota.Columns[9].Title.Alignment := taCenter;
-//GrdRota.Columns[9].Alignment       := taCenter;
-//DM.qryRotaPeriodicas.Fields[9].DisplayWidth := 8;
-//GrdRota.Columns[10].Title.Caption   := 'Vencida';
-//GrdRota.Columns[10].Title.Alignment := taCenter;
-//GrdRota.Columns[10].Alignment       := taCenter;
-//DM.qryRotaPeriodicas.Fields[10].DisplayWidth := 10;
-
-if (Column.Field.FieldName = 'SITUACAOOS') then
+  if (Column.Field.FieldName = 'SITUACAOOS') then
   begin
     if GrdRota.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA' then
       begin
@@ -1459,263 +1233,28 @@ end;
 
 procedure TFrmTelaInspFechamento.GrdRotaKeyPress(Sender: TObject;
   var Key: Char);
-//var
-//LCampo : String;
+var
+LCampo : String;
 begin
   inherited;
-if (Key = #13) and (GrdRota.SelectedIndex = 2) then
+if (Key = #13) and (GrdRota.SelectedIndex = 0) then
   begin
-    {LCampo := DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
+    LCampo := DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
     if LCampo <> EmptyStr then
       begin
-        if GrdManutencao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
+        if GrdRota.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
           Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
       end;
-
-    Try
-      if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then Exit;
-      Application.CreateForm(TFrmTelaCadOrdemServicoGerencia, FrmTelaCadOrdemServicoGerencia);
-      DM.qryOrdemServicoGerencia.Locate('CODIGO', GrdRota.DataSource.DataSet.FieldByName('CODORDEMSERVICO').AsString, []);
-      FrmTelaCadOrdemServicoGerencia.ShowModal;
-    Finally
-      if DM.qryOrdemServicoGerenciaCODIGO.AsInteger = GrdRota.DataSource.DataSet.FieldByName('CODORDEMSERVICO').AsInteger then
-        if ((DM.qryOrdemServicoGerenciaSITUACAO.AsString <> GrdRota.DataSource.DataSet.FieldByName('SITUACAOOS').AsString)
-          or (DM.qryOrdemServicoGerenciaMATRICULA.AsString <> GrdRota.DataSource.DataSet.FieldByName('MATRICULAOS').AsString)) then
-            begin
-              GrdRota.DataSource.DataSet.Edit;
-              GrdRota.DataSource.DataSet.FieldByName('SITUACAOOS').AsString := DM.qryOrdemServicoGerenciaSITUACAO.AsString;
-              GrdRota.DataSource.DataSet.FieldByName('MATRICULA').AsString  := DM.qryOrdemServicoGerenciaMATRICULA.AsString;
-              GrdRota.DataSource.DataSet.Post;
-            end;
-      FreeAndNil(FrmTelaCadOrdemServicoGerencia);
-    End;}
   end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdRotaManutDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-GrdRotaManut.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdRotaManut.Columns[0].Visible := False;
-GrdRotaManut.Columns[1].Visible := False;
-GrdRotaManut.Columns[2].Visible := False;
-GrdRotaManut.Columns[3].Visible := False;
-GrdRotaManut.Columns[4].Visible := False;
-GrdRotaManut.Columns[6].Visible := False;
-GrdRotaManut.Columns[7].Visible := False;
-GrdRotaManut.Columns[8].Visible := False;
-GrdRotaManut.Columns[9].Visible := False;
-GrdRotaManut.Columns[10].Visible := False;
-GrdRotaManut.Columns[11].Visible := False;
-GrdRotaManut.Columns[12].Visible := False;
-GrdRotaManut.Columns[13].Visible := False;
-GrdRotaManut.Columns[14].Visible := False;
-GrdRotaManut.Columns[15].Visible := False;
-GrdRotaManut.Columns[18].Visible := False;
-GrdRotaManut.Columns[19].Visible := False;
-
-
-GrdRotaManut.Columns[5].Title.Caption   := 'Inspeção';
-DM.qryRotaPeriodicasManut.Fields[5].DisplayWidth := 20;
-GrdRotaManut.Columns[16].Title.Caption   := 'Código';
-GrdRotaManut.Columns[16].Title.Alignment := taCenter;
-GrdRotaManut.Columns[16].Alignment       := taCenter;
-DM.qryRotaPeriodicasManut.Fields[16].DisplayWidth := 12;
-GrdRotaManut.Columns[17].Title.Font.Style:= [fsBold];
-GrdRotaManut.Columns[17].Title.Caption   := 'Equipamento';
-DM.qryRotaPeriodicasManut.Fields[17].DisplayWidth := 30;
-end;
-
-procedure TFrmTelaInspFechamento.GrdRotaManutItensCellClick(Column: TColumn);
-begin
-  inherited;
-if DM.qryRotaPeriodicasManutItens.IsEmpty then Exit;
-if DM.qryRotaPeriodicasManutSITUACAO.AsString = 'FECHADA' then Exit;
-
-if (GrdRotaManutItens.SelectedIndex = 14) and (DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = 'S') then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 14) and ((DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = EmptyStr)) then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'S';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 15) and (Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'S') then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 15) and ((Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensBOM.AsString = EmptyStr)) then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'S';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 16) and (Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'S') then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 16) and ((Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensREGULAR.AsString = EmptyStr)) then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'S';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 17) and (Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'S') then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-if (GrdRotaManutItens.SelectedIndex = 17) and ((Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensRUIM.AsString = EmptyStr)) then
-  begin
-    DM.qryRotaPeriodicasManutItens.Edit;
-    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
-    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
-    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
-    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'S';
-    DM.qryRotaPeriodicasManutItens.Post;
-    Exit;
-  end;
-
-end;
-
-procedure TFrmTelaInspFechamento.GrdRotaManutItensDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  inherited;
-//GrdRotaManutItens.Columns[Column.Index].Title.Font.Size := 9;
-//
-//GrdRotaManutItens.Columns[0].Visible  := False;
-//GrdRotaManutItens.Columns[1].Visible  := False;
-//GrdRotaManutItens.Columns[2].Visible  := False;
-//GrdRotaManutItens.Columns[3].Visible  := False;
-//GrdRotaManutItens.Columns[4].Visible  := False;
-//GrdRotaManutItens.Columns[5].Visible  := False;
-//GrdRotaManutItens.Columns[6].Visible  := False;
-//GrdRotaManutItens.Columns[7].Visible  := False;
-//GrdRotaManutItens.Columns[11].Visible  := False;
-//GrdRotaManutItens.Columns[13].Visible  := False;
-//
-//GrdRotaManutItens.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItens.Fields[8].DisplayWidth  := 23;
-//GrdRotaManutItens.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItens.Fields[9].DisplayWidth  := 30;
-//GrdRotaManutItens.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItens.Fields[10].DisplayWidth := 45;
-//GrdRotaManutItens.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItens.Fields[12].DisplayWidth := 5;  GrdRotaManutItens.Columns[12].Title.Alignment := taCenter;
-//GrdRotaManutItens.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItens.Fields[14].DisplayWidth := 5;  GrdRotaManutItens.Columns[14].Title.Alignment := taCenter;
-//GrdRotaManutItens.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItens.Fields[15].DisplayWidth := 5;  GrdRotaManutItens.Columns[15].Title.Alignment := taCenter;
-//GrdRotaManutItens.Columns[16].Title.Caption   := 'Regular';   DM.qryRotaPeriodicasManutItens.Fields[16].DisplayWidth := 5;  GrdRotaManutItens.Columns[16].Title.Alignment := taCenter;
-//GrdRotaManutItens.Columns[17].Title.Caption   := 'Ruim';      DM.qryRotaPeriodicasManutItens.Fields[17].DisplayWidth := 5;  GrdRotaManutItens.Columns[17].Title.Alignment := taCenter;
-//
-//
-//
-
-GrdRotaManutItens.Columns[0].Visible  := False;
-GrdRotaManutItens.Columns[1].Visible  := False;
-GrdRotaManutItens.Columns[2].Visible  := False;
-GrdRotaManutItens.Columns[3].Visible  := False;
-GrdRotaManutItens.Columns[4].Visible  := False;
-GrdRotaManutItens.Columns[5].Visible  := False;
-GrdRotaManutItens.Columns[6].Visible  := False;
-GrdRotaManutItens.Columns[7].Visible  := False;
-GrdRotaManutItens.Columns[11].Visible  := False;
-GrdRotaManutItens.Columns[13].Visible  := False;
-
-GrdRotaManutItens.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItens.Fields[8].DisplayWidth  := 23;
-GrdRotaManutItens.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItens.Fields[9].DisplayWidth  := 30;
-GrdRotaManutItens.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItens.Fields[10].DisplayWidth := 45;
-GrdRotaManutItens.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItens.Fields[12].DisplayWidth := 5;  GrdRotaManutItens.Columns[12].Title.Alignment := taCenter;
-GrdRotaManutItens.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItens.Fields[14].DisplayWidth := 5;  GrdRotaManutItens.Columns[14].Title.Alignment := taCenter;
-GrdRotaManutItens.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItens.Fields[15].DisplayWidth := 5;  GrdRotaManutItens.Columns[15].Title.Alignment := taCenter;
-GrdRotaManutItens.Columns[16].Title.Caption   := 'Regular';   DM.qryRotaPeriodicasManutItens.Fields[16].DisplayWidth := 5;  GrdRotaManutItens.Columns[16].Title.Alignment := taCenter;
-GrdRotaManutItens.Columns[17].Title.Caption   := 'Ruim';      DM.qryRotaPeriodicasManutItens.Fields[17].DisplayWidth := 5;  GrdRotaManutItens.Columns[17].Title.Alignment := taCenter;
-end;
-
-procedure TFrmTelaInspFechamento.GrdRotaManutItensDrawDataCell(Sender: TObject;
-  const Rect: TRect; Field: TField; State: TGridDrawState);
-begin
-  inherited;
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 22, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 22, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 1);
-   end;
 end;
 
 procedure TFrmTelaInspFechamento.GrdRotaManutItensEspCellClick(Column: TColumn);
 begin
   inherited;
-if DM.qryRotaPeriodicasManutItensEsp.IsEmpty = True then Exit;
-if DM.qryRotaPeriodicasManutSITUACAO.AsString = 'FECHADA' then Exit;
+  if DM.qryRotaPeriodicasManutItensEsp.IsEmpty = True then Exit;
+  if DM.qryRotaPeriodicasManutSITUACAO.AsString = 'FECHADA' then Exit;
 
-if (GrdRotaManutItensEsp.SelectedIndex = 14) and (DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = 'S') then
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = 'S') then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1723,9 +1262,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 14) and (DM.qryRotaPeriodicasManutItens
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 14) and ((DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = EmptyStr)) then
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = EmptyStr)) then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'S';
@@ -1733,9 +1271,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 14) and ((DM.qryRotaPeriodicasManutIten
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 15) and (Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'S') then
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'S') then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1743,9 +1280,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 15) and (Trim(DM.qryRotaPeriodicasManut
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 15) and ((Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspBOM.AsString = EmptyStr)) then
+  end else
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspBOM.AsString = EmptyStr)) then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1753,9 +1289,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 15) and ((Trim(DM.qryRotaPeriodicasManu
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 16) and (Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'S') then
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'S') then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1763,9 +1298,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 16) and (Trim(DM.qryRotaPeriodicasManut
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 16) and ((Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspREGULAR.AsString = EmptyStr)) then
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspREGULAR.AsString = EmptyStr)) then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1773,9 +1307,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 16) and ((Trim(DM.qryRotaPeriodicasManu
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'S';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 17) and (Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'S') then
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'S') then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1783,9 +1316,8 @@ if (GrdRotaManutItensEsp.SelectedIndex = 17) and (Trim(DM.qryRotaPeriodicasManut
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
-  end;
-if (GrdRotaManutItensEsp.SelectedIndex = 17) and ((Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspRUIM.AsString = EmptyStr)) then
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspRUIM.AsString = EmptyStr)) then
   begin
     DM.qryRotaPeriodicasManutItensEsp.Edit;
     DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -1793,7 +1325,6 @@ if (GrdRotaManutItensEsp.SelectedIndex = 17) and ((Trim(DM.qryRotaPeriodicasManu
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'S';
     DM.qryRotaPeriodicasManutItensEsp.Post;
-    Exit;
   end;
 end;
 
@@ -1802,73 +1333,769 @@ procedure TFrmTelaInspFechamento.GrdRotaManutItensEspDrawColumnCell(
   State: TGridDrawState);
 begin
   inherited;
-GrdRotaManutItens.Columns[Column.Index].Title.Font.Size := 9;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 22, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 22, Rect.Top, 1);
+  end;
 
-GrdRotaManutItensEsp.Columns[0].Visible  := False;
-GrdRotaManutItensEsp.Columns[1].Visible  := False;
-GrdRotaManutItensEsp.Columns[2].Visible  := False;
-GrdRotaManutItensEsp.Columns[3].Visible  := False;
-GrdRotaManutItensEsp.Columns[4].Visible  := False;
-GrdRotaManutItensEsp.Columns[5].Visible  := False;
-GrdRotaManutItensEsp.Columns[6].Visible  := False;
-GrdRotaManutItensEsp.Columns[7].Visible  := False;
-GrdRotaManutItensEsp.Columns[11].Visible  := False;
-GrdRotaManutItensEsp.Columns[13].Visible  := False;
-//GrdRotaManutItensEsp.Columns[18].Visible  := False;
-//GrdRotaManutItensEsp.Columns[19].Visible  := False;
-//GrdRotaManutItensEsp.Columns[20].Visible  := False;
-//GrdRotaManutItensEsp.Columns[21].Visible  := False;
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 1);
+  end;
 
-GrdRotaManutItensEsp.Columns[8].Title.Caption    := 'Parte';     DM.qryRotaPeriodicasManutItensEsp.Fields[8].DisplayWidth  := 23;
-GrdRotaManutItensEsp.Columns[9].Title.Caption    := 'Item';      DM.qryRotaPeriodicasManutItensEsp.Fields[9].DisplayWidth  := 30;
-GrdRotaManutItensEsp.Columns[10].Title.Caption   := 'Inspeção';  DM.qryRotaPeriodicasManutItensEsp.Fields[10].DisplayWidth := 45;
-GrdRotaManutItensEsp.Columns[12].Title.Caption   := 'Tempo';     DM.qryRotaPeriodicasManutItensEsp.Fields[12].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[12].Title.Alignment := taCenter;
-GrdRotaManutItensEsp.Columns[14].Title.Caption   := 'Executado'; DM.qryRotaPeriodicasManutItensEsp.Fields[14].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[14].Title.Alignment := taCenter;
-GrdRotaManutItensEsp.Columns[15].Title.Caption   := 'Bom';       DM.qryRotaPeriodicasManutItensEsp.Fields[15].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[15].Title.Alignment := taCenter;
-GrdRotaManutItensEsp.Columns[16].Title.Caption   := 'Regular';   DM.qryRotaPeriodicasManutItensEsp.Fields[16].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[16].Title.Alignment := taCenter;
-GrdRotaManutItensEsp.Columns[17].Title.Caption   := 'Ruim';      DM.qryRotaPeriodicasManutItensEsp.Fields[17].DisplayWidth := 5;  GrdRotaManutItensEsp.Columns[17].Title.Alignment := taCenter;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 1);
+  end;
 end;
 
-procedure TFrmTelaInspFechamento.GrdRotaManutItensEspDrawDataCell(
-  Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
+procedure TFrmTelaInspFechamento.GrdRotaManutKeyPress(Sender: TObject;
+  var Key: Char);
 begin
   inherited;
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
+  if (Key = #13) and (GrdRotaManut.SelectedIndex = 2) then
+  begin
+    DM.FTabela_auxiliar := 250;
+    DM.FNomeConsulta    := 'Equipamentos';
+    DM.FParamAuxiliar[1] := 'DESCRICAO';
+    if DM.ConsultarCombo <> EmptyStr then
+    begin
+      DM.qryRotaPeriodicasManut.Filtered := False;
+      DM.qryRotaPeriodicasManut.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
+      DM.qryRotaPeriodicasManut.Filtered := True;
+    end else
+      DM.qryRotaPeriodicasManut.Filtered := False;
+  end;
+
+end;
+
+procedure TFrmTelaInspFechamento.GrdRotaManutItensCellClick(Column: TColumn);
+begin
+  inherited;
+  if DM.qryRotaPeriodicasManutItens.IsEmpty then Exit;
+  if DM.qryRotaPeriodicasManutSITUACAO.AsString = 'FECHADA' then Exit;
+
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = 'S') then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = EmptyStr)) then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'S';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'S') then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensBOM.AsString = EmptyStr)) then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'S';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'S') then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensREGULAR.AsString = EmptyStr)) then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'S';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'S') then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensRUIM.AsString = EmptyStr)) then
+  begin
+    DM.qryRotaPeriodicasManutItens.Edit;
+    DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
+    DM.qryRotaPeriodicasManutItensBOM.AsString       := 'N';
+    DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
+    DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'S';
+    DM.qryRotaPeriodicasManutItens.Post;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdRotaManutItensDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 22, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 22, Rect.Top, 0);
    end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 22, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 22, Rect.Top, 1);
    end;
 
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 0);
    end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 1);
    end;
 
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 0);
    end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 1);
    end;
 
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+   begin
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 0);
+   end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+   begin
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 1);
+   end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensEspLubrificCellClick(Column: TColumn);
+begin
+  inherited;
+  if DM.qryLubrificPeriodicasItensEsp.IsEmpty then Exit;
+  if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
+
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'S';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end;
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspBOM.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'S';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'S';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspRUIM.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItensEsp.Edit;
+    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'S';
+    DM.qryLubrificPeriodicasItensEsp.Post;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensEspLubrificDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 22, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 22, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensEspManutCellClick(Column: TColumn);
+begin
+  inherited;
+  if DM.qryManutPeriodicasItensEsp.IsEmpty then Exit;
+  if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
+
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryManutPeriodicasItensEspEXECUTADO.AsString = 'S') then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryManutPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'S';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end;
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspBOM.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'S';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'S';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspRUIM.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItensEsp.Edit;
+    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'S';
+    DM.qryManutPeriodicasItensEsp.Post;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensEspManutDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 22, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 22, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 1);
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensLubrificCellClick(Column: TColumn);
+begin
+  inherited;
+  if DM.qryLubrificPeriodicasItens.IsEmpty then Exit;
+  if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
+
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryLubrificPeriodicasItensEXECUTADO.AsString = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryLubrificPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'S';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensBOM.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'S';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensREGULAR.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'S';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'S') then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryLubrificPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensRUIM.AsString = EmptyStr)) then
+  begin
+    DM.qryLubrificPeriodicasItens.Edit;
+    DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryLubrificPeriodicasItensBOM.AsString       := 'N';
+    DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryLubrificPeriodicasItensRUIM.AsString      := 'S';
+    DM.qryLubrificPeriodicasItens.Post;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensLubrificDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 22, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 22, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensManutCellClick(Column: TColumn);
+begin
+  inherited;
+  if DM.qryManutPeriodicasItens.IsEmpty then Exit;
+  if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
+
+  if (Column.FieldName = 'EXECUTADO') and (DM.qryManutPeriodicasItensEXECUTADO.AsString = 'S') then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'EXECUTADO') and ((DM.qryManutPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'S';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and (Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'BOM') and ((Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensBOM.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'S';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and (Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensREGULAR.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'S';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and (Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'S') then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
+    DM.qryManutPeriodicasItens.Post;
+  end else
+  if (Column.FieldName = 'RUIM') and ((Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensRUIM.AsString = EmptyStr)) then
+  begin
+    DM.qryManutPeriodicasItens.Edit;
+    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
+    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
+    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
+    DM.qryManutPeriodicasItensRUIM.AsString      := 'S';
+    DM.qryManutPeriodicasItens.Post;
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdItensManutDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 22, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'EXECUTADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 22, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 1);
+  end;
+
+  if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 0);
+  end;
+  if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
+  begin
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 1);
+  end;
+end;
+
+procedure TFrmTelaInspFechamento.GrdLubrificacaoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+if (Column.Field.FieldName = 'SITUACAOOS') then
+  begin
+    if GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA' then
+      begin
+         GrdLubrificacao.Canvas.Brush.Color := clGray; GrdLubrificacao.Canvas.Font.Color:= clBlack;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'CADASTRADA') then
+      begin
+        if GrdLubrificacao.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> EmptyStr then
+          begin GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clRed end
+        else
+          begin GrdLubrificacao.Canvas.Brush.Color := $00BBFFFF; GrdLubrificacao.Canvas.Font.Color := clRed end;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'SOLICITADA') then
+      begin
+        if GrdLubrificacao.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> EmptyStr then
+          begin GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clRed end
+        else
+          begin GrdLubrificacao.Canvas.Brush.Color := $00BBFFFF; GrdLubrificacao.Canvas.Font.Color := clRed end;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DETALHADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clGreen;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PROGRAMADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clBlue; GrdLubrificacao.Canvas.Font.Color := clWhite;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'REPROGRAMADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clBlue; GrdLubrificacao.Canvas.Font.Color := clYellow;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DESPROGRAMADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clBlue;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'REALIZADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clBlack; GrdLubrificacao.Canvas.Font.Color := clYellow;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'EXECUCAO')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clInfoBk; GrdLubrificacao.Canvas.Font.Color := clGreen;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'LIBERADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clGreen; GrdLubrificacao.Canvas.Font.Color := clWhite;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clGray; GrdLubrificacao.Canvas.Font.Color := clBlack;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PARALISADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clRed; GrdLubrificacao.Canvas.Font.Color  := clYellow;
+      end;
+    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'CANCELADA')then
+      begin
+        GrdLubrificacao.Canvas.Brush.Color := clBlack; GrdLubrificacao.Canvas.Font.Color  := $00FF8000;
+      end;
+  end;
+
+  GrdLubrificacao.Canvas.FillRect(Rect);
+  GrdLubrificacao.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TFrmTelaInspFechamento.GrdLubrificacaoKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  LCampo : String;
+begin
+  inherited;
+  if (Key = #13) and (GrdLubrificacao.SelectedIndex = 0) then
+  begin
+    LCampo := DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
+    if LCampo <> EmptyStr then
+    begin
+      if GrdLubrificacao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
+        Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
+    end;
+  end;
+
+  if (Key = #13) and (GrdLubrificacao.SelectedIndex = 6) then
+  begin
+    DM.FTabela_auxiliar := 250;
+    DM.FNomeConsulta    := 'Equipamentos';
+    DM.FParamAuxiliar[1] := 'DESCRICAO';
+    if DM.ConsultarCombo <> EmptyStr then
+    begin
+      DM.qryLubrificPeriodicas.Filtered := False;
+      DM.qryLubrificPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
+      DM.qryLubrificPeriodicas.Filtered := True;
+    end else
+      DM.qryLubrificPeriodicas.Filtered := False;
+  end;
 end;
 
 procedure TFrmTelaInspFechamento.Marcartodos1Click(Sender: TObject);
@@ -2251,625 +2478,6 @@ begin
         BtnMaodeObra.Visible := False;
       end;
   end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensManutCellClick(Column: TColumn);
-begin
-  inherited;
-if DM.qryManutPeriodicasItens.IsEmpty then Exit;
-if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
-
-if (GrdItensManut.SelectedIndex = 14) and (DM.qryManutPeriodicasItensEXECUTADO.AsString = 'S') then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 14) and ((DM.qryManutPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'S';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 15) and (Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 15) and ((Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensBOM.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'S';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 16) and (Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 16) and ((Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensREGULAR.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'S';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 17) and (Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-if (GrdItensManut.SelectedIndex = 17) and ((Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensRUIM.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItens.Edit;
-    DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensRUIM.AsString      := 'S';
-    DM.qryManutPeriodicasItens.Post;
-    Exit;
-  end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensManutDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-GrdItensManut.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdItensManut.Columns[0].Visible  := False;  GrdItensManut.Columns[1].Visible  := False;
-GrdItensManut.Columns[2].Visible  := False;  GrdItensManut.Columns[3].Visible  := False;
-GrdItensManut.Columns[4].Visible  := False;  GrdItensManut.Columns[5].Visible  := False;
-GrdItensManut.Columns[6].Visible  := False;  GrdItensManut.Columns[7].Visible  := False;
-GrdItensManut.Columns[11].Visible  := False; GrdItensManut.Columns[13].Visible  := False;
-GrdItensManut.Columns[18].Visible  := False; GrdItensManut.Columns[19].Visible  := False;
-GrdItensManut.Columns[20].Visible  := False; GrdItensManut.Columns[21].Visible  := False;
-
-GrdItensManut.Columns[8].Title.Caption    := 'Parte';     DM.qryManutPeriodicasItens.Fields[8].DisplayWidth  := 23;
-GrdItensManut.Columns[9].Title.Caption    := 'Item';      DM.qryManutPeriodicasItens.Fields[9].DisplayWidth  := 30;
-GrdItensManut.Columns[10].Title.Caption   := 'Inspeção';  DM.qryManutPeriodicasItens.Fields[10].DisplayWidth := 45;
-GrdItensManut.Columns[12].Title.Caption   := 'Tempo';     DM.qryManutPeriodicasItens.Fields[12].DisplayWidth := 5;  GrdItensManut.Columns[12].Title.Alignment := taCenter;
-GrdItensManut.Columns[14].Title.Caption   := 'Executado'; DM.qryManutPeriodicasItens.Fields[14].DisplayWidth := 5;  GrdItensManut.Columns[14].Title.Alignment := taCenter;
-GrdItensManut.Columns[15].Title.Caption   := 'Bom';       DM.qryManutPeriodicasItens.Fields[15].DisplayWidth := 5;  GrdItensManut.Columns[15].Title.Alignment := taCenter;
-GrdItensManut.Columns[16].Title.Caption   := 'Regular';   DM.qryManutPeriodicasItens.Fields[16].DisplayWidth := 5;  GrdItensManut.Columns[16].Title.Alignment := taCenter;
-GrdItensManut.Columns[17].Title.Caption   := 'Ruim';      DM.qryManutPeriodicasItens.Fields[17].DisplayWidth := 5;  GrdItensManut.Columns[17].Title.Alignment := taCenter;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensManutDrawDataCell(Sender: TObject;
-  const Rect: TRect; Field: TField; State: TGridDrawState);
-begin
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 22, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 22, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 1);
-   end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdLubrificacaoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-GrdLubrificacao.Columns[Column.Index].Title.Font.Size := 9;
-GrdLubrificacao.Columns[0].Title.Alignment := taCenter;
-GrdLubrificacao.Columns[0].Title.Font.Style:= [fsBold];
-GrdLubrificacao.Columns[1].Title.Alignment := taCenter;
-GrdLubrificacao.Columns[3].Title.Alignment := taCenter;
-GrdLubrificacao.Columns[4].Title.Alignment := taCenter;
-GrdLubrificacao.Columns[5].Title.Alignment := taCenter;
-GrdLubrificacao.Columns[6].Title.Font.Style:= [fsBold];
-
-if (Column.Field.FieldName = 'SITUACAOOS') then
-  begin
-    if GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA' then
-      begin
-         GrdLubrificacao.Canvas.Brush.Color := clGray; GrdLubrificacao.Canvas.Font.Color:= clBlack;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'CADASTRADA') then
-      begin
-        if GrdLubrificacao.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> EmptyStr then
-          begin GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clRed end
-        else
-          begin GrdLubrificacao.Canvas.Brush.Color := $00BBFFFF; GrdLubrificacao.Canvas.Font.Color := clRed end;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'SOLICITADA') then
-      begin
-        if GrdLubrificacao.DataSource.DataSet.FieldByName('CODMANUTENCAO').AsString <> EmptyStr then
-          begin GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clRed end
-        else
-          begin GrdLubrificacao.Canvas.Brush.Color := $00BBFFFF; GrdLubrificacao.Canvas.Font.Color := clRed end;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DETALHADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clGreen;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PROGRAMADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clBlue; GrdLubrificacao.Canvas.Font.Color := clWhite;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'REPROGRAMADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clBlue; GrdLubrificacao.Canvas.Font.Color := clYellow;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'DESPROGRAMADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clYellow; GrdLubrificacao.Canvas.Font.Color := clBlue;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'REALIZADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clBlack; GrdLubrificacao.Canvas.Font.Color := clYellow;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'EXECUCAO')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clInfoBk; GrdLubrificacao.Canvas.Font.Color := clGreen;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'LIBERADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clGreen; GrdLubrificacao.Canvas.Font.Color := clWhite;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'FECHADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clGray; GrdLubrificacao.Canvas.Font.Color := clBlack;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'PARALISADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clRed; GrdLubrificacao.Canvas.Font.Color  := clYellow;
-      end;
-    if (GrdLubrificacao.DataSource.DataSet.FieldByName('SITUACAOOS').AsString = 'CANCELADA')then
-      begin
-        GrdLubrificacao.Canvas.Brush.Color := clBlack; GrdLubrificacao.Canvas.Font.Color  := $00FF8000;
-      end;
-
-  if not odd(GrdLubrificacao.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'SITUACAOOS') then
-        if not (gdSelected in State) then
-          begin
-            GrdLubrificacao.Canvas.Brush.Color := $00E2E6E9;
-          end;
-
-    GrdLubrificacao.Canvas.FillRect(Rect);
-    GrdLubrificacao.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-  end;
-
-end;
-
-procedure TFrmTelaInspFechamento.GrdLubrificacaoKeyPress(Sender: TObject;
-  var Key: Char);
-var
-LCampo : String;
-begin
-  inherited;
-if (Key = #13) and (GrdLubrificacao.SelectedIndex = 0) then
-  begin
-    LCampo :=DM.CampoInputBox('SPMPWeb', 'Informe o código da ordem de serviço:');
-    if LCampo <> EmptyStr then
-      begin
-//        DM.qryLubrificPeriodicas.FetchOnDemand := True;
-        if GrdLubrificacao.DataSource.DataSet.Locate('CODORDEMSERVICO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
-          Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
-      end;
-  end;
-if (Key = #13) and (GrdLubrificacao.SelectedIndex = 6) then
-  begin
-    DM.FTabela_auxiliar := 250;
-    DM.FNomeConsulta    := 'Equipamentos';
-    DM.FParamAuxiliar[1] := 'DESCRICAO';
-    if DM.ConsultarCombo <> EmptyStr then
-      begin
-//        DM.qryLubrificPeriodicas.FetchOnDemand := True;
-        //DM.qryLubrificPeriodicas.Locate('EQUIPAMENTO', DM.FValorCombo, []);
-        DM.qryLubrificPeriodicas.Filtered := False;
-        DM.qryLubrificPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
-        DM.qryLubrificPeriodicas.Filtered := True;
-      end
-    else
-      DM.qryLubrificPeriodicas.Filtered := False;
-  end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdLubrificacaoTitleClick(Column: TColumn);
-begin
-  inherited;
-DM.qryLubrificPeriodicas.IndexFieldNames := Column.FieldName;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspLubrificCellClick(Column: TColumn);
-begin
-  inherited;
-if DM.qryLubrificPeriodicasItensEsp.IsEmpty then Exit;
-if DM.qryLubrificPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
-
-if (GrdItensEspLubrific.SelectedIndex = 14) and (DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 14) and ((DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'S';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 15) and (Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 15) and ((Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspBOM.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'S';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 16) and (Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 16) and ((Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'S';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 17) and (Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'S') then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspLubrific.SelectedIndex = 17) and ((Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspRUIM.AsString = EmptyStr)) then
-  begin
-    DM.qryLubrificPeriodicasItensEsp.Edit;
-    DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryLubrificPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'S';
-    DM.qryLubrificPeriodicasItensEsp.Post;
-    Exit;
-  end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspLubrificDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  inherited;
-GrdItensEspLubrific.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdItensEspLubrific.Columns[0].Visible  := False;  GrdItensEspLubrific.Columns[1].Visible  := False;
-GrdItensEspLubrific.Columns[2].Visible  := False;  GrdItensEspLubrific.Columns[3].Visible  := False;
-GrdItensEspLubrific.Columns[4].Visible  := False;  GrdItensEspLubrific.Columns[5].Visible  := False;
-GrdItensEspLubrific.Columns[6].Visible  := False;  GrdItensEspLubrific.Columns[7].Visible  := False;
-GrdItensEspLubrific.Columns[11].Visible  := False; GrdItensEspLubrific.Columns[13].Visible  := False;
-GrdItensEspLubrific.Columns[18].Visible  := False; GrdItensEspLubrific.Columns[19].Visible  := False;
-GrdItensEspLubrific.Columns[20].Visible  := False; GrdItensEspLubrific.Columns[21].Visible  := False;
-
-GrdItensEspLubrific.Columns[8].Title.Caption   := 'Parte';
-DM.qryLubrificPeriodicasItensEsp.Fields[8].DisplayWidth := 23;
-GrdItensEspLubrific.Columns[9].Title.Caption   := 'Item';
-DM.qryLubrificPeriodicasItensEsp.Fields[9].DisplayWidth := 30;
-GrdItensEspLubrific.Columns[10].Title.Caption   := 'Inspeção';
-DM.qryLubrificPeriodicasItensEsp.Fields[10].DisplayWidth := 45;
-GrdItensEspLubrific.Columns[12].Title.Caption   := 'Tempo';
-GrdItensEspLubrific.Columns[12].Title.Alignment := taCenter;
-DM.qryLubrificPeriodicasItensEsp.Fields[12].DisplayWidth := 5;
-GrdItensEspLubrific.Columns[14].Title.Caption   := 'Executado';
-GrdItensEspLubrific.Columns[14].Title.Alignment := taCenter;
-GrdItensEspLubrific.Columns[14].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItensEsp.Fields[14].DisplayWidth := 5;
-GrdItensEspLubrific.Columns[15].Title.Caption   := 'Bom';
-GrdItensEspLubrific.Columns[15].Title.Alignment := taCenter;
-GrdItensEspLubrific.Columns[15].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItensEsp.Fields[14].DisplayWidth := 5;
-GrdItensEspLubrific.Columns[16].Title.Caption   := 'Regular';
-GrdItensEspLubrific.Columns[16].Title.Alignment := taCenter;
-GrdItensEspLubrific.Columns[16].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItensEsp.Fields[16].DisplayWidth := 5;
-GrdItensEspLubrific.Columns[17].Title.Caption   := 'Ruim';
-GrdItensEspLubrific.Columns[17].Title.Alignment := taCenter;
-GrdItensEspLubrific.Columns[17].Alignment       := taCenter;
-DM.qryLubrificPeriodicasItensEsp.Fields[17].DisplayWidth := 5;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspLubrificDrawDataCell(
-  Sender: TObject; const Rect: TRect; Field: TField; State: TGridDrawState);
-begin
-  inherited;
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 16, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 16, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
-   end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspManutCellClick(Column: TColumn);
-begin
-  inherited;
-if DM.qryManutPeriodicasItensEsp.IsEmpty then Exit;
-if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
-
-if (GrdItensEspManut.SelectedIndex = 14) and (DM.qryManutPeriodicasItensEspEXECUTADO.AsString = 'S') then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 14) and ((DM.qryManutPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'S';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 15) and (Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 15) and ((Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspBOM.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'S';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 16) and (Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 16) and ((Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'S';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 17) and (Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'S') then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-if (GrdItensEspManut.SelectedIndex = 17) and ((Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspRUIM.AsString = EmptyStr)) then
-  begin
-    DM.qryManutPeriodicasItensEsp.Edit;
-    DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
-    DM.qryManutPeriodicasItensEspBOM.AsString       := 'N';
-    DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
-    DM.qryManutPeriodicasItensEspRUIM.AsString      := 'S';
-    DM.qryManutPeriodicasItensEsp.Post;
-    Exit;
-  end;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspManutDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-GrdItensEspManut.Columns[Column.Index].Title.Font.Size := 9;
-
-GrdItensEspManut.Columns[0].Visible  := False;  GrdItensEspManut.Columns[1].Visible  := False;
-GrdItensEspManut.Columns[2].Visible  := False;  GrdItensEspManut.Columns[3].Visible  := False;
-GrdItensEspManut.Columns[4].Visible  := False;  GrdItensEspManut.Columns[5].Visible  := False;
-GrdItensEspManut.Columns[6].Visible  := False;  GrdItensEspManut.Columns[7].Visible  := False;
-GrdItensEspManut.Columns[11].Visible  := False; GrdItensEspManut.Columns[13].Visible  := False;
-GrdItensEspManut.Columns[18].Visible  := False; GrdItensEspManut.Columns[19].Visible  := False;
-GrdItensEspManut.Columns[20].Visible  := False; GrdItensEspManut.Columns[21].Visible  := False;
-
-GrdItensEspManut.Columns[8].Title.Caption   := 'Parte';
-DM.qryManutPeriodicasItensEsp.Fields[8].DisplayWidth := 23;
-GrdItensEspManut.Columns[9].Title.Caption   := 'Item';
-DM.qryManutPeriodicasItensEsp.Fields[9].DisplayWidth := 30;
-GrdItensEspManut.Columns[10].Title.Caption   := 'Inspeção';
-DM.qryManutPeriodicasItensEsp.Fields[10].DisplayWidth := 45;
-GrdItensEspManut.Columns[12].Title.Caption   := 'Tempo';
-GrdItensEspManut.Columns[12].Title.Alignment := taCenter;
-DM.qryManutPeriodicasItensEsp.Fields[12].DisplayWidth := 5;
-GrdItensEspManut.Columns[14].Title.Caption   := 'Executado';
-GrdItensEspManut.Columns[14].Title.Alignment := taCenter;
-GrdItensEspManut.Columns[14].Alignment       := taCenter;
-DM.qryManutPeriodicasItensEsp.Fields[14].DisplayWidth := 5;
-GrdItensEspManut.Columns[15].Title.Caption   := 'Bom';
-GrdItensEspManut.Columns[15].Title.Alignment := taCenter;
-GrdItensEspManut.Columns[15].Alignment       := taCenter;
-DM.qryManutPeriodicasItensEsp.Fields[14].DisplayWidth := 5;
-GrdItensEspManut.Columns[16].Title.Caption   := 'Regular';
-GrdItensEspManut.Columns[16].Title.Alignment := taCenter;
-GrdItensEspManut.Columns[16].Alignment       := taCenter;
-DM.qryManutPeriodicasItensEsp.Fields[16].DisplayWidth := 5;
-GrdItensEspManut.Columns[17].Title.Caption   := 'Ruim';
-GrdItensEspManut.Columns[17].Title.Alignment := taCenter;
-GrdItensEspManut.Columns[17].Alignment       := taCenter;
-DM.qryManutPeriodicasItensEsp.Fields[17].DisplayWidth := 5;
-end;
-
-procedure TFrmTelaInspFechamento.GrdItensEspManutDrawDataCell(Sender: TObject;
-  const Rect: TRect; Field: TField; State: TGridDrawState);
-begin
-  inherited;
-if (Trim(Field.FieldName) = 'EXECUTADO') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 22, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'EXECUTADO') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 22, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'BOM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'BOM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'REGULAR') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'REGULAR') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 1);
-   end;
-
-if (Trim(Field.FieldName) = 'RUIM') and (Trim(Field.AsString) = 'S') then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 0);
-   end;
-if (Trim(Field.FieldName) = 'RUIM') and ((Trim(Field.AsString) = 'N') or (Trim(Field.AsString) = EmptyStr)) then
-   begin
-     GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 1);
-   end;
 end;
 
 procedure TFrmTelaInspFechamento.RGFiltroClick(Sender: TObject);

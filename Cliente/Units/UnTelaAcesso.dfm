@@ -12037,7 +12037,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Hint = 'Consultar'
       DisabledImageIndex = 111114
       ImageAlignment = iaCenter
-      ImageIndex = 121
+      ImageIndex = 127
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
@@ -12053,7 +12053,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Hint = 'Licen'#231'a'
       DisabledImageIndex = 111114
       ImageAlignment = iaCenter
-      ImageIndex = 123
+      ImageIndex = 126
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
@@ -12116,7 +12116,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       OnClick = BtnSairClick
     end
     object BtnEntrar: TButton
-      Left = 140
+      Left = 139
       Top = 80
       Width = 75
       Height = 25

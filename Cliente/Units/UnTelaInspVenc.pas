@@ -4,16 +4,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, System.DateUtils, Data.DB,
-  Vcl.ComCtrls, FireDAC.Stan.Param, FireDAC.Comp.Client, FireDAC.Stan.Intf;
+  Vcl.ComCtrls, FireDAC.Stan.Param, FireDAC.Comp.Client, FireDAC.Stan.Intf,
+  JvExDBGrids, JvDBGrid;
 type
   TFrmTelaInspVenc = class(TFrmTelaPaiOKCancel)
     PCInspecoes: TPageControl;
     TSManut: TTabSheet;
     TSLubrific: TTabSheet;
     TSRotas: TTabSheet;
-    GrdManut: TDBGrid;
-    GrdLubrific: TDBGrid;
-    GrdRotas: TDBGrid;
     Panel1: TPanel;
     Label6: TLabel;
     BtnFamiliaEquip: TButton;
@@ -22,23 +20,27 @@ type
     edtOficina: TEdit;
     BtnOficina: TButton;
     Panel2: TPanel;
-    DBGrid1: TDBGrid;
-    DBGrid2: TDBGrid;
     chbTodos: TCheckBox;
+    GrdManut: TJvDBGrid;
+    GrdLubrific: TJvDBGrid;
+    GrdRotas: TJvDBGrid;
+    GrdRotasEquipSeq: TJvDBGrid;
+    GrdRotasEquip: TJvDBGrid;
     procedure BtnOKClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure BtnFamiliaEquipClick(Sender: TObject);
     procedure EdtFamiliaEquipDblClick(Sender: TObject);
     procedure edtOficinaDblClick(Sender: TObject);
     procedure BtnOficinaClick(Sender: TObject);
-    procedure GrdManutTitleClick(Column: TColumn);
     procedure FormShow(Sender: TObject);
     procedure chbTodosClick(Sender: TObject);
     procedure PCInspecoesChanging(Sender: TObject; var AllowChange: Boolean);
     procedure PCInspecoesChange(Sender: TObject);
+    procedure GrdManutTitleClick(Column: TColumn);
+    procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure GrdManutKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
@@ -1080,94 +1082,39 @@ end;
 procedure TFrmTelaInspVenc.FormShow(Sender: TObject);
 begin
   inherited;
-GrdManut.SetFocus;
-GrdManut.SelectedRows.CurrentRowSelected := True;
+  GrdManut.SetFocus;
+  GrdManut.SelectedRows.CurrentRowSelected := True;
 end;
 
 procedure TFrmTelaInspVenc.GrdManutDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
-case PCInspecoes.ActivePageIndex of
+  case PCInspecoes.ActivePageIndex of
   0:
     Begin
-      GrdManut.Columns[0].Title.Font.Size := 8;
-      GrdManut.Columns[0].Title.Caption   := 'Descrição';
-      GrdManut.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 45;
-      GrdManut.Columns[1].Title.Alignment := taCenter;
-      GrdManut.Columns[1].Title.Font.Size := 8;
-      GrdManut.Columns[1].Title.Caption   := 'Freq. (d)';
-      GrdManut.DataSource.DataSet.FieldByName('FREQUENCIA1').DisplayWidth := 7;
-      GrdManut.Columns[2].Title.Alignment := taCenter;
-      GrdManut.Columns[2].Title.Font.Size := 8;
-      GrdManut.Columns[2].Title.Caption   := 'Vencimento';
-      GrdManut.DataSource.DataSet.FieldByName('DTAINICIO1').DisplayWidth := 10;
-      GrdManut.Columns[3].Title.Font.Size := 8;
-      GrdManut.Columns[3].Title.Caption   := 'Cód. Equip.';
-      GrdManut.DataSource.DataSet.FieldByName('CODEQUIPAMENTO').DisplayWidth := 12;
-      GrdManut.Columns[3].Title.Alignment := taCenter;
-      GrdManut.Columns[3].Alignment := taCenter;
-      GrdManut.Columns[3].Title.Font.Size := 8;
-      //GrdManut.Columns[3].Title.Font.Style := [fsbold];
-      GrdManut.Columns[4].Title.Caption   := 'Equipamento';
-      GrdManut.DataSource.DataSet.FieldByName('EQUIPAMENTO').DisplayWidth := 35;
-      GrdManut.Columns[4].Title.Font.Size := 8;
-      GrdManut.Columns[5].Title.Alignment := taCenter;
-      GrdManut.Columns[5].Title.Font.Size := 8;
-
       if (Column.Field.FieldName = 'DTAINICIO1') then
-        begin
-          if Column.Field.IsNull = False then
-            if GrdManut.DataSource.DataSet.FieldByName('DTAINICIO1').AsDateTime < DateOf(DM.FDataHoraServidor) then
-              begin
-                if DM.qryManutVencC_DIASATRASO.AsInteger < 5 then
-                  begin
-                    GrdManut.Canvas.Brush.Color := clYellow;
-                    GrdManut.Canvas.Font.Color  := clRed;
-                  end
-                else
-                  begin
-                    GrdManut.Canvas.Brush.Color := clRed;
-                    GrdManut.Canvas.Font.Color  := clWhite;
-                  end;
-              end;
-        end;
-      if not odd(GrdManut.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'DTAINICIO1') then
-            if not (gdSelected in State) then
-              begin
-                GrdManut.Canvas.Brush.Color := $00F7F8F9;
-    //          GrdOrdemServico.Canvas.FillRect(Rect);
-    //          GrdOrdemServico.DefaultDrawDataCell(rect,Column.Field,state);
+      begin
+        if Column.Field.IsNull = False then
+          if GrdManut.DataSource.DataSet.FieldByName('DTAINICIO1').AsDateTime < DateOf(DM.FDataHoraServidor) then
+          begin
+            if DM.qryManutVencC_DIASATRASO.AsInteger < 5 then
+            begin
+              GrdManut.Canvas.Brush.Color := clYellow;
+              GrdManut.Canvas.Font.Color  := clRed;
+            end else
+            begin
+              GrdManut.Canvas.Brush.Color := clRed;
+              GrdManut.Canvas.Font.Color  := clWhite;
             end;
+          end;
+      end;
+
       GrdManut.Canvas.FillRect(Rect);
       GrdManut.DefaultDrawColumnCell(Rect, DataCol, Column, State);
     End;
   1:
     Begin
-      GrdLubrific.Columns[0].Title.Font.Size := 8;
-      GrdLubrific.Columns[0].Title.Caption   := 'Descrição';
-      GrdLubrific.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 45;
-      GrdLubrific.Columns[1].Title.Alignment := taCenter;
-      GrdLubrific.Columns[1].Title.Font.Size := 8;
-      GrdLubrific.Columns[1].Title.Caption   := 'Freq. (d)';
-      GrdLubrific.DataSource.DataSet.FieldByName('FREQUENCIA1').DisplayWidth := 7;
-      GrdLubrific.Columns[2].Title.Alignment := taCenter;
-      GrdLubrific.Columns[2].Title.Font.Size := 8;
-      GrdLubrific.Columns[2].Title.Caption   := 'Vencimento';
-      GrdLubrific.DataSource.DataSet.FieldByName('DTAINICIO1').DisplayWidth := 10;
-      GrdLubrific.Columns[3].Title.Font.Size := 8;
-      GrdLubrific.Columns[3].Title.Caption   := 'Cód. Equip.';
-      GrdLubrific.DataSource.DataSet.FieldByName('CODEQUIPAMENTO').DisplayWidth := 12;
-      GrdLubrific.Columns[3].Title.Alignment := taCenter;
-      GrdLubrific.Columns[3].Alignment := taCenter;
-      GrdLubrific.Columns[3].Title.Font.Size := 8;
-      //GrdLubrific.Columns[3].Title.Font.Style := [fsbold];
-      GrdLubrific.Columns[4].Title.Caption   := 'Equipamento';
-      GrdLubrific.DataSource.DataSet.FieldByName('EQUIPAMENTO').DisplayWidth := 35;
-      GrdLubrific.Columns[4].Title.Font.Size := 8;
-      GrdLubrific.Columns[5].Title.Alignment := taCenter;
-      GrdLubrific.Columns[5].Title.Font.Size := 8;
-
       if (Column.Field.FieldName = 'DTAINICIO1') then
         begin
           if Column.Field.IsNull = False then
@@ -1185,32 +1132,12 @@ case PCInspecoes.ActivePageIndex of
                   end;
               end;
         end;
-      if not odd(GrdLubrific.DataSource.DataSet.RecNo) and (Column.Field.FieldName <> 'DTAINICIO1') then
-            if not (gdSelected in State) then
-              begin
-                GrdManut.Canvas.Brush.Color := $00F7F8F9;
-    //          GrdOrdemServico.Canvas.FillRect(Rect);
-    //          GrdOrdemServico.DefaultDrawDataCell(rect,Column.Field,state);
-            end;
+
       GrdLubrific.Canvas.FillRect(Rect);
       GrdLubrific.DefaultDrawColumnCell(Rect, DataCol, Column, State);
     End;
   2:
     Begin
-      GrdRotas.Columns[0].Title.Font.Size := 8;
-      GrdRotas.Columns[0].Title.Caption   := 'Descrição';
-      GrdRotas.DataSource.DataSet.FieldByName('DESCRICAO').DisplayWidth := 40;
-      GrdRotas.Columns[1].Title.Alignment := taCenter;
-      GrdRotas.Columns[1].Title.Font.Size := 8;
-      GrdRotas.Columns[1].Title.Caption   := 'Freq. (d)';
-      GrdRotas.DataSource.DataSet.FieldByName('FREQUENCIA').DisplayWidth := 10;
-      GrdRotas.Columns[2].Title.Alignment := taCenter;
-      GrdRotas.Columns[2].Title.Font.Size := 8;
-      GrdRotas.Columns[2].Title.Caption   := 'Vencimento';
-      GrdRotas.DataSource.DataSet.FieldByName('DATAINICIO').DisplayWidth := 12;
-      GrdRotas.Columns[3].Title.Font.Size := 8;
-      GrdRotas.Columns[3].Title.Alignment := taCenter;
-//      GrdRotas.Columns[3].Title.Font.Style := [fsbold];
       if (Column.Field.FieldName = 'DATAINICIO') then
         begin
           if Column.Field.IsNull = False then
@@ -1232,14 +1159,34 @@ case PCInspecoes.ActivePageIndex of
             if not (gdSelected in State) then
               begin
                 GrdManut.Canvas.Brush.Color := $00F7F8F9;
-    //          GrdOrdemServico.Canvas.FillRect(Rect);
-    //          GrdOrdemServico.DefaultDrawDataCell(rect,Column.Field,state);
             end;
       GrdRotas.Canvas.FillRect(Rect);
       GrdRotas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
     End;
 end;
+
 end;
+
+procedure TFrmTelaInspVenc.GrdManutKeyPress(Sender: TObject; var Key: Char);
+var
+  LCampo : String;
+begin
+  inherited;
+  if (Key = #13) and (GrdManut.SelectedIndex = 4) then
+  begin
+    DM.FTabela_auxiliar := 250;
+    DM.FNomeConsulta    := 'Equipamentos';
+    DM.FParamAuxiliar[1] := 'DESCRICAO';
+    if DM.ConsultarCombo <> EmptyStr then
+    begin
+      DM.qryManutVenc.Filtered := False;
+      DM.qryManutVenc.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
+      DM.qryManutVenc.Filtered := True;
+    end else
+      DM.qryManutVenc.Filtered := False;
+  end;
+end;
+
 procedure TFrmTelaInspVenc.GrdManutTitleClick(Column: TColumn);
 begin
   inherited;
@@ -1260,9 +1207,8 @@ begin
       CliqueNoTitulo(Column, TFDquery(GrdRotas.DataSource.DataSet), GrdRotas.DataSource.DataSet.Fields[1].Name, GrdRotas);
     end;
   end;
+
 end;
-
-
 
 procedure TFrmTelaInspVenc.PCInspecoesChange(Sender: TObject);
 begin

@@ -2,33 +2,36 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Gerenciador'
-  ClientHeight = 264
-  ClientWidth = 395
-  Constraints.MaxHeight = 300
-  Constraints.MaxWidth = 407
-  Constraints.MinHeight = 300
+  ClientHeight = 319
+  ClientWidth = 438
+  Constraints.MaxHeight = 355
+  Constraints.MaxWidth = 450
+  Constraints.MinHeight = 305
   Constraints.MinWidth = 407
+  Font.Charset = ANSI_CHARSET
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
   OnShow = FormShow
-  ExplicitWidth = 407
-  ExplicitHeight = 300
-  TextHeight = 16
+  ExplicitWidth = 450
+  ExplicitHeight = 355
+  TextHeight = 15
   inherited PTop: TPanel
-    Width = 391
+    Width = 434
     ExplicitWidth = 387
     inherited BtnAjuda: TButton
-      Left = 354
+      Left = 397
       Visible = False
       ExplicitLeft = 354
     end
   end
   inherited PCentro: TPanel
-    Width = 389
-    Height = 194
+    Width = 432
+    Height = 201
     ExplicitWidth = 385
     ExplicitHeight = 191
     inherited RGTelas: TRadioGroup
-      Width = 387
-      Height = 192
+      Width = 430
+      Height = 199
       ExplicitWidth = 383
       ExplicitHeight = 189
     end
@@ -36,8 +39,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 381
-      Height = 186
+      Width = 424
+      Height = 193
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
@@ -45,7 +48,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       ExplicitWidth = 377
       ExplicitHeight = 183
       object Label1: TLabel
-        Left = 274
+        Left = 352
         Top = 6
         Width = 66
         Height = 13
@@ -58,31 +61,31 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 224
+        Left = 263
         Top = 93
-        Width = 35
-        Height = 16
+        Width = 32
+        Height = 15
         Caption = 'In'#237'cio:'
       end
       object Label2: TLabel
-        Left = 10
+        Left = 9
         Top = 93
-        Width = 34
-        Height = 16
+        Width = 31
+        Height = 15
         Caption = 'Local:'
       end
       object Label3: TLabel
-        Left = 274
+        Left = 282
         Top = 51
-        Width = 68
-        Height = 16
+        Width = 61
+        Height = 15
         Caption = 'Frequ'#234'ncia:'
       end
       object Label4: TLabel
-        Left = 141
+        Left = 145
         Top = 51
-        Width = 45
-        Height = 16
+        Width = 42
+        Height = 15
         Caption = 'Backup:'
       end
       object Label5: TLabel
@@ -112,7 +115,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 141
+        Left = 145
         Top = 6
         Width = 66
         Height = 13
@@ -124,133 +127,10 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Font.Style = []
         ParentFont = False
       end
-      object BtnBackup: TBitBtn
-        Left = 217
-        Top = 147
-        Width = 75
-        Height = 25
-        Hint = 'Criar arquivo de backup.'
-        Caption = 'Backup'
-        Default = True
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
-          5555555555555555555555555555555555555555555555555555555555555555
-          55555555FFFFFFFFFF5555500000000005555557777777777F55550BFBFBFBFB
-          0555557F555555557F55550FBFBFBFBF0555557F555555557F55550BFBFBFBFB
-          0555557F555555557F55550FBFBFBFBF0555557F555555557F55550BFBFBFBFB
-          0555557F555555557F55550FBFBFBFBF0555557FFFFFFFFF7555550000000000
-          555555777777777755555550FBFB0555555555575FFF75555555555700007555
-          5555555577775555555555555555555555555555555555555555555555555555
-          5555555555555555555555555555555555555555555555555555}
-        ModalResult = 1
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 11
-        OnClick = BtnBackupClick
-      end
-      object BtnBanco: TBitBtn
-        Left = 112
-        Top = 147
-        Width = 100
-        Height = 25
-        Hint = 'Testar conex'#227'o com banco de dados.'
-        Caption = 'Banco'
-        Default = True
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-          33333FFFFFFFFFFFFFFF000000000000000077777777777777770FFFFFFFFFFF
-          FFF07F3FF3FF3FF3FFF70F00F00F00F000F07F773773773777370FFFFFFFFFFF
-          FFF07F3FF3FF3FF3FFF70F00F00F00F000F07F773773773777370FFFFFFFFFFF
-          FFF07F3FF3FF3FF3FFF70F00F00F00F000F07F773773773777370FFFFFFFFFFF
-          FFF07F3FF3FF3FF3FFF70F00F00F00F000F07F773773773777370FFFFFFFFFFF
-          FFF07FFFFFFFFFFFFFF70CCCCCCCCCCCCCC07777777777777777088CCCCCCCCC
-          C8807FF7777777777FF700000000000000007777777777777777333333333333
-          3333333333333333333333333333333333333333333333333333}
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 10
-        OnClick = BtnBancoClick
-      end
-      object BtnExtrair: TBitBtn
-        Left = 296
-        Top = 147
-        Width = 75
-        Height = 25
-        Hint = 'Descompactar arquivo de backup.'
-        Caption = 'Extrair'
-        Default = True
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
-          5555555555555555555555555555555555555555555555555555555555555555
-          555555555555555555555555555555555555555FFFFFFFFFF555550000000000
-          55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
-          B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
-          000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
-          555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
-          55555575FFF75555555555700007555555555557777555555555555555555555
-          5555555555555555555555555555555555555555555555555555}
-        ModalResult = 1
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 12
-      end
-      object BtnGravar: TBitBtn
-        Left = 8
-        Top = 147
-        Width = 100
-        Height = 25
-        Hint = 'Grava dados de conex'#227'o.'
-        Caption = 'Gravar'
-        Default = True
-        DisabledImageIndex = 3
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ImageIndex = 2
-        Images = DM.ImageListBotoes
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
-        OnClick = BtnGravarClick
-      end
       object CBBackup: TComboBox
-        Left = 141
+        Left = 145
         Top = 68
-        Width = 130
+        Width = 134
         Height = 22
         Style = csOwnerDrawFixed
         TabOrder = 4
@@ -260,9 +140,9 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
           'Manual')
       end
       object CBFrequencia: TComboBox
-        Left = 274
+        Left = 282
         Top = 68
-        Width = 97
+        Width = 133
         Height = 22
         Style = csOwnerDrawFixed
         TabOrder = 5
@@ -273,10 +153,10 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
           '30 dias')
       end
       object EdtBackupMySQL: TJvDirectoryEdit
-        Left = 10
+        Left = 9
         Top = 112
-        Width = 211
-        Height = 24
+        Width = 251
+        Height = 23
         ReadOnly = True
         TabOrder = 6
         Text = 'C:\SPMP3\Backup'
@@ -284,7 +164,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       object edtDatabaseName: TEdit
         Left = 9
         Top = 25
-        Width = 130
+        Width = 133
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -296,20 +176,20 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Text = 'spmpma_spmp'
       end
       object EdtHorario: TLabeledEdit
-        Left = 326
+        Left = 365
         Top = 112
-        Width = 45
-        Height = 24
-        EditLabel.Width = 47
-        EditLabel.Height = 16
+        Width = 50
+        Height = 23
+        EditLabel.Width = 43
+        EditLabel.Height = 15
         EditLabel.Caption = 'Hor'#225'rio:'
         TabOrder = 8
         Text = ''
       end
       object EdtHostName: TEdit
-        Left = 141
+        Left = 145
         Top = 25
-        Width = 130
+        Width = 204
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -321,18 +201,18 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Text = 'localhost'
       end
       object EdtInicio: TJvDateEdit
-        Left = 224
+        Left = 263
         Top = 112
         Width = 99
-        Height = 24
+        Height = 23
         DialogTitle = 'Selecione a data'
         ShowNullDate = False
         TabOrder = 7
       end
       object EdtPorta: TEdit
-        Left = 274
+        Left = 352
         Top = 24
-        Width = 97
+        Width = 63
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -346,7 +226,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       object EdtSenha: TEdit
         Left = 9
         Top = 68
-        Width = 130
+        Width = 133
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -357,13 +237,47 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         PasswordChar = '*'
         TabOrder = 3
       end
+      object edtHostFTP: TLabeledEdit
+        Left = 9
+        Top = 160
+        Width = 140
+        Height = 23
+        EditLabel.Width = 58
+        EditLabel.Height = 15
+        EditLabel.Caption = 'Host (FTP):'
+        TabOrder = 9
+        Text = ''
+      end
+      object edtSenhaFTP: TLabeledEdit
+        Left = 152
+        Top = 160
+        Width = 95
+        Height = 23
+        EditLabel.Width = 65
+        EditLabel.Height = 15
+        EditLabel.Caption = 'Senha (FTP):'
+        PasswordChar = '*'
+        TabOrder = 10
+        Text = ''
+      end
+      object edtUsernamFTP: TLabeledEdit
+        Left = 250
+        Top = 160
+        Width = 165
+        Height = 23
+        EditLabel.Width = 56
+        EditLabel.Height = 15
+        EditLabel.Caption = 'User (FTP):'
+        TabOrder = 11
+        Text = ''
+      end
     end
   end
   inherited PAuxiliares: TPanel
     AlignWithMargins = False
     Left = 0
-    Top = 264
-    Width = 395
+    Top = 271
+    Width = 438
     Height = 0
     Visible = False
     ExplicitLeft = 0
@@ -372,21 +286,121 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
-    AlignWithMargins = False
-    Left = 0
-    Width = 395
-    Height = 0
-    Visible = False
-    ExplicitLeft = 0
+    Top = 273
+    Width = 434
+    Height = 44
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    ExplicitTop = 267
     ExplicitWidth = 391
-    ExplicitHeight = 0
+    ExplicitHeight = 44
     inherited BtnOK: TButton
-      Left = 117
-      ExplicitLeft = 117
+      Left = 0
+      Width = 0
+      Height = 0
+      Visible = False
+      ExplicitLeft = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     inherited BtnFechar: TButton
-      Left = 199
-      ExplicitLeft = 199
+      Left = 0
+      Width = 0
+      Height = 0
+      Visible = False
+      ExplicitLeft = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+    end
+    object BtnGravar: TBitBtn
+      Left = 8
+      Top = 9
+      Width = 98
+      Height = 25
+      Hint = 'Grava dados de conex'#227'o.'
+      Caption = 'Gravar'
+      Default = True
+      DisabledImageIndex = 3
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 2
+      Images = DM.ImageListBotoes
+      NumGlyphs = 2
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = BtnGravarClick
+    end
+    object BtnBanco: TBitBtn
+      Left = 112
+      Top = 9
+      Width = 98
+      Height = 25
+      Hint = 'Testar conex'#227'o com banco de dados.'
+      Caption = 'Banco'
+      Default = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 128
+      Images = DM.ImageListBotoes
+      NumGlyphs = 2
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = BtnBancoClick
+    end
+    object BtnBackup: TBitBtn
+      Left = 217
+      Top = 9
+      Width = 98
+      Height = 25
+      Hint = 'Criar arquivo de backup.'
+      Caption = 'Backup'
+      Default = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 129
+      Images = DM.ImageListBotoes
+      ModalResult = 1
+      NumGlyphs = 2
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = BtnBackupClick
+    end
+    object BtnExtrair: TBitBtn
+      Left = 322
+      Top = 9
+      Width = 98
+      Height = 25
+      Hint = 'Descompactar arquivo de backup.'
+      Caption = 'Extrair'
+      Default = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ImageIndex = 130
+      Images = DM.ImageListBotoes
+      ModalResult = 1
+      NumGlyphs = 2
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
     end
   end
 end

@@ -728,7 +728,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           Width = 50
         end>
       OnResize = StatusBar1Resize
-      ExplicitTop = 488
+      ExplicitTop = 484
+      ExplicitWidth = 1002
     end
     object Panel10: TPanel
       AlignWithMargins = True
@@ -742,7 +743,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 6
-      ExplicitHeight = 199
+      ExplicitWidth = 996
+      ExplicitHeight = 371
       object Label18: TLabel
         Left = 873
         Top = 88
@@ -903,7 +905,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Height = -11
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         ParentFont = False
         PopupMenu = PopupMenuOS
         TabOrder = 0

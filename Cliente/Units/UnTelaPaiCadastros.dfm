@@ -11611,7 +11611,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       1008
       45)
     object LCadastro: TLabel
-      Left = 742
+      Left = 746
       Top = 23
       Width = 36
       Height = 16
@@ -11627,7 +11627,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ExplicitLeft = 726
     end
     object LCadastroPor: TLabel
-      Left = 698
+      Left = 702
       Top = 9
       Width = 80
       Height = 16
@@ -11643,7 +11643,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ExplicitLeft = 682
     end
     object LblDataCad: TDBText
-      Left = 780
+      Left = 784
       Top = 24
       Width = 64
       Height = 16
@@ -11656,10 +11656,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 776
+      ExplicitLeft = 780
     end
     object LblUsuCad: TDBText
-      Left = 780
+      Left = 784
       Top = 10
       Width = 59
       Height = 16
@@ -11674,10 +11674,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 776
+      ExplicitLeft = 780
     end
     object LAlteracao: TLabel
-      Left = 893
+      Left = 897
       Top = 23
       Width = 36
       Height = 16
@@ -11693,7 +11693,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ExplicitLeft = 877
     end
     object LAlteradoPor: TLabel
-      Left = 867
+      Left = 871
       Top = 9
       Width = 62
       Height = 16
@@ -11709,7 +11709,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ExplicitLeft = 851
     end
     object LblDataAlt: TDBText
-      Left = 931
+      Left = 935
       Top = 23
       Width = 57
       Height = 16
@@ -11722,10 +11722,10 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 927
+      ExplicitLeft = 931
     end
     object LblUsuAlt: TDBText
-      Left = 931
+      Left = 935
       Top = 9
       Width = 52
       Height = 16
@@ -11740,7 +11740,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 927
+      ExplicitLeft = 931
     end
     object BtnNovo: TButton
       Left = 8
@@ -12798,7 +12798,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Enabled = False
     Interval = 15
     OnTimer = TimerLetreiroTimer
-    Left = 346
+    Left = 298
     Top = 58
   end
   object TimerAlertas: TTimer

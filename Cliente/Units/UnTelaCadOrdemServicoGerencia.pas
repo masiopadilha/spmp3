@@ -1410,7 +1410,7 @@ begin
     begin;
 
       FDMemTOSSimplesExcel.Close;
-      FDMemTOSSimplesExcel.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
+      FDMemTOSSimplesExcel.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);      
 
       FDMemTOSSimplesExcel.FieldByName('DATACADASTRO').Visible          := True;
       FDMemTOSSimplesExcel.FieldByName('DATAPROGINI').Visible           := True;

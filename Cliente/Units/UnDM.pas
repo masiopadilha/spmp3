@@ -27,8 +27,9 @@ uses
   Vcl.Grids,
   System.Win.ComObj, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   frxClass, frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
-  FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math, Winapi.ShellAPI,
-  Vcl.Menus;
+  FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math,
+  Winapi.ShellAPI, Vcl.Menus, IdURI, IdHTTP, IdIOHandler, IdIOHandlerSocket,
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip;
 
 const
   OffsetMemoryStream : Int64 = 0;
@@ -584,11 +585,6 @@ type
     qryLinhasUSUARIOCAD: TStringField;
     qryLinhasUSUARIOALT: TStringField;
     qryLogin: TFDQuery;
-    qryLoginNOME: TStringField;
-    qryLoginSENHA: TStringField;
-    qryLoginBLOQUEIO: TSmallintField;
-    qryLoginULTIMOACESSO: TDateTimeField;
-    qryLoginDIFERENCA: TLargeintField;
     qryLubrificantes: TFDQuery;
     qryLubrificantesCODIGO: TStringField;
     qryLubrificantesCODEMPRESA: TStringField;
@@ -4108,8 +4104,6 @@ type
     qryAcessoUSUARIO: TStringField;
     qryAcessoDATAACESSO: TDateTimeField;
     qryAcessoDATASAIDA: TDateTimeField;
-    qryAcessoHORAENTRADA: TDateTimeField;
-    qryAcessoHORASAIDA: TDateTimeField;
     qryAcessoESTACAO: TStringField;
     qryAcessoATIVO: TStringField;
     qryAcessoPERIODO: TIntegerField;
@@ -4480,7 +4474,6 @@ type
     qryConfigscodusuarioalt: TStringField;
     qryUsuariosAtivosHOST: TStringField;
     qryTotalEquipHoraCODCALENDARIOEQUIP: TStringField;
-    qryLoginSENHAALTERADADATA: TDateTimeField;
     qryUsuarioSENHAALTERADADATA: TDateTimeField;
     qryDispAdmissiveisCODIGO: TFDAutoIncField;
     qryDispAdmissiveisCODEMPRESA: TStringField;
@@ -4740,7 +4733,6 @@ type
     qryEquipamentosConfOSServEQUIPPARADO: TStringField;
     qryEquipamentosConfOSServTEMPOEXECUCAO: TBCDField;
     qryUsuarioSENHAALTERADA: TStringField;
-    qryLoginSENHAALTERADA: TStringField;
     qryManutProgEquipPlanoTrabCODIGO: TFDAutoIncField;
     qryManutProgEquipPlanoTrabCODEMPRESA: TStringField;
     qryManutProgEquipPlanoTrabCODMANUTPROGFAMEQUIP: TStringField;
@@ -5822,6 +5814,47 @@ type
     qryManutConsItensEsptempototal: TAggregateField;
     qryLubrificConsItenstempototal: TAggregateField;
     qryLubrificConsItensEsptempototal: TAggregateField;
+    qryLoginCODIGO: TStringField;
+    qryLoginMATRICULA: TStringField;
+    qryLoginNOME: TStringField;
+    qryLoginSENHA: TStringField;
+    qryLoginBLOQUEIO: TSmallintField;
+    qryLoginSENHAALTERADA: TStringField;
+    qryLoginSENHAALTERADADATA: TDateTimeField;
+    qryLoginDATAFIM: TDateTimeField;
+    qryLoginULTIMOACESSO: TDateTimeField;
+    qryLoginNOVOACESSO: TDateTimeField;
+    qryLoginDIFERENCA: TLargeintField;
+    IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
+    IdHTTP: TIdHTTP;
+    qryManutProgFamEquipCons: TFDQuery;
+    dsManutProgFamEquipCons: TDataSource;
+    qryManutProgFamEquipConsCODEQUIPAMENTO: TStringField;
+    qryManutProgFamEquipConsEQUIPAMENTO: TStringField;
+    qryManutProgFamEquipConsCENTROCUSTO: TStringField;
+    qryManutProgFamEquipConsCODMANUTENCAO: TStringField;
+    qryManutProgFamEquipConsMANUTENCAO: TStringField;
+    qryManutProgFamEquipConsDIAS: TSmallintField;
+    qryManutProgFamEquipConsATIVO: TStringField;
+    qryManutProgFamEquipConsPLANEJADA: TDateTimeField;
+    qryManutProgFamEquipConsCODMANUTFAMILIA: TStringField;
+    qryManutProgFamEquipConsDESCMANUTFAMILIA: TStringField;
+    qryManutProgFamEquipConsTIPOMANUTENCAO: TStringField;
+    qryManutProgFamEquipConsCODTIPOMANUTENCAO: TStringField;
+    qryLubrificProgFamEquipCons: TFDQuery;
+    dsLubrificProgFamEquipCons: TDataSource;
+    qryLubrificProgFamEquipConsCODEQUIPAMENTO: TStringField;
+    qryLubrificProgFamEquipConsEQUIPAMENTO: TStringField;
+    qryLubrificProgFamEquipConsCENTROCUSTO: TStringField;
+    qryLubrificProgFamEquipConsTIPOMANUTENCAO: TStringField;
+    qryLubrificProgFamEquipConsCODLUBRIFICACAO: TStringField;
+    qryLubrificProgFamEquipConsLUBRIFICACAO: TStringField;
+    qryLubrificProgFamEquipConsDIAS: TSmallintField;
+    qryLubrificProgFamEquipConsATIVO: TStringField;
+    qryLubrificProgFamEquipConsPLANEJADA: TDateTimeField;
+    qryLubrificProgFamEquipConsCODLUBRIFICFAMILIA: TStringField;
+    qryLubrificProgFamEquipConsDESCLUBRIFICFAMILIA: TStringField;
+    qryLubrificProgFamEquipConsCODTIPOMANUTENCAO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5911,65 +5944,101 @@ type
 
   public
     { Public declarations }
+
     FDataSetParam : TFDQuery;
+
     FDataSetRelat : TfrxDBDataset;
+
     FDataSourceParam : TDataSource;
-    FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario, FNomeUsuario, FCodEmpresa,
-    FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo, FValorCombo,
-    FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao, FNivelAcesso, FEstacao, FModulo,
-    FNomeConsulta, FServerPathExeVersion, FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro, FPromptConsulta,
-    _EMAIL, _SENHA, _PORTA, _SMTP: String;
-    FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1, FDataConsulta2: TDateTime;
-    FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha, FQtdeLoginTent, FNumUsuarios, FCodOrdemServico,
-    FTabela_auxiliar, FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip, FVersaoMaquina, FVersaoBanco : Integer;
+
+    FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario,
+    FNomeUsuario, FHostFTP, FPasswordFTP, FUsernameFTP, FCodEmpresa,
+    FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo,
+    FValorCombo, FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao,
+    FNivelAcesso, FEstacao, FModulo, FNomeConsulta, FServerPathExeVersion,
+    FCodFamilia, FCodArea, FCodCelula, FCodLinha, FVersaoMacro, FPromptConsulta,
+     _EMAIL, _SENHA, _PORTA, _SMTP, FUrlSPMPBuilder: String;
+
+    FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1,
+    FDataConsulta2: TDateTime; FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha,
+    FQtdeLoginTent, FNumUsuarios, FCodOrdemServico, FTabela_auxiliar,
+    FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip,
+    FVersaoMaquina, FVersaoRepo, FVersaoBanco, FSegundosDesliga : Integer;
+
     FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms, FAutoUpdate: Boolean;
+
     FParamAuxiliar: array[0..20] of String;
+
     FParametros : TArray<String>;
+
     FCustos : TArray<Real>;
+
     FTotalHHDisp, FTotalHorasFunc, FTotalHorasParadas : Real;
+
+    function GetVersionLocal(AFileName: String): string;
+    function GetVersionRepo: Integer;
+    function ResourceExists(const ResourceName: string): Boolean;
+
+    procedure ResourceExtract(AResourceName, APath, AFileName: String);
+    procedure CheckApplicationVersion;
+    procedure DownloadNewVersion;
+    procedure ExtractFile(AFile, APath: String);
+    procedure CopySingleFile(AFileName: String);
+
 
     function RetornaDataHoraServidor: Boolean;
     function VerificaArquivoAberto(FileName: TFileName) : boolean;
     function IniciaServicoWin(sMachine, sService: string): boolean;
-    function GetVersion(AFileName: String): string;
     function SenhaExpirada: Boolean;
     function Crypt(Action, Src: String): String;
     function PasswordInputBox(const ACaption, APrompt:string): string;
     function VerificaPrimeiroAcesso:Boolean;
-    function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao, Lubrificacao, Rota, SolicTrab, Matricula,
-                      Prioridade, Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado, Email: String): Integer;
+    function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
+                     Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
+                     Criticidade, CentroCusto, Observacoes, tempototal, Oficina,
+                     TipoManutencao, EquipParado, Email: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
     function AplicarMascara(Campo, Mascara: TStringField; Form: TForm): Boolean;
-    function HorasParadasEquipamento(CodEquipamento, Tipo, Area, Celula: String): Real;
+    function HorasParadasEquipamento(CodEquipamento, Tipo, Area,
+             Celula: String): Real;
     function HorasCalendario(Tipo: SmallInt; CodEquip, CodArea: String):Real;
     function DataFeriado(Hora:String):Boolean;
-    function TotalHomemHoraDisp(Data: TDateTime; Matricula, TipoCelula: String): Real;
+    function TotalHomemHoraDisp(Data: TDateTime; Matricula,
+             TipoCelula: String): Real;
     function TotalEquipHoraDisp(Data: TDateTime): Real;
     function HorasFuncTotal:Real;
     function AnalisarImportancia:SmallInt;
     function JpgToBmp(cImage: String): Boolean;
-    function XlsToStringGrid(xStringGrid: TStringGrid; xFileXLS: string): Boolean;
+    function XlsToStringGrid(xStringGrid: TStringGrid;
+             xFileXLS: string): Boolean;
     function converter_ponto(valor_com_virgula: string): string;
-    function AtualizarContadorSatelite(CodEquipamento, Placa: String; DataImportacao: TDateTime; Rodagem: Real; Indice: SmallInt): String;
+    function AtualizarContadorSatelite(CodEquipamento, Placa: String;
+                                       DataImportacao: TDateTime; Rodagem: Real;
+                                       Indice: SmallInt): String;
     function LicencaExpirada: Boolean;
     function VerificarInspecoes: Boolean;
     function CalcularMTBF(codequip: String; periodo: SmallInt): Real;
     function CalcularTaxaFalha(mtbf: Real): Real;
     function IsAdmin: Boolean;
 
-    procedure GravaLog(linha1: string = ''; linha2: string = ''; linha3: string = '');
+    procedure GravaLog(linha1: string = ''; linha2: string = '';
+              linha3: string = '');
     procedure CriaArquivoLog(var arquivo: TextFile);
     procedure ConectaBanco(sIp: string);
     procedure ReconectaBanco;
     procedure CheckUpdateVersion;
     procedure VerificarConfiabilidade;
     procedure MSGAguarde(strTexto: String = ''; boolAguarde: Boolean = true);
-    procedure HistoricoInspecoes(Tipo: SmallInt; CodEmpresa, CodEquip, Codigo: String; CodOrdemServico: Integer);
-    procedure ExibeFoto(DataSet : TDataSet; BlobFieldName: String; ImageExibicao: TImage);
-    procedure SetJPGCompression(ACompression: integer; const AInFile: string; const AOutFile: string);
-    procedure RegistrarMovimentacao(Operacao, CodEmpresa, CodUsuario, Modulo, Estacao: String);
+    procedure HistoricoInspecoes(Tipo: SmallInt; CodEmpresa, CodEquip,
+                                 Codigo: String; CodOrdemServico: Integer);
+    procedure ExibeFoto(DataSet : TDataSet; BlobFieldName: String;
+                        ImageExibicao: TImage);
+    procedure SetJPGCompression(ACompression: integer; const AInFile: string;
+              const AOutFile: string);
+    procedure RegistrarMovimentacao(Operacao, CodEmpresa, CodUsuario, Modulo,
+              Estacao: String);
     procedure ConsultarAlertas;
     procedure EnviarEmail(Msg, Destinario, OrdemServico: String);
 
@@ -5995,9 +6064,8 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   idSMTP,
   idMessage,
   idText,
-  idSSLOpenSSL,
   idAttachmentFile,
-  idExplicitTLSClientServerBase ;
+  idExplicitTLSClientServerBase , UnTempoOcioso, UnDmAlertas;
 
 
 {$R *.dfm}
@@ -6022,11 +6090,10 @@ begin
      exit;
   PVersionData := AllocMem(VersionInfoSize);
   try
-    if GetFileVersionInfo(pChar(AFileName), 0, VersionInfoSize, PVersionData) = False then
-       exit;
-//      raise Exception.Create('Não pude recuperar informação sobre versão');
-    if VerQueryValue(PVersionData, '', pointer(PFixedFileInfo), FixedFileInfoLength) = False then
-       exit;
+    if GetFileVersionInfo(pChar(AFileName), 0, VersionInfoSize,
+       PVersionData) = False then  exit;
+    if VerQueryValue(PVersionData, '', pointer(PFixedFileInfo),
+       FixedFileInfoLength) = False then exit;
     Major := PFixedFileInfo^.dwFileVersionMS shr 16;
     Minor := PFixedFileInfo^.dwFileVersionMS and $FFFF;
     Release := PFixedFileInfo^.dwFileVersionLS shr 16;
@@ -6035,32 +6102,9 @@ begin
     FreeMem(PVersionData);
   end;
   if (Major or Minor or Release or Build) <> 0 then
-    result := IntToStr(Major) +'.'+ IntToStr(Minor) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
-//    result := IntToStr(Major) +'.'+ IntToStr(Release) +'.'+ IntToStr(Build);
-//    result := IntToStr(Build);
+    result := IntToStr(Major) +'.'+ IntToStr(Minor) +'.'+ IntToStr(Release)
+                       +'.'+ IntToStr(Build);
 end;
-
-//function TDM.GetFileDateTime(AFileName: String): TDateTime;
-//var
-//  LInteger: integer;
-//  LSearchRed : TSearchRec;
-//begin
-//  LInteger := FindFirst(AFileName, faAnyFile, LSearchRed);
-//  if LInteger = 0 then
-//  begin
-//    Result := LSearchRed.TimeStamp;
-//    System.SysUtils.FindClose(LSearchRed);
-//  end
-//  else
-//  begin
-//    Result := 0;
-//  end;
-//end;
-
-//function TDM.GetFileDateAsInteger(AFileName: String): Integer;
-//begin
-//  Result := StrToInt(FormatDateTime('yyyymmdd', GetFileDateTime(AFileName)));
-//end;
 
 function TDM.GetFileDateAsIntegerAndBuildVersion(AFileName: String): Currency;
 var
@@ -6068,9 +6112,8 @@ var
   Handle: TextFile;
 begin
   try
-//    LFileVersion := GetFileDateAsInteger(AFileName);
-//    LFileVersion := LFileVersion + StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
-    LFileVersion := StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',[rfReplaceAll]));
+    LFileVersion := StrToCurr(StringReplace(GetFileVersion(AFileName), '.', '',
+    [rfReplaceAll]));
     Result := LFileVersion;
   except
     on E: Exception do
@@ -6078,6 +6121,114 @@ begin
       GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 5799', E.ClassName, E.Message);
       Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
     end;
+  end;
+end;
+
+procedure TDM.CopySingleFile(AFileName: String);
+var
+  LSourceFolder: String;
+  LTargetFolder: String;
+begin
+  LSourceFolder := ExtractFilePath(ParamStr(0))+'SPMP3';
+  LTargetFolder := ExtractFilePath(ParamStr(0));
+  CopyFile(PChar(LSourceFolder+'\'+AFileName), PChar(LTargetFolder+'\'+AFileName), False);
+end;
+
+procedure TDM.ExtractFile(AFile, APath: String);
+var
+  LZipFile: TZipFile;
+begin
+  LZipFile := TZipFile.Create;
+  LZipFile.Open(AFile, zmRead);
+  LZipFile.ExtractAll(APath);
+  LZipFile.Close;
+  FreeAndNil(LZipFile);
+end;
+
+procedure TDM.DownloadNewVersion;
+var
+  LFileSaveName: String;
+  LMemoryStream: TMemoryStream;
+  LUrl: String;
+begin
+  // text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, /
+
+  LFileSaveName := ExtractFilePath(ParamStr(0))+'SPMP3.zip';
+  LMemoryStream := TMemoryStream.Create;
+  //Creating URL for the last version
+  LUrl := 'https://github.com/masiopadilha/spmp/releases/download/'+IntToStr(GetVersionRepo)+ '/SPMP3.zip';
+  //Download last update file
+  IdHTTP.Get(LUrl, LMemoryStream);
+  //Saving file
+  LMemoryStream.SaveToFile(LFileSaveName);
+  //ExtractFiles
+  ExtractFile(LFileSaveName, ExtractFilePath(ParamStr(0))+'\SPMP3');
+  FreeAndNil(LMemoryStream);
+end;
+
+procedure TDM.CheckApplicationVersion;
+var
+  LVerExec: Integer;
+  LVerRepo: Integer;
+begin
+//  FrmTelaSplash.lblCheckUpdate.BringToFront;
+
+  LVerExec := DM.FVersaoMaquina;
+  LVerRepo := DM.FVersaoRepo;
+  if DM.FVersaoMaquina < LVerRepo then
+  begin
+    if Application.MessageBox('Há uma nova versão disponível.' +''#13#13''+
+                              'Se você clicar em SIM, o download começará e' +''#13''+
+                              'a nova versão será iniciada automaticamente.'+''#13''+
+                              'Então, apenas espere.' +''#13#13''+
+                              'Você quer baixá-la?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+
+    begin
+      DM.DownloadNewVersion; //Download the New Pack version and extract it.
+      DM.CopySingleFile('Updater.bat'); //Copy from the New Pack Folder to the current folder
+
+      if DM.FNomeUsuario <> 'sam_spmp' then
+      begin
+        DM.RetornaDataHoraServidor;
+        DM.qryAcesso.Edit;
+        DM.qryAcessoDATASAIDA.AsDateTime  := DM.FDataHoraServidor;
+        DM.qryAcessoATIVO.AsString        := 'N';
+        DM.qryAcessoPERIODO.AsString      := IntToStr(MinutesBetween(DM.qryAcessoDATAACESSO.AsDateTime, DM.qryAcessoDATASAIDA.AsDateTime));
+        DM.qryAcesso.Post;
+        DM.qryUsuario.Edit;
+        DM.qryUsuarioLOGADO.AsString       := 'N';
+        DM.qryUsuarioQUEDAENERGIA.AsString := 'N';
+        DM.qryUsuario.Post;
+      end;
+      DM.qryUsuario.Close;
+      DM.qryFormatoCodigo.Close;
+      DM.qryUsuarioAcessos.Close;
+
+      ShellExecute(0, 'open', PChar(ExtractFilePath(ParamStr(0))+'\Updater.bat'), nil, nil, SW_HIDE);
+      Halt;
+    end;
+  end;
+end;
+
+procedure TDM.ResourceExtract(AResourceName, APath, AFileName: String);
+var
+  LResouce: TResourceStream;
+begin
+  LResouce := TResourceStream.Create(HInstance, AResourceName, RT_RCDATA);
+  LResouce.SaveToFile(APath+AFileName);
+  FreeAndNil(LResouce);
+end;
+
+function TDM.ResourceExists(const ResourceName: string): Boolean;
+var
+  HInstance: HMODULE;
+begin
+  Result := False;
+  HInstance := GetModuleHandle(nil);
+  if HInstance <> 0 then
+  begin
+    if FindResource(HInstance, PChar(ResourceName), RT_RCDATA) <> 0 then
+      Result := True;
   end;
 end;
 
@@ -6105,6 +6256,67 @@ end;
 //    ShowMessage('Erro ao executar com privilégios de administrador');
 //  end;
 //end;
+
+function TDM.GetVersionRepo: Integer;
+var
+  LUri: TIdURI;
+  LUrl: String;
+  LLastBarIndex: Integer;
+begin
+  Result := 0;
+//  IdHTTP.Request.Accept := 'text/html, image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, /';
+  IdHTTP.Request.Accept := '*/*';
+  IdHTTP.Request.AcceptEncoding := 'gzip, deflate';
+  IdHTTP.Request.UserAgent := 'Mozilla/4.0';
+  IdHTTP.IOHandler := IdSSLIOHandlerSocketOpenSSL1;
+  IdHTTP.HandleRedirects := True;
+
+  // Fazer solicitação HEAD para obter o URL final após redirecionamentos
+  LUri := TIdURI.Create(FUrlSPMPBuilder);
+  IdHTTP.Head(LUri.URI);
+  LUrl := IdHTTP.Request.URL;
+
+  // Encontra o índice da última barra na string
+  LLastBarIndex := LastDelimiter('/', LUrl);
+
+  // Verifica se encontrou a barra
+  if LLastBarIndex > 0 then
+    // Extrai o texto após a última barra
+    Result := StrToInt(Copy(LUrl, LLastBarIndex + 1, Length(LUrl) - LLastBarIndex));
+end;
+
+function TDM.GetVersionLocal(AFileName: String): string;
+var
+  Size, Size2: DWord;
+  Pt, Pt2: Pointer;
+  Ver: String;
+begin
+  Size := GetFileVersionInfoSize(PChar(AFileName), Size2);
+  if Size > 0 then
+    begin
+      GetMem (Pt, Size);
+      try
+        GetFileVersionInfo(PChar(AFileName), 0, Size, Pt);
+        VerQueryValue (Pt, '\', Pt2, Size2);
+        with TVSFixedFileInfo (Pt2^) do
+          begin
+            FVersaoMacro := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+                            IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                            IntToStr (HiWord (dwFileVersionLS));
+
+            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
+                   IntToStr (LoWord (dwFileVersionMS)) + '.' +
+                   IntToStr (HiWord (dwFileVersionLS)) + '.' +
+                   IntToStr (LoWord (dwFileVersionLS));
+//            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
+            FVersaoMaquina := StrToInt(StringReplace(Ver, '.', '',[rfReplaceAll]));
+            Result := Ver;
+          end;
+      finally
+        FreeMem (Pt);
+      end;
+    end;
+end;
 
 procedure TDM.CheckUpdateVersion;
 var
@@ -6140,40 +6352,6 @@ begin
       Application.MessageBox('Falha ao atualizar o SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
     end;
   end;
-end;
-
-
-function TDM.GetVersion(AFileName: String): string;
-var
-  Size, Size2: DWord;
-  Pt, Pt2: Pointer;
-  Ver: String;
-begin
-  Size := GetFileVersionInfoSize(PChar(AFileName), Size2);
-  if Size > 0 then
-    begin
-      GetMem (Pt, Size);
-      try
-        GetFileVersionInfo(PChar(AFileName), 0, Size, Pt);
-        VerQueryValue (Pt, '\', Pt2, Size2);
-        with TVSFixedFileInfo (Pt2^) do
-          begin
-            FVersaoMacro := IntToStr (HiWord (dwFileVersionMS)) + '.' +
-                            IntToStr (LoWord (dwFileVersionMS)) + '.' +
-                            IntToStr (HiWord (dwFileVersionLS));
-
-            Ver := IntToStr (HiWord (dwFileVersionMS)) + '.' +
-                   IntToStr (LoWord (dwFileVersionMS)) + '.' +
-                   IntToStr (HiWord (dwFileVersionLS)) + '.' +
-                   IntToStr (LoWord (dwFileVersionLS));
-//            Result := StringReplace(Ver, '.', '',[rfReplaceAll]);
-            FVersaoMaquina := StrToInt(StringReplace(Ver, '.', '',[rfReplaceAll]));
-            Result := Ver;
-          end;
-      finally
-        FreeMem (Pt);
-      end;
-    end;
 end;
 
 function TDM.IsAdmin: Boolean;
@@ -7801,20 +7979,20 @@ Result := False;
 
 if DM.FNomeUsuario <> LowerCase('sam_spmp') then
   begin
-    if (Trim(qryUsuarioSENHAALTERADA.AsString) <> 'S') then
+    if (Trim(qryLoginSENHAALTERADA.AsString) <> 'S') then
       begin
         if Application.MessageBox('O sistema detectou que sua senha ainda não foi alterada desde o seu cadastro.'+#13+#13+'Será necessário fazê-lo agora, deseja prosseguir ?','SPMP', MB_YESNO + MB_ICONQUESTION)=IDYes then
           begin
             LSenhaAtual := PasswordInputBox('Senha temporária atual','Digite sua senha:');
 
             // Verificar senha informada.
-            if (LSenhaAtual = EmptyStr) or (LSenhaAtual <> Crypt('D', qryUsuarioSENHA.AsString)) then
+            if (LSenhaAtual = EmptyStr) or (LSenhaAtual <> Crypt('D', qryLoginSENHA.AsString)) then
               begin
                 MessageDlg('Senha temporária incorreta!', mtWarning, [mbOK], 0);
               end
             else
               begin // SenhaAtual foi informada corretamente.
-                if LSenhaAtual = Crypt('D', qryUsuarioSENHA.AsString) then
+                if LSenhaAtual = Crypt('D', qryLoginSENHA.AsString) then
                   begin
                     LNovaSenha := PasswordInputBox('Nova Senha','Digite sua nova senha.');
                     if Length(LNovaSenha) < 6 then
@@ -7833,12 +8011,12 @@ if DM.FNomeUsuario <> LowerCase('sam_spmp') then
                         else
                         if (LNovaSenha <> EmptyStr) and (LNovaSenhaConfirmacao <> EmptyStr) and (LNovaSenha = LNovaSenhaConfirmacao) then
                           begin
-                            qryUsuario.Edit;
-                            qryUsuarioSENHA.AsString         := Crypt('C', LNovaSenha);
-                            qryUsuarioSENHAALTERADA.AsString := 'S';
-                            qryUsuarioBLOQUEIO.AsInteger     := 0;
+                            qryLogin.Edit;
+                            qryLoginSENHA.AsString         := Crypt('C', LNovaSenha);
+                            qryLoginSENHAALTERADA.AsString := 'S';
+                            qryLoginBLOQUEIO.AsInteger     := 0;
 
-                            qryUsuario.Post;
+                            qryLogin.Post;
                             Result := True;
                           end;
                       end;
@@ -9186,15 +9364,19 @@ var
   Ini: TIniFile;
   Handle: TextFile;
 begin
-if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
+  if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
   begin
     Ini :=  TIniFile.Create(ExtractFilePath(Application.ExeName) + 'spmp.ini');
 
-    DM.FDatabase := Ini.ReadString( 'Conexao', 'DataBase', '');
-    DM.FHost     := Ini.ReadString( 'Conexao', 'HostName', '');
-    DM.FUserName := Ini.ReadString( 'Conexao', 'User_Name', '');
+    DM.FDatabase := Ini.ReadString('Conexao', 'DataBase', '');
+    DM.FHost     := Ini.ReadString('Conexao', 'HostName', '');
+    DM.FUserName := Ini.ReadString('Conexao', 'User_Name', '');
     DM.FPort     := Ini.ReadString('Conexao', 'Port', '');
     DM.FPassword := Crypt('D', (Ini.ReadString( 'Conexao', 'Password', '')));
+
+    DM.FHostFTP     := Ini.ReadString('Update', 'HostFTP', '');
+    DM.FPasswordFTP := Ini.ReadString('Update', 'PasswordFTP', '');
+    DM.FUsernameFTP := Ini.ReadString('Update', 'UsernameFTP', '');
 
 //    DM.FServerPathExeVersion := Ini.ReadString( 'ARQUIVOS', 'exeRemoto', '');
     DM.FServerPathExeVersion := '\\'+DM.FHost+'\update_sam\spmp3.exe';
@@ -9206,8 +9388,7 @@ if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
     FDConnSPMP3.Params.Values['Port']      := DM.FPort;
 
     Ini.Free;
-  end
-else
+  end else
   begin
     Try
       Application.CreateForm(TFrmTelaGerenciador, FrmTelaGerenciador);
@@ -9232,31 +9413,34 @@ else
   DM._PORTA          := DM.qryConfigsportaemail.AsString;
   DM._SMTP           := DM.qryConfigssmtp.AsString;
 
+  //Consulta as versões da máquina e no repositório
+  DM.FUrlSPMPBuilder := 'https://github.com/masiopadilha/spmp/releases/latest';
+  DM.GetVersionLocal(Application.ExeName);
+  DM.FVersaoRepo := DM.GetVersionRepo;
 
-  DM.GetVersion(Application.ExeName);
-
-  if DM.FAutoUpdate = True then
-  begin
-    if DM.FVersaoBanco > DM.FVersaoMaquina then
-    begin
-      try
-        DM.CheckUpdateVersion;
-      except
-        on E: Exception do
-        begin
-          GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 8911', E.ClassName, E.Message);
-          Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
-        end;
-      end;
-    end else
-    if DM.FVersaoBanco < DM.FVersaoMaquina then
-    begin
-      DM.qryConfigs.Edit;
-      DM.qryConfigsversion.AsInteger := DM.FVersaoMaquina;
-      DM.qryConfigs.Post;
-      DM.FVersaoBanco := DM.FVersaoMaquina;
-    end;
-  end;
+//
+//  if DM.FAutoUpdate = True then
+//  begin
+//    if DM.FVersaoBanco > DM.FVersaoMaquina then
+//    begin
+//      try
+//        DM.CheckUpdateVersion;
+//      except
+//        on E: Exception do
+//        begin
+//          GravaLog('Falha ao buscar atualização do SPMP3. DM Linha: 8911', E.ClassName, E.Message);
+//          Application.MessageBox('Falha ao buscar atualização do SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+//        end;
+//      end;
+//    end else
+//    if DM.FVersaoBanco < DM.FVersaoMaquina then
+//    begin
+//      DM.qryConfigs.Edit;
+//      DM.qryConfigsversion.AsInteger := DM.FVersaoMaquina;
+//      DM.qryConfigs.Post;
+//      DM.FVersaoBanco := DM.FVersaoMaquina;
+//    end;
+//  end;
 end;
 
 procedure TDM.dsOrdemServicoGerenciaDataChange(Sender: TObject; Field: TField);
@@ -10568,6 +10752,7 @@ begin
   End;
 
 end;
+
 
 end.
 

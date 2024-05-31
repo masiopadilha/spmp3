@@ -1,4 +1,10 @@
 program SPMP3;
+
+
+
+
+{$R *.dres}
+
 uses
   Vcl.Forms,
   Midas,
@@ -170,7 +176,10 @@ uses
   UnTelaCadManutProgEquipMObra in '..\Units\UnTelaCadManutProgEquipMObra.pas' {FrmTelaCadManutProgEquipMObra},
   UnTelaCadLubrificProgEquipMObra in '..\Units\UnTelaCadLubrificProgEquipMObra.pas' {FrmTelaCadLubrificProgEquipMObra},
   unRelatorioPadrao in '..\Units\Report\unRelatorioPadrao.pas' {frmRelatorioPadrao},
-  unTelaInspVencRelatManut in '..\Units\Report\unTelaInspVencRelatManut.pas' {FrmTelaInspVencRelatManut};
+  unTelaInspVencRelatManut in '..\Units\Report\unTelaInspVencRelatManut.pas' {FrmTelaInspVencRelatManut},
+  UnTempoOcioso in '..\Units\UnTempoOcioso.pas' {frmSistemaOcioso},
+  UnTelaCadManutProgFamEquipConsulta in '..\Units\UnTelaCadManutProgFamEquipConsulta.pas' {FrmTelaCadManutProgFamEquipConsulta},
+  UnTelaCadLubrificProgFamEquipConsulta in '..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas' {FrmTelaCadLubrificProgFamEquipConsulta};
 
 {$R *.res}
 begin
@@ -188,10 +197,11 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.MainFormOnTaskbar := True;
   //Application.Title := '';
   TStyleManager.TrySetStyle('Windows10 Malibu');
-  Application.Title := 'SPMP - Sistema do Plano de Manutenção LTDA.';
+  Application.Title := 'SPMP - Sistema do Plano de Manutenção Programada';
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
+  Application.CreateForm(TfrmSistemaOcioso, frmSistemaOcioso);
   FrmTelaAcesso.ShowModal;
   if DM.FAcessoLiberado = True then
     begin
@@ -212,6 +222,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
     FreeAndNil(DMAlertas);
     FreeAndNil(DmRelatorios);
     FreeAndNil(DM);
+
     Application.Terminate;
   end;
 end.
