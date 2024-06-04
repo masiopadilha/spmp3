@@ -33,8 +33,8 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       Height = 16
     end
     inherited BtnAjuda: TButton
-      Left = 510
-      ExplicitLeft = 506
+      Left = 509
+      ExplicitLeft = 509
     end
   end
   inherited PCentro: TPanel
@@ -277,7 +277,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       end
       object BtnDesprogramar: TButton
         Left = 332
-        Top = 260
+        Top = 265
         Width = 98
         Height = 25
         Caption = 'Desprogramar'
@@ -288,7 +288,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       end
       object BtnProgramar: TButton
         Left = 434
-        Top = 260
+        Top = 265
         Width = 89
         Height = 25
         Caption = 'Programar'

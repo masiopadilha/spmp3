@@ -41,6 +41,7 @@ type
     procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdManutKeyPress(Sender: TObject; var Key: Char);
+    procedure GrdLubrificKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String; Grid:TDBgrid);
@@ -66,7 +67,7 @@ var
   i: smallint;
 begin
   // retira a formata��o em negrito de todas as colunas
-  for i := 0 to Grid.Columns.Count - 1 do
+  if Grid.Columns[i].Title.Caption <> 'Equipamento'  then
     Grid.Columns[i].Title.Font.Style := [];
 
   // configura a ordena��o ascendente ou descendente
@@ -86,7 +87,7 @@ begin
     TFDQuery(Grid.DataSource.DataSet).AddIndex(sIndexName, Column.FieldName, EmptyStr, [oOrdenacao]);
 
   // formata o t�tulo da coluna em negrito
-  Column.Title.Font.Style := [fsBold];
+ // Column.Title.Font.Style := [fsBold];
 
   // atribui a ordena��o selecionada
   TFDQuery(Grid.DataSource.DataSet).IndexName := sIndexName;
@@ -222,9 +223,9 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdManut.SelectedRows.Count - 1 do
         begin
+          DM.qryManutVenc.GotoBookmark(GrdManut.SelectedRows.Items[I]);
           GrdManut.SelectedRows.CurrentRowSelected := True;
 
-          DM.qryManutVenc.GotoBookmark(GrdManut.SelectedRows.Items[I]);
           DM.qryManutProgEquip.Close;
           DM.qryManutProgEquip.Params[0].AsString := DM.qryManutVencCODIGO.AsString;
           DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
@@ -507,6 +508,8 @@ case PCInspecoes.ActivePageIndex of
 
         DM.MSGAguarde('', False);
 
+        GrdManut.UnselectAll;
+
         ManutExec := True;
       end;
     End;
@@ -527,8 +530,8 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
         begin
-          GrdLubrific.SelectedRows.CurrentRowSelected := True;
           DM.qryLubrificVenc.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
+          GrdLubrific.SelectedRows.CurrentRowSelected := True;
 
           DM.qryLubrificProgEquip.Close;
           DM.qryLubrificProgEquip.Params[0].AsString := DM.qryLubrificVencCODIGO.AsString;
@@ -802,6 +805,8 @@ case PCInspecoes.ActivePageIndex of
 
         DM.MSGAguarde('', False);
 
+        GrdLubrific.UnselectAll;
+
         LubrificExec := True;
       end;
     End;
@@ -823,8 +828,8 @@ case PCInspecoes.ActivePageIndex of
 
         for I := 0 to GrdRotas.SelectedRows.Count - 1 do
         begin
-          GrdRotas.SelectedRows.CurrentRowSelected := True;
           DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
+          GrdRotas.SelectedRows.CurrentRowSelected := True;
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
                                             , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
                                             , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
@@ -951,6 +956,8 @@ case PCInspecoes.ActivePageIndex of
 
           DM.MSGAguarde('', False);
 
+          GrdRotas.UnselectAll;
+
           RotaExec := True;
         end;
         end;
@@ -965,51 +972,24 @@ begin
   case PCInspecoes.TabIndex of
     0:
       begin
-        DM.qryManutVenc.First;
-        while not DM.qryManutVenc.Eof = True do
-        begin
-          GrdManut.DataSource.DataSet.RecNo := DM.qryManutVenc.RecNo;
-
-          if chbTodos.Checked = True then
-            GrdManut.SelectedRows.CurrentRowSelected := True
-          else
-            GrdManut.SelectedRows.CurrentRowSelected := False;
-
-          DM.qryManutVenc.Next;
-        end;
-        DM.qryManutVenc.First;
+        if chbTodos.Checked = True then
+          GrdManut.SelectAll
+        else
+          GrdManut.UnselectAll;
       end;
     1:
       begin
-        DM.qryLubrificVenc.First;
-        while not DM.qryLubrificVenc.Eof = True do
-        begin
-          GrdLubrific.DataSource.DataSet.RecNo := DM.qryLubrificVenc.RecNo;
-
-          if chbTodos.Checked = True then
-            GrdLubrific.SelectedRows.CurrentRowSelected := True
-          else
-            GrdLubrific.SelectedRows.CurrentRowSelected := False;
-
-          DM.qryLubrificVenc.Next;
-        end;
-        DM.qryLubrificVenc.First;
+        if chbTodos.Checked = True then
+          GrdLubrific.SelectAll
+        else
+          GrdLubrific.UnselectAll;
       end;
     2:
       begin
-        DM.qryRotaEquipVenc.First;
-        while not DM.qryRotaEquipVenc.Eof = True do
-        begin
-          GrdRotas.DataSource.DataSet.RecNo := DM.qryRotaEquipVenc.RecNo;
-
-          if chbTodos.Checked = True then
-            GrdRotas.SelectedRows.CurrentRowSelected := True
-          else
-            GrdRotas.SelectedRows.CurrentRowSelected := False;
-
-          DM.qryRotaEquipVenc.Next;
-        end;
-        DM.qryRotaEquipVenc.First;
+        if chbTodos.Checked = True then
+          GrdRotas.SelectAll
+        else
+          GrdRotas.UnselectAll;
       end;
   end;
 end;
@@ -1082,8 +1062,28 @@ end;
 procedure TFrmTelaInspVenc.FormShow(Sender: TObject);
 begin
   inherited;
-  GrdManut.SetFocus;
-  GrdManut.SelectedRows.CurrentRowSelected := True;
+//  GrdManut.SetFocus;
+//  GrdManut.SelectedRows.CurrentRowSelected := True;
+end;
+
+procedure TFrmTelaInspVenc.GrdLubrificKeyPress(Sender: TObject; var Key: Char);
+var
+  LCampo : String;
+begin
+  inherited;
+  if (Key = #13) and (GrdLubrific.SelectedIndex = 4) then
+  begin
+    DM.FTabela_auxiliar := 250;
+    DM.FNomeConsulta    := 'Equipamentos';
+    DM.FParamAuxiliar[1] := 'DESCRICAO';
+    if DM.ConsultarCombo <> EmptyStr then
+    begin
+      DM.qryLubrificVenc.Filtered := False;
+      DM.qryLubrificVenc.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(DM.FCodCombo);
+      DM.qryLubrificVenc.Filtered := True;
+    end else
+      DM.qryLubrificVenc.Filtered := False;
+  end;
 end;
 
 procedure TFrmTelaInspVenc.GrdManutDrawColumnCell(Sender: TObject;
@@ -1219,14 +1219,14 @@ begin
      Panel1.Visible := True;
      chbTodos.Top := 46;
      GrdManut.SetFocus;
-     GrdManut.SelectedRows.CurrentRowSelected := True;
+     //GrdManut.SelectedRows.CurrentRowSelected := True;
    end;
    1:
    begin
      chbTodos.Top := 46;
      Panel1.Visible := True;
      GrdLubrific.SetFocus;
-     GrdLubrific.SelectedRows.CurrentRowSelected := True;
+     //GrdLubrific.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;
    end;
    2:
@@ -1234,7 +1234,7 @@ begin
      chbTodos.Top := 6;
      Panel1.Visible := False;
      GrdRotas.SetFocus;
-     GrdRotas.SelectedRows.CurrentRowSelected := True;
+     //GrdRotas.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;
    end;
   end;
@@ -1252,7 +1252,7 @@ begin
     GrdManut.DataSource.DataSet.EnableControls;
 
     GrdManut.SetFocus;
-    GrdManut.SelectedRows.CurrentRowSelected := True;
+//    GrdManut.SelectedRows.CurrentRowSelected := True;
    end;
    1:
    begin
@@ -1261,7 +1261,7 @@ begin
      GrdLubrific.DataSource.DataSet.EnableControls;
 
      GrdLubrific.SetFocus;
-     GrdLubrific.SelectedRows.CurrentRowSelected := True;
+ //    GrdLubrific.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;
    end;
    2:
@@ -1271,7 +1271,7 @@ begin
      GrdRotas.DataSource.DataSet.EnableControls;
 
      GrdRotas.SetFocus;
-     GrdRotas.SelectedRows.CurrentRowSelected := True;
+//     GrdRotas.SelectedRows.CurrentRowSelected := True;
      chbTodos.Checked := False;
    end;
   end;

@@ -953,11 +953,6 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
               item
                 Expanded = False
                 FieldName = 'CODORDEMSERVICO'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = []
                 Title.Alignment = taCenter
                 Title.Font.Charset = DEFAULT_CHARSET
                 Title.Font.Color = clWindowText
@@ -980,33 +975,18 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
               item
                 Expanded = False
                 FieldName = 'DESCRICAO'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = []
                 Width = 190
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'FREQUENCIA'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = []
                 Title.Alignment = taCenter
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'DTAINICIO1'
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -12
-                Font.Name = 'Segoe UI'
-                Font.Style = []
                 Title.Alignment = taCenter
                 Visible = True
               end>

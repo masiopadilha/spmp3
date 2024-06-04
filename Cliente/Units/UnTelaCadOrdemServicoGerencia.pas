@@ -1930,20 +1930,24 @@ procedure TFrmTelaCadOrdemServicoGerencia.ParcialClick(Sender: TObject);
 begin
   inherited;
   Try
-  if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
+    if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
+
     with DM.qryOrdemServico do
-      begin
-        Close;
-        Params[0].AsString := DM.FCodEmpresa;
-        Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
-        Open;
-        Edit;
-      end;
+    begin
+      Close;
+      Params[0].AsString := DM.FCodEmpresa;
+      Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
+      Open;
+      Edit;
+    end;
+
     Timer1.Enabled := False;
+
     Application.CreateForm(TFrmTelaCadOrdemServicoMObraExec, FrmTelaCadOrdemServicoMObraExec);
     FrmTelaCadOrdemServicoMObraExec.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoMObraExec);
+
     Timer1.Enabled := True;
   End;
 end;
@@ -2023,23 +2027,27 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
-if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
+  if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
 
-if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
+  if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
     Timer1.Enabled := False;
+
     DM.MSGAguarde('');
+
     DM.qryDataHoraServidor.Refresh;
     DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
+
     if (DM.qryOrdemServico.Active = False) or ((DM.qryOrdemServico.Active = True) and (DM.qryOrdemServicoCODIGO.AsInteger <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)) then
       with DM.qryOrdemServico do
-        begin
-          Close;
-          Params[0].AsString := DM.FCodEmpresa;
-          Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
-          Open;
-          Edit;
-        end;
+      begin
+        Close;
+        Params[0].AsString := DM.FCodEmpresa;
+        Params[1].AsString := DBGrid.DataSource.DataSet.FieldByName('CODIGO').AsString;
+        Open;
+        Edit;
+      end;
+
     DM.qryOrdemServicoEquipe.Open;
     DM.qryOrdemServicoEquipeMObra.Open;
     DM.qryOrdemServicoServSolic.Close;
@@ -2050,6 +2058,7 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     DM.qryOrdemServicoServExec.Open;
     DM.qryOrdemServicoEquipeMObraUtil.Open;
     DM.qryOrdemServicoEquipeMObraMovim.Open;
+
     DM.qryOrdemServicoMObraDisp.Close;
     DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', EdtData1.Date) + ' 00:00:00';
     DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', EdtData2.Date) + ' 23:59:59';
@@ -2059,11 +2068,14 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     else
       DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
     DM.qryOrdemServicoMObraDisp.Open;
+
     DM.qryTotalHomemHora.Close;
     DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
     DM.qryTotalHomemHora.Open;
     DM.qryTotalHomemHoraSeqHora.Open;
+
     LiberarMaodeObraEmExecucao;
+
     DM.qryOrdemServico.Edit;
     DM.qryOrdemServicoDATAFIM.AsDateTime     := DM.FDataHoraServidor;
     DM.qryOrdemServicoDATAFIMREAL.AsDateTime := DM.FDataHoraServidor;
@@ -2071,36 +2083,40 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     DM.qryOrdemServicoSITUACAO.AsString      := 'LIBERADA';
     DM.qryOrdemServicoDATAFIMREAL.AsDateTime := DM.FDataHoraServidor;
     DM.qryOrdemServico.Post;
+
     DM.qryOrdemServicoGerencia.Edit;
     DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'LIBERADA';
     DM.qryOrdemServicoGerencia.Post;
+
     //Localiza e atualiza o status da Solic. de Trab
     if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
+    begin
+      DM.qrySolicitacaoTrab.Close;
+      DM.qrySolicitacaoTrab.Params[0].AsString := DM.qryOrdemServicoCODSOLICITACAOTRAB.AsString;
+      DM.qrySolicitacaoTrab.Params[1].AsString := DM.FCodEmpresa;
+      DM.qrySolicitacaoTrab.Open;
+      if DM.qrySolicitacaoTrab.IsEmpty = False then
       begin
-        DM.qrySolicitacaoTrab.Close;
-        DM.qrySolicitacaoTrab.Params[0].AsString := DM.qryOrdemServicoCODSOLICITACAOTRAB.AsString;
-        DM.qrySolicitacaoTrab.Params[1].AsString := DM.FCodEmpresa;
-        DM.qrySolicitacaoTrab.Open;
-        if DM.qrySolicitacaoTrab.IsEmpty = False then
-          begin
-            DM.qrySolicitacaoTrab.Edit;
-            DM.qrySolicitacaoTrabSITUACAO.AsString := 'LIBERADA';
-            DM.qrySolicitacaoTrab.Post;
-          end;
+        DM.qrySolicitacaoTrab.Edit;
+        DM.qrySolicitacaoTrabSITUACAO.AsString := 'LIBERADA';
+        DM.qrySolicitacaoTrab.Post;
       end;
-     while not DM.qryOrdemServicoServSolic.Eof = True do
-       begin
-         DM.qryOrdemServicoServExec.Append;
-         DM.qryOrdemServicoServExecCODEMPRESA.AsString       := DM.FCodEmpresa;
-         DM.qryOrdemServicoServExecCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger;
-         DM.qryOrdemServicoServExecPARTE.AsString            := DM.qryOrdemServicoServSolicPARTE.AsString;
-         DM.qryOrdemServicoServExecITEM.AsString             := DM.qryOrdemServicoServSolicITEM.AsString;
-         DM.qryOrdemServicoServExecDESCRICAO.AsString        := DM.qryOrdemServicoServSolicDESCRICAO.AsString;
-         DM.qryOrdemServicoServExecEQUIPPARADO.AsString      := DM.qryOrdemServicoServSolicEQUIPPARADO.AsString;
-         DM.qryOrdemServicoServExecTEMPOEXECUCAO.AsFloat     := DM.qryOrdemServicoServSolicTEMPOEXECUCAO.AsFloat;
-         DM.qryOrdemServicoServExec.Post;
-         DM.qryOrdemServicoServSolic.Next;
-       end;
+    end;
+
+    while not DM.qryOrdemServicoServSolic.Eof = True do
+    begin
+      DM.qryOrdemServicoServExec.Append;
+      DM.qryOrdemServicoServExecCODEMPRESA.AsString       := DM.FCodEmpresa;
+      DM.qryOrdemServicoServExecCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger;
+      DM.qryOrdemServicoServExecPARTE.AsString            := DM.qryOrdemServicoServSolicPARTE.AsString;
+      DM.qryOrdemServicoServExecITEM.AsString             := DM.qryOrdemServicoServSolicITEM.AsString;
+      DM.qryOrdemServicoServExecDESCRICAO.AsString        := DM.qryOrdemServicoServSolicDESCRICAO.AsString;
+      DM.qryOrdemServicoServExecEQUIPPARADO.AsString      := DM.qryOrdemServicoServSolicEQUIPPARADO.AsString;
+      DM.qryOrdemServicoServExecTEMPOEXECUCAO.AsFloat     := DM.qryOrdemServicoServSolicTEMPOEXECUCAO.AsFloat;
+      DM.qryOrdemServicoServExec.Post;
+      DM.qryOrdemServicoServSolic.Next;
+    end;
+
     DM.qryOrdemServicoEquipe.Close;
     DM.qryOrdemServicoEquipeMObra.Close;
     DM.qryOrdemServicoEquipeRecursos.Close;
@@ -2112,7 +2128,9 @@ if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os rec
     DM.qryTotalHomemHora.Close;
     DM.qryTotalHomemHoraSeqHora.Close;
     DM.qrySolicitacaoTrab.Close;
+
     DM.MSGAguarde('', False);
+
     Timer1.Enabled := True;
   end;
 end;

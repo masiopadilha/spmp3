@@ -4,10 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
+  System.IOUtils, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids,
   JvExDBGrids, JvDBGrid, Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker,
-  JvComponentBase, JvDBGridExport, JvBaseDlg, JvProgressDialog;
+  JvComponentBase, JvDBGridExport, JvBaseDlg, JvProgressDialog, JvExGrids,
+  JvStringGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmTelaCadLubrificProgFamEquipConsulta = class(TFrmTelaPaiOKCancel)
@@ -21,6 +24,9 @@ type
     BtnConsultar: TButton;
     JvProgressDialog1: TJvProgressDialog;
     SaveDialog1: TSaveDialog;
+    grid: TJvStringGrid;
+    FDMemTLubrificacaoExcel: TFDMemTable;
+    DSLubrirficacaoExcel: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure chkProgramadaClick(Sender: TObject);
@@ -35,6 +41,8 @@ type
 
     LEquipamento, LTipoManutencao, LProgramadas,  LAtivas: String;
 
+    procedure LimpaGrid(Grid: TStringGrid);
+    procedure CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
     procedure SaveDoc(AExportClass: TJvCustomDBGridExportClass; const Filename: string);
     procedure DoExportProgress(Sender: TObject; Min, Max,
       Position: Cardinal; const AText: string; var AContinue: Boolean);
@@ -52,6 +60,48 @@ implementation
 
 uses UnDM, UnTelaConsulta;
 
+
+procedure TFrmTelaCadLubrificProgFamEquipConsulta.LimpaGrid(Grid: TStringGrid);
+var lin, col: integer;
+begin
+     for lin := 1 to Grid.RowCount - 1 do
+       for col := 0 to Grid.ColCount - 1 do
+         Grid.Cells[col, lin] := '';
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquipConsulta.CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
+var
+  I, J: Integer;
+begin
+  // Limpe o TStringGrid, se necessário
+  LimpaGrid(StringGrid);
+
+  // Defina o número de colunas do TStringGrid
+  StringGrid.ColCount := Query.FieldCount;
+  StringGrid.RowCount := Query.RecordCount + 1;
+
+  // Preencha os cabeçalhos das colunas com os nomes dos campos do ClientDataSet
+  for I := 0 to Query.FieldCount - 1 do
+  begin
+    if Query.Fields[I].Visible = True then
+      StringGrid.Cells[I, 0] := Query.Fields[I].DisplayLabel;
+  end;
+
+  // Preencha as células do TStringGrid com os valores da Query
+  Query.First;
+  J := 1; // Comece a partir da segunda linha
+  while not Query.Eof do
+  begin
+    for I := 0 to Query.FieldCount - 1 do
+    begin
+      if Query.Fields[I].Visible = True then
+        StringGrid.Cells[I, J] := Query.Fields[I].AsString;
+    end;
+
+    Query.Next;
+    Inc(J);
+  end;
+end;
 
 procedure TFrmTelaCadLubrificProgFamEquipConsulta.DBGridKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
@@ -172,11 +222,64 @@ end;
 
 procedure TFrmTelaCadLubrificProgFamEquipConsulta.BtnConsultarClick(
   Sender: TObject);
+var
+  caminho: string;
 begin
   inherited;
-  SaveDialog1.Filename := 'Consulta de Lubrificações.'+FormatDateTime('dd.mm.yyyy.hh.sss', now)+'.csv';
-  if SaveDialog1.Execute then
-    SaveDoc(TJvDBGridCSVExport, SaveDialog1.Filename);
+//  SaveDialog1.Filename := 'Consulta de Lubrificações.'+FormatDateTime('dd.mm.yyyy.hh.sss', now)+'.csv';
+//  if SaveDialog1.Execute then
+//    SaveDoc(TJvDBGridCSVExport, SaveDialog1.Filename);
+
+  caminho := 'C:\SPMP3\Planilhas';
+
+  // Verifica se a pasta existe
+  if not TDirectory.Exists(caminho) then
+  begin
+    // Cria a pasta se não existir
+    try
+      TDirectory.CreateDirectory(caminho);
+    except
+      on E: Exception do
+        ShowMessage('Erro ao criar a pasta: C:\SPMP3\Planilhas' + E.Message);
+    end;
+  end
+  else
+    begin;
+
+      FDMemTLubrificacaoExcel.Close;
+      FDMemTLubrificacaoExcel.CopyDataSet(DM.qryLubrificProgFamEquipCons, [coStructure, coRestart, coAppend, coCalcFields]);
+
+      FDMemTLubrificacaoExcel.FieldByName('CODEQUIPAMENTO').DisplayLabel      := 'Cód. Equipamento';
+      FDMemTLubrificacaoExcel.FieldByName('CODEQUIPAMENTO').Index             := 0;
+      FDMemTLubrificacaoExcel.FieldByName('EQUIPAMENTO').DisplayLabel         := 'Equipamento';
+      FDMemTLubrificacaoExcel.FieldByName('EQUIPAMENTO').Index                := 1;
+      FDMemTLubrificacaoExcel.FieldByName('CENTROCUSTO').DisplayLabel         := 'Centro de Custo';
+      FDMemTLubrificacaoExcel.FieldByName('CENTROCUSTO').Index                := 2;
+      FDMemTLubrificacaoExcel.FieldByName('TIPOMANUTENCAO').DisplayLabel      := 'Tipo de Manutenção';
+      FDMemTLubrificacaoExcel.FieldByName('TIPOMANUTENCAO').Index             := 3;
+      FDMemTLubrificacaoExcel.FieldByName('LUBRIFICACAO').DisplayLabel        := 'Lubrificação';
+      FDMemTLubrificacaoExcel.FieldByName('LUBRIFICACAO').Index               := 4;
+      FDMemTLubrificacaoExcel.FieldByName('DIAS').DisplayLabel                := 'Dias (d)';
+      FDMemTLubrificacaoExcel.FieldByName('DIAS').Index                       := 5;
+      FDMemTLubrificacaoExcel.FieldByName('ATIVO').DisplayLabel               := 'Ativo';
+      FDMemTLubrificacaoExcel.FieldByName('ATIVO').Index                      := 6;
+      FDMemTLubrificacaoExcel.FieldByName('PLANEJADA').DisplayLabel           := 'Programada';
+      FDMemTLubrificacaoExcel.FieldByName('PLANEJADA').Index                  := 7;
+      FDMemTLubrificacaoExcel.FieldByName('CODLUBRIFICFAMILIA').DisplayLabel  := 'Cód. Lubrific. Família';
+      FDMemTLubrificacaoExcel.FieldByName('CODLUBRIFICFAMILIA').Index         := 8;
+      FDMemTLubrificacaoExcel.FieldByName('DESCLUBRIFICFAMILIA').DisplayLabel := 'Lubrificação de Família';
+      FDMemTLubrificacaoExcel.FieldByName('DESCLUBRIFICFAMILIA').Index        := 9;
+
+      CopyDataSetToGrid(FDMemTLubrificacaoExcel, Grid);
+      //caminho := caminho+'\Lista Simples das Ordens de Serviços.'+FormatDateTime('dd.mm.yyyy.hh.sss', now) + '.csv';
+      caminho := caminho+'\Consulta de Lubrificações.'+FormatDateTime('dd.mm.yyyy.hh.sss', now)+'.csv';
+      Grid.SaveToCSV(caminho);
+
+      Application.MessageBox(PChar( 'Exportação do arquivo "' + caminho + '" concluída com sucesso!'), 'SPMP3', MB_OK + MB_ICONINFORMATION);
+//      PAuxiliares.Caption := 'Exportação concluída!';
+//      Sleep(3);
+      PAuxiliares.Caption := '';
+    end;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquipConsulta.BtnTipoManutencaoClick(

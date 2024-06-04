@@ -11585,6 +11585,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 16
   object Image1: TImage
     Left = 0
@@ -46054,7 +46055,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Width = 23
     Height = 22
     Visible = False
-    OnClick = SpeedButton1Click
   end
   object lblLicenca: TLabel
     Left = 999

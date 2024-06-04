@@ -14,8 +14,8 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
     Width = 769
     ExplicitWidth = 765
     inherited BtnAjuda: TButton
-      Left = 734
-      ExplicitLeft = 734
+      Left = 736
+      ExplicitLeft = 736
     end
   end
   inherited PCentro: TPanel
@@ -55,7 +55,6 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       StyleElements = [seFont, seBorder]
-      OnDblClick = GrdEquipeDblClick
       OnKeyDown = GrdEquipeKeyDown
       Columns = <
         item
@@ -326,9 +325,9 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
       ExplicitTop = 7
     end
     inherited BtnFechar: TButton
-      Left = 345
+      Left = 347
       Top = 7
-      ExplicitLeft = 345
+      ExplicitLeft = 347
       ExplicitTop = 7
     end
   end

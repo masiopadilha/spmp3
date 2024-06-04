@@ -12,10 +12,10 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 975
+    ExplicitWidth = 1008
     inherited BtnAjuda: TButton
       Left = 975
-      ExplicitLeft = 942
+      ExplicitLeft = 971
     end
     object BtnConsultar: TButton
       Left = 942
@@ -36,14 +36,14 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 973
+    ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 43
       Width = 1004
       Height = 461
       ExplicitTop = 43
-      ExplicitWidth = 971
+      ExplicitWidth = 1000
       ExplicitHeight = 458
     end
     object PFiltros2: TPanel
@@ -56,7 +56,7 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 965
+      ExplicitWidth = 994
       object Label6: TLabel
         Left = 7
         Top = 11
@@ -270,18 +270,39 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
           Visible = True
         end>
     end
+    object grid: TJvStringGrid
+      Left = 886
+      Top = 432
+      Width = 116
+      Height = 73
+      FixedRows = 0
+      TabOrder = 3
+      Visible = False
+      Alignment = taLeftJustify
+      FixedFont.Charset = DEFAULT_CHARSET
+      FixedFont.Color = clWindowText
+      FixedFont.Height = -12
+      FixedFont.Name = 'Segoe UI'
+      FixedFont.Style = []
+      RowHeights = (
+        24
+        21
+        24
+        24
+        24)
+    end
   end
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
     ExplicitTop = 574
-    ExplicitWidth = 975
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
     ExplicitTop = 601
-    ExplicitWidth = 975
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 0
       Visible = False
@@ -340,5 +361,21 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 48
     Top = 184
+  end
+  object FDMemTManutencaoExcel: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 675
+    Top = 347
+  end
+  object DSManutencaoExcel: TDataSource
+    DataSet = FDMemTManutencaoExcel
+    Left = 755
+    Top = 347
   end
 end

@@ -68,7 +68,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -80,6 +80,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           OnDrawColumnCell = GrdManutDrawColumnCell
           OnKeyPress = GrdManutKeyPress
           OnTitleClick = GrdManutTitleClick
+          MultiSelect = True
           TitleButtons = True
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -163,7 +164,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -173,7 +174,9 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           TitleFont.Style = []
           StyleElements = [seFont, seBorder]
           OnDrawColumnCell = GrdManutDrawColumnCell
+          OnKeyPress = GrdLubrificKeyPress
           OnTitleClick = GrdManutTitleClick
+          MultiSelect = True
           TitleButtons = True
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -221,6 +224,11 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
               Expanded = False
               FieldName = 'EQUIPAMENTO'
               Title.Caption = 'Equipamento'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -12
+              Title.Font.Name = 'Segoe UI'
+              Title.Font.Style = [fsBold]
               Width = 259
               Visible = True
             end
@@ -243,8 +251,6 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 902
-          ExplicitHeight = 214
           object GrdRotasEquip: TJvDBGrid
             AlignWithMargins = True
             Left = 1

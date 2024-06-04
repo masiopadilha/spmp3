@@ -1344,29 +1344,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 0);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 4, Rect.Top, 1);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 0);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 17, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 10, Rect.Top, 1);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 17, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 0);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 6, Rect.Top, 1);
+    GrdRotaManutItensEsp.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItensEsp.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 end;
 
@@ -1486,29 +1486,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 12, Rect.Top, 0);
    end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 4, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 12, Rect.Top, 1);
    end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 17, Rect.Top, 0);
    end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 10, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 17, Rect.Top, 1);
    end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 0);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 12, Rect.Top, 0);
    end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
    begin
-     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 6, Rect.Top, 1);
+     GrdRotaManutItens.Canvas.FillRect(Rect); ImageList1.Draw(GrdRotaManutItens.Canvas, Rect.Left + 12, Rect.Top, 1);
    end;
 end;
 
@@ -1608,29 +1608,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 17, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 17, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
+    GrdItensEspLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspLubrific.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 end;
 
@@ -1729,29 +1729,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 0);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 4, Rect.Top, 1);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 0);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 17, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 10, Rect.Top, 1);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 17, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 0);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 6, Rect.Top, 1);
+    GrdItensEspManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensEspManut.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 end;
 
@@ -1850,29 +1850,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 0);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 4, Rect.Top, 1);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 0);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 17, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 10, Rect.Top, 1);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 17, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 0);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 6, Rect.Top, 1);
+    GrdItensLubrific.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensLubrific.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 end;
 
@@ -1971,29 +1971,29 @@ begin
 
   if (Trim(Column.Field.FieldName) = 'BOM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 0);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'BOM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 4, Rect.Top, 1);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'REGULAR') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 0);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 17, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'REGULAR') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 10, Rect.Top, 1);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 17, Rect.Top, 1);
   end;
 
   if (Trim(Column.Field.FieldName) = 'RUIM') and (Trim(Column.Field.AsString) = 'S') then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 0);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 12, Rect.Top, 0);
   end;
   if (Trim(Column.Field.FieldName) = 'RUIM') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
-    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 6, Rect.Top, 1);
+    GrdItensManut.Canvas.FillRect(Rect); ImageList1.Draw(GrdItensManut.Canvas, Rect.Left + 12, Rect.Top, 1);
   end;
 end;
 
@@ -2104,34 +2104,34 @@ begin
   case PCInspecoes.ActivePageIndex of
     0:
     begin
-      if GrdItensManut.SelectedIndex in [14, 15,16,17] then
+      if GrdItensManut.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryManutPeriodicasItens.First;
         while not  DM.qryManutPeriodicasItens.Eof = True do
         begin
           DM.qryManutPeriodicasItens.Edit;
-          if GrdItensManut.SelectedIndex = 14 then
+          if GrdItensManut.SelectedIndex = 4 then
           begin
             DM.qryManutPeriodicasItensEXECUTADO.AsString := 'S';
             DM.qryManutPeriodicasItensBOM.AsString := 'N';
             DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
             DM.qryManutPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 15 then
+          else if GrdItensManut.SelectedIndex = 5 then
           begin
             DM.qryManutPeriodicasItensBOM.AsString := 'S';
             DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
             DM.qryManutPeriodicasItensREGULAR.AsString := 'N';
             DM.qryManutPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 16 then
+          else if GrdItensManut.SelectedIndex = 6 then
           begin
             DM.qryManutPeriodicasItensREGULAR.AsString := 'S';
             DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
             DM.qryManutPeriodicasItensBOM.AsString := 'N';
             DM.qryManutPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 17 then
+          else if GrdItensManut.SelectedIndex = 7 then
           begin
             DM.qryManutPeriodicasItensRUIM.AsString := 'S';
             DM.qryManutPeriodicasItensEXECUTADO.AsString := 'N';
@@ -2146,34 +2146,34 @@ begin
     end;
     1:
     begin
-      if GrdItensLubrific.SelectedIndex in [14, 15,16,17] then
+      if GrdItensLubrific.SelectedIndex in [4, 5,6,7] then
       begin
         DM.qryLubrificPeriodicasItens.First;
         while not  DM.qryLubrificPeriodicasItens.Eof = True do
         begin
           DM.qryLubrificPeriodicasItens.Edit;
-          if GrdItensLubrific.SelectedIndex = 14 then
+          if GrdItensLubrific.SelectedIndex = 4 then
           begin
             DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'S';
             DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
             DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
             DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensLubrific.SelectedIndex = 15 then
+          else if GrdItensLubrific.SelectedIndex = 5 then
           begin
             DM.qryLubrificPeriodicasItensBOM.AsString := 'S';
             DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
             DM.qryLubrificPeriodicasItensREGULAR.AsString := 'N';
             DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensLubrific.SelectedIndex = 16 then
+          else if GrdItensLubrific.SelectedIndex = 6 then
           begin
             DM.qryLubrificPeriodicasItensREGULAR.AsString := 'S';
             DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
             DM.qryLubrificPeriodicasItensBOM.AsString := 'N';
             DM.qryLubrificPeriodicasItensRUIM.AsString := 'N';
           end
-          else if GrdItensLubrific.SelectedIndex = 17 then
+          else if GrdItensLubrific.SelectedIndex = 7 then
           begin
             DM.qryLubrificPeriodicasItensRUIM.AsString := 'S';
             DM.qryLubrificPeriodicasItensEXECUTADO.AsString := 'N';
@@ -2188,34 +2188,34 @@ begin
     end;
     2:
     begin
-      if GrdRotaManutItens.SelectedIndex in [14, 15,16,17] then
+      if GrdRotaManutItens.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryRotaPeriodicasManutItens.First;
         while not  DM.qryRotaPeriodicasManutItens.Eof = True do
         begin
           DM.qryRotaPeriodicasManutItens.Edit;
-          if GrdItensManut.SelectedIndex = 14 then
+          if GrdItensManut.SelectedIndex = 4 then
           begin
             DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'S';
             DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
             DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
             DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 15 then
+          else if GrdItensManut.SelectedIndex = 5 then
           begin
             DM.qryRotaPeriodicasManutItensBOM.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
             DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'N';
             DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 16 then
+          else if GrdItensManut.SelectedIndex = 6 then
           begin
             DM.qryRotaPeriodicasManutItensREGULAR.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
             DM.qryRotaPeriodicasManutItensBOM.AsString := 'N';
             DM.qryRotaPeriodicasManutItensRUIM.AsString := 'N';
           end
-          else if GrdItensManut.SelectedIndex = 17 then
+          else if GrdItensManut.SelectedIndex = 7 then
           begin
             DM.qryRotaPeriodicasManutItensRUIM.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEXECUTADO.AsString := 'N';
@@ -2237,34 +2237,34 @@ begin
   case PCInspecoes.ActivePageIndex of
     0:
     begin
-      if GrdItensEspManut.SelectedIndex in [14, 15,16,17] then
+      if GrdItensEspManut.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryManutPeriodicasItensEsp.First;
         while not  DM.qryManutPeriodicasItensEsp.Eof = True do
         begin
           DM.qryManutPeriodicasItensEsp.Edit;
-          if GrdItensEspManut.SelectedIndex = 14 then
+          if GrdItensEspManut.SelectedIndex = 4 then
           begin
             DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'S';
             DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
             DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
             DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 15 then
+          else if GrdItensEspManut.SelectedIndex = 5 then
           begin
             DM.qryManutPeriodicasItensEspBOM.AsString := 'S';
             DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
             DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
             DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 16 then
+          else if GrdItensEspManut.SelectedIndex = 6 then
           begin
             DM.qryManutPeriodicasItensEspREGULAR.AsString := 'S';
             DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
             DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
             DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 17 then
+          else if GrdItensEspManut.SelectedIndex = 7 then
           begin
             DM.qryManutPeriodicasItensEspRUIM.AsString := 'S';
             DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
@@ -2279,34 +2279,34 @@ begin
     end;
     1:
     begin
-      if GrdItensEspLubrific.SelectedIndex in [14, 15,16,17] then
+      if GrdItensEspLubrific.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryLubrificPeriodicasItensEsp.First;
         while not  DM.qryLubrificPeriodicasItensEsp.Eof = True do
         begin
           DM.qryLubrificPeriodicasItensEsp.Edit;
-          if GrdItensEspLubrific.SelectedIndex = 14 then
+          if GrdItensEspLubrific.SelectedIndex = 4 then
           begin
             DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'S';
             DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspLubrific.SelectedIndex = 15 then
+          else if GrdItensEspLubrific.SelectedIndex = 5 then
           begin
             DM.qryLubrificPeriodicasItensEspBOM.AsString := 'S';
             DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspLubrific.SelectedIndex = 16 then
+          else if GrdItensEspLubrific.SelectedIndex = 6 then
           begin
             DM.qryLubrificPeriodicasItensEspREGULAR.AsString := 'S';
             DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspBOM.AsString := 'N';
             DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspLubrific.SelectedIndex = 17 then
+          else if GrdItensEspLubrific.SelectedIndex = 7 then
           begin
             DM.qryLubrificPeriodicasItensEspRUIM.AsString := 'S';
             DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString := 'N';
@@ -2321,34 +2321,34 @@ begin
     end;
     2:
     begin
-      if GrdRotaManutItensEsp.SelectedIndex in [14, 15,16,17] then
+      if GrdRotaManutItensEsp.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryRotaPeriodicasManutItensEsp.First;
         while not  DM.qryRotaPeriodicasManutItensEsp.Eof = True do
         begin
           DM.qryRotaPeriodicasManutItensEsp.Edit;
-          if GrdItensEspManut.SelectedIndex = 14 then
+          if GrdItensEspManut.SelectedIndex = 4 then
           begin
             DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 15 then
+          else if GrdItensEspManut.SelectedIndex = 5 then
           begin
             DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 16 then
+          else if GrdItensEspManut.SelectedIndex = 6 then
           begin
             DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
             DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 17 then
+          else if GrdItensEspManut.SelectedIndex = 7 then
           begin
             DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'S';
             DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
@@ -2370,25 +2370,25 @@ begin
   case PCInspecoes.ActivePageIndex of
     0:
     begin
-      if GrdItensEspManut.SelectedIndex in [14, 15,16,17] then
+      if GrdItensEspManut.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryManutPeriodicasItensEsp.First;
         while not  DM.qryManutPeriodicasItensEsp.Eof = True do
         begin
           DM.qryManutPeriodicasItensEsp.Edit;
-          if GrdItensEspManut.SelectedIndex = 14 then
+          if GrdItensEspManut.SelectedIndex = 4 then
           begin
             DM.qryManutPeriodicasItensEspEXECUTADO.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 15 then
+          else if GrdItensEspManut.SelectedIndex = 5 then
           begin
             DM.qryManutPeriodicasItensEspBOM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 16 then
+          else if GrdItensEspManut.SelectedIndex = 6 then
           begin
             DM.qryManutPeriodicasItensEspREGULAR.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 17 then
+          else if GrdItensEspManut.SelectedIndex = 7 then
           begin
             DM.qryManutPeriodicasItensEspRUIM.AsString := 'N';
           end;
@@ -2430,25 +2430,25 @@ begin
     end;
     2:
     begin
-      if GrdRotaManutItensEsp.SelectedIndex in [14, 15,16,17] then
+      if GrdRotaManutItensEsp.SelectedIndex in [4, 5, 6, 7] then
       begin
         DM.qryRotaPeriodicasManutItensEsp.First;
         while not  DM.qryRotaPeriodicasManutItensEsp.Eof = True do
         begin
           DM.qryRotaPeriodicasManutItensEsp.Edit;
-          if GrdItensEspManut.SelectedIndex = 14 then
+          if GrdItensEspManut.SelectedIndex = 4 then
           begin
             DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 15 then
+          else if GrdItensEspManut.SelectedIndex = 5 then
           begin
             DM.qryRotaPeriodicasManutItensEspBOM.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 16 then
+          else if GrdItensEspManut.SelectedIndex = 6 then
           begin
             DM.qryRotaPeriodicasManutItensEspREGULAR.AsString := 'N';
           end
-          else if GrdItensEspManut.SelectedIndex = 17 then
+          else if GrdItensEspManut.SelectedIndex = 7 then
           begin
             DM.qryRotaPeriodicasManutItensEspRUIM.AsString := 'N';
           end;

@@ -21,7 +21,6 @@ type
     procedure GrdMovimenDblClick(Sender: TObject);
     procedure GrdEquipeKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure GrdEquipeDblClick(Sender: TObject);
     procedure GrdMovimenKeyPress(Sender: TObject; var Key: Char);
     procedure GrdEquipeMObraUtilDblClick(Sender: TObject);
     procedure GrdEquipeMObraUtilKeyPress(Sender: TObject; var Key: Char);
@@ -41,28 +40,19 @@ implementation
 uses UnTelaCadOrdemServicoMObraExecDisp, UnTelaConsulta,
   UnTelaCadOrdemServicoMObraProgHHDisp, UnDM;
 
-procedure TFrmTelaCadOrdemServicoMObraExec.GrdEquipeDblClick(Sender: TObject);
-begin
-  inherited;
-//if Application.MessageBox('Deseja realmente excluir a equipe?', 'SPMP3', MB_ICONWARNING + MB_YESNO) = IDYes then
-  //begin
-
-  //end;
-end;
-
 procedure TFrmTelaCadOrdemServicoMObraExec.GrdEquipeKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   inherited;
-if (Shift = [ssCtrl]) and (Key = 46) then
-  Key := 0;
+  if (Shift = [ssCtrl]) and (Key = 46) then
+    Key := 0;
 end;
 
 procedure TFrmTelaCadOrdemServicoMObraExec.GrdEquipeMObraDblClick(
   Sender: TObject);
 begin
   inherited;
-if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
+  if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
   begin
     DM.qryOrdemServicoEquipeMObra.Delete;
   end;
@@ -72,16 +62,16 @@ procedure TFrmTelaCadOrdemServicoMObraExec.GrdEquipeMObraKeyPress(Sender: TObjec
   var Key: Char);
 begin
   inherited;
-PAuxiliares.Font.Color := clGray;
-PAuxiliares.Caption := EmptyStr;
+  PAuxiliares.Font.Color := clGray;
+  PAuxiliares.Caption := EmptyStr;
 
-if ((GrdEquipeMObra.SelectedIndex = 0) or (GrdEquipeMObra.SelectedIndex = 2)) and (Key <> #13) or (DM.qryOrdemServicoEquipe.IsEmpty = True) then
+  if ((GrdEquipeMObra.SelectedIndex = 0) or (GrdEquipeMObra.SelectedIndex = 2)) and (Key <> #13) or (DM.qryOrdemServicoEquipe.IsEmpty = True) then
   begin
     Key := #0;
     Exit;
   end;
 
-if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
+  if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
   begin
     DM.qryOrdemServicoEquipe.Edit;
     DM.qryOrdemServicoEquipe.Post;
@@ -117,8 +107,8 @@ if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
     End;
   end;
 
-if (GrdEquipeMObra.SelectedIndex = 2) // and (DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = True)
-  and (Key = #13) and (DM.qryOrdemServicoEquipeMObraCODCARGO.AsString <> EmptyStr) then
+  if (GrdEquipeMObra.SelectedIndex = 2) // and (DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = True)
+    and (Key = #13) and (DM.qryOrdemServicoEquipeMObraCODCARGO.AsString <> EmptyStr) then
     begin
       DM.FTabela_auxiliar := 230;
 
@@ -127,31 +117,29 @@ if (GrdEquipeMObra.SelectedIndex = 2) // and (DM.qryOrdemServicoEquipeMObraUtil.
         FrmTelaAuxiliar.ShowModal;
       Finally
         if DM.FCodCombo <> EmptyStr then
+        begin
+          DM.qryOrdemServicoEquipeMObra.Edit;
+          DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString := DM.FCodCombo;
+          DM.qryOrdemServicoEquipeMObraCALENDARIO.AsString    := DM.FValorCombo;
+          DM.qryOrdemServicoEquipeMObra.Post;
+
+          if DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = False then
           begin
-            DM.qryOrdemServicoEquipeMObra.Edit;
-            DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString := DM.FCodCombo;
-            DM.qryOrdemServicoEquipeMObraCALENDARIO.AsString    := DM.FValorCombo;
-            DM.qryOrdemServicoEquipeMObra.Post;
-
-            if DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = False then
-              begin
-                DM.qryOrdemServicoEquipeMObraUtil.First;
-                while not DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = True do
-                  DM.qryOrdemServicoEquipeMObraUtil.Delete;
-              end;
-
+            DM.qryOrdemServicoEquipeMObraUtil.First;
+            while not DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = True do
+              DM.qryOrdemServicoEquipeMObraUtil.Delete;
           end;
+        end;
         FreeAndNil(FrmTelaAuxiliar);
       End;
     end;
-
 end;
 
 procedure TFrmTelaCadOrdemServicoMObraExec.GrdEquipeMObraUtilDblClick(
   Sender: TObject);
 begin
   inherited;
-if DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = False then
+  if DM.qryOrdemServicoEquipeMObraUtil.IsEmpty = False then
   begin
     DM.qryOrdemServicoEquipeMObraUtil.Delete;
   end;

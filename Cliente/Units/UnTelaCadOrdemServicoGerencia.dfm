@@ -1309,8 +1309,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   object PopupMenuLiberar: TPopupMenu
-    Left = 589
-    Top = 13
+    Left = 405
+    Top = 5
     object Total: TMenuItem
       Caption = 'Libera'#231#227'o total'
       OnClick = TotalClick
@@ -1361,8 +1361,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     Top = 18
   end
   object PopupMenuExecutar: TPopupMenu
-    Left = 493
-    Top = 13
+    Left = 285
+    Top = 5
     object MenuItem1: TMenuItem
       Caption = 'Executar'
       OnClick = TotalClick

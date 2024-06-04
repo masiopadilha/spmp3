@@ -406,6 +406,7 @@ begin
   PAuxiliares.Caption := EmptyStr;
   LInsp := EmptyStr;
   FrmTelaPrincipal.TimerOscioso.Enabled := False;
+  FrmTelaPrincipal.TimerOscioso2.Enabled := False;
   case PCInspecoes.TabIndex of
     0: //Manutenções
       begin
@@ -1534,6 +1535,7 @@ begin
 end;
 
 FrmTelaPrincipal.TimerOscioso.Enabled := True;
+FrmTelaPrincipal.TimerOscioso2.Enabled := True;
 
 DM.MSGAguarde('', False);
 end;

@@ -36,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnTelaPrincipal, UnTempoOcioso;
 
 
 procedure TFrmTelaPaiOKCancel.BtnAjudaClick(Sender: TObject);

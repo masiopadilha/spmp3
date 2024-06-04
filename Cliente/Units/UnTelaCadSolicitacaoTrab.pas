@@ -579,6 +579,8 @@ begin
   DM.FTela := 'CADSOLICITACAOTRAB';
   DM.FTabela_auxiliar := 40;
 
+  FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
+
   LPrimeiroDataMes := DateOf(StartOfTheMonth(DM.FDataHoraServidor));
   LUltimaDataMes   := DateOf(EndOfTheMonth(LPrimeiroDataMes));
 

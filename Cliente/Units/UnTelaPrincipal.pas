@@ -385,7 +385,6 @@ type
     procedure Familia1Click(Sender: TObject);
     procedure odos1Click(Sender: TObject);
     procedure Familia2Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure Opcoes1Click(Sender: TObject);
     procedure Auditoria1Click(Sender: TObject);
     procedure DespesasdaManutencao1Click(Sender: TObject);
@@ -411,13 +410,12 @@ type
     procedure Consulta2Click(Sender: TObject);
     procedure Cadastro9Click(Sender: TObject);
     procedure Consulta3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
 
   public
     { Public declarations }
-
-    function SecondToTime( Segundos : Cardinal ) : String;
 
     procedure AppIdle(Sender: TObject; var Done: Boolean);
     procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
@@ -474,20 +472,6 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTempoOcioso, UnTelaCadManutProgFamEquipConsulta,
   UnTelaCadLubrificProgFamEquipConsulta;
 
-
-
-function TFrmTelaPrincipal.SecondToTime( Segundos : Cardinal ) : String;
-var
-  Seg, Min, Hora: Cardinal;
-begin
-  Hora := Segundos div 3600;
-  Seg := Segundos mod 3600;
-  Min := Seg div 60;
-  Seg := Seg mod 60;
-  Result := FormatFloat(',00', Hora) + ':' +
-  FormatFloat('00', Min) + ':' +
-  FormatFloat('00', Seg);
-end;
 
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
@@ -583,7 +567,7 @@ begin
       TimerOscioso.Enabled := False;
       TimerOscioso2.Enabled := False;
       DM.FSegundosDesliga := DM.FMinutosInativo * 60;
-      LblTempoDesliga.Caption := 'O sistema será encerrado em ' + SecondToTime(DM.FSegundosDesliga);
+      LblTempoDesliga.Caption := ' O sistema será encerrado em ' + DM.SecondToTime(DM.FSegundosDesliga);
       if frmSistemaOcioso <> nil then
         if frmSistemaOcioso.Active = True then
           frmSistemaOcioso.Close;
@@ -1985,7 +1969,6 @@ begin
     begin
       FreeAndNil(frmSistemaOcioso);
       DM.FDConnSPMP3.Connected := False;
-      Application.MessageBox('Sistema será encerrado por inatividade!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
     end;
   FreeAndNil(frmSistemaOcioso);
   FreeAndNil(DMAlertas);
@@ -2033,10 +2016,15 @@ if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUs
     end;
 
   RotasdeManuteno1.Visible := DM.FEmpTransf;
+end;
+
+procedure TFrmTelaPrincipal.FormShow(Sender: TObject);
+begin
   DM.FFecharForms := False;
   TimerOscioso.Interval := DM.FMinutosInativo * 60000;
   DM.FSegundosDesliga := DM.FMinutosInativo * 60;
-  LblTempoDesliga.Caption := 'O sistema será encerrado em ' + SecondToTime(TimerOscioso.Interval);
+  LblTempoDesliga.Caption := 'O sistema será encerrado em ' + DM.SecondToTime(TimerOscioso.Interval);
+
   Application.OnMessage := AppMessage;
   Application.OnIdle := AppIdle;
 end;
@@ -3560,11 +3548,6 @@ procedure TFrmTelaPrincipal.Sair1Click(Sender: TObject);
 var
   X: Integer;
 begin
-//  if DM.FFecharForms = True then
-//    begin
-//      for X := 1 to Screen.FormCount -1 do
-//        Screen.Forms[X].Close;
-//    end;
   if DM.FFecharForms = True then
     begin
       for X := 0 to Application.ComponentCount-1 do
@@ -3632,18 +3615,10 @@ begin
   End;
 end;
 
-procedure TFrmTelaPrincipal.SpeedButton1Click(Sender: TObject);
-var
-sWindowsDir:String;
-begin
-  sWindowsDir := GetEnvironmentVariable('LOCALAPPDATA');
-  ShowMessage(sWindowsDir);
-end;
-
 procedure TFrmTelaPrincipal.TimerOscioso2Timer(Sender: TObject);
 begin
   DM.FSegundosDesliga := DM.FSegundosDesliga - 1;
-  LblTempoDesliga.Caption := 'O sistema será encerrado em ' + SecondToTime(DM.FSegundosDesliga);
+  LblTempoDesliga.Caption := 'O sistema será encerrado em ' + DM.SecondToTime(DM.FSegundosDesliga);
   if (DM.FSegundosDesliga <= 30) and (DM.FSegundosDesliga >= 0) then
   begin
     if (DM.FSegundosDesliga > 0) then
@@ -3654,7 +3629,10 @@ begin
      // ShowMessageFmt('O sistema será desligado em %d segundos.', [DM.FSegundosDesliga]);
     end else
     if (DM.FSegundosDesliga = 0) then
-      frmSistemaOcioso.Close;
+    begin
+      //frmSistemaOcioso.Close;
+      Sair1Click(Sender);
+    end;
   end;
 end;
 

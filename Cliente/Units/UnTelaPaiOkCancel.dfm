@@ -12039,7 +12039,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
         9B19924EEEF97F3E0AAB43077639F50000000049454E44AE426082}
     end
     object BtnAjuda: TButton
-      Left = 467
+      Left = 471
       Top = 17
       Width = 28
       Height = 28
@@ -12053,6 +12053,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
       ShowHint = True
       TabOrder = 0
       OnClick = BtnAjudaClick
+      ExplicitLeft = 467
     end
   end
   object PCentro: TPanel

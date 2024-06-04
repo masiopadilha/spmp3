@@ -12,8 +12,10 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
+    ExplicitWidth = 1004
     inherited BtnAjuda: TButton
       Left = 975
+      ExplicitLeft = 971
     end
     object BtnConsultar: TButton
       Left = 942
@@ -34,10 +36,15 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Top = 43
       Width = 1004
       Height = 461
+      ExplicitTop = 43
+      ExplicitWidth = 1000
+      ExplicitHeight = 458
     end
     object DBGrid: TJvDBGrid
       AlignWithMargins = True
@@ -176,7 +183,7 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 965
+      ExplicitWidth = 994
       object Label6: TLabel
         Left = 7
         Top = 11
@@ -268,10 +275,14 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 0
       Visible = False
@@ -281,6 +292,27 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
       Left = 466
       ExplicitLeft = 466
     end
+  end
+  object grid: TJvStringGrid
+    Left = 886
+    Top = 432
+    Width = 116
+    Height = 73
+    FixedRows = 0
+    TabOrder = 4
+    Visible = False
+    Alignment = taLeftJustify
+    FixedFont.Charset = DEFAULT_CHARSET
+    FixedFont.Color = clWindowText
+    FixedFont.Height = -12
+    FixedFont.Name = 'Segoe UI'
+    FixedFont.Style = []
+    RowHeights = (
+      24
+      21
+      24
+      24
+      24)
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = 'csv'
@@ -330,5 +362,21 @@ inherited FrmTelaCadLubrificProgFamEquipConsulta: TFrmTelaCadLubrificProgFamEqui
     ScreenPosition = poScreenCenter
     Left = 128
     Top = 184
+  end
+  object FDMemTLubrificacaoExcel: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 675
+    Top = 347
+  end
+  object DSLubrirficacaoExcel: TDataSource
+    DataSet = FDMemTLubrificacaoExcel
+    Left = 755
+    Top = 347
   end
 end

@@ -5975,6 +5975,7 @@ type
 
     FTotalHHDisp, FTotalHorasFunc, FTotalHorasParadas : Real;
 
+    function SecondToTime( Segundos : Cardinal ) : String;
     function GetVersionLocal(AFileName: String): string;
     function GetVersionRepo: Integer;
     function ResourceExists(const ResourceName: string): Boolean;
@@ -6075,6 +6076,19 @@ const
   SECURITY_BUILTIN_DOMAIN_RID = $00000020;
   DOMAIN_ALIAS_RID_ADMINS = $00000220;
 
+
+function TDM.SecondToTime( Segundos : Cardinal ) : String;
+var
+  Seg, Min, Hora: Cardinal;
+begin
+  Hora := Segundos div 3600;
+  Seg := Segundos mod 3600;
+  Min := Seg div 60;
+  Seg := Seg mod 60;
+  Result := FormatFloat(',00', Hora) + ':' +
+  FormatFloat('00', Min) + ':' +
+  FormatFloat('00', Seg);
+end;
 
 function TDM.GetFileVersion(const AFileName: string): String;
 var
@@ -6270,15 +6284,12 @@ begin
   IdHTTP.Request.UserAgent := 'Mozilla/4.0';
   IdHTTP.IOHandler := IdSSLIOHandlerSocketOpenSSL1;
   IdHTTP.HandleRedirects := True;
-
   // Fazer solicitação HEAD para obter o URL final após redirecionamentos
   LUri := TIdURI.Create(FUrlSPMPBuilder);
   IdHTTP.Head(LUri.URI);
   LUrl := IdHTTP.Request.URL;
-
   // Encontra o índice da última barra na string
   LLastBarIndex := LastDelimiter('/', LUrl);
-
   // Verifica se encontrou a barra
   if LLastBarIndex > 0 then
     // Extrai o texto após a última barra
@@ -6348,8 +6359,8 @@ begin
   except
     on E: Exception do
     begin
-      GravaLog('Falha ao atualizar o SPMP3. DM linha: 5864', E.ClassName, E.Message);
-      Application.MessageBox('Falha ao atualizar o SPMP3!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+      GravaLog('Não foi possível buscar atualização do SPMP3. DM linha: 5864', E.ClassName, E.Message);
+      Application.MessageBox('Não foi possível buscar atualização do SPMP3.', 'SPMP3', MB_OK + MB_ICONERROR);
     end;
   end;
 end;
@@ -8964,7 +8975,7 @@ begin
       Writeln(arquivo, 'A conexão com o banco de dados foi restabelecida!');
       Writeln(arquivo, '<-------------------------------------------------------->');
       CloseFile(arquivo);
-      Application.MessageBox('Sucesso ao restabelecer conexão!, Por favor, tente repita a operação novamente. Caso persistir o erro, contate o suporte.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+      Application.MessageBox('Sucesso ao restabelecer conexão!, Por favor, repita a operação. Caso persista o erro, contate o suporte.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
     end else
     begin
       CriaArquivoLog(arquivo);
@@ -9364,6 +9375,8 @@ var
   Ini: TIniFile;
   Handle: TextFile;
 begin
+  FDConnSPMP3.Connected := False;
+
   if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
   begin
     Ini :=  TIniFile.Create(ExtractFilePath(Application.ExeName) + 'spmp.ini');

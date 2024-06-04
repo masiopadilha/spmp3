@@ -149,7 +149,7 @@ begin
       DM.qryLogin.Params[0].AsString := DM.FNomeUsuario;
       DM.qryLogin.Open;
 
-      if DM.qryLogin.IsEmpty = False then
+      if DM.qryLoginCODIGO.IsNull = False then
       begin
         //Usuário informado localizado
         qLogin := DM.qryLoginBLOQUEIO.AsInteger;
@@ -372,7 +372,6 @@ begin
     //Extrair o recurso .bat para atualização do sistema
     if DM.ResourceExists('updaterbat') then
       DM.ResourceExtract('updaterbat', ExtractFilePath(ParamStr(0)), '\Updater.bat');
-
     //Check atualização disponível
     DM.CheckApplicationVersion;
   except

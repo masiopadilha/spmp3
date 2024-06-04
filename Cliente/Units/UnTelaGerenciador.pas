@@ -308,13 +308,13 @@ begin
     end;
   Registro.CloseKey;
 
-  Registro         := TRegistry.Create;
-  Registro.RootKey := HKEY_LOCAL_MACHINE;
-  if registro.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', true) then
-    begin
-      Registro.WriteString('SPMP3srv','C:\SPMP3\SPMP3srv.exe');
-    end;
-  Registro.CloseKey;
+//  Registro         := TRegistry.Create;
+//  Registro.RootKey := HKEY_LOCAL_MACHINE;
+//  if registro.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', true) then
+//    begin
+//      Registro.WriteString('SPMP3srv','C:\SPMP3\SPMP3srv.exe');
+//    end;
+//  Registro.CloseKey;
 
   Registro.Free;
 
