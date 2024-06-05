@@ -5227,11 +5227,6 @@ type
     qryOrdemServicoGerenciaRelatMObraUtilCODMANUTENCAO: TStringField;
     qryOrdemServicoGerenciaRelatMObraUtilDATACADASTRO: TDateTimeField;
     qryOrdemServicoGerenciaRelatMObraProgDATACADASTRO: TDateTimeField;
-    qryOrdemServicoLocalizaMObraMATRICULA: TStringField;
-    qryOrdemServicoLocalizaMObraNOME: TStringField;
-    qryOrdemServicoLocalizaMObraCALENDARIO: TStringField;
-    qryOrdemServicoLocalizaMObraCARGO: TStringField;
-    qryOrdemServicoLocalizaMObraCODEMPRESA: TStringField;
     dsOrdemServicoLocalizaMObraOSExec: TDataSource;
     qryProgramadasExecucaoMObraCELULA: TStringField;
     qryProgramadasExecucaoMObraTIPOCELULA: TStringField;
@@ -5855,6 +5850,11 @@ type
     qryLubrificProgFamEquipConsCODLUBRIFICFAMILIA: TStringField;
     qryLubrificProgFamEquipConsDESCLUBRIFICFAMILIA: TStringField;
     qryLubrificProgFamEquipConsCODTIPOMANUTENCAO: TStringField;
+    qryOrdemServicoLocalizaMObraMATRICULA: TStringField;
+    qryOrdemServicoLocalizaMObraNOME: TStringField;
+    qryOrdemServicoLocalizaMObraCARGO: TStringField;
+    qryOrdemServicoLocalizaMObraCALENDARIO: TStringField;
+    qryOrdemServicoLocalizaMObraCODEMPRESA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

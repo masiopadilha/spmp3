@@ -179,7 +179,8 @@ uses
   unTelaInspVencRelatManut in '..\Units\Report\unTelaInspVencRelatManut.pas' {FrmTelaInspVencRelatManut},
   UnTempoOcioso in '..\Units\UnTempoOcioso.pas' {frmSistemaOcioso},
   UnTelaCadManutProgFamEquipConsulta in '..\Units\UnTelaCadManutProgFamEquipConsulta.pas' {FrmTelaCadManutProgFamEquipConsulta},
-  UnTelaCadLubrificProgFamEquipConsulta in '..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas' {FrmTelaCadLubrificProgFamEquipConsulta};
+  UnTelaCadLubrificProgFamEquipConsulta in '..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas' {FrmTelaCadLubrificProgFamEquipConsulta},
+  UnTelaCadSolicitacaoTrabCons in '..\Units\UnTelaCadSolicitacaoTrabCons.pas' {FrmTelaCadSolicitacaoTrabCons};
 
 {$R *.res}
 begin

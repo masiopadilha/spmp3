@@ -470,7 +470,7 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod,
   UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod,
   UnTempoOcioso, UnTelaCadManutProgFamEquipConsulta,
-  UnTelaCadLubrificProgFamEquipConsulta;
+  UnTelaCadLubrificProgFamEquipConsulta, UnTelaCadSolicitacaoTrabCons;
 
 
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
@@ -826,6 +826,12 @@ procedure TFrmTelaPrincipal.Button1Click(Sender: TObject);
 //
 //  direc, name, repli, line, dir: String;
 begin
+  try
+    Application.CreateForm(TFrmTelaCadSolicitacaoTrabCons, FrmTelaCadSolicitacaoTrabCons);
+    FrmTelaCadSolicitacaoTrabCons.ShowModal;
+  finally
+    FreeAndNil(FrmTelaCadSolicitacaoTrabCons);
+  end;
 //    DM.qryTotalHomemHora.Close;
 //    DM.qryTotalHomemHora.Params[0].AsString := DM.FCodEmpresa;
 //    DM.qryTotalHomemHora.Open;

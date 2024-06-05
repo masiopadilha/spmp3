@@ -675,6 +675,10 @@
             <Form>FrmTelaCadLubrificProgFamEquipConsulta</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadSolicitacaoTrabCons.pas">
+            <Form>FrmTelaCadSolicitacaoTrabCons</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="..\updater.bat">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>

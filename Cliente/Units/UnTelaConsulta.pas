@@ -459,6 +459,9 @@ begin
                                   if DM.FParamAuxiliar[2] = 'Matrícula' then
                                     DM.qryAuxiliar.SQL.Add('AND `solictrabalho`.`CODSOLICITANTE` = ' + DM.FParamAuxiliar[3]);
                                   DM.qryAuxiliar.SQL.Add(' AND `solictrabalho`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+') ORDER BY `solictrabalho`.`DATACADASTRO` DESC');
+
+          DM.FParamAuxiliar[2] := '';
+          DM.FParamAuxiliar[3] := '';
         end;
       41, 410://Plano de Trabalho
         begin

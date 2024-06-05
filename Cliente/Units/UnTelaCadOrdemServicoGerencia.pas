@@ -213,12 +213,12 @@ PAuxiliares.Caption := EmptyStr;
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
     FrmTelaCadOrdemServico.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServico);
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   End;
 end;
 
@@ -705,7 +705,7 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     DM.FTabela_auxiliar := 600;
     DM.FNomeConsulta := 'Famílias de Equipamentos';
     if DM.ConsultarCombo <> EmptyStr then
@@ -714,7 +714,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         EdtFamiliaEquip.Text := DM.FValorCombo;
         ConfigurarFiltros;
       end;
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   end;
 end;
 
@@ -741,12 +741,12 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
             Edit;
           end;
       Try
-        Timer1.Enabled := False;
+//        Timer1.Enabled := False;
         Application.CreateForm(TFrmTelaCadOrdemServicoFechamento, FrmTelaCadOrdemServicoFechamento);
         FrmTelaCadOrdemServicoFechamento.ShowModal;
       Finally
         FreeAndNil(FrmTelaCadOrdemServicoFechamento);
-        Timer1.Enabled := True;
+//        Timer1.Enabled := True;
       End;
     end;
 end;
@@ -757,12 +757,12 @@ begin
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
   Try
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     Application.CreateForm(TFrmTelaCadOrdemServicoHistorico, FrmTelaCadOrdemServicoHistorico);
     FrmTelaCadOrdemServicoHistorico.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoHistorico);
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   End;
 end;
 
@@ -817,7 +817,7 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     DM.FTabela_auxiliar := 200;
     DM.FNomeConsulta := 'Oficinas';
     if DM.ConsultarCombo <> EmptyStr then
@@ -826,7 +826,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         EdtOficina.Text := DM.FValorCombo;
         ConfigurarFiltros;
       end;
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   end;
 end;
 
@@ -852,13 +852,13 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or 
             Edit;
           end;
       Try
-        Timer1.Enabled := False;
+//        Timer1.Enabled := False;
         Application.CreateForm(TFrmTelaCadOrdemServicoParalisacao, FrmTelaCadOrdemServicoParalisacao);
         FrmTelaCadOrdemServicoParalisacao.Caption := 'Paralisações da O.S.: '+ FormatFloat('#000000', DM.qryOrdemServicoCODIGO.Asfloat);
         FrmTelaCadOrdemServicoParalisacao.ShowModal;
       Finally
         FreeAndNil(FrmTelaCadOrdemServicoParalisacao);
-        Timer1.Enabled := True;
+//        Timer1.Enabled := True;
       End;
     end;
 end;
@@ -894,16 +894,16 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
                   PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'MÃO DE OBRA NÃO CADASTRADA!'; Exit;
                 end;
               if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-      begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-        Exit;
-      end;
-              Timer1.Enabled := False;
+              begin
+                Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+                Exit;
+              end;
+//              Timer1.Enabled := False;
               Application.CreateForm(TFrmTelaCadOrdemServicoMObraProg, FrmTelaCadOrdemServicoMObraProg);
               FrmTelaCadOrdemServicoMObraProg.ShowModal;
             Finally
               FreeAndNil(FrmTelaCadOrdemServicoMObraProg);
-              Timer1.Enabled := True;
+//              Timer1.Enabled := True;
             End;
           end
       else
@@ -917,7 +917,7 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     DM.FTabela_auxiliar := 300;
     DM.FNomeConsulta := 'Solicitantes';
     DM.FParamAuxiliar[1] := 'NOME';
@@ -927,7 +927,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         edtSolicitante.Text := DM.FValorCombo;
         ConfigurarFiltros;
       end;
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   end;
 end;
 
@@ -989,12 +989,12 @@ begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
     Application.CreateForm(TFrmTelaCadOrdemServicoLocalizaMObra, FrmTelaCadOrdemServicoLocalizaMObra);
     FrmTelaCadOrdemServicoLocalizaMObra.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoLocalizaMObra);
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   End;
 end;
 
@@ -1510,12 +1510,18 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.FDataSetParam    := DM.qryOrdemServico;
-DM.FDataSourceParam := DM.dsOrdemServico;
-DM.FTela := 'CADORDEMSERVICO';
-EdtData1.Date := IncMonth(DateOf(DM.FDataHoraServidor), -1);
-EdtData2.Date := DateOf(DM.FDataHoraServidor);
-hora_futura := IncMinute(Now, DM.FTempoNovaOS);
+  DM.FDataSetParam    := DM.qryOrdemServico;
+  DM.FDataSourceParam := DM.dsOrdemServico;
+  DM.FTela := 'CADORDEMSERVICO';
+
+  EdtData1.Date := IncMonth(DateOf(DM.FDataHoraServidor), -1);
+  EdtData2.Date := DateOf(DM.FDataHoraServidor);
+
+  Timer1.Enabled := False;
+  Timer1.Interval := (DM.FTempoNovaOS * 60) * 1000;
+  Timer1.Enabled := True;
+
+  hora_futura := IncMinute(Now, DM.FTempoNovaOS);
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.FormKeyDown(Sender: TObject;
@@ -1941,14 +1947,14 @@ begin
       Edit;
     end;
 
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
 
     Application.CreateForm(TFrmTelaCadOrdemServicoMObraExec, FrmTelaCadOrdemServicoMObraExec);
     FrmTelaCadOrdemServicoMObraExec.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoMObraExec);
 
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   End;
 end;
 
@@ -1981,6 +1987,7 @@ var
   hora_atual, diferenca: TDateTime;
   df_hr: TTime;
   dt_ini, dt_final: TDate;
+  LTemp:Integer;
 //  codos: Integer;
 begin
   inherited;
@@ -1994,7 +2001,7 @@ begin
                                           dt_final := DateOf(hora_futura);
                                           diferenca := hora_futura - hora_atual;
                                           df_hr := TimeOf(diferenca);
-                                          StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
+                                          //StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
                                          // Application.Title := Label1.Caption;
                                           Application.ProcessMessages;
                                       end
@@ -2005,10 +2012,11 @@ begin
                                               begin
                                                  if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
                                                    begin
-                                                     DM.MSGAguarde();
+                                                     DM.MSGAguarde('ATUALIZANDO');
                                                      Try
                                                        if not (DM.qryOrdemServicoGerencia.State in [dsBrowse]) then
                                                          DM.qryOrdemServicoGerencia.Cancel;
+                                                       LTemp :=  DM.FSegundosDesliga;
                                                        DM.qryOrdemServicoGerencia.Refresh;
                                                        hora_futura := IncMinute(Now, DM.FTempoNovaOS);
                                                      Except
@@ -2017,6 +2025,7 @@ begin
                                                      End;
                                                      Application.ProcessMessages;
                                                      DM.MSGAguarde('', False);
+                                                     DM.FSegundosDesliga := LTemp;
                                                   end;
                                               end);
                                     end;
@@ -2031,7 +2040,7 @@ begin
 
   if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
-    Timer1.Enabled := False;
+//    Timer1.Enabled := False;
 
     DM.MSGAguarde('');
 
@@ -2131,7 +2140,7 @@ begin
 
     DM.MSGAguarde('', False);
 
-    Timer1.Enabled := True;
+//    Timer1.Enabled := True;
   end;
 end;
 

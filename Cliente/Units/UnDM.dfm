@@ -36823,23 +36823,66 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `funcionarios`.`MATRICULA`'
-      '    , `funcionarios`.`CODEMPRESA`'
-      '    , `funcionarios`.`NOME`'
+      '    `funcionarios`.`MATRICULA` AS MATRICULA'
+      '    , TRIM(`funcionarios`.`NOME`) AS NOME'
       '    , `cargos`.`DESCRICAO` AS `CARGO`'
       '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    ,  `ordemservicoequipemobrafunc`.`CODEMPRESA`'
       'FROM'
-      '    `funcionarios`'
-      '    INNER JOIN `cargos` '
-      '        ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`)'
-      '    INNER JOIN `calendario` '
+      '    `ordemservicoequipemobrafunc`    '
+      '    INNER JOIN `funcionarios` '
       
-        '        ON (`funcionarios`.`CODCALENDARIO` = `calendario`.`CODIG' +
-        'O`)'
-      'WHERE (`funcionarios`.`MOBRA` = '#39'OPERACIONAL'#39
-      '    AND `funcionarios`.`ATIVO` = '#39'S'#39
-      '    AND `funcionarios`.`CODEMPRESA` = :codempresa)'
-      'ORDER BY `funcionarios`.`NOME` ASC;')
+        #9'ON (`ordemservicoequipemobrafunc`.`MATRICULA` = `funcionarios`.' +
+        '`MATRICULA`) AND (`ordemservicoequipemobrafunc`.`CODEMPRESA` = `' +
+        'funcionarios`.`CODEMPRESA`)'
+      '    INNER JOIN `ordemservico` '
+      
+        #9'ON (`ordemservicoequipemobrafunc`.`CODORDEMSERVICO` = `ordemser' +
+        'vico`.`CODIGO`)        '
+      '    INNER JOIN `cargos` '
+      
+        #9'ON (`ordemservicoequipemobrafunc`.`CODCARGO` = `cargos`.`CODIGO' +
+        '`) AND (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`)'
+      '    INNER JOIN `calendario` '
+      #9'ON (`funcionarios`.`CODCALENDARIO` = `calendario`.`CODIGO`)'
+      #9
+      'WHERE (`ordemservicoequipemobrafunc`.`CODEMPRESA` = :codempresa)'
+      
+        '    AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39' OR `ordemservi' +
+        'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
+      ''
+      'UNION'
+      ''
+      'SELECT'
+      '    `funcionarios`.`MATRICULA` AS MATRICULA'
+      '    , TRIM(`funcionarios`.`NOME`) AS NOME'
+      '    , `cargos`.`DESCRICAO` AS `CARGO`'
+      '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    ,  `ordemservicoequipemobrautil`.`CODEMPRESA`'
+      'FROM    '
+      '    `ordemservicoequipemobrautil`'
+      '    INNER JOIN `funcionarios` '
+      
+        #9'ON (`ordemservicoequipemobrautil`.`MATRICULA` = `funcionarios`.' +
+        '`MATRICULA`) AND (`ordemservicoequipemobrautil`.`CODEMPRESA` = `' +
+        'funcionarios`.`CODEMPRESA`)'
+      '    INNER JOIN `ordemservico` '
+      
+        #9'ON (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = `ordemser' +
+        'vico`.`CODIGO`)        '
+      '    INNER JOIN `cargos` '
+      
+        #9'ON (`ordemservicoequipemobrautil`.`CODCARGO` = `cargos`.`CODIGO' +
+        '`) AND (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`)'
+      '    INNER JOIN `calendario` '
+      #9'ON (`funcionarios`.`CODCALENDARIO` = `calendario`.`CODIGO`)'
+      #9
+      'WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = :codempresa)'
+      '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
+      '    '
+      'GROUP BY MATRICULA'
+      ''
+      'ORDER BY NOME ASC')
     Left = 171
     Top = 480
     ParamData = <
@@ -36849,35 +36892,27 @@ object DM: TDM
         ParamType = ptInput
       end>
     object qryOrdemServicoLocalizaMObraMATRICULA: TStringField
-      AutoGenerateValue = arDefault
       FieldName = 'MATRICULA'
       Origin = 'MATRICULA'
-      ProviderFlags = []
-      ReadOnly = True
+      Required = True
       Size = 9
     end
     object qryOrdemServicoLocalizaMObraNOME: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'NOME'
       Origin = 'NOME'
-      ProviderFlags = []
-      ReadOnly = True
+      Size = 200
+    end
+    object qryOrdemServicoLocalizaMObraCARGO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CARGO'
+      Origin = 'CARGO'
       Size = 80
     end
     object qryOrdemServicoLocalizaMObraCALENDARIO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CALENDARIO'
       Origin = 'CALENDARIO'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 80
-    end
-    object qryOrdemServicoLocalizaMObraCARGO: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CARGO'
-      Origin = 'CARGO'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 80
     end
     object qryOrdemServicoLocalizaMObraCODEMPRESA: TStringField
@@ -52398,10 +52433,10 @@ object DM: TDM
     Top = 531
   end
   object qryOrdemServicoLocalizaMObraOSProg: TFDQuery
-    IndexFieldNames = 'MATRICULA'
+    IndexFieldNames = 'CODEMPRESA;MATRICULA'
     MasterSource = dsOrdemServicoLocalizaMObra
-    MasterFields = 'MATRICULA'
-    DetailFields = 'MATRICULA'
+    MasterFields = 'CODEMPRESA;MATRICULA'
+    DetailFields = 'CODEMPRESA;MATRICULA'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -52429,26 +52464,24 @@ object DM: TDM
       ''
       ''
       'FROM'
-      '    `spmpma_spmp`.`ordemservico`'
-      '    LEFT JOIN `spmpma_spmp`.`equipamentos` '
+      '    `ordemservico`'
+      '    LEFT JOIN `equipamentos` '
       
         '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
         'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
         'RESA`)'
-      '    LEFT JOIN `spmpma_spmp`.`ordemservicoequipemobrafunc` '
+      '    INNER JOIN `ordemservicoequipemobrafunc` '
       
         '        ON (`ordemservicoequipemobrafunc`.`CODORDEMSERVICO` = `o' +
         'rdemservico`.`CODIGO`)'
-      '    LEFT JOIN `spmpma_spmp`.`centrocusto` '
+      '    LEFT JOIN `centrocusto` '
       
         '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
         'IGO`)'
       ''
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      
-        '    -- AND `ordemservicoequipemobrafunc`.`MATRICULA` = :matricul' +
-        'a'
+      '     AND `ordemservicoequipemobrafunc`.`MATRICULA` = :matricula'
       
         '    -- AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIME' +
         'STAMP(), INTERVAL -18 MONTH) '
@@ -52456,14 +52489,15 @@ object DM: TDM
         '       -- OR `ordemservico`.`DATAULTALT` >= DATE_ADD(CURRENT_TIM' +
         'ESTAMP(), INTERVAL -18 MONTH))'
       
-        '    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%' +
-        'Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:d' +
-        'ata2,'#39'%Y/%m/%d %T'#39')))'
+        '--    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,' +
+        #39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(' +
+        ':data2,'#39'%Y/%m/%d %T'#39')))'
       
         '    AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39' OR `ordemservi' +
         'co`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
       '    )'
       ''
+      'GROUP BY `ordemservico`.`CODIGO`'
       'ORDER BY `ordemservico`.`DATAPROGINI` DESC;')
     Left = 188
     Top = 480
@@ -52475,13 +52509,7 @@ object DM: TDM
         Size = 9
       end
       item
-        Name = 'DATA1'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'DATA2'
-        DataType = ftString
+        Name = 'MATRICULA'
         ParamType = ptInput
       end>
     object qryOrdemServicoLocalizaMObraOSProgCODIGO: TFDAutoIncField
@@ -54527,10 +54555,10 @@ object DM: TDM
     Top = 424
   end
   object qryOrdemServicoLocalizaMObraOSExec: TFDQuery
-    IndexFieldNames = 'MATRICULA'
+    IndexFieldNames = 'CODEMPRESA;MATRICULA'
     MasterSource = dsOrdemServicoLocalizaMObra
-    MasterFields = 'MATRICULA'
-    DetailFields = 'MATRICULA'
+    MasterFields = 'CODEMPRESA;MATRICULA'
+    DetailFields = 'CODEMPRESA;MATRICULA'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -54558,32 +54586,39 @@ object DM: TDM
       ''
       ''
       'FROM'
-      '    `spmpma_spmp`.`ordemservico`'
-      '    LEFT JOIN `spmpma_spmp`.`equipamentos` '
+      '    `ordemservico`'
+      '    LEFT JOIN `equipamentos` '
       
         '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
         'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
         'RESA`)'
-      '    LEFT JOIN `spmpma_spmp`.`ordemservicoequipemobrautil` '
+      '    INNER JOIN `ordemservicoequipemobrautil` '
       
         '        ON (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = `o' +
         'rdemservico`.`CODIGO`)'
-      '    LEFT JOIN `spmpma_spmp`.`centrocusto` '
+      '    LEFT JOIN `centrocusto` '
       
         '        ON (`ordemservico`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
         'IGO`)'
       ''
       ''
-      ' WHERE ( `ordemservico`.`CODEMPRESA` = :codempresa'
+      'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
+      '     AND `ordemservicoequipemobrautil`.`MATRICULA` = :matricula'
       
-        '    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,'#39'%' +
-        'Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(:d' +
-        'ata2,'#39'%Y/%m/%d %T'#39')))'
+        '    -- AND (`ordemservico`.DATACADASTRO >= DATE_ADD(CURRENT_TIME' +
+        'STAMP(), INTERVAL -18 MONTH) '
+      
+        '       -- OR `ordemservico`.`DATAULTALT` >= DATE_ADD(CURRENT_TIM' +
+        'ESTAMP(), INTERVAL -18 MONTH))'
+      
+        '--    AND ((`ordemservico`.`DATACADASTRO` >= STR_TO_DATE(:data1,' +
+        #39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE(' +
+        ':data2,'#39'%Y/%m/%d %T'#39')))'
       '    AND (`ordemservico`.`SITUACAO` = '#39'EXECUCAO'#39')'
-      '   )'
+      '    )'
       ''
-      'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;'
-      '')
+      'GROUP BY `ordemservico`.`CODIGO`'
+      'ORDER BY `ordemservico`.`DATAINICIOREAL` DESC;')
     Left = 207
     Top = 480
     ParamData = <
@@ -54593,11 +54628,7 @@ object DM: TDM
         ParamType = ptInput
       end
       item
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        Name = 'DATA2'
+        Name = 'MATRICULA'
         ParamType = ptInput
       end>
     object qryOrdemServicoLocalizaMObraOSExecCODIGO: TIntegerField
@@ -55342,6 +55373,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -55466,6 +55498,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -56019,6 +56052,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end
@@ -56144,6 +56178,7 @@ object DM: TDM
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
       ProviderFlags = [pfInUpdate]
+      DisplayFormat = ',0.00'
       Precision = 10
       Size = 2
     end

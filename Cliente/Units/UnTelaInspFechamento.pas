@@ -954,7 +954,7 @@ TSLubrific.Caption := 'Lubrificações ('+IntToStr(DM.qryLubrificPeriodicas.Reco
 if PCInspecoes.Pages[2].TabVisible = True then
   TSRota.Caption := 'Rotas ('+IntToStr(DM.qryRotaPeriodicas.RecordCount)+')';
 
-hora_futura := IncMinute(Now, 5);
+//hora_futura := IncMinute(Now, 5);
 
 EdtMatricula.Text := DM.qryManutPeriodicasMATRICULAOS.AsString;
 EdtResponsavel.Text := DM.qryManutPeriodicasFUNCIONARIOOS.AsString;
@@ -2522,6 +2522,7 @@ var
   hora_atual, diferenca: TDateTime;
   df_hr: TTime;
   dt_ini, dt_final: TDate;
+  LTemp:Integer;
 begin
   inherited;
   TThread.CreateAnonymousThread(
@@ -2537,8 +2538,8 @@ begin
                                           diferenca := hora_futura - hora_atual;
                                           df_hr := TimeOf(diferenca);
 
-                                          label1.Caption := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
-                                          Application.Title := Label1.Caption;
+//                                          label1.Caption := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
+//                                          Application.Title := Label1.Caption;
 
                                           Application.ProcessMessages;
                                       end
@@ -2549,10 +2550,12 @@ begin
                                               begin
                                                 if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
                                                   begin
-                                                    DM.MSGAguarde();
+                                                    DM.MSGAguarde('ATUALIZANDO');
                                                     BtnOK.Enabled := False;
 
                                                     Try
+                                                      LTemp :=  DM.FSegundosDesliga;
+
                                                       DM.qryManutPeriodicas.Close;
                                                       DM.qryManutPeriodicasItens.Close;
                                                       DM.qryManutPeriodicasItensEsp.Close;
@@ -2576,6 +2579,7 @@ begin
 
                                                     DM.MSGAguarde('', False);
                                                     BtnOK.Enabled := True;
+                                                    DM.FSegundosDesliga := LTemp;
                                                   end;
 
                                               end);

@@ -1301,12 +1301,11 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     ExplicitTop = 574
     ExplicitWidth = 1004
     object Label1: TLabel
-      Left = 919
+      Left = 991
       Top = 4
-      Width = 75
+      Width = 3
       Height = 13
       Alignment = taRightJustify
-      Caption = 'Atualiza'#231#227'o...'
     end
   end
   inherited PBotoes: TPanel
@@ -1556,6 +1555,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     Top = 190
   end
   object Timer1: TTimer
+    Interval = 300000
     OnTimer = Timer1Timer
     Left = 130
     Top = 7

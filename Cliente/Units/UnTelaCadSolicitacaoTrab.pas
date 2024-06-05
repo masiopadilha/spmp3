@@ -162,72 +162,73 @@ end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnConsultarClick(Sender: TObject);
 begin
-if DM.FParamAuxiliar[2] = '' then
-begin
-  PopupMenuCons.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
-  Exit;
-end else
-if DM.FParamAuxiliar[2] = 'Matrícula' then
-begin
-  DM.FTabela_auxiliar := 40;
-    inherited;
-end else
-begin
-  if DM.FParamAuxiliar[3] = '' then
+  if DM.FParamAuxiliar[2] = '' then
   begin
-    DM.FParamAuxiliar[2] := '';
+    PopupMenuCons.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
     Exit;
-  end;
-
-  DM.qryAuxiliar.Close;
-  DM.qryAuxiliar.Fields.Clear;
-  DM.qryAuxiliar.Indexes.Clear;
-  DM.qryAuxiliar.SQL.Clear;
-  DM.qryAuxiliar.SQL.Add('SELECT `solictrabalho`.`CODIGO` FROM `solictrabalho` WHERE `solictrabalho`.`CODORDEMSERVICO` = ' + DM.FParamAuxiliar[3]);
-  DM.qryAuxiliar.Open;
-  with DM.dsSolicitacaoTrab.DataSet as TFDQuery do
-    begin
-      Close;
-      Params[0].AsString := DM.DSAuxiliar.DataSet.Fields[0].AsString;
-      Params[1].AsString := DM.FCodEmpresa;
-      Open;
-      Edit;
-    end;
-  DM.qryAuxiliar.Close;
-end;
-PIdentificacao.Enabled  := True;
-PProgramacao.Enabled    := True;
-PDiversos.Enabled       := True;
-
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'SOLICITADA'    then begin PSituacao.Caption := 'SOLICITADA';    PSituacao.Color := clWhite;  PSituacao.Font.Color := clBlack;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'DETALHADA'     then begin PSituacao.Caption := 'DETALHADA';     PSituacao.Color := clYellow; PSituacao.Font.Color := clGreen;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CADASTRADA'    then begin PSituacao.Caption := 'CADASTRADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'EXECUCAO'      then begin PSituacao.Caption := 'EXECUÇÃO';      PSituacao.Color := clInfoBk; PSituacao.Font.Color := clGreen;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'LIBERADA'      then begin PSituacao.Caption := 'LIBERADA';      PSituacao.Color := clGreen;  PSituacao.Font.Color := clWhite;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
-
-if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
+  end else
+  if DM.FParamAuxiliar[2] = 'Matrícula' then
   begin
-    if (DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA') then
+    DM.FTabela_auxiliar := 40;
+      inherited;
+  end else
+  begin
+    if DM.FParamAuxiliar[3] = '' then
+    begin
+      DM.FParamAuxiliar[2] := '';
+      Exit;
+    end;
+
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.Fields.Clear;
+    DM.qryAuxiliar.Indexes.Clear;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `solictrabalho`.`CODIGO` FROM `solictrabalho` WHERE `solictrabalho`.`CODORDEMSERVICO` = ' + DM.FParamAuxiliar[3]);
+    DM.qryAuxiliar.Open;
+    with DM.dsSolicitacaoTrab.DataSet as TFDQuery do
       begin
-        PAuxiliares.Font.Color  := clRed;
-        PAuxiliares.Caption     := 'ORDEM DE SERVIÇO CANCELADA, ALTERAÇÕES NÃO PERMITIDAS!';
-        PIdentificacao.Enabled  := False;
-        PProgramacao.Enabled    := False;
-        PDiversos.Enabled       := False;
+        Close;
+        Params[0].AsString := DM.DSAuxiliar.DataSet.Fields[0].AsString;
+        Params[1].AsString := DM.FCodEmpresa;
+        Open;
+        Edit;
       end;
+    DM.qryAuxiliar.Close;
   end;
-DM.FParamAuxiliar[2] := '';
-DM.FDataSetParam     := DM.qrySolicitacaoTrab;
-DM.FDataSourceParam  := DM.dsSolicitacaoTrab;
-DM.FTela := 'CADSOLICITACAOTRAB';
-DM.FTabela_auxiliar := 40;
+
+  PIdentificacao.Enabled  := True;
+  PProgramacao.Enabled    := True;
+  PDiversos.Enabled       := True;
+
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'SOLICITADA'    then begin PSituacao.Caption := 'SOLICITADA';    PSituacao.Color := clWhite;  PSituacao.Font.Color := clBlack;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'DETALHADA'     then begin PSituacao.Caption := 'DETALHADA';     PSituacao.Color := clYellow; PSituacao.Font.Color := clGreen;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CADASTRADA'    then begin PSituacao.Caption := 'CADASTRADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PROGRAMADA'    then begin PSituacao.Caption := 'PROGRAMADA';    PSituacao.Color := clBlue;   PSituacao.Font.Color := clWhite;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'REPROGRAMADA'  then begin PSituacao.Caption := 'REPROGRAMADA';  PSituacao.Color := clBlue;   PSituacao.Font.Color := clYellow; end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'DESPROGRAMADA' then begin PSituacao.Caption := 'DESPROGRAMADA'; PSituacao.Color := clYellow; PSituacao.Font.Color := clBlue;   end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'EXECUCAO'      then begin PSituacao.Caption := 'EXECUÇÃO';      PSituacao.Color := clInfoBk; PSituacao.Font.Color := clGreen;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'LIBERADA'      then begin PSituacao.Caption := 'LIBERADA';      PSituacao.Color := clGreen;  PSituacao.Font.Color := clWhite;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'FECHADA'       then begin PSituacao.Caption := 'FECHADA';       PSituacao.Color := clGray;   PSituacao.Font.Color := clBlack;  end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
+
+  if DM.qrySolicitacaoTrabSITUACAO_1.AsString <> '' then
+    begin
+      if (DM.qrySolicitacaoTrabSITUACAO_1.AsString = 'CANCELADA') then
+        begin
+          PAuxiliares.Font.Color  := clRed;
+          PAuxiliares.Caption     := 'ORDEM DE SERVIÇO CANCELADA, ALTERAÇÕES NÃO PERMITIDAS!';
+          PIdentificacao.Enabled  := False;
+          PProgramacao.Enabled    := False;
+          PDiversos.Enabled       := False;
+        end;
+    end;
+
+  DM.FDataSetParam     := DM.qrySolicitacaoTrab;
+  DM.FDataSourceParam  := DM.dsSolicitacaoTrab;
+  DM.FTela := 'CADSOLICITACAOTRAB';
+  DM.FTabela_auxiliar := 40;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnEquipamentoClick(Sender: TObject);
