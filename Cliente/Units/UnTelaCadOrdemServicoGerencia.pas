@@ -13,36 +13,26 @@ uses
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.ComCtrls, JvExComCtrls, JvDateTimePicker, JvExGrids, JvStringGrid, IOUtils,
   JvFullColorSpaces, JvFullColorCtrls, JvDBGridFooter, JvExDBGrids, JvDBGrid,
-  System.ImageList, Vcl.ImgList;
+  System.ImageList, Vcl.ImgList, Vcl.Buttons;
 
 type
   TFrmTelaCadOrdemServicoGerencia = class(TFrmTelaPaiOKCancel)
     PFuncoes: TPanel;
-    BtnCadastro: TButton;
-    BtnProgramacao: TButton;
-    BtnExecucao: TButton;
-    BtnLiberacao: TButton;
-    BtnFechamento: TButton;
-    BtnParalisacao: TButton;
-    BtnImpressao: TButton;
-    BtnCancelamento: TButton;
     Label9: TLabel;
     CBPeriodo: TComboBox;
-    BtnHistorico: TButton;
     PopupMenuLiberar: TPopupMenu;
     Total: TMenuItem;
     Parcial: TMenuItem;
     PopupMenuRelat: TPopupMenu;
     Ficha1: TMenuItem;
     Lista1: TMenuItem;
-    btnMObra: TButton;
     PFiltros: TPanel;
-    chkNProg: TCheckBox;
-    chkProg: TCheckBox;
-    chkExec: TCheckBox;
-    chkLib: TCheckBox;
-    chkFec: TCheckBox;
-    chkPar: TCheckBox;
+    CheckBox1: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
     PFiltros2: TPanel;
     Label6: TLabel;
     BtnFamiliaEquip: TButton;
@@ -62,10 +52,10 @@ type
     Label4: TLabel;
     EdtData2: TJvDateTimePicker;
     BtnConsultar: TButton;
-    chbCanc: TCheckBox;
+    CheckBox8: TCheckBox;
     Simples1: TMenuItem;
     Checklist1: TMenuItem;
-    chkDetalhad: TCheckBox;
+    CheckBox2: TCheckBox;
     Exportar1: TMenuItem;
     grid: TJvStringGrid;
     DSOSSimplesExcel: TDataSource;
@@ -88,7 +78,7 @@ type
     StringField14: TStringField;
     StringField15: TStringField;
     StringField16: TStringField;
-    chbVenc: TCheckBox;
+    CheckBox9: TCheckBox;
     PopupMenuOS: TPopupMenu;
     Vencida1: TMenuItem;
     DesafazerVencida1: TMenuItem;
@@ -124,24 +114,33 @@ type
     Panel9: TPanel;
     Label17: TLabel;
     chkSolic: TCheckBox;
+    Button1: TBitBtn;
+    Button2: TBitBtn;
+    Button3: TBitBtn;
+    Button4: TBitBtn;
+    Button5: TBitBtn;
+    Button6: TBitBtn;
+    Button7: TBitBtn;
+    Button8: TBitBtn;
+    Button9: TBitBtn;
+    Button10: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure ConfigurarFiltros;
-    procedure BtnCadastroClick(Sender: TObject);
-    procedure BtnProgramacaoClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGConsSimplesClick(Sender: TObject);
-    procedure BtnExecucaoClick(Sender: TObject);
-    procedure BtnLiberacaoClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure ParcialClick(Sender: TObject);
     procedure TotalClick(Sender: TObject);
-    procedure BtnFechamentoClick(Sender: TObject);
-    procedure BtnHistoricoClick(Sender: TObject);
-    procedure BtnParalisacaoClick(Sender: TObject);
-    procedure BtnCancelamentoClick(Sender: TObject);
-    procedure BtnImpressaoClick(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Ficha1Click(Sender: TObject);
-    procedure btnMObraClick(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
     procedure LiberarMaodeObraEmExecucao;
     procedure BtnOficinaClick(Sender: TObject);
     procedure EdtOficinaDblClick(Sender: TObject);
@@ -149,7 +148,7 @@ type
     procedure BtnFamiliaEquipClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure chkNProgClick(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
     procedure Completa1Click(Sender: TObject);
     procedure MaodeObra1Click(Sender: TObject);
     procedure Inspecoes1Click(Sender: TObject);
@@ -173,6 +172,8 @@ type
     procedure DBGridKeyPress(Sender: TObject; var Key: Char);
     procedure edtSolicitanteDblClick(Sender: TObject);
     procedure BtnSolicitanteClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
     Ascending:boolean;
@@ -202,27 +203,7 @@ uses UnTelaConsulta, UnTelaCadOrdemServico,
   UnTelaCadOrdemServicoParalisacao, UnDmRelatorios,
   UnTelaCadOrdemServicoLocalizaMObra, UnDM;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnCadastroClick(Sender: TObject);
-begin
-  inherited;
-PAuxiliares.Font.Color := clGray;
-PAuxiliares.Caption := EmptyStr;
-  Try
-    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
-      begin
-        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
-        Exit;
-      end;
-//    Timer1.Enabled := False;
-    Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
-    FrmTelaCadOrdemServico.ShowModal;
-  Finally
-    FreeAndNil(FrmTelaCadOrdemServico);
-//    Timer1.Enabled := True;
-  End;
-end;
-
-procedure TFrmTelaCadOrdemServicoGerencia.BtnCancelamentoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button8Click(Sender: TObject);
 var
 LMotivo : String;
 begin
@@ -273,6 +254,26 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') o
       end;
 end;
 
+procedure TFrmTelaCadOrdemServicoGerencia.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+PAuxiliares.Font.Color := clGray;
+PAuxiliares.Caption := EmptyStr;
+  Try
+    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+//    Timer1.Enabled := False;
+    Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
+    FrmTelaCadOrdemServico.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadOrdemServico);
+//    Timer1.Enabled := True;
+  End;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.BtnConsultarClick(Sender: TObject);
 begin
   inherited;
@@ -288,7 +289,7 @@ DM.qryOrdemServicoGerencia.Open;
 ConfigurarFiltros;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnExecucaoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button3Click(Sender: TObject);
 var
 LTexto : PChar;
 LPecas : String;
@@ -302,7 +303,7 @@ if (DM.qryUsuarioPAcessoCADORDEMSERVICOEXECUTAR.AsString <> 'S') and (LowerCase(
       end;
 if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'PARALISADA') then
   begin
-    BtnParalisacao.OnClick(Sender);
+    Button6.OnClick(Sender);
     Exit;
   end;
 
@@ -718,7 +719,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   end;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnFechamentoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button5Click(Sender: TObject);
 begin
   inherited;
 if (DM.qryUsuarioPAcessoCADORDEMSERVICOFECHAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -751,7 +752,7 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
     end;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnHistoricoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button10Click(Sender: TObject);
 begin
   inherited;
 PAuxiliares.Font.Color := clGray;
@@ -766,7 +767,7 @@ PAuxiliares.Caption := EmptyStr;
   End;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnImpressaoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button7Click(Sender: TObject);
 begin
   inherited;
 if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')
@@ -780,7 +781,7 @@ PAuxiliares.Caption := EmptyStr;
 PopupMenuRelat.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnLiberacaoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button4Click(Sender: TObject);
 begin
   inherited;
 if DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO' Then Exit;
@@ -830,7 +831,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   end;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnParalisacaoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button6Click(Sender: TObject);
 begin
   inherited;
 if (DM.qryUsuarioPAcessoCADORDEMSERVICOPARALISAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -863,7 +864,7 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or 
     end;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.BtnProgramacaoClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button2Click(Sender: TObject);
 begin
   inherited;
 if (DM.qryUsuarioPAcessoCADORDEMSERVICOPROGRAMAR.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -973,14 +974,14 @@ begin
   end;
 end;
 
-procedure TFrmTelaCadOrdemServicoGerencia.chkNProgClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.CheckBox1Click(Sender: TObject);
 begin
   inherited;
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
 ConfigurarFiltros;
 end;
-procedure TFrmTelaCadOrdemServicoGerencia.btnMObraClick(Sender: TObject);
+procedure TFrmTelaCadOrdemServicoGerencia.Button9Click(Sender: TObject);
 begin
   inherited;
   Try
@@ -1022,49 +1023,49 @@ begin
   LNProg := ''; LDet := ''; LProg := ''; LExec := '';  LLib := ''; LFec := ''; LPar := '';
   LSolic := ''; LRot := ''; LCanc := ''; LVenc := ''; LParado := ''; LTipoManutencao := '';
 
-  if (chkNProg.Checked = True) then
+  if (CheckBox1.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LDet := ' (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')'
     else
       LDet := ' OR (SITUACAO = ''CADASTRADA'') OR (SITUACAO = ''DESPROGRAMADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LDet;
 
-  if (chkDetalhad.Checked = True) then
+  if (CheckBox2.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LNProg := ' (SITUACAO = ''DETALHADA'')'
     else
       LNProg := ' OR (SITUACAO = ''DETALHADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LNProg;
 
-  if (chkProg.Checked = True) then
+  if (CheckBox3.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LProg  := ' (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')'
     else
       LProg  := ' OR (SITUACAO = ''PROGRAMADA'') or (SITUACAO = ''REPROGRAMADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LProg;
 
-  if (chkExec.Checked = True) then
+  if (CheckBox4.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LExec  := ' (SITUACAO = ''EXECUCAO'')'
     else
       LExec  := ' OR (SITUACAO = ''EXECUCAO'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LExec;
 
-  if (chkLib.Checked = True) then
+  if (CheckBox5.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LLib   := ' (SITUACAO = ''LIBERADA'')'
     else
       LLib   := ' OR (SITUACAO = ''LIBERADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LLib;
 
-  if (chkFec.Checked = True) then
+  if (CheckBox6.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LFec   := ' (SITUACAO = ''FECHADA'')'
     else
       LFec   := ' OR (SITUACAO = ''FECHADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LFec;
 
-  if (chkPar.Checked = True) then
+  if (CheckBox7.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LPar   := ' (SITUACAO = ''PARALISADA'')'
     else
@@ -1102,14 +1103,14 @@ begin
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LRot ;
 
 
-  if (chbCanc.Checked = True) then
+  if (CheckBox8.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LCanc   := ' (SITUACAO = ''CANCELADA'')'
     else
       LCanc   := ' OR (SITUACAO = ''CANCELADA'')';
   DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + LCanc;
 
-  if (chbVenc.Checked = True) then
+  if (CheckBox9.Checked = True) then
     if DBGrid.DataSource.DataSet.Filter = '' then
       LVenc   := ' (SITUACAO = ''VENCIDA'')'
     else
@@ -1549,19 +1550,93 @@ if Key = 116 then
   end;
  if (Shift = [ssCtrl, ssAlt]) then
   begin
-    if (key = 79) then BtnCadastro.OnClick(Sender);
-    if (key = 80) then BtnProgramacao.OnClick(Sender);
-    if (key = 69) then BtnExecucao.OnClick(Sender);
-    if (key = 76) then BtnLiberacao.OnClick(Sender);
-    if (key = 70) then BtnFechamento.OnClick(Sender);
-    if (key = 82) then BtnParalisacao.OnClick(Sender);
-    if (key = 73) then BtnImpressao.OnClick(Sender);
-    if (key = 67) then BtnCancelamento.OnClick(Sender);
-    if (key = 77) then btnMObra.OnClick(Sender);
-    if (key = 72) then BtnHistorico.OnClick(Sender);
+    if (key = 79) then Button1.OnClick(Sender);
+    if (key = 80) then Button2.OnClick(Sender);
+    if (key = 69) then Button3.OnClick(Sender);
+    if (key = 76) then Button4.OnClick(Sender);
+    if (key = 70) then Button5.OnClick(Sender);
+    if (key = 82) then Button6.OnClick(Sender);
+    if (key = 73) then Button7.OnClick(Sender);
+    if (key = 67) then Button8.OnClick(Sender);
+    if (key = 77) then Button9.OnClick(Sender);
+    if (key = 72) then Button10.OnClick(Sender);
   end;
 
   inherited;
+end;
+
+procedure TFrmTelaCadOrdemServicoGerencia.FormResize(Sender: TObject);
+var
+  i: Integer;
+  ButtonWidth, Spacing, CheckBoxWidth, TotalWidth, StartPos, AvailableWidth,
+  ColumnWidth: Integer;
+begin
+  inherited;
+  // Defina o número de botões
+  const ButtonCount = 10;
+  // Calcule a largura do botão
+  ButtonWidth := (ClientWidth div ButtonCount) -7;
+  // Calcule o espaçamento entre os botões
+  Spacing := (ClientWidth - (ButtonWidth * ButtonCount)) div (ButtonCount + 1);
+
+  for i := 0 to ButtonCount - 1 do
+    begin
+      with TButton(FindComponent('Button' + IntToStr(i + 1))) do
+      begin
+        // Defina a largura do botão
+        Width := ButtonWidth;
+        // Defina a posição do botão
+        Left := Spacing + i * (ButtonWidth + Spacing) - 2;
+        if i = 9 then
+          Left := Left - 1;
+        // Defina a altura e posição vertical, se necessário
+        Top := 7;  // por exemplo, 10 pixels da borda superior do formulário
+        Height := 23; // altura do botão, ajustável conforme necessário
+      end;
+    end;
+
+
+  // Obtém a largura de um CheckBox (assumindo que todos têm a mesma largura)
+  CheckBoxWidth := CheckBox1.Width;
+
+  // Calcula a largura total ocupada por todos os CheckBoxes
+  TotalWidth := 9 * CheckBoxWidth;
+
+  // Calcula o espaço entre os CheckBoxes
+  Spacing := (ClientWidth - TotalWidth) div 10;
+
+  // Define a posição inicial (margem esquerda)
+  StartPos := Spacing;
+
+  // Posiciona os CheckBoxes
+  for i := 0 to 8 do
+  begin
+    TCheckBox(FindComponent('CheckBox' + IntToStr(i + 1))).Left := StartPos;
+    StartPos := StartPos + CheckBoxWidth + Spacing;
+  end;
+
+  BtnFechar.Left := (PBotoes.Width div 2) - (BtnFechar.Width div 2);
+  BtnFechar.Top := (PBotoes.Height div 2) - (BtnFechar.Height div 2);
+
+
+  // Calcula a largura total das colunas sem contar a última
+  TotalWidth := 0;
+  for i := 0 to DBGrid.Columns.Count - 2 do
+    TotalWidth := TotalWidth + DBGrid.Columns[i].Width;
+
+  // Calcula a largura disponível para a última coluna
+  AvailableWidth := DBGrid.ClientWidth - TotalWidth;
+
+  // Define a largura de cada coluna proporcionalmente
+  for i := 0 to DBGrid.Columns.Count - 2 do
+  begin
+    ColumnWidth := (DBGrid.ClientWidth * DBGrid.Columns[i].Width) div TotalWidth;
+    DBGrid.Columns[i].Width := ColumnWidth;
+  end;
+
+  // Define a largura da última coluna para preencher o restante do espaço
+//  if DBGrid.Columns.Count > 0 then
+//    DBGrid.Columns[DBGrid.Columns.Count - 1].Width := AvailableWidth;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.FormShow(Sender: TObject);
@@ -1658,7 +1733,7 @@ begin
       Open;
       Edit;
     end;
-  BtnCadastro.OnClick(Sender);
+  Button1.OnClick(Sender);
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.DBGridDrawColumnCell(
@@ -1799,12 +1874,12 @@ begin
   if (Trim(Column.Field.FieldName) = 'EQUIPPARADO') and (Trim(Column.Field.AsString) = 'S') then
   begin
     DBGrid.Canvas.FillRect(Rect);
-    ImageList1.Draw(TDBGrid(Sender).Canvas,Rect.Left + 12, Rect.Top, 0, True);
+    ImageList1.Draw(TDBGrid(Sender).Canvas, (Rect.Left + Round(Rect.Width/2)) - 10, Rect.Top, 0, True);
   end;
   if (Trim(Column.Field.FieldName) = 'EQUIPPARADO') and ((Trim(Column.Field.AsString) = 'N') or (Trim(Column.Field.AsString) = EmptyStr)) then
   begin
     DBGrid.Canvas.FillRect(Rect);
-    ImageList1.Draw(TDBGrid(Sender).Canvas,Rect.Left + 12, Rect.Top, 1, True);
+    ImageList1.Draw(TDBGrid(Sender).Canvas, (Rect.Left + Round(Rect.Width/2)) - 10, Rect.Top, 1, True);
   end;
 
 end;

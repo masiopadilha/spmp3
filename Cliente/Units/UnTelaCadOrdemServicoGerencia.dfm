@@ -2,11 +2,13 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   Caption = 'Ordens de Servi'#231'o'
   ClientHeight = 644
   ClientWidth = 1012
-  Constraints.MaxHeight = 680
-  Constraints.MaxWidth = 1024
-  Constraints.MinHeight = 680
-  Constraints.MinWidth = 1024
+  Constraints.MaxHeight = 0
+  Constraints.MaxWidth = 0
+  Constraints.MinHeight = 0
+  Constraints.MinWidth = 0
+  WindowState = wsMaximized
   OnCreate = FormCreate
+  OnResize = FormResize
   OnShow = FormShow
   ExplicitWidth = 1024
   ExplicitHeight = 680
@@ -155,225 +157,205 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelOuter = bvLowered
       TabOrder = 0
       ExplicitWidth = 996
-      object BtnCadastro: TButton
-        Left = 7
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button1: TBitBtn
+        Left = 3
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Cadastrar O.S. (Ctrl + Alt + O)'
         Caption = 'Cadastrar'
-        DisabledImageIndex = 1
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 0
-        ImageMargins.Left = 6
-        ImageMargins.Right = -6
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
-        OnClick = BtnCadastroClick
+        OnClick = BitBtn1Click
       end
-      object BtnProgramacao: TButton
-        Left = 122
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button2: TBitBtn
+        Left = 103
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Programar O.S. (Ctrl + Alt + P)'
         Caption = 'Programar'
-        DisabledImageIndex = 59
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 58
-        ImageMargins.Left = 4
-        ImageMargins.Top = 1
-        ImageMargins.Right = 2
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
-        OnClick = BtnProgramacaoClick
+        OnClick = Button2Click
       end
-      object BtnExecucao: TButton
-        Left = 237
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button3: TBitBtn
+        Left = 203
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Executar O.S. (Ctrl + Alt + E)'
         Caption = 'Executar'
-        DisabledImageIndex = 61
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 60
-        ImageMargins.Left = 6
-        ImageMargins.Top = 1
-        ImageMargins.Right = -6
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
-        OnClick = BtnExecucaoClick
+        OnClick = Button3Click
       end
-      object BtnLiberacao: TButton
-        Left = 352
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button4: TBitBtn
+        Left = 303
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Liberar O.S. (Ctrl + Alt + L)'
         Caption = 'Liberar'
-        DisabledImageIndex = 63
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 62
-        ImageMargins.Left = 6
-        ImageMargins.Top = 1
-        ImageMargins.Right = -6
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 3
-        OnClick = BtnLiberacaoClick
+        OnClick = Button4Click
       end
-      object BtnFechamento: TButton
-        Left = 467
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button5: TBitBtn
+        Left = 403
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Fechar O.S. (Ctrl + Alt + F)'
         Caption = 'Fechar'
-        DisabledImageIndex = 65
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 64
-        ImageMargins.Left = 6
-        ImageMargins.Top = 1
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
-        OnClick = BtnFechamentoClick
+        OnClick = Button5Click
       end
-      object BtnParalisacao: TButton
-        Left = 582
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button6: TBitBtn
+        Left = 503
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Paralisar O.S. (Ctrl + Alt + R)'
         Caption = 'Paralisar'
-        DisabledImageIndex = 67
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 66
-        ImageMargins.Left = 4
-        ImageMargins.Top = 1
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 5
-        OnClick = BtnParalisacaoClick
+        OnClick = Button6Click
       end
-      object BtnImpressao: TButton
-        Left = 697
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button7: TBitBtn
+        Left = 603
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Imprimir O.S. (Ctrl + Alt + I)'
         Caption = 'Imprimir'
-        DisabledImageIndex = 16
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 15
-        ImageMargins.Left = 4
-        ImageMargins.Right = 2
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 6
-        OnClick = BtnImpressaoClick
+        OnClick = Button7Click
       end
-      object BtnCancelamento: TButton
-        Left = 812
-        Top = 7
-        Width = 110
-        Height = 23
+      object Button8: TBitBtn
+        Left = 703
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Cancelar O.S. (Ctrl + Alt + C)'
         Caption = 'Cancelar'
-        DisabledImageIndex = 7
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -12
         Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 6
-        ImageMargins.Left = 8
-        ImageMargins.Top = 1
-        ImageMargins.Right = -4
         Images = DM.ImageListBotoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 7
-        OnClick = BtnCancelamentoClick
+        OnClick = Button8Click
       end
-      object BtnHistorico: TButton
-        Left = 961
-        Top = 5
-        Width = 29
-        Height = 27
-        Hint = 'Hist'#243'rico (Ctrl + Alt + H)'
-        DisabledImageIndex = 59
-        ImageIndex = 58
-        ImageMargins.Left = 4
-        ImageMargins.Top = 1
-        Images = DM.ImageListBotoes
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
-        OnClick = BtnHistoricoClick
-      end
-      object btnMObra: TButton
-        Left = 927
-        Top = 5
-        Width = 29
-        Height = 27
+      object Button9: TBitBtn
+        Left = 803
+        Top = 6
+        Width = 96
+        Height = 25
         Hint = 'Localizar M'#227'o de Obra (Ctrl + Alt + M)'
-        DisabledImageIndex = 27
+        Caption = 'M'#227'o de Obra'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ImageIndex = 27
-        ImageMargins.Left = 4
-        ImageMargins.Top = 1
         Images = DM.ImageListBotoes
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 8
-        OnClick = btnMObraClick
+        OnClick = Button9Click
+      end
+      object Button10: TBitBtn
+        Left = 902
+        Top = 6
+        Width = 96
+        Height = 25
+        Hint = 'Hist'#243'rico (Ctrl + Alt + H)'
+        Caption = 'Hist'#243'rico'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 58
+        Images = DM.ImageListBotoes
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 9
+        OnClick = Button10Click
       end
     end
     object PFiltros: TPanel
@@ -389,7 +371,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelOuter = bvLowered
       TabOrder = 1
       ExplicitWidth = 996
-      object chkNProg: TCheckBox
+      object CheckBox1: TCheckBox
         Left = 8
         Top = 5
         Width = 95
@@ -402,9 +384,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkProg: TCheckBox
+      object CheckBox3: TCheckBox
         Left = 233
         Top = 5
         Width = 95
@@ -417,9 +399,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkExec: TCheckBox
+      object CheckBox4: TCheckBox
         Left = 346
         Top = 5
         Width = 95
@@ -432,9 +414,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkLib: TCheckBox
+      object CheckBox5: TCheckBox
         Left = 459
         Top = 5
         Width = 95
@@ -447,9 +429,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 4
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkFec: TCheckBox
+      object CheckBox6: TCheckBox
         Left = 571
         Top = 5
         Width = 95
@@ -462,9 +444,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 5
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkPar: TCheckBox
+      object CheckBox7: TCheckBox
         Left = 684
         Top = 5
         Width = 95
@@ -477,9 +459,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 6
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chbCanc: TCheckBox
+      object CheckBox8: TCheckBox
         Left = 797
         Top = 5
         Width = 95
@@ -492,9 +474,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 7
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chkDetalhad: TCheckBox
+      object CheckBox2: TCheckBox
         Left = 120
         Top = 5
         Width = 95
@@ -507,9 +489,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
-      object chbVenc: TCheckBox
+      object CheckBox9: TCheckBox
         Left = 910
         Top = 5
         Width = 95
@@ -522,7 +504,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
     end
     object PFiltros2: TPanel
@@ -745,11 +727,15 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       TabOrder = 6
       ExplicitWidth = 996
       ExplicitHeight = 371
+      DesignSize = (
+        1000
+        374)
       object Label18: TLabel
         Left = 873
         Top = 88
         Width = 57
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Prioridade:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -763,6 +749,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 137
         Width = 117
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Tipo de Manuten'#231#227'o:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -776,6 +763,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 197
         Width = 57
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Preventiva'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -789,6 +777,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 216
         Width = 48
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Corretiva'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -802,6 +791,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 235
         Width = 46
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Preditiva'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -815,6 +805,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 254
         Width = 63
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Lubrifica'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -828,6 +819,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 273
         Width = 82
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Novos Projetos'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -841,6 +833,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 292
         Width = 57
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Altera'#231#245'es'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -854,6 +847,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 311
         Width = 57
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Aut'#244'noma'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -867,6 +861,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 330
         Width = 37
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Outros'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -880,6 +875,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 350
         Width = 54
         Height = 14
+        Anchors = [akTop, akRight]
         Caption = 'Indefinido'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1090,6 +1086,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Width = 56
         Height = 18
         Hint = 'Somente as rotas'
+        Anchors = [akTop, akRight]
         Caption = 'Rotas'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1098,7 +1095,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
       object chkParado: TCheckBox
         Left = 875
@@ -1106,6 +1103,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Width = 60
         Height = 18
         Hint = 'Somente equipamentos parados'
+        Anchors = [akTop, akRight]
         Caption = 'Parado'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1114,7 +1112,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
       object CBPrioridade: TComboBox
         Left = 873
@@ -1122,6 +1120,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Width = 120
         Height = 22
         Style = csOwnerDrawFixed
+        Anchors = [akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -1146,6 +1145,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Width = 120
         Height = 22
         Style = csOwnerDrawFixed
+        Anchors = [akTop, akRight]
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -1173,6 +1173,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 198
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = clBlue
         ParentBackground = False
@@ -1184,6 +1185,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 217
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = clRed
         ParentBackground = False
@@ -1195,6 +1197,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 236
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 49151
         ParentBackground = False
@@ -1206,6 +1209,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 255
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 697632
         ParentBackground = False
@@ -1217,6 +1221,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 274
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 721026
         ParentBackground = False
@@ -1228,6 +1233,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 293
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 9262534
         ParentBackground = False
@@ -1239,6 +1245,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 312
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 13290186
         ParentBackground = False
@@ -1250,6 +1257,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 331
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 8026746
         ParentBackground = False
@@ -1261,6 +1269,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Top = 351
         Width = 11
         Height = 13
+        Anchors = [akTop, akRight]
         BevelOuter = bvNone
         Color = 9694960
         ParentBackground = False
@@ -1273,6 +1282,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Width = 89
         Height = 18
         Hint = 'Somente as solicita'#231#245'es'
+        Anchors = [akTop, akRight]
         Caption = 'Solicita'#231#245'es'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1283,7 +1293,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
-        OnClick = chkNProgClick
+        OnClick = CheckBox1Click
       end
     end
   end
@@ -1305,6 +1315,10 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     inherited BtnFechar: TButton
       Left = 467
+      Margins.Left = 458
+      Margins.Top = 4
+      Margins.Right = 458
+      Margins.Bottom = 4
       ExplicitLeft = 467
     end
   end

@@ -242,6 +242,7 @@ type
     Consulta2: TMenuItem;
     Cadastro9: TMenuItem;
     Consulta3: TMenuItem;
+    Image2: TImage;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -3631,7 +3632,10 @@ begin
     begin
       if frmSistemaOcioso.Active = False then
         frmSistemaOcioso.ShowModal;
-      frmSistemaOcioso.lblTempoRegressivo.Caption := 'O sistema será desligado em '+IntToStr(DM.FSegundosDesliga)+' segundos.'
+      frmSistemaOcioso.lblTempoRegressivo.Caption := 'O sistema será desligado em '+IntToStr(DM.FSegundosDesliga)+' segundos.';
+      if DM.FSegundosDesliga < 0 then
+        Sair1Click(Sender);
+
      // ShowMessageFmt('O sistema será desligado em %d segundos.', [DM.FSegundosDesliga]);
     end else
     if (DM.FSegundosDesliga = 0) then
