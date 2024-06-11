@@ -15,7 +15,7 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
     Width = 384
     ExplicitWidth = 380
     inherited BtnAjuda: TButton
-      Left = 355
+      Left = 351
       ExplicitLeft = 351
     end
   end

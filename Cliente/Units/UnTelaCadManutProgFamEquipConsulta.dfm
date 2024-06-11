@@ -12,10 +12,10 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1008
+    ExplicitWidth = 1004
     inherited BtnAjuda: TButton
-      Left = 975
-      ExplicitLeft = 971
+      Left = 979
+      ExplicitLeft = 975
     end
     object BtnConsultar: TButton
       Left = 942
@@ -169,7 +169,7 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
       TitleButtons = True
       BevelInner = bvNone
       BevelOuter = bvNone
-      AlternateRowColor = 15727296
+      AlternateRowColor = 16055512
       SortedField = 'CODIGO'
       TitleArrow = True
       SelectColumnsDialogStrings.Caption = 'Selecione as colunas'

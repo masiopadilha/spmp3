@@ -1,12 +1,9 @@
 unit UnTelaCadEquipamentosArqTec;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadEquipamentosArqTec = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -19,16 +16,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadEquipamentosArqTec: TFrmTelaCadEquipamentosArqTec;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaConsulta, UnDM;
-
 procedure TFrmTelaCadEquipamentosArqTec.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -39,14 +31,12 @@ if DM.qryEquipamentosArqTec.Active = True then
     DM.qryEquipamentosArqTec.Close;
   end;
 end;
-
 procedure TFrmTelaCadEquipamentosArqTec.FormCreate(Sender: TObject);
 begin
   inherited;
 DM.qryEquipamentosArqTec.Close;
 DM.qryEquipamentosArqTec.Open;
 DM.qryEquipamentosArqTec.Edit;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -67,7 +57,6 @@ DM.qryEquipamentosArqTec.Edit;
     Exit;
   end;
 end;
-
 procedure TFrmTelaCadEquipamentosArqTec.GrdCadastroDblClick(Sender: TObject);
 begin
   inherited;
@@ -79,7 +68,6 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
   end;
 DM.qryEquipamentosArqTec.Delete;
 end;
-
 procedure TFrmTelaCadEquipamentosArqTec.GrdCadastroKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -107,7 +95,6 @@ if (Key = #13) then
     end;
 
     DM.FTabela_auxiliar := 37;
-
     Try
       Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
       FrmTelaAuxiliar.ShowModal;
@@ -130,5 +117,4 @@ if (Key = #13) then
     End;
   end;
 end;
-
 end.

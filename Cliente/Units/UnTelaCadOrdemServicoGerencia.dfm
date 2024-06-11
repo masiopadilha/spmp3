@@ -701,13 +701,13 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           Width = 110
         end
         item
-          Width = 297
+          Width = 325
         end
         item
-          Width = 430
+          Width = 475
         end
         item
-          Width = 50
+          Width = 200
         end>
       OnResize = StatusBar1Resize
       ExplicitTop = 484
@@ -919,7 +919,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         OnGetBtnParams = DBGridGetBtnParams
         BevelInner = bvNone
         BevelOuter = bvNone
-        AlternateRowColor = 15727296
+        AlternateRowColor = 16055512
         SortedField = 'CODIGO'
         TitleArrow = True
         SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -1096,6 +1096,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
         TabOrder = 2
         OnClick = CheckBox1Click
+        ExplicitLeft = 871
       end
       object chkParado: TCheckBox
         Left = 875
@@ -1113,6 +1114,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
         TabOrder = 3
         OnClick = CheckBox1Click
+        ExplicitLeft = 871
       end
       object CBPrioridade: TComboBox
         Left = 873
@@ -1138,6 +1140,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           'At'#233' 1 Semana'
           'At'#233' 1 M'#234's'
           'Acima de 1 m'#234's')
+        ExplicitLeft = 869
       end
       object CBTipoManutencao: TComboBox
         Left = 873
@@ -1167,6 +1170,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           'Novos Projetos'
           'Altera'#231#245'es'
           'Outras')
+        ExplicitLeft = 869
       end
       object Panel2: TPanel
         Left = 875
@@ -1179,6 +1183,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 6
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel1: TPanel
         Left = 875
@@ -1191,6 +1196,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 7
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel3: TPanel
         Left = 875
@@ -1203,6 +1209,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 8
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel4: TPanel
         Left = 875
@@ -1215,6 +1222,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 9
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel5: TPanel
         Left = 875
@@ -1227,6 +1235,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 10
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel6: TPanel
         Left = 875
@@ -1239,6 +1248,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 11
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel7: TPanel
         Left = 875
@@ -1251,6 +1261,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 12
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel8: TPanel
         Left = 875
@@ -1263,6 +1274,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 13
         StyleElements = []
+        ExplicitLeft = 871
       end
       object Panel9: TPanel
         Left = 875
@@ -1275,6 +1287,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 14
         StyleElements = []
+        ExplicitLeft = 871
       end
       object chkSolic: TCheckBox
         Left = 875
@@ -1294,6 +1307,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ShowHint = True
         TabOrder = 1
         OnClick = CheckBox1Click
+        ExplicitLeft = 871
       end
     end
   end

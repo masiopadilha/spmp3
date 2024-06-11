@@ -332,7 +332,7 @@ procedure TFrmTelaPaiCadastros.BtnConsultarClick(Sender: TObject);
 var
 c:SmallInt;
 begin
-DM.FMinutosInativo  := 0;
+//DM.FMinutosInativo  := 0;
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption    := EmptyStr;
 Try
@@ -446,7 +446,7 @@ procedure TFrmTelaPaiCadastros.BtnNovoClick(Sender: TObject);
 var
 c:SmallInt;
 begin
-DM.FMinutosInativo  := 0;
+//DM.FMinutosInativo  := 0;
 PAuxiliares.Font.Color := clBlue;
 PAuxiliares.Caption    := '';
 

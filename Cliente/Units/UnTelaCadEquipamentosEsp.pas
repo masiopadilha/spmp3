@@ -1,12 +1,9 @@
 unit UnTelaCadEquipamentosEsp;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Data.DB, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadEquipamentosEsp = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -19,16 +16,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadEquipamentosEsp: TFrmTelaCadEquipamentosEsp;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaConsulta, UnDM;
-
 procedure TFrmTelaCadEquipamentosEsp.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -39,14 +31,12 @@ if DM.qryEquipamentosEsp.Active = True then
     DM.qryEquipamentosEsp.Close;
   end;
 end;
-
 procedure TFrmTelaCadEquipamentosEsp.FormCreate(Sender: TObject);
 begin
   inherited;
 DM.qryEquipamentosEsp.Close;
 DM.qryEquipamentosEsp.Open;
 DM.qryEquipamentosEsp.Edit;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -68,7 +58,6 @@ DM.qryEquipamentosEsp.Edit;
   end;
 
 end;
-
 procedure TFrmTelaCadEquipamentosEsp.GrdCadastroDblClick(Sender: TObject);
 begin
   inherited;
@@ -80,7 +69,6 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
   end;
 DM.qryEquipamentosEsp.Delete;
 end;
-
 procedure TFrmTelaCadEquipamentosEsp.GrdCadastroKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -108,7 +96,6 @@ if (Key = #13) then
     end;
 
     DM.FTabela_auxiliar := 300;
-
     if (GrdCadastro.SelectedIndex = 0) then
       begin
         DM.FParamAuxiliar[1] := 'MATRICULA';
@@ -142,5 +129,4 @@ if (Key = #13) then
     End;
   end;
 end;
-
 end.

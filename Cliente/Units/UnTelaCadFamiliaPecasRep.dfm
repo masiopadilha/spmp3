@@ -1,20 +1,21 @@
 inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
   Caption = 'Fam'#237'lias de Pe'#231'as de Reposi'#231#227'o'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 513
     end
     inherited LAlteradoPor: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 535
     end
     inherited LblDataAlt: TDBText
       Margins.Left = 4
@@ -22,7 +23,6 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFamPecasRep
-      ExplicitLeft = 568
     end
     inherited LblDataCad: TDBText
       Margins.Left = 4
@@ -30,7 +30,6 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFamPecasRep
-      ExplicitLeft = 440
     end
     inherited LblUsuAlt: TDBText
       Margins.Left = 4
@@ -38,7 +37,6 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFamPecasRep
-      ExplicitLeft = 568
     end
     inherited LblUsuCad: TDBText
       Margins.Left = 4
@@ -46,24 +44,23 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsFamPecasRep
-      ExplicitLeft = 440
     end
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 407
     end
     inherited LCadastroPor: TLabel
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 369
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label2: TLabel
       Left = 79
       Top = 60
@@ -504,6 +501,14 @@ inherited FrmTelaCadFamiliaPecasRep: TFrmTelaCadFamiliaPecasRep
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 196

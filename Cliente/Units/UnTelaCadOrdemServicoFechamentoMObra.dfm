@@ -1,20 +1,12 @@
 inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamentoMObra
   Caption = 'Fechamento de M'#227'o de Obra'
   ClientHeight = 374
-  ClientWidth = 508
   Constraints.MaxHeight = 410
   Constraints.MinHeight = 410
   OnCreate = FormCreate
   ExplicitHeight = 410
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 504
-    inherited BtnAjuda: TButton
-      Left = 471
-    end
-  end
   inherited PCentro: TPanel
-    Width = 502
     Height = 235
     ExplicitHeight = 232
     inherited RGTelas: TRadioGroup
@@ -247,12 +239,10 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   end
   inherited PAuxiliares: TPanel
     Top = 307
-    Width = 504
     ExplicitTop = 304
   end
   inherited PBotoes: TPanel
     Top = 334
-    Width = 504
     ExplicitTop = 331
     inherited BtnOK: TButton
       Left = 100

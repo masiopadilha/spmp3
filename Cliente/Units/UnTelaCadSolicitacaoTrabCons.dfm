@@ -38,7 +38,7 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 969
+      Left = 973
       ExplicitLeft = 969
     end
     object EdtData1: TJvDateTimePicker
@@ -80,15 +80,16 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
     Top = 108
     Width = 1006
     Height = 464
+    ExplicitTop = 108
     ExplicitWidth = 1002
-    ExplicitHeight = 502
+    ExplicitHeight = 461
     inherited RGTelas: TRadioGroup
       Left = 707
       Width = 298
       Height = 246
       ExplicitLeft = 707
       ExplicitWidth = 294
-      ExplicitHeight = 213
+      ExplicitHeight = 243
     end
     object DBGrid: TJvDBGrid
       AlignWithMargins = True
@@ -115,7 +116,7 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
       TitleButtons = True
       BevelInner = bvNone
       BevelOuter = bvNone
-      AlternateRowColor = 15727296
+      AlternateRowColor = 16055512
       SortedField = 'CODIGO'
       TitleArrow = True
       SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -192,7 +193,7 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
       BevelOuter = bvNone
       Color = 16513523
       TabOrder = 2
-      ExplicitHeight = 209
+      ExplicitHeight = 239
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -351,7 +352,7 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
       Color = 16513523
       TabOrder = 3
       ExplicitWidth = 284
-      ExplicitHeight = 204
+      ExplicitHeight = 234
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -432,9 +433,7 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 4
-    ExplicitLeft = 4
-    ExplicitTop = 72
-    ExplicitWidth = 996
+    ExplicitWidth = 1002
     object Label6: TLabel
       Left = 7
       Top = 12

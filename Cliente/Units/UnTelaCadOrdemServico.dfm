@@ -712,6 +712,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       TabOrder = 19
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbParadoClick
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtTempoPrev: TDBEdit
@@ -740,6 +741,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       TabOrder = 20
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbAutonomoClick
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtResponsavel: TDBEdit
@@ -787,7 +789,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ExplicitTop = 2
       ExplicitWidth = 194
     end
-    object GrdServicosExec: TDBGrid
+    object DBGrid: TJvDBGrid
       AlignWithMargins = True
       Left = 5
       Top = 26
@@ -800,37 +802,56 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Margins.Bottom = 4
       Align = alClient
       DataSource = DM.dsOrdemServicoServSolic
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -13
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Height = -11
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       OnDblClick = GrdServicosExecDblClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = GrdServicosExecKeyPress
+      TitleButtons = True
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      AlternateRowColor = 16055512
+      SortedField = 'CODIGO'
+      TitleArrow = True
+      SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+      SelectColumnsDialogStrings.OK = '&OK'
+      SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+      EditControls = <>
+      RowsHeight = 17
+      TitleRowHeight = 17
       Columns = <
         item
           Expanded = False
           FieldName = 'PARTE'
           Title.Caption = 'Parte'
-          Width = 241
+          Width = 240
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'ITEM'
           Title.Caption = 'Item'
-          Width = 249
+          Width = 252
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DESCRICAO'
           Title.Caption = 'Servi'#231'o'
-          Width = 336
+          Width = 365
           Visible = True
         end
         item
@@ -842,15 +863,15 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
             'N')
           Title.Alignment = taCenter
           Title.Caption = 'Parado'
+          Width = 43
           Visible = True
         end
         item
-          Alignment = taCenter
           Expanded = False
           FieldName = 'TEMPOEXECUCAO'
           Title.Alignment = taCenter
           Title.Caption = 'Tempo'
-          Width = 63
+          Width = 60
           Visible = True
         end>
     end

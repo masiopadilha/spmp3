@@ -5,7 +5,6 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   TextHeight = 16
   inherited PControle: TPanel
     Width = 624
-    ExplicitWidth = 624
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -62,7 +61,6 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   inherited PCentro: TPanel
     Width = 624
     Height = 323
-    ExplicitWidth = 624
     object Label4: TLabel
       Left = 170
       Top = 123
@@ -179,11 +177,9 @@ inherited FrmTelaCadTipoManutencao: TFrmTelaCadTipoManutencao
   inherited StatusBar1: TStatusBar
     Top = 405
     Width = 628
-    ExplicitTop = 405
   end
   inherited PAuxiliares: TPanel
     Top = 378
     Width = 624
-    ExplicitTop = 378
   end
 end

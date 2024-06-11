@@ -3,40 +3,40 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 754
+      Left = 758
       ExplicitLeft = 730
     end
     inherited LCadastroPor: TLabel
-      Left = 710
+      Left = 714
       ExplicitLeft = 686
     end
     inherited LblDataCad: TDBText
-      Left = 792
+      Left = 796
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 788
+      ExplicitLeft = 792
     end
     inherited LblUsuCad: TDBText
-      Left = 792
+      Left = 796
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 788
+      ExplicitLeft = 792
     end
     inherited LAlteracao: TLabel
-      Left = 905
+      Left = 909
       ExplicitLeft = 881
     end
     inherited LAlteradoPor: TLabel
-      Left = 879
+      Left = 883
       ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
-      Left = 943
+      Left = 947
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 939
+      ExplicitLeft = 943
     end
     inherited LblUsuAlt: TDBText
-      Left = 943
+      Left = 947
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 939
+      ExplicitLeft = 943
     end
   end
   inherited PIdentificacao: TPanel
@@ -225,6 +225,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       TabOrder = 12
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbAtivoClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodManutencaoKeyPress
     end
@@ -240,6 +241,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       TabOrder = 13
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbVisivelClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodManutencaoKeyPress
     end
@@ -285,6 +287,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       TabOrder = 14
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = chbClonavelClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodManutencaoKeyPress
     end
@@ -379,6 +382,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       TabOrder = 15
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbParadoClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodManutencaoKeyPress
     end

@@ -71,6 +71,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ChbAtivoNFClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -594,6 +595,12 @@ begin
     DM.FDataSourceParam := DM.dsManutProgEquip;
   End;
 
+end;
+
+procedure TFrmTelaCadManutProgEquip.ChbAtivoNFClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
 end;
 
 procedure TFrmTelaCadManutProgEquip.Completo1Click(Sender: TObject);

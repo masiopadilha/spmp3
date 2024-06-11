@@ -1,22 +1,8 @@
 inherited FrmTelaCadOrdemServicoPecas: TFrmTelaCadOrdemServicoPecas
   Caption = 'Pe'#231'as da O.S.'
-  ClientHeight = 304
-  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 504
-    ExplicitWidth = 504
-    inherited BtnAjuda: TButton
-      Left = 471
-      ExplicitLeft = 471
-    end
-  end
   inherited PCentro: TPanel
-    Width = 502
-    Height = 165
-    ExplicitWidth = 502
-    ExplicitHeight = 165
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
       Left = 4
@@ -97,15 +83,7 @@ inherited FrmTelaCadOrdemServicoPecas: TFrmTelaCadOrdemServicoPecas
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 504
-    ExplicitTop = 237
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 504
-    ExplicitTop = 264
     inherited BtnOK: TButton
       Left = 100
       ModalResult = 0

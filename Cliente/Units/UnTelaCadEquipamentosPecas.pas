@@ -1,12 +1,9 @@
 unit UnTelaCadEquipamentosPecas;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Menus, Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadEquipamentosPecas = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -20,22 +17,16 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaConsulta, UnDM;
-
 procedure TFrmTelaCadEquipamentosPecas.BtnOKClick(Sender: TObject);
 begin
   inherited;
   DM.qryEquipamentosPecas.Post;
 end;
-
 procedure TFrmTelaCadEquipamentosPecas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -46,14 +37,12 @@ if DM.qryEquipamentosPecas.Active = True then
     DM.qryEquipamentosPecas.Close;
   end;
 end;
-
 procedure TFrmTelaCadEquipamentosPecas.FormCreate(Sender: TObject);
 begin
   inherited;
   DM.qryEquipamentosPecas.Close;
   DM.qryEquipamentosPecas.Open;
   DM.qryEquipamentosPecas.Edit;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -75,7 +64,6 @@ begin
   end;
 
 end;
-
 procedure TFrmTelaCadEquipamentosPecas.GrdCadastroDblClick(Sender: TObject);
 begin
   inherited;
@@ -85,10 +73,8 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
     Exit;
   end;
-
 DM.qryEquipamentosPecas.Delete;
 end;
-
 procedure TFrmTelaCadEquipamentosPecas.GrdCadastroKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -98,7 +84,6 @@ if (GrdCadastro.SelectedIndex = 3) or (GrdCadastro.SelectedIndex = 4) then
     if DM.qryEquipamentosPecasCODPECAREP.AsString = EmptyStr then
       Key := #0;
   end;
-
 if (Key = #13) then
   begin
     if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -122,7 +107,6 @@ if (Key = #13) then
     end;
 
     DM.FTabela_auxiliar := 360;
-
     if (GrdCadastro.SelectedIndex = 1) then
       begin
         DM.FParamAuxiliar[1] := 'REFERENCIA';
@@ -158,5 +142,4 @@ if (Key = #13) then
     End;
   end;
 end;
-
 end.

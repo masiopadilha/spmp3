@@ -9,8 +9,8 @@ inherited FrmTelaCadManutProgEquipPartesItensEsp: TFrmTelaCadManutProgEquipParte
     Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 747
-      ExplicitLeft = 747
+      Left = 748
+      ExplicitLeft = 748
     end
   end
   inherited PCentro: TPanel

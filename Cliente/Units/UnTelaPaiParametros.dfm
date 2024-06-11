@@ -11625,7 +11625,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 497
     end
     object LAlteradoPor: TLabel
       Left = 531
@@ -11641,7 +11640,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 519
     end
     object LblDataAlt: TDBText
       Left = 564
@@ -11657,7 +11655,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 560
     end
     object LblDataCad: TDBText
       Left = 436
@@ -11673,7 +11670,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 432
     end
     object LblUsuAlt: TDBText
       Left = 564
@@ -11691,7 +11687,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 560
     end
     object LblUsuCad: TDBText
       Left = 436
@@ -11709,7 +11704,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 432
     end
     object LCadastro: TLabel
       Left = 403
@@ -11725,7 +11719,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 391
     end
     object LCadastroPor: TLabel
       Left = 365
@@ -11741,7 +11734,6 @@ object FrmTelaPaiParametros: TFrmTelaPaiParametros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 353
     end
     object BtnAjuda: TButton
       Left = 245

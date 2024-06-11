@@ -1,7 +1,10 @@
 inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
   Caption = 'Grupo Industrial'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -15,40 +18,32 @@ inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
       Margins.Bottom = 4
     end
     inherited LblDataAlt: TDBText
-      Width = 67
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsGrupos
-      ExplicitWidth = 67
     end
     inherited LblDataCad: TDBText
-      Width = 67
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsGrupos
-      ExplicitWidth = 67
     end
     inherited LblUsuAlt: TDBText
-      Width = 67
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsGrupos
-      ExplicitWidth = 67
     end
     inherited LblUsuCad: TDBText
-      Width = 67
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsGrupos
-      ExplicitWidth = 67
     end
     inherited LCadastro: TLabel
       Margins.Left = 4
@@ -66,8 +61,7 @@ inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
   inherited PCentro: TPanel
     Left = 4
     Top = 53
-    Width = 616
-    Height = 316
+    Height = 319
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -80,13 +74,14 @@ inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 608
-      Height = 328
+      Width = 612
+      Height = 311
       ActivePage = TSGrupo
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PCGrupoIndustrialChange
+      ExplicitWidth = 608
       ExplicitHeight = 308
       object TSGrupo: TTabSheet
         Margins.Left = 2
@@ -455,5 +450,13 @@ inherited FrmTelaCadGrupoIndustrial: TFrmTelaCadGrupoIndustrial
         end
       end
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

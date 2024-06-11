@@ -10,8 +10,8 @@ inherited FrmTelaCadPneusIDs: TFrmTelaCadPneusIDs
     Width = 559
     ExplicitWidth = 555
     inherited BtnAjuda: TButton
-      Left = 523
-      ExplicitLeft = 523
+      Left = 526
+      ExplicitLeft = 526
     end
   end
   inherited PCentro: TPanel

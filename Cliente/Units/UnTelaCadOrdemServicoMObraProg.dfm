@@ -33,8 +33,8 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       Height = 16
     end
     inherited BtnAjuda: TButton
-      Left = 509
-      ExplicitLeft = 509
+      Left = 507
+      ExplicitLeft = 507
     end
   end
   inherited PCentro: TPanel

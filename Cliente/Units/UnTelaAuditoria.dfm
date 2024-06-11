@@ -14,15 +14,15 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     Width = 1000
     ExplicitWidth = 996
     inherited BtnAjuda: TButton
-      Left = 962
+      Left = 958
       Top = 16
       Height = 30
-      ExplicitLeft = 958
+      ExplicitLeft = 954
       ExplicitTop = 16
       ExplicitHeight = 30
     end
     object BtnImprimir: TButton
-      Left = 929
+      Left = 925
       Top = 16
       Width = 30
       Height = 30
@@ -36,6 +36,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
       ShowHint = True
       TabOrder = 1
       OnClick = BtnImprimirClick
+      ExplicitLeft = 921
     end
   end
   inherited PCentro: TPanel
@@ -51,7 +52,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
       Width = 0
       Height = 411
       ExplicitLeft = 499
-      ExplicitWidth = 4
+      ExplicitWidth = 0
       ExplicitHeight = 408
     end
     object PGrid: TPanel
@@ -99,7 +100,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
         BevelEdges = []
         BevelInner = bvNone
         BevelKind = bkTile
-        AlternateRowColor = 16251129
+        AlternateRowColor = 16055512
         AlternateRowFontColor = clBlack
         TitleArrow = True
         AutoSizeColumns = True

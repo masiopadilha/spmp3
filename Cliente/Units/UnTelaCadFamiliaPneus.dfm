@@ -1,45 +1,34 @@
 inherited FrmTelaCadFamiliaPneus: TFrmTelaCadFamiliaPneus
   Caption = 'Familia de Pneus'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    inherited LAlteracao: TLabel
-      Left = 510
-      ExplicitLeft = 510
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 532
-      ExplicitLeft = 532
-    end
+    Width = 624
     inherited LblDataAlt: TDBText
-      Left = 566
+      Left = 565
       DataSource = DM.dsFamPneus
-      ExplicitLeft = 566
+      ExplicitLeft = 565
     end
     inherited LblDataCad: TDBText
-      Left = 438
+      Left = 437
       DataSource = DM.dsFamPneus
-      ExplicitLeft = 438
+      ExplicitLeft = 437
     end
     inherited LblUsuAlt: TDBText
-      Left = 566
+      Left = 565
       DataSource = DM.dsFamPneus
-      ExplicitLeft = 566
+      ExplicitLeft = 565
     end
     inherited LblUsuCad: TDBText
-      Left = 438
+      Left = 437
       DataSource = DM.dsFamPneus
-      ExplicitLeft = 438
-    end
-    inherited LCadastro: TLabel
-      Left = 404
-      ExplicitLeft = 404
-    end
-    inherited LCadastroPor: TLabel
-      Left = 366
-      ExplicitLeft = 366
+      ExplicitLeft = 437
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 71
       Top = 121
@@ -480,5 +469,13 @@ inherited FrmTelaCadFamiliaPneus: TFrmTelaCadFamiliaPneus
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
 end

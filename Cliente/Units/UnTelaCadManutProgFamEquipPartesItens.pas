@@ -1,12 +1,9 @@
 unit UnTelaCadManutProgFamEquipPartesItens;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadManutProgFamEquipPartesItens = class(TFrmTelaPaiOKCancel)
     GrdCadastro: TDBGrid;
@@ -25,16 +22,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPartesItens;
-
 implementation
-
 {$R *.dfm}
-
 uses UnDM;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.BtnFecharClick(
   Sender: TObject);
 begin
@@ -56,7 +48,6 @@ while not DM.qryManutProgFamEquipPartes.Eof = True do
 DM.qryManutProgFamEquipItensTodos.Close;
 DM.qryManutProgFamEquipItensTodos.Open;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -64,21 +55,18 @@ begin
 DM.qryManutProgFamEquipItens.Close;
 DM.qryManutProgFamEquipPartes.Close;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.FormCreate(Sender: TObject);
 begin
   inherited;
   DM.FTela := 'CADMANUTPROG';
   DM.FDataSetParam    := DM.qryManutProgFamEquipItens;
   DM.FDataSourceParam := DM.dsManutProgFamEquipItens;
-
   DM.qryManutProgFamEquipPartes.Close;
   //DM.qryManutProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
   //DM.qryManutProgFamEquipPartes.Params[1].AsString := DM.qryManutProgFamEquipCODIGO.AsString;
   DM.qryManutProgFamEquipPartes.Open;
   DM.qryManutProgFamEquipItens.Close;
   DM.qryManutProgFamEquipItens.Open;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -99,23 +87,19 @@ begin
     Exit;
   end;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.GrdCadastroKeyDown(
   Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;
 if (Shift = [ssCtrl]) and (Key = 46) then
   Key := 0;
-
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.GrdCadastroTitleClick(
   Column: TColumn);
 begin
   inherited;
 //DM.CliqueNoTitulo(Column, DM.qryManutProgFamEquipPartes);
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.GrdItensDblClick(
   Sender: TObject);
 begin
@@ -126,12 +110,10 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
     Exit;
   end;
-
 if DM.qryManutProgFamEquipItens.IsEmpty = False then
   if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = mrYes then
     DM.qryManutProgFamEquipItens.Delete;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.GrdItensKeyPress(
   Sender: TObject; var Key: Char);
 begin
@@ -140,12 +122,10 @@ if (GrdItens.SelectedIndex = 2) or (GrdItens.SelectedIndex = 4) then
   if (Key <> #0) and (Key <> #9) then
     Key := #0;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartesItens.GrdItensTitleClick(
   Column: TColumn);
 begin
   inherited;
 //DM.CliqueNoTitulo(Column, DM.qryManutProgFamEquipItens);
 end;
-
 end.

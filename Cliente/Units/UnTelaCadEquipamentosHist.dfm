@@ -1,4 +1,4 @@
-inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
+﻿inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   Caption = 'Hist'#243'rico'
   ClientHeight = 644
   ClientWidth = 1012
@@ -304,7 +304,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
         object TSManutencoes: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object lblTotalManutProg: TLabel
-            Left = 326
+            Left = 324
             Top = 169
             Width = 81
             Height = 16
@@ -312,7 +312,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Caption = 'Programadas:'
           end
           object lblDBTotalManutProg: TLabel
-            Left = 411
+            Left = 409
             Top = 169
             Width = 8
             Height = 16
@@ -325,7 +325,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             ParentFont = False
           end
           object lblTotalManutExec: TLabel
-            Left = 455
+            Left = 453
             Top = 169
             Width = 69
             Height = 16
@@ -333,7 +333,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Caption = 'Executadas:'
           end
           object lblDBTotalManutExec: TLabel
-            Left = 528
+            Left = 526
             Top = 169
             Width = 8
             Height = 16
@@ -345,35 +345,145 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object GrdManutencoes: TDBGrid
-            Left = 2
+          object GrdManutencoes: TJvDBGrid
+            AlignWithMargins = True
+            Left = 322
+            Top = 0
+            Width = 658
+            Height = 167
+            Margins.Left = 0
+            Margins.Top = 0
+            Margins.Right = 0
+            Margins.Bottom = 20
+            Align = alRight
+            DataSource = DM.dsEquipamentoManutHist
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
+            TitleFont.Style = []
+            OnDrawColumnCell = GrdManutencoesDrawColumnCell
+            OnKeyPress = GrdManutencoesKeyPress
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 16055512
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'DESCRICAO'
+                Width = 274
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CODORDEMSERVICO'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FREQUENCIA1'
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Segoe UI'
+                Title.Font.Style = [fsBold]
+                Width = 48
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTAINICIO1'
+                Title.Alignment = taCenter
+                Title.Caption = 'Programada'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Segoe UI'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATAEXECUCAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Executada'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATAFECHAMENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fechada'
+                Visible = True
+              end>
+          end
+          object GrdTipoManutencoes: TJvDBGrid
+            AlignWithMargins = True
+            Left = 0
             Top = 0
             Width = 320
             Height = 187
-            Margins.Top = 48
-            Margins.Bottom = 232
-            Align = alCustom
+            Margins.Left = 0
+            Margins.Top = 0
+            Margins.Right = 0
+            Margins.Bottom = 0
+            Align = alLeft
             DataSource = DM.dsEquipamentoTipoManutHist
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
-            OnDrawColumnCell = GrdManutencoesDrawColumnCell
+            OnDrawColumnCell = GrdTipoManutencoesDrawColumnCell
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 16055512
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
             Columns = <
               item
                 Expanded = False
                 FieldName = 'DESCRICAO'
                 Title.Caption = 'Tipo'
-                Width = 141
+                Width = 160
                 Visible = True
               end
               item
@@ -382,7 +492,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
                 FieldName = 'TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Total'
-                Width = 70
+                Width = 57
                 Visible = True
               end
               item
@@ -390,37 +500,16 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
                 FieldName = 'CUSTOTOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Custo'
-                Width = 70
+                Width = 68
                 Visible = True
               end>
-          end
-          object GrdInspecoes: TDBGrid
-            Left = 324
-            Top = 0
-            Width = 651
-            Height = 167
-            DataSource = DM.dsEquipamentoManutHist
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-            ParentFont = False
-            TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
-            OnDrawColumnCell = GrdInspecoesDrawColumnCell
           end
         end
         object TSLubrificacoes: TTabSheet
           Caption = 'Lubrifica'#231#245'es'
           ImageIndex = 1
           object lblTotalLubrificProg: TLabel
-            Left = 326
+            Left = 324
             Top = 169
             Width = 81
             Height = 16
@@ -428,7 +517,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Caption = 'Programadas:'
           end
           object lblDBTotalLubrificProg: TLabel
-            Left = 411
+            Left = 409
             Top = 169
             Width = 8
             Height = 16
@@ -441,7 +530,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             ParentFont = False
           end
           object lblTotalLubrificExec: TLabel
-            Left = 455
+            Left = 453
             Top = 169
             Width = 69
             Height = 16
@@ -449,7 +538,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Caption = 'Executadas:'
           end
           object lblDBTotalLubrificExec: TLabel
-            Left = 528
+            Left = 526
             Top = 169
             Width = 8
             Height = 16
@@ -461,35 +550,140 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object GrdManutencoes2: TDBGrid
-            Left = 2
+          object GrdLubrificacoes: TJvDBGrid
+            AlignWithMargins = True
+            Left = 322
+            Top = 0
+            Width = 658
+            Height = 167
+            Margins.Left = 0
+            Margins.Top = 0
+            Margins.Right = 0
+            Margins.Bottom = 20
+            Align = alRight
+            DataSource = DM.dsEquipamentoLubrificHist
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
+            TitleFont.Style = []
+            OnDrawColumnCell = GrdLubrificacoesDrawColumnCell
+            OnKeyPress = GrdLubrificacoesKeyPress
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 16055512
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'DESCRICAO'
+                Width = 274
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CODORDEMSERVICO'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FREQUENCIA1'
+                Title.Alignment = taCenter
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -12
+                Title.Font.Name = 'Segoe UI'
+                Title.Font.Style = [fsBold]
+                Width = 48
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTAINICIO1'
+                Title.Alignment = taCenter
+                Title.Caption = 'Programada'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATAEXECUCAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Executada'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATAFECHAMENTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fechada'
+                Visible = True
+              end>
+          end
+          object GrdTipoManutencoes2: TJvDBGrid
+            AlignWithMargins = True
+            Left = 0
             Top = 0
             Width = 320
             Height = 187
-            Margins.Top = 48
-            Margins.Bottom = 232
-            Align = alCustom
+            Margins.Left = 0
+            Margins.Top = 0
+            Margins.Right = 0
+            Margins.Bottom = 0
+            Align = alLeft
             DataSource = DM.dsEquipamentoTipoManutHist
-            Font.Charset = DEFAULT_CHARSET
+            Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Segoe UI'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
+            TitleFont.Height = -12
+            TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
-            OnDrawColumnCell = GrdManutencoesDrawColumnCell
+            OnDrawColumnCell = GrdTipoManutencoesDrawColumnCell
+            TitleButtons = True
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            AlternateRowColor = 16055512
+            SortedField = 'CODIGO'
+            TitleArrow = True
+            SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+            SelectColumnsDialogStrings.OK = '&OK'
+            SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+            EditControls = <>
+            RowsHeight = 19
+            TitleRowHeight = 19
             Columns = <
               item
                 Expanded = False
                 FieldName = 'DESCRICAO'
                 Title.Caption = 'Tipo'
-                Width = 141
+                Width = 160
                 Visible = True
               end
               item
@@ -498,7 +692,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
                 FieldName = 'TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Total'
-                Width = 70
+                Width = 57
                 Visible = True
               end
               item
@@ -506,49 +700,51 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
                 FieldName = 'CUSTOTOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Custo'
-                Width = 70
+                Width = 68
                 Visible = True
               end>
           end
-          object GrdLubrificacoes: TDBGrid
-            Left = 324
-            Top = 0
-            Width = 651
-            Height = 167
-            DataSource = DM.dsEquipamentoLubrificHist
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-            ParentFont = False
-            TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
-            OnDrawColumnCell = GrdLubrificacoesDrawColumnCell
-          end
         end
       end
-      object GrdItensManut: TDBGrid
+      object GrdServiços: TJvDBGrid
         AlignWithMargins = True
-        Left = 5
+        Left = 4
         Top = 293
-        Width = 988
-        Height = 195
+        Width = 990
+        Height = 200
+        Margins.Left = 2
         Margins.Top = 0
-        Align = alTop
+        Margins.Right = 2
+        Margins.Bottom = 2
+        Align = alClient
         DataSource = DM.dsEquipamentosHist
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -13
-        TitleFont.Name = 'Tahoma'
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        TitleButtons = True
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        AlternateRowColor = 16055512
+        SortedField = 'CODIGO'
+        TitleArrow = True
+        SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+        SelectColumnsDialogStrings.OK = '&OK'
+        SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+        EditControls = <>
+        RowsHeight = 19
+        TitleRowHeight = 19
         Columns = <
           item
             Alignment = taCenter
@@ -556,11 +752,6 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'ORDEMSERVICO'
             Title.Alignment = taCenter
             Title.Caption = 'OS'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 72
             Visible = True
           end
@@ -568,26 +759,8 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             Expanded = False
             FieldName = 'SERVICO'
             Title.Caption = 'Servi'#231'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 324
+            Width = 321
             Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'TIPOMANUTENCAO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo de Manuten'#231#227'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Visible = False
           end
           item
             Alignment = taCenter
@@ -595,26 +768,15 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'DATAINICIOREAL'
             Title.Alignment = taCenter
             Title.Caption = 'In'#237'cio'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 120
+            Width = 122
             Visible = True
           end
           item
-            Alignment = taCenter
             Expanded = False
             FieldName = 'DATAFIMREAL'
             Title.Alignment = taCenter
             Title.Caption = 'Fim'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 119
+            Width = 117
             Visible = True
           end
           item
@@ -622,12 +784,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'CUSTOMOBRA'
             Title.Alignment = taCenter
             Title.Caption = 'M'#227'o de Obra'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 86
+            Width = 87
             Visible = True
           end
           item
@@ -635,11 +792,6 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'CUSTOPECAS'
             Title.Alignment = taCenter
             Title.Caption = 'Pe'#231'as'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
             Width = 73
             Visible = True
           end
@@ -648,12 +800,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'CUSTORECURSOS'
             Title.Alignment = taCenter
             Title.Caption = 'Recursos'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 66
+            Width = 64
             Visible = True
           end
           item
@@ -661,12 +808,7 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
             FieldName = 'CUSTOEXTRA'
             Title.Alignment = taCenter
             Title.Caption = 'Extras'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -12
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
-            Width = 74
+            Width = 75
             Visible = True
           end>
       end
@@ -689,8 +831,8 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
       ExplicitLeft = 313
     end
     inherited BtnFechar: TButton
-      Left = 464
-      ExplicitLeft = 464
+      Left = 466
+      ExplicitLeft = 466
     end
   end
   object ImageList1: TImageList
@@ -839,8 +981,8 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   object CDTipoManut: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 127
-    Top = 196
+    Left = 247
+    Top = 68
     object CDTipoManutTIPO: TStringField
       FieldName = 'TIPO'
       Size = 30
@@ -856,14 +998,14 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   end
   object DSTipoManut: TDataSource
     DataSet = CDTipoManut
-    Left = 191
-    Top = 196
+    Left = 311
+    Top = 68
   end
   object CDTipoLubrific: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 127
-    Top = 252
+    Left = 247
+    Top = 124
     object CDTipoLubrificTIPO: TStringField
       FieldName = 'TIPO'
       Size = 30
@@ -879,14 +1021,14 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   end
   object DSTipoLubrific: TDataSource
     DataSet = CDTipoLubrific
-    Left = 191
-    Top = 252
+    Left = 311
+    Top = 124
   end
   object CDAuxiliar: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 519
-    Top = 178
+    Left = 839
+    Top = 98
     object CDAuxiliarCODIGO: TWideStringField
       FieldName = 'CODIGO'
     end
@@ -900,8 +1042,8 @@ inherited FrmTelaCadEquipamentosHist: TFrmTelaCadEquipamentosHist
   object CDEquipEAuxiliares: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 591
-    Top = 178
+    Left = 911
+    Top = 98
     object CDEquipEAuxiliaresCODIGO: TStringField
       FieldName = 'CODIGO'
     end

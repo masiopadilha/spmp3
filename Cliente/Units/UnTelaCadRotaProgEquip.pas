@@ -280,23 +280,25 @@ end;
 procedure TFrmTelaCadRotaProgEquip.GrdSequencia1DblClick(Sender: TObject);
 begin
   inherited;
-if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     PAuxiliares.Font.Color := clRed;
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
     Exit;
   end;
 
-if DM.qryRotas.IsEmpty = True then Exit;
-if DM.qryRotasSequencia.IsEmpty = True then Exit;
+  if DM.qryRotas.IsEmpty = True then Exit;
+  if DM.qryRotasSequencia.IsEmpty = True then Exit;
 
-if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+  if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
   begin
     DM.qryRotasSequencia.Delete;
+
     if DM.qryRotasSequenciaCODAREA.AsString = '' then Exit;
     if DM.qryRotasSequenciaCODCELULA.AsString = '' then Exit;
     if DM.qryRotasSequenciaCODLINHA.AsString = '' then Exit;
     if DM.qryRotasSequenciaSEQUENCIA.AsString = '' then Exit;
+
     if CDValidaEquip.Locate('CODAREA;CODCELULA;CODLINHA;SEQUENCIA', VarArrayOf([DM.qryRotasSequenciaCODAREA.AsString, DM.qryRotasSequenciaCODCELULA.AsString, DM.qryRotasSequenciaCODLINHA.AsString, DM.qryRotasSequenciaSEQUENCIA.AsString]), []) = True then CDValidaEquip.Delete;
   end;
 end;
@@ -312,28 +314,28 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
     DM.FTabela_auxiliar := 84;
 
     if DM.qryRotasCODIGO.AsString = EmptyStr then
-      begin
+    begin
         PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CÓDIGO DO REGISTRO!'; EdtCodRota.SetFocus; Exit;
-      end;
+    end else
     if (DM.VerificaDuplo(EdtCodRota.Text) = True) and (DM.FAlterando = False) then
-      begin
-        EdtCodRota.SetFocus;
-        PAuxiliares.Font.Color := clBlack;
-        PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
-        Exit;
-      end;
+    begin
+      EdtCodRota.SetFocus;
+      PAuxiliares.Font.Color := clBlack;
+      PAuxiliares.Caption := 'VALOR JÁ CADASTRADO!!!';
+      Exit;
+    end else
     if DM.qryRotasDESCRICAO.IsNull = True then
-      begin
-        PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO REGISTRO!'; EdtDescricao.SetFocus; Exit;
-      end;
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DESCRIÇÃO DO REGISTRO!'; EdtDescricao.SetFocus; Exit;
+    end else
     if (DM.qryRotasFREQUENCIA.IsNull = True) or (DM.qryRotasFREQUENCIA.AsInteger <= 0) then
-      begin
-        PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FREQUÊNCIA DO REGISTRO!'; EdtDias.SetFocus; Exit;
-      end;
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A FREQUÊNCIA DO REGISTRO!'; EdtDias.SetFocus; Exit;
+    end else
     if DM.qryRotasREPROGRAMAR.IsNull = True then
-      begin
-        PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A REPROGRAMAÇÃO DO REGISTRO!'; CBReprogramacao.SetFocus; Exit;
-      end;
+    begin
+      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A REPROGRAMAÇÃO DO REGISTRO!'; CBReprogramacao.SetFocus; Exit;
+    end;
 
     DM.qryRotas.Edit;
     DM.qryRotas.Post;
@@ -347,8 +349,8 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
     begin
       DM.FParamAuxiliar[1] := 'CODIGO';
       DM.FPromptConsulta := 'Informe o código a ser consultado';
-    end
-    else if (GrdSequencia.SelectedIndex = 4) then
+    end else
+    if (GrdSequencia.SelectedIndex = 4) then
     begin
       DM.FParamAuxiliar[1] := 'DESCRICAO';
       DM.FPromptConsulta := 'Informe a descrição a ser consultada';
@@ -391,17 +393,18 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
 
 
         DM.qryRotasSequencia.Append;
-        DM.qryRotasSequenciaCODROTA.AsString       := DM.qryRotasCODIGO.AsString;
-        DM.qryRotasSequenciaCODEMPRESA.AsString    := DM.FCodEmpresa;
-        DM.qryRotasSequenciaCODEQUIPATUAL.AsString := DM.FCodCombo;
-        DM.qryRotasSequenciaEQUIPATUAL.AsString    := DM.FValorCombo;
-        DM.qryRotasSequenciaCODAREA.AsString       := DM.FParamAuxiliar[4];
-        DM.qryRotasSequenciaAREA.AsString          := DM.FParamAuxiliar[5];
-        DM.qryRotasSequenciaCODCELULA.AsString     := DM.FParamAuxiliar[6];
-        DM.qryRotasSequenciaCELULA.AsString        := DM.FParamAuxiliar[7];
-        DM.qryRotasSequenciaCODLINHA.AsString      := DM.FParamAuxiliar[8];
-        DM.qryRotasSequenciaLINHA.AsString         := DM.FParamAuxiliar[9];
-        DM.qryRotasSequenciaSEQUENCIA.AsString     := DM.FParamAuxiliar[10];
+        DM.qryRotasSequenciaCODROTA.AsString         := DM.qryRotasCODIGO.AsString;
+        DM.qryRotasSequenciaCODEMPRESA.AsString      := DM.FCodEmpresa;
+        DM.qryRotasSequenciaCODEQUIPATUAL.AsString   := DM.FCodCombo;
+        DM.qryRotasSequenciaEQUIPATUAL.AsString      := DM.FParamAuxiliar[3];
+        DM.qryRotasSequenciaCODFAMILIAEQUIP.AsString := DM.FParamAuxiliar[2];
+        DM.qryRotasSequenciaCODAREA.AsString         := DM.FParamAuxiliar[4];
+        DM.qryRotasSequenciaAREA.AsString            := DM.FParamAuxiliar[5];
+        DM.qryRotasSequenciaCODCELULA.AsString       := DM.FParamAuxiliar[6];
+        DM.qryRotasSequenciaCELULA.AsString          := DM.FParamAuxiliar[7];
+        DM.qryRotasSequenciaCODLINHA.AsString        := DM.FParamAuxiliar[8];
+        DM.qryRotasSequenciaLINHA.AsString           := DM.FParamAuxiliar[9];
+        DM.qryRotasSequenciaSEQUENCIA.AsString       := DM.FParamAuxiliar[10];
         DM.qryRotasSequencia.Post;
         DM.qryRotasSequencia.Edit;
 

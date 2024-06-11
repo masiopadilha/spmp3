@@ -1,13 +1,10 @@
 unit UnTelaCadManutProgFamEquipPartes;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.Grids,
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Data.DB, FireDAC.Stan.Param,
   Vcl.DBCtrls;
-
 type
   TFrmTelaCadManutProgFamEquipPartes = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -22,16 +19,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadManutProgFamEquipPartes: TFrmTelaCadManutProgFamEquipPartes;
-
 implementation
-
 {$R *.dfm}
-
 uses UnDM;
-
 procedure TFrmTelaCadManutProgFamEquipPartes.BtnFecharClick(Sender: TObject);
 begin
   inherited;
@@ -45,7 +37,6 @@ while not DM.qryManutProgFamEquipPartes.Eof = True do
 DM.qryManutProgFamEquipItens.Close;
 DM.qryManutProgFamEquipPartes.Close;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartes.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -56,7 +47,6 @@ begin
   //DM.qryManutProgFamEquipPartes.Params[0].AsString := DM.FCodEmpresa;
   //DM.qryManutProgFamEquipPartes.Params[1].AsString := DM.qryManutProgFamEquipCODIGO.AsString;
   DM.qryManutProgFamEquipPartes.Open;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -77,7 +67,6 @@ begin
     Exit;
   end;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartes.GrdCadastroDblClick(
   Sender: TObject);
 begin
@@ -88,26 +77,21 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
     Exit;
   end;
-
 if DM.qryManutProgFamEquipPartes.IsEmpty = False then
 if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = mrYes then
     DM.qryManutProgFamEquipPartes.Delete;
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartes.GrdCadastroKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   inherited;
 if (Shift = [ssCtrl]) and (Key = 46) then
   Key := 0;
-
 end;
-
 procedure TFrmTelaCadManutProgFamEquipPartes.GrdCadastroTitleClick(
   Column: TColumn);
 begin
   inherited;
 //DM.CliqueNoTitulo(Column, DM.qryManutProgFamEquipPartes);
 end;
-
 end.

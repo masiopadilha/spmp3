@@ -1,19 +1,8 @@
 inherited FrmTelaCadManutProgEquipMObra: TFrmTelaCadManutProgEquipMObra
   Caption = 'M'#227'o de Obra'
-  ClientHeight = 304
-  ClientWidth = 508
   OnCreate = FormCreate
   TextHeight = 16
-  inherited PTop: TPanel
-    Width = 504
-    inherited BtnAjuda: TButton
-      Left = 475
-      ExplicitLeft = 471
-    end
-  end
   inherited PCentro: TPanel
-    Width = 502
-    Height = 165
     inherited RGTelas: TRadioGroup
       Width = 496
       Height = 0
@@ -121,13 +110,7 @@ inherited FrmTelaCadManutProgEquipMObra: TFrmTelaCadManutProgEquipMObra
         end>
     end
   end
-  inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 504
-  end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 504
     inherited BtnOK: TButton
       Left = 100
       Visible = False

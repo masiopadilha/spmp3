@@ -10,8 +10,8 @@ inherited FrmTelaCadOrdemServicoTercUnidMedicoes: TFrmTelaCadOrdemServicoTercUni
     Width = 284
     ExplicitWidth = 280
     inherited BtnAjuda: TButton
-      Left = 249
-      ExplicitLeft = 249
+      Left = 250
+      ExplicitLeft = 250
     end
   end
   inherited PCentro: TPanel

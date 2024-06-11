@@ -234,9 +234,14 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA') o
               begin
                 PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'MOTIVO OBRIGATÓRIO!'; Exit;
               end;
+
+            DM.qryDataHoraServidor.Refresh;
+            DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
+
             DM.qryOrdemServico.Edit;
-            DM.qryOrdemServicoOBSERVACOES.AsString := LMotivo;
-            DM.qryOrdemServicoSITUACAO.AsString    := 'CANCELADA';
+            DM.qryOrdemServicoOBSERVACOES.AsString  := LMotivo;
+            DM.qryOrdemServicoSITUACAO.AsString     := 'CANCELADA';
+            DM.qryOrdemServicoDATACANCEL.AsDateTime := DM.FDataHoraServidor;
             DM.qryOrdemServico.Post;
             DM.qryOrdemServicoGerencia.Edit;
             DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CANCELADA';
@@ -1604,10 +1609,8 @@ begin
 
   // Calcula o espaço entre os CheckBoxes
   Spacing := (ClientWidth - TotalWidth) div 10;
-
   // Define a posição inicial (margem esquerda)
   StartPos := Spacing;
-
   // Posiciona os CheckBoxes
   for i := 0 to 8 do
   begin
@@ -1623,17 +1626,14 @@ begin
   TotalWidth := 0;
   for i := 0 to DBGrid.Columns.Count - 2 do
     TotalWidth := TotalWidth + DBGrid.Columns[i].Width;
-
   // Calcula a largura disponível para a última coluna
   AvailableWidth := DBGrid.ClientWidth - TotalWidth;
-
   // Define a largura de cada coluna proporcionalmente
   for i := 0 to DBGrid.Columns.Count - 2 do
   begin
     ColumnWidth := (DBGrid.ClientWidth * DBGrid.Columns[i].Width) div TotalWidth;
     DBGrid.Columns[i].Width := ColumnWidth;
   end;
-
   // Define a largura da última coluna para preencher o restante do espaço
 //  if DBGrid.Columns.Count > 0 then
 //    DBGrid.Columns[DBGrid.Columns.Count - 1].Width := AvailableWidth;
@@ -1913,7 +1913,7 @@ begin
   inherited;
   if (Key = #13) and (DBGrid.SelectedIndex = 1) then
     begin
-      LCampo :=DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
+      LCampo := DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
       if LCampo <> EmptyStr then
         begin
           if DBGrid.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then

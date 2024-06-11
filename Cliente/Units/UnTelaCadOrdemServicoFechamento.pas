@@ -93,6 +93,7 @@ type
     procedure Lubrificantes1Click(Sender: TObject);
     procedure GrdServicosExecDblClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ChbParcialClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -786,6 +787,12 @@ begin
     Finally
       FreeAndNil(FrmTelaInspFechamento);
     End;
+end;
+
+procedure TFrmTelaCadOrdemServicoFechamento.ChbParcialClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.FormClose(Sender: TObject;

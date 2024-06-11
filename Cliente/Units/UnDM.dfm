@@ -25434,6 +25434,7 @@ object DM: TDM
       '    `manutprogequipamentohist`.`INDICE`'
       '    , `manutprogequipamentohist`.`DESCRICAO`'
       '    , `manutprogequipamentohist`.`CODORDEMSERVICO`'
+      '    , `manutprogequipamentohist`.`FREQUENCIA1`'
       '    , `manutprogequipamentohist`.`DTAINICIO1`'
       '    , `manutprogequipamentohist`.`DATAEXECUCAO`'
       '    , `manutprogequipamentohist`.`DATAFECHAMENTO`'
@@ -25505,6 +25506,12 @@ object DM: TDM
       ProviderFlags = [pfInUpdate]
       DisplayFormat = '#000000'
     end
+    object qryEquipamentoManutHistFREQUENCIA1: TSmallintField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Dias'
+      FieldName = 'FREQUENCIA1'
+      Origin = 'FREQUENCIA1'
+    end
     object qryEquipamentoManutHistDTAINICIO1: TDateTimeField
       Alignment = taCenter
       AutoGenerateValue = arDefault
@@ -25543,6 +25550,7 @@ object DM: TDM
       '    `lubrificprogequipamentohist`.`INDICE`'
       '    , `lubrificprogequipamentohist`.`DESCRICAO`'
       '    , `lubrificprogequipamentohist`.`CODORDEMSERVICO`'
+      '    , `lubrificprogequipamentohist`.`FREQUENCIA1`'
       '    , `lubrificprogequipamentohist`.`DTAINICIO1`'
       '    , `lubrificprogequipamentohist`.`DATAEXECUCAO`'
       '    , `lubrificprogequipamentohist`.`DATAFECHAMENTO`'
@@ -25612,6 +25620,12 @@ object DM: TDM
       FieldName = 'CODORDEMSERVICO'
       Origin = 'CODORDEMSERVICO'
       DisplayFormat = '#000000'
+    end
+    object qryEquipamentoLubrificHistFREQUENCIA1: TSmallintField
+      AutoGenerateValue = arDefault
+      DisplayLabel = 'Dias'
+      FieldName = 'FREQUENCIA1'
+      Origin = 'FREQUENCIA1'
     end
     object qryEquipamentoLubrificHistDTAINICIO1: TDateTimeField
       Alignment = taCenter
@@ -33802,7 +33816,6 @@ object DM: TDM
       '    , `funcionarios`.`NOME` AS FUNCIONARIO'
       '    , `tipomanutencao`.`TIPOMANUTENCAO` AS `TIPO`'
       '    , `ordemservico`.`DATACANCEL`'
-      ''
       '  '
       'FROM'
       '    `ordemservico`'

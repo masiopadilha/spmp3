@@ -1,6 +1,5 @@
 inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPartesItens
   Caption = 'Itens a Inspecionar'
-  ClientHeight = 304
   ClientWidth = 788
   Constraints.MaxWidth = 800
   Constraints.MinWidth = 800
@@ -11,14 +10,13 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
     Width = 784
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
-      Left = 753
-      ExplicitLeft = 749
+      Left = 751
+      ExplicitLeft = 751
     end
   end
   inherited PCentro: TPanel
     Width = 782
-    Height = 165
-    ExplicitWidth = 782
+    ExplicitWidth = 778
     inherited RGTelas: TRadioGroup
       Height = 0
       Align = alNone
@@ -30,7 +28,7 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
       Left = 4
       Top = 4
       Width = 200
-      Height = 154
+      Height = 157
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -76,7 +74,7 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
       Left = 209
       Top = 4
       Width = 569
-      Height = 154
+      Height = 157
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Align = alRight
       DataSource = DM.dsManutProgFamEquipItens
@@ -166,14 +164,12 @@ inherited FrmTelaCadManutProgFamEquipPartesItens: TFrmTelaCadManutProgFamEquipPa
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
     Width = 784
-    ExplicitWidth = 784
+    ExplicitWidth = 780
   end
   inherited PBotoes: TPanel
-    Top = 264
     Width = 784
-    ExplicitWidth = 784
+    ExplicitWidth = 780
     inherited BtnOK: TButton
       Left = 100
       Visible = False

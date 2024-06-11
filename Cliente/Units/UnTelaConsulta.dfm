@@ -30,7 +30,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 975
+      Left = 971
       ExplicitLeft = 971
     end
   end
@@ -56,7 +56,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Right = 4
       Margins.Bottom = 4
       Align = alNone
-      TabOrder = 3
+      TabOrder = 2
       ExplicitTop = 0
       ExplicitWidth = 500
       ExplicitHeight = 0
@@ -82,7 +82,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       TabOrder = 1
       OnClick = BtnConsultarClick
     end
-    object GrdAuxiliar: TDBGrid
+    object GrdAuxiliar: TJvDBGrid
       AlignWithMargins = True
       Left = 5
       Top = 35
@@ -95,24 +95,35 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
       Align = alClient
       DataSource = DM.dsAuxiliar
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
       Font.Style = []
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -12
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
-      OnDrawColumnCell = GrdAuxiliarDrawColumnCell
       OnDblClick = GrdAuxiliarDblClick
       OnTitleClick = GrdAuxiliarTitleClick
+      TitleButtons = True
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      AlternateRowColor = 16055512
+      SortedField = 'CODIGO'
+      TitleArrow = True
+      SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
+      SelectColumnsDialogStrings.OK = '&OK'
+      SelectColumnsDialogStrings.NoSelectionWarning = 'Pelo menos uma coluna deve estar vis'#237'vel'
+      EditControls = <>
+      RowsHeight = 19
+      TitleRowHeight = 19
     end
   end
   inherited PAuxiliares: TPanel
@@ -141,13 +152,13 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
     ExplicitTop = 599
     ExplicitWidth = 1000
     inherited BtnOK: TButton
-      Left = 424
+      Left = 423
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       OnClick = GrdAuxiliarDblClick
-      ExplicitLeft = 424
+      ExplicitLeft = 423
     end
     inherited BtnFechar: TButton
       Left = 506

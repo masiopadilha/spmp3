@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls,
   Vcl.Menus, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.Grids,
   Vcl.DBGrids, Data.DB, System.DateUtils, System.Actions, Vcl.ActnList,
-  Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons;
+  Vcl.ExtActns, FireDAC.Stan.Param, Vcl.Buttons, JvExDBGrids, JvDBGrid;
 
 type
   TFrmTelaCadOrdemServico = class(TFrmTelaPaiCadastros)
@@ -51,7 +51,6 @@ type
     EdtTempoPrev: TDBEdit;
     Label18: TLabel;
     LblHomemHora: TDBText;
-    GrdServicosExec: TDBGrid;
     LblOrigem: TLabel;
     ChbAutonomo: TDBCheckBox;
     Label19: TLabel;
@@ -73,6 +72,7 @@ type
     EdtResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label28: TLabel;
+    DBGrid: TJvDBGrid;
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -102,6 +102,8 @@ type
     procedure Descricao1Click(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure ChbParadoClick(Sender: TObject);
+    procedure ChbAutonomoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -1037,6 +1039,18 @@ if (DM.qryOrdemServicoSITUACAO.AsString = 'CADASTRADA') or (DM.qryOrdemServicoSI
 
 end;
 
+procedure TFrmTelaCadOrdemServico.ChbAutonomoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadOrdemServico.ChbParadoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
 procedure TFrmTelaCadOrdemServico.Codigo1Click(Sender: TObject);
 begin
   inherited;
@@ -1162,7 +1176,7 @@ procedure TFrmTelaCadOrdemServico.GrdServicosExecKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-if (GrdServicosExec.SelectedIndex = 3) and (Key <> #13) and (Key <> #9) then
+if (DBGrid.SelectedIndex = 3) and (Key <> #13) and (Key <> #9) then
   Key := #0;
 end;
 

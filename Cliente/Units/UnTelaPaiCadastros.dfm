@@ -11611,7 +11611,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       1008
       45)
     object LCadastro: TLabel
-      Left = 746
+      Left = 749
       Top = 23
       Width = 36
       Height = 16
@@ -11624,10 +11624,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 726
     end
     object LCadastroPor: TLabel
-      Left = 702
+      Left = 705
       Top = 9
       Width = 80
       Height = 16
@@ -11640,10 +11639,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 682
     end
     object LblDataCad: TDBText
-      Left = 784
+      Left = 787
       Top = 24
       Width = 64
       Height = 16
@@ -11656,10 +11654,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 780
     end
     object LblUsuCad: TDBText
-      Left = 784
+      Left = 787
       Top = 10
       Width = 59
       Height = 16
@@ -11674,10 +11671,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 780
     end
     object LAlteracao: TLabel
-      Left = 897
+      Left = 900
       Top = 23
       Width = 36
       Height = 16
@@ -11690,10 +11686,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 877
     end
     object LAlteradoPor: TLabel
-      Left = 871
+      Left = 874
       Top = 9
       Width = 62
       Height = 16
@@ -11706,10 +11701,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 851
     end
     object LblDataAlt: TDBText
-      Left = 935
+      Left = 938
       Top = 23
       Width = 57
       Height = 16
@@ -11722,10 +11716,9 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 931
     end
     object LblUsuAlt: TDBText
-      Left = 935
+      Left = 938
       Top = 9
       Width = 52
       Height = 16
@@ -11740,7 +11733,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      ExplicitLeft = 931
     end
     object BtnNovo: TButton
       Left = 8

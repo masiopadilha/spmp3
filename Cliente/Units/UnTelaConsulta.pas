@@ -1,15 +1,18 @@
 unit UnTelaConsulta;
+
 interface
+
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datasnap.DBClient, UnTelaPaiOkCancel,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Intf;
+  Data.DB, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Intf,
+  JvExDBGrids, JvDBGrid;
+
 type
   TFrmTelaAuxiliar = class(TFrmTelaPaiOKCancel)
     BtnConsultar: TButton;
     EdtConsulta: TEdit;
-    GrdAuxiliar: TDBGrid;
     PFiltroEquip: TPanel;
     Label6: TLabel;
     EdtFamiliaEquip: TEdit;
@@ -23,14 +26,13 @@ type
     Label2: TLabel;
     EdtCelula: TEdit;
     BtnCelula: TButton;
+    GrdAuxiliar: TJvDBGrid;
     procedure BtnConsultarClick(Sender: TObject);
     procedure EdtConsultaKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure GrdAuxiliarDblClick(Sender: TObject);
-    procedure GrdAuxiliarDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormActivate(Sender: TObject);
     procedure EdtFamiliaEquipDblClick(Sender: TObject);
     procedure BtnFamiliaEquipClick(Sender: TObject);
@@ -43,17 +45,25 @@ type
     procedure BtnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GrdAuxiliarTitleClick(Column: TColumn);
+
   private
     { Private declarations }
+
     procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
+
   public
     { Public declarations }
+
   end;
+
+
 var
   FrmTelaAuxiliar: TFrmTelaAuxiliar;
 
 implementation
+
 {$R *.dfm}
+
 uses UnTelaCadMonitMedicoes, UnDM;
 
 procedure TFrmTelaAuxiliar.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
@@ -114,6 +124,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     BtnConsultar.OnClick(Sender);
   end;
 end;
+
 procedure TFrmTelaAuxiliar.BtnCelulaClick(Sender: TObject);
 begin
   inherited;
@@ -140,6 +151,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     BtnConsultar.OnClick(Sender);
   end;
 end;
+
 procedure TFrmTelaAuxiliar.BtnConsultarClick(Sender: TObject);
 var
   LMensagem: PChar;
@@ -280,7 +292,7 @@ begin
                                     + ' `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `equipamentos`.`CODFAMILIAEQUIP`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
                                     + ', `equipamentos`.`CODCENTROCUSTO`, `centrocusto`.`DESCRICAO` CENTROCUSTO'
                                     + ', `equipamentos`.`CODLOCALIZACAO` CODAREA, `areas`.`DESCRICAO` AREA, `equipamentos`.`CODCELULA`, `celulas`.`DESCRICAO` CELULA'
-                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`'
+                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`'
                                     + ' FROM `equipamentos`'
                                     + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                     + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
@@ -293,7 +305,7 @@ begin
                                     + ' `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `equipamentos`.`CODFAMILIAEQUIP`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
                                     + ', `equipamentos`.`CODCENTROCUSTO`, `centrocusto`.`DESCRICAO` CENTROCUSTO'
                                     + ', `equipamentos`.`CODLOCALIZACAO` CODAREA, `areas`.`DESCRICAO` AREA, `equipamentos`.`CODCELULA`, `celulas`.`DESCRICAO` CELULA'
-                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`'
+                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`'
                                     + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                     + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
                                     + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
@@ -819,6 +831,9 @@ begin
           DM.qryAuxiliar.FieldByName('LINHA').DisplayWidth        := 15;
           DM.qryAuxiliar.FieldByName('SEQUENCIA').DisplayLabel    := 'Sequência';
           DM.qryAuxiliar.FieldByName('SEQUENCIA').DisplayWidth    := 10;
+          DM.qryAuxiliar.FieldByName('OPERANDO').DisplayLabel     := 'Operando';
+          DM.qryAuxiliar.FieldByName('OPERANDO').Alignment        := taCenter;
+          GrdAuxiliar.Columns[8].Title.Alignment                            := taCenter;
           DM.qryAuxiliar.FieldByName('CODFAMILIAEQUIP').Visible   := False;
           DM.qryAuxiliar.FieldByName('CODAREA').Visible           := False;
           DM.qryAuxiliar.FieldByName('CODCELULA').Visible         := False;
@@ -1287,10 +1302,10 @@ begin
           DM.qryAuxiliar.Fields[3].DisplayWidth := 15;
         end;
     end;
-  DM.FParamAuxiliar[3] := '';
-  DM.FParamAuxiliar[4] := '';
-  DM.FParamAuxiliar[5] := '';
-  DM.FParamAuxiliar[6] := '';
+    DM.FParamAuxiliar[3] := '';
+    DM.FParamAuxiliar[4] := '';
+    DM.FParamAuxiliar[5] := '';
+    DM.FParamAuxiliar[6] := '';
   except
     on E: Exception do
     begin
@@ -1299,6 +1314,7 @@ begin
     end;
   end;
 end;
+
 procedure TFrmTelaAuxiliar.BtnFamiliaEquipClick(Sender: TObject);
 begin
   inherited;
@@ -1320,12 +1336,14 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     BtnConsultar.OnClick(Sender);
   end;
 end;
+
 procedure TFrmTelaAuxiliar.BtnFecharClick(Sender: TObject);
 begin
   inherited;
-DM.FCodCombo := EmptyStr;
-DM.FValorCombo := EmptyStr;
+  DM.FCodCombo := EmptyStr;
+  DM.FValorCombo := EmptyStr;
 end;
+
 procedure TFrmTelaAuxiliar.BtnLinhaClick(Sender: TObject);
 begin
   inherited;
@@ -1355,6 +1373,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     BtnConsultar.OnClick(Sender);
   end;
 end;
+
 procedure TFrmTelaAuxiliar.edtAreaDblClick(Sender: TObject);
 begin
   inherited;
@@ -1369,6 +1388,7 @@ begin
   DM.FCodLinha  := '';
   BtnConsultar.OnClick(Sender);
 end;
+
 procedure TFrmTelaAuxiliar.EdtCelulaDblClick(Sender: TObject);
 begin
   inherited;
@@ -1380,12 +1400,14 @@ begin
   DM.FCodLinha  := '';
   BtnConsultar.OnClick(Sender);
 end;
+
 procedure TFrmTelaAuxiliar.EdtConsultaKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
 if Key = #13 then
   BtnConsultar.OnClick(Sender);
 end;
+
 procedure TFrmTelaAuxiliar.EdtFamiliaEquipDblClick(Sender: TObject);
 begin
   inherited;
@@ -1393,6 +1415,7 @@ begin
   EdtFamiliaEquip.Text := '';
   BtnConsultar.OnClick(Sender);
 end;
+
 procedure TFrmTelaAuxiliar.edtLinhaDblClick(Sender: TObject);
 begin
   inherited;
@@ -1401,21 +1424,23 @@ begin
   DM.FCodLinha  := '';
   BtnConsultar.OnClick(Sender);
 end;
+
 procedure TFrmTelaAuxiliar.FormActivate(Sender: TObject);
 begin
   inherited;
   DM.qryAuxiliar.Close;
   DM.qryAuxiliar.SQL.Clear;
 end;
+
 procedure TFrmTelaAuxiliar.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-//DM.FTabela_auxiliar := -1;
-DM.FNomeConsulta := EmptyStr;
-DM.FPromptConsulta := EmptyStr;
-DM.qryAuxiliar.Close;
+  DM.FNomeConsulta := EmptyStr;
+  DM.FPromptConsulta := EmptyStr;
+  DM.qryAuxiliar.Close;
 end;
+
 procedure TFrmTelaAuxiliar.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -2382,18 +2407,7 @@ DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 Close;
 end;
-procedure TFrmTelaAuxiliar.GrdAuxiliarDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  inherited;
-  if not odd(GrdAuxiliar.DataSource.DataSet.RecNo) then
-        if not (gdSelected in State) then
-          begin
-          GrdAuxiliar.Canvas.Brush.Color := $00F7F8F9;
-        end;
-  GrdAuxiliar.Canvas.FillRect(Rect);
-  GrdAuxiliar.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
+
 procedure TFrmTelaAuxiliar.GrdAuxiliarTitleClick(Column: TColumn);
 begin
   inherited;
@@ -2402,10 +2416,11 @@ begin
   except
     on E: Exception do
     begin
-      DM.GravaLog('Falha ao ordenar o grid. FrmTelaCOnsulta Linha: 2327', E.ClassName, E.Message);
+      DM.GravaLog('Falha ao ordenar o grid. FrmTelaConsulta Linha: 2327', E.ClassName, E.Message);
       Application.MessageBox('Falha ao ordenar o grid operação!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
     end;
   end;
 end;
+
 
 end.

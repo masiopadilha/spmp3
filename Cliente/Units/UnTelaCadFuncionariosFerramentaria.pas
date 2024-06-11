@@ -1,13 +1,10 @@
 unit UnTelaCadFuncionariosFerramentaria;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, System.DateUtils, Data.DB,
   Vcl.Menus, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadFuncionariosFerramentaria = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -28,24 +25,18 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadFuncionariosFerramentaria: TFrmTelaCadFuncionariosFerramentaria;
   LMatricula, LNome: String;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaConsulta, UnDmRelatorios, UnDM;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.BtnImprimirClick(
   Sender: TObject);
 begin
   inherited;
 PopupMenuInventario.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.Ferramenta1Click(
   Sender: TObject);
 begin
@@ -64,9 +55,7 @@ if DM.ConsultarCombo <> EmptyStr then
   end
 else
   DM.qryFuncionariosFerramentaria.Filtered := False;
-
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -76,20 +65,17 @@ DM.qryFerramentariaItens.Close;
 DM.qryFerramentaria.Close;
 DM.qryFuncionariosFerramentaria.Close;
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.FormCreate(Sender: TObject);
 begin
   inherited;
 DM.FTela := 'CADFUNCIONARIOS';
 LMatricula := DM.FParamAuxiliar[0];
 LNome      := DM.FParamAuxiliar[1];
-
 DM.qryFuncionariosFerramentaria.Close;
 DM.qryFuncionariosFerramentaria.Params[0].AsString := DM.FCodEmpresa;
 DM.qryFuncionariosFerramentaria.Params[1].AsString := LMatricula;
 DM.qryFuncionariosFerramentaria.Open;
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.Funcionario1Click(
   Sender: TObject);
 begin
@@ -103,7 +89,6 @@ if DM.qryFerramentariaItens.Active = True then
     DM.qryFuncionariosFerramentaria.Edit;
     DM.qryFuncionariosFerramentaria.Post;
   end;
-
 DM.FTabela_auxiliar := 300;
 DM.FNomeConsulta := 'Funcionários';
 DM.FParamAuxiliar[1] := 'NOME';
@@ -117,9 +102,7 @@ if DM.ConsultarCombo <> EmptyStr then
   end
 else
   DM.qryFuncionariosFerramentaria.Filtered := False;
-
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.GrdCadastroKeyPress(
   Sender: TObject; var Key: Char);
 var
@@ -128,7 +111,6 @@ begin
   inherited;
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := EmptyStr;
-
 if (Key = #13) then
   begin
     if (DM.qryUsuarioPInclusaoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -161,14 +143,12 @@ if (Key = #13) then
                     PAuxiliares.Font.Color := clRed;
                     PAuxiliares.Caption := 'VALOR INVÁLIDO!';
                   end;
-
                   DM.qryFerramentaria.Close;
                   DM.qryFerramentaria.Params[0].AsString := DM.FCodCombo;
                   DM.qryFerramentaria.Params[1].AsString := DM.FCodEmpresa;
                   DM.qryFerramentaria.Open;
                   DM.qryFerramentariaItens.Open;
                   DM.qryFerramentaria.Locate('CODIGO', DM.FCodCombo, []);
-
                   if DM.qryFerramentariaItens.Locate('CODRECURSO', DM.FParamAuxiliar[2], []) = True then
                     begin
                       if DM.qryFerramentariaItensQUANTIDADE.AsInteger < StrToInt(LCampo) then
@@ -192,7 +172,6 @@ if (Key = #13) then
                               DM.qryFuncionariosFerramentariaQUANTIDADE.AsString           := LCampo;
                               DM.qryFuncionariosFerramentariaDATAEMPRESTIMO.AsDateTime     := DateOf(DM.FDataHoraServidor);
                               DM.qryFuncionariosFerramentaria.Post;
-
                               DM.qryFerramentariaItens.Edit;
                               DM.qryFerramentariaItensQUANTIDADE.AsInteger := DM.qryFerramentariaItensQUANTIDADE.AsInteger - StrToInt(LCampo);
                               DM.qryFerramentariaItens.Post;
@@ -213,13 +192,11 @@ if (Key = #13) then
         DM.qryFerramentaria.Open;
         DM.qryFerramentariaItens.Open;
         DM.qryFerramentaria.Locate('CODIGO', DM.FCodCombo, []);
-
         if DM.qryFerramentariaItens.Locate('CODRECURSO', DM.qryFuncionariosFerramentariaCODFERRAMENTARIAITEM.AsString, []) = True then
           begin
             DM.qryFuncionariosFerramentaria.Edit;
             DM.qryFuncionariosFerramentariaDATADEVOLUCAO.AsDateTime := DateOf(DM.FDataHoraServidor);
             DM.qryFuncionariosFerramentaria.Post;
-
 
             DM.qryFerramentariaItens.Edit;
             DM.qryFerramentariaItensQUANTIDADE.AsInteger := DM.qryFerramentariaItensQUANTIDADE.AsInteger + DM.qryFuncionariosFerramentariaQUANTIDADE.AsInteger;
@@ -228,7 +205,6 @@ if (Key = #13) then
       end;
   end;
 end;
-
 procedure TFrmTelaCadFuncionariosFerramentaria.odos1Click(Sender: TObject);
 begin
   inherited;
@@ -238,5 +214,4 @@ DM.qryFuncionariosFerramentaria.Filtered := False;
 if DM.qryFuncionariosFerramentaria.IsEmpty = False then
   DmRelatorios.frxRFuncionariosFerramentaria.ShowReport();
 end;
-
 end.

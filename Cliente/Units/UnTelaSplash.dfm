@@ -17766,7 +17766,7 @@ object FrmTelaSplash: TFrmTelaSplash
   end
   object LblRegistro: TLabel
     Left = 5
-    Top = 233
+    Top = 279
     Width = 62
     Height = 13
     Caption = 'Registrado'
@@ -17781,7 +17781,7 @@ object FrmTelaSplash: TFrmTelaSplash
   end
   object LblVersao: TLabel
     Left = 5
-    Top = 251
+    Top = 297
     Width = 29
     Height = 11
     Caption = '3.0.0.0'
@@ -17795,9 +17795,9 @@ object FrmTelaSplash: TFrmTelaSplash
     StyleElements = []
   end
   object ProgressBar1: TProgressBar
-    Left = 73
-    Top = 251
-    Width = 272
+    Left = 75
+    Top = 297
+    Width = 368
     Height = 11
     Min = 1
     Max = 4

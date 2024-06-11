@@ -11,8 +11,8 @@ inherited FrmTelaCadOrdemServicoMObraDisp: TFrmTelaCadOrdemServicoMObraDisp
     Width = 624
     ExplicitWidth = 620
     inherited BtnAjuda: TButton
-      Left = 589
-      ExplicitLeft = 589
+      Left = 588
+      ExplicitLeft = 588
     end
   end
   inherited PCentro: TPanel

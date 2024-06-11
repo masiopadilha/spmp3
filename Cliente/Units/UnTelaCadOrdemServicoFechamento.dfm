@@ -3,55 +3,55 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 706
+      Left = 710
       Top = 24
       ExplicitLeft = 694
       ExplicitTop = 24
     end
     inherited LCadastroPor: TLabel
-      Left = 662
+      Left = 666
       Top = 10
       ExplicitLeft = 650
       ExplicitTop = 10
     end
     inherited LblDataCad: TDBText
-      Left = 744
+      Left = 748
       Top = 25
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 740
+      ExplicitLeft = 744
       ExplicitTop = 25
     end
     inherited LblUsuCad: TDBText
-      Left = 744
+      Left = 748
       Top = 11
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 740
+      ExplicitLeft = 744
       ExplicitTop = 11
     end
     inherited LAlteracao: TLabel
-      Left = 857
+      Left = 861
       Top = 24
       ExplicitLeft = 845
       ExplicitTop = 24
     end
     inherited LAlteradoPor: TLabel
-      Left = 831
+      Left = 835
       Top = 10
       ExplicitLeft = 819
       ExplicitTop = 10
     end
     inherited LblDataAlt: TDBText
-      Left = 895
+      Left = 899
       Top = 24
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 891
+      ExplicitLeft = 895
       ExplicitTop = 24
     end
     inherited LblUsuAlt: TDBText
-      Left = 895
+      Left = 899
       Top = 10
       DataSource = DM.dsOrdemServico
-      ExplicitLeft = 891
+      ExplicitLeft = 895
       ExplicitTop = 10
     end
     inherited BtnExcluir: TButton
@@ -243,7 +243,6 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     Top = 179
     Height = 195
     ExplicitTop = 179
-    ExplicitWidth = 1008
     ExplicitHeight = 195
     inherited Label2: TLabel
       Width = 132
@@ -526,6 +525,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       TabOrder = 0
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbParcialClick
     end
     object EdtDescCustoExtra: TDBEdit
       Left = 254
@@ -744,8 +744,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   inherited PDiversos: TPanel
     Top = 378
     Height = 167
-    ExplicitTop = 373
-    ExplicitHeight = 169
+    ExplicitTop = 378
+    ExplicitHeight = 164
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'

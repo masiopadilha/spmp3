@@ -78,6 +78,10 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure EdtCodLubrificacaoKeyPress(Sender: TObject; var Key: Char);
     procedure Button3Click(Sender: TObject);
+    procedure ChbAtivoClick(Sender: TObject);
+    procedure ChbVisivelClick(Sender: TObject);
+    procedure chbClonavelClick(Sender: TObject);
+    procedure ChbParadoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -454,6 +458,30 @@ begin
     DM.FTela            := 'CADLUBRIFICPROG';
     DM.FTabela_auxiliar := 35;
   End;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.ChbAtivoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.chbClonavelClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.ChbParadoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadLubrificProgFamEquip.ChbVisivelClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.Completo1Click(Sender: TObject);

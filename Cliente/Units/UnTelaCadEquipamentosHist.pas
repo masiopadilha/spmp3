@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids,
   Data.DB, Datasnap.DBClient, Vcl.ImgList, Vcl.ComCtrls, System.DateUtils,
-  System.ImageList, FireDAC.Stan.Param, JvExComCtrls, JvDateTimePicker;
+  System.ImageList, FireDAC.Stan.Param, JvExComCtrls, JvDateTimePicker,
+  JvExDBGrids, JvDBGrid;
 
 type
   TFrmTelaCadEquipamentosHist = class(TFrmTelaPaiOKCancel)
@@ -23,10 +24,6 @@ type
     PCInspecoes: TPageControl;
     TSManutencoes: TTabSheet;
     TSLubrificacoes: TTabSheet;
-    GrdManutencoes: TDBGrid;
-    GrdInspecoes: TDBGrid;
-    GrdManutencoes2: TDBGrid;
-    GrdLubrificacoes: TDBGrid;
     CDTipoManut: TClientDataSet;
     DSTipoManut: TDataSource;
     CDTipoManutTIPO: TStringField;
@@ -37,7 +34,6 @@ type
     CDTipoLubrificTIPO: TStringField;
     CDTipoLubrificTOTAL: TIntegerField;
     CDTipoLubrificCUSTO: TFloatField;
-    GrdItensManut: TDBGrid;
     CDAuxiliar: TClientDataSet;
     CDEquipEAuxiliares: TClientDataSet;
     CDEquipEAuxiliaresCODIGO: TStringField;
@@ -67,18 +63,25 @@ type
     lblDBTotalLubrificProg: TLabel;
     lblTotalLubrificExec: TLabel;
     lblDBTotalLubrificExec: TLabel;
+    GrdManutencoes: TJvDBGrid;
+    GrdLubrificacoes: TJvDBGrid;
+    GrdServiços: TJvDBGrid;
+    GrdTipoManutencoes: TJvDBGrid;
+    GrdTipoManutencoes2: TJvDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CBPeriodoChange(Sender: TObject);
-    procedure GrdManutencoesDrawColumnCell(Sender: TObject; const Rect: TRect;
+    procedure GrdTipoManutencoesDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure GrdInspecoesDrawColumnCell(Sender: TObject; const Rect: TRect;
+    procedure GrdManutencoesDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure GrdLubrificacoesDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
     procedure CustosAuxilares;
+    procedure GrdManutencoesKeyPress(Sender: TObject; var Key: Char);
+    procedure GrdLubrificacoesKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -844,6 +847,37 @@ GrdLubrificacoes.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
 end;
 
+procedure TFrmTelaCadEquipamentosHist.GrdLubrificacoesKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  LCampo: String;
+  LDias: Integer;
+begin
+  inherited;
+  if (Key = #13) and (GrdLubrificacoes.SelectedIndex = 2) then
+  begin
+      LCampo := DM.CampoInputBox('SPMP3', 'Informe a frequência desejada:');
+      if LCampo <> '' then
+      begin
+        if TryStrToInt(LCampo, LDias) then
+        begin
+          if LDias > 0 then
+          begin
+            GrdLubrificacoes.DataSource.DataSet.Filtered := False;
+            GrdLubrificacoes.DataSource.DataSet.Filter := EmptyStr;
+            GrdLubrificacoes.DataSource.DataSet.Filter := 'FREQUENCIA1 = ' + QuotedStr(LCampo);
+            GrdLubrificacoes.DataSource.DataSet.Filtered := True;      
+          end;
+        end else
+          Application.MessageBox('Valor Inválido', 'SPMP3', MB_OK + MB_ICONERROR);          
+      end else
+      begin
+        GrdLubrificacoes.DataSource.DataSet.Filtered := False;
+        GrdLubrificacoes.DataSource.DataSet.Filter := EmptyStr;        
+      end;  
+  end;
+end;
+
 procedure TFrmTelaCadEquipamentosHist.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -860,63 +894,83 @@ EdtData1.Date := IncDay(DateOf(DM.FDataHoraServidor), -30);
 EdtData2.Date := DateOf(DM.FDataHoraServidor);
 end;
 
-procedure TFrmTelaCadEquipamentosHist.GrdInspecoesDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  inherited;
-GrdInspecoes.Columns[0].Title.Font.Size := 9; GrdInspecoes.Columns[1].Title.Font.Size := 9;
-GrdInspecoes.Columns[2].Title.Font.Size := 9; GrdInspecoes.Columns[3].Title.Font.Size := 9;
-GrdInspecoes.Columns[4].Title.Font.Size := 9;
-
-GrdInspecoes.Columns[1].Title.Alignment := taCenter;
-GrdInspecoes.Columns[2].Title.Alignment := taCenter;
-GrdInspecoes.Columns[2].Alignment       := taCenter;
-GrdInspecoes.Columns[3].Title.Alignment := taCenter;
-GrdInspecoes.Columns[3].Alignment       := taCenter;
-GrdInspecoes.Columns[4].Title.Alignment := taCenter;
-GrdInspecoes.Columns[4].Alignment       := taCenter;
-
-
-//if gdSelected in State then
-//  begin
-//    if GrdInspecoes.Fields[4].AsString = EmptyStr then
-//        GrdInspecoes.Canvas.Brush.Color := clMaroon
-//    else
-//        GrdInspecoes.Canvas.Brush.Color := clHighlight;
-//    GrdInspecoes.Canvas.Font.Color := clHighlightText;
-//  end
-//else
-//  begin
-    if GrdInspecoes.Fields[4].AsString = EmptyStr then
-        GrdInspecoes.Canvas.Font.Color := clRed
-    else
-        GrdInspecoes.Canvas.Font.Color := clBlack;
-//  end;
-GrdInspecoes.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
-
 procedure TFrmTelaCadEquipamentosHist.GrdManutencoesDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
   inherited;
+  GrdManutencoes.Columns[0].Title.Font.Size := 9; GrdManutencoes.Columns[1].Title.Font.Size := 9;
+  GrdManutencoes.Columns[2].Title.Font.Size := 9; GrdManutencoes.Columns[3].Title.Font.Size := 9;
+  GrdManutencoes.Columns[4].Title.Font.Size := 9;
+
+  GrdManutencoes.Columns[1].Title.Alignment := taCenter;
+  GrdManutencoes.Columns[2].Title.Alignment := taCenter;
+  GrdManutencoes.Columns[2].Alignment       := taCenter;
+  GrdManutencoes.Columns[3].Title.Alignment := taCenter;
+  GrdManutencoes.Columns[3].Alignment       := taCenter;
+  GrdManutencoes.Columns[4].Title.Alignment := taCenter;
+  GrdManutencoes.Columns[4].Alignment       := taCenter;
+
+  if GrdManutencoes.Fields[4].AsString = EmptyStr then
+      GrdManutencoes.Canvas.Font.Color := clRed
+  else
+      GrdManutencoes.Canvas.Font.Color := clBlack;
+
+  GrdManutencoes.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TFrmTelaCadEquipamentosHist.GrdManutencoesKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  LCampo: String;
+  LDias: Integer;
+begin
+  inherited;
+  if (Key = #13) and (GrdManutencoes.SelectedIndex = 2) then
+  begin
+      LCampo := DM.CampoInputBox('SPMP3', 'Informe a frequência desejada:');
+      if LCampo <> '' then
+      begin
+        if TryStrToInt(LCampo, LDias) then
+        begin
+          if LDias > 0 then
+          begin
+            GrdManutencoes.DataSource.DataSet.Filtered := False;
+            GrdManutencoes.DataSource.DataSet.Filter := EmptyStr;
+            GrdManutencoes.DataSource.DataSet.Filter := 'FREQUENCIA1 = ' + QuotedStr(LCampo);
+            GrdManutencoes.DataSource.DataSet.Filtered := True;      
+          end;
+        end else
+          Application.MessageBox('Valor Inválido', 'SPMP3', MB_OK + MB_ICONERROR);          
+      end else
+      begin
+        GrdManutencoes.DataSource.DataSet.Filtered := False;
+        GrdManutencoes.DataSource.DataSet.Filter := EmptyStr;        
+      end;  
+  end;
+end;
+
+procedure TFrmTelaCadEquipamentosHist.GrdTipoManutencoesDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
   Exit;
-GrdManutencoes.Columns[0].Title.Font.Size := 7;
-GrdManutencoes.Columns[1].Title.Font.Size := 7;
-GrdManutencoes.Columns[2].Title.Font.Size := 7;
+GrdTipoManutencoes.Columns[0].Title.Font.Size := 7;
+GrdTipoManutencoes.Columns[1].Title.Font.Size := 7;
+GrdTipoManutencoes.Columns[2].Title.Font.Size := 7;
 
-GrdManutencoes.Columns[0].Title.Alignment := taCenter;
-GrdManutencoes.Columns[1].Title.Alignment := taCenter;
-GrdManutencoes.Columns[2].Title.Alignment := taCenter;
+GrdTipoManutencoes.Columns[0].Title.Alignment := taCenter;
+GrdTipoManutencoes.Columns[1].Title.Alignment := taCenter;
+GrdTipoManutencoes.Columns[2].Title.Alignment := taCenter;
 
-GrdManutencoes2.Columns[0].Title.Font.Size := 7;
-GrdManutencoes2.Columns[1].Title.Font.Size := 7;
-GrdManutencoes2.Columns[2].Title.Font.Size := 7;
+GrdTipoManutencoes2.Columns[0].Title.Font.Size := 7;
+GrdTipoManutencoes2.Columns[1].Title.Font.Size := 7;
+GrdTipoManutencoes2.Columns[2].Title.Font.Size := 7;
 
-GrdManutencoes2.Columns[0].Title.Alignment := taCenter;
-GrdManutencoes2.Columns[1].Title.Alignment := taCenter;
-GrdManutencoes2.Columns[2].Title.Alignment := taCenter;
+GrdTipoManutencoes2.Columns[0].Title.Alignment := taCenter;
+GrdTipoManutencoes2.Columns[1].Title.Alignment := taCenter;
+GrdTipoManutencoes2.Columns[2].Title.Alignment := taCenter;
 end;
 
 end.

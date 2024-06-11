@@ -269,7 +269,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -368,7 +368,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -484,7 +484,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -605,7 +605,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -704,7 +704,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -820,7 +820,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -940,7 +940,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -1021,7 +1021,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -1090,7 +1090,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'
@@ -1206,7 +1206,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
             TitleButtons = True
             BevelInner = bvNone
             BevelOuter = bvNone
-            AlternateRowColor = 15727296
+            AlternateRowColor = 16055512
             SortedField = 'CODIGO'
             TitleArrow = True
             SelectColumnsDialogStrings.Caption = 'Selecione as colunas'

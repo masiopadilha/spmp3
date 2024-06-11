@@ -1,14 +1,14 @@
 inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamEquipPartesItens
   Caption = 'Itens a Inspecionar'
-  ClientHeight = 304
-  ClientWidth = 788
+  ClientHeight = 301
+  ClientWidth = 784
   Constraints.MaxWidth = 800
   Constraints.MinWidth = 800
   OnCreate = FormCreate
   ExplicitWidth = 800
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 784
+    Width = 780
     ExplicitWidth = 780
     inherited BtnAjuda: TButton
       Left = 752
@@ -16,9 +16,10 @@ inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamE
     end
   end
   inherited PCentro: TPanel
-    Width = 782
-    Height = 165
+    Width = 778
+    Height = 162
     ExplicitWidth = 782
+    ExplicitHeight = 165
     inherited RGTelas: TRadioGroup
       Left = 207
       Width = 578
@@ -166,13 +167,15 @@ inherited FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamE
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 237
-    Width = 784
+    Top = 234
+    Width = 780
+    ExplicitTop = 237
     ExplicitWidth = 784
   end
   inherited PBotoes: TPanel
-    Top = 264
-    Width = 784
+    Top = 261
+    Width = 780
+    ExplicitTop = 264
     ExplicitWidth = 784
     inherited BtnOK: TButton
       Left = 100

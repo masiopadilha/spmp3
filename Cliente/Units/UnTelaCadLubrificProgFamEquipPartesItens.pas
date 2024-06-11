@@ -1,12 +1,9 @@
 unit UnTelaCadLubrificProgFamEquipPartesItens;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Data.DB, FireDAC.Stan.Param;
-
 type
   TFrmTelaCadLubrificProgFamEquipPartesItens = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -25,16 +22,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadLubrificProgFamEquipPartesItens: TFrmTelaCadLubrificProgFamEquipPartesItens;
-
 implementation
-
 {$R *.dfm}
-
 uses UnDM;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.BtnFecharClick(
   Sender: TObject);
 begin
@@ -56,7 +48,6 @@ while not DM.qryLubrificProgFamEquipPartes.Eof = True do
 DM.qryLubrificProgFamEquipItensTodos.Close;
 DM.qryLubrificProgFamEquipItensTodos.Open;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -64,7 +55,6 @@ begin
 DM.qryLubrificProgFamEquipItens.Close;
 DM.qryLubrificProgFamEquipPartes.Close;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.FormCreate(
   Sender: TObject);
 begin
@@ -75,7 +65,6 @@ begin
   DM.qryLubrificProgFamEquipPartes.Open;
   DM.qryLubrificProgFamEquipItens.Close;
   DM.qryLubrificProgFamEquipItens.Open;
-
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
@@ -96,7 +85,6 @@ begin
     Exit;
   end;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdCadastroKeyDown(
   Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
@@ -104,14 +92,12 @@ begin
 if (Shift = [ssCtrl]) and (Key = 46) then
   Key := 0;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdCadastroTitleClick(
   Column: TColumn);
 begin
   inherited;
 //DM.CliqueNoTitulo(Column, DM.qryLubrificProgFamEquipPartes);
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdItensDblClick(
   Sender: TObject);
 begin
@@ -122,12 +108,10 @@ if (DM.qryUsuarioPExclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA EXCLUSÃO!';
     Exit;
   end;
-
 if DM.qryManutProgFamEquipItens.IsEmpty = False then
   if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = mrYes then
     DM.qryLubrificProgFamEquipItens.Delete;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdItensKeyPress(
   Sender: TObject; var Key: Char);
 begin
@@ -136,12 +120,10 @@ if (GrdItens.SelectedIndex = 2) or (GrdItens.SelectedIndex = 4) then
   if (Key <> #0) and (Key <> #9) then
     Key := #0;
 end;
-
 procedure TFrmTelaCadLubrificProgFamEquipPartesItens.GrdItensTitleClick(
   Column: TColumn);
 begin
   inherited;
 //DM.CliqueNoTitulo(Column, DM.qryLubrificProgFamEquipItens);
 end;
-
 end.

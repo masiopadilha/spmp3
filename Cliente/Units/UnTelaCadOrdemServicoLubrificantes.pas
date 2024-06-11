@@ -1,12 +1,9 @@
 unit UnTelaCadOrdemServicoLubrificantes;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Data.DB, Vcl.Grids, Vcl.DBGrids;
-
 type
   TFrmTelaCadOrdemServicoLubrificantes = class(TFrmTelaPaiOkCancel)
     GrdCadastro: TDBGrid;
@@ -20,16 +17,11 @@ type
   public
     { Public declarations }
   end;
-
 var
   FrmTelaCadOrdemServicoLubrificantes: TFrmTelaCadOrdemServicoLubrificantes;
-
 implementation
-
 {$R *.dfm}
-
 uses UnTelaConsulta, UnDM;
-
 procedure TFrmTelaCadOrdemServicoLubrificantes.BtnOKClick(Sender: TObject);
 begin
 PAuxiliares.Font.Color    := clGreen;
@@ -48,18 +40,14 @@ while not DM.qryOrdemServicoEquipeLubrificantes.Eof = True do
     DM.qryOrdemServicoEquipeLubrificantes.Next;
    end;
   inherited;
-
 end;
-
 procedure TFrmTelaCadOrdemServicoLubrificantes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
 FillChar(DM.FParamAuxiliar, SizeOf(DM.FParamAuxiliar), #0);
-
 DM.qryOrdemServicoEquipeLubrificantes.Close;
 end;
-
 procedure TFrmTelaCadOrdemServicoLubrificantes.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -89,16 +77,13 @@ if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServico
       PAuxiliares.Caption    := 'ORDEM DE SERVIÇO: '+DM.qryOrdemServicoSITUACAO.AsString+', ALTERAÇÕES NÃO PERMITIDAS!';
       GrdCadastro.ReadOnly   := True;
     end;
-
 DM.qryOrdemServicoEquipeLubrificantes.Open;
 end;
-
 procedure TFrmTelaCadOrdemServicoLubrificantes.GrdCadastroDblClick(
   Sender: TObject);
 begin
   inherited;
 if DM.qryOrdemServicoEquipePecas.IsEmpty = True then Exit;
-
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA')
   and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA')  and (DM.qryOrdemServicoSITUACAO.AsString <> 'PROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') then
     begin
@@ -108,7 +93,6 @@ if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServico
 else
   DM.qryOrdemServicoEquipeLubrificantes.Delete;
 end;
-
 procedure TFrmTelaCadOrdemServicoLubrificantes.GrdCadastroKeyPress(
   Sender: TObject; var Key: Char);
 begin
@@ -120,13 +104,11 @@ if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA')  and (DM.qryOrdemServic
     GrdCadastro.ReadOnly      := True;
     Exit;
   end;
-
 if (GrdCadastro.SelectedIndex = 3) then
   begin
     if DM.qryOrdemServicoEquipeLubrificantesCODLUBRIFICANTE.AsString = EmptyStr then
       Key := #0;
   end;
-
 if (Key = #13) then
   begin
     if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -149,7 +131,6 @@ if (Key = #13) then
     end;
 
     DM.FTabela_auxiliar := 6400;
-
     Try
       Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
       FrmTelaAuxiliar.ShowModal;
@@ -167,7 +148,6 @@ if (Key = #13) then
               DM.qryOrdemServicoEquipeLubrificantesLUBRIFICANTE.AsString      := DM.FValorCombo;
               DM.qryOrdemServicoEquipeLubrificantesENTRADA.AsDateTime         := DM.FDataHoraServidor;
               DM.qryOrdemServicoEquipeLubrificantes.Post;
-
               GrdCadastro.SelectedIndex := 2;
             end;
         end;
@@ -175,5 +155,4 @@ if (Key = #13) then
     End;
   end;
 end;
-
 end.

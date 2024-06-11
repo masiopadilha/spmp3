@@ -55,11 +55,13 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       DataSource = DM.dsLubrificProgEquip
     end
     inherited BtnNovo: TButton
+      Left = 10
       Width = 27
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 10
       ExplicitWidth = 27
     end
     inherited BtnSalvar: TButton
@@ -357,6 +359,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       TabOrder = 9
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = DBCheckBox1Click
       OnExit = TabNextTab1AfterTabChange
     end
   end

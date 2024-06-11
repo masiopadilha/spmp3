@@ -67,6 +67,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure DBCheckBox1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -575,6 +576,12 @@ DM.FDataSetRelat    := DmRelatorios.frxDBLubrificProgEquipGeral;
 DM.FTabela_auxiliar  := 33;
   inherited;
 end;
+procedure TFrmTelaCadLubrificProgEquip.DBCheckBox1Click(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
 procedure TFrmTelaCadLubrificProgEquip.EdtCodLubrificacaoExit(Sender: TObject);
 begin
   inherited;

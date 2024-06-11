@@ -4,40 +4,40 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   TextHeight = 16
   inherited PControle: TPanel
     inherited LCadastro: TLabel
-      Left = 758
+      Left = 762
       ExplicitLeft = 742
     end
     inherited LCadastroPor: TLabel
-      Left = 714
+      Left = 718
       ExplicitLeft = 698
     end
     inherited LblDataCad: TDBText
-      Left = 796
+      Left = 800
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 792
+      ExplicitLeft = 796
     end
     inherited LblUsuCad: TDBText
-      Left = 796
+      Left = 800
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 792
+      ExplicitLeft = 796
     end
     inherited LAlteracao: TLabel
-      Left = 909
+      Left = 913
       ExplicitLeft = 893
     end
     inherited LAlteradoPor: TLabel
-      Left = 883
+      Left = 887
       ExplicitLeft = 867
     end
     inherited LblDataAlt: TDBText
-      Left = 947
+      Left = 951
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 943
+      ExplicitLeft = 947
     end
     inherited LblUsuAlt: TDBText
-      Left = 947
+      Left = 951
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 943
+      ExplicitLeft = 947
     end
   end
   inherited PIdentificacao: TPanel
@@ -177,6 +177,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 12
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbAtivoClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodLubrificacaoKeyPress
     end
@@ -192,6 +193,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 13
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbVisivelClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodLubrificacaoKeyPress
     end
@@ -286,6 +288,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 14
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = chbClonavelClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodLubrificacaoKeyPress
     end
@@ -380,6 +383,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 15
       ValueChecked = 'S'
       ValueUnchecked = 'N'
+      OnClick = ChbParadoClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = EdtCodLubrificacaoKeyPress
     end

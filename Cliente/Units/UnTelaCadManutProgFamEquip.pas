@@ -78,6 +78,10 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure EdtCodManutencaoKeyPress(Sender: TObject; var Key: Char);
     procedure Button3Click(Sender: TObject);
+    procedure ChbAtivoClick(Sender: TObject);
+    procedure ChbVisivelClick(Sender: TObject);
+    procedure chbClonavelClick(Sender: TObject);
+    procedure ChbParadoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -458,6 +462,30 @@ begin
     DM.FTabela_auxiliar := 34;
   End;
 
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.ChbAtivoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.chbClonavelClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.ChbParadoClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
+end;
+
+procedure TFrmTelaCadManutProgFamEquip.ChbVisivelClick(Sender: TObject);
+begin
+  inherited;
+  BtnSalvar.ImageIndex := 115;
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.Completo1Click(Sender: TObject);
