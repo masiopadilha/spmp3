@@ -9,7 +9,9 @@ uses
 type
   TfrmSistemaOcioso = class(TForm)
     lblTempoRegressivo: TLabel;
+    Label1: TLabel;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,9 +27,15 @@ implementation
 
 uses UnDM;
 
+procedure TfrmSistemaOcioso.FormCreate(Sender: TObject);
+begin
+Brush.Style := bsClear;
+end;
+
 procedure TfrmSistemaOcioso.FormShow(Sender: TObject);
 begin
-lblTempoRegressivo.Caption := 'O sistema será desligado em 30 segundos.'
+  lblTempoRegressivo.Caption := 'O sistema será desligado em 30 segundos.';
+//  frmSistemaOcioso.TransparentColor := True;
 end;
 
 end.

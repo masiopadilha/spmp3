@@ -10,7 +10,7 @@ uses
   Vcl.Buttons, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Error, Winapi.ShellAPI,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdFTP, IdIOHandler, IdIOHandlerSocket,
-  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP;
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP, System.Math;
 
 type
   TFrmTelaPrincipal = class(TForm)
@@ -563,7 +563,7 @@ end;
 procedure TFrmTelaPrincipal.AppMessage(var Msg: TMsg; var Handled: Boolean);
 begin
   case Msg.message of
-    WM_KEYFIRST..WM_KEYLAST, WM_MOUSEFIRST..WM_MOUSELAST:
+    WM_MOUSEACTIVATE, WM_KEYFIRST..WM_KEYLAST, WM_MOUSEFIRST..WM_MOUSELAST:
     begin
       TimerOscioso.Enabled := False;
       TimerOscioso2.Enabled := False;
@@ -3631,7 +3631,11 @@ begin
     if (DM.FSegundosDesliga > 0) then
     begin
       if frmSistemaOcioso.Active = False then
+      begin
+        frmSistemaOcioso.Left := RandomRange(0, Screen.Width - frmSistemaOcioso.Width);
+        frmSistemaOcioso.Top := RandomRange(0, Screen.Height - frmSistemaOcioso.Height);
         frmSistemaOcioso.ShowModal;
+      end;
       frmSistemaOcioso.lblTempoRegressivo.Caption := 'O sistema será desligado em '+IntToStr(DM.FSegundosDesliga)+' segundos.';
       if DM.FSegundosDesliga < 0 then
         Sair1Click(Sender);

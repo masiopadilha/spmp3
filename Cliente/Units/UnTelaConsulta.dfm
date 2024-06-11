@@ -30,7 +30,7 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 971
+      Left = 975
       ExplicitLeft = 971
     end
   end

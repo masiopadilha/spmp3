@@ -98,6 +98,17 @@ while not DM.qryRotasSequencia.Eof = True do
 
     DM.qryRotasSequencia.Next;
   end;
+
+DM.FParamAuxiliar[2] := '';
+DM.FParamAuxiliar[3] := '';
+DM.FParamAuxiliar[4] := '';
+DM.FParamAuxiliar[5] := '';
+DM.FParamAuxiliar[6] := '';
+DM.FParamAuxiliar[7] := '';
+DM.FParamAuxiliar[8] := '';
+DM.FParamAuxiliar[9] := '';
+DM.FParamAuxiliar[10] := '';
+
 DM.qryRotasSequencia.First;
 DM.qryRotasSequencia.Edit;
 end;
@@ -343,6 +354,16 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
 
     DM.FAlterando := True;
 
+    DM.FParamAuxiliar[2] := '';
+    DM.FParamAuxiliar[3] := '';
+    DM.FParamAuxiliar[4] := '';
+    DM.FParamAuxiliar[5] := '';
+    DM.FParamAuxiliar[6] := '';
+    DM.FParamAuxiliar[7] := '';
+    DM.FParamAuxiliar[8] := '';
+    DM.FParamAuxiliar[9] := '';
+    DM.FParamAuxiliar[10] := '';
+
     DM.FTabela_auxiliar := 250;
     DM.FNomeConsulta := 'Equipamentos';
     if (GrdSequencia.SelectedIndex = 3) then
@@ -359,16 +380,6 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
     DM.FCodArea    := EmptyStr;
     DM.FCodCelula  := EmptyStr;
     DM.FCodLinha   := EmptyStr;
-
-    DM.FParamAuxiliar[2] := '';
-    DM.FParamAuxiliar[3] := '';
-    DM.FParamAuxiliar[4] := '';
-    DM.FParamAuxiliar[5] := '';
-    DM.FParamAuxiliar[6] := '';
-    DM.FParamAuxiliar[7] := '';
-    DM.FParamAuxiliar[8] := '';
-    DM.FParamAuxiliar[9] := '';
-    DM.FParamAuxiliar[10] := '';
 
     if DM.ConsultarCombo <> EmptyStr then
       begin

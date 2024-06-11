@@ -64,7 +64,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnTelaCadMonitMedicoes, UnDM;
+uses UnTelaCadMonitMedicoes, UnDM, UnTelaCadRotaProgEquip;
 
 procedure TFrmTelaAuxiliar.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
 var
@@ -1455,6 +1455,15 @@ DM.qryAuxiliar.Close;
 if FrmTelaAuxiliar.Caption = 'Equipamentos' then
   begin
     PFiltroEquip.Visible := True;
+//    if FrmTelaCadRotaProgEquip <> nil then
+//    begin
+//      if DM.FParamAuxiliar[4] <> '' then DM.qryRotasSequenciaCODAREA.AsString   := DM.FParamAuxiliar[4];
+//      if DM.FParamAuxiliar[5] <> '' then DM.qryRotasSequenciaAREA.AsString      := DM.FParamAuxiliar[5];
+//      if DM.FParamAuxiliar[6] <> '' then DM.qryRotasSequenciaCODCELULA.AsString := DM.FParamAuxiliar[6];
+//      if DM.FParamAuxiliar[7] <> '' then DM.qryRotasSequenciaCELULA.AsString    := DM.FParamAuxiliar[7];
+//      if DM.FParamAuxiliar[8] <> '' then DM.qryRotasSequenciaCODLINHA.AsString  := DM.FParamAuxiliar[8];
+//      if DM.FParamAuxiliar[9] <> '' then DM.qryRotasSequenciaLINHA.AsString     := DM.FParamAuxiliar[9];
+//    end;
   end;
 
 if DM.FPromptConsulta = '' then
@@ -1770,14 +1779,14 @@ begin
       begin
         DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
-        DM.FParamAuxiliar[2] := DM.qryAuxiliar.FieldByName('CODFAMILIAEQUIP').AsString;
-        DM.FParamAuxiliar[3] := DM.qryAuxiliar.FieldByName('FAMILIAEQUIP').AsString;
-        DM.FParamAuxiliar[4] := DM.qryAuxiliar.FieldByName('CODAREA').AsString;
-        DM.FParamAuxiliar[5] := DM.qryAuxiliar.FieldByName('AREA').AsString;
-        DM.FParamAuxiliar[6] := DM.qryAuxiliar.FieldByName('CODCELULA').AsString;
-        DM.FParamAuxiliar[7] := DM.qryAuxiliar.FieldByName('CELULA').AsString;
-        DM.FParamAuxiliar[8] := DM.qryAuxiliar.FieldByName('CODLINHA').AsString;
-        DM.FParamAuxiliar[9] := DM.qryAuxiliar.FieldByName('LINHA').AsString;
+        DM.FParamAuxiliar[2]  := DM.qryAuxiliar.FieldByName('CODFAMILIAEQUIP').AsString;
+        DM.FParamAuxiliar[3]  := DM.qryAuxiliar.FieldByName('FAMILIAEQUIP').AsString;
+        DM.FParamAuxiliar[4]  := DM.qryAuxiliar.FieldByName('CODAREA').AsString;
+        DM.FParamAuxiliar[5]  := DM.qryAuxiliar.FieldByName('AREA').AsString;
+        DM.FParamAuxiliar[6]  := DM.qryAuxiliar.FieldByName('CODCELULA').AsString;
+        DM.FParamAuxiliar[7]  := DM.qryAuxiliar.FieldByName('CELULA').AsString;
+        DM.FParamAuxiliar[8]  := DM.qryAuxiliar.FieldByName('CODLINHA').AsString;
+        DM.FParamAuxiliar[9]  := DM.qryAuxiliar.FieldByName('LINHA').AsString;
         DM.FParamAuxiliar[10] := DM.qryAuxiliar.FieldByName('SEQUENCIA').AsString;
         DM.FParamAuxiliar[11] := DM.qryAuxiliar.FieldByName('CODCENTROCUSTO').AsString;
         DM.FParamAuxiliar[12] := DM.qryAuxiliar.FieldByName('CENTROCUSTO').AsString;

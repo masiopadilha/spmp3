@@ -1,39 +1,55 @@
 object frmSistemaOcioso: TfrmSistemaOcioso
   Left = 0
   Top = 0
+  AlphaBlend = True
   BorderIcons = []
   BorderStyle = bsNone
-  ClientHeight = 83
-  ClientWidth = 350
-  Color = clBtnFace
+  ClientHeight = 61
+  ClientWidth = 440
+  Color = 14737632
+  TransparentColor = True
+  TransparentColorValue = 14737632
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poScreenCenter
+  Position = poDefault
+  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object lblTempoRegressivo: TLabel
     AlignWithMargins = True
-    Left = 3
+    Left = 13
     Top = 3
-    Width = 344
-    Height = 77
-    Align = alClient
+    Width = 413
+    Height = 29
     Alignment = taCenter
     Caption = 'O sistema ser'#225' desligado em 30 segundos.'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
+    Font.Height = -21
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
+    Transparent = True
     Layout = tlCenter
-    StyleElements = [seClient, seBorder]
-    ExplicitLeft = 10
-    ExplicitTop = 15
-    ExplicitWidth = 319
-    ExplicitHeight = 21
+  end
+  object Label1: TLabel
+    AlignWithMargins = True
+    Left = 74
+    Top = 31
+    Width = 294
+    Height = 21
+    Alignment = taCenter
+    Caption = 'Passe o mouse para evitar o desligamento.'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    Layout = tlCenter
   end
 end
