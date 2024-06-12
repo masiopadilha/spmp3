@@ -1152,7 +1152,7 @@ begin
     if edtSolicitante.Text <> ''  then
     begin
       if DBGrid.DataSource.DataSet.Filter = EmptyStr then
-        DBGrid.DataSource.DataSet.Filter := 'MATRICULA = ' + QuotedStr(LCodManutencao)
+        DBGrid.DataSource.DataSet.Filter := 'MATRICULA = ' + QuotedStr(LCodSolicitante)
       else
         DBGrid.DataSource.DataSet.Filter := DBGrid.DataSource.DataSet.Filter + ' AND MATRICULA = ' + QuotedStr(LCodSolicitante);
     end;
