@@ -1,7 +1,10 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     DesignSize = (
       1008
       45)
@@ -111,6 +114,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 97
     ExplicitHeight = 97
     inherited Label1: TLabel
@@ -369,6 +373,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PProgramacao: TPanel
     Top = 152
+    Width = 1008
     Height = 122
     ExplicitTop = 152
     ExplicitHeight = 122
@@ -610,6 +615,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
+    Width = 1008
     Height = 267
     ExplicitTop = 278
     ExplicitHeight = 264
@@ -806,7 +812,17 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
     inherited Button1: TButton
       Left = 853
       Hint = 'Itens Espec'#237'ficos a Inspecionar'

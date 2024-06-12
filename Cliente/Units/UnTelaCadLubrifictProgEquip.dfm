@@ -1,7 +1,10 @@
 inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   Caption = 'Lubrifica'#231#227'o Programada do Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       Margins.Left = 4
       Margins.Top = 4
@@ -108,6 +111,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 97
     ExplicitHeight = 97
     inherited Label1: TLabel
@@ -365,6 +369,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PProgramacao: TPanel
     Top = 152
+    Width = 1008
     Height = 122
     ExplicitTop = 152
     ExplicitHeight = 122
@@ -594,6 +599,7 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
+    Width = 1008
     Height = 267
     ExplicitTop = 278
     ExplicitHeight = 264
@@ -791,12 +797,16 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
   end
   inherited PAlertas: TPanel
+    Top = 589
+    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -809,6 +819,8 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PBase: TPanel
+    Top = 549
+    Width = 1008
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

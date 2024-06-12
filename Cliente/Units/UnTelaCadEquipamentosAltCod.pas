@@ -60,9 +60,9 @@ begin
   DM.qryAuxiliar2.Params[0].AsString := DM.FCodEmpresa;
   DM.qryAuxiliar2.Params[1].AsString := edtNovoAntigo.Text;
   DM.qryAuxiliar2.Open;
-  if DM.qryAuxiliar2.IsEmpty = True then
+  if DM.qryAuxiliar2.IsEmpty = False then
   begin
-    Mensagem := PChar('Equipamento novo não identificado!');
+    Mensagem := PChar('Novo código já cadastrado!');
     Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
     DM.qryAuxiliar2.Close;
     Exit;

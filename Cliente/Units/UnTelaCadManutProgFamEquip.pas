@@ -353,7 +353,7 @@ if DM.qryManutProgFamEquipCODOFICINA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A OFICINA DO REGISTRO!'; EdtDescOficina.SetFocus; Abort;
   end;
-if DM.qryManutProgFamEquipCODOFICINA.IsNull = True then
+if DM.qryManutProgFamEquipCODMANUTENCAO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A MANUTENÇÃO DO REGISTRO!'; EdtManutencao.SetFocus; Abort;
   end;

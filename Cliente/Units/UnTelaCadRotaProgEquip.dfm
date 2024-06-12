@@ -168,6 +168,8 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
       DataSource = DM.dsRotas
       MaxLength = 5
       TabOrder = 0
+      OnChange = EdtDiasChange
+      OnEnter = EdtDiasEnter
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end

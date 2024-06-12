@@ -1,14 +1,19 @@
 inherited FrmTelaCadEquipamentosAltCod: TFrmTelaCadEquipamentosAltCod
   Caption = 'Altera'#231#227'o de C'#243'digo do Equipamento'
+  ClientHeight = 304
+  ClientWidth = 508
   OnShow = FormShow
   TextHeight = 16
   inherited PTop: TPanel
+    Width = 504
     inherited BtnAjuda: TButton
       Left = 469
       ExplicitLeft = 469
     end
   end
   inherited PCentro: TPanel
+    Width = 502
+    Height = 165
     object pBase: TPanel
       AlignWithMargins = True
       Left = 4
@@ -70,7 +75,13 @@ inherited FrmTelaCadEquipamentosAltCod: TFrmTelaCadEquipamentosAltCod
       end
     end
   end
+  inherited PAuxiliares: TPanel
+    Top = 237
+    Width = 504
+  end
   inherited PBotoes: TPanel
+    Top = 264
+    Width = 504
     inherited BtnOK: TButton
       Caption = 'Gravar'
       ModalResult = 0

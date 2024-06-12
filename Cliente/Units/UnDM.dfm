@@ -14819,20 +14819,56 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `rotasequipamento`.`CODIGO`'
-      '    , `rotasequipamento`.`CODEMPRESA`'
-      '    , `rotasequipamento`.`DESCRICAO`'
-      '    , `rotasequipamento`.`FREQUENCIA`'
-      '    , `rotasequipamento`.`DATAINICIO`'
-      '    , `rotasequipamento`.`REPROGRAMAR`'
-      '    , `rotasequipamento`.`RELATORIO`'
+      '    `rotasequipamento`.*'
+      
+        '    , SUM(`manutprogfamequipitens`.`TEMPO`) + SUM(`manutprogequi' +
+        'pitensesp`.`TEMPO`)TEMPOTOTALITENS'
       'FROM'
       '    `rotasequipamento`'
+      '    INNER JOIN `rotasequipamentoseq` '
+      
+        '        ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`' +
+        '.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequip' +
+        'amento`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogequipamento` '
+      
+        '        ON (`rotasequipamento`.`FREQUENCIA` = `manutprogequipame' +
+        'nto`.`FREQUENCIA1`)'
+      '    INNER JOIN `equipamentos` '
+      
+        '        ON (`rotasequipamentoseq`.`CODAREA` = `equipamentos`.`CO' +
+        'DLOCALIZACAO`) AND (`rotasequipamentoseq`.`CODCELULA` = `equipam' +
+        'entos`.`CODCELULA`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `e' +
+        'quipamentos`.`CODEMPRESA`) AND (`rotasequipamentoseq`.`SEQUENCIA' +
+        '` = `equipamentos`.`SEQUENCIA`) AND (`rotasequipamentoseq`.`CODL' +
+        'INHA` = `equipamentos`.`CODLINHA`) AND (`manutprogequipamento`.`' +
+        'CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipa' +
+        'mento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
+        'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
+      '    LEFT JOIN `manutprogfamequipitens` '
+      
+        '        ON (`manutprogfamequipamento`.`CODEMPRESA` = `manutprogf' +
+        'amequipitens`.`CODEMPRESA`) AND (`manutprogfamequipamento`.`CODI' +
+        'GO` = `manutprogfamequipitens`.`CODMANUTPROGFAMEQUIP`)'
+      '    LEFT JOIN `manutprogequipitensesp` '
+      
+        '        ON (`manutprogequipamento`.`CODEMPRESA` = `manutprogequi' +
+        'pitensesp`.`CODEMPRESA`) AND (`manutprogequipamento`.`CODIGO` = ' +
+        '`manutprogequipitensesp`.`CODMANUTPROGEQUIP`)'
+      '        '
+      '        '
       'WHERE (`rotasequipamento`.`CODEMPRESA` = :codempresa'
       
-        '    AND `rotasequipamento`.`DATAINICIO` <= DATE_FORMAT(:DATA, '#39'%' +
-        'Y-%m-%d'#39')'
-      '    AND `rotasequipamento`.`RELATORIO` = '#39'N'#39')'
+        '   AND `rotasequipamento`.`DATAINICIO` <= DATE_FORMAT(:DATA, '#39'%Y' +
+        '-%m-%d'#39')'
+      '   AND `rotasequipamento`.`RELATORIO` = '#39'N'#39')'
+      '        '
+      'GROUP BY `rotasequipamento`.`CODIGO`'
+      ''
       'ORDER BY `rotasequipamento`.`DATAINICIO` ASC;')
     Left = 1595
     Top = 585
@@ -14852,7 +14888,6 @@ object DM: TDM
       Origin = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
-      Visible = False
       Size = 9
     end
     object qryRotaEquipVencCODEMPRESA: TStringField
@@ -14860,7 +14895,6 @@ object DM: TDM
       Origin = 'CODEMPRESA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
-      Visible = False
       Size = 9
     end
     object qryRotaEquipVencDESCRICAO: TStringField
@@ -14869,30 +14903,63 @@ object DM: TDM
       Origin = 'DESCRICAO'
       Size = 200
     end
+    object qryRotaEquipVencDATAINICIO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINICIO'
+      Origin = 'DATAINICIO'
+    end
     object qryRotaEquipVencFREQUENCIA: TSmallintField
       AutoGenerateValue = arDefault
       FieldName = 'FREQUENCIA'
       Origin = 'FREQUENCIA'
     end
-    object qryRotaEquipVencDATAINICIO: TDateTimeField
-      Alignment = taCenter
-      AutoGenerateValue = arDefault
-      FieldName = 'DATAINICIO'
-      Origin = 'DATAINICIO'
-    end
     object qryRotaEquipVencREPROGRAMAR: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'REPROGRAMAR'
       Origin = 'REPROGRAMAR'
-      Visible = False
       Size = 40
     end
     object qryRotaEquipVencRELATORIO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'RELATORIO'
       Origin = 'RELATORIO'
-      Visible = False
       Size = 1
+    end
+    object qryRotaEquipVencDATACADASTRO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATACADASTRO'
+      Origin = 'DATACADASTRO'
+    end
+    object qryRotaEquipVencCODUSUARIOCAD: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODUSUARIOCAD'
+      Origin = 'CODUSUARIOCAD'
+      Size = 9
+    end
+    object qryRotaEquipVencDATAULTALT: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAULTALT'
+      Origin = 'DATAULTALT'
+    end
+    object qryRotaEquipVencCODUSUARIOALT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODUSUARIOALT'
+      Origin = 'CODUSUARIOALT'
+      Size = 9
+    end
+    object qryRotaEquipVencOBSERVACOES: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'OBSERVACOES'
+      Origin = 'OBSERVACOES'
+    end
+    object qryRotaEquipVencTEMPOTOTALITENS: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TEMPOTOTALITENS'
+      Origin = 'TEMPOTOTALITENS'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 39
+      Size = 2
     end
     object qryRotaEquipVencC_DIASATRASO: TIntegerField
       DisplayLabel = 'Atraso (d)'
@@ -15093,6 +15160,10 @@ object DM: TDM
       '    , `manutprogequipamento`.`RELATORIO`'
       '    , `manutprogequipamento`.`FREQUENCIA1` AS FREQUENCIA'
       '    , `equipamentos`.`CODIGO` AS CODEQUIPATUAL'
+      '    , `equipamentos`.`CODCENTROCUSTO`'
+      '    , `manutprogfamequipamento`.`CODOFICINA`'
+      '    , `manutprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `manutprogfamequipamento`.`EQUIPPARADO`'
       'FROM'
       '    `manutprogequipamento`'
       '    INNER JOIN `equipamentos` '
@@ -15100,6 +15171,11 @@ object DM: TDM
         '        ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamen' +
         'tos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equip' +
         'amentos`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`)'
+      ''
       'WHERE (`manutprogequipamento`.`CODEMPRESA` = :codempresa'
       '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipatual'
       '    AND `manutprogequipamento`.`FREQUENCIA1` = :frequencia'
@@ -15164,6 +15240,38 @@ object DM: TDM
       FieldName = 'CODEQUIPATUAL'
       Origin = 'CODIGO'
       ProviderFlags = []
+    end
+    object qryRotaEquipVencSeqManutCODCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCENTROCUSTO'
+      Origin = 'CODCENTROCUSTO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaEquipVencSeqManutCODOFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODOFICINA'
+      Origin = 'CODOFICINA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaEquipVencSeqManutCODMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaEquipVencSeqManutEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
     end
   end
   object qryRotaPeriodicas: TFDQuery
@@ -15559,37 +15667,19 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `manutprogequiphistitens`.`INDICE`'
-      '    , `manutprogequiphistitens`.`CODEMPRESA`'
-      '    , `manutprogequiphistitens`.`HISTORICO`'
-      '    , `manutprogequiphistitens`.`CODIGO`'
-      '    , `manutprogequiphistitens`.`CODMANUTPROGEQUIP`'
-      '    , `manutprogequiphistitens`.`DTAINICIO1`'
-      '    , `manutprogequiphistitens`.`DATAINSPECAO`'
-      '    , `manutprogequiphistitens`.`CODPARTE`'
-      '    , `manutprogequiphistitens`.`ITEM`'
-      '    , `manutprogequiphistitens`.`DESCINSPECAO`'
-      '    , `manutprogequiphistitens`.`EQUIPPARADO`'
-      '    , `manutprogequiphistitens`.`TEMPO`'
-      '    , `manutprogequiphistitens`.`EXECAUTONOMO`'
-      '    , `manutprogequiphistitens`.`EXECUTADO`'
-      '    , `manutprogequiphistitens`.`BOM`'
-      '    , `manutprogequiphistitens`.`REGULAR`'
-      '    , `manutprogequiphistitens`.`RUIM`'
+      '    `manutprogequiphistitens`.*'
       '    , `manutprogfamequippartes`.`DESCRICAO` AS `PARTE`'
+      ''
       'FROM'
       '    `manutprogequiphistitens`'
-      '    INNER JOIN `manutprogequipamento` '
+      ''
+      '    INNER JOIN `manutprogfamequippartes` '
       
-        '        ON (`manutprogequiphistitens`.`CODMANUTPROGEQUIP` = `man' +
-        'utprogequipamento`.`CODIGO`) AND (`manutprogequiphistitens`.`COD' +
-        'EMPRESA` = `manutprogequipamento`.`CODEMPRESA`)'
-      '    LEFT JOIN `manutprogfamequippartes` '
-      
-        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
-        'utprogfamequippartes`.`CODMANUTPROGFAMEQUIP`) AND (`manutprogequ' +
-        'ipamento`.`CODEMPRESA` = `manutprogfamequippartes`.`CODEMPRESA`)'
-      ' WHERE (`manutprogequiphistitens`.`HISTORICO` = :indice)'
+        '        ON (`manutprogequiphistitens`.`CODPARTE` = `manutprogfam' +
+        'equippartes`.`CODIGO`)'
+      ''
+      'WHERE (`manutprogequiphistitens`.`HISTORICO` = :indice)'
+      ''
       
         'ORDER BY `manutprogfamequippartes`.`DESCRICAO`, `manutprogequiph' +
         'istitens`.`ITEM`')
@@ -15598,7 +15688,7 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftInteger
         ParamType = ptInput
       end>
     object qryRotaPeriodicasManutItensINDICE: TFDAutoIncField
@@ -15752,54 +15842,22 @@ object DM: TDM
   end
   object qryRotaPeriodicasManutItensEsp: TFDQuery
     OnCalcFields = qryRotaPeriodicasManutItensEspCalcFields
-    IndexFieldNames = 'INDICE'
+    IndexFieldNames = 'HISTORICO'
     MasterSource = dsRotaPeriodicasManut
     MasterFields = 'INDICE'
-    DetailFields = 'INDICE'
+    DetailFields = 'HISTORICO'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `manutprogequiphistitensesp`.`INDICE`'
-      '    , `manutprogequiphistitensesp`.`CODEMPRESA`'
-      '    , `manutprogequiphistitensesp`.`HISTORICO`'
-      '    , `manutprogequiphistitensesp`.`CODIGO`'
-      '    , `manutprogequiphistitensesp`.`CODMANUTPROGEQUIP`'
-      '    , `manutprogequiphistitensesp`.`DTAINICIO1`'
-      '    , `manutprogequiphistitensesp`.`DATAINSPECAO`'
-      '    , `manutprogequiphistitensesp`.`CODPARTE`'
-      '    , `manutprogequiphistitensesp`.`ITEM`'
-      '    , `manutprogequiphistitensesp`.`DESCINSPECAO`'
-      '    , `manutprogequiphistitensesp`.`EQUIPPARADO`'
-      '    , `manutprogequiphistitensesp`.`TEMPO`'
-      '    , `manutprogequiphistitensesp`.`EXECAUTONOMO`'
-      '    , `manutprogequiphistitensesp`.`EXECUTADO`'
-      '    , `manutprogequiphistitensesp`.`BOM`'
-      '    , `manutprogequiphistitensesp`.`REGULAR`'
-      '    , `manutprogequiphistitensesp`.`RUIM`'
-      '    , `manutprogfamequipamento`.`DESCRICAO` AS `PARTE`'
+      '    `manutprogequiphistitensesp`.*'
+      '    , `manutprogfamequippartes`.`DESCRICAO` AS `PARTE`'
       'FROM'
       '    `manutprogequiphistitensesp`'
-      '    INNER JOIN `manutprogequipamento` '
-      
-        '        ON (`manutprogequiphistitensesp`.`CODMANUTPROGEQUIP` = `' +
-        'manutprogequipamento`.`CODIGO`) AND (`manutprogequiphistitensesp' +
-        '`.`CODEMPRESA` = `manutprogequipamento`.`CODEMPRESA`)'
-      '    INNER JOIN `manutprogfamequipamento` '
-      
-        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
-        'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
-        'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
       '    INNER JOIN `manutprogfamequippartes` '
       
-        '        ON (`manutprogfamequipamento`.`CODIGO` = `manutprogfameq' +
-        'uippartes`.`CODMANUTPROGFAMEQUIP`) AND (`manutprogfamequipamento' +
-        '`.`CODEMPRESA` = `manutprogfamequippartes`.`CODEMPRESA`) AND (`m' +
-        'anutprogfamequippartes`.`CODIGO` = `manutprogequiphistitensesp`.' +
-        '`CODPARTE`)'
-      'WHERE (`manutprogequiphistitensesp`.`HISTORICO` = :indice)'
-      
-        'ORDER BY `manutprogfamequippartes`.`DESCRICAO` ASC, `manutprogeq' +
-        'uiphistitensesp`.`DESCINSPECAO` ASC;')
+        '        ON (`manutprogequiphistitensesp`.`CODPARTE` = `manutprog' +
+        'famequippartes`.`CODIGO`)'
+      'WHERE (`manutprogequiphistitensesp`.`HISTORICO` = :indice);')
     Left = 1902
     Top = 585
     ParamData = <
@@ -29448,19 +29506,55 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `rotasequipamento`.`CODIGO`'
-      '    , `rotasequipamento`.`CODEMPRESA`'
-      '    , `rotasequipamento`.`DESCRICAO`'
-      '    , `rotasequipamento`.`FREQUENCIA`'
-      '    , `rotasequipamento`.`DATAINICIO`'
-      '    , `rotasequipamento`.`REPROGRAMAR`'
-      '    , `rotasequipamento`.`RELATORIO` '
+      '    `rotasequipamento`.*'
+      
+        '    , SUM(`manutprogfamequipitens`.`TEMPO`) + SUM(`manutprogequi' +
+        'pitensesp`.`TEMPO`)TEMPOTOTALITENS'
       'FROM'
       '    `rotasequipamento`'
+      '    INNER JOIN `rotasequipamentoseq` '
+      
+        '        ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`' +
+        '.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequip' +
+        'amento`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogequipamento` '
+      
+        '        ON (`rotasequipamento`.`FREQUENCIA` = `manutprogequipame' +
+        'nto`.`FREQUENCIA1`)'
+      '    INNER JOIN `equipamentos` '
+      
+        '        ON (`rotasequipamentoseq`.`CODAREA` = `equipamentos`.`CO' +
+        'DLOCALIZACAO`) AND (`rotasequipamentoseq`.`CODCELULA` = `equipam' +
+        'entos`.`CODCELULA`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `e' +
+        'quipamentos`.`CODEMPRESA`) AND (`rotasequipamentoseq`.`SEQUENCIA' +
+        '` = `equipamentos`.`SEQUENCIA`) AND (`rotasequipamentoseq`.`CODL' +
+        'INHA` = `equipamentos`.`CODLINHA`) AND (`manutprogequipamento`.`' +
+        'CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipa' +
+        'mento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
+        'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
+      '    LEFT JOIN `manutprogfamequipitens` '
+      
+        '        ON (`manutprogfamequipamento`.`CODEMPRESA` = `manutprogf' +
+        'amequipitens`.`CODEMPRESA`) AND (`manutprogfamequipamento`.`CODI' +
+        'GO` = `manutprogfamequipitens`.`CODMANUTPROGFAMEQUIP`)'
+      '    LEFT JOIN `manutprogequipitensesp` '
+      
+        '        ON (`manutprogequipamento`.`CODEMPRESA` = `manutprogequi' +
+        'pitensesp`.`CODEMPRESA`) AND (`manutprogequipamento`.`CODIGO` = ' +
+        '`manutprogequipitensesp`.`CODMANUTPROGEQUIP`)'
+      '        '
+      '        '
       'WHERE (`rotasequipamento`.`CODEMPRESA` = :codempresa'
-      '                AND `rotasequipamento`.`DATAINICIO` IS NOT NULL'
-      '                AND `rotasequipamento`.`RELATORIO` = '#39'N'#39
-      '              )'
+      '   AND `rotasequipamento`.`DATAINICIO` IS NOT NULL'
+      '   AND `rotasequipamento`.`RELATORIO` = '#39'N'#39
+      '   )'
+      '        '
+      'GROUP BY `rotasequipamento`.`CODIGO`'
+      ''
       'ORDER BY `rotasequipamento`.`DATAINICIO` ASC;')
     Left = 1945
     Top = 269
@@ -29543,6 +29637,15 @@ object DM: TDM
       FieldName = 'C_PROXINSP'
       Visible = False
       Calculated = True
+    end
+    object qryRotaConsTEMPOTOTALITENS: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TEMPOTOTALITENS'
+      Origin = 'TEMPOTOTALITENS'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 39
+      Size = 2
     end
   end
   object qryManutPeriodicas: TFDQuery
@@ -33860,6 +33963,8 @@ object DM: TDM
         ','#39'%Y/%m/%d %T'#39') AND `ordemservico`.`DATACADASTRO` <= STR_TO_DATE' +
         '(:data2,'#39'%Y/%m/%d %T'#39')))'
       '       )'
+      ''
+      'GROUP BY `ordemservico`.`CODIGO`'
       ''
       'ORDER BY `ordemservico`.`CODIGO` DESC')
     Left = 369
@@ -51666,32 +51771,41 @@ object DM: TDM
     Top = 317
   end
   object qryRotaConsSeqManut: TFDQuery
-    IndexFieldNames = 'CODEMPRESA;CODEQUIPAMENTO'
+    IndexFieldNames = 'CODEMPRESA;FREQUENCIA1;CODEQUIPAMENTO'
     MasterSource = dsRotaConsSeq
-    MasterFields = 'CODEMPRESA;CODEQUIPATUAL'
+    MasterFields = 'CODEMPRESA;FREQUENCIA;CODEQUIPATUAL'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
       '    `manutprogequipamento`.`CODIGO`'
       '    , `manutprogequipamento`.`CODEMPRESA`'
-      '    , `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
       '    , `manutprogequipamento`.`DESCRICAO`'
       '    , `manutprogequipamento`.`DTAINICIO1`'
       '    , `manutprogequipamento`.`RELATORIO`'
       '    , `manutprogequipamento`.`FREQUENCIA1`'
       '    , `equipamentos`.`CODIGO` AS CODEQUIPAMENTO'
+      '    , `equipamentos`.`CODCENTROCUSTO`'
+      '    , `manutprogequipamento`.`CODMANUTPROGFAMEQUIP`'
+      '    , `manutprogfamequipamento`.`CODOFICINA`'
+      '    , `manutprogfamequipamento`.`CODMANUTENCAO`'
+      '    , `manutprogfamequipamento`.`EQUIPPARADO`'
+      '    '
+      ''
       'FROM'
       '    `manutprogequipamento`'
       '    INNER JOIN `equipamentos` '
       
         '        ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamen' +
-        'tos`.`CODIGO`) '
+        'tos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equip' +
+        'amentos`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
       
-        '                AND (`manutprogequipamento`.`CODEMPRESA` = `equi' +
-        'pamentos`.`CODEMPRESA`)'
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`)'
+      ''
       'WHERE (`manutprogequipamento`.`CODEMPRESA` = :codempresa'
-      '   -- AND `manutprogequipamento`.`FREQUENCIA1` = :frequencia1'
       '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipatual'
+      '    AND `manutprogequipamento`.`FREQUENCIA1` = :frequencia'
       '    AND `manutprogequipamento`.`GRUPOINSP` = '#39'S'#39')'
       'ORDER BY `manutprogequipamento`.`DTAINICIO1` ASC;')
     Left = 2011
@@ -51704,6 +51818,11 @@ object DM: TDM
       end
       item
         Name = 'CODEQUIPATUAL'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'FREQUENCIA'
         DataType = ftString
         ParamType = ptInput
       end>
@@ -51719,12 +51838,6 @@ object DM: TDM
       Origin = 'CODEMPRESA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
-      Size = 9
-    end
-    object qryRotaConsSeqManutCODMANUTPROGFAMEQUIP: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTPROGFAMEQUIP'
-      Origin = 'CODMANUTPROGFAMEQUIP'
       Size = 9
     end
     object qryRotaConsSeqManutDESCRICAO: TStringField
@@ -51755,6 +51868,44 @@ object DM: TDM
       Origin = 'CODIGO'
       ProviderFlags = []
       ReadOnly = True
+    end
+    object qryRotaConsSeqManutCODMANUTPROGFAMEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTPROGFAMEQUIP'
+      Origin = 'CODMANUTPROGFAMEQUIP'
+      Size = 9
+    end
+    object qryRotaConsSeqManutCODCENTROCUSTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCENTROCUSTO'
+      Origin = 'CODCENTROCUSTO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaConsSeqManutCODOFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODOFICINA'
+      Origin = 'CODOFICINA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaConsSeqManutCODMANUTENCAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTENCAO'
+      Origin = 'CODMANUTENCAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 9
+    end
+    object qryRotaConsSeqManutEQUIPPARADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPPARADO'
+      Origin = 'EQUIPPARADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
     end
   end
   object dsRotaConsSeqManut: TDataSource

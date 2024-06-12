@@ -1,45 +1,49 @@
 inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   Caption = 'Manuten'#231#227'o Programada de Fam'#237'lia de Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
-      Left = 758
+      Left = 762
       ExplicitLeft = 730
     end
     inherited LCadastroPor: TLabel
-      Left = 714
+      Left = 718
       ExplicitLeft = 686
     end
     inherited LblDataCad: TDBText
-      Left = 796
+      Left = 800
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 792
+      ExplicitLeft = 796
     end
     inherited LblUsuCad: TDBText
-      Left = 796
+      Left = 800
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 792
+      ExplicitLeft = 796
     end
     inherited LAlteracao: TLabel
-      Left = 909
+      Left = 913
       ExplicitLeft = 881
     end
     inherited LAlteradoPor: TLabel
-      Left = 883
+      Left = 887
       ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
-      Left = 947
+      Left = 951
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 943
+      ExplicitLeft = 947
     end
     inherited LblUsuAlt: TDBText
-      Left = 947
+      Left = 951
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 943
+      ExplicitLeft = 947
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 123
     ExplicitHeight = 123
     object Label5: TLabel
@@ -389,6 +393,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PProgramacao: TPanel
     Top = 178
+    Width = 1008
     Height = 65
     ExplicitTop = 178
     ExplicitHeight = 65
@@ -493,6 +498,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 247
+    Width = 1008
     Height = 113
     Align = alTop
     ExplicitTop = 247
@@ -566,13 +572,19 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       ExplicitLeft = 330
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
   inherited PAlertas: TPanel
     Top = 547
+    Width = 1012
     TabOrder = 7
     ExplicitTop = 544
   end
   inherited PBase: TPanel
     Top = 565
+    Width = 1008
     TabOrder = 5
     ExplicitTop = 562
     inherited Button1: TButton

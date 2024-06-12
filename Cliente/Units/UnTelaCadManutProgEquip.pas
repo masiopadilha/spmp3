@@ -504,7 +504,7 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadManutProgEquipPecas, FrmTelaCadManutProgEquipPecas);
-    FrmTelaCadManutProgEquipPecas.Caption := 'Peças da O.S.: '+ DM.qryOrdemServicoCODIGO.AsString;
+    FrmTelaCadManutProgEquipPecas.Caption := 'Peças da Manutenção: '+ DM.qryManutProgEquipDESCRICAO.AsString;
     FrmTelaCadManutProgEquipPecas.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadManutProgEquipPecas);
@@ -545,7 +545,7 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadManutProgEquipRecursos, FrmTelaCadManutProgEquipRecursos);
-    FrmTelaCadManutProgEquipRecursos.Caption := 'Recursos da O.S.: '+ FormatFloat('#000000', DM.qryOrdemServicoCODIGO.AsInteger);
+    FrmTelaCadManutProgEquipRecursos.Caption := 'Recursos da Manutenção: '+ DM.qryManutProgEquipDESCRICAO.AsString;
     FrmTelaCadManutProgEquipRecursos.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadManutProgEquipRecursos);
@@ -587,7 +587,7 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadManutProgEquipMObra, FrmTelaCadManutProgEquipMObra);
-    FrmTelaCadManutProgEquipMObra.Caption := 'Mão de Obra da Manutenção: '+ DM.qryManutProgEquipCODIGO.AsString;
+    FrmTelaCadManutProgEquipMObra.Caption := 'Mão de Obra da Manutenção: '+ DM.qryManutProgEquipDESCRICAO.AsString;
     FrmTelaCadManutProgEquipMObra.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadManutProgEquipMObra);

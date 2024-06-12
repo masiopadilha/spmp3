@@ -208,7 +208,8 @@ case PCInspecoes.ActivePageIndex of
     Begin
       if DM.qryManutVenc.IsEmpty = True then Exit;
 
-      GrdManut.SetFocus;
+      if GrdManut.SelectedRows.Count = 0 then
+        GrdManut.SelectedRows.CurrentRowSelected := True;
 
       for I := 0 to GrdManut.SelectedRows.Count - 1 do
       begin
@@ -517,6 +518,9 @@ case PCInspecoes.ActivePageIndex of
     Begin
       if DM.qryLubrificVenc.IsEmpty = True then Exit;
 
+      if GrdLubrific.SelectedRows.Count = 0 then
+        GrdLubrific.SelectedRows.CurrentRowSelected := True;
+
       for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
       begin
         DM.qryLubrificVenc.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
@@ -551,9 +555,14 @@ case PCInspecoes.ActivePageIndex of
           end;
 
 
+
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
-                                                            , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N'
-                                                            , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                            , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr
+                                            , DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                            , DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString
+                                            , DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString
+                                            , DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
+
 
           //Verifica se existe mão de obra cadastrada na manutenção
           if DM.qryLubrificProgEquipEquipe.IsEmpty = False then
@@ -814,6 +823,10 @@ case PCInspecoes.ActivePageIndex of
     Begin
       if DM.qryRotaEquipVenc.IsEmpty = True then Exit;
 
+      if GrdRotas.SelectedRows.Count = 0 then
+        GrdRotas.SelectedRows.CurrentRowSelected := True;
+
+
       for I := 0 to GrdRotas.SelectedRows.Count - 1 do
       begin
         DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
@@ -830,9 +843,15 @@ case PCInspecoes.ActivePageIndex of
         begin
           DM.qryRotaEquipVenc.GotoBookmark(GrdRotas.SelectedRows.Items[I]);
           GrdRotas.SelectedRows.CurrentRowSelected := True;
+
+
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaEquipVencDESCRICAO.AsString
-                                            , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                            , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                            , EmptyStr, EmptyStr
+                                            , EmptyStr, 'S', 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                            , DM.qryRotaEquipVencSeqManutCODCENTROCUSTO.AsString, EmptyStr, DM.qryRotaEquipVencTEMPOTOTALITENS.AsString
+                                            , DM.qryRotaEquipVencSeqManutCODOFICINA.AsString, DM.qryRotaEquipVencSeqManutCODMANUTENCAO.AsString
+                                            , DM.qryRotaEquipVencSeqManutEQUIPPARADO.AsString, EmptyStr);
+
 
           if DM.qryRotaEquipVenc.IsEmpty = False then
             DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaEquipVencCODIGO.AsString, DM.FCodOrdemServico);
@@ -939,28 +958,29 @@ case PCInspecoes.ActivePageIndex of
               DM.qryRotaEquipVencSeq.Next;
             end;
           end;
-
-          DM.qryRotaEquipVenc.Refresh;
-          DM.qryRotaEquipVencSeq.Close;
-          DM.qryRotaEquipVencSeqManut.Close;
-          DM.qryRotaEquipVencSeqManutPecas.Close;
-          DM.qryRotaEquipVencSeqManutRecursos.Close;
-
-          TSRotas.Caption := 'Rotas ('+ IntToStr(DM.qryRotaEquipVenc.RecordCount)+')';
-
-          DM.qryRotasSequencia.Close;
-          DM.qryRotasSequenciaInsp.Close;
-          DM.qryRotasSequenciaInspItens.Close;
-          DM.qryRotasSequenciaInspItensEsp.Close;
-          DM.qryRotas.Close;
-
-          DM.MSGAguarde('', False);
-
-          GrdRotas.UnselectAll;
-
-          RotaExec := True;
         end;
-        end;
+
+        DM.qryRotaEquipVenc.Refresh;
+        DM.qryRotaEquipVencSeq.Close;
+        DM.qryRotaEquipVencSeqManut.Close;
+        DM.qryRotaEquipVencSeqManutPecas.Close;
+        DM.qryRotaEquipVencSeqManutRecursos.Close;
+
+        TSRotas.Caption := 'Rotas ('+ IntToStr(DM.qryRotaEquipVenc.RecordCount)+')';
+
+        DM.qryRotasSequencia.Close;
+        DM.qryRotasSequenciaInsp.Close;
+        DM.qryRotasSequenciaInspItens.Close;
+        DM.qryRotasSequenciaInspItensEsp.Close;
+        DM.qryRotas.Close;
+
+        DM.MSGAguarde('', False);
+
+        GrdRotas.UnselectAll;
+
+        RotaExec := True;
+
+      end;
     End;
 end;
   inherited;

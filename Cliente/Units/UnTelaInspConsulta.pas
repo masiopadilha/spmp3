@@ -1296,8 +1296,14 @@ begin
                   end;
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaConsDESCRICAO.AsString
-                                                              , EmptyStr, EmptyStr, EmptyStr, 'S', 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', EmptyStr, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                  , EmptyStr, EmptyStr
+                                                  , EmptyStr, 'S', 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                                  , DM.qryRotaConsSeqManutCODCENTROCUSTO.AsString, EmptyStr, DM.qryRotaConsTEMPOTOTALITENS.AsString
+                                                  , DM.qryRotaConsSeqManutCODOFICINA.AsString, DM.qryRotaConsSeqManutCODMANUTENCAO.AsString
+                                                  , DM.qryRotaConsSeqManutEQUIPPARADO.AsString, EmptyStr);
+
+
+
                 DM.HistoricoInspecoes(2, DM.FCodEmpresa, EmptyStr, DM.qryRotaConsCODIGO.AsString, DM.FCodOrdemServico);
 
                 if DM.qryRotaConsSeqManutPecas.IsEmpty = False then
@@ -2146,6 +2152,9 @@ begin
         GrdRota.Columns[3].Title.Caption   := 'Atraso (d)';
         GrdRota.Columns[3].Title.Alignment := taCenter;
         GrdRota.Columns[3].Title.Font.Size := 9;
+
+        GrdRota.Columns[4].Visible := False;
+
         if (Column.Field.FieldName = 'DATAINICIO') then
           begin
             if Column.Field.IsNull = False then

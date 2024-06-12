@@ -44,8 +44,12 @@ type
     procedure EdtCodRotaExit(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnExcluirClick(Sender: TObject);
+    procedure EdtDiasChange(Sender: TObject);
+    procedure EdtDiasEnter(Sender: TObject);
   private
     { Private declarations }
+    FPreviousText: string;
+
   public
     { Public declarations }
   end;
@@ -69,8 +73,14 @@ end;
 
 procedure TFrmTelaCadRotaProgEquip.BtnConsultarClick(Sender: TObject);
 begin
+EdtDias.OnChange := nil; // Desabilita temporariamente o OnChange para evitar loop
   inherited;
-if DM.qryRotasCODIGO.AsString = '' then Exit;
+if DM.qryRotasCODIGO.AsString = '' then
+  begin
+    EdtDias.OnChange := nil;
+    Exit;
+  end;
+
 
 DM.qryRotasSequencia.Open;
 DM.qryRotasSequencia.Edit;
@@ -108,6 +118,8 @@ DM.FParamAuxiliar[7] := '';
 DM.FParamAuxiliar[8] := '';
 DM.FParamAuxiliar[9] := '';
 DM.FParamAuxiliar[10] := '';
+
+EdtDias.OnChange := EdtDiasChange; // Reabilita o OnChange
 
 DM.qryRotasSequencia.First;
 DM.qryRotasSequencia.Edit;
@@ -267,6 +279,29 @@ if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
 end;
 
+procedure TFrmTelaCadRotaProgEquip.EdtDiasChange(Sender: TObject);
+begin
+  inherited;
+  if DM.qryRotasSequencia.IsEmpty = False then
+  begin
+    Application.MessageBox('Exclua todos os equipamentos da rota para alterar a frequência','SPMP3', MB_OK + MB_ICONWARNING);
+    EdtDias.OnChange := nil; // Desabilita temporariamente o OnChange para evitar loop
+    EdtDias.Text := FPreviousText;
+    EdtDias.OnChange := EdtDiasChange; // Reabilita o OnChange
+  end
+  else
+  begin
+    FPreviousText := EdtDias.Text; // Atualiza o valor anterior se a edição for permitida
+  end;
+end;
+
+procedure TFrmTelaCadRotaProgEquip.EdtDiasEnter(Sender: TObject);
+begin
+  inherited;
+  FPreviousText := EdtDias.Text;
+end;
+
+
 procedure TFrmTelaCadRotaProgEquip.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -364,7 +399,7 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
     DM.FParamAuxiliar[9] := '';
     DM.FParamAuxiliar[10] := '';
 
-    DM.FTabela_auxiliar := 250;
+    DM.FTabela_auxiliar := 252;
     DM.FNomeConsulta := 'Equipamentos';
     if (GrdSequencia.SelectedIndex = 3) then
     begin
@@ -396,7 +431,7 @@ if (Key = #13) and ((GrdSequencia.SelectedIndex = 3) or (GrdSequencia.SelectedIn
             and (DM.qryRotasSequenciaCODLINHA.AsString = DM.FParamAuxiliar[8]) and (DM.qryRotasSequenciaSEQUENCIA.AsString = DM.FParamAuxiliar[10]) then
             begin
               Application.MessageBox('Equipamento já cadastrado na rota!', 'SPMP3', MB_OK + MB_ICONSTOP);
-              Abort;
+              Exit;
             end;
 
           DM.qryRotasSequencia.Next;

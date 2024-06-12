@@ -324,6 +324,34 @@ begin
                                     DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODLINHA` = '+QuotedStr(DM.FCodLinha));
           DM.qryAuxiliar.SQL.Add(' ) order by `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`, `celulas`.`DESCRICAO`, `linhas`.`DESCRICAO`, `equipamentos`.`SEQUENCIA`');
         end;
+      252://Equipamentos Rotas
+        begin
+          if (DM.FParamAuxiliar[1] <> 'CODIGO') and (DM.FParamAuxiliar[1] <> 'DESCRICAO') then
+            DM.FParamAuxiliar[1] := 'DESCRICAO';
+            DM.qryAuxiliar.SQL.Add('SELECT '
+                                    + ' `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `equipamentos`.`CODFAMILIAEQUIP`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
+                                    + ', `equipamentos`.`CODCENTROCUSTO`, `centrocusto`.`DESCRICAO` CENTROCUSTO'
+                                    + ', `equipamentos`.`CODLOCALIZACAO` CODAREA, `areas`.`DESCRICAO` AREA, `equipamentos`.`CODCELULA`, `celulas`.`DESCRICAO` CELULA'
+                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`'
+                                    + ' FROM `equipamentos`'
+                                    + ' INNER JOIN `manutprogequipamento` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                                    + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                                    + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                                    + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                                    + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                                    + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` =  `linhas`.`CODIGO`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`) AND (`linhas`.`CODAREA` = `areas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                                    + ' WHERE (`equipamentos`.'+DM.FParamAuxiliar[1]+' like :descricao and `equipamentos`.`codempresa` = '+QuotedStr(DM.FCodEmpresa) + ''
+                                    + ' AND `equipamentos`.`OPERANDO` = ''S'' AND `manutprogequipamento`.`FREQUENCIA1` = '+QuotedStr(DM.qryRotasFREQUENCIA.AsString) +'');
+          if DM.FCodFamilia <> '' then
+                                    DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODFAMILIAEQUIP` = '+QuotedStr(DM.FCodFamilia));
+          if DM.FCodArea <> '' then
+                                    DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODLOCALIZACAO` = '+QuotedStr(DM.FCodArea));
+          if DM.FCodCelula <> '' then
+                                    DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODCELULA` = '+QuotedStr(DM.FCodCelula));
+          if DM.FCodLinha <> '' then
+                                    DM.qryAuxiliar.SQL.Add(' AND `equipamentos`.`CODLINHA` = '+QuotedStr(DM.FCodLinha));
+          DM.qryAuxiliar.SQL.Add(' ) order by `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`, `celulas`.`DESCRICAO`, `linhas`.`DESCRICAO`, `equipamentos`.`SEQUENCIA`');
+        end;
       26://Imagens
         begin
           DM.qryAuxiliar.SQL.Add('SELECT `imagens`.`CODIGO`, `imagens`.`DESCRICAO`, `imagens`.`CODEQUIPAMENTO` CODEQUIPAMENTO, `equipamentos`.`DESCRICAO`EQUIPAMENTO, `imagens`.`DESCSECUNDARIO`PONTO FROM `imagens` LEFT JOIN `equipamentos`'
@@ -816,7 +844,7 @@ begin
           DM.qryAuxiliar.FieldByName('VISIVEL').DisplayLabel := 'Visível';
           DM.qryAuxiliar.FieldByName('VISIVEL').Alignment    := taCenter;
         end;
-      25, 250://Equipamentos
+      25, 250, 251, 252://Equipamentos
         begin
           DM.qryAuxiliar.FieldByName('DESCRICAO').DisplayWidth    := 40;
           DM.qryAuxiliar.FieldByName('FAMILIAEQUIP').DisplayLabel := 'Família';
@@ -1775,7 +1803,7 @@ begin
             Edit;
           end;
       end;
-    250://Equipamentos
+    250, 251, 252://Equipamentos
       begin
         DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;

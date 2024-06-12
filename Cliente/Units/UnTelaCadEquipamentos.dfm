@@ -6,72 +6,56 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      Left = 749
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 749
     end
     inherited LCadastroPor: TLabel
-      Left = 705
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 705
     end
     inherited LblDataCad: TDBText
-      Left = 787
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitLeft = 787
     end
     inherited LblUsuCad: TDBText
-      Left = 787
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitLeft = 787
     end
     inherited LAlteracao: TLabel
-      Left = 900
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 900
     end
     inherited LAlteradoPor: TLabel
-      Left = 874
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 874
     end
     inherited LblDataAlt: TDBText
-      Left = 938
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitLeft = 938
     end
     inherited LblUsuAlt: TDBText
-      Left = 938
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsEquipamentos
-      ExplicitLeft = 938
     end
     inherited BtnNovo: TButton
       Margins.Left = 4

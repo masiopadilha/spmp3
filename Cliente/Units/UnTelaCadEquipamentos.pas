@@ -1929,6 +1929,11 @@ else
 
 LSequenciaAtual := 0;
 LSequenciaNova  := 0;
+
+DM.FCodFamilia := '';
+DM.FCodArea := '';
+DM.FCodCelula := '';
+DM.FCodLinha := '';
 end;
 
 procedure TFrmTelaCadEquipamentos.Individual1Click(Sender: TObject);

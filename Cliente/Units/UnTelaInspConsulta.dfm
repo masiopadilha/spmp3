@@ -537,6 +537,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
                   Title.Font.Height = -11
                   Title.Font.Name = 'Tahoma'
                   Title.Font.Style = []
+                  Width = 64
                   Visible = True
                 end
                 item

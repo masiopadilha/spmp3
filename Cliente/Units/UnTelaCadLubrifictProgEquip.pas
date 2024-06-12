@@ -480,7 +480,8 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadLubrificProgEquipPecas, FrmTelaCadLubrificProgEquipPecas);
-    FrmTelaCadLubrificProgEquipPecas.Caption := 'Peças da O.S.: '+ DM.qryOrdemServicoCODIGO.AsString;
+    FrmTelaCadLubrificProgEquipPecas.Caption := 'Peças da da Lubrificação: '+ DM.qryLubrificProgEquipDESCRICAO.AsString;
+
     FrmTelaCadLubrificProgEquipPecas.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadLubrificProgEquipPecas);
@@ -521,7 +522,8 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadLubrificProgEquipRecursos, FrmTelaCadLubrificProgEquipRecursos);
-    FrmTelaCadLubrificProgEquipRecursos.Caption := 'Recursos da O.S.: '+ FormatFloat('#000000', DM.qryOrdemServicoCODIGO.AsInteger);
+    FrmTelaCadLubrificProgEquipRecursos.Caption := 'Recursos da da Lubrificação: '+ DM.qryLubrificProgEquipDESCRICAO.AsString;
+
     FrmTelaCadLubrificProgEquipRecursos.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadLubrificProgEquipRecursos);
@@ -561,7 +563,7 @@ begin
       end;
 
     Application.CreateForm(TFrmTelaCadLubrificProgEquipMObra, FrmTelaCadLubrificProgEquipMObra);
-    FrmTelaCadLubrificProgEquipMObra.Caption := 'Mão de Obra da Lubrificação: '+ DM.qryLubrificProgEquipCODIGO.AsString;
+    FrmTelaCadLubrificProgEquipMObra.Caption := 'Mão de Obra da Lubrificação: '+ DM.qryLubrificProgEquipDESCRICAO.AsString;
     FrmTelaCadLubrificProgEquipMObra.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadLubrificProgEquipMObra);

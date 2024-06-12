@@ -147,6 +147,14 @@ PAuxiliares.Font.Color := clBlack;
         begin
           if DM.qryManutPeriodicas.IsEmpty = True then Exit;
 
+          if DM.qryManutPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
+
+          if DM.qryManutPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+              Exit;
+            end;
+
           LTexto := PChar('Deseja realmente efetuar o fechamento da manutenção: ' + DM.qryManutPeriodicasDESCRICAO.AsString);
           if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
             Begin
@@ -303,15 +311,16 @@ PAuxiliares.Font.Color := clBlack;
 
           if DM.qryLubrificPeriodicasSITUACAO.AsString = 'FECHADA' then Exit;
 
+          if DM.qryLubrificPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+              Exit;
+            end;
+
           LTexto := PChar('Deseja realmente efetuar o fechamento da Lubrificação: ' + DM.qryLubrificPeriodicasDESCRICAO.AsString);
           if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
             Begin
 
-              if DM.qryLubrificPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
-                begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
-                  Exit;
-                end;
               if EdtExecucao.Date = 0 then
                 begin
                   PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUÇÃO!';
@@ -458,15 +467,16 @@ PAuxiliares.Font.Color := clBlack;
 
           if DM.qryRotaPeriodicasManutSITUACAO.AsString = 'FECHADA' then Exit;
 
+          if DM.qryRotaPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
+            begin
+              PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
+              Exit;
+            end;
+
           LTexto := PChar('Deseja realmente efetuar o fechamento da rota: ' + DM.qryRotaPeriodicasDESCRICAO.AsString);
           if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
             Begin
 
-              if DM.qryRotaPeriodicasSITUACAOOS.AsString <> 'FECHADA' then
-                begin
-                  PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'ORDEM DE SERVIÇO NÃO FECHADA!';
-                  Exit;
-                end;
               if EdtExecucao.Date = 0 then
                 begin
                   PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A DATA DE EXECUÇÃO!';

@@ -378,7 +378,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           Font.Height = -12
           Font.Name = 'Segoe UI'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
           ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -389,6 +389,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
           StyleElements = [seFont, seBorder]
           OnDrawColumnCell = GrdManutDrawColumnCell
           OnTitleClick = GrdManutTitleClick
+          MultiSelect = True
           TitleButtons = True
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -417,6 +418,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
               Visible = True
             end
             item
+              Alignment = taCenter
               Expanded = False
               FieldName = 'DATAINICIO'
               Title.Alignment = taCenter

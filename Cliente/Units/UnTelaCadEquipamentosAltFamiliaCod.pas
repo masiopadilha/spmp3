@@ -70,7 +70,7 @@ begin
   DM.qryAuxiliar2.Open;
   if DM.qryAuxiliar2.IsEmpty = True then
   begin
-    Mensagem := PChar('Famíla antiga não identificada!');
+    Mensagem := PChar('Código da Famíla não localizado!');
     Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
     DM.qryAuxiliar2.Close;
     Exit;
@@ -81,9 +81,9 @@ begin
   DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `familiaequipamento` WHERE CODIGO = :novocodfamilia';
   DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
   DM.qryAuxiliar2.Open;
-  if DM.qryAuxiliar2.IsEmpty = True then
+  if DM.qryAuxiliar2.IsEmpty = False then
   begin
-    Mensagem := PChar('Equipamento novo não identificado!');
+    Mensagem := PChar('Novo código já cadastrado!');
     Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
     DM.qryAuxiliar2.Close;
     Exit;
