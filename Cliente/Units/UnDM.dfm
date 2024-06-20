@@ -21449,6 +21449,7 @@ object DM: TDM
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
+    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 56
@@ -41858,8 +41859,8 @@ object DM: TDM
         'EMPRESA`)'
       '    LEFT JOIN `centrocusto` '
       
-        '        ON (`solictrabalho`.`CODCENTROCUSTO` = `centrocusto`.`CO' +
-        'DIGO`)'
+        '        ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`COD' +
+        'IGO`)'
       '    LEFT JOIN `oficinas`'
       
         '        ON (`solictrabalho`.`CODEMPRESA` = `oficinas`.`CODEMPRES' +
@@ -59014,5 +59015,10 @@ object DM: TDM
     DataSet = qryLubrificProgFamEquipCons
     Left = 1312
     Top = 317
+  end
+  object qryDashboard: TFDQuery
+    Connection = FDConnSPMP3
+    Left = 2184
+    Top = 8
   end
 end

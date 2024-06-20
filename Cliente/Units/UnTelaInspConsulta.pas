@@ -437,7 +437,7 @@ begin
 
             for I := 0 to GrdManut.SelectedRows.Count - 1 do
               begin
-                GrdManut.DataSource.DataSet.GotoBookmark(GrdManut.SelectedRows.Items[i]);
+//                DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
 
                 if (DM.qryManutConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryManutConsRELATORIO.AsString = 'S') then
                   begin
@@ -778,11 +778,11 @@ begin
                     DM.qryManutConsPlanoTrab.Next;
                   end;
 
-                //Sendo a inspeção reprogramada pela 'programação', programa a pr�xima inspeção independente se a manutenção foi fechada ou n�o.
+                //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
                 if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryManutConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
+                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
                       DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
                     else
                       DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutConsDTAINICIO1.AsDateTime), DM.qryManutConsFREQUENCIA1.AsInteger);
@@ -859,7 +859,8 @@ begin
 
             for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
               begin
-                GrdLubrific.DataSource.DataSet.GotoBookmark(GrdLubrific.SelectedRows.Items[i]);
+//                GrdLubrific.DataSource.DataSet.GotoBookmark(GrdLubrific.SelectedRows.Items[i]);
+
                 if (DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
                   begin
                     PAuxiliares.Font.Color := clRed;
@@ -1202,7 +1203,7 @@ begin
                 if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryLubrificConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
+                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
                       DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
                     else
                       DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime), DM.qryLubrificConsFREQUENCIA1.AsInteger);
@@ -1285,8 +1286,8 @@ begin
 
             for I := 0 to GrdRota.SelectedRows.Count - 1 do
               begin
-                bmQuery := GrdRota.SelectedRows.Items[I];
-                DM.qryRotaCons.GotoBookmark(bmQuery);
+    //            bmQuery := GrdRota.SelectedRows.Items[I];
+    //            DM.qryRotaCons.GotoBookmark(bmQuery);
 
                 if (DM.qryRotaConsREPROGRAMAR.AsString = 'Execução') and (DM.qryRotaConsRELATORIO.AsString = 'S') then
                   begin
@@ -1457,7 +1458,7 @@ begin
                  begin
                    DM.qryRotaCons.Edit;
                    DM.qryRotaConsRELATORIO.AsString  := 'N';
-                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) < DateOf(DM.FDataHoraServidor) then
+                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
                      DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
                    else
                      DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaConsDATAINICIO.AsDateTime), DM.qryRotaConsFREQUENCIA.AsInteger);
@@ -1921,8 +1922,6 @@ DM.qryRotaConsSeqManutItensEsp.Close;
 end;
 
 procedure TFrmTelaInspConsulta.FormShow(Sender: TObject);
-var
-a: Double;
 begin
   inherited;
   DM.qryManutCons.Close;

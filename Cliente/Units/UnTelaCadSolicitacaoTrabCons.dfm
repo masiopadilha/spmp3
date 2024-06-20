@@ -38,8 +38,8 @@ inherited FrmTelaCadSolicitacaoTrabCons: TFrmTelaCadSolicitacaoTrabCons
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 973
-      ExplicitLeft = 969
+      Left = 977
+      ExplicitLeft = 973
     end
     object EdtData1: TJvDateTimePicker
       Left = 185

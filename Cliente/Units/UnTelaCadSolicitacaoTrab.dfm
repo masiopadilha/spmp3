@@ -7,10 +7,10 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      ExplicitLeft = 738
+      ExplicitLeft = 753
     end
     inherited LCadastroPor: TLabel
-      ExplicitLeft = 694
+      ExplicitLeft = 709
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsSolicitacaoTrab
@@ -19,10 +19,10 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       DataSource = DM.dsSolicitacaoTrab
     end
     inherited LAlteracao: TLabel
-      ExplicitLeft = 889
+      ExplicitLeft = 904
     end
     inherited LAlteradoPor: TLabel
-      ExplicitLeft = 863
+      ExplicitLeft = 878
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsSolicitacaoTrab

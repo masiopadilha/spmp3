@@ -98,7 +98,6 @@ type
     procedure PIdentificacaoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure TimerLetreiroTimer(Sender: TObject);
     procedure TimerAlertasTimer(Sender: TObject);
-    procedure PAlertasDblClick(Sender: TObject);
     procedure MmSalvarClick(Sender: TObject);
     procedure MmSairClick(Sender: TObject);
     procedure MmRelatorioClick(Sender: TObject);
@@ -219,21 +218,6 @@ begin
                 TDbLookupComboBox(Components[c]).Hint := TDbLookupComboBox(Components[c]).ListSource.DataSet.FieldByName(TDbLookupComboBox(Components[c]).ListField).AsString;
             end;
         End;
-end;
-
-procedure TFrmTelaPaiCadastros.PAlertasDblClick(Sender: TObject);
-begin
-LblAlertas.Left := PAlertas.Width;
-if TimerLetreiro.Enabled = True then
-  begin
-    TimerLetreiro.Enabled := False;
-    TimerAlertas.Enabled  := False;
-  end
-else
-  begin
-    TimerLetreiro.Enabled := True;
-    TimerAlertas.Enabled  := True;
-  end;
 end;
 
 procedure TFrmTelaPaiCadastros.PIdentificacaoMouseMove(Sender: TObject;

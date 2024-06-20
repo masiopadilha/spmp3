@@ -537,7 +537,6 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
                   Title.Font.Height = -11
                   Title.Font.Name = 'Tahoma'
                   Title.Font.Style = []
-                  Width = 64
                   Visible = True
                 end
                 item
@@ -737,8 +736,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    ExplicitTop = 604
+    ExplicitWidth = 1008
     inherited BtnOK: TButton
       Left = 425
       Caption = 'Executar'

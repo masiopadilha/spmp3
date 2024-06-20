@@ -10,11 +10,13 @@ uses
   Vcl.Buttons, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.Stan.Error, Winapi.ShellAPI,
   IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdFTP, IdIOHandler, IdIOHandlerSocket,
-  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP, System.Math;
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP, System.Math, VclTee.TeeGDIPlus,
+  VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, JvExExtCtrls,
+  JvShape;
 
 type
   TFrmTelaPrincipal = class(TForm)
-    Image1: TImage;
+    imgBackground: TImage;
     MainMenuPrincipal: TMainMenu;
     Arquivo1: TMenuItem;
     PAlertas: TPanel;
@@ -114,7 +116,6 @@ type
     InformaesGerenciaisCorporativas2: TMenuItem;
     ConsultadeAcessos1: TMenuItem;
     UsuariosAtivos1: TMenuItem;
-    TimerLetreiro: TTimer;
     TimerAlertas: TTimer;
     TimerOscioso: TTimer;
     Permissoes1: TMenuItem;
@@ -242,7 +243,27 @@ type
     Consulta2: TMenuItem;
     Cadastro9: TMenuItem;
     Consulta3: TMenuItem;
-    Image2: TImage;
+    imgLogoSPMP: TImage;
+    ChartSolicTrabalho: TChart;
+    Series1: TBarSeries;
+    Series2: TBarSeries;
+    ShapeEficiencia: TJvShape;
+    LblEficSolicTrabVal: TLabel;
+    LblEficSolicTrab: TLabel;
+    imgEficSolicTrab: TImage;
+    ChartSituacaoOS: TChart;
+    Series3: THorizBarSeries;
+    ChartTipoManutencao: TChart;
+    HorizBarSeries1: THorizBarSeries;
+    JvShape2: TJvShape;
+    Label1: TLabel;
+    cbAno: TComboBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    cbMes: TComboBox;
+    butAtualizarDashboard: TSpeedButton;
+    ChartOSOficina: TChart;
+    HorizBarSeries2: TPieSeries;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -412,14 +433,27 @@ type
     procedure Cadastro9Click(Sender: TObject);
     procedure Consulta3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure butAtualizarDashboardClick(Sender: TObject);
   private
     { Private declarations }
+    LSolicitadas: array[1..12] of Integer;
+    LFechadas: array[1..12] of Integer;
+    LTipoManutencao: array[1..7] of Integer;
+    LSituacaoOS: array[1..11] of Integer;
 
+    OriginalFormWidth, OriginalFormHeight, OriginalSituacaoOSWidth,
+    OriginalSituacaoOSHeight, OriginalTipoManutencaoWidth, OriginalTipoManutencaoHeight,
+    OriginalSolicTrabalhoWidth, OriginalSolicTrabalhoHeight, OriginalSolicTrabalhoTop,
+    OriginalOSOficinaWidth, OriginalOSOficinaHeight, OriginalOSOficinaTop: Integer;
+    ProporcaoTopTipoManut, ProporcaoTopOSOficina: Double;
   public
     { Public declarations }
 
     procedure AppIdle(Sender: TObject; var Done: Boolean);
     procedure AppMessage(var Msg: TMsg; var Handled: Boolean);
+    procedure CalcularDashboard;
+    //procedure CalcDashBoard;
 
   end;
 
@@ -473,6 +507,28 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTempoOcioso, UnTelaCadManutProgFamEquipConsulta,
   UnTelaCadLubrificProgFamEquipConsulta, UnTelaCadSolicitacaoTrabCons;
 
+
+procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
+begin
+  TimerOscioso.Enabled := True;
+  TimerOscioso2.Enabled := True;
+end;
+
+procedure TFrmTelaPrincipal.AppMessage(var Msg: TMsg; var Handled: Boolean);
+begin
+  case Msg.message of
+    WM_MOUSEACTIVATE, WM_KEYFIRST..WM_KEYLAST, WM_MOUSEFIRST..WM_MOUSELAST:
+    begin
+      TimerOscioso.Enabled := False;
+      TimerOscioso2.Enabled := False;
+      DM.FSegundosDesliga := DM.FMinutosInativo * 60;
+      LblTempoDesliga.Caption := ' O sistema será encerrado em ' + DM.SecondToTime(DM.FSegundosDesliga);
+      if frmSistemaOcioso <> nil then
+        if frmSistemaOcioso.Active = True then
+          frmSistemaOcioso.Close;
+    end;
+  end;
+end;
 
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);
 begin
@@ -552,28 +608,6 @@ begin
   Finally
     FreeAndNil(FrmTelaCadEquipamentosAltFamiliaCod);
   End;
-end;
-
-procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
-begin
-  TimerOscioso.Enabled := True;
-  TimerOscioso2.Enabled := True;
-end;
-
-procedure TFrmTelaPrincipal.AppMessage(var Msg: TMsg; var Handled: Boolean);
-begin
-  case Msg.message of
-    WM_MOUSEACTIVATE, WM_KEYFIRST..WM_KEYLAST, WM_MOUSEFIRST..WM_MOUSELAST:
-    begin
-      TimerOscioso.Enabled := False;
-      TimerOscioso2.Enabled := False;
-      DM.FSegundosDesliga := DM.FMinutosInativo * 60;
-      LblTempoDesliga.Caption := ' O sistema será encerrado em ' + DM.SecondToTime(DM.FSegundosDesliga);
-      if frmSistemaOcioso <> nil then
-        if frmSistemaOcioso.Active = True then
-          frmSistemaOcioso.Close;
-    end;
-  end;
 end;
 
 procedure TFrmTelaPrincipal.Area1Click(Sender: TObject);
@@ -818,6 +852,13 @@ begin
   Finally
     FreeAndNil(FrmTelaConsultaPeriodo);
   End;
+end;
+
+procedure TFrmTelaPrincipal.butAtualizarDashboardClick(Sender: TObject);
+begin
+  DM.MSGAguarde('');
+  CalcularDashboard;
+  DM.MSGAguarde('', False);
 end;
 
 procedure TFrmTelaPrincipal.Button1Click(Sender: TObject);
@@ -1116,6 +1157,282 @@ begin
   Finally
     FreeAndNil(FrmTelaCadUsuarios);
   End;
+end;
+
+procedure TFrmTelaPrincipal.CalcularDashboard;
+var
+  LTotalSolicitado, LTotalFechado: Real;
+  LColor: TColor;
+begin
+  //---------------------------GrafSolicTrab------------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------SOLICITADAS-------------------------------------------------------------------------------------------------------------------------------------
+  ChartSolicTrabalho.Series[0].Clear;
+  ChartSolicTrabalho.Series[1].Clear;
+  LTotalSolicitado := 0;
+  LTotalFechado := 0;
+  DM.qryDashboard.Close;
+  DM.qryDashboard.SQL.Text := 'SELECT'
+                                +' DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%b'') AS MES, COALESCE(COUNT(s.`CODIGO`), 0) AS TOTALSOLIC'
+                                + ' FROM'
+                                + ' (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL'
+                                + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
+                                + ' LEFT JOIN'
+                                + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
+                                + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA'''
+                                + ' GROUP BY MES'
+                                + ' ORDER BY'
+                                + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
+  DM.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
+  DM.qryDashboard.Open;
+
+  while not DM.qryDashboard.Eof = True do
+  begin
+    LSolicitadas[DM.qryDashboard.RecNo] := DM.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+    LTotalSolicitado := LTotalSolicitado + DM.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+
+    DM.qryDashboard.Next;
+  end;
+  DM.qryDashboard.Close;
+
+  //------------------------------FECHADAS--------------------------------------------------------------------------------------------------------------------------------------
+  DM.qryDashboard.Close;
+  DM.qryDashboard.SQL.Text := 'SELECT'
+                                +' DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%b'') AS MES, COALESCE(COUNT(s.`CODIGO`), 0) AS TOTALSOLIC'
+                                + ' FROM'
+                                + ' (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL'
+                                + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
+                                + ' LEFT JOIN'
+                                + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
+                                + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA'''
+                                + ' GROUP BY MES'
+                                + ' ORDER BY'
+                                + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
+  DM.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);;
+  DM.qryDashboard.Open;
+
+  while not DM.qryDashboard.Eof = True do
+  begin
+    LFechadas[DM.qryDashboard.RecNo] := DM.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+    LTotalFechado := LTotalFechado + DM.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+
+    DM.qryDashboard.Next;
+  end;
+
+  DM.qryDashboard.First;
+  while not DM.qryDashboard.Eof = True do
+  begin
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Feb' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Fev');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Fev');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Apr' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Abr');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Abr');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'May' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Mai');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Mai');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Aug' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Ago');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Ago');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Sep' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Set');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Set');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Oct' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Out');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Out');
+    end else
+    if DM.qryDashboard.FieldByName('MES').AsString = 'Dec' then
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Dez');
+      ChartSolicTrabalho.Series[1].Add(LSolicitadas[DM.qryDashboard.RecNo], 'Dez');
+    end else
+    begin
+      ChartSolicTrabalho.Series[0].Add(LSolicitadas[DM.qryDashboard.RecNo], DM.qryDashboard.FieldByName('MES').AsString);
+      ChartSolicTrabalho.Series[1].Add(LFechadas[DM.qryDashboard.RecNo], DM.qryDashboard.FieldByName('MES').AsString);
+    end;
+
+    DM.qryDashboard.Next;
+  end;
+  DM.qryDashboard.Close;
+
+  if LTotalSolicitado > 0 then
+    LblEficSolicTrabVal.Caption := FormatFloat('0.00%', (LTotalFechado/LTotalSolicitado) * 100)
+  else
+    LblEficSolicTrabVal.Caption := '0%';
+
+  //---------------------------TIPOS DE MANUTENÇÃO------------------------------------------------------------------------------------------------------------------------------
+
+  ChartTipoManutencao.Series[0].Clear;
+  DM.qryDashboard.Close;
+  DM.qryDashboard.SQL.Text := 'SELECT'
+                              + ' TIPO.TIPO, COUNT(o.`CODIGO`) AS TOTAL'
+                              + ' FROM'
+                              + ' (SELECT ''Manutenção Preventiva'' AS TIPO'
+                              + ' UNION ALL SELECT ''Manutenção Corretiva'' UNION ALL SELECT ''Manutenção Preditiva'''
+                              + ' UNION ALL SELECT ''Lubrificação'' UNION ALL SELECT ''Manutenção Autônoma'''
+                              + ' UNION ALL SELECT ''Novos Projetos'' UNION ALL SELECT ''Outros Serviços'') AS TIPO'
+                              + ' LEFT JOIN `tipomanutencao` AS t ON  TIPO.TIPO = t.`TIPOMANUTENCAO`'
+                              + ' LEFT JOIN `ordemservico` AS o ON o.`CODMANUTENCAO` = t.`CODIGO`'
+                              + ' AND MONTH(o.`DATACADASTRO`) = :MES AND YEAR(o.`DATACADASTRO`) = :ANO'
+                              + ' GROUP BY TIPO.TIPO;';
+  DM.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
+  DM.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
+  DM.qryDashboard.Open;
+
+  while not DM.qryDashboard.Eof = True do
+  begin
+    if DM.qryDashboard.FieldByName('TOTAL').AsInteger > 0 then
+      LTipoManutencao[DM.qryDashboard.RecNo] := DM.qryDashboard.FieldByName('TOTAL').AsInteger;
+
+    DM.qryDashboard.Next;
+  end;
+
+  DM.qryDashboard.First;
+  while not DM.qryDashboard.Eof = True do
+  begin
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Cadastrada' then
+      LColor := $00BBFFFF
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Solicitada' then
+      LColor := $00F3F3F3
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Fechada' then
+      LColor := clGray
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Detalhada' then
+      LColor := clYellow
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Programada' then
+      LColor := clBlue
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Reprogramada' then
+      LColor := clBlue
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Desprogramada' then
+      LColor := clYellow
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Execução' then
+      LColor := clInfoBk
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Liberada' then
+      LColor := clGreen
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Paralisada' then
+      LColor := clRed
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Cancelada' then
+      LColor := clBlack
+    else
+    if DM.qryDashboard.FieldByName('TIPO').AsString = 'Vencida' then
+      LColor := $006666FF
+    else
+      LColor := clGray;
+
+    if LTipoManutencao[DM.qryDashboard.RecNo] > 0 then
+      ChartTipoManutencao.Series[0].Add(LTipoManutencao[DM.qryDashboard.RecNo], DM.qryDashboard.FieldByName('TIPO').AsString, LColor);
+
+    DM.qryDashboard.Next;
+  end;
+  DM.qryDashboard.Close;
+  //----------------------------SITUAÇÃO DAS OS---------------------------------------------------------------------------------------------------------------------------------
+
+  ChartSituacaoOS.Series[0].Clear;
+  DM.qryDashboard.Close;
+  DM.qryDashboard.SQL.Text := 'SELECT'
+                              + ' (CASE'
+                              + ' WHEN SITUACAO.SITUACAO = ''SOLICITADA'' THEN ''Solicitada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''CADASTRADA'' THEN ''Cadastrada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''DETALHADA'' THEN ''Detalhada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''PROGRAMADA'' THEN ''Programada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''DESPROGRAMADA'' THEN ''Desprogramada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''REPROGRAMADA'' THEN ''Reprogramada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''EXECUCAO'' THEN ''Execução'''
+                              + ' WHEN SITUACAO.SITUACAO = ''PARALISADA'' THEN ''Paralisada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''LIBERADA'' THEN ''Liberada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''FECHADA'' THEN ''Fechada'''
+                              + ' WHEN SITUACAO.SITUACAO = ''VENCIDA'' THEN ''Vencida'''
+                              + ' ELSE ''OUTRO'''
+                              + ' END) AS SITUACAO'
+                              +', COUNT(o.`CODIGO`) AS TOTAL'
+                              + ' FROM'
+                              + ' (SELECT ''SOLICITADA'' AS SITUACAO UNION ALL SELECT ''CADASTRADA'''
+                              + ' UNION ALL SELECT ''DETALHADA'' UNION ALL SELECT ''PROGRAMADA'''
+                              + ' UNION ALL SELECT ''DESPROGRAMADA'' UNION ALL SELECT ''REPROGRAMADA'''
+                              + ' UNION ALL SELECT ''EXECUCAO'' UNION ALL SELECT ''PARALISADA'''
+                              + ' UNION ALL SELECT ''LIBERADA'' UNION ALL SELECT ''FECHADA'''
+                              + ' UNION ALL SELECT ''VENCIDA'') AS SITUACAO'
+                              + ' LEFT JOIN `ordemservico` AS o ON o.`SITUACAO` = SITUACAO.SITUACAO'
+                              + ' AND MONTH(o.`DATACADASTRO`) = :mes AND YEAR(o.`DATACADASTRO`) = :ano'
+                              + ' GROUP BY SITUACAO.SITUACAO;';
+  DM.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
+  DM.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
+  DM.qryDashboard.Open;
+
+  while not DM.qryDashboard.Eof = True do
+  begin
+    if DM.qryDashboard.FieldByName('TOTAL').AsInteger > 0 then
+      LSituacaoOS[DM.qryDashboard.RecNo] := DM.qryDashboard.FieldByName('TOTAL').AsInteger;
+
+    DM.qryDashboard.Next;
+  end;
+
+  DM.qryDashboard.First;
+  while not DM.qryDashboard.Eof = True do
+  begin
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Cadastrada' then
+      LColor := $00BBFFFF
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Solicitada' then
+      LColor := $00F3F3F3
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Fechada' then
+      LColor := clGray
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Detalhada' then
+      LColor := clYellow
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Programada' then
+      LColor := clBlue
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Reprogramada' then
+      LColor := clBlue
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Desprogramada' then
+      LColor := clYellow
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Execução' then
+      LColor := clInfoBk
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Liberada' then
+      LColor := clGreen
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Paralisada' then
+      LColor := clRed
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Cancelada' then
+      LColor := clBlack
+    else
+    if DM.qryDashboard.FieldByName('SITUACAO').AsString = 'Vencida' then
+      LColor := $006666FF
+    else
+      LColor := clGray;
+
+    if LSituacaoOS[DM.qryDashboard.RecNo] > 0 then
+      ChartSituacaoOS.Series[0].Add(LSituacaoOS[DM.qryDashboard.RecNo], DM.qryDashboard.FieldByName('SITUACAO').AsString, LColor);
+
+    DM.qryDashboard.Next;
+  end;
+  DM.qryDashboard.Close;
 end;
 
 procedure TFrmTelaPrincipal.Calendrio1Click(Sender: TObject);
@@ -1986,30 +2303,54 @@ begin
 end;
 
 procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
-var
-  Handle: TextFile;
 begin
 
 if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
-    or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-        begin
-          DM.VerificarInspecoes;
-          DM.VerificarConfiabilidade;
-        end;
+  or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+  begin
+    DM.VerificarInspecoes;
+    DM.VerificarConfiabilidade;
+
+
+    OriginalFormWidth            := Self.ClientWidth;
+    OriginalFormHeight           := Self.ClientHeight;
+    OriginalSituacaoOSWidth      := ChartSituacaoOS.Width;
+    OriginalSituacaoOSHeight     := ChartSituacaoOS.Height;
+    OriginalTipoManutencaoWidth  := ChartTipoManutencao.Width;
+    OriginalTipoManutencaoHeight := ChartTipoManutencao.Height;
+    OriginalSolicTrabalhoWidth   := ChartSolicTrabalho.Width;
+    OriginalSolicTrabalhoHeight  := ChartSolicTrabalho.Height;
+    OriginalSolicTrabalhoTop     := ChartSolicTrabalho.Top;
+    OriginalOSOficinaWidth       := ChartOSOficina.Width;
+    OriginalOSOficinaHeight      := ChartOSOficina.Height;
+    OriginalOSOficinaTop         := ChartSolicTrabalho.Top;
+
+    ProporcaoTopTipoManut := OriginalSolicTrabalhoTop/OriginalFormHeight;
+    ProporcaoTopOSOficina := OriginalOSOficinaTop/OriginalFormHeight;
+
+    CalcularDashboard;
+
+    TimerAlertas.Enabled := False;
+    TimerAlertas.Interval := (DM.FTempoNovaOS * 60) * 1000;
+    TimerAlertas.Enabled := True;
+  end;
 
   StatusBar1.Font.Size := 9;
   StatusBar1.Panels[0].Text := DM.FNomeUsuario;
   StatusBar1.Panels[1].Text := DM.FNivelAcesso;
   StatusBar1.Panels[2].Text := DM.FNomeEmpresa;
   StatusBar1.Panels[3].Text := DM.FNomeGrupo;
-//  StatusBar1.Panels[4].Text := DM.FVersaoMacro + ' beta';
-  StatusBar1.Panels[4].Text := DM.FVersaoMacro;
-
-
   if DM.FDiasRestantes < 36500 then
-    lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
+    StatusBar1.Panels[4].Text :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes - ' + DM.FVersaoMacro
   else
-    lblLicenca.Caption :=  'Licença: Ilimitada';
+    StatusBar1.Panels[4].Text :=  'Licença: Ilimitada - ' + DM.FVersaoMacro;
+  //  StatusBar1.Panels[4].Text := DM.FVersaoMacro;
+
+
+  //  if DM.FDiasRestantes < 36500 then
+  //    lblLicenca.Caption :=  'Licença: '+FormatFloat('00', DM.FDiasRestantes)+' dias restantes'
+  //  else
+  //    lblLicenca.Caption :=  'Licença: Ilimitada';
 
   if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
     begin
@@ -2023,6 +2364,39 @@ if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUs
     end;
 
   RotasdeManuteno1.Visible := DM.FEmpTransf;
+end;
+
+procedure TFrmTelaPrincipal.FormResize(Sender: TObject);
+var
+  WidthRatio, HeightRatio: Double;
+begin
+  // Calcula a proporção de aumento do Form
+  WidthRatio := Self.ClientWidth / OriginalFormWidth;
+  HeightRatio := Self.ClientHeight / OriginalFormHeight;
+
+  // Ajusta o tamanho do Panel proporcionalmente ao aumento do Form
+  ChartSituacaoOS.Width := Round(OriginalSituacaoOSWidth * WidthRatio);
+  ChartSituacaoOS.Height := Round(OriginalSituacaoOSHeight * HeightRatio);
+
+  ChartTipoManutencao.Width := Round(OriginalTipoManutencaoWidth * WidthRatio);
+  ChartTipoManutencao.Height := Round(OriginalTipoManutencaoHeight * HeightRatio);
+
+  ChartSolicTrabalho.Width := Round(OriginalSolicTrabalhoWidth * WidthRatio);
+  ChartSolicTrabalho.Height := Round(OriginalSolicTrabalhoHeight * HeightRatio) - 10;
+  if ChartSolicTrabalho.Height < 165 then ChartSolicTrabalho.Height := 165;
+  ChartSolicTrabalho.Top := Round(Self.ClientHeight - ChartSolicTrabalho.Height) - 50;
+
+  ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.8);
+  if ChartOSOficina.Width < 345 then ChartOSOficina.Width := 345;
+  ChartOSOficina.Height := Round(OriginalOSOficinaHeight * HeightRatio);
+
+  ShapeEficiencia.Top := ChartSolicTrabalho.Top - 95;
+  LblEficSolicTrab.Top := ChartSolicTrabalho.Top - 95;
+  LblEficSolicTrabVal.Top := ChartSolicTrabalho.Top - 60;
+  imgEficSolicTrab.Top := ChartSolicTrabalho.Top - 60;
+
+  ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 35;
+  ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 20;
 end;
 
 procedure TFrmTelaPrincipal.FormShow(Sender: TObject);
@@ -3651,8 +4025,6 @@ begin
 end;
 
 procedure TFrmTelaPrincipal.TimerOsciosoTimer(Sender: TObject);
-var
-  X: SmallInt;
 begin
   DM.FFecharForms := True;
   Close;
@@ -3670,11 +4042,12 @@ end;
 
 procedure TFrmTelaPrincipal.TimerAlertasTimer(Sender: TObject);
 begin
-  try
-    DM.ConsultarAlertas;
-  except
-    TimerAlertas.Enabled := False;
-  end;
+//  try
+//    DM.ConsultarAlertas;
+//  except
+//    TimerAlertas.Enabled := False;
+//  end;
+
 end;
 
 procedure TFrmTelaPrincipal.TimerLetreiroTimer(Sender: TObject);

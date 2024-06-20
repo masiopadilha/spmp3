@@ -5872,6 +5872,7 @@ type
     qryRotaConsSeqManutFREQUENCIA1: TSmallintField;
     qryRotaConsSeqManutCODMANUTPROGFAMEQUIP: TStringField;
     qryRotaConsSeqManutCODEQUIPAMENTO: TStringField;
+    qryDashboard: TFDQuery;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -9827,11 +9828,11 @@ LVencimento : TDateTime;
 begin
 if FrmTelaCadAlertas <> nil then Exit;
 
-if FrmTelaPrincipal <> nil then
-  begin
-    FrmTelaPrincipal.PAlertas.Font.Color := clGreen;
-    if FrmTelaPrincipal.TimerLetreiro.Enabled = False then Exit;
-  end;
+//if FrmTelaPrincipal <> nil then
+//  begin
+//    FrmTelaPrincipal.PAlertas.Font.Color := clGreen;
+//    if FrmTelaPrincipal.TimerLetreiro.Enabled = False then Exit;
+//  end;
 
 qryAlertas.Close;
 qryAlertas.Params[0].AsString := DM.FCodEmpresa;
