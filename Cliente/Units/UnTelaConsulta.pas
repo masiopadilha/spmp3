@@ -153,8 +153,6 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
 end;
 
 procedure TFrmTelaAuxiliar.BtnConsultarClick(Sender: TObject);
-var
-  LMensagem: PChar;
 begin
   inherited;
   try

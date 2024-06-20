@@ -14,6 +14,7 @@ uses
   Winapi.Windows,
   Winapi.TlHelp32,
   System.UITypes,
+  Data.DB,
   UnTelaPaiOkCancel in '..\Units\UnTelaPaiOkCancel.pas' {FrmTelaPaiOKCancel},
   UnTelaPaiParametros in '..\Units\UnTelaPaiParametros.pas' {FrmTelaPaiParametros},
   UnTelaAcesso in '..\Units\UnTelaAcesso.pas' {FrmTelaAcesso},
@@ -205,25 +206,57 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.CreateForm(TfrmSistemaOcioso, frmSistemaOcioso);
   FrmTelaAcesso.ShowModal;
   if DM.FAcessoLiberado = True then
-    begin
-      FreeAndNil(FrmTelaAcesso);
+  begin
+    FreeAndNil(FrmTelaAcesso);
+    Try
+      Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
+
       FrmTelaSplash := TFrmTelaSplash.Create(Application);
       FrmTelaSplash.ShowModal;
       FreeAndNil(FrmTelaSplash);
-      Try
-        Application.CreateForm(TFrmTelaPrincipal, FrmTelaPrincipal);
-        FrmTelaPrincipal.ShowModal;
-      Finally
-        FreeAndNil(FrmTelaPrincipal);
-      End;
-    Application.Run;
+
+      if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
+        or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+        begin
+          if (DM.qryManutVenc.IsEmpty = False) or (DM.qryLubrificVenc.IsEmpty = False) or (DM.qryRotaEquipVenc.IsEmpty = False) then
+          begin
+            Try
+              Application.CreateForm(TFrmTelaInspVenc, FrmTelaInspVenc);
+              FrmTelaInspVenc.TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutVenc.RecordCount)+')';
+              FrmTelaInspVenc.TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificVenc.RecordCount)+')';
+              if DM.FEmpTransf = True then
+              begin
+                FrmTelaInspVenc.TSRotas.Caption := 'Rotas ('+ IntToStr(DM.qryRotaEquipVenc.RecordCount)+')';
+              end;
+              FrmTelaInspVenc.ShowModal;
+            Finally
+              FreeAndNil(FrmTelaInspVenc);
+            End;
+          end else
+          begin
+            DM.qryManutVenc.Close;
+            DM.qryLubrificVenc.Close;
+            DM.qryRotaEquipVenc.Close;
+          end;
+        end;
+
+      Application.Run;
+    Finally
+       FreeAndNil(FrmTelaPrincipal);
+       FreeAndNil(frmSistemaOcioso);
+       FreeAndNil(DMAlertas);
+       FreeAndNil(DmRelatorios);
+       FreeAndNil(DM);
+
+      Application.Terminate;
+    End;
   end else
   begin
+    FrmTelaAcesso.Close;
     FreeAndNil(FrmTelaAcesso);
     FreeAndNil(DMAlertas);
     FreeAndNil(DmRelatorios);
     FreeAndNil(DM);
-
-    Application.Terminate;
   end;
+
 end.

@@ -17761,8 +17761,7 @@ object FrmTelaSplash: TFrmTelaSplash
       78EB546C61381A4D4DD6B57C25C565E752D6E178E49665491A0B902A9B24EB59
       8E6193707935648FB6E9FF035FA12ECA06E8704B0000000049454E44AE426082}
     Proportional = True
-    ExplicitWidth = 673
-    ExplicitHeight = 503
+    ExplicitLeft = -1
   end
   object LblRegistro: TLabel
     Left = 5
@@ -17794,17 +17793,29 @@ object FrmTelaSplash: TFrmTelaSplash
     Transparent = True
     StyleElements = []
   end
-  object ProgressBar1: TProgressBar
-    Left = 75
-    Top = 297
-    Width = 368
-    Height = 11
-    Min = 1
-    Max = 4
-    Position = 1
-    MarqueeInterval = 1
-    TabOrder = 0
-    Visible = False
+  object LblProcesso: TLabel
+    Left = 127
+    Top = 239
+    Width = 3
+    Height = 14
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -11
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Layout = tlCenter
+    StyleElements = [seClient, seBorder]
+  end
+  object JvGradientProgressBar1: TJvGradientProgressBar
+    Left = 127
+    Top = 215
+    Width = 265
+    Height = 20
+    BarColorFrom = 15329769
+    BarColorTo = clTeal
+    Max = 13
+    ParentColor = True
   end
   object Timer1: TTimer
     Interval = 30

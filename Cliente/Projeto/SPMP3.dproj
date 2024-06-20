@@ -587,97 +587,74 @@
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaOpcoes.pas">
             <Form>FrmTelaOpcoes</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnDM.pas">
             <Form>DM</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgEquipPartesItensEsp.pas">
             <Form>FrmTelaCadManutProgEquipPartesItensEsp</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgEquipPartesItensEsp.pas">
             <Form>FrmTelaCadLubrificProgEquipPartesItensEsp</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaAuditoria.pas">
             <Form>FrmTelaAuditoria</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaGerenciador.pas">
             <Form>FrmTelaGerenciador</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnDmAlertas.pas">
             <Form>DMAlertas</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadEquipamentosAltCod.pas">
             <Form>FrmTelaCadEquipamentosAltCod</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadEquipamentosAltFamiliaCod.pas">
             <Form>FrmTelaCadEquipamentosAltFamiliaCod</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgEquipPecas.pas">
             <Form>FrmTelaCadManutProgEquipPecas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgEquipRecursos.pas">
             <Form>FrmTelaCadManutProgEquipRecursos</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgEquipPecas.pas">
             <Form>FrmTelaCadLubrificProgEquipPecas</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgEquipRecursos.pas">
             <Form>FrmTelaCadLubrificProgEquipRecursos</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgFamEquipClonagem.pas">
             <Form>FrmTelaCadManutProgFamEquipClonagem</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgFamEquipClonagem.pas">
             <Form>FrmTelaCadLubrificProgFamEquipClonagem</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgEquipMObra.pas">
             <Form>FrmTelaCadManutProgEquipMObra</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgEquipMObra.pas">
             <Form>FrmTelaCadLubrificProgEquipMObra</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\Report\unRelatorioPadrao.pas">
             <Form>frmRelatorioPadrao</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\Report\unTelaInspVencRelatManut.pas">
             <Form>FrmTelaInspVencRelatManut</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTempoOcioso.pas">
             <Form>frmSistemaOcioso</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadManutProgFamEquipConsulta.pas">
             <Form>FrmTelaCadManutProgFamEquipConsulta</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas">
             <Form>FrmTelaCadLubrificProgFamEquipConsulta</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadSolicitacaoTrabCons.pas">
             <Form>FrmTelaCadSolicitacaoTrabCons</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <RcItem Include="..\updater.bat">
             <ContainerId>ResourceItem</ContainerId>

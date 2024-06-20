@@ -375,7 +375,7 @@ begin
 if (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   Exit;
 
-LNovoCodigo := 0;
+//LNovoCodigo := 0;
 LDataSet := DM.qryPermissoesAcesso;
 if CDPermissoesUsuPESSOAL.AsString = 'S' then
   begin

@@ -124,6 +124,7 @@ type
     Button8: TBitBtn;
     Button9: TBitBtn;
     Button10: TBitBtn;
+    DBNavigator1: TDBNavigator;
     procedure FormCreate(Sender: TObject);
     procedure ConfigurarFiltros;
     procedure Button2Click(Sender: TObject);
@@ -1627,7 +1628,7 @@ begin
   for i := 0 to DBGrid.Columns.Count - 2 do
     TotalWidth := TotalWidth + DBGrid.Columns[i].Width;
   // Calcula a largura disponível para a última coluna
-  AvailableWidth := DBGrid.ClientWidth - TotalWidth;
+//  AvailableWidth := DBGrid.ClientWidth - TotalWidth;
   // Define a largura de cada coluna proporcionalmente
   for i := 0 to DBGrid.Columns.Count - 2 do
   begin

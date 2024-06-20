@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, System.DateUtils, Vcl.ComCtrls, FireDAC.Stan.Param, IdURI,
   IdTCPConnection, IdTCPClient, IdHTTP, IdBaseComponent, IdComponent,
-  IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip, Winapi.ShellAPI;
+  IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip, Winapi.ShellAPI,
+  JvExControls, JvWaitingGradient, JvProgressBar;
 
 type
   TFrmTelaSplash = class(TForm)
@@ -15,17 +16,14 @@ type
     LblRegistro: TLabel;
     LblVersao: TLabel;
     Timer1: TTimer;
-    ProgressBar1: TProgressBar;
+    LblProcesso: TLabel;
+    JvGradientProgressBar1: TJvGradientProgressBar;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
 
     function ResourceExists(const ResourceName: string): Boolean;
-
-    procedure CopySingleFile(AFileName: String);
-    procedure ExtractFile(AFile, APath: String);
-    procedure ResourceExtract(AResourceName, APath, AFileName: String);
 
   public
     { Public declarations }
@@ -38,16 +36,8 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM;
+uses UnDM, UnTelaPrincipal;
 
-procedure TFrmTelaSplash.ResourceExtract(AResourceName, APath, AFileName: String);
-var
-  LResouce: TResourceStream;
-begin
-  LResouce := TResourceStream.Create(HInstance, AResourceName, RT_RCDATA);
-  LResouce.SaveToFile(APath+AFileName);
-  FreeAndNil(LResouce);
-end;
 
 function TFrmTelaSplash.ResourceExists(const ResourceName: string): Boolean;
 var
@@ -62,30 +52,9 @@ begin
   end;
 end;
 
-procedure TFrmTelaSplash.CopySingleFile(AFileName: String);
-var
-  LSourceFolder: String;
-  LTargetFolder: String;
-begin
-  LSourceFolder := ExtractFilePath(ParamStr(0))+'SPMP3';
-  LTargetFolder := ExtractFilePath(ParamStr(0));
-  CopyFile(PChar(LSourceFolder+'\'+AFileName), PChar(LTargetFolder+'\'+AFileName), False);
-end;
-
-procedure TFrmTelaSplash.ExtractFile(AFile, APath: String);
-var
-  LZipFile: TZipFile;
-begin
-  LZipFile := TZipFile.Create;
-  LZipFile.Open(AFile, zmRead);
-  LZipFile.ExtractAll(APath);
-  LZipFile.Close;
-  FreeAndNil(LZipFile);
-end;
-
 procedure TFrmTelaSplash.FormCreate(Sender: TObject);
 var
-LDiasRestantes : SmallInt;
+  LDiasRestantes : SmallInt;
 begin
   if DM.FLicenca = 'TRIAL' then
   begin
@@ -104,39 +73,74 @@ end;
 procedure TFrmTelaSplash.Timer1Timer(Sender: TObject);
 begin
 AlphaBlendValue := AlphaBlendValue + 5;
+
 if AlphaBlendValue = 255 then
   begin
     Timer1.Enabled := False;
-    ProgressBar1.Visible := True;
 
     DM.qryFormatoCodigo.Open;
+    JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+    LblProcesso.Caption := 'Carregando máscaras de códigos...';
+    Application.ProcessMessages;
+    Sleep(100);
 
     if DM.FNomeUsuario <> 'sam_spmp' then
-      begin
-        DM.qryUsuarioPAcesso.Params[0].AsString := DM.FCodAcesso;
-        DM.qryUsuarioPAcesso.Open;
-        ProgressBar1.Position := ProgressBar1.Position + 1;
+    begin
+      JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+      LblProcesso.Caption := 'Carregando permissões de acesso...';
+      Application.ProcessMessages;
+      Sleep(100);
+      DM.qryUsuarioPAcesso.Params[0].AsString := DM.FCodAcesso;
+      DM.qryUsuarioPAcesso.Open;
 
-        DM.qryUsuarioPAlteracao.Params[0].AsString := DM.FCodAlteracao;
-        DM.qryUsuarioPAlteracao.Open;
-        ProgressBar1.Position := ProgressBar1.Position + 1;
+      JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+      LblProcesso.Caption := 'Carregando permissões de alterações...';
+      Application.ProcessMessages;
+      Sleep(100);
+      DM.qryUsuarioPAlteracao.Params[0].AsString := DM.FCodAlteracao;
+      DM.qryUsuarioPAlteracao.Open;
 
-        DM.qryUsuarioPInclusao.Params[0].AsString := DM.FCodInclusao;
-        DM.qryUsuarioPInclusao.Open;
-        ProgressBar1.Position := ProgressBar1.Position + 1;
+      JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+      LblProcesso.Caption := 'Carregando permissões de inclusão...';
+      Application.ProcessMessages;
+      Sleep(100);
+      DM.qryUsuarioPInclusao.Params[0].AsString := DM.FCodInclusao;
+      DM.qryUsuarioPInclusao.Open;
 
-        DM.qryUsuarioPExclusao.Params[0].AsString := DM.FCodExclusao;
-        DM.qryUsuarioPExclusao.Open;
-        ProgressBar1.Position := ProgressBar1.Position + 1;
+      JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+      LblProcesso.Caption := 'Carregando permissões de exclusão...';
+      Application.ProcessMessages;
+      Sleep(100);
+      DM.qryUsuarioPExclusao.Params[0].AsString := DM.FCodExclusao;
+      DM.qryUsuarioPExclusao.Open;
 
+      if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
+        or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+        begin
+          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+          LblProcesso.Caption := 'Consultando manutenções vencidas...';
+          Application.ProcessMessages;
+          Sleep(100);
+          DM.VerificarInspecoes;
 
-        if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
-          begin
-            ProgressBar1.Position := ProgressBar1.Position + 1;
-          end
-        else
-          ProgressBar1.Position := ProgressBar1.Position + 4;
-      end;
+          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+          LblProcesso.Caption := 'Consultando dados de confiabilidade...';
+          Application.ProcessMessages;
+          Sleep(100);
+          DM.VerificarConfiabilidade;
+
+          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 1;
+          LblProcesso.Caption := 'Carregando dados do dashboard...';
+          Application.ProcessMessages;
+          Sleep(100);
+          DM.CalcularDashboard;
+        end else
+        begin
+          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 7;
+          Application.ProcessMessages;
+          Sleep(100);
+        end;
+    end;
     Close;
   end;
 end;

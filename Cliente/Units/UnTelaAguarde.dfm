@@ -6,24 +6,22 @@ object FrmTelaAguarde: TFrmTelaAguarde
   AutoSize = True
   BorderStyle = bsNone
   ClientHeight = 20
-  ClientWidth = 100
+  ClientWidth = 130
   Color = 14671839
   Constraints.MaxHeight = 20
-  Constraints.MaxWidth = 100
-  Constraints.MinWidth = 100
+  Constraints.MaxWidth = 130
+  Constraints.MinWidth = 130
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clGray
   Font.Height = -19
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
-  PixelsPerInch = 96
   TextHeight = 23
   object PTexto: TPanel
     Left = 0
     Top = 0
-    Width = 100
+    Width = 130
     Height = 20
     Align = alClient
     AutoSize = True
@@ -36,5 +34,6 @@ object FrmTelaAguarde: TFrmTelaAguarde
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 100
   end
 end

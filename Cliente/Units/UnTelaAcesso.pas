@@ -470,8 +470,6 @@ begin
 end;
 
 procedure TFrmTelaAcesso.FormCreate(Sender: TObject);
-var
-  LDiasRestantes : SmallInt;
 begin
   if (Screen.Width < 1024) or (Screen.Height < 600) then
   begin

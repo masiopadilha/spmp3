@@ -32533,7 +32533,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ExplicitWidth = 438
     ExplicitHeight = 100
   end
-  object JvShape2: TJvShape
+  object ShapePeriodo: TJvShape
     Left = 843
     Top = 12
     Width = 157
@@ -32544,7 +32544,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Pen.Mode = pmMergeNotPen
     Shape = stRoundRect
   end
-  object Label1: TLabel
+  object lblFiltro: TLabel
     Left = 855
     Top = 19
     Width = 39
@@ -32559,7 +32559,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     StyleElements = [seClient, seBorder]
   end
-  object Label3: TLabel
+  object lblAno: TLabel
     Left = 865
     Top = 48
     Width = 27
@@ -32574,7 +32574,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     StyleElements = [seClient, seBorder]
   end
-  object Label4: TLabel
+  object lblMes: TLabel
     Left = 865
     Top = 76
     Width = 29
@@ -32882,7 +32882,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     TabOrder = 0
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 586
+    ExplicitTop = 674
     ExplicitWidth = 1008
     object LblTempoDesliga: TLabel
       AlignWithMargins = True
@@ -32929,7 +32929,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       item
         Width = 15
       end>
-    ExplicitTop = 602
+    ExplicitTop = 690
     ExplicitWidth = 1008
   end
   object ProgressBar1: TProgressBar
@@ -32939,16 +32939,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Height = 25
     TabOrder = 2
     Visible = False
-  end
-  object Button1: TButton
-    Left = 496
-    Top = 443
-    Width = 75
-    Height = 25
-    Caption = 'Executar'
-    TabOrder = 3
-    Visible = False
-    OnClick = Button1Click
   end
   object ChartSolicTrabalho: TChart
     AlignWithMargins = True
@@ -33038,8 +33028,9 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 6714673
-    TabOrder = 4
+    TabOrder = 3
     Anchors = [akLeft, akBottom]
+    ExplicitTop = 512
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33071,7 +33062,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       Marks.Color = 15461334
       RoundSize = 5
       SeriesColor = clWhite
-      Title = 'Solicitadas'
+      Title = 'Realizadas'
       BarStyle = bsRoundRectangle
       OffsetPercent = 15
       XValues.Name = 'X'
@@ -33110,7 +33101,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       Marks.Color = 15461334
       RoundSize = 5
       SeriesColor = 7763574
-      Title = 'Realizadas'
+      Title = 'Fechadas'
       BarStyle = bsRoundRectangle
       OffsetPercent = 30
       Sides = 28
@@ -33196,8 +33187,9 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 6714673
-    TabOrder = 6
+    TabOrder = 5
     Anchors = [akLeft]
+    ExplicitTop = 209
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33312,7 +33304,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 6714673
-    TabOrder = 5
+    TabOrder = 4
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33374,7 +33366,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Font.Style = []
     ItemIndex = 9
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 6
     Text = '2024'
     Items.Strings = (
       '2015'
@@ -33387,6 +33379,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       '2022'
       '2023'
       '2024')
+    ExplicitLeft = 896
   end
   object cbMes: TComboBox
     Left = 900
@@ -33402,7 +33395,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Font.Style = []
     ItemIndex = 1
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 7
     Text = 'Fevereiro'
     Items.Strings = (
       'Janeiro'
@@ -33417,6 +33410,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       'Outubro'
       'Novembro'
       'Dezembro')
+    ExplicitLeft = 896
   end
   object ChartOSOficina: TChart
     AlignWithMargins = True
@@ -33491,11 +33485,15 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TopAxis.Title.Visible = False
     TopAxis.Visible = False
     View3D = False
+    View3DOptions.Elevation = 315
+    View3DOptions.Orthogonal = False
+    View3DOptions.Perspective = 0
+    View3DOptions.Rotation = 360
     View3DWalls = False
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 6714673
-    TabOrder = 9
+    TabOrder = 8
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33521,6 +33519,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       Marks.BackColor = 15395798
       Marks.Callout.Arrow.Visible = False
       Marks.Callout.Length = 10
+      Marks.Tail.Margin = 2
       Marks.Color = 15395798
       SeriesColor = clGray
       Title = 'Status'
@@ -34410,6 +34409,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Top = 16
   end
   object TimerOscioso2: TTimer
+    Enabled = False
     OnTimer = TimerOscioso2Timer
     Left = 584
     Top = 72

@@ -1,7 +1,7 @@
 inherited FrmTelaPermissoes: TFrmTelaPermissoes
   Caption = 'Permiss'#245'es de Usu'#225'rios'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 700
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,7 +11,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 880
     inherited Image1: TImage
       Margins.Left = 4
@@ -27,8 +27,8 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
   inherited PCentro: TPanel
     Left = 2
     Top = 66
-    Width = 1008
-    Height = 507
+    Width = 1004
+    Height = 504
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -280,15 +280,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             006F006C0065002000640065002000460072006F00740061002E00340000005F
             0000005F000000FFFFFFFFFFFFFFFF5F0000000000000000000000010B520065
             006C0061007400F300720069006F0073002E00}
-          ExplicitWidth = 298
         end
       end
       object pBaseDireito: TPanel
         AlignWithMargins = True
         Left = 326
         Top = 5
-        Width = 669
-        Height = 489
+        Width = 665
+        Height = 486
         Margins.Left = 0
         Align = alClient
         TabOrder = 1
@@ -457,14 +456,14 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 574
+    Width = 1004
     ExplicitTop = 574
     ExplicitWidth = 880
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 601
+    Width = 1004
     ExplicitTop = 601
     ExplicitWidth = 880
     inherited BtnOK: TButton

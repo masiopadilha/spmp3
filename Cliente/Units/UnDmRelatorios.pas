@@ -196,9 +196,6 @@ type
     frxREquipGeral: TfrxReport;
     frxREquipIndividual: TfrxReport;
     frxRFamEquipamento: TfrxReport;
-    frxRFamPecasRep: TfrxReport;
-    frxRFamPneus: TfrxReport;
-    frxRFamRecursos: TfrxReport;
     frxRFeriados: TfrxReport;
     frxRFerramentariaGeral: TfrxReport;
     frxRFerramentariaIndividual: TfrxReport;
@@ -330,6 +327,9 @@ type
     frxRLubrificProgEquipGeral: TfrxReport;
     frxRChecklistLubrificProgEquip: TfrxReport;
     frxPDFExport1: TfrxPDFExport;
+    frxRFamPecasRep: TfrxReport;
+    frxRFamPneus: TfrxReport;
+    frxRFamRecursos: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
     procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);
