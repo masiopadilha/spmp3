@@ -21449,7 +21449,6 @@ object DM: TDM
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
-    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 56
@@ -25407,43 +25406,53 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `ordemservico`.`CODEQUIPAMENTO`'#9#9
-      '    ,`tipomanutencao`.`DESCRICAO`'
-      '    , COUNT(`ordemservico`.`CODIGO`) AS `TOTAL`'
-      
-        '    , SUM(`ordemservico`.`CUSTOMOBRA`) + SUM(`ordemservico`.`CUS' +
-        'TORECURSOS`) + SUM(`ordemservico`.`CUSTOPECAS`) + SUM(`ordemserv' +
-        'ico`.`CUSTOEXTRA`) AS CUSTOTOTAL'
+      '  SUM(sub.HORASPARADAS) AS HORASPARADAS'
       'FROM'
-      '    `ordemservico`'
-      '    INNER JOIN `tipomanutencao`'
+      '    (SELECT'
       
-        '        ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`C' +
-        'ODIGO`)    '
-      'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
-      '    AND `ordemservico`.`CODEQUIPAMENTO` = :codequipamento'
+        '        ROUND((IF(MIN(os.`DATAINICIOREAL`) < DATE(DATE_SUB(os.`D' +
+        'ATAINICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY))' +
+        ', '
       
-        '    AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%' +
-        'Y/%m/%d'#39') AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(:da' +
-        'ta2,'#39'%Y/%m/%d'#39')'
+        '                                                   /*true*/  TIM' +
+        'ESTAMPDIFF(MINUTE, DATE(DATE_SUB(os.`DATAFECHAMENTO`, INTERVAL D' +
+        'AYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY)), os.`DATAFIMREAL`),'
+      
+        '                                                   /*false*/  TI' +
+        'MESTAMPDIFF(MINUTE, os.`DATAINICIOREAL`, os.`DATAFIMREAL`))/60),' +
+        ' 2) HORASPARADAS'
       ''
-      '    AND `ordemservico`.`EQUIPPARADO` = '#39'S'#39
+      'FROM'
+      '    `ordemservico` os'
+      ''
+      '    INNER JOIN `equipamentos` AS e'
       
-        '    AND (`ordemservico`.`SITUACAO` = '#39'LIBERADA'#39' OR `ordemservico' +
-        '`.`SITUACAO` = '#39'FECHADA'#39' OR `ordemservico`.`SITUACAO` = '#39'EXECUCA' +
-        'O'#39')'
-      '    )'
-      ' GROUP BY `ordemservico`.`CODMANUTENCAO`')
+        '        ON (e.`CODIGO` = `CODEQUIPAMENTO`) AND (e.`OPERANDO` = '#39 +
+        'S'#39' ) AND (e.`SECUNDARIO` = '#39'N'#39')'
+      '    LEFT JOIN `tipomanutencao` AS t'
+      
+        '        ON (os.CODMANUTENCAO = t.CODIGO) AND (t.`TIPOMANUTENCAO`' +
+        ' = '#39'Manuten'#231#227'o Corretiva'#39')'
+      ''
+      'WHERE (os.`CODEMPRESA` = :codempresa'
+      
+        '   -- AND MONTH(os.`DATAFECHAMENTO`) = '#39'05'#39' AND YEAR(os.`DATAFEC' +
+        'HAMENTO`) = '#39'2024'#39
+      
+        '    AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d'#39') AN' +
+        'D os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+      
+        '    AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`, I' +
+        'NTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
+      '    AND os.`SITUACAO` <> '#39'CANCELADA'#39
+      '    AND os.`EQUIPPARADO` = '#39'S'#39')'
+      '    '
+      '    GROUP BY os.`CODIGO`) AS sub')
     Left = 547
     Top = 163
     ParamData = <
       item
         Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'CODEQUIPAMENTO'
         DataType = ftString
         ParamType = ptInput
       end
@@ -52855,36 +52864,6 @@ object DM: TDM
       Size = 9
     end
   end
-  object FDMemTRelatGerencMTBF: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 1309
-    Top = 693
-    object FDMemTRelatGerencMTBFCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 9
-    end
-    object FDMemTRelatGerencMTBFDESCRICAO: TStringField
-      FieldName = 'DESCRICAO'
-      Size = 200
-    end
-    object FDMemTRelatGerencMTBFVALOR: TFloatField
-      FieldName = 'VALOR'
-    end
-    object FDMemTRelatGerencMTBFDATA1: TStringField
-      FieldName = 'DATA1'
-      Size = 10
-    end
-    object FDMemTRelatGerencMTBFDATA2: TStringField
-      FieldName = 'DATA2'
-      Size = 10
-    end
-  end
   object FDMemTRelatGerencMTTR: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -59020,5 +58999,291 @@ object DM: TDM
     Connection = FDConnSPMP3
     Left = 2184
     Top = 8
+  end
+  object qryMTBMedio: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      '-- C'#225'lculo de MTBF '
+      'SELECT'
+      '    AVG(fmt.MTBF)MTBF_MEDIA       '
+      '    , IFNULL(CONCAT('
+      
+        '           FLOOR(AVG(TIME_TO_SEC(SEC_TO_TIME(fmt.MTBF * 3600))) ' +
+        '/ 3600), '#39':'#39','
+      
+        '           LPAD(FLOOR((AVG(TIME_TO_SEC(SEC_TO_TIME(fmt.MTBF * 36' +
+        '00))) % 3600) / 60), 2, '#39'0'#39')'
+      '       ), '#39'00:00'#39') AS MTBF_MEDIA_FORMAT'
+      'FROM'
+      '    (SELECT'
+      '        res.CODEQUIPAMENTO'
+      '        , res.DATAFECHAMENTO'
+      '        , res.EQUIPAMENTO            '
+      '        , res.TOTALPARADAS'
+      '        , res.HORASPARADAS'
+      '        , res.HOFICIAIS'#9'    '
+      
+        '        , ((res.HOFICIAIS - res.HORASPARADAS)/res.TOTALPARADAS)M' +
+        'TBF        '
+      '    FROM     '
+      '        (SELECT'
+      #9'    sub2.CODEQUIPAMENTO'
+      #9'    , sub2.DATAFECHAMENTO'
+      #9'    , sub2.EQUIPAMENTO            '
+      #9'    , SUM(sub2.TOTALPARADAS)TOTALPARADAS'
+      #9'    , SUM(sub2.HORASPARADAS)HORASPARADAS'
+      #9'    , sub2.HOFICIAIS'#9'    '
+      '           '
+      '        FROM    '
+      '            (SELECT        '
+      #9#9'sub1.CODEQUIPAMENTO'
+      #9#9', sub1.DATAFECHAMENTO'
+      #9#9', sub1.EQUIPAMENTO            '
+      #9#9', SUM(sub1.TOTALPARADAAS) TOTALPARADAS'
+      #9#9', SUM(sub1.HORASPARADAS) HORASPARADAS'
+      #9#9', ((HOFICIAIS)) HOFICIAIS'
+      #9'    '
+      #9'    FROM'
+      #9#9' (SELECT'
+      #9#9'    os.`CODEQUIPAMENTO`'
+      #9#9'    , os.`DATAFECHAMENTO`'
+      #9#9'    , e.`DESCRICAO` EQUIPAMENTO            '
+      #9#9'    , COUNT(*)TOTALPARADAAS'
+      
+        #9#9'    , ROUND((IF(MIN(os.`DATAINICIOREAL`) < DATE(DATE_SUB(os.`D' +
+        'ATAINICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY))' +
+        ', '
+      
+        #9#9'      /*true*/  TIMESTAMPDIFF(MINUTE, DATE(DATE_SUB(os.`DATAFE' +
+        'CHAMENTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY)), os.' +
+        '`DATAFIMREAL`),'
+      
+        #9#9'      /*false*/  TIMESTAMPDIFF(MINUTE, os.`DATAINICIOREAL`, os' +
+        '.`DATAFIMREAL`))/60), 2) HORASPARADAS'
+      #9#9'    , (IFNULL(c.`HOFICIAIS`, 720)) HOFICIAIS'
+      #9#9'     '
+      #9#9' FROM '
+      #9#9'     `ordemservico` AS os'
+      ''
+      #9#9'     INNER JOIN `equipamentos` AS e'
+      
+        #9#9#9' ON (e.`CODIGO` = `CODEQUIPAMENTO`) AND (e.`OPERANDO` = '#39'S'#39' )' +
+        ' AND (e.`SECUNDARIO` = '#39'N'#39')'
+      ''
+      #9#9'     INNER JOIN `calendarioequip` c'
+      
+        #9#9#9' ON (c.`CODIGO` = e.`CODCALENDARIO`) AND (c.`CODEMPRESA` = e.' +
+        'CODEMPRESA )'
+      ''
+      #9#9' WHERE (os.`CODEMPRESA` = :codempresa'
+      
+        #9#9'     AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d'#39')' +
+        ' AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+      
+        #9#9'     AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`' +
+        ', INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
+      #9#9'     AND os.`SITUACAO` <> '#39'CANCELADA'#39
+      #9#9'     AND os.`EQUIPPARADO` = '#39'S'#39
+      #9#9'     )'
+      #9#9' GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
+      #9#9' ORDER BY os.`CODEQUIPAMENTO`) AS sub1'
+      #9'    GROUP BY sub1.DATAFECHAMENTO, sub1.EQUIPAMENTO'
+      #9'    ORDER BY sub1.EQUIPAMENTO) AS sub2'
+      #9'GROUP BY sub2.CODEQUIPAMENTO) AS res'
+      '    ORDER BY res.EQUIPAMENTO) AS fmt  '
+      ' -- group by fmt.CODEQUIPAMENTO  ')
+    Left = 1704
+    Top = 496
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA1'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryMTBMedioMTBF_MEDIA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'MTBF_MEDIA'
+      Origin = 'MTBF_MEDIA'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 64
+      Size = 10
+    end
+    object qryMTBMedioMTBF_MEDIA_FORMAT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MTBF_MEDIA_FORMAT'
+      Origin = 'MTBF_MEDIA_FORMAT'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+  end
+  object qryMTBEquipamentos: TFDQuery
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      '-- C'#225'lculo de MTBF Equipamentos'
+      'SELECT'
+      '    fmt.CODEQUIPAMENTO'
+      '    , fmt.EQUIPAMENTO            '
+      '    , ROUND(AVG(fmt.MTBF), 2)MTBF_MEDIA'
+      '    , IFNULL(CONCAT('
+      
+        '           FLOOR(AVG(TIME_TO_SEC(SEC_TO_TIME(fmt.MTBF * 3600))) ' +
+        '/ 3600), '#39':'#39','
+      
+        '           LPAD(FLOOR((AVG(TIME_TO_SEC(SEC_TO_TIME(fmt.MTBF * 36' +
+        '00))) % 3600) / 60), 2, '#39'0'#39')'
+      '       ), '#39'00:00'#39') AS MTBF_MEDIA_FORMAT'
+      
+        '    , CAST(DATE(DATE_SUB(fmt.`DATAFECHAMENTO`, INTERVAL DAYOFMON' +
+        'TH(fmt.`DATAFECHAMENTO`)-1 DAY)) AS DATE) AS DATA1'
+      
+        '    , CAST(LAST_DAY(DATE(DATE_SUB(fmt.`DATAFECHAMENTO`, INTERVAL' +
+        ' DAYOFMONTH(fmt.`DATAFECHAMENTO`)-1 DAY))) AS DATE) AS DATA2'
+      'FROM'
+      '    (SELECT'
+      '        res.CODEQUIPAMENTO'
+      '        , res.DATAFECHAMENTO'
+      '        , res.EQUIPAMENTO            '
+      '        , res.TOTALPARADAS'
+      '        , res.HORASPARADAS'
+      '        , res.HOFICIAIS'#9'    '
+      
+        '        , IFNULL(((res.HOFICIAIS - res.HORASPARADAS)/res.TOTALPA' +
+        'RADAS), 0)MTBF'
+      '    FROM     '
+      '        (SELECT'
+      #9'    sub2.CODEQUIPAMENTO'
+      #9'    , sub2.DATAFECHAMENTO'
+      #9'    , sub2.EQUIPAMENTO            '
+      #9'    , SUM(sub2.TOTALPARADAS)TOTALPARADAS'
+      #9'    , SUM(sub2.HORASPARADAS)HORASPARADAS'
+      #9'    , sub2.HOFICIAIS'
+      '           '
+      '        FROM    '
+      '            (SELECT        '
+      #9#9'sub1.CODEQUIPAMENTO'
+      #9#9', sub1.DATAFECHAMENTO'
+      #9#9', sub1.EQUIPAMENTO            '
+      #9#9', SUM(sub1.TOTALPARADAAS) TOTALPARADAS'
+      #9#9', SUM(sub1.HORASPARADAS) HORASPARADAS'
+      #9#9', ((HOFICIAIS)) HOFICIAIS'
+      #9'    '
+      #9'    FROM'
+      #9#9' (SELECT'
+      #9#9'    os.`CODEQUIPAMENTO`'
+      #9#9'    , os.`DATAFECHAMENTO`'
+      #9#9'    , e.`DESCRICAO` EQUIPAMENTO            '
+      #9#9'    , COUNT(*)TOTALPARADAAS'
+      
+        #9#9'    , ROUND((IF(MIN(os.`DATAINICIOREAL`) < DATE(DATE_SUB(os.`D' +
+        'ATAINICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY))' +
+        ', '
+      
+        #9#9'      /*true*/  TIMESTAMPDIFF(MINUTE, DATE(DATE_SUB(os.`DATAFE' +
+        'CHAMENTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY)), os.' +
+        '`DATAFIMREAL`),'
+      
+        #9#9'      /*false*/  TIMESTAMPDIFF(MINUTE, os.`DATAINICIOREAL`, os' +
+        '.`DATAFIMREAL`))/60), 2) HORASPARADAS'
+      #9#9'    , (IFNULL(c.`HOFICIAIS`, 720)) HOFICIAIS'
+      #9#9'     '
+      #9#9' FROM '
+      #9#9'     `ordemservico` AS os'
+      ''
+      #9#9'     INNER JOIN `equipamentos` AS e'
+      
+        #9#9#9' ON (e.`CODIGO` = `CODEQUIPAMENTO`) AND (e.`OPERANDO` = '#39'S'#39' )' +
+        ' AND (e.`SECUNDARIO` = '#39'N'#39')'
+      ''
+      #9#9'     INNER JOIN `calendarioequip` c'
+      
+        #9#9#9' ON (c.`CODIGO` = e.`CODCALENDARIO`) AND (c.`CODEMPRESA` = e.' +
+        'CODEMPRESA )'
+      ''
+      #9#9' WHERE (os.`CODEMPRESA` = :codempresa'
+      
+        #9#9'     AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d'#39')' +
+        ' AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+      
+        #9#9'     AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`' +
+        ', INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
+      #9#9'     AND os.`SITUACAO` <> '#39'CANCELADA'#39
+      #9#9'     AND os.`EQUIPPARADO` = '#39'S'#39
+      #9#9'     )'
+      #9#9' GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
+      #9#9' ORDER BY os.`CODEQUIPAMENTO`) AS sub1'
+      #9'    GROUP BY sub1.DATAFECHAMENTO, sub1.EQUIPAMENTO'
+      #9'    ORDER BY sub1.EQUIPAMENTO) AS sub2'
+      #9'GROUP BY sub2.CODEQUIPAMENTO) AS res'
+      '    ORDER BY res.EQUIPAMENTO) AS fmt  '
+      '  GROUP BY fmt.CODEQUIPAMENTO'
+      '  ORDER BY fmt.EQUIPAMENTO')
+    Left = 1784
+    Top = 496
+    ParamData = <
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA1'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object FMTBCDField1: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'MTBF_MEDIA'
+      Origin = 'MTBF_MEDIA'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 64
+      Size = 10
+    end
+    object qryMTBEquipamentosMTBF_MEDIA_FORMAT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MTBF_MEDIA_FORMAT'
+      Origin = 'MTBF_MEDIA_FORMAT'
+      Size = 15
+    end
+    object qryMTBEquipamentosCODEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPAMENTO'
+      Origin = 'CODEQUIPAMENTO'
+    end
+    object qryMTBEquipamentosEQUIPAMENTO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EQUIPAMENTO'
+      Origin = 'EQUIPAMENTO'
+      Size = 200
+    end
+    object qryMTBEquipamentosDATA1: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATA1'
+      Origin = 'DATA1'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
+    object qryMTBEquipamentosDATA2: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATA2'
+      Origin = 'DATA2'
+      DisplayFormat = 'dd/mm/yyyy'
+    end
   end
 end

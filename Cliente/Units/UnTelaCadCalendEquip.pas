@@ -315,6 +315,14 @@ if DM.qryCalendEquipDESCRICAO.IsNull = True then
     EdtDescricao.SetFocus;
     Exit;
   end;
+if DM.qryCalendEquipHOFICIAIS.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'INFORME A QUANTIDADE DE HORAS OFICIAIS DO REGISTRO!';
+    EdtHOficiais.SetFocus;
+    Exit;
+  end;
+
 
 if DM.qryCalendEquipSeqHora.Active = True then
   if DM.qryCalendEquipSeqHora.IsEmpty = False then

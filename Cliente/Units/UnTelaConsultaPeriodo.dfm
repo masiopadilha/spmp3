@@ -17,7 +17,7 @@ inherited FrmTelaConsultaPeriodo: TFrmTelaConsultaPeriodo
     inherited BtnAjuda: TButton
       Left = 288
       Visible = False
-      ExplicitLeft = 288
+      ExplicitLeft = 284
     end
   end
   inherited PCentro: TPanel

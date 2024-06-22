@@ -1,38 +1,58 @@
 inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
   Caption = 'Indicadores de Desempenho'
-  PixelsPerInch = 96
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
+      Left = 517
       Visible = False
+      ExplicitLeft = 513
     end
     inherited LAlteradoPor: TLabel
+      Left = 539
       Visible = False
+      ExplicitLeft = 535
     end
     inherited LblDataAlt: TDBText
+      Left = 572
       DataField = ''
       Visible = False
+      ExplicitLeft = 568
     end
     inherited LblDataCad: TDBText
+      Left = 444
       DataField = ''
       Visible = False
+      ExplicitLeft = 440
     end
     inherited LblUsuAlt: TDBText
+      Left = 572
       DataField = ''
       Visible = False
+      ExplicitLeft = 568
     end
     inherited LblUsuCad: TDBText
+      Left = 444
       DataField = ''
       Visible = False
+      ExplicitLeft = 440
     end
     inherited LCadastro: TLabel
+      Left = 411
       Visible = False
+      ExplicitLeft = 407
     end
     inherited LCadastroPor: TLabel
+      Left = 373
       Visible = False
+      ExplicitLeft = 369
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object LblGravAcidMenM: TDBText
       Left = 223
       Top = 206
@@ -532,12 +552,20 @@ inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
       OnExit = TabNextTab1AfterTabChange
     end
   end
-  inherited MainMenuPadrao: TMainMenu
-    Left = 414
-    Top = 260
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited ActionList1: TActionList
     Left = 450
     Top = 99
+  end
+  inherited MainMenuPadrao: TMainMenu
+    Left = 414
+    Top = 260
   end
 end

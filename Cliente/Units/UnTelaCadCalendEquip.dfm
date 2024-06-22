@@ -1,9 +1,11 @@
 inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
   Caption = 'Calend'#225'rios de Equipamentos'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -11,7 +13,6 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ExplicitLeft = 505
     end
     inherited LAlteradoPor: TLabel
-      Left = 527
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -19,43 +20,38 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ExplicitLeft = 527
     end
     inherited LblDataAlt: TDBText
-      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 556
+      ExplicitLeft = 560
     end
     inherited LblDataCad: TDBText
-      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 428
+      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
-      Left = 560
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 556
+      ExplicitLeft = 560
     end
     inherited LblUsuCad: TDBText
-      Left = 432
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 428
+      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
-      Left = 399
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -63,7 +59,6 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 361
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -72,6 +67,8 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label1: TLabel
       Left = 233
       Top = 83
@@ -598,6 +595,14 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 284

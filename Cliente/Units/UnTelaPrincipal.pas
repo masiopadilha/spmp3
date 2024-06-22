@@ -191,8 +191,6 @@ type
     Recursos4: TMenuItem;
     PeasdeReposio2: TMenuItem;
     Lubrificantes2: TMenuItem;
-    Area2: TMenuItem;
-    Area3: TMenuItem;
     PecadeReposicao1: TMenuItem;
     Equipamento1: TMenuItem;
     ConsultadePecas1: TMenuItem;
@@ -263,6 +261,14 @@ type
     butAtualizarDashboard: TSpeedButton;
     ChartOSOficina: TChart;
     HorizBarSeries2: TPieSeries;
+    JvShape1: TJvShape;
+    lblMTBF: TLabel;
+    imgMTBF: TImage;
+    lblMTBFVal: TLabel;
+    JvShape2: TJvShape;
+    Label1: TLabel;
+    Image1: TImage;
+    Label2: TLabel;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -397,8 +403,6 @@ type
     procedure Area1Click(Sender: TObject);
     procedure odas4Click(Sender: TObject);
     procedure rea2Click(Sender: TObject);
-    procedure Area2Click(Sender: TObject);
-    procedure Area3Click(Sender: TObject);
     procedure Pneus1Click(Sender: TObject);
     procedure Satelite1Click(Sender: TObject);
     procedure Pedidos1Click(Sender: TObject);
@@ -433,6 +437,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure butAtualizarDashboardClick(Sender: TObject);
+    procedure MTBF1Click(Sender: TObject);
+    procedure MTTR1Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -610,45 +616,6 @@ DM.FNomeConsulta := 'Áreas';
 if DM.ConsultarCombo <> '' then
   begin
     FrmTelaPrincipal.Tag := 1;
-    Try
-      Application.CreateForm(TFrmTelaConsultaPeriodo, FrmTelaConsultaPeriodo);
-      FrmTelaConsultaPeriodo.ShowModal;
-    Finally
-      DM.FCodCombo := EmptyStr;
-      DM.FValorCombo := EmptyStr;
-      DM.FTabela_auxiliar := -1;
-      FreeAndNil(FrmTelaConsultaPeriodo);
-    End;
-  end;
-end;
-
-procedure TFrmTelaPrincipal.Area2Click(Sender: TObject);
-begin
-DM.FTabela_auxiliar := 150;
-DM.FNomeConsulta := 'Áreas';
-if DM.ConsultarCombo <> '' then
-  begin
-    FrmTelaPrincipal.Tag := 4;
-    Try
-      Application.CreateForm(TFrmTelaConsultaPeriodo, FrmTelaConsultaPeriodo);
-      FrmTelaConsultaPeriodo.ShowModal;
-    Finally
-      DM.FCodCombo := EmptyStr;
-      DM.FValorCombo := EmptyStr;
-      DM.FTabela_auxiliar := -1;
-      FreeAndNil(FrmTelaConsultaPeriodo);
-    End;
-  end;
-end;
-
-procedure TFrmTelaPrincipal.Area3Click(Sender: TObject);
-begin
-  inherited;
-DM.FTabela_auxiliar := 150;
-DM.FNomeConsulta := 'Áreas';
-if DM.ConsultarCombo <> '' then
-  begin
-    FrmTelaPrincipal.Tag := 5;
     Try
       Application.CreateForm(TFrmTelaConsultaPeriodo, FrmTelaConsultaPeriodo);
       FrmTelaConsultaPeriodo.ShowModal;
@@ -3042,6 +3009,34 @@ begin
   End;
 end;
 
+procedure TFrmTelaPrincipal.MTBF1Click(Sender: TObject);
+begin
+  FrmTelaPrincipal.Tag := 4;
+  Try
+    Application.CreateForm(TFrmTelaConsultaPeriodo, FrmTelaConsultaPeriodo);
+    FrmTelaConsultaPeriodo.ShowModal;
+  Finally
+    DM.FCodCombo := EmptyStr;
+    DM.FValorCombo := EmptyStr;
+    DM.FTabela_auxiliar := -1;
+    FreeAndNil(FrmTelaConsultaPeriodo);
+  End;
+end;
+
+procedure TFrmTelaPrincipal.MTTR1Click(Sender: TObject);
+begin
+  FrmTelaPrincipal.Tag := 5;
+  Try
+    Application.CreateForm(TFrmTelaConsultaPeriodo, FrmTelaConsultaPeriodo);
+    FrmTelaConsultaPeriodo.ShowModal;
+  Finally
+    DM.FCodCombo := EmptyStr;
+    DM.FValorCombo := EmptyStr;
+    DM.FTabela_auxiliar := -1;
+    FreeAndNil(FrmTelaConsultaPeriodo);
+  End;
+end;
+
 procedure TFrmTelaPrincipal.NaoProgramadas1Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -3940,7 +3935,7 @@ begin
   begin
     if (DM.FSegundosDesliga > 0) then
     begin
-      if frmSistemaOcioso.Active = False then
+      if (frmSistemaOcioso.Active = False) and (frmSistemaOcioso <> nil) then
       begin
         frmSistemaOcioso.Left := RandomRange(0, Screen.Width - frmSistemaOcioso.Width);
         frmSistemaOcioso.Top := RandomRange(0, Screen.Height - frmSistemaOcioso.Height);

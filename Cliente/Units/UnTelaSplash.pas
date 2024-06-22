@@ -136,7 +136,7 @@ if AlphaBlendValue = 255 then
           DM.CalcularDashboard;
         end else
         begin
-          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 7;
+          JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 8;
           Application.ProcessMessages;
           Sleep(100);
         end;

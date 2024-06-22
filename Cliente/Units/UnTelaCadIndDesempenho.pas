@@ -163,7 +163,7 @@ DM.MSGAguarde('');
 
 
 DM.FDataConsulta1 := StrToDateTime('01/'+DM.qryIndDesempenhoMES.AsString+'/'+DM.qryIndDesempenhoANO.AsString);
-DM.FDataConsulta2 := IncMonth(DM.FDataConsulta1);
+DM.FDataConsulta2 := EndOfTheMonth(DateOf(DM.FDataConsulta1));
 
 LTotalHorasParadasEquip := 0;
 LTotalHorasTrabEquip := 0;

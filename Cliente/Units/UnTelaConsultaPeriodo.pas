@@ -177,25 +177,14 @@ if not Assigned(DmRelatorios) then
       end;
     4:
       begin
-//        DM.HorasParadasEquipamento(EmptyStr, 'Manutenção Corretiva', DM.FCodCombo, EmptyStr);
-//        LNumParadasCorret    := DM.FTotalParadasEquip;
-//        LTotalHorasEquipDisp := DM.HorasCalendario(1, '', DM.FCodCombo);
-
-
-        DM.FDMemTRelatGerencMTBF.Close; DM.FDMemTRelatGerencMTBF.CreateDataSet; DM.FDMemTRelatGerencMTBF.Append;
-        DM.FDMemTRelatGerencMTBFCODIGO.AsString    := DM.FCodCombo;
-        DM.FDMemTRelatGerencMTBFDESCRICAO.AsString := DM.FValorCombo;
-//        if LNumParadasCorret > 1 then
-//          DM.CDRelatGerencMTBFVALOR.AsFloat    := LTotalHorasEquipDisp/LNumParadasCorret
-//        else
-//          DM.CDRelatGerencMTBFVALOR.AsFloat    := 0;
-        DM.FDMemTRelatGerencMTBFVALOR.AsFloat      := DM.CalcularMTBF('', DaysBetween(DM.FDataConsulta1, DM.FDataConsulta2));
-        DM.FDMemTRelatGerencMTBFDATA1.AsString     := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
-        DM.FDMemTRelatGerencMTBFDATA2.AsString     := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
-        DM.FDMemTRelatGerencMTBF.Post;
+        DM.qryMTBEquipamentos.Close;
+        DM.qryMTBEquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
+        DM.qryMTBEquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
+        DM.qryMTBEquipamentos.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryMTBEquipamentos.Open;
 
         DmRelatorios.frxRRelatGerencMTBF.ShowReport();
-        DM.FDMemTRelatGerencMTBF.Close;
+        DM.qryMTBEquipamentos.Close;
       end;
     5:
       begin

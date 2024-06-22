@@ -332,8 +332,6 @@ type
     frxRFamRecursos: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
-    procedure frxDBManutProgEquipIndividualOpen(Sender: TObject);
-    procedure frxDBLubrificProgEquipIndividualOpen(Sender: TObject);
   private
     { Private declarations }
   public
@@ -371,24 +369,6 @@ begin
   DM.qryLubrificProgEquipPlanoTrab.Open;
 end;
 
-procedure TDmRelatorios.frxDBLubrificProgEquipIndividualOpen(Sender: TObject);
-begin
-//  DM.qryLubrificProgEquipItens.Close;
-//  DM.qryLubrificProgEquipItens.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryLubrificProgEquipItens.Params[1].AsString := DM.qryAuxiliar.FieldByName('CODLUBRIFICPROGFAMEQUIP').AsString;
-//  DM.qryLubrificProgEquipItens.Open;
-//
-//  DM.qryLubrificProgEquipItensEsp.Close;
-//  DM.qryLubrificProgEquipItensEsp.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryLubrificProgEquipItensEsp.Params[1].AsString := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
-//  DM.qryLubrificProgEquipItensEsp.Open;
-//
-//  DM.qryLubrificProgEquipPlanoTrab.Close;
-//  DM.qryLubrificProgEquipPlanoTrab.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryLubrificProgEquipPlanoTrab.Params[1].AsString := DM.qryAuxiliar.FieldByName('CODLUBRIFICPROGFAMEQUIP').AsString;
-//  DM.qryLubrificProgEquipPlanoTrab.Open;
-end;
-
 procedure TDmRelatorios.frxDBManutProgEquipGeralOpen(Sender: TObject);
 begin
   DM.qryManutProgEquipItens.Close;
@@ -405,25 +385,6 @@ begin
   DM.qryManutProgEquipPlanoTrab.Params[0].AsString := DM.FCodEmpresa;
   DM.qryManutProgEquipPlanoTrab.Params[1].AsString := DM.qryAuxiliar.FieldByName('CODMANUTPROGFAMEQUIP').AsString;
   DM.qryManutProgEquipPlanoTrab.Open;
-
-end;
-
-procedure TDmRelatorios.frxDBManutProgEquipIndividualOpen(Sender: TObject);
-begin
-//  DM.qryManutProgEquipItens.Close;
-//  DM.qryManutProgEquipItens.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryManutProgEquipItens.Params[1].AsString := DM.qryManutProgEquip.FieldByName('CODMANUTPROGFAMEQUIP').AsString;
-//  DM.qryManutProgEquipItens.Open;
-//
-//  DM.qryManutProgEquipItensEsp.Close;
-//  DM.qryManutProgEquipItensEsp.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryManutProgEquipItensEsp.Params[1].AsString := DM.qryManutProgEquip.FieldByName('CODIGO').AsString;
-//  DM.qryManutProgEquipItensEsp.Open;
-//
-//  DM.qryManutProgEquipPlanoTrab.Close;
-//  DM.qryManutProgEquipPlanoTrab.Params[0].AsString := DM.FCodEmpresa;
-//  DM.qryManutProgEquipPlanoTrab.Params[1].AsString := DM.qryManutProgEquip.FieldByName('CODMANUTPROGFAMEQUIP').AsString;
-//  DM.qryManutProgEquipPlanoTrab.Open;
 
 end;
 

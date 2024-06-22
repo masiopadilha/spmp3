@@ -17814,7 +17814,7 @@ object FrmTelaSplash: TFrmTelaSplash
     Height = 20
     BarColorFrom = 15329769
     BarColorTo = clTeal
-    Max = 13
+    Max = 14
     ParentColor = True
   end
   object Timer1: TTimer
