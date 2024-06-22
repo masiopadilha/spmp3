@@ -5877,6 +5877,16 @@ type
     qryMTBEquipamentosMTBF_MEDIA_FORMAT: TStringField;
     qryMTBEquipamentosDATA1: TDateField;
     qryMTBEquipamentosDATA2: TDateField;
+    qryMTTRMedio: TFDQuery;
+    qryMTTREquipamentos: TFDQuery;
+    qryMTTRMedioMTTR_MEDIA: TFMTBCDField;
+    qryMTTRMedioMTTR_MEDIA_FORMAT: TStringField;
+    qryMTTRMedioDATA1: TDateField;
+    qryMTTRMedioDATA2: TDateField;
+    qryMTTREquipamentosMTTR_MEDIA: TFMTBCDField;
+    qryMTTREquipamentosMTTR_MEDIA_FORMAT: TStringField;
+    qryMTTREquipamentosDATA1: TDateField;
+    qryMTTREquipamentosDATA2: TDateField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -10494,7 +10504,7 @@ end;
 procedure TDM.CalcularDashBoard;
 var
   LTotalSolicitado, LTotalFechado,
-  LTotalHorasParadasEquip, LTotalHorasTrabEquip: Real;
+  LTotalHorasParadasEquip, LTotalHorasTrabEquip, LMTBF, LMTTR: Real;
   LColor: TColor;
   I: SmallInt;
 begin
@@ -10847,38 +10857,6 @@ begin
       DM.qryDashboard.Next;
     end;
     DM.qryDashboard.Close;
-    //----------------------------Disponibilidade--------------------------------------------------------------------------------------------------------------------------------
-//    if FrmTelaSplash <> nil then
-//    begin
-//      FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
-//      FrmTelaSplash.LblProcesso.Caption := 'Calculando a disponibilidade dos equipamentos...';
-//      Application.ProcessMessages;
-//      Sleep(50);
-//    end;
-//
-//    DM.FDataConsulta1 := StrToDateTime('01/' + IntToStr(cbMes.ItemIndex + 1) + '/' + cbAno.Text);
-//    DM.FDataConsulta2 := EndOfTheMonth(DateOf(DM.FDataConsulta1));
-//
-//    //Calculando horas calendário dos equipamentos ativos
-//    LTotalHorasTrabEquip := DM.HorasCalendario(1, EmptyStr, EmptyStr);
-//
-//    //Calculando horas paradas dos equipamentos ativos
-//    DM.qryRelatGerencDispEquip.Filtered := False;
-//    DM.qryRelatGerencDispEquip.Close;
-//    DM.qryRelatGerencDispEquip.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
-//    DM.qryRelatGerencDispEquip.Params.ParamByName('data1').AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
-//    DM.qryRelatGerencDispEquip.Params.ParamByName('data2').AsString := FormatDateTime('yyyy/mm/dd hh:mm', DM.FDataConsulta2);
-//    DM.qryRelatGerencDispEquip.Open; DM.qryRelatGerencDispEquip.First;
-//    while not DM.qryRelatGerencDispEquip.Eof = True  do
-//      begin
-//        LTotalHorasParadasEquip   := LTotalHorasParadasEquip + DM.qryRelatGerencDispEquipHORASPARADASABERTAS.AsFloat + DM.qryRelatGerencDispEquipHORASPARADASFECHADAS.AsFloat;//DM.HorasParadasEquipamento(EmptyStr, EmptyStr, EmptyStr, EmptyStr);
-//        DM.qryRelatGerencDispEquip.Next;
-//      end;
-
-   // Result := ltotalhorasdisp/FTotalParadasEquip;
-   //lblMTBFVal.Caption := FormatFloat(',0.00%', 100 * (LTotalHorasTrabEquip - LTotalHorasParadasEquip)/LTotalHorasTrabEquip);
-
-
     //----------------------------MTBF--------------------------------------------------------------------------------------------------------------------------------
     if FrmTelaSplash <> nil then
     begin
@@ -10897,7 +10875,43 @@ begin
     DM.qryMTBMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
     DM.qryMTBMedio.Open;
 
+    LMTBF := DM.qryMTBMedioMTBF_MEDIA.AsFloat;
     lblMTBFVal.Caption := DM.qryMTBMedioMTBF_MEDIA_FORMAT.AsString;
+
+    DM.qryMTBMedio.Close;
+    //----------------------------MTTR--------------------------------------------------------------------------------------------------------------------------------
+    if FrmTelaSplash <> nil then
+    begin
+      FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
+      FrmTelaSplash.LblProcesso.Caption := 'Calculando o MTTR médio dos equipamentos...';
+      Application.ProcessMessages;
+      Sleep(50);
+    end;
+
+    DM.FDataConsulta1 := StrToDateTime('01/' + IntToStr(cbMes.ItemIndex + 1) + '/' + cbAno.Text);
+    DM.FDataConsulta2 := EndOfTheMonth(DateOf(DM.FDataConsulta1));
+
+    DM.qryMTTRMedio.Close;
+    DM.qryMTTRMedio.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
+    DM.qryMTTRMedio.Params.ParamByName('data1').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+    DM.qryMTTRMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+    DM.qryMTTRMedio.Open;
+
+    LMTTR := DM.qryMTTRMedioMTTR_MEDIA.AsFloat;
+    lblMTTRVal.Caption := DM.qryMTTRMedioMTTR_MEDIA_FORMAT.AsString;
+
+    DM.qryMTBMedio.Close;
+    //-------------------------Disponibilidade------------------------------------------------------------------------------------------------------------------------
+    if FrmTelaSplash <> nil then
+    begin
+      FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
+      FrmTelaSplash.LblProcesso.Caption := 'Calculando a Disponibilidade média dos equipamentos...';
+      Application.ProcessMessages;
+      Sleep(50);
+    end;
+
+
+    lblDisponibilidadeVal.Caption := FormatFloat(',0.00%', 100 * (LMTBF/(LMTBF + LMTTR)));
 
     DM.qryMTBMedio.Close;
   end;
