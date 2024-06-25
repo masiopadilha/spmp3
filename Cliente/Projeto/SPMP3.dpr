@@ -181,7 +181,9 @@ uses
   UnTempoOcioso in '..\Units\UnTempoOcioso.pas' {frmSistemaOcioso},
   UnTelaCadManutProgFamEquipConsulta in '..\Units\UnTelaCadManutProgFamEquipConsulta.pas' {FrmTelaCadManutProgFamEquipConsulta},
   UnTelaCadLubrificProgFamEquipConsulta in '..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas' {FrmTelaCadLubrificProgFamEquipConsulta},
-  UnTelaCadSolicitacaoTrabCons in '..\Units\UnTelaCadSolicitacaoTrabCons.pas' {FrmTelaCadSolicitacaoTrabCons};
+  UnTelaCadSolicitacaoTrabCons in '..\Units\UnTelaCadSolicitacaoTrabCons.pas' {FrmTelaCadSolicitacaoTrabCons},
+  unTelaOutrosIndicadores in '..\Units\unTelaOutrosIndicadores.pas' {FrmTelaOutrosIndicadores},
+  UnDMDashboard in '..\Units\UnDMDashboard.pas' {DMDashboard: TDataModule};
 
 {$R *.res}
 begin
@@ -201,6 +203,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   TStyleManager.TrySetStyle('Windows10 Malibu');
   Application.Title := 'SPMP - Sistema do Plano de Manutenção Programada';
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TDMDashboard, DMDashboard);
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
   Application.CreateForm(TfrmSistemaOcioso, frmSistemaOcioso);
@@ -246,6 +249,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
        FreeAndNil(frmSistemaOcioso);
        FreeAndNil(DMAlertas);
        FreeAndNil(DmRelatorios);
+       FreeAndNil(DmDashboard);
        FreeAndNil(DM);
 
       Application.Terminate;
@@ -256,6 +260,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
     FreeAndNil(FrmTelaAcesso);
     FreeAndNil(DMAlertas);
     FreeAndNil(DmRelatorios);
+    FreeAndNil(DmDashboard);
     FreeAndNil(DM);
   end;
 

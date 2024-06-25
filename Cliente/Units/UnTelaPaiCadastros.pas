@@ -44,8 +44,6 @@ type
     LAlteradoPor: TLabel;
     LblDataAlt: TDBText;
     LblUsuAlt: TDBText;
-    TimerLetreiro: TTimer;
-    TimerAlertas: TTimer;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -96,8 +94,6 @@ type
     function ObservacoesInputBox(const ACaption, APrompt:string): string;
 
     procedure PIdentificacaoMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure TimerLetreiroTimer(Sender: TObject);
-    procedure TimerAlertasTimer(Sender: TObject);
     procedure MmSalvarClick(Sender: TObject);
     procedure MmSairClick(Sender: TObject);
     procedure MmRelatorioClick(Sender: TObject);
@@ -232,19 +228,6 @@ if DM.FDataSetParam.Modified = True then BtnSalvar.ImageIndex := 115
 else BtnSalvar.ImageIndex := 2;
 PAuxiliares.Font.Color := clGreen;
 PAuxiliares.Caption := EmptyStr;
-end;
-
-procedure TFrmTelaPaiCadastros.TimerAlertasTimer(Sender: TObject);
-begin
-//UnFuncoesSPMP.Alertas;
-end;
-
-procedure TFrmTelaPaiCadastros.TimerLetreiroTimer(Sender: TObject);
-begin
-if LblAlertas.left >= -(LblAlertas.Width) then
-  LblAlertas.left := LblAlertas.left-1
-else
-  LblAlertas.left := PAlertas.width;
 end;
 
 procedure TFrmTelaPaiCadastros.Botao11Click(Sender: TObject);

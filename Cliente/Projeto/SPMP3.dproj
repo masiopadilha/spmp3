@@ -656,6 +656,15 @@
         <DCCReference Include="..\Units\UnTelaCadSolicitacaoTrabCons.pas">
             <Form>FrmTelaCadSolicitacaoTrabCons</Form>
         </DCCReference>
+        <DCCReference Include="..\Units\unTelaOutrosIndicadores.pas">
+            <Form>FrmTelaOutrosIndicadores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\UnDMDashboard.pas">
+            <Form>DMDashboard</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <RcItem Include="..\updater.bat">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>
@@ -745,6 +754,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\updater.bat" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
@@ -756,12 +771,6 @@
                 <DeployFile LocalName="C:\SPMP3\SPMP3.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>SPMP3.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="C:\SPMP3\updater.bat" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

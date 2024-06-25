@@ -779,9 +779,9 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited PDiversos: TPanel
     Top = 315
     Width = 1008
-    Height = 230
+    Height = 246
     ExplicitTop = 315
-    ExplicitHeight = 227
+    ExplicitHeight = 243
     inherited Label3: TLabel
       Top = 2
       Width = 194
@@ -794,7 +794,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Left = 5
       Top = 26
       Width = 998
-      Height = 199
+      Height = 215
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -881,12 +881,13 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
+    ExplicitTop = 562
     inherited Button1: TButton
       Hint = 'M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28
@@ -927,14 +928,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 504
-    Top = 65534
-  end
-  inherited TimerLetreiro: TTimer
-    Left = 418
-    Top = 65534
-  end
-  inherited TimerAlertas: TTimer
-    Left = 458
     Top = 65534
   end
   inherited PopupMenuRelat: TPopupMenu

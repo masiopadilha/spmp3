@@ -29,7 +29,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnTelaPrincipal, UnDmRelatorios, UnDM;
+uses UnTelaPrincipal, UnDmRelatorios, UnDM, UnDMDashboard;
 
 procedure TFrmTelaConsultaPeriodo.BtnOKClick(Sender: TObject);
 var
@@ -177,25 +177,25 @@ if not Assigned(DmRelatorios) then
       end;
     4:
       begin
-        DM.qryMTBEquipamentos.Close;
-        DM.qryMTBEquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
-        DM.qryMTBEquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
-        DM.qryMTBEquipamentos.Params[0].AsString := DM.FCodEmpresa;
-        DM.qryMTBEquipamentos.Open;
+        DMDashboard.qryMTBFEquipamentos.Close;
+        DMDashboard.qryMTBFEquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
+        DMDashboard.qryMTBFEquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
+        DMDashboard.qryMTBFEquipamentos.Params[0].AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTBFEquipamentos.Open;
 
         DmRelatorios.frxRRelatGerencMTBF.ShowReport();
-        DM.qryMTBEquipamentos.Close;
+        DMDashboard.qryMTBFEquipamentos.Close;
       end;
     5:
       begin
-        DM.qryMTTREquipamentos.Close;
-        DM.qryMTTREquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
-        DM.qryMTTREquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
-        DM.qryMTTREquipamentos.Params[0].AsString := DM.FCodEmpresa;
-        DM.qryMTTREquipamentos.Open;
+        DMDashboard.qryMTTREquipamentos.Close;
+        DMDashboard.qryMTTREquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
+        DMDashboard.qryMTTREquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
+        DMDashboard.qryMTTREquipamentos.Params[0].AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTTREquipamentos.Open;
 
         DmRelatorios.frxRRelatGerencMTTR.ShowReport();
-        DM.qryMTTREquipamentos.Close;
+        DMDashboard.qryMTTREquipamentos.Close;
 
       end;
     6:

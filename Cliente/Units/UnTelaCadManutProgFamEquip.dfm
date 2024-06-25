@@ -6,40 +6,40 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      Left = 762
+      Left = 766
       ExplicitLeft = 730
     end
     inherited LCadastroPor: TLabel
-      Left = 718
+      Left = 722
       ExplicitLeft = 686
     end
     inherited LblDataCad: TDBText
-      Left = 800
+      Left = 804
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 796
+      ExplicitLeft = 800
     end
     inherited LblUsuCad: TDBText
-      Left = 800
+      Left = 804
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 796
+      ExplicitLeft = 800
     end
     inherited LAlteracao: TLabel
-      Left = 913
+      Left = 917
       ExplicitLeft = 881
     end
     inherited LAlteradoPor: TLabel
-      Left = 887
+      Left = 891
       ExplicitLeft = 855
     end
     inherited LblDataAlt: TDBText
-      Left = 951
+      Left = 955
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 947
+      ExplicitLeft = 951
     end
     inherited LblUsuAlt: TDBText
-      Left = 951
+      Left = 955
       DataSource = DM.dsManutProgFamEquip
-      ExplicitLeft = 947
+      ExplicitLeft = 951
     end
   end
   inherited PIdentificacao: TPanel
@@ -499,10 +499,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   inherited PDiversos: TPanel
     Top = 247
     Width = 1008
-    Height = 113
+    Height = 136
     Align = alTop
     ExplicitTop = 247
-    ExplicitHeight = 113
+    ExplicitWidth = 1008
+    ExplicitHeight = 136
     inherited Label3: TLabel
       Width = 179
       Caption = 'PLANO DE TRABALHO'
@@ -513,7 +514,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Left = 4
       Top = 21
       Width = 323
-      Height = 88
+      Height = 111
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -555,7 +556,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       Left = 334
       Top = 21
       Width = 670
-      Height = 88
+      Height = 111
       Margins.Top = 20
       DataField = 'DETALHES'
       DataSource = DM.dsManutProgFamEquipPlanoTrab
@@ -570,6 +571,7 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
       TabOrder = 1
       OnExit = TabNextTab1AfterTabChange
       ExplicitLeft = 330
+      ExplicitHeight = 88
     end
   end
   inherited StatusBar1: TStatusBar
@@ -577,10 +579,11 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 547
+    Top = 563
     Width = 1012
     TabOrder = 7
-    ExplicitTop = 544
+    ExplicitTop = 560
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 565
@@ -608,11 +611,12 @@ inherited FrmTelaCadManutProgFamEquip: TFrmTelaCadManutProgFamEquip
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
-    Top = 365
+    Top = 388
     Width = 1006
     Height = 179
     Align = alTop
     TabOrder = 4
+    ExplicitTop = 365
     ExplicitWidth = 1002
     object Label7: TLabel
       Left = 7

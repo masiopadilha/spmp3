@@ -347,7 +347,7 @@ implementation
 
 uses UnTelaCadOrdemServicoHistorico, UnTelaInspConsulta,
   UnTelaCadEquipamentosHist, UnDM, UnTelaConsultaPeriodo,
-  UnTelaCadOrdemServicoGerencia;
+  UnTelaCadOrdemServicoGerencia, UnDMDashboard;
 
 {$R *.dfm}
 

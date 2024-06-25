@@ -36,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-uses UnDM, UnTelaPrincipal;
+uses UnDM, UnTelaPrincipal, UnDMDashboard;
 
 
 function TFrmTelaSplash.ResourceExists(const ResourceName: string): Boolean;
@@ -133,7 +133,7 @@ if AlphaBlendValue = 255 then
           LblProcesso.Caption := 'Carregando dados do dashboard...';
           Application.ProcessMessages;
           Sleep(100);
-          DM.CalcularDashboard;
+          DMDashboard.CalcularDashboard;
         end else
         begin
           JvGradientProgressBar1.Position := JvGradientProgressBar1.Position + 10;

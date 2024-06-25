@@ -1,46 +1,50 @@
 inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   Hint = 'Criar inspe'#231#245'es nos equipamentos da fam'#237'lia.'
   Caption = 'Lubrifica'#231#227'o Programada de Fam'#237'lia de Equipamento'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
-      Left = 762
+      Left = 766
       ExplicitLeft = 742
     end
     inherited LCadastroPor: TLabel
-      Left = 718
+      Left = 722
       ExplicitLeft = 698
     end
     inherited LblDataCad: TDBText
-      Left = 800
+      Left = 804
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 796
+      ExplicitLeft = 800
     end
     inherited LblUsuCad: TDBText
-      Left = 800
+      Left = 804
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 796
+      ExplicitLeft = 800
     end
     inherited LAlteracao: TLabel
-      Left = 913
+      Left = 917
       ExplicitLeft = 893
     end
     inherited LAlteradoPor: TLabel
-      Left = 887
+      Left = 891
       ExplicitLeft = 867
     end
     inherited LblDataAlt: TDBText
-      Left = 951
+      Left = 955
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 947
+      ExplicitLeft = 951
     end
     inherited LblUsuAlt: TDBText
-      Left = 951
+      Left = 955
       DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 947
+      ExplicitLeft = 951
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     Height = 123
     ExplicitHeight = 123
     object Label5: TLabel
@@ -390,6 +394,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   end
   inherited PProgramacao: TPanel
     Top = 178
+    Width = 1008
     Height = 65
     ExplicitTop = 178
     ExplicitHeight = 65
@@ -494,10 +499,12 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   end
   inherited PDiversos: TPanel
     Top = 247
-    Height = 113
+    Width = 1008
+    Height = 134
     Align = alTop
     ExplicitTop = 247
-    ExplicitHeight = 113
+    ExplicitWidth = 1008
+    ExplicitHeight = 134
     inherited Label3: TLabel
       Width = 179
       Caption = 'PLANO DE TRABALHO'
@@ -508,7 +515,7 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       Left = 334
       Top = 21
       Width = 670
-      Height = 88
+      Height = 109
       Margins.Top = 20
       DataField = 'DETALHES'
       DataSource = DM.dsLubrificProgFamEquipPlanoTrab
@@ -523,13 +530,14 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 0
       OnExit = TabNextTab1AfterTabChange
       ExplicitLeft = 330
+      ExplicitHeight = 88
     end
     object GrdPlanoTrabalho: TDBGrid
       AlignWithMargins = True
       Left = 4
       Top = 21
       Width = 323
-      Height = 88
+      Height = 109
       Hint = 
         'Tecle ENTER na(s) coluna(s) em negrito para incluir um registro ' +
         'ou efetue o duplo-clique para exclu'#237'-lo'
@@ -567,13 +575,20 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
         end>
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
   inherited PAlertas: TPanel
-    Top = 547
+    Top = 563
+    Width = 1012
     TabOrder = 7
-    ExplicitTop = 544
+    ExplicitTop = 560
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 565
+    Width = 1008
     TabOrder = 5
     ExplicitTop = 562
     inherited Button1: TButton
@@ -597,11 +612,12 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   object Panel1: TPanel [7]
     AlignWithMargins = True
     Left = 3
-    Top = 365
+    Top = 386
     Width = 1006
     Height = 179
     Align = alTop
     TabOrder = 4
+    ExplicitTop = 365
     ExplicitWidth = 1002
     object Label4: TLabel
       Left = 7

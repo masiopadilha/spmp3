@@ -881,7 +881,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   end
   inherited PDiversos: TPanel
     Width = 1008
-    Height = 200
+    Height = 216
+    ExplicitHeight = 213
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -1594,6 +1595,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         Left = 0
         Top = 0
         Caption = 'PrimTranspSecTransf'
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label29: TLabel
           Left = 6
           Top = 5
@@ -1688,7 +1691,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     Margins.Bottom = 2
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
     inherited LblAlertas: TLabel
       Left = 1011
@@ -1700,8 +1703,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
+    ExplicitTop = 562
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4
@@ -1797,14 +1801,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         ShortCut = 16466
       end
     end
-  end
-  inherited TimerLetreiro: TTimer
-    Left = 487
-    Top = 64
-  end
-  inherited TimerAlertas: TTimer
-    Left = 525
-    Top = 64
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 384

@@ -616,9 +616,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   inherited PDiversos: TPanel
     Top = 278
     Width = 1008
-    Height = 267
+    Height = 283
     ExplicitTop = 278
-    ExplicitHeight = 264
+    ExplicitHeight = 280
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -633,33 +633,34 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 237
+      Height = 253
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 996
-      ExplicitHeight = 234
+      ExplicitHeight = 250
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 206
+          Height = 222
           Align = alClient
           TabOrder = 0
           ExplicitWidth = 988
-          ExplicitHeight = 203
+          ExplicitHeight = 219
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 204
+            Height = 220
             Align = alClient
             Color = 14671839
             DataSource = DM.dsManutProgEquipItens
             DrawingStyle = gdsClassic
+            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -717,7 +718,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
                 PickList.Strings = (
                   'S'
                   'N')
-                ReadOnly = True
                 Title.Caption = 'Auton'#244'mo'
                 Visible = True
               end>
@@ -817,12 +817,13 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
+    ExplicitTop = 562
     inherited Button1: TButton
       Left = 853
       Hint = 'Itens Espec'#237'ficos a Inspecionar'
@@ -860,14 +861,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   inherited MainMenuPadrao: TMainMenu
     Left = 768
     Top = 158
-  end
-  inherited TimerLetreiro: TTimer
-    Left = 768
-    Top = 219
-  end
-  inherited TimerAlertas: TTimer
-    Left = 858
-    Top = 219
   end
   inherited PopupMenuRelat: TPopupMenu
     Left = 172

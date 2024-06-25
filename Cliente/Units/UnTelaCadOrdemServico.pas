@@ -687,6 +687,7 @@ if DM.qryOrdemServicoEXECAUTONOMO.IsNull then DM.qryOrdemServicoEXECAUTONOMO.AsS
 
 DM.qryOrdemServicoIMPORTANCIA.AsInteger := DM.AnalisarImportancia;
 
+
 if (DM.qryOrdemServicoSITUACAO.AsString = 'SOLICITADA') and (DM.qryOrdemServicoCODMANUTENCAO.AsString <> '') then
 begin
   DM.qryOrdemServicoEquipe.Open;
@@ -701,6 +702,7 @@ begin
       begin
         DM.qryOrdemServicoGerencia.Edit;
         DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
         DM.qryOrdemServicoGerencia.Post;
       end;
 
@@ -716,6 +718,7 @@ begin
       begin
         DM.qryOrdemServicoGerencia.Edit;
         DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
+        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
         DM.qryOrdemServicoGerencia.Post;
       end;
 
@@ -728,29 +731,40 @@ begin
   DM.qryOrdemServicoEquipeMObra.Close;
 end else
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA') and (DM.qryOrdemServicoCODMANUTENCAO.AsString <> '') then
+begin
+  DM.qryOrdemServicoEquipe.Open;
+  DM.qryOrdemServicoEquipeMObra.Open;
+  if DM.qryOrdemServicoEquipeMObra.RecordCount > 0 then
   begin
-    DM.qryOrdemServicoEquipe.Open;
-    DM.qryOrdemServicoEquipeMObra.Open;
-    if DM.qryOrdemServicoEquipeMObra.RecordCount > 0 then
+    DM.qryOrdemServico.Edit;
+    DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
+    DM.qryOrdemServico.Post;
+
+    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+      begin
+        DM.qryOrdemServicoGerencia.Edit;
+        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+        DM.qryOrdemServicoGerencia.Post;
+      end;
+
+    PSituacao.Caption := 'DETALHADA';
+    PSituacao.Color := clYellow;
+    PSituacao.Font.Color := clGreen;
+  end else
+  begin
+    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
     begin
-      DM.qryOrdemServico.Edit;
-      DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
-      DM.qryOrdemServico.Post;
-
-      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-        begin
-          DM.qryOrdemServicoGerencia.Edit;
-          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
-          DM.qryOrdemServicoGerencia.Post;
-        end;
-
-      PSituacao.Caption := 'DETALHADA';
-      PSituacao.Color := clYellow;
-      PSituacao.Font.Color := clGreen;
+      DM.qryOrdemServicoGerencia.Edit;
+      DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+      DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+      DM.qryOrdemServicoGerencia.Post;
     end;
-    DM.qryOrdemServicoEquipe.Close;
-    DM.qryOrdemServicoEquipeMObra.Close;
   end;
+  DM.qryOrdemServicoEquipe.Close;
+  DM.qryOrdemServicoEquipeMObra.Close;
+end;
+
 
 DM.MSGAguarde('');
 

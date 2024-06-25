@@ -1734,7 +1734,7 @@ begin
       Open;
       Edit;
     end;
-  if DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA'then
+  if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA') or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'FECHADA') then
     Button5.OnClick(Sender)
   else
     Button1.OnClick(Sender);

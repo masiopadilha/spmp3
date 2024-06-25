@@ -6,46 +6,46 @@ inherited FrmTelaCadIndDesempenho: TFrmTelaCadIndDesempenho
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
-      Left = 517
+      Left = 521
       Visible = False
       ExplicitLeft = 513
     end
     inherited LAlteradoPor: TLabel
-      Left = 539
+      Left = 543
       Visible = False
       ExplicitLeft = 535
     end
     inherited LblDataAlt: TDBText
-      Left = 572
+      Left = 576
       DataField = ''
       Visible = False
-      ExplicitLeft = 568
+      ExplicitLeft = 572
     end
     inherited LblDataCad: TDBText
-      Left = 444
+      Left = 448
       DataField = ''
       Visible = False
-      ExplicitLeft = 440
+      ExplicitLeft = 444
     end
     inherited LblUsuAlt: TDBText
-      Left = 572
+      Left = 576
       DataField = ''
       Visible = False
-      ExplicitLeft = 568
+      ExplicitLeft = 572
     end
     inherited LblUsuCad: TDBText
-      Left = 444
+      Left = 448
       DataField = ''
       Visible = False
-      ExplicitLeft = 440
+      ExplicitLeft = 444
     end
     inherited LCadastro: TLabel
-      Left = 411
+      Left = 415
       Visible = False
       ExplicitLeft = 407
     end
     inherited LCadastroPor: TLabel
-      Left = 373
+      Left = 377
       Visible = False
       ExplicitLeft = 369
     end

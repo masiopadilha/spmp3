@@ -6,40 +6,40 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   inherited PControle: TPanel
     Width = 1008
     inherited LCadastro: TLabel
-      Left = 695
+      Left = 699
       ExplicitLeft = 691
     end
     inherited LCadastroPor: TLabel
-      Left = 651
+      Left = 655
       ExplicitLeft = 647
     end
     inherited LblDataCad: TDBText
-      Left = 737
+      Left = 741
       DataSource = DM.dsOrdemServicoTercFora
-      ExplicitLeft = 733
+      ExplicitLeft = 737
     end
     inherited LblUsuCad: TDBText
-      Left = 737
+      Left = 741
       DataSource = DM.dsOrdemServicoTercFora
-      ExplicitLeft = 733
+      ExplicitLeft = 737
     end
     inherited LAlteracao: TLabel
-      Left = 857
+      Left = 861
       ExplicitLeft = 853
     end
     inherited LAlteradoPor: TLabel
-      Left = 831
+      Left = 835
       ExplicitLeft = 827
     end
     inherited LblDataAlt: TDBText
-      Left = 899
+      Left = 903
       DataSource = DM.dsOrdemServicoTercFora
-      ExplicitLeft = 895
+      ExplicitLeft = 899
     end
     inherited LblUsuAlt: TDBText
-      Left = 899
+      Left = 903
       DataSource = DM.dsOrdemServicoTercFora
-      ExplicitLeft = 895
+      ExplicitLeft = 899
     end
   end
   inherited PIdentificacao: TPanel
@@ -283,7 +283,8 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
   end
   inherited PProgramacao: TPanel
     Width = 1008
-    Height = 391
+    Height = 410
+    Align = alClient
     ExplicitHeight = 391
     inherited Label2: TLabel
       Width = 194
@@ -427,7 +428,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       Left = 508
       Top = 231
       Width = 252
-      Height = 145
+      Height = 173
       DataSource = DM.dsOrdemServicoTercForaAditivos
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -506,7 +507,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       Left = 17
       Top = 226
       Width = 480
-      Height = 150
+      Height = 178
       DataSource = DM.dsOrdemServicoTercForaOE
       TabOrder = 2
       TitleFont.Charset = DEFAULT_CHARSET
@@ -545,7 +546,7 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
       Left = 762
       Top = 231
       Width = 226
-      Height = 144
+      Height = 172
       DataField = 'MOTIVO'
       DataSource = DM.dsOrdemServicoTercForaAditivos
       TabOrder = 4
@@ -564,18 +565,15 @@ inherited FrmTelaCadOrdemServicoTercFora: TFrmTelaCadOrdemServicoTercFora
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
+    ExplicitTop = 560
+    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
-  end
-  inherited TimerLetreiro: TTimer
-    Left = 442
-  end
-  inherited TimerAlertas: TTimer
-    Left = 362
+    ExplicitTop = 562
   end
   inherited ActionList1: TActionList
     Left = 418

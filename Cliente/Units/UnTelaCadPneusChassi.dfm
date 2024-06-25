@@ -1,7 +1,10 @@
 inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 467
     end
@@ -10,11 +13,9 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsPneusChassi
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsPneusChassi
-      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       ExplicitLeft = 626
@@ -24,14 +25,13 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsPneusChassi
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsPneusChassi
-      ExplicitLeft = 927
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -279,6 +279,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     inherited Label2: TLabel
       Width = 62
       Caption = 'CHASSI'
@@ -324,6 +325,8 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     end
   end
   inherited PDiversos: TPanel
+    Width = 1008
+    Height = 216
     inherited Label3: TLabel
       Width = 55
       Caption = 'PNEUS'
@@ -334,7 +337,7 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       Left = 4
       Top = 21
       Width = 1000
-      Height = 175
+      Height = 191
       Hint = 'Tecle ENTER nas colunas em negrito para as op'#231#245'es de cadastro.'
       Margins.Top = 20
       Align = alClient
@@ -356,7 +359,17 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
       OnKeyPress = GrdPneusKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 563
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 565
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Atrelamento de Carrocerias'
       ImageIndex = 84
@@ -386,10 +399,6 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
     FixedRows = 0
     TabOrder = 7
     Visible = False
-  end
-  inherited TimerAlertas: TTimer
-    Left = 434
-    Top = 65534
   end
   object PopupMenuID: TPopupMenu
     Left = 640

@@ -5,6 +5,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    ExplicitWidth = 1008
     inherited LCadastro: TLabel
       Left = 691
       ExplicitLeft = 691
@@ -44,7 +45,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1004
     object Label4: TLabel
       Left = 93
       Top = 32
@@ -230,13 +230,12 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 211
-    ExplicitWidth = 1004
     ExplicitHeight = 211
     object Chart1: TChart
       AlignWithMargins = True
       Left = 4
       Top = 26
-      Width = 1000
+      Width = 996
       Height = 181
       Margins.Top = 25
       Legend.CheckBoxesStyle = cbsRadio
@@ -251,7 +250,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -286,10 +284,9 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   inherited PDiversos: TPanel
     Top = 366
     Width = 1008
-    Height = 179
+    Height = 195
     ExplicitTop = 366
-    ExplicitWidth = 1004
-    ExplicitHeight = 176
+    ExplicitHeight = 195
     inherited Label3: TLabel
       Width = 93
       Caption = 'CONTRATO'
@@ -524,20 +521,16 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   inherited StatusBar1: TStatusBar
     Top = 605
     Width = 1012
-    ExplicitTop = 602
-    ExplicitWidth = 1008
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
-    ExplicitTop = 586
+    ExplicitTop = 563
     ExplicitWidth = 1008
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
-    ExplicitTop = 546
-    ExplicitWidth = 1004
     inherited Button1: TButton
       Left = 852
       Hint = 'Tarefas'
@@ -585,8 +578,5 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       OnClick = Button6Click
       ExplicitLeft = 823
     end
-  end
-  inherited TimerAlertas: TTimer
-    Left = 338
   end
 end

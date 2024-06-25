@@ -1,7 +1,10 @@
 inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   Caption = 'Recursos'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited LCadastro: TLabel
       ExplicitLeft = 499
     end
@@ -10,11 +13,9 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
     inherited LblDataCad: TDBText
       DataSource = DM.dsRecursos
-      ExplicitLeft = 776
     end
     inherited LblUsuCad: TDBText
       DataSource = DM.dsRecursos
-      ExplicitLeft = 776
     end
     inherited LAlteracao: TLabel
       ExplicitLeft = 662
@@ -24,11 +25,9 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
     inherited LblDataAlt: TDBText
       DataSource = DM.dsRecursos
-      ExplicitLeft = 927
     end
     inherited LblUsuAlt: TDBText
       DataSource = DM.dsRecursos
-      ExplicitLeft = 927
     end
     inherited BtnConsultar: TButton
       Left = 151
@@ -36,6 +35,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label4: TLabel
       Left = 72
       Top = 32
@@ -312,6 +312,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     object PCDadosTecnicos: TPageControl
       AlignWithMargins = True
       Left = 6
@@ -736,6 +737,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   end
   inherited PDiversos: TPanel
     Width = 780
+    Height = 216
     Align = alLeft
     ExplicitWidth = 780
     object Label15: TLabel
@@ -1131,7 +1133,17 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnKeyPress = FormKeyPress
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 563
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 565
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Ferramentas'
       DisabledImageIndex = 38
@@ -1143,13 +1155,13 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     Left = 789
     Top = 343
     Width = 223
-    Height = 204
+    Height = 220
     Align = alRight
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 7
     ExplicitLeft = 785
-    ExplicitHeight = 201
+    ExplicitHeight = 217
     object ImgFotoRecurso: TImage
       Left = 25
       Top = 10
@@ -1188,10 +1200,6 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
       OnClick = BtnLimparClick
       OnExit = TabNextTab1AfterTabChange
     end
-  end
-  inherited TimerAlertas: TTimer
-    Left = 466
-    Top = 22
   end
   object PopupMenuFerramentas: TPopupMenu
     Left = 826

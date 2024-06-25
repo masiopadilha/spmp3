@@ -12,7 +12,7 @@ uses
   IdExplicitTLSClientServerBase, IdFTP, IdIOHandler, IdIOHandlerSocket,
   IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP, System.Math, VclTee.TeeGDIPlus,
   VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, JvExExtCtrls,
-  JvShape;
+  JvShape, Vcl.VirtualImage, Vcl.BaseImageCollection, Vcl.ImageCollection;
 
 type
   TFrmTelaPrincipal = class(TForm)
@@ -116,7 +116,6 @@ type
     InformaesGerenciaisCorporativas2: TMenuItem;
     ConsultadeAcessos1: TMenuItem;
     UsuariosAtivos1: TMenuItem;
-    TimerAlertas: TTimer;
     TimerOscioso: TTimer;
     Permissoes1: TMenuItem;
     ManutencaoProgramadadeFamilias1: TMenuItem;
@@ -207,7 +206,6 @@ type
     Familia1: TMenuItem;
     odos1: TMenuItem;
     Familia2: TMenuItem;
-    SpeedButton1: TSpeedButton;
     FamliadeEquipamentos1: TMenuItem;
     Equpamentos1: TMenuItem;
     Equipamentos5: TMenuItem;
@@ -240,10 +238,6 @@ type
     Consulta2: TMenuItem;
     Cadastro9: TMenuItem;
     Consulta3: TMenuItem;
-    imgLogoSPMP: TImage;
-    ChartSolicTrabalho: TChart;
-    Series1: TBarSeries;
-    Series2: TBarSeries;
     ShapeEficiencia: TJvShape;
     LblEficSolicTrabVal: TLabel;
     LblEficSolicTrab: TLabel;
@@ -270,9 +264,15 @@ type
     imgMTTR: TImage;
     lblMTTRVal: TLabel;
     lblDisponibilidade: TLabel;
-    imglblDisponibilidade: TImage;
+    imgDisponibilidade: TImage;
     ShapeDisponibilidade: TJvShape;
     lblDisponibilidadeVal: TLabel;
+    vimgSPMPLogo: TVirtualImage;
+    ImageCollection1: TImageCollection;
+    ChartSolicTrabalho: TChart;
+    BarSeries1: TBarSeries;
+    BarSeries2: TLineSeries;
+    Series1: THorizBarSeries;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -345,7 +345,6 @@ type
     procedure Diversos1Click(Sender: TObject);
     procedure IndicadoresdeDesempenho2Click(Sender: TObject);
     procedure InformaesGerenciaisCorporativas2Click(Sender: TObject);
-    procedure TimerAlertasTimer(Sender: TObject);
     procedure Alertas2Click(Sender: TObject);
     procedure Cadastro8Click(Sender: TObject);
     procedure Inventario1Click(Sender: TObject);
@@ -508,7 +507,8 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaAuditoria, UnDmAlertas, UnTelaCadEquipamentosAltCod,
   UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod,
   UnTempoOcioso, UnTelaCadManutProgFamEquipConsulta,
-  UnTelaCadLubrificProgFamEquipConsulta, UnTelaCadSolicitacaoTrabCons;
+  UnTelaCadLubrificProgFamEquipConsulta, UnTelaCadSolicitacaoTrabCons,
+  UnDMDashboard;
 
 
 procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
@@ -821,7 +821,7 @@ end;
 procedure TFrmTelaPrincipal.butAtualizarDashboardClick(Sender: TObject);
 begin
   DM.MSGAguarde('');
-  DM.CalcularDashboard;
+  DMDashboard.CalcularDashboard;
   DM.MSGAguarde('', False);
 end;
 
@@ -2190,6 +2190,11 @@ end;
 
 procedure TFrmTelaPrincipal.FormCreate(Sender: TObject);
 begin
+ChartTipoManutencao.Series[0].Transparency := 30;
+ChartSituacaoOS.Series[0].Transparency := 30;
+ChartOSOficina.Series[0].Transparency := 15;
+ChartSolicTrabalho.Series[0].Transparency := 20;
+ChartSolicTrabalho.Series[1].Transparency := 30;
 
 if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
   or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
@@ -2285,13 +2290,15 @@ begin
 
         ChartTipoManutencao.Width := Round(OriginalTipoManutencaoWidth * WidthRatio);
         ChartTipoManutencao.Height := Round(OriginalTipoManutencaoHeight * HeightRatio);
+       // ChartTipoManutencao.Top := ChartSituacaoOS.Height + 23;
+        ChartTipoManutencao.Left := ChartSituacaoOS.Width + 22;
 
         ChartSolicTrabalho.Width := Round(OriginalSolicTrabalhoWidth * WidthRatio);
         ChartSolicTrabalho.Height := Round(OriginalSolicTrabalhoHeight * HeightRatio) - 10;
         if ChartSolicTrabalho.Height < 165 then ChartSolicTrabalho.Height := 165;
         ChartSolicTrabalho.Top := Round(Self.ClientHeight - ChartSolicTrabalho.Height) - 50;
 
-        ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.8);
+        ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.65);
         if ChartOSOficina.Width < 345 then ChartOSOficina.Width := 345;
         ChartOSOficina.Height := Round(OriginalOSOficinaHeight * HeightRatio);
 
@@ -2300,9 +2307,54 @@ begin
         LblEficSolicTrabVal.Top := ChartSolicTrabalho.Top - 60;
         imgEficSolicTrab.Top := ChartSolicTrabalho.Top - 60;
 
-        ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 35;
-        ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 20;
+        ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 48;
+        ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 15;
+
+//        ShapeMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 17;
+//        lblMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
+//        lblMTBFVal.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 97;
+//        imgMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
+//
+//        ShapeMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 17;
+//        lblMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
+//        lblMTTRVal.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 127;
+//        imgMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
+
+        ShapeMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
+        lblMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+        lblMTBFVal.Left := ShapePeriodo.Left - lblMTBFVal.Width - 10;
+        imgMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+
+        ShapeMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
+        lblMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+        lblMTTRVal.Left := ShapePeriodo.Left - lblMTTRVal.Width - 19;
+        imgMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
       end;
+
+    if WindowState = wsMaximized then
+    begin
+
+      vimgSPMPLogo.ImageIndex := 0;
+      vimgSPMPLogo.ImageHeight := 125;
+      vimgSPMPLogo.ImageWidth := 548;
+
+
+//      ShapeDisponibilidade.Top := ShapeDisponibilidade.Top + 30;
+//      lblDisponibilidade.Top := lblDisponibilidade.Top + 30;
+//      lblDisponibilidadeVal.Top := lblDisponibilidade.Top + 30;
+//      imgDisponibilidade.Top := imgDisponibilidade.Top + 30;
+    end else
+    if ClientWidth >= 1185 then
+    begin
+      vimgSPMPLogo.ImageIndex := 1;
+      vimgSPMPLogo.ImageHeight := 100;
+      vimgSPMPLogo.ImageWidth := 438;
+    end else
+    begin
+      vimgSPMPLogo.ImageIndex := 2;
+      vimgSPMPLogo.ImageHeight := 85;
+      vimgSPMPLogo.ImageWidth := 372;
+    end;
   end;
 end;
 
@@ -3973,16 +4025,6 @@ begin
   Finally
     FreeAndNil(FrmTelaUsuariosAtivos);
   End;
-end;
-
-procedure TFrmTelaPrincipal.TimerAlertasTimer(Sender: TObject);
-begin
-//  try
-//    DM.ConsultarAlertas;
-//  except
-//    TimerAlertas.Enabled := False;
-//  end;
-
 end;
 
 procedure TFrmTelaPrincipal.TimerLetreiroTimer(Sender: TObject);

@@ -11601,9 +11601,6 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     ParentBackground = False
     TabOrder = 0
     ExplicitWidth = 500
-    DesignSize = (
-      504
-      60)
     object Image1: TImage
       Left = 0
       Top = 0
@@ -12039,12 +12036,16 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
         9B19924EEEF97F3E0AAB43077639F50000000049454E44AE426082}
     end
     object BtnAjuda: TButton
+      AlignWithMargins = True
       Left = 467
-      Top = 17
+      Top = 16
       Width = 28
       Height = 28
       Hint = 'Ajuda'
-      Anchors = [akTop, akRight]
+      Margins.Top = 15
+      Margins.Right = 8
+      Margins.Bottom = 15
+      Align = alRight
       DisabledImageIndex = 18
       ImageAlignment = iaCenter
       ImageIndex = 17
@@ -12053,6 +12054,7 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
       ShowHint = True
       TabOrder = 0
       OnClick = BtnAjudaClick
+      ExplicitLeft = 463
     end
   end
   object PCentro: TPanel
@@ -12126,8 +12128,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
     ExplicitTop = 261
     ExplicitWidth = 500
     object BtnOK: TButton
-      Left = 171
-      Top = 6
+      Left = 173
+      Top = 7
       Width = 75
       Height = 25
       Caption = 'OK'
@@ -12135,8 +12137,8 @@ object FrmTelaPaiOKCancel: TFrmTelaPaiOKCancel
       TabOrder = 0
     end
     object BtnFechar: TButton
-      Left = 253
-      Top = 6
+      Left = 254
+      Top = 7
       Width = 75
       Height = 25
       Caption = 'Sair'
