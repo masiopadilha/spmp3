@@ -276,7 +276,8 @@ begin
     end;
 
     DM.qryOrdemServicoGerencia.Edit;
-    DM.qryOrdemServicoGerenciaSITUACAO.AsString    := DM.qryOrdemServicoSITUACAO.AsString;
+    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'PROGRAMADA') and ((DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'REPROGRAMADA')) then
+      DM.qryOrdemServicoGerenciaSITUACAO.AsString    := 'PROGRAMADA';
     DM.qryOrdemServicoGerenciaDATAPROGINI.AsString := DM.qryOrdemServicoDATAPROGINI.AsString;
     DM.qryOrdemServicoGerencia.Post;
     if FrmTelaCadOrdemServico <> nil then

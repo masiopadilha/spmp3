@@ -28,9 +28,6 @@ type
     Label8: TLabel;
     EdtServico: TDBEdit;
     Label11: TLabel;
-    Chart1: TChart;
-    Series1: TBarSeries;
-    Series2: TBarSeries;
     Label17: TLabel;
     Label18: TLabel;
     PSituacao: TPanel;
@@ -62,6 +59,9 @@ type
     Label21: TLabel;
     EdtCentroCusto: TDBEdit;
     BtnCentroCusto: TButton;
+    Chart1: TChart;
+    BarSeries1: TBarSeries;
+    Series1: TBarSeries;
     procedure BtnNovoClick(Sender: TObject);
 
     function MontarGrafico(Data: TDateTime; Chart: TChart): Boolean;

@@ -8,7 +8,9 @@ uses
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Grids, Vcl.DBGrids, Vcl.Mask,
   Vcl.DBCtrls, JvExMask, JvToolEdit, JvDBControls, Data.DB, System.DateUtils,
   Vcl.ImgList, Datasnap.DBClient, Vcl.ComCtrls, System.ImageList, FireDAC.Stan.Param,
-  Vcl.Menus, JvExDBGrids, JvDBGrid;
+  Vcl.Menus, JvExDBGrids, JvDBGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmTelaInspFechamento = class(TFrmTelaPaiOkCancel)
@@ -62,6 +64,9 @@ type
     GrdRotaManut: TJvDBGrid;
     GrdRotaManutItens: TJvDBGrid;
     GrdRotaManutItensEsp: TJvDBGrid;
+    fdmInputBox: TFDMemTable;
+    fdmInputBoxCODIGO: TStringField;
+    dsInputBox: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RGFiltroClick(Sender: TObject);
@@ -113,6 +118,8 @@ type
       State: TGridDrawState);
   private
     hora_futura: TDateTime;
+    LProblemaItem, LProblemaItemEsp: Boolean;
+    LManutRetorno :String;
     { Private declarations }
   public
     { Public declarations }
@@ -212,6 +219,22 @@ PAuxiliares.Font.Color := clBlack;
               //Verifica itens problemáticos detectados após a manutenção
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryManutPeriodicasItens.First;
+
+              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+              begin
+                LManutRetorno := '';
+
+                fdmInputBox.Close;
+                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open;
+                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+                DM.qryAuxiliar.Close;
+              end;
+
+
               while not DM.qryManutPeriodicasItens.Eof = True do
                 begin
                   if (DM.qryManutPeriodicasItensRUIM.AsString = 'S') or (DM.qryManutPeriodicasItensREGULAR.AsString = 'S') then
@@ -264,7 +287,8 @@ PAuxiliares.Font.Color := clBlack;
                 begin
                   LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
                                                                 , DM.qryManutPeriodicasCODEQUIPAMENTO.AsString, DM.qryManutPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, EmptyStr, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0'
+                                                                , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
 
                   DM.qryManutPeriodicas.Edit;
@@ -368,6 +392,21 @@ PAuxiliares.Font.Color := clBlack;
               //Verifica itens problemáticos detectados após a Lubrificação
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryLubrificPeriodicasItens.First;
+
+              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+              begin
+                LManutRetorno := '';
+
+                fdmInputBox.Close;
+                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open;
+                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+                DM.qryAuxiliar.Close;
+              end;
+
               while not DM.qryLubrificPeriodicasItens.Eof = True do
                 begin
                   if (DM.qryLubrificPeriodicasItensRUIM.AsString = 'S') or (DM.qryLubrificPeriodicasItensREGULAR.AsString = 'S') then
@@ -418,9 +457,10 @@ PAuxiliares.Font.Color := clBlack;
             //Gerar OS com itens problemáticos
             if CDItensProb.RecordCount > 0 then
               begin
-                LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
-                                                              , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryLubrificProgEquipCODOFICINA.AsString, EmptyStr, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
+                  LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
+                                                                , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, 'N'
+                                                                , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0'
+                                                                , DM.qryLubrificProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
@@ -538,6 +578,21 @@ PAuxiliares.Font.Color := clBlack;
                   //Verifica itens problemáticos detectados após a manutenção
                   CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
                   DM.qryRotaPeriodicasManutItens.First;
+
+                  if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+                  begin
+                    LManutRetorno := '';
+
+                    fdmInputBox.Close;
+                    fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+
+                    DM.qryAuxiliar.Close;
+                    DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+                    DM.qryAuxiliar.Open;
+                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+                    DM.qryAuxiliar.Close;
+                  end;
+
                   while not DM.qryRotaPeriodicasManutItens.Eof do
                     begin
                       if (DM.qryRotaPeriodicasManutItensRUIM.AsString = 'S') or (DM.qryRotaPeriodicasManutItensREGULAR.AsString = 'S') then
@@ -590,7 +645,8 @@ PAuxiliares.Font.Color := clBlack;
                     begin
                       LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (CORRETIVA)'
                                                                     , DM.qryRotaPeriodicasManutCODEQUIPAMENTO.AsString, DM.qryRotaPeriodicasManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0', DM.qryManutProgEquipCODOFICINA.AsString, EmptyStr, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                                                    , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0'
+                                                                    , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
 
 
                       DM.qryRotaPeriodicasManut.Edit;
@@ -1272,6 +1328,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEspEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1281,6 +1338,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'S') then
   begin
@@ -1290,6 +1348,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryRotaPeriodicasManutItensEspBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspBOM.AsString = EmptyStr)) then
   begin
@@ -1299,6 +1358,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'S') then
   begin
@@ -1308,6 +1368,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryRotaPeriodicasManutItensEspREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspREGULAR.AsString = EmptyStr)) then
   begin
@@ -1317,6 +1378,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'S';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'S') then
   begin
@@ -1326,6 +1388,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryRotaPeriodicasManutItensEspRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensEspRUIM.AsString = EmptyStr)) then
   begin
@@ -1335,6 +1398,7 @@ begin
     DM.qryRotaPeriodicasManutItensEspREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensEspRUIM.AsString      := 'S';
     DM.qryRotaPeriodicasManutItensEsp.Post;
+    LProblemaItemEsp := True;
   end;
 end;
 
@@ -1414,6 +1478,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = 'N') or (DM.qryRotaPeriodicasManutItensEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1423,6 +1488,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'S') then
   begin
@@ -1432,6 +1498,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryRotaPeriodicasManutItensBOM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensBOM.AsString = EmptyStr)) then
   begin
@@ -1441,6 +1508,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'S') then
   begin
@@ -1450,6 +1518,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryRotaPeriodicasManutItensREGULAR.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensREGULAR.AsString = EmptyStr)) then
   begin
@@ -1459,6 +1528,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'S';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'S') then
   begin
@@ -1468,6 +1538,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'N';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryRotaPeriodicasManutItensRUIM.AsString) = 'N') or (DM.qryRotaPeriodicasManutItensRUIM.AsString = EmptyStr)) then
   begin
@@ -1477,6 +1548,7 @@ begin
     DM.qryRotaPeriodicasManutItensREGULAR.AsString   := 'N';
     DM.qryRotaPeriodicasManutItensRUIM.AsString      := 'S';
     DM.qryRotaPeriodicasManutItens.Post;
+    LProblemaItem := True;
   end;
 end;
 
@@ -1536,6 +1608,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1545,6 +1618,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'S') then
   begin
@@ -1554,6 +1628,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end;
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryLubrificPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspBOM.AsString = EmptyStr)) then
   begin
@@ -1563,6 +1638,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'S') then
   begin
@@ -1572,6 +1648,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryLubrificPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
   begin
@@ -1581,6 +1658,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'S';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'S') then
   begin
@@ -1590,6 +1668,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryLubrificPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensEspRUIM.AsString = EmptyStr)) then
   begin
@@ -1599,6 +1678,7 @@ begin
     DM.qryLubrificPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensEspRUIM.AsString      := 'S';
     DM.qryLubrificPeriodicasItensEsp.Post;
+    LProblemaItemEsp := True;
   end;
 end;
 
@@ -1658,6 +1738,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryManutPeriodicasItensEspEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEspEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1667,6 +1748,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'S') then
   begin
@@ -1676,6 +1758,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end;
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryManutPeriodicasItensEspBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspBOM.AsString = EmptyStr)) then
   begin
@@ -1685,6 +1768,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'S') then
   begin
@@ -1694,6 +1778,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryManutPeriodicasItensEspREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensEspREGULAR.AsString = EmptyStr)) then
   begin
@@ -1703,6 +1788,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'S';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'S') then
   begin
@@ -1712,6 +1798,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryManutPeriodicasItensEspRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensEspRUIM.AsString = EmptyStr)) then
   begin
@@ -1721,6 +1808,7 @@ begin
     DM.qryManutPeriodicasItensEspREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensEspRUIM.AsString      := 'S';
     DM.qryManutPeriodicasItensEsp.Post;
+    LProblemaItemEsp := True;
   end;
 end;
 
@@ -1779,6 +1867,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryLubrificPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryLubrificPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1788,6 +1877,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'S') then
   begin
@@ -1797,6 +1887,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryLubrificPeriodicasItensBOM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensBOM.AsString = EmptyStr)) then
   begin
@@ -1806,6 +1897,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'S') then
   begin
@@ -1815,6 +1907,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryLubrificPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryLubrificPeriodicasItensREGULAR.AsString = EmptyStr)) then
   begin
@@ -1824,6 +1917,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'S';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'S') then
   begin
@@ -1833,6 +1927,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'N';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryLubrificPeriodicasItensRUIM.AsString) = 'N') or (DM.qryLubrificPeriodicasItensRUIM.AsString = EmptyStr)) then
   begin
@@ -1842,6 +1937,7 @@ begin
     DM.qryLubrificPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryLubrificPeriodicasItensRUIM.AsString      := 'S';
     DM.qryLubrificPeriodicasItens.Post;
+    LProblemaItem := True;
   end;
 end;
 
@@ -1900,6 +1996,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'EXECUTADO') and ((DM.qryManutPeriodicasItensEXECUTADO.AsString = 'N') or (DM.qryManutPeriodicasItensEXECUTADO.AsString = EmptyStr)) then
   begin
@@ -1909,6 +2006,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and (Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'S') then
   begin
@@ -1918,6 +2016,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'BOM') and ((Trim(DM.qryManutPeriodicasItensBOM.AsString) = 'N') or (DM.qryManutPeriodicasItensBOM.AsString = EmptyStr)) then
   begin
@@ -1927,6 +2026,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and (Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'S') then
   begin
@@ -1936,6 +2036,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'REGULAR') and ((Trim(DM.qryManutPeriodicasItensREGULAR.AsString) = 'N') or (DM.qryManutPeriodicasItensREGULAR.AsString = EmptyStr)) then
   begin
@@ -1945,6 +2046,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'S';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := True;
   end else
   if (Column.FieldName = 'RUIM') and (Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'S') then
   begin
@@ -1954,6 +2056,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItemEsp := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensRUIM.AsString = EmptyStr)) then
   begin
@@ -1963,6 +2066,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'S';
     DM.qryManutPeriodicasItens.Post;
+    LProblemaItem := True;
   end;
 end;
 

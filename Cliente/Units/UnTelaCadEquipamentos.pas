@@ -119,6 +119,7 @@ type
     Famlia1: TMenuItem;
     PFundoDadosTecnicos: TPanel;
     Label32: TLabel;
+    DBCheckBox1: TDBCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
@@ -464,6 +465,7 @@ if DM.FParamAuxiliar[1] = '' then
   end
 else
 DM.FTabela_auxiliar := 25;
+DM.FNomeConsulta := 'Equipamentos';
   inherited;
 if DM.qryEquipamentosCODFAMILIAEQUIP.AsString <> EmptyStr then
   begin

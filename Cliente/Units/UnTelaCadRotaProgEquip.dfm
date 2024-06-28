@@ -204,9 +204,9 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
   inherited PDiversos: TPanel
     Top = 189
     Width = 1008
-    Height = 356
+    Height = 372
     ExplicitTop = 189
-    ExplicitHeight = 353
+    ExplicitHeight = 369
     object GrdInspecoes: TDBGrid
       Left = 3
       Top = 194
@@ -382,12 +382,13 @@ inherited FrmTelaCadRotaProgEquip: TFrmTelaCadRotaProgEquip
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
+    ExplicitTop = 562
   end
   object CDValidaEquip: TClientDataSet
     Aggregates = <>

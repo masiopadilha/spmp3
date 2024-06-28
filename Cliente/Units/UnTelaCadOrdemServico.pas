@@ -73,6 +73,7 @@ type
     BtnResponsavel: TButton;
     Label28: TLabel;
     DBGrid: TJvDBGrid;
+    Label30: TLabel;
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -562,7 +563,7 @@ begin
 if DM.qryOrdemServico.Active = False then Exit;
 if DM.qryOrdemServico.IsEmpty = True then Exit;
 DM.FTabela_auxiliar := 450;
-DM.FNomeConsulta := 'Ordens de Serviços';
+DM.FNomeConsulta := 'Ordens de Serviço';
 DM.qryOrdemServico.Edit;
 if DM.ConsultarCombo <> EmptyStr then
   begin
@@ -653,10 +654,10 @@ if DM.qryOrdemServicoCODCENTROCUSTO.IsNull = True then
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CENTRO DE CUSTO DA O.S.!'; EdtCentroCusto.SetFocus;
     Exit;
   end;
-//if DM.qryOrdemServicoMATRICULA.IsNull = True then
-//  begin
-//    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DA O.S.!'; EdtSolicitado.SetFocus; Exit;
-//  end;
+if DM.qryOrdemServicoMATRICULA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DA O.S.!'; EdtSolicitado.SetFocus; Exit;
+  end;
 if DM.qryOrdemServicoPRIORIDADEPARADA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DA O.S.!'; CBPrioridade.SetFocus; Exit;
@@ -668,6 +669,10 @@ if DM.qryOrdemServicoCRITICIDADE.IsNull = True then
 if (DM.qryOrdemServicoTEMPOPREVISTO.AsFloat <= 0) and (DM.qryOrdemServicoCODOFICINA.IsNull) then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O TEMPO PREVISTO DA O.S.!'; EdtTempoPrev.SetFocus; Exit;
+  end;
+if DM.qryOrdemServicoNOMERESPONSAVEL.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O RESPONSÁVEL DA O.S.!'; EdtResponsavel.SetFocus; Exit;
   end;
 
 if DM.qryOrdemServicoSOLICTRAB.IsNull then DM.qryOrdemServicoSOLICTRAB.AsString := 'N';
@@ -815,6 +820,8 @@ DM.qryPlanoTrabalhoAut.Close;
 if PAuxiliares.Caption <> 'REGISTRO GRAVADO COM SUCESSO!!!' then Exit;
 
 EdtCodigo.ReadOnly := True;
+
+DM.qryOrdemServico.Edit;
 
 DM.MSGAguarde('', False);
 end;

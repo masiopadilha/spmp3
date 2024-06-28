@@ -1027,7 +1027,7 @@ LCustoTotalExec := 0;
     end;
    //---------------------------------------------------------------------------------------------------------------------
 
-//ORDENS DE SERVIÇOS
+//ORDENS DE SERVIÇO
     if (Relatorio = 'Ordens de Serviço por Equipamento') or (Relatorio = 'Ordens de Serviço por Posição')
       or (Relatorio = 'Ordens de Serviço por Linha') or (Relatorio = 'Ordens de Serviço por Célula')
         or (Relatorio = 'Ordens de Serviço por Área') or (Relatorio = 'Ordens de Serviço por Motivos de Paradas')

@@ -12,7 +12,10 @@ uses
   IdExplicitTLSClientServerBase, IdFTP, IdIOHandler, IdIOHandlerSocket,
   IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdHTTP, System.Math, VclTee.TeeGDIPlus,
   VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart, JvExExtCtrls,
-  JvShape, Vcl.VirtualImage, Vcl.BaseImageCollection, Vcl.ImageCollection;
+  JvShape, Vcl.VirtualImage, Vcl.BaseImageCollection, Vcl.ImageCollection,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Stan.Async, FireDAC.DApt,
+  System.Notification;
 
 type
   TFrmTelaPrincipal = class(TForm)
@@ -273,6 +276,25 @@ type
     BarSeries1: TBarSeries;
     BarSeries2: TLineSeries;
     Series1: THorizBarSeries;
+    ShapeOficina: TJvShape;
+    cbOficina: TDBLookupComboBox;
+    memFiltros: TFDMemTable;
+    memFiltrosCODOFICINA: TStringField;
+    memFiltrosMATRICULA: TStringField;
+    dsFiltros: TDataSource;
+    qryOficinas: TFDQuery;
+    lblOficina: TLabel;
+    dsOficinas: TDataSource;
+    btnFiltraOficina: TSpeedButton;
+    ShapeSolicitante: TJvShape;
+    lblSolicitante: TLabel;
+    CBSolicitante: TDBLookupComboBox;
+    btnFiltraSolic: TSpeedButton;
+    qryFuncionarios: TFDQuery;
+    dsFuncionarios: TDataSource;
+    qryFuncionariosMATRICULA: TStringField;
+    qryFuncionariosNOME: TStringField;
+    NotificationCenter1: TNotificationCenter;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -442,6 +464,10 @@ type
     procedure butAtualizarDashboardClick(Sender: TObject);
     procedure MTBF1Click(Sender: TObject);
     procedure MTTR1Click(Sender: TObject);
+    procedure btnFiltraOficinaClick(Sender: TObject);
+    procedure btnFiltraSolicClick(Sender: TObject);
+    procedure CBSolicitanteKeyPress(Sender: TObject; var Key: Char);
+    procedure cbOficinaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
 
@@ -818,10 +844,159 @@ begin
   End;
 end;
 
+procedure TFrmTelaPrincipal.btnFiltraOficinaClick(Sender: TObject);
+begin
+  //----------------------------OFICINAS DE OS---------------------------------------------------------------------------------------------------------------------------------
+    if cbOficina.Text = '' then Exit;
+
+    DM.MSGAguarde('');
+    ChartOSOficina.Series[0].Clear;
+
+    DMDashboard.qryOficinasIndiv.Close;
+    DMDashboard.qryOficinasIndiv.Params[0].AsInteger := cbMes.ItemIndex + 1;
+    DMDashboard.qryOficinasIndiv.Params[1].AsInteger := StrToInt(cbAno.Text);
+    DMDashboard.qryOficinasIndiv.Params[2].AsString := DM.FCodEmpresa;
+    DMDashboard.qryOficinasIndiv.Params[3].AsString := memFiltrosCODOFICINA.AsString;
+    DMDashboard.qryOficinasIndiv.Open;
+    if DMDashboard.qryOficinasIndivOFICINA.AsString <> '' then
+    begin
+      DMDashboard.qryOficinasIndiv.First;
+      ChartOSOficina.Series[0].Add(DMDashboard.qryOficinasIndivTOTAL.AsInteger, DMDashboard.qryOficinasIndivOFICINA.AsString);
+    end;
+    DM.MSGAguarde('', False);
+end;
+
+procedure TFrmTelaPrincipal.btnFiltraSolicClick(Sender: TObject);
+var
+  LTotalSolicitado, LTotalFechado: Integer;
+  LSolicitadas: array[1..12] of Integer;
+  LFechadas: array[1..12] of Integer;
+
+begin
+    //----------------------------SOLICITADAS-------------------------------------------------------------------------------------------------------------------------------------
+    if CBSolicitante.Text = '' then Exit;
+
+    DM.MSGAguarde('');
+
+    ChartSolicTrabalho.Series[0].Clear;
+    ChartSolicTrabalho.Series[1].Clear;
+    LTotalSolicitado := 0;
+    LTotalFechado := 0;
+    DMDashboard.qryDashboard.Close;
+    DMDashboard.qryDashboard.SQL.Text := 'SELECT'
+                                  +' DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%b'') AS MES, COALESCE(COUNT(s.`CODIGO`), 0) AS TOTALSOLIC'
+                                  + ' FROM'
+                                  + ' (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL'
+                                  + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
+                                  + ' LEFT JOIN'
+                                  + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA'' and s.`MATRICULA` = :matricula'
+                                  + ' GROUP BY MES'
+                                  + ' ORDER BY'
+                                  + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
+    DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
+    DMDashboard.qryDashboard.Params[1].AsString := qryFuncionariosMATRICULA.AsString;
+    DMDashboard.qryDashboard.Open;
+
+    while not DMDashboard.qryDashboard.Eof = True do
+    begin
+      LSolicitadas[DMDashboard.qryDashboard.RecNo] := DMDashboard.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+      LTotalSolicitado := LTotalSolicitado + DMDashboard.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+
+      DMDashboard.qryDashboard.Next;
+    end;
+    DMDashboard.qryDashboard.Close;
+
+    //------------------------------FECHADAS--------------------------------------------------------------------------------------------------------------------------------------
+    DMDashboard.qryDashboard.Close;
+    DMDashboard.qryDashboard.SQL.Text := 'SELECT'
+                                  +' DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%b'') AS MES, COALESCE(COUNT(s.`CODIGO`), 0) AS TOTALSOLIC'
+                                  + ' FROM'
+                                  + ' (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL'
+                                  + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
+                                  + ' LEFT JOIN'
+                                  + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA'' and s.`MATRICULA` = :matricula'
+                                  + ' GROUP BY MES'
+                                  + ' ORDER BY'
+                                  + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
+    DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
+    DMDashboard.qryDashboard.Params[1].AsString := qryFuncionariosMATRICULA.AsString;
+    DMDashboard.qryDashboard.Open;
+
+    while not DMDashboard.qryDashboard.Eof = True do
+    begin
+      LFechadas[DMDashboard.qryDashboard.RecNo] := DMDashboard.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+      LTotalFechado := LTotalFechado + DMDashboard.qryDashboard.FieldByName('TOTALSOLIC').AsInteger;
+
+      DMDashboard.qryDashboard.Next;
+    end;
+
+    DMDashboard.qryDashboard.First;
+    while not DMDashboard.qryDashboard.Eof = True do
+    begin
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Feb' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Fev');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Fev');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Apr' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Abr');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Abr');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'May' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Mai');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Mai');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Aug' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Ago');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Ago');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Sep' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Set');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Set');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Oct' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Out');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Out');
+      end else
+      if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Dec' then
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Dez');
+        ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Dez');
+      end else
+      begin
+        ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('MES').AsString);
+        ChartSolicTrabalho.Series[1].Add(LFechadas[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('MES').AsString);
+      end;
+
+      DMDashboard.qryDashboard.Next;
+    end;
+    DMDashboard.qryDashboard.Close;
+
+    if LTotalSolicitado > 0 then
+      LblEficSolicTrabVal.Caption := FormatFloat('0.00%', (LTotalFechado/LTotalSolicitado) * 100)
+    else
+      LblEficSolicTrabVal.Caption := '0%';
+
+    DM.MSGAguarde('', False);
+end;
+
 procedure TFrmTelaPrincipal.butAtualizarDashboardClick(Sender: TObject);
 begin
+  cbOficina.ListFieldIndex := -1;
+  CBSolicitante.ListFieldIndex := -1;
+
   DM.MSGAguarde('');
   DMDashboard.CalcularDashboard;
+  memFiltros.Edit;
+  memFiltrosMATRICULA.AsString := '';
+  memFiltrosCODOFICINA.AsString := '';
   DM.MSGAguarde('', False);
 end;
 
@@ -1449,6 +1624,24 @@ DM.qryAuxiliar.SQL.Add('select codigo, descricao from causasfalha order by descr
 DM.qryAuxiliar.Open;
 DmRelatorios.frxRCausaFalha.ShowReport();
 DM.qryAuxiliar.Close;
+end;
+
+procedure TFrmTelaPrincipal.cbOficinaKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    btnFiltraOficina.OnClick(Sender);
+  end;
+
+end;
+
+procedure TFrmTelaPrincipal.CBSolicitanteKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+  begin
+    btnFiltraSolic.OnClick(Sender);
+  end;
 end;
 
 procedure TFrmTelaPrincipal.CentrodeCusto1Click(Sender: TObject);
@@ -2142,6 +2335,9 @@ begin
   try
     if DM.FNomeUsuario <> 'sam_spmp' then
       begin
+        qryOficinas.Close;
+        qryFuncionarios.Close;
+
         TimerOscioso.Enabled := False;
         TimerOscioso2.Enabled := False;
 
@@ -2196,49 +2392,76 @@ ChartOSOficina.Series[0].Transparency := 15;
 ChartSolicTrabalho.Series[0].Transparency := 20;
 ChartSolicTrabalho.Series[1].Transparency := 30;
 
-if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
-  or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-  begin
-    CBAno.Text := DateTimeToStr(YearOf(DM.FDataHoraServidor));
-    CBMes.ItemIndex := MonthOf(DM.FDataHoraServidor) - 1;
+CBAno.Text := DateTimeToStr(YearOf(DM.FDataHoraServidor));
+CBMes.ItemIndex := MonthOf(DM.FDataHoraServidor) - 1;
 
-    OriginalFormWidth            := Self.ClientWidth;
-    OriginalFormHeight           := Self.ClientHeight;
-    OriginalSituacaoOSWidth      := ChartSituacaoOS.Width;
-    OriginalSituacaoOSHeight     := ChartSituacaoOS.Height;
-    OriginalTipoManutencaoWidth  := ChartTipoManutencao.Width;
-    OriginalTipoManutencaoHeight := ChartTipoManutencao.Height;
-    OriginalSolicTrabalhoWidth   := ChartSolicTrabalho.Width;
-    OriginalSolicTrabalhoHeight  := ChartSolicTrabalho.Height;
-    OriginalSolicTrabalhoTop     := ChartSolicTrabalho.Top;
-    OriginalOSOficinaWidth       := ChartOSOficina.Width;
-    OriginalOSOficinaHeight      := ChartOSOficina.Height;
-    OriginalOSOficinaTop         := ChartSolicTrabalho.Top;
+OriginalFormWidth            := Self.ClientWidth;
+OriginalFormHeight           := Self.ClientHeight;
+OriginalSituacaoOSWidth      := ChartSituacaoOS.Width;
+OriginalSituacaoOSHeight     := ChartSituacaoOS.Height;
+OriginalTipoManutencaoWidth  := ChartTipoManutencao.Width;
+OriginalTipoManutencaoHeight := ChartTipoManutencao.Height;
+OriginalSolicTrabalhoWidth   := ChartSolicTrabalho.Width;
+OriginalSolicTrabalhoHeight  := ChartSolicTrabalho.Height;
+OriginalSolicTrabalhoTop     := ChartSolicTrabalho.Top;
+OriginalOSOficinaWidth       := ChartOSOficina.Width;
+OriginalOSOficinaHeight      := ChartOSOficina.Height;
+OriginalOSOficinaTop         := ChartSolicTrabalho.Top;
 
-    ProporcaoTopTipoManut := OriginalSolicTrabalhoTop/OriginalFormHeight;
-    ProporcaoTopOSOficina := OriginalOSOficinaTop/OriginalFormHeight;
+ProporcaoTopTipoManut := OriginalSolicTrabalhoTop/OriginalFormHeight;
+ProporcaoTopOSOficina := OriginalOSOficinaTop/OriginalFormHeight;
 
-//    TimerAlertas.Enabled := False;
-//    TimerAlertas.Interval := (DM.FTempoNovaOS * 60) * 1000;
-//    TimerAlertas.Enabled := True;
-  end else
-  begin
-    ChartSolicTrabalho.Visible := False;
-    ChartSituacaoOS.Visible := False;
-    ChartTipoManutencao.Visible := False;
-    ChartOSOficina.Visible := False;
-    lblFiltro.Visible := False;
-    lblAno.Visible := False;
-    lblMes.Visible := False;
-    cbAno.Visible := False;
-    cbMes.Visible := False;
-    butAtualizarDashboard.Visible := False;
-    ShapePeriodo.Visible := False;
-    LblEficSolicTrab.Visible := False;
-    LblEficSolicTrabVal.Visible := False;
-    imgEficSolicTrab.Visible := False;
-    ShapeEficiencia.Visible := False;
-  end;
+memFiltros.Close; memFiltros.CreateDataSet; memFiltros.Edit;
+qryOficinas.Close;
+qryOficinas.Params[0].AsString := DM.FCodEmpresa;
+qryOficinas.Open;
+
+qryFuncionarios.Close;
+qryFuncionarios.Params[0].AsString := DM.FCodEmpresa;
+qryFuncionarios.Open;
+
+if (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador Corporativo') and  (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador de Unidade')
+  and (DM.qryUsuarioNIVELACESSO.AsString <> 'Controlador de Manutenção') and (DM.qryUsuarioNIVELACESSO.AsString <> 'Executante de Trabalho A')
+    and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+    begin
+      ChartSituacaoOS.Visible := False;
+      ChartTipoManutencao.Visible := False;
+      ChartOSOficina.Visible := False;
+      ShapeOficina.Visible := False;
+      lblOficina.Visible := False;
+      cbOficina.Visible := False;
+      btnFiltraOficina.Visible := False;
+      ShapeDisponibilidade.Visible := False;
+      lblDisponibilidade.Visible := False;
+      lblDisponibilidadeVal.Visible := False;
+      imgDisponibilidade.Visible := False;
+      ShapeMTTR.Visible := False;
+      lblMTTR.Visible := False;
+      lblMTTRVal.Visible := False;
+      imgMTTR.Visible := False;
+      ShapeMTBF.Visible := False;
+      lblMTBF.Visible := False;
+      lblMTBFVal.Visible := False;
+      imgMTBF.Visible := False;
+
+      if DM.FMatricula <> '' then
+      begin
+        if qryFuncionarios.Locate('MATRICULA', DM.FMatricula, []) = True then
+        begin
+          memFiltros.Edit;
+          memFiltrosMATRICULA.AsString := DM.FMatricula;
+          btnFiltraSolic.OnClick(Sender);
+        end else
+        begin
+          ChartSolicTrabalho.Series[0].Clear;
+          ChartSolicTrabalho.Series[1].Clear;
+        end;
+      end else
+      begin
+        ChartSolicTrabalho.Series[0].Clear;
+        ChartSolicTrabalho.Series[1].Clear;
+      end;
+    end;
 
   StatusBar1.Font.Size := 9;
   StatusBar1.Panels[0].Text := DM.FNomeUsuario;
@@ -2277,72 +2500,62 @@ var
 begin
   if FrmTelaPrincipal <> nil then
   begin
-    if (DM.qryUsuarioNIVELACESSO.AsString = 'Administrador de Unidade') or (DM.qryUsuarioNIVELACESSO.AsString = 'Controlador de Manutenção')
-      or (DM.qryUsuarioNIVELACESSO.AsString = 'Executante de Trabalho A') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-      begin
-        // Calcula a proporção de aumento do Form
-        WidthRatio := Self.ClientWidth / OriginalFormWidth;
-        HeightRatio := Self.ClientHeight / OriginalFormHeight;
+    // Calcula a proporção de aumento do Form
+    WidthRatio := Self.ClientWidth / OriginalFormWidth;
+    HeightRatio := Self.ClientHeight / OriginalFormHeight;
 
-        // Ajusta o tamanho do Panel proporcionalmente ao aumento do Form
-        ChartSituacaoOS.Width := Round(OriginalSituacaoOSWidth * WidthRatio);
-        ChartSituacaoOS.Height := Round(OriginalSituacaoOSHeight * HeightRatio);
+    // Ajusta o tamanho do Panel proporcionalmente ao aumento do Form
+    ChartSituacaoOS.Width := Round(OriginalSituacaoOSWidth * WidthRatio);
+    ChartSituacaoOS.Height := Round(OriginalSituacaoOSHeight * HeightRatio);
 
-        ChartTipoManutencao.Width := Round(OriginalTipoManutencaoWidth * WidthRatio);
-        ChartTipoManutencao.Height := Round(OriginalTipoManutencaoHeight * HeightRatio);
-       // ChartTipoManutencao.Top := ChartSituacaoOS.Height + 23;
-        ChartTipoManutencao.Left := ChartSituacaoOS.Width + 22;
+    ChartTipoManutencao.Width := Round(OriginalTipoManutencaoWidth * WidthRatio);
+    ChartTipoManutencao.Height := Round(OriginalTipoManutencaoHeight * HeightRatio);
+   // ChartTipoManutencao.Top := ChartSituacaoOS.Height + 23;
+    ChartTipoManutencao.Left := ChartSituacaoOS.Width + 22;
 
-        ChartSolicTrabalho.Width := Round(OriginalSolicTrabalhoWidth * WidthRatio);
-        ChartSolicTrabalho.Height := Round(OriginalSolicTrabalhoHeight * HeightRatio) - 10;
-        if ChartSolicTrabalho.Height < 165 then ChartSolicTrabalho.Height := 165;
-        ChartSolicTrabalho.Top := Round(Self.ClientHeight - ChartSolicTrabalho.Height) - 50;
+    ChartSolicTrabalho.Width := Round(OriginalSolicTrabalhoWidth * WidthRatio);
+    ChartSolicTrabalho.Height := Round(OriginalSolicTrabalhoHeight * HeightRatio) - 10;
+    if ChartSolicTrabalho.Height < 165 then ChartSolicTrabalho.Height := 165;
+    ChartSolicTrabalho.Top := Round(Self.ClientHeight - ChartSolicTrabalho.Height) - 50;
 
-        ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.65);
-        if ChartOSOficina.Width < 345 then ChartOSOficina.Width := 345;
-        ChartOSOficina.Height := Round(OriginalOSOficinaHeight * HeightRatio);
+    ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.65);
+    if ChartOSOficina.Width < 345 then ChartOSOficina.Width := 345;
+    ChartOSOficina.Height := Round(OriginalOSOficinaHeight * HeightRatio);
 
-        ShapeEficiencia.Top := ChartSolicTrabalho.Top - 95;
-        LblEficSolicTrab.Top := ChartSolicTrabalho.Top - 95;
-        LblEficSolicTrabVal.Top := ChartSolicTrabalho.Top - 60;
-        imgEficSolicTrab.Top := ChartSolicTrabalho.Top - 60;
+    ShapeEficiencia.Top := ChartSolicTrabalho.Top - 95;
+    LblEficSolicTrab.Top := ChartSolicTrabalho.Top - 95;
+    LblEficSolicTrabVal.Top := ChartSolicTrabalho.Top - 60;
+    imgEficSolicTrab.Top := ChartSolicTrabalho.Top - 60;
 
-        ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 48;
-        ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 15;
+    ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 48;
+    ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 15;
 
-//        ShapeMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 17;
-//        lblMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
-//        lblMTBFVal.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 97;
-//        imgMTBF.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
-//
-//        ShapeMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 17;
-//        lblMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
-//        lblMTTRVal.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 127;
-//        imgMTTR.Left := ChartTipoManutencao.Left + ChartTipoManutencao.Width + 27;
+    ShapeOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 10;
+    ShapeOficina.Left := (Self.ClientWidth - ShapeOficina.Width) - 15;
+    btnFiltraOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
+    lblOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
+    cbOficina.Top := ChartOSOficina.Top - ShapeOficina.Height + 30;
 
-        ShapeMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
-        lblMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
-        lblMTBFVal.Left := ShapePeriodo.Left - lblMTBFVal.Width - 10;
-        imgMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+    ShapeSolicitante.Top := ShapeEficiencia.Top - ShapeSolicitante.Height - 12;
+    btnFiltraSolic.Top := ShapeEficiencia.Top - ShapeSolicitante.Height - 8;
+    lblSolicitante.Top := ShapeEficiencia.Top - ShapeSolicitante.Height - 5;
+    cbSolicitante.Top := ShapeEficiencia.Top - ShapeSolicitante.Height + 30;
 
-        ShapeMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
-        lblMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
-        lblMTTRVal.Left := ShapePeriodo.Left - lblMTTRVal.Width - 19;
-        imgMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
-      end;
+    ShapeMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
+    lblMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+    lblMTBFVal.Left := ShapePeriodo.Left - lblMTBFVal.Width - 10;
+    imgMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+
+    ShapeMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
+    lblMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+    lblMTTRVal.Left := ShapePeriodo.Left - lblMTTRVal.Width - 19;
+    imgMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
 
     if WindowState = wsMaximized then
     begin
-
       vimgSPMPLogo.ImageIndex := 0;
       vimgSPMPLogo.ImageHeight := 125;
       vimgSPMPLogo.ImageWidth := 548;
-
-
-//      ShapeDisponibilidade.Top := ShapeDisponibilidade.Top + 30;
-//      lblDisponibilidade.Top := lblDisponibilidade.Top + 30;
-//      lblDisponibilidadeVal.Top := lblDisponibilidade.Top + 30;
-//      imgDisponibilidade.Top := imgDisponibilidade.Top + 30;
     end else
     if ClientWidth >= 1185 then
     begin
@@ -4012,7 +4225,20 @@ begin
 end;
 
 procedure TFrmTelaPrincipal.TimerOsciosoTimer(Sender: TObject);
+var
+  MyNotification: TNotification;
 begin
+  MyNotification := NotificationCenter1.CreateNotification;
+  try
+    MyNotification.Name := 'SPMP3CloseNotification';
+    MyNotification.Title := 'SPMP3';
+    MyNotification.AlertBody := 'Sistem encerrado por inatividade!';
+
+    NotificationCenter1.PresentNotification(MyNotification);
+  finally
+    MyNotification.Free;
+  end;
+
   DM.FFecharForms := True;
   Close;
 end;

@@ -30,14 +30,9 @@ inherited FrmTelaAuxiliar: TFrmTelaAuxiliar
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      AlignWithMargins = True
       Left = 971
-      Top = 16
-      Margins.Top = 15
       Margins.Right = 4
-      Margins.Bottom = 15
-      Align = alRight
-      ExplicitLeft = 971
+      ExplicitLeft = 967
     end
   end
   inherited PCentro: TPanel

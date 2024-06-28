@@ -29,8 +29,8 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       Caption = 'M'#227'o de Obra:'
     end
     inherited BtnAjuda: TButton
-      Left = 969
-      ExplicitLeft = 965
+      Left = 971
+      ExplicitLeft = 967
     end
     object CBConsSimples: TComboBox
       Left = 212
@@ -75,115 +75,25 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Width = 1004
-      Height = 324
+      Height = 503
       ExplicitWidth = 1000
-      ExplicitHeight = 321
-    end
-    object Chart1: TChart
-      AlignWithMargins = True
-      Left = 4
-      Top = 328
-      Width = 998
-      Height = 173
-      AllowPanning = pmNone
-      BackWall.Brush.Style = bsClear
-      Gradient.EndColor = 13224338
-      Gradient.Visible = True
-      LeftWall.Color = clYellow
-      LeftWall.Pen.Color = 8421440
-      Legend.Alignment = laTop
-      Legend.Color = 8421440
-      Legend.ColorWidth = 10
-      Legend.Shadow.HorizSize = 1
-      Legend.Shadow.VertSize = 1
-      Legend.Symbol.Width = 10
-      Legend.TopPos = 0
-      MarginBottom = 1
-      MarginLeft = 1
-      MarginRight = 1
-      MarginTop = 2
-      Title.Text.Strings = (
-        'Gr'#225'fico das Homens/Horas Programadas')
-      Title.Visible = False
-      Title.AdjustFrame = False
-      BottomAxis.Automatic = False
-      BottomAxis.AutomaticMaximum = False
-      BottomAxis.AutomaticMinimum = False
-      BottomAxis.Axis.SmallSpace = 1
-      BottomAxis.GridCentered = True
-      BottomAxis.Increment = 1.000000000000000000
-      BottomAxis.Maximum = 31.000000000000000000
-      BottomAxis.Minimum = 1.000000000000000000
-      BottomAxis.StartPosition = 2.000000000000000000
-      LeftAxis.Automatic = False
-      LeftAxis.AutomaticMaximum = False
-      LeftAxis.AutomaticMinimum = False
-      LeftAxis.ExactDateTime = False
-      LeftAxis.Grid.Color = -1
-      LeftAxis.Grid.Style = psDashDotDot
-      LeftAxis.Grid.SmallDots = True
-      LeftAxis.GridCentered = True
-      LeftAxis.LabelsMultiLine = True
-      LeftAxis.Maximum = 872.500000000000000000
-      LeftAxis.MinorTickCount = 0
-      LeftAxis.MinorTickLength = 0
-      LeftAxis.TickLength = 0
-      LeftAxis.Title.Caption = 'H/H Dispon'#237'veis'
-      View3D = False
-      Zoom.Pen.Mode = pmNotXor
-      Align = alBottom
-      BevelOuter = bvLowered
-      TabOrder = 1
-      ExplicitTop = 325
-      ExplicitWidth = 994
-      DefaultCanvas = 'TGDIPlusCanvas'
-      ColorPaletteIndex = 13
-      object Series1: TBarSeries
-        HoverElement = []
-        BarBrush.Color = 8421440
-        Marks.Font.Height = -8
-        Marks.Frame.SmallSpace = 1
-        Marks.BackColor = 16764622
-        Marks.Callout.Distance = 2
-        Marks.Callout.Length = 10
-        Marks.Color = 16764622
-        SeriesColor = clBlue
-        Title = 'Programado'
-        TickLines.Color = clDefault
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Bar'
-        YValues.Order = loNone
-      end
-      object Series2: TBarSeries
-        HoverElement = []
-        Marks.Font.Height = -8
-        Marks.BackColor = 13434828
-        Marks.Callout.Length = 10
-        Marks.Color = 13434828
-        SeriesColor = clGreen
-        Title = 'Execu'#231#227'o'
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        YValues.Name = 'Bar'
-        YValues.Order = loNone
-      end
+      ExplicitHeight = 323
     end
     object GBTotalHomemHora: TGroupBox
       AlignWithMargins = True
       Left = 1
       Top = 3
       Width = 1004
-      Height = 322
+      Height = 501
       Margins.Left = 0
       Margins.Top = 2
       Margins.Right = 0
       Margins.Bottom = 0
       Align = alClient
       Caption = 'Total Homem/Hora Programada e em Execu'#231#227'o para:'
-      TabOrder = 2
+      TabOrder = 1
       ExplicitWidth = 1000
-      ExplicitHeight = 319
+      ExplicitHeight = 321
       object CalendarGrid: TStringGrid
         AlignWithMargins = True
         Left = 5
@@ -217,7 +127,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
         OnDblClick = CalendarGridDblClick
         OnDrawCell = CalendarGridDrawCell
         ExplicitWidth = 990
-        ExplicitHeight = 275
+        ExplicitHeight = 277
       end
       object PPeriodo: TPanel
         Left = 398
@@ -266,6 +176,236 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
           ShowHint = True
           TabOrder = 1
           OnClick = BtnProxMesClick
+        end
+      end
+      object Chart1: TChart
+        AlignWithMargins = True
+        Left = 5
+        Top = 323
+        Width = 994
+        Height = 173
+        AllowPanning = pmNone
+        Border.Color = 7766572
+        Border.Width = 0
+        Border.Fill.Gradient.EndColor = 7766572
+        Border.Fill.Gradient.MidColor = 527860268
+        Border.Fill.Gradient.StartColor = 7766572
+        Border.Visible = True
+        BorderRound = 15
+        BottomWall.Pen.Visible = False
+        BottomWall.Visible = False
+        Gradient.Colors = <
+          item
+            Color = 7766572
+          end
+          item
+            Color = 8754226
+            Offset = 1.000000000000000000
+          end
+          item
+            Color = 9412405
+            Offset = 1.000000000000000000
+          end>
+        Gradient.EndColor = 9412405
+        Gradient.MidColor = 8754226
+        Gradient.StartColor = 7766572
+        LeftWall.Visible = False
+        Legend.Alignment = laTop
+        Legend.Color = 15657170
+        Legend.ColorWidth = 0
+        Legend.Font.Color = clWhite
+        Legend.Font.Name = 'Segoe UI'
+        Legend.Font.Style = [fsBold]
+        Legend.FontSeriesColor = True
+        Legend.Frame.Color = 15657170
+        Legend.RoundSize = 8
+        Legend.Shadow.Visible = False
+        Legend.ShapeStyle = fosRoundRectangle
+        Legend.Symbol.Width = 0
+        Legend.TextStyle = ltsXAndValue
+        Legend.Title.Alignment = taCenter
+        Legend.Title.Font.Color = 9875024
+        Legend.Title.Font.Height = -13
+        Legend.Title.Font.Name = 'Segoe UI Semibold'
+        Legend.Title.Font.Style = []
+        Legend.Title.Frame.Color = clWhite
+        Legend.Title.Margins.Left = 8
+        Legend.Title.Text.Strings = (
+          'Execu'#231#227'o')
+        Legend.Title.TextAlignment = taRightJustify
+        Legend.TopPos = 0
+        Legend.Visible = False
+        MarginBottom = 0
+        MarginLeft = 1
+        MarginRight = 1
+        MarginTop = 5
+        Title.Font.Charset = ANSI_CHARSET
+        Title.Font.Color = clGray
+        Title.Font.Height = -15
+        Title.Font.Name = 'Segoe UI'
+        Title.Font.Style = [fsBold]
+        Title.Text.Strings = (
+          'Programadas x Execu'#231#227'o (HH)')
+        Title.VertMargin = 2
+        BottomAxis.Axis.Color = 545292416
+        BottomAxis.Axis.Style = psDash
+        BottomAxis.Axis.Width = 1
+        BottomAxis.Grid.Visible = False
+        BottomAxis.LabelsFormat.Font.Color = 10724259
+        BottomAxis.LabelsFormat.Font.Height = -13
+        BottomAxis.LabelsFormat.Font.Name = 'Segoe UI'
+        BottomAxis.LabelsFormat.Font.Style = [fsBold]
+        BottomAxis.LabelsFormat.Frame.Visible = False
+        Hover.Visible = False
+        LeftAxis.Automatic = False
+        LeftAxis.AutomaticMaximum = False
+        LeftAxis.AutomaticMinimum = False
+        LeftAxis.Axis.Color = clGray
+        LeftAxis.Axis.Visible = False
+        LeftAxis.AxisValuesFormat = '0'
+        LeftAxis.Grid.Color = 2009120960
+        LeftAxis.LabelsFormat.Font.Color = 8421440
+        LeftAxis.LabelsFormat.Font.Name = 'Segoe UI'
+        LeftAxis.LabelsFormat.Font.Style = [fsBold]
+        LeftAxis.LabelsFormat.Frame.Color = clDefault
+        LeftAxis.Maximum = 28.000000000000000000
+        LeftAxis.TickLength = 5
+        LeftAxis.Title.Caption = 'HH Dispon'#237'vel'
+        LeftAxis.Title.Font.Color = 10724259
+        LeftAxis.Title.Font.Height = -12
+        LeftAxis.Title.Font.Name = 'Segoe UI'
+        LeftAxis.Title.Font.Style = [fsBold]
+        Panning.MouseWheel = pmwNone
+        RightAxis.Title.Visible = False
+        RightAxis.Visible = False
+        Shadow.Visible = False
+        TopAxis.Axis.Visible = False
+        TopAxis.Title.Visible = False
+        TopAxis.Visible = False
+        View3D = False
+        View3DWalls = False
+        Zoom.Allow = False
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 16249832
+        TabOrder = 2
+        ExplicitTop = 322
+        DefaultCanvas = 'TGDIPlusCanvas'
+        PrintMargins = (
+          15
+          43
+          15
+          43)
+        ColorPaletteIndex = 20
+        object BarSeries1: TBarSeries
+          HoverElement = []
+          Legend.Visible = False
+          BarPen.Color = clSilver
+          Marks.Font.Color = clGray
+          Marks.Font.Name = 'Segoe UI'
+          Marks.Font.Style = [fsBold]
+          Marks.Frame.Visible = False
+          Marks.Shadow.Color = 12303291
+          Marks.Shadow.HorizSize = 2
+          Marks.Shadow.VertSize = 2
+          Marks.Transparency = 1
+          Marks.Transparent = True
+          Marks.Margins.Left = 3
+          Marks.Margins.Right = 3
+          Marks.Margins.Bottom = 0
+          Marks.Style = smsValue
+          Marks.Arrow.Width = 0
+          Marks.Arrow.Visible = False
+          Marks.BackColor = 15461334
+          Marks.Callout.Arrow.Width = 0
+          Marks.Callout.Arrow.Visible = False
+          Marks.Callout.Length = 8
+          Marks.SoftClip = True
+          Marks.Symbol.Shadow.Visible = False
+          Marks.TextAlign = taLeftJustify
+          Marks.Color = 15461334
+          RoundSize = 5
+          SeriesColor = 10384222
+          ShowInLegend = False
+          Title = 'Programadas'
+          BarStyle = bsRoundRectangle
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+          Data = {
+            041E0000000000000000003C40FF01000000310000000000002440FF01000000
+            320000000000002240FF01000000330000000000003740FF0100000034000000
+            0000003240FF01000000350000000000002440FF01000000360000000000002C
+            40FF01000000370000000000002240FF01000000380000000000002840FF0100
+            0000390000000000001840FF0200000031300000000000001440FF0200000031
+            310000000000001C40FF0200000031320000000000000000FF02000000313300
+            00000000000000FF0200000031340000000000000000FF020000003135000000
+            0000000000FF0200000031360000000000000000FF0200000031370000000000
+            000000FF0200000031380000000000000000FF02000000313900000000000000
+            00FF0200000032300000000000000000FF0200000032310000000000000000FF
+            0200000032310000000000000000FF0200000032330000000000000000FF0200
+            000032340000000000000000FF0200000032350000000000000000FF02000000
+            32360000000000000000FF0200000032370000000000000000FF020000003238
+            0000000000000000FF0200000032390000000000000000FF020000003330}
+          Detail = {0000000000}
+        end
+        object Series1: TBarSeries
+          HoverElement = []
+          Legend.Visible = False
+          BarPen.Color = clSilver
+          Marks.Font.Color = clGray
+          Marks.Font.Name = 'Segoe UI'
+          Marks.Font.Style = [fsBold]
+          Marks.Frame.Visible = False
+          Marks.Shadow.Color = 12303291
+          Marks.Shadow.HorizSize = 2
+          Marks.Shadow.VertSize = 2
+          Marks.Transparency = 1
+          Marks.Transparent = True
+          Marks.Margins.Left = 3
+          Marks.Margins.Right = 3
+          Marks.Margins.Bottom = 0
+          Marks.TextAlignment = taRightJustify
+          Marks.Style = smsValue
+          Marks.Arrow.Width = 0
+          Marks.Arrow.Visible = False
+          Marks.BackColor = 15461334
+          Marks.Callout.Arrow.Width = 0
+          Marks.Callout.Arrow.Visible = False
+          Marks.Callout.Length = 8
+          Marks.SoftClip = True
+          Marks.Symbol.Shadow.Visible = False
+          Marks.TextAlign = taRightJustify
+          Marks.Color = 15461334
+          RoundSize = 5
+          SeriesColor = 9875024
+          ShowInLegend = False
+          Title = 'Execu'#231#227'o'
+          BarStyle = bsRoundRectangle
+          XValues.Name = 'X'
+          XValues.Order = loAscending
+          YValues.Name = 'Bar'
+          YValues.Order = loNone
+          Data = {
+            061E0000000000000000003C4000000020FF0100000031000000000000244000
+            000020FF0100000032000000000000224000000020FF01000000330000000000
+            00374000000020FF0100000034000000000000324000000020FF010000003500
+            0000000000244000000020FF01000000360000000000002C4000000020FF0100
+            000037000000000000224000000020FF01000000380000000000002840000000
+            20FF0100000039000000000000184000000020FF020000003130000000000000
+            144000000020FF0200000031310000000000001C4000000020FF020000003132
+            00000000000000005E739E00FF02000000313300000000000000005E739E00FF
+            02000000313400000000000000005E739E00FF02000000313500000000000000
+            005E739E00FF02000000313600000000000000005E739E00FF02000000313700
+            000000000000005E739E00FF02000000313800000000000000005E739E00FF02
+            000000313900000000000000005E739E00FF0200000032300000000000000000
+            5E739E00FF02000000323100000000000000005E739E00FF0200000032310000
+            0000000000005E739E00FF02000000323300000000000000005E739E00FF0200
+            0000323400000000000000005E739E00FF02000000323500000000000000005E
+            739E00FF02000000323600000000000000005E739E00FF020000003237000000
+            00000000005E739E00FF02000000323800000000000000005E739E00FF020000
+            00323900000000000000005E739E00FF020000003330}
         end
       end
     end

@@ -1,69 +1,7 @@
 inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   Caption = 'Manuten'#231#227'o Programada do Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
-    DesignSize = (
-      1008
-      45)
-    inherited LCadastro: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      ExplicitLeft = 754
-    end
-    inherited LCadastroPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      ExplicitLeft = 710
-    end
-    inherited LblDataCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsManutProgEquip
-    end
-    inherited LblUsuCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsManutProgEquip
-    end
-    inherited LAlteracao: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      ExplicitLeft = 905
-    end
-    inherited LAlteradoPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      ExplicitLeft = 879
-    end
-    inherited LblDataAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsManutProgEquip
-    end
-    inherited LblUsuAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsManutProgEquip
-    end
     inherited BtnNovo: TButton
       Margins.Left = 4
       Margins.Top = 4
@@ -112,9 +50,48 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
     end
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        ExplicitLeft = 103
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsManutProgEquip
+        ExplicitLeft = 289
+        ExplicitTop = 4
+        ExplicitHeight = 12
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 219
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsManutProgEquip
+        ExplicitLeft = 114
+        ExplicitTop = 4
+        ExplicitHeight = 12
+      end
+    end
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        ExplicitLeft = 69
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsManutProgEquip
+        ExplicitLeft = 119
+        ExplicitTop = 4
+        ExplicitHeight = 12
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 224
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsManutProgEquip
+        ExplicitLeft = 294
+        ExplicitTop = 4
+        ExplicitHeight = 12
+      end
+    end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 97
     ExplicitHeight = 97
     inherited Label1: TLabel
@@ -373,7 +350,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PProgramacao: TPanel
     Top = 152
-    Width = 1008
     Height = 122
     ExplicitTop = 152
     ExplicitHeight = 122
@@ -615,7 +591,6 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
-    Width = 1008
     Height = 283
     ExplicitTop = 278
     ExplicitHeight = 280
@@ -731,14 +706,14 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 206
+          Height = 222
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 204
+            Height = 220
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839
@@ -812,18 +787,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
-  end
-  inherited PAlertas: TPanel
-    Top = 563
-    Width = 1012
-  end
   inherited PBase: TPanel
-    Top = 565
-    Width = 1008
-    ExplicitTop = 562
     inherited Button1: TButton
       Left = 853
       Hint = 'Itens Espec'#237'ficos a Inspecionar'

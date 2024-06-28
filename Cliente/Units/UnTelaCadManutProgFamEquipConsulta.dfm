@@ -1,7 +1,7 @@
 inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsulta
   Caption = 'Consulta das Manuten'#231#245'es'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 641
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,7 +11,7 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     inherited BtnAjuda: TButton
       Left = 979
@@ -34,8 +34,8 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
+    Width = 1002
+    Height = 502
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -293,14 +293,14 @@ inherited FrmTelaCadManutProgFamEquipConsulta: TFrmTelaCadManutProgFamEquipConsu
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
+    Top = 574
+    Width = 1004
     ExplicitTop = 574
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
+    Top = 601
+    Width = 1004
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

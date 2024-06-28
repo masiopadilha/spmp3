@@ -330,6 +330,7 @@ type
     frxRFamPecasRep: TfrxReport;
     frxRFamPneus: TfrxReport;
     frxRFamRecursos: TfrxReport;
+    frxReport1: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
   private

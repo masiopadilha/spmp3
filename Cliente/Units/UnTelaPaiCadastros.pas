@@ -36,14 +36,6 @@ type
     PIdentificacao: TPanel;
     PProgramacao: TPanel;
     PDiversos: TPanel;
-    LCadastro: TLabel;
-    LCadastroPor: TLabel;
-    LblDataCad: TDBText;
-    LblUsuCad: TDBText;
-    LAlteracao: TLabel;
-    LAlteradoPor: TLabel;
-    LblDataAlt: TDBText;
-    LblUsuAlt: TDBText;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -88,6 +80,16 @@ type
     BitBtn6: TBitBtn;
     BitBtn7: TBitBtn;
     BitBtn8: TBitBtn;
+    pAlteracao: TPanel;
+    LCadastro: TLabel;
+    LblDataAlt: TDBText;
+    LAlteradoPor: TLabel;
+    LblDataCad: TDBText;
+    pCadastro: TPanel;
+    LCadastroPor: TLabel;
+    LblUsuCad: TDBText;
+    LAlteracao: TLabel;
+    LblUsuAlt: TDBText;
     procedure MostrarValorHint;
     procedure ControleBotoes(Indice: SmallInt);
 

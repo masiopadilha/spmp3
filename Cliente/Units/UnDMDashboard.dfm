@@ -75,13 +75,14 @@ object DMDashboard: TDMDashboard
         'ESA` = e.CODEMPRESA)'
       '             WHERE (os.`CODEMPRESA` = :codempresa'
       
-        #9'         AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%' +
-        'd'#39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        #9'         AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAFE' +
+        'CHAMENTO` <= DATE(:data2)'
       
         #9#9' AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`, IN' +
         'TERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
       #9#9' AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      #9#9' AND os.`EQUIPPARADO` = '#39'S'#39')'
+      #9#9' AND os.`EQUIPPARADO` = '#39'S'#39
+      '                                 AND e.`CALCINDIC` = '#39'S'#39')'
       #9'     GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
       #9'     ORDER BY os.`CODEQUIPAMENTO`'
       #9'     ) AS sub1'
@@ -213,13 +214,14 @@ object DMDashboard: TDMDashboard
         ' = e.CODEMPRESA )'
       #9'      WHERE (os.`CODEMPRESA` = :codempresa'
       
-        #9'          AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/' +
-        '%d'#39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        #9'          AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAF' +
+        'ECHAMENTO` <= DATE(:data2)'
       
         #9#9'  AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`, I' +
         'NTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
       #9#9'  AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      #9#9'  AND os.`EQUIPPARADO` = '#39'S'#39')'
+      #9#9'  AND os.`EQUIPPARADO` = '#39'S'#39
+      '                                  AND e.`CALCINDIC` = '#39'S'#39')'
       #9'      GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
       '              ORDER BY os.`CODEQUIPAMENTO`'
       #9'      ) AS sub1'
@@ -348,13 +350,15 @@ object DMDashboard: TDMDashboard
         '= e.CODEMPRESA )    '
       #9'      WHERE (os.`CODEMPRESA` = :codempresa'
       
-        #9'          AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/' +
-        '%d'#39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        #9'          AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAF' +
+        'ECHAMENTO` <= DATE(:data2)'
       
-        #9'          AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAME' +
-        'NTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
+        '                           AND os.`DATAFIMREAL` >= DATE(DATE_SUB' +
+        '(os.`DATAFECHAMENTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1' +
+        ' DAY))'
       #9'          AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      #9'          AND os.`EQUIPPARADO` = '#39'S'#39')'#9'         '
+      #9'          AND os.`EQUIPPARADO` = '#39'S'#39
+      '                          AND e.`CALCINDIC` = '#39'S'#39')'#9'         '
       '              GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
       #9'      ORDER BY os.`CODEQUIPAMENTO`'
       #9'      ) AS sub1'
@@ -374,12 +378,10 @@ object DMDashboard: TDMDashboard
       end
       item
         Name = 'DATA1'
-        DataType = ftString
         ParamType = ptInput
       end
       item
         Name = 'DATA2'
-        DataType = ftString
         ParamType = ptInput
       end>
     object qryMTTRMedioMTTR_MEDIA: TFMTBCDField
@@ -481,13 +483,14 @@ object DMDashboard: TDMDashboard
         '= e.CODEMPRESA )    '
       #9'      WHERE (os.`CODEMPRESA` = :codempresa'
       
-        #9'          AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/' +
-        '%d'#39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        #9'          AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAF' +
+        'ECHAMENTO` <= DATE(:data2)'
       
         #9'          AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAME' +
         'NTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
       #9'          AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      #9'          AND os.`EQUIPPARADO` = '#39'S'#39')'#9'         '
+      #9'          AND os.`EQUIPPARADO` = '#39'S'#39
+      '                          AND e.`CALCINDIC` = '#39'S'#39')'#9'         '
       '              GROUP BY os.`CODEQUIPAMENTO`, os.`CODIGO`'
       #9'      ORDER BY os.`CODEQUIPAMENTO`'
       #9'      ) AS sub1'
@@ -607,8 +610,8 @@ object DMDashboard: TDMDashboard
       '             '
       '     WHERE (os.`CODEMPRESA` = :codempresa'
       
-        '         AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d' +
-        #39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        '         AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAFEC' +
+        'HAMENTO` <= DATE(:data2)'
       '         AND os.`SITUACAO` <> '#39'CANCELADA'#39'        '
       '         )'
       '         '
@@ -711,8 +714,8 @@ object DMDashboard: TDMDashboard
       '             '
       '     WHERE (os.`CODEMPRESA` = :codempresa'
       
-        '         AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d' +
-        #39') AND os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+        '         AND os.`DATAFECHAMENTO` >= DATE(:data1) AND os.`DATAFEC' +
+        'HAMENTO` <= DATE(:data2)'
       '         AND os.`SITUACAO` <> '#39'CANCELADA'#39'        '
       '         )'
       '         '
@@ -790,32 +793,141 @@ object DMDashboard: TDMDashboard
       Origin = 'DATA2'
     end
   end
-  object FDQuery1: TFDQuery
+  object qryOficinas5: TFDQuery
     Connection = DM.FDConnSPMP3
     SQL.Strings = (
-      'SET @row_number = 0;'
+      'SET @row_number := 0;'
+      'SET @row_number1 := 0;'
       ''
-      'SELECT '
-      '    (@row_number := @row_number + 1) AS row_number'
-      '    , os.`CODEQUIPAMENTO`'
-      '    , e.`DESCRICAO` EQUIPAMENTO'
-      '    , COUNT(os.`CODIGO`)TOTAL'
-      '    '
+      '-- Subconsulta para gerar a numera'#231#227'o de linha'
+      'SELECT'
+      '    OFICINA,'
+      '    TOTAL'
+      'FROM ('
+      '    SELECT'
+      '        ofc.`DESCRICAO` AS OFICINA,'
+      '        COUNT(os.`CODIGO`) AS TOTAL,'
+      '        (@row_number := @row_number + 1) AS RN'
+      '    FROM'
+      '        `ordemservico` AS os'
+      
+        '        INNER JOIN `oficinas` AS ofc ON (os.`CODOFICINA` = ofc.`' +
+        'CODIGO`)'
+      '    WHERE'
+      '        os.`SITUACAO` <> '#39'CANCELADA'#39
+      '        AND MONTH(os.`DATACADASTRO`) = :MES'
+      '        AND YEAR(os.`DATACADASTRO`) = :ANO'
+      '    GROUP BY ofc.`DESCRICAO`'
+      '    ORDER BY TOTAL DESC'
+      ') AS T1'
+      'WHERE RN <= 5'
+      ''
+      'UNION ALL'
+      ''
+      '-- Subconsulta para agrupar as demais oficinas como "Outras"'
+      'SELECT'
+      '    '#39'Outras'#39' AS OFICINA,'
+      '    SUM(TOTAL) AS TOTAL'
+      'FROM ('
+      '    SELECT'
+      '        COUNT(os.`CODIGO`) AS TOTAL,'
+      '        (@row_number1 := @row_number1 + 1) AS RN'
+      '    FROM'
+      '        `ordemservico` AS os'
+      
+        '        INNER JOIN `oficinas` AS ofc ON (os.`CODOFICINA` = ofc.`' +
+        'CODIGO`)'
+      '    WHERE'
+      '        os.`SITUACAO` <> '#39'CANCELADA'#39
+      '        AND MONTH(os.`DATACADASTRO`) = :MES'
+      '        AND YEAR(os.`DATACADASTRO`) = :ANO'
+      '    GROUP BY ofc.`DESCRICAO`'
+      '    ORDER BY TOTAL DESC'
+      ') AS T2'
+      'WHERE RN > 5;')
+    Left = 160
+    Top = 8
+    ParamData = <
+      item
+        Name = 'MES'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'ANO'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryOficinas5OFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OFICINA'
+      Origin = 'OFICINA'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryOficinas5TOTAL: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 42
+      Size = 0
+    end
+  end
+  object qryOficinasIndiv: TFDQuery
+    Connection = DM.FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    ofc.`DESCRICAO` AS OFICINA'
+      '    , COUNT(os.`CODIGO`) AS TOTAL'
       'FROM'
       '    `ordemservico` AS os'
-      '    INNER JOIN `equipamentos` AS e    '
       
-        '        ON (e.`CODIGO` = os.`CODEQUIPAMENTO`) AND (e.`CODEMPRESA' +
-        '` = os.`CODEMPRESA`)'
+        '    INNER JOIN `oficinas` AS ofc ON (os.`CODOFICINA` = ofc.`CODI' +
+        'GO`)'
       'WHERE'
-      '    (os.`EQUIPPARADO` = '#39'S'#39
-      '    AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      '    AND e.`OPERANDO` = '#39'S'#39')'
-      'GROUP BY'
-      '    os.`CODEQUIPAMENTO`'
-      'ORDER BY'
-      '    TOTAL DESC')
-    Left = 192
-    Top = 8
+      '    (os.`SITUACAO` <> '#39'CANCELADA'#39' '
+      
+        '    AND MONTH(os.`DATACADASTRO`) = :MES AND YEAR(os.`DATACADASTR' +
+        'O`) = :ANO'
+      '    AND os.`CODEMPRESA` = :codempresa'
+      '    AND ofc.`CODIGO` = :codoficina'
+      '   )')
+    Left = 160
+    Top = 63
+    ParamData = <
+      item
+        Name = 'MES'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'ANO'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEMPRESA'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODOFICINA'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryOficinasIndivOFICINA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OFICINA'
+      Origin = 'OFICINA'
+      Size = 80
+    end
+    object qryOficinasIndivTOTAL: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL'
+      Origin = 'TOTAL'
+    end
   end
 end

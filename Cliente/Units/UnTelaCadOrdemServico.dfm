@@ -5,41 +5,41 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      Left = 694
-      ExplicitLeft = 694
+    inherited pAlteracao: TPanel
+      ExplicitLeft = 654
+      inherited LCadastro: TLabel
+        Height = 14
+        ExplicitLeft = 694
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsOrdemServico
+        ExplicitLeft = 900
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 836
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsOrdemServico
+        ExplicitLeft = 732
+      end
     end
-    inherited LCadastroPor: TLabel
-      Left = 650
-      ExplicitLeft = 650
-    end
-    inherited LblDataCad: TDBText
-      Left = 732
-      DataSource = DM.dsOrdemServico
-      ExplicitLeft = 732
-    end
-    inherited LblUsuCad: TDBText
-      Left = 732
-      DataSource = DM.dsOrdemServico
-      ExplicitLeft = 732
-    end
-    inherited LAlteracao: TLabel
-      Left = 862
-      ExplicitLeft = 862
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 836
-      ExplicitLeft = 836
-    end
-    inherited LblDataAlt: TDBText
-      Left = 900
-      DataSource = DM.dsOrdemServico
-      ExplicitLeft = 900
-    end
-    inherited LblUsuAlt: TDBText
-      Left = 900
-      DataSource = DM.dsOrdemServico
-      ExplicitLeft = 900
+    inherited pCadastro: TPanel
+      ExplicitLeft = 654
+      inherited LCadastroPor: TLabel
+        Height = 14
+        ExplicitLeft = 650
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsOrdemServico
+        ExplicitLeft = 732
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 862
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsOrdemServico
+        ExplicitLeft = 900
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -369,7 +369,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      Visible = False
     end
     object Label25: TLabel
       Left = 322
@@ -439,6 +438,20 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     object Label28: TLabel
       Left = 991
       Top = 66
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label30: TLabel
+      Left = 657
+      Top = 128
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -887,7 +900,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited PBase: TPanel
     Top = 565
     Width = 1008
-    ExplicitTop = 562
     inherited Button1: TButton
       Hint = 'M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

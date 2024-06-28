@@ -92,6 +92,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Date = 44771.000000000000000000
       Time = 0.515031701390398700
       TabOrder = 2
+      OnKeyPress = EdtData1KeyPress
       DropDownDate = 44778.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
@@ -102,6 +103,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Date = 44771.000000000000000000
       Time = 0.515031701390398700
       TabOrder = 3
+      OnKeyPress = EdtData1KeyPress
       DropDownDate = 44771.000000000000000000
     end
     object BtnConsultar: TButton
@@ -701,7 +703,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           Width = 325
         end
         item
-          Width = 475
+          Width = 300
         end
         item
           Width = 200
@@ -1351,8 +1353,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
   end
   object PopupMenuLiberar: TPopupMenu
-    Left = 405
-    Top = 5
+    Left = 373
+    Top = 69
     object Total: TMenuItem
       Caption = 'Libera'#231#227'o total'
       OnClick = TotalClick
@@ -1397,15 +1399,15 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       OnClick = Checklist1Click
     end
   end
-  object Timer1: TTimer
+  object TimerCheckOS: TTimer
     Enabled = False
-    OnTimer = Timer1Timer
-    Left = 914
-    Top = 18
+    OnTimer = TimerCheckOSTimer
+    Left = 199
+    Top = 299
   end
   object PopupMenuExecutar: TPopupMenu
-    Left = 285
-    Top = 5
+    Left = 261
+    Top = 69
     object MenuItem1: TMenuItem
       Caption = 'Executar'
       OnClick = TotalClick
@@ -1730,5 +1732,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       FE00E18F00000000FE00C7E700000000FF0787FF00000000FF839FFF00000000
       FFC19FFF00000000FFFBFFFF0000000000000000000000000000000000000000
       000000000000}
+  end
+  object NotificationCenter1: TNotificationCenter
+    Left = 406
+    Top = 275
   end
 end

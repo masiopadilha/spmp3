@@ -72,6 +72,9 @@ type
     Label4: TLabel;
     edtDataInicioReal: TDateTimePicker;
     edtDataFimReal: TDateTimePicker;
+    Label30: TLabel;
+    EdtResponsavel: TDBEdit;
+    BtnResponsavel: TButton;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -94,6 +97,7 @@ type
     procedure GrdServicosExecDblClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure ChbParcialClick(Sender: TObject);
+    procedure BtnResponsavelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -374,6 +378,46 @@ DM.FTela            := 'CADORDEMSERVICO';
 DM.FTabela_auxiliar := 45;
 end;
 
+procedure TFrmTelaCadOrdemServicoFechamento.BtnResponsavelClick(
+  Sender: TObject);
+begin
+  inherited;
+if DM.qryOrdemServico.Active = False then Exit;
+if DM.qryOrdemServico.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 300;
+    DM.FNomeConsulta := 'Funcionários';
+    DM.qryOrdemServico.Edit;
+    DM.FParamAuxiliar[1] := 'NOME';
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryOrdemServicoRESPONSAVEL.AsString   := DM.FCodCombo;
+        DM.qryOrdemServicoNOMERESPONSAVEL.AsString := DM.FValorCombo;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
+      FrmTelaCadFuncionarios.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadFuncionarios);
+    End;
+  end;
+DM.FDataSetParam    := DM.qryOrdemServico;
+DM.FDataSourceParam := DM.dsOrdemServico;
+DM.FTela            := 'CADORDEMSERVICO';
+DM.FTabela_auxiliar := 45;
+DM.FParamAuxiliar[1] := EmptyStr;
+
+end;
+
 procedure TFrmTelaCadOrdemServicoFechamento.BtnSalvarClick(Sender: TObject);
 const
   EmailRegexPattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
@@ -399,6 +443,7 @@ if (DM.qryUsuarioPAlteracao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S'
     Exit;
   end;
 
+DM.qryOrdemServico.Edit;
 DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := edtDataInicioReal.DateTime;
 DM.qryOrdemServicoDATAFIMREAL.AsDateTime := edtDataFimReal.DateTime;
 

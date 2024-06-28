@@ -1,62 +1,7 @@
 inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   Caption = 'Equipamentos'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
-    inherited LCadastro: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LCadastroPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LblDataCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsEquipamentos
-    end
-    inherited LblUsuCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsEquipamentos
-    end
-    inherited LAlteracao: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LAlteradoPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LblDataAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsEquipamentos
-    end
-    inherited LblUsuAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsEquipamentos
-    end
     inherited BtnNovo: TButton
       Margins.Left = 4
       Margins.Top = 4
@@ -109,9 +54,55 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       Visible = True
       OnClick = BtnImagemClick
     end
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        ExplicitLeft = 44
+        ExplicitTop = 4
+        ExplicitHeight = 14
+      end
+      inherited LblDataAlt: TDBText
+        AutoSize = False
+        DataSource = DM.dsEquipamentos
+        ExplicitLeft = 293
+        ExplicitHeight = 22
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 186
+        ExplicitTop = 4
+        ExplicitHeight = 14
+      end
+      inherited LblDataCad: TDBText
+        AutoSize = False
+        DataSource = DM.dsEquipamentos
+        ExplicitLeft = 126
+        ExplicitHeight = 22
+      end
+    end
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        ExplicitLeft = 0
+        ExplicitTop = 4
+      end
+      inherited LblUsuCad: TDBText
+        AutoSize = False
+        DataSource = DM.dsEquipamentos
+        ExplicitLeft = 131
+        ExplicitHeight = 22
+      end
+      inherited LAlteracao: TLabel
+        AutoSize = True
+        ExplicitLeft = 186
+        ExplicitTop = 4
+      end
+      inherited LblUsuAlt: TDBText
+        AutoSize = False
+        DataSource = DM.dsEquipamentos
+        ExplicitLeft = 298
+        ExplicitHeight = 22
+      end
+    end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     object Label4: TLabel [0]
       Left = 45
       Top = 33
@@ -439,7 +430,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     inherited Label2: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -880,9 +870,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PDiversos: TPanel
-    Width = 1008
-    Height = 216
-    ExplicitHeight = 213
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -989,7 +976,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label15: TLabel
       Left = 730
-      Top = 38
+      Top = 68
       Width = 32
       Height = 16
       Alignment = taRightJustify
@@ -1003,7 +990,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label16: TLabel
       Left = 722
-      Top = 68
+      Top = 99
       Width = 40
       Height = 16
       Alignment = taRightJustify
@@ -1073,7 +1060,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label25: TLabel
       Left = 990
-      Top = 42
+      Top = 73
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1087,7 +1074,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label26: TLabel
       Left = 990
-      Top = 73
+      Top = 103
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1114,9 +1101,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ParentFont = False
     end
     object LblPrimario: TDBText
-      Left = 670
-      Top = 161
-      Width = 326
+      Left = 391
+      Top = 187
+      Width = 597
       Height = 16
       DataSource = DM.dsEquipamentos
       Font.Charset = DEFAULT_CHARSET
@@ -1293,19 +1280,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnArea: TButton
       Left = 960
-      Top = 34
-      Width = 28
-      Height = 28
-      Hint = 'Consultar/Cadastrar (Ctrl)'
-      DisabledImageIndex = 14
-      ImageAlignment = iaCenter
-      ImageIndex = 14
-      Images = DM.ImageListBotoes
-      TabOrder = 17
-      OnClick = BtnAreaClick
-    end
-    object BtnCelula: TButton
-      Left = 960
       Top = 65
       Width = 28
       Height = 28
@@ -1314,7 +1288,20 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 19
+      TabOrder = 18
+      OnClick = BtnAreaClick
+    end
+    object BtnCelula: TButton
+      Left = 960
+      Top = 96
+      Width = 28
+      Height = 28
+      Hint = 'Consultar/Cadastrar (Ctrl)'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      TabOrder = 20
       OnClick = BtnCelulaClick
     end
     object EdtCalendario: TDBEdit
@@ -1405,7 +1392,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtArea: TDBEdit
       Left = 766
-      Top = 36
+      Top = 67
       Width = 192
       Height = 24
       Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1422,7 +1409,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 16
+      TabOrder = 17
       StyleElements = [seFont, seClient]
       OnDblClick = EdtAreaDblClick
       OnExit = TabNextTab1AfterTabChange
@@ -1430,7 +1417,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtCelula: TDBEdit
       Left = 766
-      Top = 67
+      Top = 98
       Width = 192
       Height = 24
       Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1447,7 +1434,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 18
+      TabOrder = 19
       StyleElements = [seFont, seClient]
       OnDblClick = EdtCelulaDblClick
       OnExit = TabNextTab1AfterTabChange
@@ -1473,10 +1460,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object NBLocalizacao: TNotebook
       Left = 692
-      Top = 95
+      Top = 125
       Width = 304
       Height = 61
-      TabOrder = 20
+      TabOrder = 21
       object TPage
         Left = 0
         Top = 0
@@ -1595,8 +1582,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         Left = 0
         Top = 0
         Caption = 'PrimTranspSecTransf'
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label29: TLabel
           Left = 6
           Top = 5
@@ -1681,18 +1666,31 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
+    object DBCheckBox1: TDBCheckBox
+      Left = 730
+      Top = 40
+      Width = 246
+      Height = 16
+      Hint = 'Calcular MTBF, MTTR, Disponibilidade e outros indicadores.'
+      Alignment = taLeftJustify
+      Caption = 'Calcular indicadores de manuten'#231#227'o:'
+      DataField = 'CALCINDIC'
+      DataSource = DM.dsEquipamentos
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 16
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      WordWrap = True
+    end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
   end
   inherited PAlertas: TPanel
-    Top = 563
-    Width = 1012
     inherited LblAlertas: TLabel
       Left = 1011
       Margins.Left = 4
@@ -1703,9 +1701,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
-    Top = 565
-    Width = 1008
-    ExplicitTop = 562
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

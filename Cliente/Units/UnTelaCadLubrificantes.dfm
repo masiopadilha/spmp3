@@ -2,21 +2,31 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
   Caption = 'Lubrificantes'
   TextHeight = 16
   inherited PControle: TPanel
-    inherited LblDataCad: TDBText
-      DataSource = DM.dsLubrificantes
-      ExplicitLeft = 776
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        ExplicitLeft = 49
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsLubrificantes
+        ExplicitLeft = 927
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsLubrificantes
+        ExplicitLeft = 776
+      end
     end
-    inherited LblUsuCad: TDBText
-      DataSource = DM.dsLubrificantes
-      ExplicitLeft = 776
-    end
-    inherited LblDataAlt: TDBText
-      DataSource = DM.dsLubrificantes
-      ExplicitLeft = 927
-    end
-    inherited LblUsuAlt: TDBText
-      DataSource = DM.dsLubrificantes
-      ExplicitLeft = 927
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        ExplicitLeft = 5
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsLubrificantes
+        ExplicitLeft = 776
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsLubrificantes
+        ExplicitLeft = 927
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -895,9 +905,6 @@ inherited FrmTelaCadLubrificantes: TFrmTelaCadLubrificantes
       TabOrder = 1
       OnClick = BtnAreaClick
     end
-  end
-  inherited TimerAlertas: TTimer
-    Top = 14
   end
   inherited PopupMenuRelat: TPopupMenu
     Top = 88

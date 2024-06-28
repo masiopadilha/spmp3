@@ -13,9 +13,6 @@ uses
 type
   TFrmTelaCadCalendarioOS = class(TFrmTelaPaiOkCancel)
     LblDataConsulta: TLabel;
-    Chart1: TChart;
-    Series1: TBarSeries;
-    Series2: TBarSeries;
     GBTotalHomemHora: TGroupBox;
     CalendarGrid: TStringGrid;
     PPeriodo: TPanel;
@@ -24,6 +21,9 @@ type
     CBConsSimples: TComboBox;
     Label1: TLabel;
     BtnImprimir: TButton;
+    Chart1: TChart;
+    BarSeries1: TBarSeries;
+    Series1: TBarSeries;
     procedure DesenharCalendario;
     procedure FormCreate(Sender: TObject);
     procedure CalendarGridDrawCell(Sender: TObject; ACol, ARow: Integer;
@@ -338,8 +338,8 @@ begin
 
   Try
     Application.CreateForm(TFrmTelaCadCalendarioOSServicos, FrmTelaCadCalendarioOSServicos);
-    FrmTelaCadCalendarioOSServicos.GBProgramadas.Caption := 'Ordens de Serviços Programadas: ' + CalendarGrid.Cells[CalendarGrid.Col, CalendarGrid.Row];
-    FrmTelaCadCalendarioOSServicos.GBExecução.Caption    := 'Ordens de Serviços em Execução: ' + CalendarGrid.Cells[CalendarGrid.Col, CalendarGrid.Row];
+    FrmTelaCadCalendarioOSServicos.GBProgramadas.Caption := 'Ordens de Serviço Programadas: ' + CalendarGrid.Cells[CalendarGrid.Col, CalendarGrid.Row];
+    FrmTelaCadCalendarioOSServicos.GBExecução.Caption    := 'Ordens de Serviço em Execução: ' + CalendarGrid.Cells[CalendarGrid.Col, CalendarGrid.Row];
     FrmTelaCadCalendarioOSServicos.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadCalendarioOSServicos);

@@ -21441,7 +21441,7 @@ object DM: TDM
   end
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
-      'Server='
+      'Server=192.168.68.119'
       'Database=spmpma_spmp'
       'User_Name=spmpma_spmp'
       'Password=luca1052'
@@ -23675,40 +23675,7 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `equipamentos`.`CODIGO`'
-      '    , `equipamentos`.`CODEMPRESA`'
-      '    , `equipamentos`.`CODCALENDARIO`'
-      '    , `equipamentos`.`CODLOCALIZACAO`'
-      '    , `equipamentos`.`CODCELULA`'
-      '    , `equipamentos`.`CODLINHA`'
-      '    , `equipamentos`.`SEQUENCIA`'
-      '    , `equipamentos`.`CODFABRICANTE`'
-      '    , `equipamentos`.`CODFORNECEDOR`'
-      '    , `equipamentos`.`CODCENTROCUSTO`'
-      '    , `equipamentos`.`CODCLASSE`'
-      '    , `equipamentos`.`CODFAMILIAEQUIP`'
-      '    , `equipamentos`.`CODEQUIPAMENTOPAI`'
-      '    , `equipamentos`.`STATUS`'
-      '    , `equipamentos`.`DESCRICAO`'
-      '    , `equipamentos`.`DATAAQUISICAO`'
-      '    , `equipamentos`.`DATAINIFUNC`'
-      '    , `equipamentos`.`DATAGARANTIA`'
-      '    , `equipamentos`.`NOTAFISCAL`'
-      '    , `equipamentos`.`PRECO`'
-      '    , `equipamentos`.`OPERANDO`'
-      '    , `equipamentos`.`RESERVA`'
-      '    , `equipamentos`.`SECUNDARIO`'
-      '    , `equipamentos`.`CALCULARCONF`'
-      '    , `equipamentos`.`DATAINICIOCONF`'
-      '    , `equipamentos`.`PERIODOCONF`'
-      '    , `equipamentos`.`CALCULADACONF`'
-      '    , `equipamentos`.`FATORMARCHAADM`'
-      '    , `equipamentos`.`DIASEMISSAOOS`'
-      '    , `equipamentos`.`DATACADASTRO`'
-      '    , `equipamentos`.`CODUSUARIOCAD`'
-      '    , `equipamentos`.`DATAULTALT`'
-      '    , `equipamentos`.`CODUSUARIOALT`'
-      '    , `equipamentos`.`OBSERVACOES`'
+      '    `equipamentos`.*'
       '    , `usuario`.`NOME` USUARIOCAD'
       '    , `usuario_1`.`NOME`USUARIOALT    '
       '    , `calendarioequip`.`DESCRICAO` CALENDARIOEQUIP'
@@ -23987,6 +23954,13 @@ object DM: TDM
       FieldName = 'DIASEMISSAOOS'
       Origin = 'DIASEMISSAOOS'
       ProviderFlags = [pfInUpdate]
+    end
+    object qryEquipamentosCALCINDIC: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CALCINDIC'
+      Origin = 'CALCINDIC'
+      FixedChar = True
+      Size = 1
     end
     object qryEquipamentosDATACADASTRO: TDateTimeField
       AutoGenerateValue = arDefault
@@ -25179,11 +25153,11 @@ object DM: TDM
       
         '    ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIG' +
         'O`)'
-      'INNER JOIN `motivoparada` '
+      'LEFT JOIN `motivoparada` '
       
         '    ON (`ordemservico`.`CODMOTIVOPARADA` = `motivoparada`.`CODIG' +
         'O`)'
-      'INNER JOIN `causasfalha` '
+      'LEFT JOIN `causasfalha` '
       '    ON (`ordemservico`.`CODCAUSAFALHA` = `causasfalha`.`CODIGO`)'
       'INNER JOIN `centrocusto` '
       
@@ -25406,48 +25380,42 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '  SUM(sub.HORASPARADAS) AS HORASPARADAS'
+      '        o.`CODEQUIPAMENTO` '
+      
+        #9', TIPO.TIPO AS DESCRICAO, COUNT(o.`CODIGO`) AS TOTAL, COUNT(o2.' +
+        '`CODIGO`) AS TOTALFECHADAS '
+      
+        #9', IFNULL(100 * (COUNT(o2.`CODIGO`)/COUNT(o.`CODIGO`)), 0)PERCEN' +
+        'TUALFECHADAS'
+      
+        #9', SUM(o.`CUSTOMOBRA`) + SUM(o.`CUSTORECURSOS`) + SUM(o.`CUSTOPE' +
+        'CAS`) + SUM(o.`CUSTOEXTRA`) AS CUSTOTOTAL'
       'FROM'
-      '    (SELECT'
+      #9'(SELECT '#39'Manuten'#231#227'o Preventiva'#39' AS TIPO'
       
-        '        ROUND((IF(MIN(os.`DATAINICIOREAL`) < DATE(DATE_SUB(os.`D' +
-        'ATAINICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY))' +
-        ', '
+        #9'UNION ALL SELECT '#39'Manuten'#231#227'o Corretiva'#39' UNION ALL SELECT '#39'Manut' +
+        'en'#231#227'o Preditiva'#39
       
-        '                                                   /*true*/  TIM' +
-        'ESTAMPDIFF(MINUTE, DATE(DATE_SUB(os.`DATAFECHAMENTO`, INTERVAL D' +
-        'AYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY)), os.`DATAFIMREAL`),'
+        #9'UNION ALL SELECT '#39'Lubrifica'#231#227'o'#39' UNION ALL SELECT '#39'Manuten'#231#227'o Au' +
+        't'#244'noma'#39
       
-        '                                                   /*false*/  TI' +
-        'MESTAMPDIFF(MINUTE, os.`DATAINICIOREAL`, os.`DATAFIMREAL`))/60),' +
-        ' 2) HORASPARADAS'
-      ''
-      'FROM'
-      '    `ordemservico` os'
-      ''
-      '    INNER JOIN `equipamentos` AS e'
+        #9'UNION ALL SELECT '#39'Novos Projetos'#39' UNION ALL SELECT '#39'Outros Serv' +
+        'i'#231'os'#39') AS TIPO'
       
-        '        ON (e.`CODIGO` = `CODEQUIPAMENTO`) AND (e.`OPERANDO` = '#39 +
-        'S'#39' ) AND (e.`SECUNDARIO` = '#39'N'#39')'
-      '    LEFT JOIN `tipomanutencao` AS t'
+        #9'LEFT JOIN `tipomanutencao` AS t ON  TIPO.TIPO = t.`TIPOMANUTENC' +
+        'AO`'
       
-        '        ON (os.CODMANUTENCAO = t.CODIGO) AND (t.`TIPOMANUTENCAO`' +
-        ' = '#39'Manuten'#231#227'o Corretiva'#39')'
-      ''
-      'WHERE (os.`CODEMPRESA` = :codempresa'
+        #9'LEFT JOIN `ordemservico` AS o ON o.`CODMANUTENCAO` = t.`CODIGO`' +
+        #9#9
+      '        AND o.`CODEMPRESA` = :codempresa'
       
-        '   -- AND MONTH(os.`DATAFECHAMENTO`) = '#39'05'#39' AND YEAR(os.`DATAFEC' +
-        'HAMENTO`) = '#39'2024'#39
+        #9'AND o.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d'#39') AND o.' +
+        '`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
+      #9'AND o.`CODEQUIPAMENTO` = :codequipamento'
       
-        '    AND os.`DATAFECHAMENTO` >= STR_TO_DATE(:data1,'#39'%Y/%m/%d'#39') AN' +
-        'D os.`DATAFECHAMENTO` <= STR_TO_DATE(:data2,'#39'%Y/%m/%d'#39')'
-      
-        '    AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`, I' +
-        'NTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
-      '    AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      '    AND os.`EQUIPPARADO` = '#39'S'#39')'
-      '    '
-      '    GROUP BY os.`CODIGO`) AS sub')
+        #9'LEFT JOIN `ordemservico` AS o2 ON o.`CODIGO` = o2.`CODIGO` AND ' +
+        'o2.`SITUACAO` = '#39'FECHADA'#39
+      'GROUP BY TIPO.TIPO ORDER BY TIPO.TIPO;')
     Left = 547
     Top = 163
     ParamData = <
@@ -25464,6 +25432,11 @@ object DM: TDM
       item
         Name = 'DATA2'
         DataType = ftWideString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CODEQUIPAMENTO'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryEquipamentoTipoManutHistCODEQUIPAMENTO: TStringField
@@ -25493,6 +25466,22 @@ object DM: TDM
       DisplayFormat = 'R$ ,0.00'
       Precision = 35
       Size = 2
+    end
+    object qryEquipamentoTipoManutHistTOTALFECHADAS: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALFECHADAS'
+      Origin = 'TOTALFECHADAS'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryEquipamentoTipoManutHistPERCENTUALFECHADAS: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'PERCENTUALFECHADAS'
+      Origin = 'PERCENTUALFECHADAS'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 27
+      Size = 4
     end
   end
   object qryEquipamentoManutHist: TFDQuery
@@ -35347,7 +35336,7 @@ object DM: TDM
       FieldName = 'DATACADASTRO'
       Origin = 'DATACADASTRO'
       ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryOrdemServicoCODUSUARIOCAD: TStringField
       AutoGenerateValue = arDefault
@@ -35361,7 +35350,7 @@ object DM: TDM
       FieldName = 'DATAULTALT'
       Origin = 'DATAULTALT'
       ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryOrdemServicoCODUSUARIOALT: TStringField
       AutoGenerateValue = arDefault
@@ -42129,8 +42118,8 @@ object DM: TDM
         '    AND `ordemservico`.`DATAPROGINI` <= STR_TO_DATE(:data2,'#39'%Y/%' +
         'm/%d %T'#39')'
       
-        '    AND `ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39' OR `ordemservic' +
-        'o`.`SITUACAO` = '#39'REPROGRAMADA'#39')'
+        '    AND (`ordemservico`.`SITUACAO` = '#39'PROGRAMADA'#39' OR `ordemservi' +
+        'co`.`SITUACAO` = '#39'REPROGRAMADA'#39'))'
       ''
       'ORDER BY `ordemservico`.`DATAPROGINI` ASC;   ')
     Left = 173
@@ -42175,12 +42164,13 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DATAPROGINI'
       Origin = 'DATAPROGINI'
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryCalendarioOSProgramadasTEMPOPREVISTO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPOPREVISTO'
       Origin = 'TEMPOPREVISTO'
+      DisplayFormat = ',0.00'
       Precision = 16
       Size = 2
     end
@@ -52400,7 +52390,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DATAINICIOREAL'
       Origin = 'DATAINICIOREAL'
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryCalendarioOSExecucaoTEMPOPREVISTO: TBCDField
       AutoGenerateValue = arDefault
@@ -52435,6 +52425,7 @@ object DM: TDM
       AutoGenerateValue = arDefault
       FieldName = 'DATAPROGINI'
       Origin = 'DATAPROGINI'
+      DisplayFormat = 'dd/mm/yy t'
     end
     object qryCalendarioOSExecucaoMATRICULA: TStringField
       FieldName = 'MATRICULA'

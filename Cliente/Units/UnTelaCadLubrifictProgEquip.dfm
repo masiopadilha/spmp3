@@ -1,62 +1,7 @@
 inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   Caption = 'Lubrifica'#231#227'o Programada do Equipamento'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
-    inherited LCadastro: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LCadastroPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LblDataCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsLubrificProgEquip
-    end
-    inherited LblUsuCad: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsLubrificProgEquip
-    end
-    inherited LAlteracao: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LAlteradoPor: TLabel
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-    end
-    inherited LblDataAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsLubrificProgEquip
-    end
-    inherited LblUsuAlt: TDBText
-      Margins.Left = 4
-      Margins.Top = 4
-      Margins.Right = 4
-      Margins.Bottom = 4
-      DataSource = DM.dsLubrificProgEquip
-    end
     inherited BtnNovo: TButton
       Left = 10
       Width = 27
@@ -109,9 +54,38 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Right = 4
       Margins.Bottom = 4
     end
+    inherited pAlteracao: TPanel
+      ExplicitLeft = 654
+      inherited LCadastro: TLabel
+        ExplicitLeft = 49
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsLubrificProgEquip
+        ExplicitLeft = 285
+        ExplicitTop = 3
+        ExplicitHeight = 14
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsLubrificProgEquip
+        ExplicitLeft = 146
+      end
+    end
+    inherited pCadastro: TPanel
+      ExplicitLeft = 654
+      inherited LCadastroPor: TLabel
+        ExplicitLeft = 5
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsLubrificProgEquip
+        ExplicitLeft = 156
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsLubrificProgEquip
+        ExplicitLeft = 290
+      end
+    end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
     Height = 97
     ExplicitHeight = 97
     inherited Label1: TLabel
@@ -369,7 +343,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PProgramacao: TPanel
     Top = 152
-    Width = 1008
     Height = 122
     ExplicitTop = 152
     ExplicitHeight = 122
@@ -599,10 +572,9 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
-    Width = 1008
-    Height = 267
+    Height = 283
     ExplicitTop = 278
-    ExplicitHeight = 264
+    ExplicitHeight = 280
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -617,29 +589,29 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 237
+      Height = 253
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 996
-      ExplicitHeight = 234
+      ExplicitHeight = 250
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 206
+          Height = 222
           Align = alClient
           TabOrder = 0
           ExplicitWidth = 988
-          ExplicitHeight = 203
+          ExplicitHeight = 219
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 204
+            Height = 220
             Align = alClient
             Color = 14671839
             DataSource = DM.dsLubrificProgEquipItens
@@ -715,14 +687,14 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 206
+          Height = 222
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 204
+            Height = 220
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839
@@ -797,16 +769,12 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
   end
   inherited PAlertas: TPanel
-    Top = 589
-    Width = 1012
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
@@ -819,8 +787,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
     end
   end
   inherited PBase: TPanel
-    Top = 549
-    Width = 1008
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

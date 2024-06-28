@@ -36,10 +36,8 @@
     end
     inherited BtnAjuda: TButton
       Left = 971
-      Top = 15
       TabOrder = 3
       ExplicitLeft = 967
-      ExplicitTop = 15
     end
     object BtnConsultar: TButton
       Left = 403
@@ -416,11 +414,6 @@
                 FieldName = 'DTAINICIO1'
                 Title.Alignment = taCenter
                 Title.Caption = 'Programada'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -12
-                Title.Font.Name = 'Segoe UI'
-                Title.Font.Style = []
                 Visible = True
               end
               item
@@ -800,7 +793,6 @@
             FieldName = 'CUSTORECURSOS'
             Title.Alignment = taCenter
             Title.Caption = 'Recursos'
-            Width = 64
             Visible = True
           end
           item

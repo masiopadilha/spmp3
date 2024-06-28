@@ -51,7 +51,12 @@ type
     qryMTBFEquipamentosDATA2: TDateField;
     qryMTTREquipamentosCODEQUIPAMENTO: TStringField;
     qryMTTREquipamentosEQUIPAMENTO: TStringField;
-    FDQuery1: TFDQuery;
+    qryOficinas5: TFDQuery;
+    qryOficinas5OFICINA: TStringField;
+    qryOficinas5TOTAL: TFMTBCDField;
+    qryOficinasIndiv: TFDQuery;
+    qryOficinasIndivOFICINA: TStringField;
+    qryOficinasIndivTOTAL: TLargeintField;
   private
     { Private declarations }
 
@@ -80,9 +85,10 @@ uses UnDM, UnTelaPrincipal, UnTelaSplash;
 procedure TDMDashboard.CalcularDashBoard;
 var
   LTotalSolicitado, LTotalFechado,
-  LTotalHorasParadasEquip, LTotalHorasTrabEquip, LMTBF, LMTTR: Real;
+  LTotalHorasParadasEquip, LTotalHorasTrabEquip,
+  LMTBF, LMTTR: Real;
   LColor: TColor;
-  I: SmallInt;
+  I,LNOficina, LOutrasOficinas: SmallInt;
 begin
   with FrmTelaPrincipal do
   begin
@@ -224,6 +230,8 @@ begin
     end;
 
     ChartTipoManutencao.Series[0].Clear;
+    ChartTipoManutencao.Series[1].Clear;
+
     DMDashboard.qryDashboard.Close;
     DMDashboard.qryDashboard.SQL.Text := 'SELECT'
                                 + ' TIPO.TIPO, COUNT(o.`CODIGO`) AS TOTAL, COUNT(o2.`CODIGO`) AS TOTALFECHADAS '
@@ -394,41 +402,26 @@ begin
     end;
 
     ChartOSOficina.Series[0].Clear;
-    DMDashboard.qryDashboard.Close;
 
-    DMDashboard.qryDashboard.SQL.Text := 'SELECT'
-                                + ' of.`DESCRICAO` AS OFICINA, COUNT(os.`CODIGO`) AS TOTAL'
-                                + ' FROM'
-                                + ' `ordemservico` AS os'
-                                + ' INNER JOIN `oficinas` AS of ON (os.`CODOFICINA` = of.`CODIGO`)'
-                                + ' WHERE'
-                                + ' (os.`SITUACAO` <> ''CANCELADA'' AND MONTH(os.`DATACADASTRO`) = :MES AND YEAR(os.`DATACADASTRO`) = :ANO)'
-                                + ' GROUP BY OFICINA ORDER BY TOTAL DESC';
+    DMDashboard.qryOficinas5.Close;
+    DMDashboard.qryOficinas5.Params[0].AsInteger := cbMes.ItemIndex + 1;
+    DMDashboard.qryOficinas5.Params[1].AsInteger := StrToInt(cbAno.Text);
+    DMDashboard.qryOficinas5.Open;
 
-    DMDashboard.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
-    DMDashboard.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
-    DMDashboard.qryDashboard.Open;
+    LNOficina := 0;
+    LOutrasOficinas := 0;
 
-    if DMDashboard.qryDashboard.IsEmpty = False then
+    DMDashboard.qryOficinas5.First;
+    while not DMDashboard.qryOficinas5.Eof = True do
     begin
-      while not DMDashboard.qryDashboard.Eof = True do
-      begin
-        if DMDashboard.qryDashboard.FieldByName('TOTAL').AsInteger > 0 then
-          LSituacaoOS[DMDashboard.qryDashboard.RecNo] := DMDashboard.qryDashboard.FieldByName('TOTAL').AsInteger;
+      ChartOSOficina.Series[0].Add(DMDashboard.qryOficinas5TOTAL.AsInteger, DMDashboard.qryOficinas5OFICINA.AsString);
 
-        DMDashboard.qryDashboard.Next;
-      end;
-
-      DMDashboard.qryDashboard.First;
-      while not DMDashboard.qryDashboard.Eof = True do
-      begin
-        if LSituacaoOS[DMDashboard.qryDashboard.RecNo] > 0 then
-          ChartOSOficina.Series[0].Add(LSituacaoOS[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('OFICINA').AsString);
-
-        DMDashboard.qryDashboard.Next;
-      end;
+      DMDashboard.qryOficinas5.Next;
     end;
-    DMDashboard.qryDashboard.Close;
+
+    if (DMDashboard.qryOficinas5.RecordCount = 1) and (DMDashboard.qryOficinas5TOTAL.AsInteger = 0) then
+      ChartOSOficina.Series[0].Clear;
+
     //----------------------------MTBF--------------------------------------------------------------------------------------------------------------------------------
     if FrmTelaSplash <> nil then
     begin
@@ -443,11 +436,11 @@ begin
 
     DMDashboard.qryMTBFMedio.Close;
     DMDashboard.qryMTBFMedio.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
-    DMDashboard.qryMTBFMedio.Params.ParamByName('data1').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
-    DMDashboard.qryMTBFMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+    DMDashboard.qryMTBFMedio.Params.ParamByName('data1').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+    DMDashboard.qryMTBFMedio.Params.ParamByName('data2').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
     DMDashboard.qryMTBFMedio.Open;
 
-    if DMDashboard.qryDashboard.IsEmpty = False then
+    if DMDashboard.qryMTBFMedio.IsEmpty = False then
     begin
       LMTBF := DMDashboard.qryMTBFMedioMTBF_MEDIA.AsFloat;
       lblMTBFVal.Caption := DMDashboard.qryMTBFMedioMTBF_MEDIA_FORMAT.AsString;
@@ -472,7 +465,7 @@ begin
     DMDashboard.qryMTTRMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
     DMDashboard.qryMTTRMedio.Open;
 
-    if DMDashboard.qryDashboard.IsEmpty = False then
+    if DMDashboard.qryMTTRMedio.IsEmpty = False then
     begin
       LMTTR := DMDashboard.qryMTTRMedioMTTR_MEDIA.AsFloat;
       lblMTTRVal.Caption := DMDashboard.qryMTTRMedioMTTR_MEDIA_FORMAT.AsString;
@@ -488,13 +481,10 @@ begin
       Sleep(50);
     end;
 
-
     if (LMTBF + LMTTR) > 0 then
       lblDisponibilidadeVal.Caption := FormatFloat(',0.00%', 100 * (LMTBF/(LMTBF + LMTTR)))
     else
       lblDisponibilidadeVal.Caption := '100%';
-
-    DMDashboard.qryMTBFMedio.Close;
   end;
 end;
 

@@ -1,7 +1,7 @@
 inherited FrmTelaAuditoria: TFrmTelaAuditoria
   Caption = 'Auditoria'
-  ClientHeight = 638
-  ClientWidth = 1004
+  ClientHeight = 635
+  ClientWidth = 1000
   Constraints.MaxHeight = 0
   Constraints.MaxWidth = 0
   Constraints.MinHeight = 0
@@ -11,14 +11,12 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
   ExplicitHeight = 674
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1000
+    Width = 996
     ExplicitWidth = 996
     inherited BtnAjuda: TButton
       Left = 958
-      Top = 16
       Height = 30
       ExplicitLeft = 954
-      ExplicitTop = 16
       ExplicitHeight = 30
     end
     object BtnImprimir: TButton
@@ -41,8 +39,8 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
   end
   inherited PCentro: TPanel
     Top = 153
-    Width = 998
-    Height = 413
+    Width = 994
+    Height = 410
     OnResize = PCentroResize
     ExplicitTop = 153
     ExplicitWidth = 994
@@ -135,7 +133,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 488
+          Width = 38
           Height = 15
           Align = alTop
           Caption = 'Antes'
@@ -145,7 +143,6 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           Font.Name = 'Roboto Lt'
           Font.Style = [fsBold]
           ParentFont = False
-          ExplicitWidth = 38
         end
         object mAntes: TDBMemo
           AlignWithMargins = True
@@ -179,7 +176,7 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 488
+          Width = 46
           Height = 15
           Align = alTop
           Caption = 'Depois'
@@ -189,7 +186,6 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
           Font.Name = 'Roboto Lt'
           Font.Style = [fsBold]
           ParentFont = False
-          ExplicitWidth = 46
         end
         object mDepois: TDBMemo
           AlignWithMargins = True
@@ -213,14 +209,14 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 571
-    Width = 1000
+    Top = 568
+    Width = 996
     ExplicitTop = 568
     ExplicitWidth = 996
   end
   inherited PBotoes: TPanel
-    Top = 598
-    Width = 1000
+    Top = 595
+    Width = 996
     ExplicitTop = 595
     ExplicitWidth = 996
     inherited BtnOK: TButton
@@ -235,14 +231,13 @@ inherited FrmTelaAuditoria: TFrmTelaAuditoria
     AlignWithMargins = True
     Left = 3
     Top = 67
-    Width = 998
+    Width = 994
     Height = 80
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 4
-    ExplicitWidth = 994
     object PConsulta: TPanel
       AlignWithMargins = True
       Left = 3

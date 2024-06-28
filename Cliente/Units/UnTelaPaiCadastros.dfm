@@ -11610,138 +11610,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     DesignSize = (
       1008
       45)
-    object LCadastro: TLabel
-      Left = 757
-      Top = 23
-      Width = 36
-      Height = 16
-      Alignment = taRightJustify
-      Anchors = [akTop, akRight]
-      Caption = 'Data:'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 749
-    end
-    object LCadastroPor: TLabel
-      Left = 713
-      Top = 9
-      Width = 80
-      Height = 16
-      Alignment = taRightJustify
-      Anchors = [akTop, akRight]
-      Caption = 'Cadastrado:'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 705
-    end
-    object LblDataCad: TDBText
-      Left = 795
-      Top = 24
-      Width = 64
-      Height = 16
-      Anchors = [akTop, akRight]
-      AutoSize = True
-      DataField = 'DATACADASTRO'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ExplicitLeft = 791
-    end
-    object LblUsuCad: TDBText
-      Left = 795
-      Top = 10
-      Width = 59
-      Height = 16
-      Anchors = [akTop, akRight]
-      AutoSize = True
-      DataField = 'CODUSUARIOCAD'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      ExplicitLeft = 791
-    end
-    object LAlteracao: TLabel
-      Left = 908
-      Top = 23
-      Width = 36
-      Height = 16
-      Alignment = taRightJustify
-      Anchors = [akTop, akRight]
-      Caption = 'Data:'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 900
-    end
-    object LAlteradoPor: TLabel
-      Left = 882
-      Top = 9
-      Width = 62
-      Height = 16
-      Alignment = taRightJustify
-      Anchors = [akTop, akRight]
-      Caption = 'Alterado:'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 874
-    end
-    object LblDataAlt: TDBText
-      Left = 946
-      Top = 23
-      Width = 57
-      Height = 16
-      Anchors = [akTop, akRight]
-      AutoSize = True
-      DataField = 'DATAULTALT'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ExplicitLeft = 942
-    end
-    object LblUsuAlt: TDBText
-      Left = 946
-      Top = 9
-      Width = 52
-      Height = 16
-      Anchors = [akTop, akRight]
-      AutoSize = True
-      DataField = 'CODUSUARIOALT'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      ExplicitLeft = 942
-    end
     object BtnNovo: TButton
       Left = 8
       Top = 7
@@ -12401,6 +12269,184 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       TabOrder = 16
       Visible = False
     end
+    object pAlteracao: TPanel
+      Left = 658
+      Top = 20
+      Width = 350
+      Height = 20
+      Anchors = [akTop, akRight]
+      BevelOuter = bvNone
+      TabOrder = 17
+      object LCadastro: TLabel
+        AlignWithMargins = True
+        Left = 49
+        Top = 3
+        Width = 36
+        Height = 14
+        Margins.Right = 2
+        Align = alRight
+        Alignment = taRightJustify
+        Caption = 'Data:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 3
+        ExplicitHeight = 16
+      end
+      object LblDataAlt: TDBText
+        AlignWithMargins = True
+        Left = 252
+        Top = 3
+        Width = 90
+        Height = 14
+        Margins.Left = 0
+        Margins.Right = 8
+        Align = alRight
+        DataField = 'DATAULTALT'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        ExplicitLeft = 260
+        ExplicitTop = 0
+        ExplicitHeight = 20
+      end
+      object LAlteradoPor: TLabel
+        AlignWithMargins = True
+        Left = 188
+        Top = 3
+        Width = 62
+        Height = 14
+        Margins.Right = 2
+        Align = alRight
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'Data:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 134
+        ExplicitHeight = 16
+      end
+      object LblDataCad: TDBText
+        AlignWithMargins = True
+        Left = 87
+        Top = 3
+        Width = 90
+        Height = 14
+        Margins.Left = 0
+        Margins.Right = 8
+        Align = alRight
+        DataField = 'DATACADASTRO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        ExplicitLeft = 88
+      end
+    end
+    object pCadastro: TPanel
+      Left = 658
+      Top = 0
+      Width = 350
+      Height = 20
+      Anchors = [akTop, akRight]
+      BevelOuter = bvNone
+      TabOrder = 18
+      object LCadastroPor: TLabel
+        AlignWithMargins = True
+        Left = 5
+        Top = 3
+        Width = 80
+        Height = 14
+        Margins.Right = 2
+        Align = alRight
+        Alignment = taRightJustify
+        Caption = 'Cadastrado:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 3
+        ExplicitHeight = 16
+      end
+      object LblUsuCad: TDBText
+        AlignWithMargins = True
+        Left = 87
+        Top = 3
+        Width = 90
+        Height = 14
+        Margins.Left = 0
+        Margins.Right = 8
+        Align = alRight
+        DataField = 'CODUSUARIOCAD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        ExplicitLeft = 88
+      end
+      object LAlteracao: TLabel
+        AlignWithMargins = True
+        Left = 188
+        Top = 3
+        Width = 62
+        Height = 14
+        Margins.Right = 2
+        Align = alRight
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'Alterado:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 178
+        ExplicitHeight = 16
+      end
+      object LblUsuAlt: TDBText
+        AlignWithMargins = True
+        Left = 252
+        Top = 3
+        Width = 90
+        Height = 14
+        Margins.Left = 0
+        Margins.Right = 8
+        Align = alRight
+        DataField = 'CODUSUARIOALT'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        ExplicitLeft = 253
+      end
+    end
   end
   object PIdentificacao: TPanel
     AlignWithMargins = True
@@ -12486,7 +12532,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     TabOrder = 3
     OnMouseMove = PIdentificacaoMouseMove
     ExplicitWidth = 1004
-    ExplicitHeight = 197
+    ExplicitHeight = 213
     object Label3: TLabel
       Left = 7
       Top = 3
@@ -12553,7 +12599,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
-    ExplicitTop = 589
+    ExplicitTop = 560
+    ExplicitWidth = 1008
     object LblAlertas: TLabel
       Left = 1005
       Top = 1
@@ -12575,7 +12622,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 4
-    ExplicitTop = 546
+    ExplicitTop = 562
     ExplicitWidth = 1004
     object BtnMais: TButton
       Left = 4

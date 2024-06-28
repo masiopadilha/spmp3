@@ -130,6 +130,7 @@ begin
     end;
 
     DM.FCodUsuario  := 'PDR-0000';
+    DM.FMatricula   := '';
     DM.FCodAcesso   := '0';
     DM.FCodAlteracao:= '0';
     DM.FCodExclusao := '0';
@@ -288,6 +289,7 @@ begin
         DM.qryUsuario.Post;
 
         DM.FCodUsuario  := DM.qryUsuarioCODIGO.AsString;
+        DM.FMatricula   := DM.qryUsuarioMATRICULA.AsString;
         DM.FNomeUsuario := DM.qryUsuarioNOME.AsString;
         DM.FCodAcesso   := DM.qryUsuarioCODPERMISSAOACESSO.AsString;
         DM.FCodAlteracao:= DM.qryUsuarioCODPERMISSAOALTERACAO.AsString;

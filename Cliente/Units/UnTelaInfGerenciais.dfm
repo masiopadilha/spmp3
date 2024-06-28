@@ -1,7 +1,7 @@
 inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   Caption = 'Informa'#231#245'es Gerenciais'
-  ClientHeight = 624
-  ClientWidth = 1012
+  ClientHeight = 621
+  ClientWidth = 1008
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,7 +12,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1008
+    Width = 1004
     ExplicitWidth = 1004
     inherited Image1: TImage
       Left = 2
@@ -34,7 +34,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 970
+      Left = 971
       ExplicitLeft = 966
     end
     object CBPeriodo: TComboBox
@@ -88,8 +88,8 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 485
+    Width = 1002
+    Height = 482
     ExplicitWidth = 1002
     ExplicitHeight = 482
     inherited RGTelas: TRadioGroup
@@ -227,14 +227,14 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 557
-    Width = 1008
+    Top = 554
+    Width = 1004
     ExplicitTop = 554
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 584
-    Width = 1008
+    Top = 581
+    Width = 1004
     ExplicitTop = 581
     ExplicitWidth = 1004
     inherited BtnOK: TButton

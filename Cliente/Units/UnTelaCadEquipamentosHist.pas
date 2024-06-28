@@ -416,9 +416,9 @@ else
 //--------------------------------------------------------------------------------------------------------------
 DM.qryEquipamentoTipoManutHist.Close;
 DM.qryEquipamentoTipoManutHist.Params[0].AsString := DM.FCodEmpresa;
-DM.qryEquipamentoTipoManutHist.Params[1].AsString := DM.qryEquipamentosCODIGO.AsString;
-DM.qryEquipamentoTipoManutHist.Params[2].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
-DM.qryEquipamentoTipoManutHist.Params[3].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+DM.qryEquipamentoTipoManutHist.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+DM.qryEquipamentoTipoManutHist.Params[2].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+DM.qryEquipamentoTipoManutHist.Params[3].AsString := DM.qryEquipamentosCODIGO.AsString;
 DM.qryEquipamentoTipoManutHist.Open;
 //--------------------------------------------------------------------------------------------------------------
 DM.qryEquipamentoManutHist.Close;

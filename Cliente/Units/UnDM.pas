@@ -29,7 +29,7 @@ uses
   frxClass, frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
   FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math,
   Winapi.ShellAPI, Vcl.Menus, IdURI, IdHTTP, IdIOHandler, IdIOHandlerSocket,
-  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip;
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip, Vcl.DBCtrls;
 
 const
   OffsetMemoryStream : Int64 = 0;
@@ -5866,6 +5866,9 @@ type
     qryRotaConsSeqManutFREQUENCIA1: TSmallintField;
     qryRotaConsSeqManutCODMANUTPROGFAMEQUIP: TStringField;
     qryRotaConsSeqManutCODEQUIPAMENTO: TStringField;
+    qryEquipamentoTipoManutHistTOTALFECHADAS: TLargeintField;
+    qryEquipamentoTipoManutHistPERCENTUALFECHADAS: TFMTBCDField;
+    qryEquipamentosCALCINDIC: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5963,7 +5966,7 @@ type
     FDataSourceParam : TDataSource;
 
     FPerfil, FPassword, FHost, FPort, FDatabase, FUserName, FCodUsuario,
-    FNomeUsuario, FHostFTP, FPasswordFTP, FUsernameFTP, FCodEmpresa,
+    FNomeUsuario, FMatricula, FHostFTP, FPasswordFTP, FUsernameFTP, FCodEmpresa,
     FNomeEmpresa, FCodGrupo, FNomeGrupo, FAlerta, FLicenca, FTela, FCodCombo,
     FValorCombo, FCodAcesso, FCodAlteracao, FCodExclusao, FCodInclusao,
     FNivelAcesso, FEstacao, FModulo, FNomeConsulta, FServerPathExeVersion,
@@ -6010,6 +6013,7 @@ type
                      Criticidade, CentroCusto, Observacoes, tempototal, Oficina,
                      TipoManutencao, EquipParado, Email: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
+    function LookUpInputBox(const ACaption, APrompt:string; AListSource, ADataSource: TDataSource; AListField, AKeyField, ADataField: String): string;
     function VerificaDuplo(Valor: String): Boolean;
     function ConsultarCombo:String;
     function AplicarMascara(Campo, Mascara: TStringField; Form: TForm): Boolean;
@@ -6658,8 +6662,8 @@ begin
                                                     + ' INNER JOIN `tipomanutencao`ON (`ordemservico`.`CODMANUTENCAO` = `tipomanutencao`.`CODIGO`)'
                                                     + ' WHERE (`ordemservicoequipemobrautil`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa)
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
@@ -6678,8 +6682,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Mecânica'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6697,8 +6701,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Elétrica'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6716,8 +6720,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Civil'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6735,8 +6739,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Apoio Técnico'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6754,8 +6758,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Produtiva'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -6773,8 +6777,8 @@ begin
                                                     + ' AND `ordemservicoequipemobrautil`.`MATRICULA` = ' + QuotedStr(DM.qryFuncionariosHistMATRICULA.AsString)
                                                     + ' AND `ordemservico`.`SITUACAO` <> ''CANCELADA'''
                                                     + ' AND `celulas`.`TIPO` = ''Administrativa'''
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
-                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1)) + ',''%Y/%m/%d'') '
+                                                    + ' AND `ordemservico`.`DATAFECHAMENTO` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2)) + ',''%Y/%m/%d'') '
                                                     + ') GROUP BY `MANUTENCAO` ORDER BY `MANUTENCAO` ASC;');
             DM.qryFuncionariosTipoManutHist.Open;
           end;
@@ -8518,6 +8522,68 @@ begin
          if Edit.Text <> EmptyStr then
            begin
             Value := Edit.Text; Result := Value;
+           end;
+        end;
+    Finally
+      FreeAndNil(Form);
+    End;
+end;
+
+function TDM.LookUpInputBox(const ACaption, APrompt:string; AListSource, ADataSource: TDataSource; AListField, AKeyField, ADataField: String): string;
+var
+Form: TForm; Prompt: TLabel; Combobox: TDBLookupComboBox; DialogUnits: TPoint;
+ButtonTop, ButtonWidth, ButtonHeight: Integer; Value: string; I: Integer;
+Buffer: array[0..51] of Char;
+begin
+  Result := EmptyStr;
+  Form := TForm.Create(Application);
+  with Form do
+    Try
+      Canvas.Font := Font;
+      For I := 0 to 25 do Buffer[I] := Chr(I + Ord('A'));
+      For I := 0 to 25 do Buffer[I + 26] := Chr(I + Ord('a'));
+      GetTextExtentPoint(Canvas.Handle, Buffer, 52, TSize(DialogUnits)); DialogUnits.X := DialogUnits.X div 52;
+      BorderStyle := bsDialog; Caption := ACaption;
+      ClientWidth := MulDiv(180, DialogUnits.X, 4); ClientHeight := MulDiv(63, DialogUnits.Y, 8);
+      Position := poScreenCenter; Prompt := TLabel.Create(Form);
+      with Prompt do
+        begin
+         Parent := Form; AutoSize := True; Left := MulDiv(8, DialogUnits.X, 4); Top := MulDiv(8, DialogUnits.Y, 8);
+         Caption := APrompt;
+        end;
+      Combobox := TDBLookupCombobox.Create(Form);
+      with Combobox do
+        begin
+         Parent := Form; Left := Prompt.Left; Top := MulDiv(19, DialogUnits.Y, 8); Width := MulDiv(164, DialogUnits.X, 4);
+         ListSource := AListSource;
+         ListField := AListField;
+         KeyField := AKeyField;
+
+         DataSource := ADataSource;
+         DataField := ADataField;
+        end;
+      ButtonTop := MulDiv(41, DialogUnits.Y, 8); ButtonWidth := MulDiv(50, DialogUnits.X, 4); ButtonHeight := MulDiv(14, DialogUnits.Y, 8);
+      with TButton.Create(Form) do
+        begin
+         Parent := Form;
+         Caption := 'OK';
+         ModalResult := mrOk;
+         Default := True;
+         SetBounds(MulDiv(38, DialogUnits.X, 4),ButtonTop, ButtonWidth,ButtonHeight);
+        end;
+      with TButton.Create(Form) do
+        begin
+         Parent := Form;
+         Caption := 'Cancel';
+         ModalResult := mrCancel;
+         Cancel := True;
+         SetBounds(MulDiv(92, DialogUnits.X, 4),ButtonTop, ButtonWidth,ButtonHeight);
+        end;
+      if ShowModal = mrOk then
+        begin
+         if Combobox.KeyValue <> EmptyStr then
+           begin
+            Value := Combobox.KeyValue; Result := Value;
            end;
         end;
     Finally

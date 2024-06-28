@@ -178,7 +178,7 @@ begin
   qryAuditoria.Close();
   qryAuditoria.SQL.Clear;
   qryAuditoria.SQL.Text := 'SELECT `id`, `id_registro`, `id_empresa`, `tabela`, `acao`, `estacao`, `usuario`, `data_hora`, `antes`, `depois` FROM `spmpma_spmp.backups`.`auditoria`';
-  qryAuditoria.SQL.Add(' WHERE `data_hora` >= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd', FDMemTConsultaDATA1.AsDateTime)) + ',''%Y/%m/%d'') AND `data_hora` <= STR_TO_DATE(' + QuotedStr(FormatDateTime('yyyy/mm/dd t', IncMinute(dedtDataCons2.Date, 1439))) + ',''%Y/%m/%d %T'')');
+  qryAuditoria.SQL.Add(' WHERE `data_hora` >= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd', FDMemTConsultaDATA1.AsDateTime)) + ',''%Y/%m/%d'') AND `data_hora` <= DATE_FORMAT(' + QuotedStr(FormatDateTime('yyyy/mm/dd t', IncMinute(dedtDataCons2.Date, 1439))) + ',''%Y/%m/%d %T'')');
   if (cbTabelaNome.Text <> '') then
     qryAuditoria.SQL.Add(' AND `tabela` = ' + QuotedStr(ValidaTabelaEscolhida(FDMemTConsultaTABELA.AsString)));
   if (cbAcao.Text <> '') then

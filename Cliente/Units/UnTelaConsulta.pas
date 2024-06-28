@@ -290,7 +290,7 @@ begin
                                     + ' `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `equipamentos`.`CODFAMILIAEQUIP`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
                                     + ', `equipamentos`.`CODCENTROCUSTO`, `centrocusto`.`DESCRICAO` CENTROCUSTO'
                                     + ', `equipamentos`.`CODLOCALIZACAO` CODAREA, `areas`.`DESCRICAO` AREA, `equipamentos`.`CODCELULA`, `celulas`.`DESCRICAO` CELULA'
-                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`'
+                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`, `equipamentos`.`CALCINDIC`'
                                     + ' FROM `equipamentos`'
                                     + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                     + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
@@ -303,7 +303,7 @@ begin
                                     + ' `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `equipamentos`.`CODFAMILIAEQUIP`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
                                     + ', `equipamentos`.`CODCENTROCUSTO`, `centrocusto`.`DESCRICAO` CENTROCUSTO'
                                     + ', `equipamentos`.`CODLOCALIZACAO` CODAREA, `areas`.`DESCRICAO` AREA, `equipamentos`.`CODCELULA`, `celulas`.`DESCRICAO` CELULA'
-                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`'
+                                    + ', `equipamentos`.`CODLINHA`, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`SEQUENCIA`, `equipamentos`.`OPERANDO`, `equipamentos`.`CALCINDIC`'
                                     + ' INNER JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
                                     + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
                                     + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
@@ -859,7 +859,10 @@ begin
           DM.qryAuxiliar.FieldByName('SEQUENCIA').DisplayWidth    := 10;
           DM.qryAuxiliar.FieldByName('OPERANDO').DisplayLabel     := 'Operando';
           DM.qryAuxiliar.FieldByName('OPERANDO').Alignment        := taCenter;
-          GrdAuxiliar.Columns[8].Title.Alignment                            := taCenter;
+          DM.qryAuxiliar.FieldByName('CALCINDIC').DisplayLabel    := 'Indicadores';
+          DM.qryAuxiliar.FieldByName('CALCINDIC').Alignment       := taCenter;
+          GrdAuxiliar.Columns[8].Title.Alignment                  := taCenter;
+          GrdAuxiliar.Columns[9].Title.Alignment                  := taCenter;
           DM.qryAuxiliar.FieldByName('CODFAMILIAEQUIP').Visible   := False;
           DM.qryAuxiliar.FieldByName('CODAREA').Visible           := False;
           DM.qryAuxiliar.FieldByName('CODCELULA').Visible         := False;

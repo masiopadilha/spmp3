@@ -43,9 +43,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
     inherited BtnAjuda: TButton
       Left = 971
-      Top = 19
       ExplicitLeft = 967
-      ExplicitTop = 19
     end
     object Button6: TButton
       Left = 940
@@ -1589,5 +1587,24 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       ImageIndex = 1
       OnClick = MenuItem2Click
     end
+  end
+  object fdmInputBox: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 856
+    Top = 304
+    object fdmInputBoxCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+  end
+  object dsInputBox: TDataSource
+    DataSet = fdmInputBox
+    Left = 928
+    Top = 304
   end
 end
