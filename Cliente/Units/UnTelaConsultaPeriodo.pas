@@ -178,9 +178,9 @@ if not Assigned(DmRelatorios) then
     4:
       begin
         DMDashboard.qryMTBFEquipamentos.Close;
-        DMDashboard.qryMTBFEquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
-        DMDashboard.qryMTBFEquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
-        DMDashboard.qryMTBFEquipamentos.Params[0].AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTBFEquipamentos.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTBFEquipamentos.Params.ParamByName('data1').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+        DMDashboard.qryMTBFEquipamentos.Params.ParamByName('data2').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
         DMDashboard.qryMTBFEquipamentos.Open;
 
         DmRelatorios.frxRRelatGerencMTBF.ShowReport();
@@ -189,11 +189,10 @@ if not Assigned(DmRelatorios) then
     5:
       begin
         DMDashboard.qryMTTREquipamentos.Close;
-        DMDashboard.qryMTTREquipamentos.Params[1].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta1);
-        DMDashboard.qryMTTREquipamentos.Params[2].AsString := FormatDateTime('dd/mm/yyyy', DM.FDataConsulta2);
-        DMDashboard.qryMTTREquipamentos.Params[0].AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTTREquipamentos.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
+        DMDashboard.qryMTTREquipamentos.Params.ParamByName('data1').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+        DMDashboard.qryMTTREquipamentos.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
         DMDashboard.qryMTTREquipamentos.Open;
-
         DmRelatorios.frxRRelatGerencMTTR.ShowReport();
         DMDashboard.qryMTTREquipamentos.Close;
 

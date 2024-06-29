@@ -497,11 +497,12 @@ object DMDashboard: TDMDashboard
       '         GROUP BY sub1.DATAFECHAMENTO, sub1.EQUIPAMENTO'
       #9' ORDER BY sub1.EQUIPAMENTO'
       '         ) AS sub2'
-      #9
+      '    '
+      '    GROUP BY sub2.DATAFECHAMENTO, sub2.EQUIPAMENTO'#9
       '    ORDER BY sub2.EQUIPAMENTO'
       '    ) AS fmt  '
       '  GROUP BY fmt.CODEQUIPAMENTO'
-      '  ORDER BY fmt.EQUIPAMENTO    ')
+      '  ORDER BY fmt.EQUIPAMENTO')
     Left = 48
     Top = 228
     ParamData = <
