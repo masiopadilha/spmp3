@@ -47,7 +47,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
     object Button6: TButton
       Left = 940
-      Top = 19
+      Top = 16
       Width = 28
       Height = 28
       Hint = 'Hist'#243'rico do Equipamento F12'
@@ -1336,7 +1336,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   object ImageList1: TImageList
-    Left = 63
+    Left = 807
     Top = 7
     Bitmap = {
       494C010102000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
@@ -1555,7 +1555,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   object Timer1: TTimer
     Interval = 300000
     OnTimer = Timer1Timer
-    Left = 130
+    Left = 866
     Top = 7
   end
   object PopupMenuItens: TPopupMenu

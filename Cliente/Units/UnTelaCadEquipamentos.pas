@@ -519,16 +519,20 @@ if DM.FEmpTransf = True then
     if DM.qryEquipamentosSECUNDARIO.AsString = 'N' then
       begin
         NBLocalizacao.PageIndex := 0;
-        //LblPrimario.Visible := False;
+        LblPrimario.Visible := False;
       end
     else
     if DM.qryEquipamentosSECUNDARIO.AsString = 'S' then
       begin
         NBLocalizacao.PageIndex := 1;
-        //LblPrimario.Visible := True;
+        LblPrimario.Visible := True;
       end;
   end;
 DM.FParamAuxiliar[1] := '';
+DM.FCodFamilia := '';
+DM.FCodArea := '';
+DM.FCodCelula := '';
+DM.FCodLinha := '';
 end;
 
 procedure TFrmTelaCadEquipamentos.BtnExcluirClick(Sender: TObject);

@@ -27,8 +27,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 972
-      ExplicitLeft = 968
+      Left = 971
+      ExplicitLeft = 967
     end
     object BtnImprimir: TButton
       Left = 939
@@ -736,8 +736,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 604
-    ExplicitWidth = 1008
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 425
       Caption = 'Executar'

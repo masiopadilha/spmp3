@@ -17,23 +17,23 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   TextHeight = 15
   inherited PTop: TPanel
     Width = 434
-    ExplicitWidth = 387
+    ExplicitWidth = 430
     inherited BtnAjuda: TButton
       Left = 397
       Visible = False
-      ExplicitLeft = 354
+      ExplicitLeft = 393
     end
   end
   inherited PCentro: TPanel
     Width = 432
     Height = 201
-    ExplicitWidth = 385
-    ExplicitHeight = 191
+    ExplicitWidth = 428
+    ExplicitHeight = 198
     inherited RGTelas: TRadioGroup
       Width = 430
       Height = 199
-      ExplicitWidth = 383
-      ExplicitHeight = 189
+      ExplicitWidth = 426
+      ExplicitHeight = 196
     end
     object Panel1: TPanel
       AlignWithMargins = True
@@ -45,8 +45,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 377
-      ExplicitHeight = 183
+      ExplicitWidth = 420
+      ExplicitHeight = 190
       object Label1: TLabel
         Left = 352
         Top = 6
@@ -89,7 +89,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Caption = 'Backup:'
       end
       object Label5: TLabel
-        Left = 9
+        Left = 123
         Top = 7
         Width = 79
         Height = 13
@@ -115,11 +115,24 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 145
+        Left = 237
         Top = 6
         Width = 66
         Height = 13
         Caption = 'Hostname/IP:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 9
+        Top = 7
+        Width = 55
+        Height = 13
+        Caption = 'User name:'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -133,7 +146,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Width = 134
         Height = 22
         Style = csOwnerDrawFixed
-        TabOrder = 4
+        TabOrder = 5
         Items.Strings = (
           ''
           'Autom'#225'tico'
@@ -145,7 +158,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Width = 133
         Height = 22
         Style = csOwnerDrawFixed
-        TabOrder = 5
+        TabOrder = 6
         Items.Strings = (
           ''
           '01 dias'
@@ -158,13 +171,13 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Width = 251
         Height = 23
         ReadOnly = True
-        TabOrder = 6
+        TabOrder = 7
         Text = 'C:\SPMP3\Backup'
       end
       object edtDatabaseName: TEdit
-        Left = 9
+        Left = 123
         Top = 25
-        Width = 133
+        Width = 112
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -172,7 +185,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
         Text = 'spmpma_spmp'
       end
       object EdtHorario: TLabeledEdit
@@ -183,13 +196,13 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         EditLabel.Width = 43
         EditLabel.Height = 15
         EditLabel.Caption = 'Hor'#225'rio:'
-        TabOrder = 8
+        TabOrder = 9
         Text = ''
       end
       object EdtHostName: TEdit
-        Left = 145
+        Left = 237
         Top = 25
-        Width = 204
+        Width = 112
         Height = 21
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -197,7 +210,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         Text = 'localhost'
       end
       object EdtInicio: TJvDateEdit
@@ -207,11 +220,11 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Height = 23
         DialogTitle = 'Selecione a data'
         ShowNullDate = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object EdtPorta: TEdit
         Left = 352
-        Top = 24
+        Top = 25
         Width = 63
         Height = 21
         Font.Charset = ANSI_CHARSET
@@ -220,7 +233,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
         Text = '3306'
       end
       object EdtSenha: TEdit
@@ -235,7 +248,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         Font.Style = [fsBold]
         ParentFont = False
         PasswordChar = '*'
-        TabOrder = 3
+        TabOrder = 4
       end
       object edtHostFTP: TLabeledEdit
         Left = 9
@@ -245,7 +258,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         EditLabel.Width = 58
         EditLabel.Height = 15
         EditLabel.Caption = 'Host (FTP):'
-        TabOrder = 9
+        TabOrder = 10
         Text = ''
       end
       object edtSenhaFTP: TLabeledEdit
@@ -257,7 +270,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         EditLabel.Height = 15
         EditLabel.Caption = 'Senha (FTP):'
         PasswordChar = '*'
-        TabOrder = 10
+        TabOrder = 11
         Text = ''
       end
       object edtUsernamFTP: TLabeledEdit
@@ -268,8 +281,22 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
         EditLabel.Width = 56
         EditLabel.Height = 15
         EditLabel.Caption = 'User (FTP):'
-        TabOrder = 11
+        TabOrder = 12
         Text = ''
+      end
+      object edtUserName: TEdit
+        Left = 9
+        Top = 25
+        Width = 112
+        Height = 21
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        Text = 'spmpma_spmp'
       end
     end
   end
@@ -281,8 +308,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     Height = 0
     Visible = False
     ExplicitLeft = 0
-    ExplicitTop = 261
-    ExplicitWidth = 391
+    ExplicitTop = 268
+    ExplicitWidth = 434
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
@@ -291,8 +318,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     Height = 44
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ExplicitTop = 267
-    ExplicitWidth = 391
+    ExplicitTop = 270
+    ExplicitWidth = 430
     ExplicitHeight = 44
     inherited BtnOK: TButton
       Left = 0
@@ -341,7 +368,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       Width = 98
       Height = 25
       Hint = 'Testar conex'#227'o com banco de dados.'
-      Caption = 'Banco'
+      Caption = 'Testar'
       Default = True
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText

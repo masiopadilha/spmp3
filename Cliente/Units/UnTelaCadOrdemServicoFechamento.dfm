@@ -6,9 +6,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Visible = False
     end
     inherited pAlteracao: TPanel
-      Left = 633
+      Left = 637
       Width = 380
-      ExplicitLeft = 629
+      ExplicitLeft = 633
       ExplicitWidth = 380
       inherited LCadastro: TLabel
         Left = 138
@@ -40,9 +40,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       end
     end
     inherited pCadastro: TPanel
-      Left = 633
+      Left = 637
       Width = 380
-      ExplicitLeft = 629
+      ExplicitLeft = 633
       ExplicitWidth = 380
       inherited LCadastroPor: TLabel
         Left = 35

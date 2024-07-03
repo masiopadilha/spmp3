@@ -21441,10 +21441,8 @@ object DM: TDM
   end
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
-      'Server=192.168.68.119'
-      'Database=spmpma_spmp'
-      'User_Name=spmpma_spmp'
-      'Password=luca1052'
+      'Server='
+      'Port='
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
@@ -55091,7 +55089,8 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `manutprogequipamentohist`.`CODIGO`'
+      '    `manutprogequipamentohist`.`INDICE`'
+      '    , `manutprogequipamentohist`.`CODIGO`'
       '    , `manutprogequipamentohist`.`CODEMPRESA`'
       '    , `manutprogequipamentohist`.`CODEQUIPAMENTO`'
       '    , `manutprogequipamentohist`.`CODMANUTPROGFAMEQUIP`'
@@ -55119,9 +55118,16 @@ object DM: TDM
       
         '    ,  DATE_ADD(`manutprogequipamentohist`.`DTAINICIO1`, INTERVA' +
         'L `manutprogequipamentohist`.`FREQUENCIA1` DAY) AS PROXINSP'
+      '    , `ordemservico`.`DATAINICIOREAL`'
+      '    , `ordemservico`.`DATAFIMREAL`'
+      '    , `ordemservico`.`SITUACAO`'
       '    , '#39'S'#39' AS REMIPRESSAO'
       'FROM'
       '    `manutprogequipamentohist`'
+      '    INNER JOIN `ordemservico`'
+      
+        '        ON (`manutprogequipamentohist`.`CODORDEMSERVICO` = `orde' +
+        'mservico`.`CODIGO`)'
       '    LEFT JOIN `manutprogfamequipamento` '
       
         '        ON (`manutprogequipamentohist`.`CODMANUTPROGFAMEQUIP` = ' +
@@ -55157,6 +55163,11 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
       end>
+    object qryChecklistManutINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
     object qryChecklistManutCODIGO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODIGO'
@@ -55326,6 +55337,30 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
     end
+    object qryChecklistManutDATAINICIOREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINICIOREAL'
+      Origin = 'DATAINICIOREAL'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistManutDATAFIMREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFIMREAL'
+      Origin = 'DATAFIMREAL'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistManutSITUACAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
     object qryChecklistManutREMIPRESSAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'REMIPRESSAO'
@@ -55415,116 +55450,191 @@ object DM: TDM
     Top = 744
   end
   object qryChecklistManutItens: TFDQuery
-    IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
+    OnCalcFields = qryChecklistManutItensCalcFields
+    IndexFieldNames = 'HISTORICO'
     AggregatesActive = True
     MasterSource = dsChecklistManut
-    MasterFields = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
+    MasterFields = 'INDICE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `manutprogfamequipitens`.`CODIGO`'
-      '    , `manutprogfamequipitens`.`CODEMPRESA`'
-      '    , `manutprogfamequipitens`.`CODMANUTPROGFAMEQUIP`'
-      '    , `manutprogfamequipitens`.`CODPARTE`'
-      '    , `manutprogfamequipitens`.`ITEM`'
-      '    , `manutprogfamequipitens`.`DESCINSPECAO`'
-      '    , `manutprogfamequipitens`.`EQUIPPARADO`'
-      '    , `manutprogfamequipitens`.`TEMPO`'
-      '    , `manutprogfamequipitens`.`EXECAUTONOMO`'
+      '    `manutprogequiphistitens`.`INDICE`'
+      '    , `manutprogequiphistitens`.`CODEMPRESA`'
+      '    , `manutprogequiphistitens`.`HISTORICO`'
+      '    , `manutprogequiphistitens`.`CODIGO`'
+      '    , `manutprogequiphistitens`.`CODMANUTPROGEQUIP`'
+      '    , `manutprogequiphistitens`.`DTAINICIO1`'
+      '    , `manutprogequiphistitens`.`DATAINSPECAO`'
+      '    , `manutprogequiphistitens`.`CODPARTE`'
+      '    , `manutprogequiphistitens`.`ITEM`'
+      '    , `manutprogequiphistitens`.`DESCINSPECAO`'
+      '    , `manutprogequiphistitens`.`EQUIPPARADO`'
+      '    , `manutprogequiphistitens`.`TEMPO`'
+      '    , `manutprogequiphistitens`.`EXECAUTONOMO`'
+      '    , `manutprogequiphistitens`.`EXECUTADO`'
+      '    , `manutprogequiphistitens`.`BOM`'
+      '    , `manutprogequiphistitens`.`REGULAR`'
+      '    , `manutprogequiphistitens`.`RUIM`'
       '    , `manutprogfamequippartes`.`DESCRICAO` AS `PARTE`'
       'FROM'
-      '    `manutprogfamequipitens`'
+      '    `manutprogequiphistitens`'
+      '    INNER JOIN `manutprogequipamento` '
+      
+        '        ON (`manutprogequiphistitens`.`CODMANUTPROGEQUIP` = `man' +
+        'utprogequipamento`.`CODIGO`) AND (`manutprogequiphistitens`.`COD' +
+        'EMPRESA` = `manutprogequipamento`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
+        'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
       '    INNER JOIN `manutprogfamequippartes` '
       
-        '        ON (`manutprogfamequipitens`.`CODPARTE` = `manutprogfame' +
-        'quippartes`.`CODIGO`)'
-      'WHERE (`manutprogfamequipitens`.`CODEMPRESA` = :codempresa'
+        '        ON  (`manutprogfamequippartes`.`CODIGO` = `manutprogequi' +
+        'phistitens`.`CODPARTE`)'
+      'WHERE (`manutprogequiphistitens`.`HISTORICO` = :indice)'
       
-        '  AND `manutprogfamequipitens`.`CODMANUTPROGFAMEQUIP` = :codmanu' +
-        'tprogfamequip'
-      ')'
-      'ORDER BY `PARTE` ASC, `manutprogfamequipitens`.`ITEM`;')
+        'ORDER BY  `manutprogfamequippartes`.`DESCRICAO` ASC, `manutproge' +
+        'quiphistitens`.`ITEM`, `manutprogequiphistitens`.`DESCINSPECAO` ' +
+        'ASC;'
+      '')
     Left = 1565
     Top = 696
     ParamData = <
       item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 9
-        Value = Null
-      end
-      item
-        Name = 'codmanutprogfamequip'
+        Name = 'INDICE'
         DataType = ftString
         ParamType = ptInput
       end>
-    object IntegerField18: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ProviderFlags = [pfInWhere]
+    object qryChecklistManutItensINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
     end
-    object StringField134: TStringField
+    object qryChecklistManutItensCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
       Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 9
     end
-    object StringField135: TStringField
+    object qryChecklistManutItensHISTORICO: TIntegerField
       AutoGenerateValue = arDefault
-      FieldName = 'CODMANUTPROGFAMEQUIP'
-      Origin = 'CODMANUTPROGFAMEQUIP'
+      FieldName = 'HISTORICO'
+      Origin = 'HISTORICO'
+    end
+    object qryChecklistManutItensCODIGO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+    end
+    object qryChecklistManutItensCODMANUTPROGEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODMANUTPROGEQUIP'
+      Origin = 'CODMANUTPROGEQUIP'
       Size = 9
     end
-    object IntegerField19: TIntegerField
+    object qryChecklistManutItensDTAINICIO1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DTAINICIO1'
+      Origin = 'DTAINICIO1'
+    end
+    object qryChecklistManutItensDATAINSPECAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINSPECAO'
+      Origin = 'DATAINSPECAO'
+    end
+    object qryChecklistManutItensCODPARTE: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'CODPARTE'
       Origin = 'CODPARTE'
     end
-    object StringField136: TStringField
+    object qryChecklistManutItensITEM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ITEM'
       Origin = 'ITEM'
-      ProviderFlags = [pfInUpdate]
       Size = 80
     end
-    object StringField137: TStringField
+    object qryChecklistManutItensDESCINSPECAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCINSPECAO'
       Origin = 'DESCINSPECAO'
-      ProviderFlags = [pfInUpdate]
       Size = 200
     end
-    object StringField138: TStringField
+    object qryChecklistManutItensEQUIPPARADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EQUIPPARADO'
       Origin = 'EQUIPPARADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object BCDField8: TBCDField
+    object qryChecklistManutItensTEMPO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = ',0.00'
-      Precision = 10
+      Precision = 16
       Size = 2
     end
-    object StringField139: TStringField
+    object qryChecklistManutItensEXECAUTONOMO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECAUTONOMO'
       Origin = 'EXECAUTONOMO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField140: TStringField
+    object qryChecklistManutItensEXECUTADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EXECUTADO'
+      Origin = 'EXECUTADO'
+      Size = 1
+    end
+    object qryChecklistManutItensBOM: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'BOM'
+      Origin = 'BOM'
+      Size = 1
+    end
+    object qryChecklistManutItensREGULAR: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REGULAR'
+      Origin = 'REGULAR'
+      Size = 1
+    end
+    object qryChecklistManutItensRUIM: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RUIM'
+      Origin = 'RUIM'
+      Size = 1
+    end
+    object qryChecklistManutItensPARTE: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'PARTE'
-      Origin = 'PARTE'
+      Origin = 'DESCRICAO'
       ProviderFlags = []
+      ReadOnly = True
       Size = 80
+    end
+    object qryChecklistManutItensEXECUTADO_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'EXECUTADO_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensBOM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'BOM_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensREGULAR_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'REGULAR_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensRUIM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'RUIM_CHK'
+      ProviderFlags = []
+      Calculated = True
     end
     object qryChecklistManutItensTotalHH: TAggregateField
       FieldName = 'TotalHH'
@@ -55541,143 +55651,192 @@ object DM: TDM
   end
   object qryChecklistManutItensEsp: TFDQuery
     AfterInsert = qryManutProgEquipItensEspAfterInsert
-    IndexFieldNames = 'CODEMPRESA;CODMANUTPROGEQUIP'
+    OnCalcFields = qryChecklistManutItensEspCalcFields
+    IndexFieldNames = 'HISTORICO'
     AggregatesActive = True
     MasterSource = dsChecklistManut
-    MasterFields = 'CODEMPRESA;CODIGO'
+    MasterFields = 'INDICE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `manutprogequipitensesp`.`CODIGO`'
-      '    , `manutprogequipitensesp`.`CODEMPRESA`'
-      '    , `manutprogequipitensesp`.`CODMANUTPROGEQUIP`'
-      '    , `manutprogequipitensesp`.`CODPARTE`'
-      '    , `manutprogequipitensesp`.`ITEM`'
-      '    , `manutprogequipitensesp`.`DESCINSPECAO`'
-      '    , `manutprogequipitensesp`.`EQUIPPARADO`'
-      '    , `manutprogequipitensesp`.`TEMPO`'
-      '    , `manutprogequipitensesp`.`EXECAUTONOMO`'
-      '    , `manutprogequipitensesp`.`EXECUTADO`'
-      '    , `manutprogequipitensesp`.`BOM`'
-      '    , `manutprogequipitensesp`.`REGULAR`'
-      '    , `manutprogequipitensesp`.`RUIM`'
-      '    , `manutprogfamequippartes`.`DESCRICAO`PARTE'
+      '    `manutprogequiphistitensesp`.`INDICE`'
+      '    , `manutprogequiphistitensesp`.`CODEMPRESA`'
+      '    , `manutprogequiphistitensesp`.`HISTORICO`'
+      '    , `manutprogequiphistitensesp`.`CODIGO`'
+      '    , `manutprogequiphistitensesp`.`CODMANUTPROGEQUIP`'
+      '    , `manutprogequiphistitensesp`.`DTAINICIO1`'
+      '    , `manutprogequiphistitensesp`.`DATAINSPECAO`'
+      '    , `manutprogequiphistitensesp`.`CODPARTE`'
+      '    , `manutprogequiphistitensesp`.`ITEM`'
+      '    , `manutprogequiphistitensesp`.`DESCINSPECAO`'
+      '    , `manutprogequiphistitensesp`.`EQUIPPARADO`'
+      '    , `manutprogequiphistitensesp`.`TEMPO`'
+      '    , `manutprogequiphistitensesp`.`EXECAUTONOMO`'
+      '    , `manutprogequiphistitensesp`.`EXECUTADO`'
+      '    , `manutprogequiphistitensesp`.`BOM`'
+      '    , `manutprogequiphistitensesp`.`REGULAR`'
+      '    , `manutprogequiphistitensesp`.`RUIM`'
+      '    , `manutprogfamequippartes`.`DESCRICAO` AS `PARTE`'
       'FROM'
-      '    `manutprogequipitensesp`'
+      '    `manutprogequiphistitensesp`'
+      '    INNER JOIN `manutprogequipamento` '
+      
+        '        ON (`manutprogequiphistitensesp`.`CODMANUTPROGEQUIP` = `' +
+        'manutprogequipamento`.`CODIGO`) AND (`manutprogequiphistitensesp' +
+        '`.`CODEMPRESA` = `manutprogequipamento`.`CODEMPRESA`)'
+      '    INNER JOIN `manutprogfamequipamento` '
+      
+        '        ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `man' +
+        'utprogfamequipamento`.`CODIGO`) AND (`manutprogequipamento`.`COD' +
+        'EMPRESA` = `manutprogfamequipamento`.`CODEMPRESA`)'
       '    INNER JOIN `manutprogfamequippartes` '
       
-        '        ON (`manutprogequipitensesp`.`CODPARTE` = `manutprogfame' +
-        'quippartes`.`CODIGO`) AND (`manutprogfamequippartes`.`CODEMPRESA' +
-        '` = `manutprogequipitensesp`.`CODEMPRESA`)'
-      'WHERE (`manutprogequipitensesp`.`CODEMPRESA` = :codempresa'
-      '    AND `manutprogequipitensesp`.`CODMANUTPROGEQUIP` = :codigo)'
-      'ORDER BY `PARTE` ASC;')
+        '        ON  (`manutprogfamequippartes`.`CODIGO` = `manutprogequi' +
+        'phistitensesp`.`CODPARTE`)'
+      'WHERE (`manutprogequiphistitensesp`.`HISTORICO` = :indice)'
+      
+        'ORDER BY  `manutprogfamequippartes`.`DESCRICAO` ASC, `manutproge' +
+        'quiphistitensesp`.`ITEM`, `manutprogequiphistitensesp`.`DESCINSP' +
+        'ECAO` ASC;'
+      ''
+      '')
     Left = 1583
     Top = 696
     ParamData = <
       item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'CODIGO'
+        Name = 'INDICE'
         DataType = ftString
         ParamType = ptInput
       end>
-    object FDAutoIncField11: TFDAutoIncField
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ReadOnly = True
+    object qryChecklistManutItensEspINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
     end
-    object StringField141: TStringField
+    object qryChecklistManutItensEspCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
       Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 9
     end
-    object StringField142: TStringField
+    object qryChecklistManutItensEspHISTORICO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HISTORICO'
+      Origin = 'HISTORICO'
+    end
+    object qryChecklistManutItensEspCODIGO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+    end
+    object qryChecklistManutItensEspCODMANUTPROGEQUIP: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODMANUTPROGEQUIP'
       Origin = 'CODMANUTPROGEQUIP'
       Size = 9
     end
-    object IntegerField20: TIntegerField
+    object qryChecklistManutItensEspDTAINICIO1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DTAINICIO1'
+      Origin = 'DTAINICIO1'
+    end
+    object qryChecklistManutItensEspDATAINSPECAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINSPECAO'
+      Origin = 'DATAINSPECAO'
+    end
+    object qryChecklistManutItensEspCODPARTE: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'CODPARTE'
       Origin = 'CODPARTE'
     end
-    object StringField143: TStringField
+    object qryChecklistManutItensEspITEM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ITEM'
       Origin = 'ITEM'
-      ProviderFlags = [pfInUpdate]
       Size = 80
     end
-    object StringField144: TStringField
+    object qryChecklistManutItensEspDESCINSPECAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCINSPECAO'
       Origin = 'DESCINSPECAO'
-      ProviderFlags = [pfInUpdate]
       Size = 200
     end
-    object StringField145: TStringField
+    object qryChecklistManutItensEspEQUIPPARADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EQUIPPARADO'
       Origin = 'EQUIPPARADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object BCDField9: TBCDField
+    object qryChecklistManutItensEspTEMPO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = ',0.00'
-      Precision = 10
+      Precision = 16
       Size = 2
     end
-    object StringField146: TStringField
+    object qryChecklistManutItensEspEXECAUTONOMO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECAUTONOMO'
       Origin = 'EXECAUTONOMO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField147: TStringField
+    object qryChecklistManutItensEspEXECUTADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECUTADO'
       Origin = 'EXECUTADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField148: TStringField
+    object qryChecklistManutItensEspBOM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'BOM'
       Origin = 'BOM'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField149: TStringField
+    object qryChecklistManutItensEspREGULAR: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'REGULAR'
       Origin = 'REGULAR'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField150: TStringField
+    object qryChecklistManutItensEspRUIM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'RUIM'
       Origin = 'RUIM'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField151: TStringField
+    object qryChecklistManutItensEspPARTE: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'PARTE'
       Origin = 'DESCRICAO'
       ProviderFlags = []
+      ReadOnly = True
       Size = 80
+    end
+    object qryChecklistManutItensEspRUIM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'RUIM_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensEspREGULAR_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'REGULAR_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensEspBOM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'BOM_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistManutItensEspEXECUTADO_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'EXECUTADO_CHK'
+      ProviderFlags = []
+      Calculated = True
     end
     object qryChecklistManutItensEspTotalHH: TAggregateField
       FieldName = 'TotalHH'
@@ -55778,7 +55937,8 @@ object DM: TDM
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `lubrificprogequipamentohist`.`CODIGO`'
+      '    `lubrificprogequipamentohist`.`INDICE`'
+      '    , `lubrificprogequipamentohist`.`CODIGO`'
       '    , `lubrificprogequipamentohist`.`CODEMPRESA`'
       '    , `lubrificprogequipamentohist`.`CODEQUIPAMENTO`'
       '    , `lubrificprogequipamentohist`.`CODLUBRIFICPROGFAMEQUIP`'
@@ -55807,9 +55967,16 @@ object DM: TDM
         '    ,  DATE_ADD(`lubrificprogequipamentohist`.`DTAINICIO1`, INTE' +
         'RVAL `lubrificprogequipamentohist`.`FREQUENCIA1` DAY) AS PROXINS' +
         'P'
+      '    , `ordemservico`.`DATAINICIOREAL`'
+      '    , `ordemservico`.`DATAFIMREAL`'
+      '    , `ordemservico`.`SITUACAO`'
       '    , '#39'S'#39' AS REMIPRESSAO'
       'FROM'
       '    `lubrificprogequipamentohist`'
+      '    INNER JOIN `ordemservico`'
+      
+        '        ON (`lubrificprogequipamentohist`.`CODORDEMSERVICO` = `o' +
+        'rdemservico`.`CODIGO`)'
       '    LEFT JOIN `lubrificprogfamequipamento`'
       
         '        ON (`lubrificprogequipamentohist`.`CODLUBRIFICPROGFAMEQU' +
@@ -55846,6 +56013,11 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
       end>
+    object qryChecklistLubrificINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
     object qryChecklistLubrificCODIGO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODIGO'
@@ -56013,6 +56185,30 @@ object DM: TDM
       ReadOnly = True
       Size = 1
     end
+    object qryChecklistLubrificDATAINICIOREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINICIOREAL'
+      Origin = 'DATAINICIOREAL'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistLubrificDATAFIMREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFIMREAL'
+      Origin = 'DATAFIMREAL'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistLubrificSITUACAO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SITUACAO'
+      Origin = 'SITUACAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
   end
   object dsChecklistLubrific: TDataSource
     DataSet = qryChecklistLubrific
@@ -56097,113 +56293,191 @@ object DM: TDM
     Top = 743
   end
   object qryChecklistLubrificItens: TFDQuery
-    IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
+    OnCalcFields = qryChecklistLubrificItensCalcFields
+    IndexFieldNames = 'HISTORICO'
     AggregatesActive = True
     MasterSource = dsChecklistLubrific
-    MasterFields = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
+    MasterFields = 'INDICE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `lubrificprogfamequipitens`.`CODIGO`'
-      '    , `lubrificprogfamequipitens`.`CODEMPRESA`'
-      '    , `lubrificprogfamequipitens`.`CODLUBRIFICPROGFAMEQUIP`'
-      '    , `lubrificprogfamequipitens`.`CODPARTE`'
-      '    , `lubrificprogfamequipitens`.`ITEM`'
-      '    , `lubrificprogfamequipitens`.`DESCINSPECAO`'
-      '    , `lubrificprogfamequipitens`.`EQUIPPARADO`'
-      '    , `lubrificprogfamequipitens`.`TEMPO`'
-      '    , `lubrificprogfamequipitens`.`EXECAUTONOMO`'
+      '    `lubrificprogequiphistitens`.`INDICE`'
+      '    , `lubrificprogequiphistitens`.`CODEMPRESA`'
+      '    , `lubrificprogequiphistitens`.`HISTORICO`'
+      '    , `lubrificprogequiphistitens`.`CODIGO`'
+      '    , `lubrificprogequiphistitens`.`CODLUBRIFICPROGEQUIP`'
+      '    , `lubrificprogequiphistitens`.`DTAINICIO1`'
+      '    , `lubrificprogequiphistitens`.`DATAINSPECAO`'
+      '    , `lubrificprogequiphistitens`.`CODPARTE`'
+      '    , `lubrificprogequiphistitens`.`ITEM`'
+      '    , `lubrificprogequiphistitens`.`DESCINSPECAO`'
+      '    , `lubrificprogequiphistitens`.`EQUIPPARADO`'
+      '    , `lubrificprogequiphistitens`.`TEMPO`'
+      '    , `lubrificprogequiphistitens`.`EXECAUTONOMO`'
+      '    , `lubrificprogequiphistitens`.`EXECUTADO`'
+      '    , `lubrificprogequiphistitens`.`BOM`'
+      '    , `lubrificprogequiphistitens`.`REGULAR`'
+      '    , `lubrificprogequiphistitens`.`RUIM`'
       '    , `lubrificprogfamequippartes`.`DESCRICAO` AS `PARTE`'
       'FROM'
-      '    `lubrificprogfamequipitens`'
+      '    `lubrificprogequiphistitens`'
+      '    INNER JOIN `lubrificprogequipamento`'
+      
+        '        ON (`lubrificprogequiphistitens`.`CODLUBRIFICPROGEQUIP` ' +
+        '= `lubrificprogequipamento`.`CODIGO`) AND (`lubrificprogequiphis' +
+        'titens`.`CODEMPRESA` = `lubrificprogequipamento`.`CODEMPRESA`)'
+      '    INNER JOIN `lubrificprogfamequipamento`'
+      
+        '        ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` ' +
+        '= `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequip' +
+        'amento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`' +
+        ')'
       '    INNER JOIN `lubrificprogfamequippartes`'
       
-        '        ON (`lubrificprogfamequipitens`.`CODPARTE` = `lubrificpr' +
-        'ogfamequippartes`.`CODIGO`)'
-      'WHERE (`lubrificprogfamequipitens`.`CODEMPRESA` = :codempresa'
+        '        ON  (`lubrificprogfamequippartes`.`CODIGO` = `lubrificpr' +
+        'ogequiphistitens`.`CODPARTE`)'
+      'WHERE (`lubrificprogequiphistitens`.`HISTORICO` = :indice)'
       
-        '    AND `lubrificprogfamequipitens`.`CODLUBRIFICPROGFAMEQUIP` = ' +
-        ':codlubrificprogfamequip)'
-      'ORDER BY `PARTE` ASC, `lubrificprogfamequipitens`.`ITEM`;')
+        'ORDER BY  `lubrificprogfamequippartes`.`DESCRICAO` ASC, `lubrifi' +
+        'cprogequiphistitens`.`ITEM`, `lubrificprogequiphistitens`.`DESCI' +
+        'NSPECAO` ASC;')
     Left = 1703
     Top = 695
     ParamData = <
       item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'CODLUBRIFICPROGFAMEQUIP'
+        Name = 'INDICE'
         DataType = ftString
         ParamType = ptInput
       end>
-    object IntegerField21: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ProviderFlags = [pfInWhere]
+    object qryChecklistLubrificItensINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
     end
-    object StringField159: TStringField
+    object qryChecklistLubrificItensCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
       Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 9
     end
-    object StringField160: TStringField
+    object qryChecklistLubrificItensHISTORICO: TIntegerField
       AutoGenerateValue = arDefault
-      FieldName = 'CODLUBRIFICPROGFAMEQUIP'
-      Origin = 'CODLUBRIFICPROGFAMEQUIP'
+      FieldName = 'HISTORICO'
+      Origin = 'HISTORICO'
+    end
+    object qryChecklistLubrificItensCODIGO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+    end
+    object qryChecklistLubrificItensCODLUBRIFICPROGEQUIP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODLUBRIFICPROGEQUIP'
+      Origin = 'CODLUBRIFICPROGEQUIP'
       Size = 9
     end
-    object IntegerField22: TIntegerField
+    object qryChecklistLubrificItensDTAINICIO1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DTAINICIO1'
+      Origin = 'DTAINICIO1'
+    end
+    object qryChecklistLubrificItensDATAINSPECAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINSPECAO'
+      Origin = 'DATAINSPECAO'
+    end
+    object qryChecklistLubrificItensCODPARTE: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'CODPARTE'
       Origin = 'CODPARTE'
     end
-    object StringField161: TStringField
+    object qryChecklistLubrificItensITEM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ITEM'
       Origin = 'ITEM'
-      ProviderFlags = [pfInUpdate]
       Size = 80
     end
-    object StringField162: TStringField
+    object qryChecklistLubrificItensDESCINSPECAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCINSPECAO'
       Origin = 'DESCINSPECAO'
-      ProviderFlags = [pfInUpdate]
       Size = 200
     end
-    object StringField163: TStringField
+    object qryChecklistLubrificItensEQUIPPARADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EQUIPPARADO'
       Origin = 'EQUIPPARADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object BCDField10: TBCDField
+    object qryChecklistLubrificItensTEMPO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = ',0.00'
-      Precision = 10
+      Precision = 16
       Size = 2
     end
-    object StringField164: TStringField
+    object qryChecklistLubrificItensEXECAUTONOMO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECAUTONOMO'
       Origin = 'EXECAUTONOMO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField165: TStringField
+    object qryChecklistLubrificItensEXECUTADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'EXECUTADO'
+      Origin = 'EXECUTADO'
+      Size = 1
+    end
+    object qryChecklistLubrificItensBOM: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'BOM'
+      Origin = 'BOM'
+      Size = 1
+    end
+    object qryChecklistLubrificItensREGULAR: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'REGULAR'
+      Origin = 'REGULAR'
+      Size = 1
+    end
+    object qryChecklistLubrificItensRUIM: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RUIM'
+      Origin = 'RUIM'
+      Size = 1
+    end
+    object qryChecklistLubrificItensPARTE: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'PARTE'
       Origin = 'DESCRICAO'
       ProviderFlags = []
+      ReadOnly = True
       Size = 80
+    end
+    object qryChecklistLubrificItensEXECUTADO_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'EXECUTADO_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensBOM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'BOM_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensREGULAR_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'REGULAR_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensRUIM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'RUIM_CHK'
+      ProviderFlags = []
+      Calculated = True
     end
     object qryChecklistLubrificItensTotalHH: TAggregateField
       FieldName = 'TotalHH'
@@ -56220,144 +56494,191 @@ object DM: TDM
   end
   object qryChecklistLubrificItensEsp: TFDQuery
     AfterInsert = qryLubrificProgEquipItensEspAfterInsert
-    IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGEQUIP'
+    OnCalcFields = qryChecklistLubrificItensEspCalcFields
+    IndexFieldNames = 'HISTORICO'
     MasterSource = dsChecklistLubrific
-    MasterFields = 'CODEMPRESA;CODIGO'
+    MasterFields = 'INDICE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
-      '    `lubrificprogequipitensesp`.`CODIGO`'
-      '    , `lubrificprogequipitensesp`.`CODEMPRESA`'
-      '    , `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP`'
-      '    , `lubrificprogequipitensesp`.`CODPARTE`'
-      '    , `lubrificprogequipitensesp`.`ITEM`'
-      '    , `lubrificprogequipitensesp`.`DESCINSPECAO`'
-      '    , `lubrificprogequipitensesp`.`EQUIPPARADO`'
-      '    , `lubrificprogequipitensesp`.`TEMPO`'
-      '    , `lubrificprogequipitensesp`.`EXECAUTONOMO`'
-      '    , `lubrificprogequipitensesp`.`EXECUTADO`'
-      '    , `lubrificprogequipitensesp`.`BOM`'
-      '    , `lubrificprogequipitensesp`.`REGULAR`'
-      '    , `lubrificprogequipitensesp`.`RUIM`'
-      '    , `lubrificprogfamequippartes`.`DESCRICAO`PARTE'
+      '    `lubrificprogequiphistitensesp`.`INDICE`'
+      '    , `lubrificprogequiphistitensesp`.`CODEMPRESA`'
+      '    , `lubrificprogequiphistitensesp`.`HISTORICO`'
+      '    , `lubrificprogequiphistitensesp`.`CODIGO`'
+      '    , `lubrificprogequiphistitensesp`.`CODLUBRIFICPROGEQUIP`'
+      '    , `lubrificprogequiphistitensesp`.`DTAINICIO1`'
+      '    , `lubrificprogequiphistitensesp`.`DATAINSPECAO`'
+      '    , `lubrificprogequiphistitensesp`.`CODPARTE`'
+      '    , `lubrificprogequiphistitensesp`.`ITEM`'
+      '    , `lubrificprogequiphistitensesp`.`DESCINSPECAO`'
+      '    , `lubrificprogequiphistitensesp`.`EQUIPPARADO`'
+      '    , `lubrificprogequiphistitensesp`.`TEMPO`'
+      '    , `lubrificprogequiphistitensesp`.`EXECAUTONOMO`'
+      '    , `lubrificprogequiphistitensesp`.`EXECUTADO`'
+      '    , `lubrificprogequiphistitensesp`.`BOM`'
+      '    , `lubrificprogequiphistitensesp`.`REGULAR`'
+      '    , `lubrificprogequiphistitensesp`.`RUIM`'
+      '    , `lubrificprogfamequippartes`.`DESCRICAO` AS `PARTE`'
       'FROM'
-      '    `lubrificprogequipitensesp`'
+      '    `lubrificprogequiphistitensesp`'
+      '    INNER JOIN `lubrificprogequipamento`'
+      
+        '        ON (`lubrificprogequiphistitensesp`.`CODLUBRIFICPROGEQUI' +
+        'P` = `lubrificprogequipamento`.`CODIGO`) AND (`lubrificprogequip' +
+        'histitensesp`.`CODEMPRESA` = `lubrificprogequipamento`.`CODEMPRE' +
+        'SA`)'
+      '    INNER JOIN `lubrificprogfamequipamento`'
+      
+        '        ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` ' +
+        '= `lubrificprogfamequipamento`.`CODIGO`) AND (`lubrificprogequip' +
+        'amento`.`CODEMPRESA` = `lubrificprogfamequipamento`.`CODEMPRESA`' +
+        ')'
       '    INNER JOIN `lubrificprogfamequippartes`'
       
-        '        ON (`lubrificprogequipitensesp`.`CODPARTE` = `lubrificpr' +
-        'ogfamequippartes`.`CODIGO`) AND (`lubrificprogfamequippartes`.`C' +
-        'ODEMPRESA` = `lubrificprogequipitensesp`.`CODEMPRESA`)'
-      'WHERE (`lubrificprogequipitensesp`.`CODEMPRESA` = :codempresa'
+        '        ON  (`lubrificprogfamequippartes`.`CODIGO` = `lubrificpr' +
+        'ogequiphistitensesp`.`CODPARTE`)'
+      'WHERE (`lubrificprogequiphistitensesp`.`HISTORICO` = :indice)'
       
-        '    AND `lubrificprogequipitensesp`.`CODLUBRIFICPROGEQUIP` = :co' +
-        'digo)'
-      'ORDER BY `PARTE`;')
+        'ORDER BY  `lubrificprogfamequippartes`.`DESCRICAO` ASC, `lubrifi' +
+        'cprogequiphistitensesp`.`ITEM`, `lubrificprogequiphistitensesp`.' +
+        '`DESCINSPECAO` ASC;')
     Left = 1723
     Top = 695
     ParamData = <
       item
-        Name = 'CODEMPRESA'
-        DataType = ftString
-        ParamType = ptInput
-      end
-      item
-        Name = 'CODIGO'
+        Name = 'INDICE'
         DataType = ftString
         ParamType = ptInput
       end>
-    object FDAutoIncField14: TFDAutoIncField
-      FieldName = 'CODIGO'
-      Origin = 'CODIGO'
-      ReadOnly = True
+    object qryChecklistLubrificItensEspINDICE: TFDAutoIncField
+      FieldName = 'INDICE'
+      Origin = 'INDICE'
+      ProviderFlags = [pfInWhere, pfInKey]
     end
-    object StringField166: TStringField
+    object qryChecklistLubrificItensEspCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
       Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Size = 9
     end
-    object StringField167: TStringField
+    object qryChecklistLubrificItensEspHISTORICO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HISTORICO'
+      Origin = 'HISTORICO'
+    end
+    object qryChecklistLubrificItensEspCODIGO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+    end
+    object qryChecklistLubrificItensEspCODLUBRIFICPROGEQUIP: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CODLUBRIFICPROGEQUIP'
       Origin = 'CODLUBRIFICPROGEQUIP'
       Size = 9
     end
-    object IntegerField23: TIntegerField
+    object qryChecklistLubrificItensEspDTAINICIO1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DTAINICIO1'
+      Origin = 'DTAINICIO1'
+    end
+    object qryChecklistLubrificItensEspDATAINSPECAO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINSPECAO'
+      Origin = 'DATAINSPECAO'
+    end
+    object qryChecklistLubrificItensEspCODPARTE: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'CODPARTE'
       Origin = 'CODPARTE'
     end
-    object StringField168: TStringField
+    object qryChecklistLubrificItensEspITEM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ITEM'
       Origin = 'ITEM'
-      ProviderFlags = [pfInUpdate]
       Size = 80
     end
-    object StringField169: TStringField
+    object qryChecklistLubrificItensEspDESCINSPECAO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCINSPECAO'
       Origin = 'DESCINSPECAO'
-      ProviderFlags = [pfInUpdate]
       Size = 200
     end
-    object StringField170: TStringField
+    object qryChecklistLubrificItensEspEQUIPPARADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EQUIPPARADO'
       Origin = 'EQUIPPARADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object BCDField11: TBCDField
+    object qryChecklistLubrificItensEspTEMPO: TBCDField
       AutoGenerateValue = arDefault
       FieldName = 'TEMPO'
       Origin = 'TEMPO'
-      ProviderFlags = [pfInUpdate]
-      DisplayFormat = ',0.00'
-      Precision = 10
+      Precision = 16
       Size = 2
     end
-    object StringField171: TStringField
+    object qryChecklistLubrificItensEspEXECAUTONOMO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECAUTONOMO'
       Origin = 'EXECAUTONOMO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField172: TStringField
+    object qryChecklistLubrificItensEspEXECUTADO: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'EXECUTADO'
       Origin = 'EXECUTADO'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField173: TStringField
+    object qryChecklistLubrificItensEspBOM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'BOM'
       Origin = 'BOM'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField174: TStringField
+    object qryChecklistLubrificItensEspREGULAR: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'REGULAR'
       Origin = 'REGULAR'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField175: TStringField
+    object qryChecklistLubrificItensEspRUIM: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'RUIM'
       Origin = 'RUIM'
-      ProviderFlags = [pfInUpdate]
       Size = 1
     end
-    object StringField176: TStringField
+    object qryChecklistLubrificItensEspPARTE: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'PARTE'
       Origin = 'DESCRICAO'
       ProviderFlags = []
+      ReadOnly = True
       Size = 80
+    end
+    object qryChecklistLubrificItensEspEXECUTADO_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'EXECUTADO_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensEspBOM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'BOM_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensEspREGULAR_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'REGULAR_CHK'
+      ProviderFlags = []
+      Calculated = True
+    end
+    object qryChecklistLubrificItensEspRUIM_CHK: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'RUIM_CHK'
+      ProviderFlags = []
+      Calculated = True
     end
     object qryChecklistLubrificItensEspTotalHH: TAggregateField
       FieldName = 'TotalHH'

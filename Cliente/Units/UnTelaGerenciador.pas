@@ -35,6 +35,8 @@ type
     edtHostFTP: TLabeledEdit;
     edtSenhaFTP: TLabeledEdit;
     edtUsernamFTP: TLabeledEdit;
+    Label6: TLabel;
+    edtUserName: TEdit;
     procedure BtnGravarClick(Sender: TObject);
     procedure BtnBancoClick(Sender: TObject);
     procedure BtnBackupClick(Sender: TObject);
@@ -169,6 +171,7 @@ begin
 
   Try
     DM.FDConnSPMP3.Params.Values['Database'] := edtDatabaseName.Text;
+    DM.FDConnSPMP3.Params.Values['User_Name'] := edtUserName.Text;
     DM.FDConnSPMP3.Params.Values['Server']   := EdtHostName.Text;
     DM.FDConnSPMP3.Params.Values['Port']     := EdtPorta.Text;
     DM.FDConnSPMP3.Params.Values['Password'] := EdtSenha.Text;
@@ -188,6 +191,11 @@ var
   Ini: TIniFile;
   Registro:TRegistry;
 begin
+  if edtUserName.Text = '' then
+    begin
+      edtUserName.SetFocus;
+      Exit;
+    end;
   if edtDatabaseName.Text = '' then
     begin
       edtDatabaseName.SetFocus;
@@ -228,21 +236,21 @@ begin
         Exit;
       End;
     end;
-  if edtHostFTP.Text = '' then
-    begin
-      edtHostFTP.SetFocus;
-      Exit;
-    end;
-  if edtSenhaFTP.Text = '' then
-    begin
-      edtSenhaFTP.SetFocus;
-      Exit;
-    end;
-  if edtUsernamFTP.Text = '' then
-    begin
-      edtUsernamFTP.SetFocus;
-      Exit;
-    end;
+//  if edtHostFTP.Text = '' then
+//    begin
+//      edtHostFTP.SetFocus;
+//      Exit;
+//    end;
+//  if edtSenhaFTP.Text = '' then
+//    begin
+//      edtSenhaFTP.SetFocus;
+//      Exit;
+//    end;
+//  if edtUsernamFTP.Text = '' then
+//    begin
+//      edtUsernamFTP.SetFocus;
+//      Exit;
+//    end;
 
 
   DeleteFile('C:\SPMP3\Gerenciador.exe');
@@ -253,7 +261,7 @@ begin
   Ini.WriteString('Conexao', 'Database', edtDatabaseName.Text);
   Ini.WriteString('Conexao', 'Port', EdtPorta.Text);
   Ini.WriteString('Conexao', 'HostName', EdtHostName.Text);
-  Ini.WriteString('Conexao', 'User_Name', 'spmpma_spmp');
+  Ini.WriteString('Conexao', 'User_Name', EdtUserName.Text);
   Ini.WriteString('Conexao', 'Password', DM.Crypt('C', EdtSenha.Text));
   if CBBackup.ItemIndex = 0 then
     Ini.WriteString('Backup', 'Automatico', '')
@@ -283,7 +291,7 @@ begin
       Registro.WriteString('Database', edtDatabaseName.Text);
       Registro.WriteString('Port', EdtPorta.Text);
       Registro.WriteString('HostName', EdtHostName.Text);
-      Registro.WriteString('User_Name', 'spmpma_spmp');
+      Registro.WriteString('User_Name', EdtUserName.Text);
       Registro.WriteString('Password', DM.Crypt('C', EdtSenha.Text));
       if CBBackup.ItemIndex = 0 then
         Registro.WriteString('Automatico', '')
@@ -345,6 +353,8 @@ if FileExists(ExtractFilePath(Application.ExeName) + 'spmp.ini') then
         Try
           //Lê  os valores
           edtDatabaseName.Text := Ini.ReadString('Conexao', 'Database', '');
+
+          edtUserName.Text := Ini.ReadString('Conexao', 'User_Name', '');
 
           EdtHostName.Text := Ini.ReadString('Conexao', 'HostName', '');
 

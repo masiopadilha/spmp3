@@ -402,6 +402,7 @@ begin
     end;
 
     ChartOSOficina.Series[0].Clear;
+    ChartOSOficina.Series[0].Legend.Visible := True;
 
     DMDashboard.qryOficinas5.Close;
     DMDashboard.qryOficinas5.Params[0].AsInteger := cbMes.ItemIndex + 1;
@@ -420,7 +421,10 @@ begin
     end;
 
     if (DMDashboard.qryOficinas5.RecordCount = 1) and (DMDashboard.qryOficinas5TOTAL.AsInteger = 0) then
-      ChartOSOficina.Series[0].Clear;
+    begin
+      ChartOSOficina.Series[0].Legend.Visible := False;
+      ChartOSOficina.Series[0].Add(0);
+    end;
 
     //----------------------------MTBF--------------------------------------------------------------------------------------------------------------------------------
     if FrmTelaSplash <> nil then

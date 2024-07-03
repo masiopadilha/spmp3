@@ -1,7 +1,10 @@
 inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
   Caption = 'Equipamentos'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited BtnNovo: TButton
       Margins.Left = 4
       Margins.Top = 4
@@ -56,12 +59,9 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     inherited pAlteracao: TPanel
       inherited LCadastro: TLabel
-        ExplicitLeft = 44
-        ExplicitTop = 4
-        ExplicitHeight = 14
+        Height = 14
       end
       inherited LblDataAlt: TDBText
-        AutoSize = False
         DataSource = DM.dsEquipamentos
         ExplicitLeft = 293
         ExplicitHeight = 22
@@ -72,7 +72,6 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
         ExplicitHeight = 14
       end
       inherited LblDataCad: TDBText
-        AutoSize = False
         DataSource = DM.dsEquipamentos
         ExplicitLeft = 126
         ExplicitHeight = 22
@@ -80,22 +79,18 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     inherited pCadastro: TPanel
       inherited LCadastroPor: TLabel
-        ExplicitLeft = 0
-        ExplicitTop = 4
+        Height = 14
       end
       inherited LblUsuCad: TDBText
-        AutoSize = False
         DataSource = DM.dsEquipamentos
         ExplicitLeft = 131
         ExplicitHeight = 22
       end
       inherited LAlteracao: TLabel
         AutoSize = True
-        ExplicitLeft = 186
-        ExplicitTop = 4
+        ExplicitLeft = 188
       end
       inherited LblUsuAlt: TDBText
-        AutoSize = False
         DataSource = DM.dsEquipamentos
         ExplicitLeft = 298
         ExplicitHeight = 22
@@ -103,6 +98,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label4: TLabel [0]
       Left = 45
       Top = 33
@@ -430,6 +426,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     inherited Label2: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -870,6 +867,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PDiversos: TPanel
+    Width = 1008
+    Height = 216
     inherited Label3: TLabel
       Margins.Left = 5
       Margins.Top = 5
@@ -1685,12 +1684,16 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
   end
   inherited PAlertas: TPanel
+    Top = 563
+    Width = 1012
     inherited LblAlertas: TLabel
       Left = 1011
       Margins.Left = 4
@@ -1701,6 +1704,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
   end
   inherited PBase: TPanel
+    Top = 565
+    Width = 1008
     inherited BtnMais: TButton
       Margins.Left = 4
       Margins.Top = 4

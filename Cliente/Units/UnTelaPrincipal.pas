@@ -851,6 +851,7 @@ begin
 
     DM.MSGAguarde('');
     ChartOSOficina.Series[0].Clear;
+    ChartOSOficina.Series[0].Legend.Visible := True;
 
     DMDashboard.qryOficinasIndiv.Close;
     DMDashboard.qryOficinasIndiv.Params[0].AsInteger := cbMes.ItemIndex + 1;
@@ -862,6 +863,10 @@ begin
     begin
       DMDashboard.qryOficinasIndiv.First;
       ChartOSOficina.Series[0].Add(DMDashboard.qryOficinasIndivTOTAL.AsInteger, DMDashboard.qryOficinasIndivOFICINA.AsString);
+    end else
+    begin
+      ChartOSOficina.Series[0].Legend.Visible := False;
+      ChartOSOficina.Series[0].Add(0);
     end;
     DM.MSGAguarde('', False);
 end;

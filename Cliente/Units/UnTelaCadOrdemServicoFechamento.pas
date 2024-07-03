@@ -943,7 +943,7 @@ end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.Individual1Click(Sender: TObject);
 begin
-DM.FDataSetRelat    := DmRelatorios.frxDBEquipIndividual;
+DM.FDataSetRelat    := DmRelatorios.frxDBOrdemServico;
 DM.FTabela_auxiliar := 451;
   inherited;
 

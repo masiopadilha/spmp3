@@ -224,14 +224,14 @@ PAuxiliares.Font.Color := clBlack;
               begin
                 LManutRetorno := '';
 
-                fdmInputBox.Close;
-                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-
-                DM.qryAuxiliar.Close;
-                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
-                DM.qryAuxiliar.Open;
-                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-                DM.qryAuxiliar.Close;
+//                fdmInputBox.Close;
+//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                DM.qryAuxiliar.Close;
+//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                DM.qryAuxiliar.Open;
+//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                DM.qryAuxiliar.Close;
               end;
 
 
@@ -293,18 +293,15 @@ PAuxiliares.Font.Color := clBlack;
 
                   DM.qryManutPeriodicas.Edit;
                   DM.qryManutPeriodicasGEROUOS.AsString          := 'S';
-                  //DM.qryManutPeriodicasCODORDEMSERVICO.AsInteger := LCodOrdemServico;
                   DM.qryManutPeriodicas.Post;
 
                   DM.qryOrdemServicoServSolic.Close;
-  //                DM.qryOrdemServicoServSolic.Params[0].AsString  := DM.FCodEmpresa;
                   DM.qryOrdemServicoServSolic.Params[0].AsInteger := LCodOrdemServico;
                   DM.qryOrdemServicoServSolic.Open;
                   CDItensProb.First;
                   while not CDItensProb.Eof = True do
                     begin
                       DM.qryOrdemServicoServSolic.Append;
-                      //DM.qryOrdemServicoServSolicCODIGO.AsInteger          := DM.SMWebClient.GerarSequencia('ORDEMSERVICOSERVSOLIC_S');
                       DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger := LCodOrdemServico;
                       DM.qryOrdemServicoServSolicCODEMPRESA.AsString       := DM.FCodEmpresa;
                       DM.qryOrdemServicoServSolicITEM.AsString             := CDItensProbITEM.AsString;
@@ -397,14 +394,14 @@ PAuxiliares.Font.Color := clBlack;
               begin
                 LManutRetorno := '';
 
-                fdmInputBox.Close;
-                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-
-                DM.qryAuxiliar.Close;
-                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
-                DM.qryAuxiliar.Open;
-                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-                DM.qryAuxiliar.Close;
+//                fdmInputBox.Close;
+//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                DM.qryAuxiliar.Close;
+//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                DM.qryAuxiliar.Open;
+//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                DM.qryAuxiliar.Close;
               end;
 
               while not DM.qryLubrificPeriodicasItens.Eof = True do
@@ -464,18 +461,15 @@ PAuxiliares.Font.Color := clBlack;
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
-                //DM.qryLubrificPeriodicasCODORDEMSERVICO.AsInteger := LCodOrdemServico;
                 DM.qryLubrificPeriodicas.Post;
 
                 DM.qryOrdemServicoServSolic.Close;
-//                DM.qryOrdemServicoServSolic.Params[0].AsString  := DM.FCodEmpresa;
                 DM.qryOrdemServicoServSolic.Params[0].AsInteger := LCodOrdemServico;
                 DM.qryOrdemServicoServSolic.Open;
                 CDItensProb.First;
                 while not CDItensProb.Eof = True do
                   begin
                     DM.qryOrdemServicoServSolic.Append;
-                    //DM.qryOrdemServicoServSolicCODIGO.AsInteger          := DM.SMWebClient.GerarSequencia('ORDEMSERVICOSERVSOLIC_S');
                     DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger := LCodOrdemServico;
                     DM.qryOrdemServicoServSolicCODEMPRESA.AsString       := DM.FCodEmpresa;
                     DM.qryOrdemServicoServSolicITEM.AsString             := CDItensProbITEM.AsString;
@@ -583,14 +577,14 @@ PAuxiliares.Font.Color := clBlack;
                   begin
                     LManutRetorno := '';
 
-                    fdmInputBox.Close;
-                    fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-
-                    DM.qryAuxiliar.Close;
-                    DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
-                    DM.qryAuxiliar.Open;
-                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-                    DM.qryAuxiliar.Close;
+//                    fdmInputBox.Close;
+//                    fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                    DM.qryAuxiliar.Close;
+//                    DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                    DM.qryAuxiliar.Open;
+//                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                    DM.qryAuxiliar.Close;
                   end;
 
                   while not DM.qryRotaPeriodicasManutItens.Eof do
@@ -655,14 +649,12 @@ PAuxiliares.Font.Color := clBlack;
                       DM.qryRotaPeriodicasManut.Post;
 
                       DM.qryOrdemServicoServSolic.Close;
-//                      DM.qryOrdemServicoServSolic.Params[0].AsString  := DM.FCodEmpresa;
                       DM.qryOrdemServicoServSolic.Params[0].AsInteger := LCodOrdemServico;
                       DM.qryOrdemServicoServSolic.Open;
                       CDItensProb.First;
                       while not CDItensProb.Eof do
                         begin
                           DM.qryOrdemServicoServSolic.Append;
-                          //DM.qryOrdemServicoServSolicCODIGO.AsInteger          := DM.SMWebClient.GerarSequencia('ORDEMSERVICOSERVSOLIC_S');
                           DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger := LCodOrdemServico;
                           DM.qryOrdemServicoServSolicCODEMPRESA.AsString       := DM.FCodEmpresa;
                           DM.qryOrdemServicoServSolicITEM.AsString             := CDItensProbITEM.AsString;
@@ -2056,7 +2048,7 @@ begin
     DM.qryManutPeriodicasItensREGULAR.AsString   := 'N';
     DM.qryManutPeriodicasItensRUIM.AsString      := 'N';
     DM.qryManutPeriodicasItens.Post;
-    LProblemaItemEsp := False;
+    LProblemaItem := False;
   end else
   if (Column.FieldName = 'RUIM') and ((Trim(DM.qryManutPeriodicasItensRUIM.AsString) = 'N') or (DM.qryManutPeriodicasItensRUIM.AsString = EmptyStr)) then
   begin

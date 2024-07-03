@@ -119,7 +119,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.FParamAuxiliar[20] := '';
         edtLinha.Clear;
       end;
-    DM.FTabela_auxiliar := 250;
+    DM.FTabela_auxiliar := 25;
     DM.FNomeConsulta := 'Equipamentos';
     BtnConsultar.OnClick(Sender);
   end;
@@ -146,7 +146,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.FParamAuxiliar[20] := '';
         edtLinha.Clear;
       end;
-    DM.FTabela_auxiliar := 250;
+    DM.FTabela_auxiliar := 25;
     DM.FNomeConsulta := 'Equipamentos';
     BtnConsultar.OnClick(Sender);
   end;
@@ -1360,7 +1360,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryAuxiliar.Close;
         DM.qryAuxiliar.SQL.Clear;
       end;
-    DM.FTabela_auxiliar := 250;
+    DM.FTabela_auxiliar := 25;
     DM.FNomeConsulta := 'Equipamentos';
     BtnConsultar.OnClick(Sender);
   end;
@@ -1397,7 +1397,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.FCodLinha          := DM.FCodCombo;
         edtLinha.Text         := DM.FValorCombo;
       end;
-    DM.FTabela_auxiliar := 250;
+    DM.FTabela_auxiliar := 25;
     DM.FNomeConsulta := 'Equipamentos';
     BtnConsultar.OnClick(Sender);
   end;
@@ -1484,6 +1484,18 @@ DM.qryAuxiliar.Close;
 if FrmTelaAuxiliar.Caption = 'Equipamentos' then
   begin
     PFiltroEquip.Visible := True;
+
+    DM.FCodFamilia := '';
+    DM.FCodArea := '';
+    DM.FCodCelula := '';
+    DM.FCodLinha := '';
+
+    if DM.FParamAuxiliar[3] <> '' then begin DM.qryAuxiliar.FieldByName('FAMILIAEQUIP').AsString; end;
+    if DM.FParamAuxiliar[5] <> '' then begin DM.qryAuxiliar.FieldByName('AREA').AsString; end;
+    if DM.FParamAuxiliar[7] <> '' then begin DM.qryAuxiliar.FieldByName('CELULA').AsString; end;
+    if DM.FParamAuxiliar[9] <> '' then begin DM.qryAuxiliar.FieldByName('LINHA').AsString; end;
+
+
 //    if FrmTelaCadRotaProgEquip <> nil then
 //    begin
 //      if DM.FParamAuxiliar[4] <> '' then DM.qryRotasSequenciaCODAREA.AsString   := DM.FParamAuxiliar[4];
@@ -2450,6 +2462,8 @@ procedure TFrmTelaAuxiliar.GrdAuxiliarTitleClick(Column: TColumn);
 begin
   inherited;
   try
+   if GrdAuxiliar.DataSource.DataSet.IsEmpty = True then Exit;
+
     CliqueNoTitulo(Column, TFDquery(GrdAuxiliar.DataSource.DataSet), GrdAuxiliar.DataSource.DataSet.Fields[1].Name);
   except
     on E: Exception do

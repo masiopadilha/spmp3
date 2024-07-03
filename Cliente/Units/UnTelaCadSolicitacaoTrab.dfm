@@ -10,7 +10,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ExplicitLeft = 654
       inherited LCadastro: TLabel
         Height = 14
-        ExplicitLeft = 747
       end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsSolicitacaoTrab
@@ -28,7 +27,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       ExplicitLeft = 654
       inherited LCadastroPor: TLabel
         Height = 14
-        ExplicitLeft = 703
       end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsSolicitacaoTrab
@@ -687,7 +685,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BevelOuter = bvNone
       Color = 16249832
       TabOrder = 0
-      ExplicitTop = 26
+      ExplicitTop = 22
+      ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15

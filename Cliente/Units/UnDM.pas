@@ -5322,32 +5322,8 @@ type
     StringField133: TStringField;
     dsChecklistManutPartes: TDataSource;
     qryChecklistManutItens: TFDQuery;
-    IntegerField18: TIntegerField;
-    StringField134: TStringField;
-    StringField135: TStringField;
-    IntegerField19: TIntegerField;
-    StringField136: TStringField;
-    StringField137: TStringField;
-    StringField138: TStringField;
-    BCDField8: TBCDField;
-    StringField139: TStringField;
-    StringField140: TStringField;
     dsChecklistManutItens: TDataSource;
     qryChecklistManutItensEsp: TFDQuery;
-    FDAutoIncField11: TFDAutoIncField;
-    StringField141: TStringField;
-    StringField142: TStringField;
-    IntegerField20: TIntegerField;
-    StringField143: TStringField;
-    StringField144: TStringField;
-    StringField145: TStringField;
-    BCDField9: TBCDField;
-    StringField146: TStringField;
-    StringField147: TStringField;
-    StringField148: TStringField;
-    StringField149: TStringField;
-    StringField150: TStringField;
-    StringField151: TStringField;
     dsChecklistManutItensEsp: TDataSource;
     qryChecklistManutPlanoTrab: TFDQuery;
     FDAutoIncField12: TFDAutoIncField;
@@ -5392,32 +5368,8 @@ type
     StringField158: TStringField;
     dsChecklistLubrificPartes: TDataSource;
     qryChecklistLubrificItens: TFDQuery;
-    IntegerField21: TIntegerField;
-    StringField159: TStringField;
-    StringField160: TStringField;
-    IntegerField22: TIntegerField;
-    StringField161: TStringField;
-    StringField162: TStringField;
-    StringField163: TStringField;
-    BCDField10: TBCDField;
-    StringField164: TStringField;
-    StringField165: TStringField;
     dsChecklistLubrificItens: TDataSource;
     qryChecklistLubrificItensEsp: TFDQuery;
-    FDAutoIncField14: TFDAutoIncField;
-    StringField166: TStringField;
-    StringField167: TStringField;
-    IntegerField23: TIntegerField;
-    StringField168: TStringField;
-    StringField169: TStringField;
-    StringField170: TStringField;
-    BCDField11: TBCDField;
-    StringField171: TStringField;
-    StringField172: TStringField;
-    StringField173: TStringField;
-    StringField174: TStringField;
-    StringField175: TStringField;
-    StringField176: TStringField;
     dsChecklistLubrificItensEsp: TDataSource;
     qryChecklistLubrificPlanoTrab: TFDQuery;
     FDAutoIncField15: TFDAutoIncField;
@@ -5869,6 +5821,102 @@ type
     qryEquipamentoTipoManutHistTOTALFECHADAS: TLargeintField;
     qryEquipamentoTipoManutHistPERCENTUALFECHADAS: TFMTBCDField;
     qryEquipamentosCALCINDIC: TStringField;
+    qryChecklistManutItensEXECUTADO_CHK: TBooleanField;
+    qryChecklistManutItensBOM_CHK: TBooleanField;
+    qryChecklistManutItensREGULAR_CHK: TBooleanField;
+    qryChecklistManutItensRUIM_CHK: TBooleanField;
+    qryChecklistManutINDICE: TFDAutoIncField;
+    qryChecklistManutItensINDICE: TFDAutoIncField;
+    qryChecklistManutItensCODEMPRESA: TStringField;
+    qryChecklistManutItensHISTORICO: TIntegerField;
+    qryChecklistManutItensCODIGO: TIntegerField;
+    qryChecklistManutItensCODMANUTPROGEQUIP: TStringField;
+    qryChecklistManutItensDTAINICIO1: TDateTimeField;
+    qryChecklistManutItensDATAINSPECAO: TDateTimeField;
+    qryChecklistManutItensCODPARTE: TIntegerField;
+    qryChecklistManutItensITEM: TStringField;
+    qryChecklistManutItensDESCINSPECAO: TStringField;
+    qryChecklistManutItensEQUIPPARADO: TStringField;
+    qryChecklistManutItensTEMPO: TBCDField;
+    qryChecklistManutItensEXECAUTONOMO: TStringField;
+    qryChecklistManutItensEXECUTADO: TStringField;
+    qryChecklistManutItensBOM: TStringField;
+    qryChecklistManutItensREGULAR: TStringField;
+    qryChecklistManutItensRUIM: TStringField;
+    qryChecklistManutItensPARTE: TStringField;
+    qryChecklistManutItensEspINDICE: TFDAutoIncField;
+    qryChecklistManutItensEspCODEMPRESA: TStringField;
+    qryChecklistManutItensEspHISTORICO: TIntegerField;
+    qryChecklistManutItensEspCODIGO: TIntegerField;
+    qryChecklistManutItensEspCODMANUTPROGEQUIP: TStringField;
+    qryChecklistManutItensEspDTAINICIO1: TDateTimeField;
+    qryChecklistManutItensEspDATAINSPECAO: TDateTimeField;
+    qryChecklistManutItensEspCODPARTE: TIntegerField;
+    qryChecklistManutItensEspITEM: TStringField;
+    qryChecklistManutItensEspDESCINSPECAO: TStringField;
+    qryChecklistManutItensEspEQUIPPARADO: TStringField;
+    qryChecklistManutItensEspTEMPO: TBCDField;
+    qryChecklistManutItensEspEXECAUTONOMO: TStringField;
+    qryChecklistManutItensEspEXECUTADO: TStringField;
+    qryChecklistManutItensEspBOM: TStringField;
+    qryChecklistManutItensEspREGULAR: TStringField;
+    qryChecklistManutItensEspRUIM: TStringField;
+    qryChecklistManutItensEspPARTE: TStringField;
+    qryChecklistManutItensEspRUIM_CHK: TBooleanField;
+    qryChecklistManutItensEspREGULAR_CHK: TBooleanField;
+    qryChecklistManutItensEspBOM_CHK: TBooleanField;
+    qryChecklistManutItensEspEXECUTADO_CHK: TBooleanField;
+    qryChecklistManutDATAINICIOREAL: TDateTimeField;
+    qryChecklistManutDATAFIMREAL: TDateTimeField;
+    qryChecklistManutSITUACAO: TStringField;
+    qryChecklistLubrificINDICE: TFDAutoIncField;
+    qryChecklistLubrificDATAINICIOREAL: TDateTimeField;
+    qryChecklistLubrificDATAFIMREAL: TDateTimeField;
+    qryChecklistLubrificSITUACAO: TStringField;
+    qryChecklistLubrificItensINDICE: TFDAutoIncField;
+    qryChecklistLubrificItensCODEMPRESA: TStringField;
+    qryChecklistLubrificItensHISTORICO: TIntegerField;
+    qryChecklistLubrificItensCODIGO: TIntegerField;
+    qryChecklistLubrificItensCODLUBRIFICPROGEQUIP: TStringField;
+    qryChecklistLubrificItensDTAINICIO1: TDateTimeField;
+    qryChecklistLubrificItensDATAINSPECAO: TDateTimeField;
+    qryChecklistLubrificItensCODPARTE: TIntegerField;
+    qryChecklistLubrificItensITEM: TStringField;
+    qryChecklistLubrificItensDESCINSPECAO: TStringField;
+    qryChecklistLubrificItensEQUIPPARADO: TStringField;
+    qryChecklistLubrificItensTEMPO: TBCDField;
+    qryChecklistLubrificItensEXECAUTONOMO: TStringField;
+    qryChecklistLubrificItensEXECUTADO: TStringField;
+    qryChecklistLubrificItensBOM: TStringField;
+    qryChecklistLubrificItensREGULAR: TStringField;
+    qryChecklistLubrificItensRUIM: TStringField;
+    qryChecklistLubrificItensPARTE: TStringField;
+    qryChecklistLubrificItensEXECUTADO_CHK: TBooleanField;
+    qryChecklistLubrificItensBOM_CHK: TBooleanField;
+    qryChecklistLubrificItensREGULAR_CHK: TBooleanField;
+    qryChecklistLubrificItensRUIM_CHK: TBooleanField;
+    qryChecklistLubrificItensEspINDICE: TFDAutoIncField;
+    qryChecklistLubrificItensEspCODEMPRESA: TStringField;
+    qryChecklistLubrificItensEspHISTORICO: TIntegerField;
+    qryChecklistLubrificItensEspCODIGO: TIntegerField;
+    qryChecklistLubrificItensEspCODLUBRIFICPROGEQUIP: TStringField;
+    qryChecklistLubrificItensEspDTAINICIO1: TDateTimeField;
+    qryChecklistLubrificItensEspDATAINSPECAO: TDateTimeField;
+    qryChecklistLubrificItensEspCODPARTE: TIntegerField;
+    qryChecklistLubrificItensEspITEM: TStringField;
+    qryChecklistLubrificItensEspDESCINSPECAO: TStringField;
+    qryChecklistLubrificItensEspEQUIPPARADO: TStringField;
+    qryChecklistLubrificItensEspTEMPO: TBCDField;
+    qryChecklistLubrificItensEspEXECAUTONOMO: TStringField;
+    qryChecklistLubrificItensEspEXECUTADO: TStringField;
+    qryChecklistLubrificItensEspBOM: TStringField;
+    qryChecklistLubrificItensEspREGULAR: TStringField;
+    qryChecklistLubrificItensEspRUIM: TStringField;
+    qryChecklistLubrificItensEspPARTE: TStringField;
+    qryChecklistLubrificItensEspEXECUTADO_CHK: TBooleanField;
+    qryChecklistLubrificItensEspBOM_CHK: TBooleanField;
+    qryChecklistLubrificItensEspREGULAR_CHK: TBooleanField;
+    qryChecklistLubrificItensEspRUIM_CHK: TBooleanField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -5946,6 +5994,10 @@ type
     procedure qryManutPeriodicasAfterScroll(DataSet: TDataSet);
     procedure qryLubrificPeriodicasAfterScroll(DataSet: TDataSet);
     procedure dsOrdemServicoGerenciaDataChange(Sender: TObject; Field: TField);
+    procedure qryChecklistManutItensCalcFields(DataSet: TDataSet);
+    procedure qryChecklistManutItensEspCalcFields(DataSet: TDataSet);
+    procedure qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
+    procedure qryChecklistLubrificItensEspCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -6609,6 +6661,54 @@ end;
 procedure TDM.qryAlertasAfterInsert(DataSet: TDataSet);
 begin
   qryAlertasCODEMPRESA.AsString := DM.FCodEmpresa;
+end;
+
+procedure TDM.qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
+begin
+if qryChecklistLubrificItensEXECUTADO.AsString = 'S' then qryChecklistLubrificItensEXECUTADO_CHK.AsBoolean := True
+else qryChecklistLubrificItensEXECUTADO_CHK.AsBoolean := False;
+if qryChecklistLubrificItensBOM.AsString = 'S' then qryChecklistLubrificItensBOM_CHK.AsBoolean := True
+else qryChecklistLubrificItensBOM_CHK.AsBoolean := False;
+if qryChecklistLubrificItensREGULAR.AsString = 'S' then qryChecklistLubrificItensREGULAR_CHK.AsBoolean := True
+else qryChecklistLubrificItensREGULAR_CHK.AsBoolean := False;
+if qryChecklistLubrificItensRUIM.AsString = 'S' then qryChecklistLubrificItensRUIM_CHK.AsBoolean := True
+else qryChecklistLubrificItensRUIM_CHK.AsBoolean := False;
+end;
+
+procedure TDM.qryChecklistLubrificItensEspCalcFields(DataSet: TDataSet);
+begin
+if qryChecklistLubrificItensEspEXECUTADO.AsString = 'S' then qryChecklistLubrificItensEspEXECUTADO_CHK.AsBoolean := True
+else qryChecklistLubrificItensEspEXECUTADO_CHK.AsBoolean := False;
+if qryChecklistLubrificItensEspBOM.AsString = 'S' then qryChecklistLubrificItensEspBOM_CHK.AsBoolean := True
+else qryChecklistLubrificItensEspBOM_CHK.AsBoolean := False;
+if qryChecklistLubrificItensEspREGULAR.AsString = 'S' then qryChecklistLubrificItensEspREGULAR_CHK.AsBoolean := True
+else qryChecklistLubrificItensEspREGULAR_CHK.AsBoolean := False;
+if qryChecklistLubrificItensEspRUIM.AsString = 'S' then qryChecklistLubrificItensEspRUIM_CHK.AsBoolean := True
+else qryChecklistLubrificItensEspRUIM_CHK.AsBoolean := False;
+end;
+
+procedure TDM.qryChecklistManutItensCalcFields(DataSet: TDataSet);
+begin
+if qryChecklistManutItensEXECUTADO.AsString = 'S' then qryChecklistManutItensEXECUTADO_CHK.AsBoolean := True
+else qryChecklistManutItensEXECUTADO_CHK.AsBoolean := False;
+if qryChecklistManutItensBOM.AsString = 'S' then qryChecklistManutItensBOM_CHK.AsBoolean := True
+else qryChecklistManutItensBOM_CHK.AsBoolean := False;
+if qryChecklistManutItensREGULAR.AsString = 'S' then qryChecklistManutItensREGULAR_CHK.AsBoolean := True
+else qryChecklistManutItensREGULAR_CHK.AsBoolean := False;
+if qryChecklistManutItensRUIM.AsString = 'S' then qryChecklistManutItensRUIM_CHK.AsBoolean := True
+else qryChecklistManutItensRUIM_CHK.AsBoolean := False;
+end;
+
+procedure TDM.qryChecklistManutItensEspCalcFields(DataSet: TDataSet);
+begin
+if qryChecklistManutItensEspEXECUTADO.AsString = 'S' then qryChecklistManutItensEspEXECUTADO_CHK.AsBoolean := True
+else qryChecklistManutItensEspEXECUTADO_CHK.AsBoolean := False;
+if qryChecklistManutItensEspBOM.AsString = 'S' then qryChecklistManutItensEspBOM_CHK.AsBoolean := True
+else qryChecklistManutItensEspBOM_CHK.AsBoolean := False;
+if qryChecklistManutItensEspREGULAR.AsString = 'S' then qryChecklistManutItensEspREGULAR_CHK.AsBoolean := True
+else qryChecklistManutItensEspREGULAR_CHK.AsBoolean := False;
+if qryChecklistManutItensEspRUIM.AsString = 'S' then qryChecklistManutItensEspRUIM_CHK.AsBoolean := True
+else qryChecklistManutItensEspRUIM_CHK.AsBoolean := False;
 end;
 
 procedure TDM.qryDataHoraServidorBeforeRefresh(DataSet: TDataSet);
@@ -10832,4 +10932,3 @@ end;
 
 
 end.
-

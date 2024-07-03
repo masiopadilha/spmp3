@@ -294,6 +294,10 @@ DM.FDataSetParam    := DM.qryOrdemServico;
 DM.FDataSourceParam := DM.dsOrdemServico;
 DM.FTela            := 'CADORDEMSERVICO';
 DM.FTabela_auxiliar := 45;
+DM.FCodFamilia := '';
+DM.FCodArea := '';
+DM.FCodCelula := '';
+DM.FCodLinha := '';
 end;
 
 procedure TFrmTelaCadOrdemServico.BtnExcluirClick(Sender: TObject);

@@ -270,6 +270,10 @@ DM.FDataSetParam    := DM.qrySolicitacaoTrab;
 DM.FDataSourceParam := DM.dsSolicitacaoTrab;
 DM.FTela            := 'CADSOLICITACAOTRAB';
 DM.FTabela_auxiliar := 40;
+DM.FCodFamilia := '';
+DM.FCodArea := '';
+DM.FCodCelula := '';
+DM.FCodLinha := '';
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnExcluirClick(Sender: TObject);

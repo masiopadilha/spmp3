@@ -9,7 +9,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ExplicitLeft = 654
       inherited LCadastro: TLabel
         Height = 14
-        ExplicitLeft = 694
       end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsOrdemServico
@@ -27,7 +26,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ExplicitLeft = 654
       inherited LCadastroPor: TLabel
         Height = 14
-        ExplicitLeft = 650
       end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsOrdemServico
