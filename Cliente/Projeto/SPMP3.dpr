@@ -188,8 +188,7 @@ uses
 {$R *.res}
 begin
   {$WARNINGS OFF}
-  ReportMemoryLeaksOnShutdown := DebugHook <> 0;
-  //ReportMemoryLeaksOnShutdown := True;
+//  ReportMemoryLeaksOnShutdown := DebugHook <> 0;
   {$WARNINGS ON}
 if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Inspeções Vencidas')) > 0)
   or (FindWindow(nil, PChar('SPMP - Sistema do Plano de Manutenção Programada')) > 0) then

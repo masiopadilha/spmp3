@@ -29,7 +29,8 @@ uses
   frxClass, frxExportBaseDialog, frxExportPDF, IdStack, Vcl.Mask, frxRich,
   FireDAC.VCLUI.Error, System.IniFiles, System.Win.Registry, System.Math,
   Winapi.ShellAPI, Vcl.Menus, IdURI, IdHTTP, IdIOHandler, IdIOHandlerSocket,
-  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip, Vcl.DBCtrls;
+  IdIOHandlerStack, IdSSL, IdSSLOpenSSL, System.Zip, Vcl.DBCtrls,
+  FireDAC.ConsoleUI.Wait;
 
 const
   OffsetMemoryStream : Int64 = 0;
@@ -5917,6 +5918,54 @@ type
     qryChecklistLubrificItensEspBOM_CHK: TBooleanField;
     qryChecklistLubrificItensEspREGULAR_CHK: TBooleanField;
     qryChecklistLubrificItensEspRUIM_CHK: TBooleanField;
+    qryChecklistManutFUNCIONARIO: TStringField;
+    qryChecklistManutSOLICITANTE: TStringField;
+    qryChecklistLubrificSOLICITANTE: TStringField;
+    qryChecklistLubrificFUNCIONARIO: TStringField;
+    qryChecklistManutMObra: TFDQuery;
+    FDAutoIncField11: TFDAutoIncField;
+    StringField61: TStringField;
+    IntegerField10: TIntegerField;
+    IntegerField11: TIntegerField;
+    StringField62: TStringField;
+    StringField63: TStringField;
+    StringField64: TStringField;
+    StringField65: TStringField;
+    BCDField8: TBCDField;
+    BCDField9: TBCDField;
+    BCDField10: TBCDField;
+    StringField66: TStringField;
+    DateTimeField1: TDateTimeField;
+    StringField67: TStringField;
+    StringField96: TStringField;
+    IntegerField16: TIntegerField;
+    IntegerField17: TIntegerField;
+    IntegerField18: TIntegerField;
+    StringField97: TStringField;
+    BCDField11: TBCDField;
+    dsChecklistManutMObra: TDataSource;
+    qryChecklistLubrificMObra: TFDQuery;
+    dsChecklistLubrificMObra: TDataSource;
+    qryChecklistLubrificMObraCODIGO: TFDAutoIncField;
+    qryChecklistLubrificMObraCODEMPRESA: TStringField;
+    qryChecklistLubrificMObraCODEQUIPE: TIntegerField;
+    qryChecklistLubrificMObraCODORDEMSERVICO: TIntegerField;
+    qryChecklistLubrificMObraCODCARGO: TStringField;
+    qryChecklistLubrificMObraCODCALENDARIO: TStringField;
+    qryChecklistLubrificMObraMATRICULA: TStringField;
+    qryChecklistLubrificMObraNOME: TStringField;
+    qryChecklistLubrificMObraTOTALHOMEMHORA: TBCDField;
+    qryChecklistLubrificMObraQTDEHENORMAL: TBCDField;
+    qryChecklistLubrificMObraQTDEHEFERIADO: TBCDField;
+    qryChecklistLubrificMObraESPECIALISTA: TStringField;
+    qryChecklistLubrificMObraFECHAMENTO: TDateTimeField;
+    qryChecklistLubrificMObraCARGO: TStringField;
+    qryChecklistLubrificMObraCALENDARIO: TStringField;
+    qryChecklistLubrificMObraHOFICIAIS: TIntegerField;
+    qryChecklistLubrificMObraHENORMAL: TIntegerField;
+    qryChecklistLubrificMObraHEFERIADO: TIntegerField;
+    qryChecklistLubrificMObraOCUPADO: TStringField;
+    qryChecklistLubrificMObraSALARIO: TBCDField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -6549,19 +6598,20 @@ end;
 
 procedure TDM.MSGAguarde(strTexto: String = ''; boolAguarde: Boolean = true);
 begin
-  if boolAguarde = True then
-    begin
-      Application.CreateForm(TFrmTelaAguarde, FrmTelaAguarde);
-      if strTexto <> '' then
-        FrmTelaAguarde.PTexto.Caption := strTexto;
+    if boolAguarde = True then
+      begin
+        Application.CreateForm(TFrmTelaAguarde, FrmTelaAguarde);
+        if strTexto <> '' then
+          FrmTelaAguarde.LblTexto.Caption := strTexto;
 
-      FrmTelaAguarde.Show;
-      FrmTelaAguarde.Repaint;
-    end
-  else
-    begin
-      FreeAndNil(FrmTelaAguarde);
-    end;
+        FrmTelaAguarde.Show;
+        Application.ProcessMessages;
+        //FrmTelaAguarde.Repaint;
+      end
+    else
+      begin
+        FreeAndNil(FrmTelaAguarde);
+      end;
 end;
 
 function TDM.PasswordInputBox(const ACaption, APrompt:string): string;
@@ -8724,11 +8774,11 @@ Try
       end;
     4://Centro de Custo
       begin
-        DM.qryAuxiliar.SQL.Add('select codigo, descricao from spmpma_spmp.centrocusto where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
+        DM.qryAuxiliar.SQL.Add('select codigo, descricao from centrocusto where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
     5://Classes
       begin
-        DM.qryAuxiliar.SQL.Add('select codigo, descricao from spmpma_spmp.classes where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
+        DM.qryAuxiliar.SQL.Add('select codigo, descricao from classes where `CODIGO` = '+ QuotedStr(Valor) + EmptyStr);
       end;
     6://Fam�lias de Equipamentos
       begin

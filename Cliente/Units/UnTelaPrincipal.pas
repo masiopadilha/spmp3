@@ -15,7 +15,7 @@ uses
   JvShape, Vcl.VirtualImage, Vcl.BaseImageCollection, Vcl.ImageCollection,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Stan.Async, FireDAC.DApt,
-  System.Notification;
+  System.Notification, FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Comp.UI;
 
 type
   TFrmTelaPrincipal = class(TForm)
@@ -295,6 +295,11 @@ type
     qryFuncionariosMATRICULA: TStringField;
     qryFuncionariosNOME: TStringField;
     NotificationCenter1: TNotificationCenter;
+    ShapeManutencao: TJvShape;
+    lblManutencao: TLabel;
+    memFiltrosCODMANUTENCAO: TStringField;
+    btnFiltraManutencao: TSpeedButton;
+    cbManutencao: TComboBox;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -468,6 +473,8 @@ type
     procedure btnFiltraSolicClick(Sender: TObject);
     procedure CBSolicitanteKeyPress(Sender: TObject; var Key: Char);
     procedure cbOficinaKeyPress(Sender: TObject; var Key: Char);
+    procedure btnFiltraManutencaoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -844,31 +851,18 @@ begin
   End;
 end;
 
+procedure TFrmTelaPrincipal.btnFiltraManutencaoClick(Sender: TObject);
+begin
+  DM.MSGAguarde('');
+  DMDashboard.CalcularDashboard;
+  DM.MSGAguarde('', False);
+end;
+
 procedure TFrmTelaPrincipal.btnFiltraOficinaClick(Sender: TObject);
 begin
-  //----------------------------OFICINAS DE OS---------------------------------------------------------------------------------------------------------------------------------
-    if cbOficina.Text = '' then Exit;
-
-    DM.MSGAguarde('');
-    ChartOSOficina.Series[0].Clear;
-    ChartOSOficina.Series[0].Legend.Visible := True;
-
-    DMDashboard.qryOficinasIndiv.Close;
-    DMDashboard.qryOficinasIndiv.Params[0].AsInteger := cbMes.ItemIndex + 1;
-    DMDashboard.qryOficinasIndiv.Params[1].AsInteger := StrToInt(cbAno.Text);
-    DMDashboard.qryOficinasIndiv.Params[2].AsString := DM.FCodEmpresa;
-    DMDashboard.qryOficinasIndiv.Params[3].AsString := memFiltrosCODOFICINA.AsString;
-    DMDashboard.qryOficinasIndiv.Open;
-    if DMDashboard.qryOficinasIndivOFICINA.AsString <> '' then
-    begin
-      DMDashboard.qryOficinasIndiv.First;
-      ChartOSOficina.Series[0].Add(DMDashboard.qryOficinasIndivTOTAL.AsInteger, DMDashboard.qryOficinasIndivOFICINA.AsString);
-    end else
-    begin
-      ChartOSOficina.Series[0].Legend.Visible := False;
-      ChartOSOficina.Series[0].Add(0);
-    end;
-    DM.MSGAguarde('', False);
+  DM.MSGAguarde('');
+  DMDashboard.CalcularDashboard;
+  DM.MSGAguarde('', False);
 end;
 
 procedure TFrmTelaPrincipal.btnFiltraSolicClick(Sender: TObject);
@@ -895,12 +889,29 @@ begin
                                   + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
                                   + ' LEFT JOIN'
                                   + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
-                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA'' and s.`MATRICULA` = :matricula'
-                                  + ' GROUP BY MES'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA'' and s.`MATRICULA` = :matricula';
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND s.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + 'LEFT JOIN `tipomanutencao` t ON (t.`CODIGO` = s.`CODMANUTENCAO`) AND (t.`TIPOMANUTENCAO`) LIKE :tipomanutencao';
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' GROUP BY MES'
                                   + ' ORDER BY'
                                   + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
     DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
     DMDashboard.qryDashboard.Params[1].AsString := qryFuncionariosMATRICULA.AsString;
+    case cbManutencao.ItemIndex of
+      0: DMDashboard.qryDashboard.Params[1].AsString := '%%';
+      1: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Autônoma';
+      2: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Corretiva';
+      3: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preventiva';
+      4: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preditiva';
+      5: DMDashboard.qryDashboard.Params[1].AsString := 'Lubrificação';
+      6: DMDashboard.qryDashboard.Params[1].AsString := 'Novos Projetos';
+      7: DMDashboard.qryDashboard.Params[1].AsString := 'Alterações';
+      8: DMDashboard.qryDashboard.Params[1].AsString := 'Outras';
+    end;
     DMDashboard.qryDashboard.Open;
 
     while not DMDashboard.qryDashboard.Eof = True do
@@ -921,12 +932,29 @@ begin
                                   + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
                                   + ' LEFT JOIN'
                                   + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
-                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA'' and s.`MATRICULA` = :matricula'
-                                  + ' GROUP BY MES'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA'' and s.`MATRICULA` = :matricula' ;
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND s.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + 'LEFT JOIN `tipomanutencao` t ON (t.`CODIGO` = s.`CODMANUTENCAO`) AND (t.`TIPOMANUTENCAO`) LIKE :tipomanutencao';
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' GROUP BY MES'
                                   + ' ORDER BY'
                                   + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
     DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
     DMDashboard.qryDashboard.Params[1].AsString := qryFuncionariosMATRICULA.AsString;
+    case cbManutencao.ItemIndex of
+      0: DMDashboard.qryDashboard.Params[1].AsString := '%%';
+      1: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Autônoma';
+      2: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Corretiva';
+      3: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preventiva';
+      4: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preditiva';
+      5: DMDashboard.qryDashboard.Params[1].AsString := 'Lubrificação';
+      6: DMDashboard.qryDashboard.Params[1].AsString := 'Novos Projetos';
+      7: DMDashboard.qryDashboard.Params[1].AsString := 'Alterações';
+      8: DMDashboard.qryDashboard.Params[1].AsString := 'Outras';
+    end;
     DMDashboard.qryDashboard.Open;
 
     while not DMDashboard.qryDashboard.Eof = True do
@@ -998,11 +1026,18 @@ begin
   CBSolicitante.ListFieldIndex := -1;
 
   DM.MSGAguarde('');
-  DMDashboard.CalcularDashboard;
+
   memFiltros.Edit;
   memFiltrosMATRICULA.AsString := '';
   memFiltrosCODOFICINA.AsString := '';
+  memFiltrosCODMANUTENCAO.AsString := '';
+  DMDashboard.CalcularDashboard;
   DM.MSGAguarde('', False);
+end;
+
+procedure TFrmTelaPrincipal.Button1Click(Sender: TObject);
+begin
+DM.MSGAguarde('');
 end;
 
 procedure TFrmTelaPrincipal.Cadastro11Click(Sender: TObject);
@@ -2535,11 +2570,11 @@ begin
     ChartOSOficina.Top := Round(Self.ClientHeight - ChartOSOficina.Height) - 48;
     ChartOSOficina.Left := (Self.ClientWidth - ChartOSOficina.Width) - 15;
 
-    ShapeOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 10;
-    ShapeOficina.Left := (Self.ClientWidth - ShapeOficina.Width) - 15;
-    btnFiltraOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
-    lblOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
-    cbOficina.Top := ChartOSOficina.Top - ShapeOficina.Height + 30;
+//    ShapeOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 10;
+//    ShapeOficina.Left := (Self.ClientWidth - ShapeOficina.Width) - 15;
+//    btnFiltraOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
+//    lblOficina.Top := ChartOSOficina.Top - ShapeOficina.Height - 5;
+//    cbOficina.Top := ChartOSOficina.Top - ShapeOficina.Height + 30;
 
     ShapeSolicitante.Top := ShapeEficiencia.Top - ShapeSolicitante.Height - 12;
     btnFiltraSolic.Top := ShapeEficiencia.Top - ShapeSolicitante.Height - 8;
@@ -2548,13 +2583,19 @@ begin
 
     ShapeMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
     lblMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
-    lblMTBFVal.Left := ShapePeriodo.Left - lblMTBFVal.Width - 10;
+    lblMTBFVal.Left := ShapePeriodo.Left - lblMTBFVal.Width - 17;
     imgMTBF.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
 
     ShapeMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 7;
     lblMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
-    lblMTTRVal.Left := ShapePeriodo.Left - lblMTTRVal.Width - 19;
+    lblMTTRVal.Left := ShapePeriodo.Left - lblMTTRVal.Width - 17;
     imgMTTR.Left := ShapePeriodo.Left - ShapeMTBF.Width - 17;
+
+    ShapeDisponibilidade.Left := ShapePeriodo.Left - ShapeDisponibilidade.Width - 7;
+    lblDisponibilidade.Left := ShapePeriodo.Left - ShapeDisponibilidade.Width - 17;
+    lblDisponibilidadeVal.Left := ShapePeriodo.Left - lblDisponibilidadeVal.Width - 17;
+    imgDisponibilidade.Left := ShapePeriodo.Left - ShapeDisponibilidade.Width - 17;
+
 
     if WindowState = wsMaximized then
     begin
@@ -2952,10 +2993,10 @@ DM.qryAuxiliar.SQL.Add('SELECT `manutprogequipamento`.`CODIGO`, `manutprogequipa
                        + ', `manutprogequipamento`.`DESCRICAO`, `manutprogequipamento`.`FREQUENCIA1`, `manutprogequipamento`.`DTAINICIO1`, `manutprogequipamento`.`FREQUENCIA2`'
                        + ', `manutprogequipamento`.`REPROGRAMAR2`, `manutprogfamequipamento`.`DESCRICAO` AS `DESCMANUTPROGFAMEQUIP`, `manutprogfamequipamento`.`CODIGO` AS `CODMANUTPROGFAMEQUIP`'
                        + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
-                       + ' FROM `spmpma_spmp`.`manutprogequipamento`'
-                       + ' INNER JOIN `spmpma_spmp`.`manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`)'
-                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
-                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                       + ' FROM `manutprogequipamento`'
+                       + ' INNER JOIN `manutprogfamequipamento` ON (`manutprogequipamento`.`CODMANUTPROGFAMEQUIP` = `manutprogfamequipamento`.`CODIGO`)'
+                       + ' INNER JOIN `equipamentos` ON (`manutprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                       + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`manutprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
                        + ' WHERE (`manutprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
                        + ' ORDER BY `equipamentos`.`DESCRICAO`');
 //                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
@@ -2975,10 +3016,10 @@ DM.qryAuxiliar.SQL.Add('SELECT `lubrificprogequipamento`.`CODIGO`, `lubrificprog
                        + ', `lubrificprogequipamento`.`DESCRICAO`, `lubrificprogequipamento`.`FREQUENCIA1`, `lubrificprogequipamento`.`DTAINICIO1`, `lubrificprogequipamento`.`FREQUENCIA2`'
                        + ', `lubrificprogequipamento`.`REPROGRAMAR2`, `lubrificprogfamequipamento`.`DESCRICAO` AS `DESCLUBRIFICPROGFAMEQUIP`, `lubrificprogfamequipamento`.`CODIGO` AS `CODLUBRIFICPROGFAMEQUIP`'
                        + ', `equipamentos`.`CODIGO` AS `CODEQUIPAMENTO`, `equipamentos`.`DESCRICAO` AS `DESCEQUIPAMENTO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `DESCAREA`'
-                       + ' FROM `spmpma_spmp`.`lubrificprogequipamento`'
-                       + ' INNER JOIN `spmpma_spmp`.`lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`)'
-                       + ' INNER JOIN `spmpma_spmp`.`equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
-                       + ' INNER JOIN `spmpma_spmp`.`areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                       + ' FROM `lubrificprogequipamento`'
+                       + ' INNER JOIN `lubrificprogfamequipamento` ON (`lubrificprogequipamento`.`CODLUBRIFICPROGFAMEQUIP` = `lubrificprogfamequipamento`.`CODIGO`)'
+                       + ' INNER JOIN `equipamentos` ON (`lubrificprogequipamento`.`CODEQUIPAMENTO` = `equipamentos`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                       + ' INNER JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`lubrificprogequipamento`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
                        + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ')'
                        + ' ORDER BY `equipamentos`.`DESCRICAO`');
 //                       + ' ORDER BY `equipamentos`.`DESCRICAO`, `areas`.`DESCRICAO`');
@@ -4237,7 +4278,7 @@ begin
   try
     MyNotification.Name := 'SPMP3CloseNotification';
     MyNotification.Title := 'SPMP3';
-    MyNotification.AlertBody := 'Sistem encerrado por inatividade!';
+    MyNotification.AlertBody := 'Sistema encerrado por inatividade!';
 
     NotificationCenter1.PresentNotification(MyNotification);
   finally

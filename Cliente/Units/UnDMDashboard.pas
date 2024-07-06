@@ -57,6 +57,33 @@ type
     qryOficinasIndiv: TFDQuery;
     qryOficinasIndivOFICINA: TStringField;
     qryOficinasIndivTOTAL: TLargeintField;
+    qryMTBFMedioOficina: TFDQuery;
+    qryMTBFMedioOficinaCODEQUIPAMENTO: TStringField;
+    qryMTBFMedioOficinaEQUIPAMENTO: TStringField;
+    qryMTBFMedioOficinaMTBF_MEDIA: TFMTBCDField;
+    qryMTBFMedioOficinaMTBF_MEDIA_FORMAT: TStringField;
+    qryMTBFMedioOficinaDATA1: TDateField;
+    qryMTBFMedioOficinaDATA2: TDateField;
+    qryMTTRMedioOficina: TFDQuery;
+    qryMTTRMedioOficinaMTTR_MEDIA: TFMTBCDField;
+    qryMTTRMedioOficinaMTTR_MEDIA_FORMAT: TStringField;
+    qryMTTRMedioOficinaDATA1: TDateField;
+    qryMTTRMedioOficinaDATA2: TDateField;
+    qryOficinasManut: TFDQuery;
+    qryMTBFMedioManut: TFDQuery;
+    qryMTTRMedioManut: TFDQuery;
+    qryMTTRMedioManutMTTR_MEDIA: TFMTBCDField;
+    qryMTTRMedioManutMTTR_MEDIA_FORMAT: TStringField;
+    qryMTTRMedioManutDATA1: TDateField;
+    qryMTTRMedioManutDATA2: TDateField;
+    qryMTBFMedioManutCODEQUIPAMENTO: TStringField;
+    qryMTBFMedioManutEQUIPAMENTO: TStringField;
+    qryMTBFMedioManutMTBF_MEDIA: TFMTBCDField;
+    qryMTBFMedioManutMTBF_MEDIA_FORMAT: TStringField;
+    qryMTBFMedioManutDATA1: TDateField;
+    qryMTBFMedioManutDATA2: TDateField;
+    qryOficinasManutOFICINA: TStringField;
+    qryOficinasManutTOTAL: TLargeintField;
   private
     { Private declarations }
 
@@ -110,6 +137,7 @@ begin
       Sleep(50);
     end;
     ChartSolicTrabalho.Series[0].Clear;
+
     ChartSolicTrabalho.Series[1].Clear;
     LTotalSolicitado := 0;
     LTotalFechado := 0;
@@ -121,11 +149,28 @@ begin
                                   + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
                                   + ' LEFT JOIN'
                                   + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
-                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA'''
-                                  + ' GROUP BY MES'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` <> ''CANCELADA''';
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND s.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + 'LEFT JOIN `tipomanutencao` t ON (t.`CODIGO` = s.`CODMANUTENCAO`) AND (t.`TIPOMANUTENCAO`) LIKE :tipomanutencao';
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' GROUP BY MES'
                                   + ' ORDER BY'
                                   + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
     DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);
+    case cbManutencao.ItemIndex of
+      0: DMDashboard.qryDashboard.Params[1].AsString := '%%';
+      1: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Autônoma';
+      2: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Corretiva';
+      3: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preventiva';
+      4: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preditiva';
+      5: DMDashboard.qryDashboard.Params[1].AsString := 'Lubrificação';
+      6: DMDashboard.qryDashboard.Params[1].AsString := 'Novos Projetos';
+      7: DMDashboard.qryDashboard.Params[1].AsString := 'Alterações';
+      8: DMDashboard.qryDashboard.Params[1].AsString := 'Outras';
+    end;
     DMDashboard.qryDashboard.Open;
 
     while not DMDashboard.qryDashboard.Eof = True do
@@ -153,11 +198,28 @@ begin
                                   + ' SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11) AS n'
                                   + ' LEFT JOIN'
                                   + ' `ordemservico` s ON DATE_FORMAT(s.DATACADASTRO, ''%Y-%m'') = DATE_FORMAT(DATE_ADD(CONCAT(:ANO, ''-01-01''), INTERVAL n.n MONTH), ''%Y-%m'')'
-                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA'''
-                                  + ' GROUP BY MES'
+                                  + ' AND s.`SOLICTRAB` = ''S'' AND s.`SITUACAO` = ''FECHADA''';
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND s.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + 'LEFT JOIN `tipomanutencao` t ON (t.`CODIGO` = s.`CODMANUTENCAO`) AND (t.`TIPOMANUTENCAO`) LIKE :tipomanutencao';
+
+    DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' GROUP BY MES'
                                   + ' ORDER BY'
                                   + ' FIELD(MES, ''Jan'', ''Feb'', ''Mar'', ''Apr'', ''May'', ''Jun'', ''Jul'', ''Aug'', ''Sep'', ''Oct'', ''Nov'', ''Dec'');';
     DMDashboard.qryDashboard.Params[0].AsInteger := StrToInt(cbAno.Text);;
+    case cbManutencao.ItemIndex of
+      0: DMDashboard.qryDashboard.Params[1].AsString := '%%';
+      1: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Autônoma';
+      2: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Corretiva';
+      3: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preventiva';
+      4: DMDashboard.qryDashboard.Params[1].AsString := 'Manutenção Preditiva';
+      5: DMDashboard.qryDashboard.Params[1].AsString := 'Lubrificação';
+      6: DMDashboard.qryDashboard.Params[1].AsString := 'Novos Projetos';
+      7: DMDashboard.qryDashboard.Params[1].AsString := 'Alterações';
+      8: DMDashboard.qryDashboard.Params[1].AsString := 'Outras';
+    end;
     DMDashboard.qryDashboard.Open;
 
     while not DMDashboard.qryDashboard.Eof = True do
@@ -233,21 +295,45 @@ begin
     ChartTipoManutencao.Series[1].Clear;
 
     DMDashboard.qryDashboard.Close;
+
     DMDashboard.qryDashboard.SQL.Text := 'SELECT'
-                                + ' TIPO.TIPO, COUNT(o.`CODIGO`) AS TOTAL, COUNT(o2.`CODIGO`) AS TOTALFECHADAS '
-                                + ' , IFNULL(100 * (COUNT(o2.`CODIGO`)/COUNT(o.`CODIGO`)), 0)PERCENTUALFECHADAS'
-                                + ' FROM'
-                                + ' (SELECT ''Manutenção Preventiva'' AS TIPO'
-                                + ' UNION ALL SELECT ''Manutenção Corretiva'' UNION ALL SELECT ''Manutenção Preditiva'''
-                                + ' UNION ALL SELECT ''Lubrificação'' UNION ALL SELECT ''Manutenção Autônoma'''
-                                + ' UNION ALL SELECT ''Novos Projetos'' UNION ALL SELECT ''Outros Serviços'') AS TIPO'
-                                + ' LEFT JOIN `tipomanutencao` AS t ON  TIPO.TIPO = t.`TIPOMANUTENCAO`'
-                                + ' LEFT JOIN `ordemservico` AS o ON o.`CODMANUTENCAO` = t.`CODIGO`'
-                                + ' AND MONTH(o.`DATACADASTRO`) = :MES AND YEAR(o.`DATACADASTRO`) = :ANO'
-                                + ' LEFT JOIN `ordemservico` AS o2 ON o.`CODIGO` = o2.`CODIGO` AND o2.`SITUACAO` = ''FECHADA'''
-                                + ' GROUP BY TIPO.TIPO ORDER BY TIPO.TIPO;';
+                            + ' TIPO.TIPO, COUNT(o.`CODIGO`) AS TOTAL, COUNT(o2.`CODIGO`) AS TOTALFECHADAS,'
+                            + ' IFNULL(100 * (COUNT(o2.`CODIGO`) / COUNT(o.`CODIGO`)), 0) PERCENTUALFECHADAS'
+                            + ' FROM'
+                            + ' (SELECT ''Manutenção Preventiva'' AS TIPO'
+                            + ' UNION ALL SELECT ''Manutenção Corretiva'' UNION ALL SELECT ''Manutenção Preditiva'''
+                            + ' UNION ALL SELECT ''Lubrificação'' UNION ALL SELECT ''Manutenção Autônoma'''
+                            + ' UNION ALL SELECT ''Novos Projetos'' UNION ALL SELECT ''Outros Serviços'''
+                            + ' UNION ALL SELECT ''Alterações de Projetos'' UNION ALL SELECT ''Não especificado'') AS TIPO'
+                            + ' LEFT JOIN `tipomanutencao` AS t ON TIPO.TIPO = t.`TIPOMANUTENCAO`'
+                            + ' LEFT JOIN `ordemservico` AS o ON (o.`CODMANUTENCAO` = t.`CODIGO` OR (TIPO.TIPO = ''Não especificado'' AND o.`CODMANUTENCAO` IS NULL))'
+                            + ' AND MONTH(o.`DATACADASTRO`) = :MES AND YEAR(o.`DATACADASTRO`) = :ANO AND o.`CODEMPRESA` = :codempresa';
+
+    if cbManutencao.ItemIndex > 0 then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND (t.`TIPOMANUTENCAO`) LIKE :tipomanutencao';
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND o.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' LEFT JOIN `ordemservico` AS o2 ON o.`CODIGO` = o2.`CODIGO` GROUP BY TIPO.TIPO ORDER BY TIPO.TIPO;';
+
     DMDashboard.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
     DMDashboard.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
+    DMDashboard.qryDashboard.Params[2].AsString := DM.FCodEmpresa;
+    if cbManutencao.ItemIndex > 0 then
+    begin
+      case cbManutencao.ItemIndex of
+        0: DMDashboard.qryDashboard.Params[3].AsString := '%%';
+        1: DMDashboard.qryDashboard.Params[3].AsString := 'Manutenção Autônoma';
+        2: DMDashboard.qryDashboard.Params[3].AsString := 'Manutenção Corretiva';
+        3: DMDashboard.qryDashboard.Params[3].AsString := 'Manutenção Preventiva';
+        4: DMDashboard.qryDashboard.Params[3].AsString := 'Manutenção Preditiva';
+        5: DMDashboard.qryDashboard.Params[3].AsString := 'Lubrificação';
+        6: DMDashboard.qryDashboard.Params[3].AsString := 'Novos Projetos';
+        7: DMDashboard.qryDashboard.Params[3].AsString := 'Alterações';
+        8: DMDashboard.qryDashboard.Params[3].AsString := 'Outras';
+      end;
+    end;
     DMDashboard.qryDashboard.Open;
 
     if DMDashboard.qryDashboard.IsEmpty = False then
@@ -284,7 +370,10 @@ begin
         if DMDashboard.qryDashboard.FieldByName('TIPO').AsString = 'Novos Projetos' then
           LColor := $B0082
         else
-          LColor := clGray;
+        if DMDashboard.qryDashboard.FieldByName('TIPO').AsString = 'Alterações de Projetos' then
+          LColor := $008D55C6
+        else
+          LColor := clWhite;
 
         if LTipoManutencao[DMDashboard.qryDashboard.RecNo] > 0 then
           ChartTipoManutencao.Series[0].Add(LTipoManutencao[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('TIPO').AsString, LColor);
@@ -328,10 +417,34 @@ begin
                                 + ' UNION ALL SELECT ''LIBERADA'' UNION ALL SELECT ''FECHADA'''
                                 + ' UNION ALL SELECT ''VENCIDA'') AS SITUACAO'
                                 + ' LEFT JOIN `ordemservico` AS o ON o.`SITUACAO` = SITUACAO.SITUACAO'
-                                + ' AND MONTH(o.`DATACADASTRO`) = :mes AND YEAR(o.`DATACADASTRO`) = :ano'
-                                + ' GROUP BY SITUACAO.SITUACAO;';
+                                + ' AND MONTH(o.`DATACADASTRO`) = :mes AND YEAR(o.`DATACADASTRO`) = :ano';
+
+    if cbManutencao.ItemIndex > 0 then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' LEFT JOIN `tipomanutencao` AS t ON t.`CODIGO` = o.`CODMANUTENCAO` WHERE t.`TIPOMANUTENCAO` LIKE :tipomanutencao';
+
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND o.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
+
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' GROUP BY SITUACAO.SITUACAO;';
+
     DMDashboard.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
-    DMDashboard.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
+    if cbManutencao.ItemIndex > 0 then
+    begin
+      DMDashboard.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
+      case cbManutencao.ItemIndex of
+        0: DMDashboard.qryDashboard.Params[2].AsString := '%%';
+        1: DMDashboard.qryDashboard.Params[2].AsString := 'Manutenção Autônoma';
+        2: DMDashboard.qryDashboard.Params[2].AsString := 'Manutenção Corretiva';
+        3: DMDashboard.qryDashboard.Params[2].AsString := 'Manutenção Preventiva';
+        4: DMDashboard.qryDashboard.Params[2].AsString := 'Manutenção Preditiva';
+        5: DMDashboard.qryDashboard.Params[2].AsString := 'Lubrificação';
+        6: DMDashboard.qryDashboard.Params[2].AsString := 'Novos Projetos';
+        7: DMDashboard.qryDashboard.Params[2].AsString := 'Alterações';
+        8: DMDashboard.qryDashboard.Params[2].AsString := 'Outras';
+      end;
+    end;
+
+
     DMDashboard.qryDashboard.Open;
 
     if DMDashboard.qryDashboard.IsEmpty = False then
@@ -405,8 +518,32 @@ begin
     ChartOSOficina.Series[0].Legend.Visible := True;
 
     DMDashboard.qryOficinas5.Close;
-    DMDashboard.qryOficinas5.Params[0].AsInteger := cbMes.ItemIndex + 1;
-    DMDashboard.qryOficinas5.Params[1].AsInteger := StrToInt(cbAno.Text);
+    if cbManutencao.ItemIndex > 0 then
+      DMDashboard.qryOficinas5.Params.ParamByName('CALCMANUT').AsBoolean := True
+    else
+      DMDashboard.qryOficinas5.Params.ParamByName('CALCMANUT').AsBoolean := False;
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryOficinas5.Params.ParamByName('CALCOFICINA').AsBoolean := True
+    else
+      DMDashboard.qryOficinas5.Params.ParamByName('CALCOFICINA').AsBoolean := False;
+    DMDashboard.qryOficinas5.Params.ParamByName('MES').AsInteger := cbMes.ItemIndex + 1;
+    DMDashboard.qryOficinas5.Params.ParamByName('ANO').AsInteger := StrToInt(cbAno.Text);
+    if cbManutencao.ItemIndex > 0 then
+    begin
+      case cbManutencao.ItemIndex of
+        0: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := '%%';
+        1: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Manutenção Autônoma';
+        2: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Manutenção Corretiva';
+        3: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Manutenção Preventiva';
+        4: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Manutenção Preditiva';
+        5: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Lubrificação';
+        6: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Novos Projetos';
+        7: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Alterações';
+        8: DMDashboard.qryOficinas5.Params.ParamByName('TIPOMANUTENCAO').AsString := 'Outras';
+      end;
+    end;
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryOficinas5.Params.ParamByName('CODOFICINA').AsString := memFiltrosCODOFICINA.AsString;
     DMDashboard.qryOficinas5.Open;
 
     LNOficina := 0;
@@ -415,17 +552,16 @@ begin
     DMDashboard.qryOficinas5.First;
     while not DMDashboard.qryOficinas5.Eof = True do
     begin
-      ChartOSOficina.Series[0].Add(DMDashboard.qryOficinas5TOTAL.AsInteger, DMDashboard.qryOficinas5OFICINA.AsString);
+      ChartOSOficina.Series[0].Add(DMDashboard.qryOficinas5.FieldByName('TOTAL').AsInteger, DMDashboard.qryOficinas5.FieldByName('OFICINA').AsString);
 
       DMDashboard.qryOficinas5.Next;
     end;
 
-    if (DMDashboard.qryOficinas5.RecordCount = 1) and (DMDashboard.qryOficinas5TOTAL.AsInteger = 0) then
+    if (DMDashboard.qryOficinas5.RecordCount = 1) and (DMDashboard.qryOficinas5.FieldByName('TOTAL').AsInteger = 0) then
     begin
       ChartOSOficina.Series[0].Legend.Visible := False;
       ChartOSOficina.Series[0].Add(0);
     end;
-
     //----------------------------MTBF--------------------------------------------------------------------------------------------------------------------------------
     if FrmTelaSplash <> nil then
     begin
@@ -442,8 +578,18 @@ begin
     DMDashboard.qryMTBFMedio.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
     DMDashboard.qryMTBFMedio.Params.ParamByName('data1').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
     DMDashboard.qryMTBFMedio.Params.ParamByName('data2').AsString    := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+    if cbManutencao.ItemIndex > 0 then
+      DMDashboard.qryMTBFMedio.Params.ParamByName('CALCMANUT').AsBoolean := True
+    else
+      DMDashboard.qryMTBFMedio.Params.ParamByName('CALCMANUT').AsBoolean := False;
+    if memFiltrosCODOFICINA.AsString <> '' then
+      DMDashboard.qryMTBFMedio.Params.ParamByName('CALCOFICINA').AsBoolean := True
+    else
+      DMDashboard.qryMTBFMedio.Params.ParamByName('CALCOFICINA').AsBoolean := False;
+
     DMDashboard.qryMTBFMedio.Open;
 
+    LMTBF := 0;
     if DMDashboard.qryMTBFMedio.IsEmpty = False then
     begin
       LMTBF := DMDashboard.qryMTBFMedioMTBF_MEDIA.AsFloat;
@@ -451,44 +597,59 @@ begin
     end;
     DMDashboard.qryMTBFMedio.Close;
 
+
     //----------------------------MTTR--------------------------------------------------------------------------------------------------------------------------------
-    if FrmTelaSplash <> nil then
+    if (memFiltrosCODOFICINA.AsString = '') and (cbManutencao.ItemIndex > 0) then
     begin
-      FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
-      FrmTelaSplash.LblProcesso.Caption := 'Calculando o MTTR médio dos equipamentos...';
-      Application.ProcessMessages;
-      Sleep(50);
+      if FrmTelaSplash <> nil then
+      begin
+        FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
+        FrmTelaSplash.LblProcesso.Caption := 'Calculando o MTTR médio dos equipamentos...';
+        Application.ProcessMessages;
+        Sleep(50);
+      end;
+
+      DM.FDataConsulta1 := StrToDateTime('01/' + IntToStr(cbMes.ItemIndex + 1) + '/' + cbAno.Text);
+      DM.FDataConsulta2 := EndOfTheMonth(DateOf(DM.FDataConsulta1));
+
+      DMDashboard.qryMTTRMedio.Close;
+      DMDashboard.qryMTTRMedio.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
+      DMDashboard.qryMTTRMedio.Params.ParamByName('data1').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
+      DMDashboard.qryMTTRMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
+      if cbManutencao.ItemIndex > 0 then
+        DMDashboard.qryMTTRMedio.Params.ParamByName('CALCMANUT').AsBoolean := True
+      else
+        DMDashboard.qryMTTRMedio.Params.ParamByName('CALCMANUT').AsBoolean := False;
+      if memFiltrosCODOFICINA.AsString <> '' then
+        DMDashboard.qryMTTRMedio.Params.ParamByName('CALCOFICINA').AsBoolean := True
+      else
+        DMDashboard.qryMTTRMedio.Params.ParamByName('CALCOFICINA').AsBoolean := False;
+      DMDashboard.qryMTTRMedio.Open;
+
+      if DMDashboard.qryMTTRMedio.IsEmpty = False then
+      begin
+        LMTTR := DMDashboard.qryMTTRMedioMTTR_MEDIA.AsFloat;
+        lblMTTRVal.Caption := DMDashboard.qryMTTRMedioMTTR_MEDIA_FORMAT.AsString;
+      end;
+
+      DMDashboard.qryMTBFMedio.Close;
     end;
-
-    DM.FDataConsulta1 := StrToDateTime('01/' + IntToStr(cbMes.ItemIndex + 1) + '/' + cbAno.Text);
-    DM.FDataConsulta2 := EndOfTheMonth(DateOf(DM.FDataConsulta1));
-
-    DMDashboard.qryMTTRMedio.Close;
-    DMDashboard.qryMTTRMedio.Params.ParamByName('codempresa').AsString := DM.FCodEmpresa;
-    DMDashboard.qryMTTRMedio.Params.ParamByName('data1').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta1);
-    DMDashboard.qryMTTRMedio.Params.ParamByName('data2').AsString      := FormatDateTime('yyyy/mm/dd', DM.FDataConsulta2);
-    DMDashboard.qryMTTRMedio.Open;
-
-    if DMDashboard.qryMTTRMedio.IsEmpty = False then
-    begin
-      LMTTR := DMDashboard.qryMTTRMedioMTTR_MEDIA.AsFloat;
-      lblMTTRVal.Caption := DMDashboard.qryMTTRMedioMTTR_MEDIA_FORMAT.AsString;
-    end;
-
-    DMDashboard.qryMTBFMedio.Close;
     //-------------------------Disponibilidade------------------------------------------------------------------------------------------------------------------------
-    if FrmTelaSplash <> nil then
+    if (memFiltrosCODOFICINA.AsString = '') and (memFiltrosCODMANUTENCAO.AsString = '') then
     begin
-      FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
-      FrmTelaSplash.LblProcesso.Caption := 'Calculando a Disponibilidade média dos equipamentos...';
-      Application.ProcessMessages;
-      Sleep(50);
-    end;
+      if FrmTelaSplash <> nil then
+      begin
+        FrmTelaSplash.JvGradientProgressBar1.Position := FrmTelaSplash.JvGradientProgressBar1.Position + 1;
+        FrmTelaSplash.LblProcesso.Caption := 'Calculando a Disponibilidade média dos equipamentos...';
+        Application.ProcessMessages;
+        Sleep(50);
+      end;
 
-    if (LMTBF + LMTTR) > 0 then
-      lblDisponibilidadeVal.Caption := FormatFloat(',0.00%', 100 * (LMTBF/(LMTBF + LMTTR)))
-    else
-      lblDisponibilidadeVal.Caption := '100%';
+      if (LMTBF + LMTTR) > 0 then
+        lblDisponibilidadeVal.Caption := FormatFloat(',0.00%', 100 * (LMTBF/(LMTBF + LMTTR)))
+      else
+        lblDisponibilidadeVal.Caption := '100%';
+    end;
   end;
 end;
 

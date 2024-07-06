@@ -32075,9 +32075,9 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     StyleElements = [seClient, seBorder]
   end
   object ShapeDisponibilidade: TJvShape
-    Left = 822
-    Top = 105
-    Width = 178
+    Left = 641
+    Top = 190
+    Width = 172
     Height = 83
     Anchors = [akTop, akRight]
     Brush.Color = 15856865
@@ -32086,8 +32086,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Shape = stRoundRect
   end
   object lblDisponibilidade: TLabel
-    Left = 831
-    Top = 108
+    Left = 654
+    Top = 191
     Width = 118
     Height = 23
     Anchors = [akTop, akRight]
@@ -32101,16 +32101,16 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     StyleElements = [seClient, seBorder]
   end
   object lblDisponibilidadeVal: TLabel
-    Left = 949
-    Top = 143
-    Width = 44
-    Height = 37
+    Left = 775
+    Top = 224
+    Width = 41
+    Height = 34
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = '0%'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -32
+    Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentFont = False
@@ -32129,7 +32129,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object ShapeMTTR: TJvShape
     Left = 641
-    Top = 104
+    Top = 99
     Width = 172
     Height = 83
     Anchors = [akTop, akRight]
@@ -32298,8 +32298,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Transparent = True
   end
   object imgDisponibilidade: TImage
-    Left = 831
-    Top = 133
+    Left = 654
+    Top = 216
     Width = 48
     Height = 48
     Anchors = [akTop, akRight]
@@ -32586,7 +32586,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object imgMTTR: TImage
     Left = 653
-    Top = 134
+    Top = 130
     Width = 48
     Height = 48
     Anchors = [akTop, akRight]
@@ -32721,7 +32721,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object lblMTTR: TLabel
     Left = 653
-    Top = 107
+    Top = 103
     Width = 44
     Height = 23
     Anchors = [akTop, akRight]
@@ -32735,16 +32735,16 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     StyleElements = [seClient, seBorder]
   end
   object lblMTTRVal: TLabel
-    Left = 723
-    Top = 144
-    Width = 82
-    Height = 37
+    Left = 731
+    Top = 137
+    Width = 74
+    Height = 34
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = '00:00'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -32
+    Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentFont = False
@@ -32766,16 +32766,16 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     StyleElements = [seClient, seBorder]
   end
   object lblMTBFVal: TLabel
-    Left = 723
-    Top = 49
-    Width = 82
-    Height = 37
+    Left = 731
+    Top = 47
+    Width = 74
+    Height = 34
     Alignment = taRightJustify
     Anchors = [akTop, akRight]
     Caption = '00:00'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -32
+    Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
     ParentFont = False
@@ -32914,10 +32914,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object ShapeOficina: TJvShape
     Left = 822
-    Top = 378
+    Top = 99
     Width = 178
-    Height = 78
-    Anchors = [akRight, akBottom]
+    Height = 83
+    Anchors = [akTop, akRight]
     Brush.Color = 15856865
     Pen.Color = clWindow
     Pen.Mode = pmMergeNotPen
@@ -32925,10 +32925,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object lblOficina: TLabel
     Left = 831
-    Top = 389
+    Top = 103
     Width = 53
     Height = 23
-    Anchors = [akRight, akBottom]
+    Anchors = [akTop, akRight]
     Caption = 'Oficina'
     Font.Charset = ANSI_CHARSET
     Font.Color = clSilver
@@ -32940,11 +32940,11 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object btnFiltraOficina: TSpeedButton
     Left = 967
-    Top = 385
+    Top = 103
     Width = 23
     Height = 22
     Hint = 'Filtrar Oficina'
-    Anchors = [akRight, akBottom]
+    Anchors = [akTop, akRight]
     Glyph.Data = {
       C6070000424DC607000000000000360000002800000016000000160000000100
       2000000000009007000000000000000000000000000000000000000000000000
@@ -33110,6 +33110,107 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentShowHint = False
     ShowHint = True
     OnClick = btnFiltraSolicClick
+  end
+  object ShapeManutencao: TJvShape
+    Left = 822
+    Top = 190
+    Width = 178
+    Height = 83
+    Anchors = [akTop, akRight]
+    Brush.Color = 15856865
+    Pen.Color = clWindow
+    Pen.Mode = pmMergeNotPen
+    Shape = stRoundRect
+  end
+  object lblManutencao: TLabel
+    Left = 831
+    Top = 191
+    Width = 94
+    Height = 23
+    Anchors = [akTop, akRight]
+    Caption = 'Manuten'#231#227'o'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clSilver
+    Font.Height = -19
+    Font.Name = 'Arial Narrow'
+    Font.Style = [fsBold]
+    ParentFont = False
+    StyleElements = [seClient, seBorder]
+  end
+  object btnFiltraManutencao: TSpeedButton
+    Left = 967
+    Top = 196
+    Width = 23
+    Height = 22
+    Hint = 'Filtrar Manutencao'
+    Anchors = [akTop, akRight]
+    Glyph.Data = {
+      C6070000424DC607000000000000360000002800000016000000160000000100
+      2000000000009007000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000DEDEDE2FDEDEDE9CDCDCDCACDEDEDE57D8D8D81400000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000DBDB
+      DB24DEDEDEC2DEDEDEFFDDDDDDBFDADADA3F0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000DBDBDB2BDDDD
+      DDDDDEDEDEF2DEDEDEE1E2E2E251000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000DCDCDC7DDEDEDEFCDDDD
+      DDECDEDEDED6E8E8E82D00000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000DBDBDB39E0E0E0E1DEDEDEE8DEDEDEF3D8D8
+      D89D000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000E4E4E413DFDFDFB9DEDEDEF0DDDDDDEDDDDDDDD0DFDFDF280000
+      0000000000000000000000000000000000000000000000000000ECECEC1BDADA
+      DA83ECECEC1C0000000000000000000000000000000000000000000000000000
+      0000E0E0E0A0DCDCDCF7DDDDDDE5DDDDDDE6DDDDDD5C00000000000000000000
+      0000000000000000000000000000FFFFFF03E3E3E39FD9D9D9FEE2E2E2A2FFFF
+      FF03000000000000000000000000000000000000000000000000D9D9D988DEDE
+      DEFEDEDEDEE1DEDEDEF8DEDEDE6D000000000000000000000000000000000000
+      000000000000D8D8D872DDDDDDF4DFDFDFEBDEDEDEF3D8D8D872000000000000
+      0000D4D4D406DFDFDF73E0E0E07CD6D6D679D8D8D8BADEDEDEECDDDDDDDFDDDD
+      DDECDDDDDDB7DDDDDD79DEDEDE7CDDDDDD6C0000000000000000DADADA46DDDD
+      DDEEDDDDDDECDEDEDEDCDDDDDDECDEDEDEEEDCDCDC4900000000BFBFBF04DFDF
+      DFA0DDDDDDFFE0E0E0FFDFDFDFEADEDEDEDBDDDDDDDFDEDEDEDBDDDDDDECDEDE
+      DEFFDEDEDEFFDEDEDE9E00000000F2F2F229DADADAD2DEDEDEF1DDDDDDDDDDDD
+      DDDFDDDDDDDDDEDEDEF1DEDEDED5D5D5D52B00000000DFDFDF10DEDEDEAEDDDD
+      DDEEDDDDDDDFDDDDDDDFDDDDDDDFDDDDDDDFDDDDDDDEDDDDDDEEDEDEDEAEE2E2
+      E212DFDFDF10E0E0E0ADDDDDDDEEDDDDDDDFDDDDDDDFDDDDDDDFDDDDDDDFDDDD
+      DDDEDDDDDDEEDEDEDEADE1E1E11100000000F2F2F229DADADAD3DEDEDEF1DDDD
+      DDDDDDDDDDDFDDDDDDDDDEDEDEF1DFDFDFD5D5D5D52B00000000DDDDDD9FDDDD
+      DDFFDEDEDEFFDDDDDDECDEDEDEDBDDDDDDDFDEDEDEDBDEDEDEEBDEDEDEFFDEDE
+      DEFFDBDBDBA0FFFFFF0300000000DBDBDB47DDDDDDEEDDDDDDECDEDEDEDCDDDD
+      DDECDEDEDEEEDCDCDC490000000000000000DDDDDD72DEDEDE7CDDDDDD79DDDD
+      DDB7DDDDDDECDDDDDDDFDEDEDEECDCDCDCB9DDDDDD79DEDEDE7CDCDCDC6EFFFF
+      FF050000000000000000D7D7D773DDDDDDF4DFDFDFEBDEDEDEF3D8D8D8720000
+      00000000000000000000000000000000000000000000DEDEDE6FDEDEDEF9DEDE
+      DEE1DEDEDEFEDCDCDC8600000000000000000000000000000000000000000000
+      0000FFFFFF04E3E3E39FDADADAFFE2E2E2A2FFFFFF0300000000000000000000
+      0000000000000000000000000000DEDEDE5FDDDDDDE7DDDDDDE4DDDDDDF7DDDD
+      DD9F00000000000000000000000000000000000000000000000000000000ECEC
+      EC1BDBDBDB82ECECEC1C00000000000000000000000000000000000000000000
+      000000000000E0E0E02ADEDEDED1DDDDDDEDDEDEDEF1DDDDDDB7E1E1E1110000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000DADADAA1DDDDDDF3DEDEDEE9DCDCDCDFE3E3E33700000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000E9E9E930DFDF
+      DFD8DDDDDDEBDCDCDCFCE1E1E17A000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000E3E3E354DDDDDDE3DEDE
+      DEF2DDDDDDDADFDFDF2800000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000DCDCDC42DFDFDFC1DEDEDEFFDEDE
+      DEBFD9D9D9220000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000DADADA15DFDFDF5ADEDEDEADDEDEDE9BDEDE
+      DE2F000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000}
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = btnFiltraManutencaoClick
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -33446,7 +33547,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Legend.TopPos = 4
     Legend.Transparent = True
     MarginBottom = 3
-    MarginLeft = 0
     MarginTop = 3
     RightWall.Dark3D = False
     RightWall.Size = 3
@@ -33890,10 +33990,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object cbOficina: TDBLookupComboBox
     Left = 833
-    Top = 419
+    Top = 142
     Width = 154
     Height = 22
-    Anchors = [akRight, akBottom]
+    Anchors = [akTop, akRight]
     DataField = 'CODOFICINA'
     DataSource = dsFiltros
     Font.Charset = DEFAULT_CHARSET
@@ -33908,8 +34008,6 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     TabOrder = 9
     OnKeyPress = cbOficinaKeyPress
-    ExplicitLeft = 829
-    ExplicitTop = 416
   end
   object CBSolicitante: TDBLookupComboBox
     Left = 22
@@ -33930,6 +34028,34 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     TabOrder = 10
     OnKeyPress = CBSolicitanteKeyPress
+  end
+  object cbManutencao: TComboBox
+    Left = 833
+    Top = 228
+    Width = 154
+    Height = 22
+    Style = csOwnerDrawFixed
+    Anchors = [akTop, akRight]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ItemIndex = 0
+    ParentFont = False
+    TabOrder = 11
+    Text = 'Todas'
+    StyleElements = [seFont, seClient]
+    Items.Strings = (
+      'Todas'
+      'Aut'#244'noma'
+      'Corretiva'
+      'Preventiva'
+      'Preditiva'
+      'Lubrifica'#231#227'o'
+      'Novos Projetos'
+      'Altera'#231#245'es'
+      'Outras')
   end
   object MainMenuPrincipal: TMainMenu
     Left = 48
@@ -36042,6 +36168,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     end
     object memFiltrosMATRICULA: TStringField
       FieldName = 'MATRICULA'
+    end
+    object memFiltrosCODMANUTENCAO: TStringField
+      FieldName = 'CODMANUTENCAO'
+      Size = 9
     end
   end
   object dsFiltros: TDataSource

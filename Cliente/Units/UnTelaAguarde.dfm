@@ -2,15 +2,11 @@ object FrmTelaAguarde: TFrmTelaAguarde
   Left = 0
   Top = 0
   AlphaBlend = True
-  AlphaBlendValue = 190
-  AutoSize = True
+  AlphaBlendValue = 180
   BorderStyle = bsNone
-  ClientHeight = 20
-  ClientWidth = 130
+  ClientHeight = 42
+  ClientWidth = 135
   Color = 14671839
-  Constraints.MaxHeight = 20
-  Constraints.MaxWidth = 130
-  Constraints.MinWidth = 130
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clGray
   Font.Height = -19
@@ -21,12 +17,11 @@ object FrmTelaAguarde: TFrmTelaAguarde
   object PTexto: TPanel
     Left = 0
     Top = 0
-    Width = 130
-    Height = 20
+    Width = 135
+    Height = 42
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
-    Caption = 'AGUARDE...'
     Font.Charset = ANSI_CHARSET
     Font.Color = clGray
     Font.Height = -16
@@ -34,6 +29,23 @@ object FrmTelaAguarde: TFrmTelaAguarde
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 100
+    ExplicitTop = -24
+    ExplicitWidth = 371
+    ExplicitHeight = 212
+    object LblTexto: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 10
+      Width = 129
+      Height = 29
+      Margins.Top = 10
+      Align = alClient
+      Alignment = taCenter
+      Caption = 'AGUARDE...'
+      ExplicitLeft = 48
+      ExplicitTop = 8
+      ExplicitWidth = 88
+      ExplicitHeight = 21
+    end
   end
 end

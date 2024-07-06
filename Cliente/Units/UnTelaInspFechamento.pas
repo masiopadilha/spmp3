@@ -228,7 +228,7 @@ PAuxiliares.Font.Color := clBlack;
 //                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
 //
 //                DM.qryAuxiliar.Close;
-//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = 'Manutenção Corretiva') ORDER BY `DESCRICAO` ASC;';
 //                DM.qryAuxiliar.Open;
 //                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
 //                DM.qryAuxiliar.Close;

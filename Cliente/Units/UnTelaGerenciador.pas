@@ -136,7 +136,7 @@ begin
    LData := Date;
    LHora := Time;
    BackupFile := EdtBackupMySQL.Text+'\'+FormatDateTime('dd_mm_yyyy', LData)+'_'+FormatDateTime('hh_mm_ss', LHora)+'.sql';
-   ShellExecute(0, nil, 'cmd.exe', Pchar('/c "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u spmpma_spmp -p spmpma_spmp --password=luca1052 --single-transaction --quick --lock-tables=false > '+BackupFile), nil, SW_MINIMIZE);
+   ShellExecute(0, nil, 'cmd.exe', Pchar('/c "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u '+edtDatabaseName.Text+' -p '+edtUserName.Text+' --password='+EdtSenha.Text+' --single-transaction --quick --lock-tables=false > '+BackupFile), nil, SW_MINIMIZE);
    Application.MessageBox('Backup realizado com sucesso!!!', 'SPMP3', MB_OK + MB_ICONINFORMATION);
   Except
    Application.MessageBox('Não foi possível realizar o backup do banco de dados!', 'SPMP', MB_OK + MB_ICONERROR);

@@ -58,6 +58,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       OnClick = BtnImagemClick
     end
     inherited pAlteracao: TPanel
+      ExplicitLeft = 654
       inherited LCadastro: TLabel
         Height = 14
       end
@@ -78,6 +79,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       end
     end
     inherited pCadastro: TPanel
+      ExplicitLeft = 654
       inherited LCadastroPor: TLabel
         Height = 14
       end
@@ -975,7 +977,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label15: TLabel
       Left = 730
-      Top = 68
+      Top = 38
       Width = 32
       Height = 16
       Alignment = taRightJustify
@@ -989,7 +991,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label16: TLabel
       Left = 722
-      Top = 99
+      Top = 69
       Width = 40
       Height = 16
       Alignment = taRightJustify
@@ -1059,7 +1061,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label25: TLabel
       Left = 990
-      Top = 73
+      Top = 43
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1073,7 +1075,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object Label26: TLabel
       Left = 990
-      Top = 103
+      Top = 73
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -1102,7 +1104,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     object LblPrimario: TDBText
       Left = 391
       Top = 187
-      Width = 597
+      Width = 273
       Height = 16
       DataSource = DM.dsEquipamentos
       Font.Charset = DEFAULT_CHARSET
@@ -1205,7 +1207,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object ChbSecundario: TDBCheckBox
       Left = 391
-      Top = 159
+      Top = 161
       Width = 93
       Height = 18
       Alignment = taLeftJustify
@@ -1265,7 +1267,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnPrimario: TButton
       Left = 639
-      Top = 155
+      Top = 156
       Width = 25
       Height = 28
       Hint = 'Consultar'
@@ -1279,7 +1281,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object BtnArea: TButton
       Left = 960
-      Top = 65
+      Top = 35
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1287,12 +1289,12 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 18
+      TabOrder = 17
       OnClick = BtnAreaClick
     end
     object BtnCelula: TButton
       Left = 960
-      Top = 96
+      Top = 66
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -1300,7 +1302,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ImageAlignment = iaCenter
       ImageIndex = 14
       Images = DM.ImageListBotoes
-      TabOrder = 20
+      TabOrder = 19
       OnClick = BtnCelulaClick
     end
     object EdtCalendario: TDBEdit
@@ -1368,7 +1370,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtPrimario: TDBEdit
       Left = 487
-      Top = 157
+      Top = 158
       Width = 150
       Height = 24
       Color = clBtnFace
@@ -1391,7 +1393,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtArea: TDBEdit
       Left = 766
-      Top = 67
+      Top = 37
       Width = 192
       Height = 24
       Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1408,7 +1410,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 17
+      TabOrder = 16
       StyleElements = [seFont, seClient]
       OnDblClick = EdtAreaDblClick
       OnExit = TabNextTab1AfterTabChange
@@ -1416,7 +1418,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object EdtCelula: TDBEdit
       Left = 766
-      Top = 98
+      Top = 68
       Width = 192
       Height = 24
       Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
@@ -1433,7 +1435,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 19
+      TabOrder = 18
       StyleElements = [seFont, seClient]
       OnDblClick = EdtCelulaDblClick
       OnExit = TabNextTab1AfterTabChange
@@ -1459,10 +1461,10 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     end
     object NBLocalizacao: TNotebook
       Left = 692
-      Top = 125
+      Top = 95
       Width = 304
       Height = 61
-      TabOrder = 21
+      TabOrder = 20
       object TPage
         Left = 0
         Top = 0
@@ -1666,8 +1668,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       OnKeyPress = FormKeyPress
     end
     object DBCheckBox1: TDBCheckBox
-      Left = 730
-      Top = 40
+      Left = 712
+      Top = 161
       Width = 246
       Height = 16
       Hint = 'Calcular MTBF, MTTR, Disponibilidade e outros indicadores.'
@@ -1677,7 +1679,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
       DataSource = DM.dsEquipamentos
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 16
+      TabOrder = 21
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       WordWrap = True
@@ -1810,8 +1812,8 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
     Top = 70
   end
   object PopupMenuInspecoes: TPopupMenu
-    Left = 826
-    Top = 506
+    Left = 842
+    Top = 530
     object Manutencoes1: TMenuItem
       Caption = 'Manuten'#231#245'es'
       OnClick = Manutencoes1Click

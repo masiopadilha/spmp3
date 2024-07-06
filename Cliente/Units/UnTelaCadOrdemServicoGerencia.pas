@@ -960,6 +960,11 @@ begin
     if DM.qryChecklistManut.IsEmpty = False then
     begin
       DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
+      DM.qryChecklistManut.Close;
+      DM.qryChecklistManutPartes.Close;
+      DM.qryChecklistManutItens.Close;
+      DM.qryChecklistManutItensEsp.Close;
+      DM.qryChecklistManutMObra.Close;
     end;
   end;
   if DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '' then
@@ -971,17 +976,12 @@ begin
     if DM.qryChecklistLubrific.IsEmpty = False then
     begin
       DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
+      DM.qryChecklistLubrific.Close;
+      DM.qryChecklistLubrificPartes.Close;
+      DM.qryChecklistLubrificItens.Close;
+      DM.qryChecklistLubrificItensEsp.Close;
+      DM.qryChecklistLubrificMObra.Close;
     end;
-//    DM.qryLubrificProgEquip.Close;
-//    DM.qryLubrificProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString;
-//    DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
-//    DM.qryLubrificProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
-//    DM.qryLubrificProgEquip.Open;
-//    if DM.qryLubrificProgEquip.IsEmpty = False then
-//    begin
-//      DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-//      DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-//    end;
   end;
 end;
 

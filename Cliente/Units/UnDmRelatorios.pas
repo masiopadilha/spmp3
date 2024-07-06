@@ -299,7 +299,6 @@ type
     frxDBOrdemServicoLocalizaMObra: TfrxDBDataset;
     frxDBOrdemServicoLocalizaMObraOSProg: TfrxDBDataset;
     frxROrdemServicoLocalizaMObra: TfrxReport;
-    frxReport2: TfrxReport;
     frxROrdemServicoMObra: TfrxReport;
     frxROrdemServicoInsp: TfrxReport;
     frxDBOrdemServicoLocalizaMObraOSExec: TfrxDBDataset;
@@ -331,6 +330,8 @@ type
     frxRFamPneus: TfrxReport;
     frxRFamRecursos: TfrxReport;
     frxReport1: TfrxReport;
+    frxDBChecklistManutMObra: TfrxDBDataset;
+    frxDBChecklistLubrificMObra: TfrxDBDataset;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
   private

@@ -21442,7 +21442,9 @@ object DM: TDM
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
       'Server='
-      'Port='
+      'Database=sampcm84_spmp'
+      'User_Name=sampcm84_spmp'
+      'Password=Lml#24313#'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
@@ -21459,6 +21461,7 @@ object DM: TDM
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
     Provider = 'Forms'
+    ScreenCursor = gcrHourGlass
     Left = 109
     Top = 8
   end
@@ -55114,13 +55117,15 @@ object DM: TDM
       '    , `equipamentos`.`DESCRICAO` EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
       '    , `equipamentos`.`CODFAMILIAEQUIP` AS FAMEQUIPAMENTO'
-      '    , `funcionarios`.`NOME` RESPONSAVEL'
+      '    , `funcionarios`.`NOME` FUNCIONARIO'
       
         '    ,  DATE_ADD(`manutprogequipamentohist`.`DTAINICIO1`, INTERVA' +
         'L `manutprogequipamentohist`.`FREQUENCIA1` DAY) AS PROXINSP'
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
       '    , `ordemservico`.`SITUACAO`'
+      '    ,  funcionarios_1.`NOME` SOLICITANTE'
+      '    ,  funcionarios_2.`NOME` RESPONSAVEL'
       '    , '#39'S'#39' AS REMIPRESSAO'
       'FROM'
       '    `manutprogequipamentohist`'
@@ -55152,9 +55157,19 @@ object DM: TDM
         '        ON (`manutprogequipamentohist`.`MATRICULA` = `funcionari' +
         'os`.`MATRICULA`) AND (`manutprogequipamentohist`.`CODEMPRESA` = ' +
         '`funcionarios`.`CODEMPRESA`)'
+      '    LEFT JOIN funcionarios AS funcionarios_1'
       
-        ' WHERE (`manutprogequipamentohist`.`CODORDEMSERVICO` = :codordem' +
-        'servico)')
+        '        ON (`ordemservico`.`MATRICULA` = `funcionarios_1`.`MATRI' +
+        'CULA`) AND (`ordemservico`.`CODEMPRESA` = `funcionarios_1`.`CODE' +
+        'MPRESA`)'
+      '    LEFT JOIN funcionarios AS funcionarios_2'
+      
+        '        ON (`ordemservico`.`RESPONSAVEL` = `funcionarios_2`.`MAT' +
+        'RICULA`) AND (`ordemservico`.`CODEMPRESA` = `funcionarios_2`.`CO' +
+        'DEMPRESA`)'
+      
+        '  WHERE (`manutprogequipamentohist`.`CODORDEMSERVICO` = :codorde' +
+        'mservico)')
     Left = 1529
     Top = 696
     ParamData = <
@@ -55167,6 +55182,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistManutCODIGO: TStringField
       AutoGenerateValue = arDefault
@@ -55322,11 +55338,11 @@ object DM: TDM
       ReadOnly = True
       Size = 9
     end
-    object qryChecklistManutRESPONSAVEL: TStringField
+    object qryChecklistManutFUNCIONARIO: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'RESPONSAVEL'
+      FieldName = 'FUNCIONARIO'
       Origin = 'NOME'
-      ProviderFlags = [pfInUpdate]
+      ProviderFlags = []
       ReadOnly = True
       Size = 200
     end
@@ -55368,6 +55384,22 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       Size = 1
+    end
+    object qryChecklistManutSOLICITANTE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SOLICITANTE'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
+    object qryChecklistManutRESPONSAVEL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RESPONSAVEL'
+      Origin = 'NOME'
+      ProviderFlags = [pfInUpdate]
+      ReadOnly = True
+      Size = 200
     end
   end
   object dsChecklistManut: TDataSource
@@ -55510,6 +55542,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistManutItensCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -55712,6 +55745,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistManutItensEspCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -55962,7 +55996,7 @@ object DM: TDM
       '    , `equipamentos`.`DESCRICAO` EQUIPAMENTO'
       '    , `equipamentos`.`CODCENTROCUSTO`'
       '    , `equipamentos`.`CODFAMILIAEQUIP` AS FAMEQUIPAMENTO'
-      '    , `funcionarios`.`NOME` RESPONSAVEL'
+      '    , `funcionarios`.`NOME` FUNCIONARIO'
       
         '    ,  DATE_ADD(`lubrificprogequipamentohist`.`DTAINICIO1`, INTE' +
         'RVAL `lubrificprogequipamentohist`.`FREQUENCIA1` DAY) AS PROXINS' +
@@ -55970,6 +56004,8 @@ object DM: TDM
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
       '    , `ordemservico`.`SITUACAO`'
+      '    ,  funcionarios_1.`NOME` SOLICITANTE'
+      '    ,  funcionarios_2.`NOME` RESPONSAVEL'
       '    , '#39'S'#39' AS REMIPRESSAO'
       'FROM'
       '    `lubrificprogequipamentohist`'
@@ -56002,10 +56038,20 @@ object DM: TDM
         '        ON (`lubrificprogequipamentohist`.`MATRICULA` = `funcion' +
         'arios`.`MATRICULA`) AND (`lubrificprogequipamentohist`.`CODEMPRE' +
         'SA` = `funcionarios`.`CODEMPRESA`)'
+      '    LEFT JOIN funcionarios AS funcionarios_1'
+      
+        '        ON (`ordemservico`.`MATRICULA` = `funcionarios_1`.`MATRI' +
+        'CULA`) AND (`ordemservico`.`CODEMPRESA` = `funcionarios_1`.`CODE' +
+        'MPRESA`)'
+      '    LEFT JOIN funcionarios AS funcionarios_2'
+      
+        '        ON (`ordemservico`.`RESPONSAVEL` = `funcionarios_2`.`MAT' +
+        'RICULA`) AND (`ordemservico`.`CODEMPRESA` = `funcionarios_2`.`CO' +
+        'DEMPRESA`)'
       
         ' WHERE (`lubrificprogequipamentohist`.`CODORDEMSERVICO` = :codor' +
         'demservico)')
-    Left = 1661
+    Left = 1702
     Top = 695
     ParamData = <
       item
@@ -56017,6 +56063,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistLubrificCODIGO: TStringField
       AutoGenerateValue = arDefault
@@ -56162,9 +56209,9 @@ object DM: TDM
       ReadOnly = True
       Size = 9
     end
-    object qryChecklistLubrificRESPONSAVEL: TStringField
+    object qryChecklistLubrificFUNCIONARIO: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'RESPONSAVEL'
+      FieldName = 'FUNCIONARIO'
       Origin = 'NOME'
       ProviderFlags = []
       ReadOnly = True
@@ -56209,10 +56256,26 @@ object DM: TDM
       ReadOnly = True
       Size = 40
     end
+    object qryChecklistLubrificSOLICITANTE: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'SOLICITANTE'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
+    object qryChecklistLubrificRESPONSAVEL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RESPONSAVEL'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
   end
   object dsChecklistLubrific: TDataSource
     DataSet = qryChecklistLubrific
-    Left = 1661
+    Left = 1702
     Top = 743
   end
   object qryChecklistLubrificPartes: TFDQuery
@@ -56242,7 +56305,7 @@ object DM: TDM
         '    AND `lubrificprogfamequippartes`.`CODLUBRIFICPROGFAMEQUIP` =' +
         ' :CODLUBRIFICPROGFAMEQUIP)'
       'order by `lubrificprogfamequippartes`.`DESCRICAO`;')
-    Left = 1681
+    Left = 1722
     Top = 695
     ParamData = <
       item
@@ -56289,7 +56352,7 @@ object DM: TDM
   end
   object dsChecklistLubrificPartes: TDataSource
     DataSet = qryChecklistLubrificPartes
-    Left = 1681
+    Left = 1722
     Top = 743
   end
   object qryChecklistLubrificItens: TFDQuery
@@ -56341,7 +56404,7 @@ object DM: TDM
         'ORDER BY  `lubrificprogfamequippartes`.`DESCRICAO` ASC, `lubrifi' +
         'cprogequiphistitens`.`ITEM`, `lubrificprogequiphistitens`.`DESCI' +
         'NSPECAO` ASC;')
-    Left = 1703
+    Left = 1744
     Top = 695
     ParamData = <
       item
@@ -56353,6 +56416,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistLubrificItensCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -56489,7 +56553,7 @@ object DM: TDM
   end
   object dsChecklistLubrificItens: TDataSource
     DataSet = qryChecklistLubrificItens
-    Left = 1703
+    Left = 1744
     Top = 743
   end
   object qryChecklistLubrificItensEsp: TFDQuery
@@ -56542,7 +56606,7 @@ object DM: TDM
         'ORDER BY  `lubrificprogfamequippartes`.`DESCRICAO` ASC, `lubrifi' +
         'cprogequiphistitensesp`.`ITEM`, `lubrificprogequiphistitensesp`.' +
         '`DESCINSPECAO` ASC;')
-    Left = 1723
+    Left = 1764
     Top = 695
     ParamData = <
       item
@@ -56554,6 +56618,7 @@ object DM: TDM
       FieldName = 'INDICE'
       Origin = 'INDICE'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qryChecklistLubrificItensEspCODEMPRESA: TStringField
       FieldName = 'CODEMPRESA'
@@ -56690,7 +56755,7 @@ object DM: TDM
   end
   object dsChecklistLubrificItensEsp: TDataSource
     DataSet = qryChecklistLubrificItensEsp
-    Left = 1723
+    Left = 1764
     Top = 743
   end
   object qryChecklistLubrificPlanoTrab: TFDQuery
@@ -56718,7 +56783,7 @@ object DM: TDM
         '    AND `lubrificprogfamequipplantrab`.`CODLUBRIFICPROGFAMEQUIP`' +
         ' = :CODLUBRIFICPROGFAMEQUIP'
       '    );')
-    Left = 1743
+    Left = 1784
     Top = 695
     ParamData = <
       item
@@ -56772,13 +56837,13 @@ object DM: TDM
   end
   object dsChecklistLubrificPlanoTrab: TDataSource
     DataSet = qryChecklistLubrificPlanoTrab
-    Left = 1743
+    Left = 1784
     Top = 743
   end
   object CDEquipamentoHist: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 1804
+    Left = 1901
     Top = 695
     object CDEquipamentoHistCODIGO: TStringField
       FieldName = 'CODIGO'
@@ -58358,7 +58423,7 @@ object DM: TDM
         'l`.`CODORDEMSERVICO`'
       ''
       'ORDER BY `funcionarios`.`NOME` ASC;')
-    Left = 1866
+    Left = 1973
     Top = 696
     ParamData = <
       item
@@ -58416,7 +58481,7 @@ object DM: TDM
   end
   object dsFuncionarioHistSimples: TDataSource
     DataSet = qryFuncionarioHistSimples
-    Left = 1866
+    Left = 1973
     Top = 743
   end
   object qryManutProgEquipEquipe: TFDQuery
@@ -59306,5 +59371,392 @@ object DM: TDM
     DataSet = qryLubrificProgFamEquipCons
     Left = 1312
     Top = 317
+  end
+  object qryChecklistManutMObra: TFDQuery
+    IndexFieldNames = 'CODORDEMSERVICO'
+    MasterSource = dsChecklistManut
+    MasterFields = 'CODORDEMSERVICO'
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservicoequipemobrautil`.`CODIGO`'
+      '    , `ordemservicoequipemobrautil`.`CODEMPRESA`'
+      '    , `ordemservicoequipemobrautil`.`CODEQUIPE`'
+      '    , `ordemservicoequipemobrautil`.`CODORDEMSERVICO`'
+      '    , `ordemservicoequipemobrautil`.`CODCARGO`'
+      '    , `ordemservicoequipemobrautil`.`CODCALENDARIO`'
+      '    , `ordemservicoequipemobrautil`.`MATRICULA`'
+      '    , `ordemservicoequipemobrautil`.`NOME`'
+      '    , `ordemservicoequipemobrautil`.`TOTALHOMEMHORA`'
+      '    , `ordemservicoequipemobrautil`.`QTDEHENORMAL`'
+      '    , `ordemservicoequipemobrautil`.`QTDEHEFERIADO`'
+      '    , `ordemservicoequipemobrautil`.`ESPECIALISTA`'
+      '    , `ordemservicoequipemobrautil`.`FECHAMENTO`'
+      '    , `cargos`.`DESCRICAO` AS `CARGO`'
+      '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    , `calendario`.`HOFICIAIS`'
+      '    , `calendario`.`HENORMAL`'
+      '    , `calendario`.`HEFERIADO`'
+      '    , `funcionarios`.`OCUPADO`'
+      '    , `funcionarios`.`SALARIO`'
+      'FROM'
+      '    `ordemservicoequipemobrautil`'
+      '    INNER JOIN `cargos` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODCARGO` = `cargos`.' +
+        '`CODIGO`)'
+      '    INNER JOIN `calendario` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODCALENDARIO` = `cal' +
+        'endario`.`CODIGO`) AND (`ordemservicoequipemobrautil`.`CODEMPRES' +
+        'A` = `calendario`.`CODEMPRESA`)'
+      '    INNER JOIN `funcionarios` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`MATRICULA` = `funcion' +
+        'arios`.`MATRICULA`) AND (`ordemservicoequipemobrautil`.`CODEMPRE' +
+        'SA` = `funcionarios`.`CODEMPRESA`)'
+      
+        ' WHERE (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = :codor' +
+        'demservico);')
+    Left = 1619
+    Top = 696
+    ParamData = <
+      item
+        Name = 'CODORDEMSERVICO'
+        ParamType = ptInput
+      end>
+    object FDAutoIncField11: TFDAutoIncField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object StringField61: TStringField
+      FieldName = 'CODEMPRESA'
+      Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object IntegerField10: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPE'
+      Origin = 'CODEQUIPE'
+    end
+    object IntegerField11: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODORDEMSERVICO'
+      Origin = 'CODORDEMSERVICO'
+    end
+    object StringField62: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCARGO'
+      Origin = 'CODCARGO'
+      Size = 9
+    end
+    object StringField63: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCALENDARIO'
+      Origin = 'CODCALENDARIO'
+      Size = 9
+    end
+    object StringField64: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Size = 9
+    end
+    object StringField65: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Size = 80
+    end
+    object BCDField8: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALHOMEMHORA'
+      Origin = 'TOTALHOMEMHORA'
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object BCDField9: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'QTDEHENORMAL'
+      Origin = 'QTDEHENORMAL'
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object BCDField10: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'QTDEHEFERIADO'
+      Origin = 'QTDEHEFERIADO'
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object StringField66: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ESPECIALISTA'
+      Origin = 'ESPECIALISTA'
+      Size = 1
+    end
+    object DateTimeField1: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'FECHAMENTO'
+      Origin = 'FECHAMENTO'
+    end
+    object StringField67: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CARGO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 80
+    end
+    object StringField96: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CALENDARIO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 80
+    end
+    object IntegerField16: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HOFICIAIS'
+      Origin = 'HOFICIAIS'
+      ProviderFlags = []
+      DisplayFormat = ',0.00'
+    end
+    object IntegerField17: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HENORMAL'
+      Origin = 'HENORMAL'
+      ProviderFlags = []
+      DisplayFormat = ',0.00'
+    end
+    object IntegerField18: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HEFERIADO'
+      Origin = 'HEFERIADO'
+      ProviderFlags = []
+      DisplayFormat = ',0.00'
+    end
+    object StringField97: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OCUPADO'
+      Origin = 'OCUPADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
+    end
+    object BCDField11: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'SALARIO'
+      Origin = 'SALARIO'
+      ProviderFlags = []
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+  end
+  object dsChecklistManutMObra: TDataSource
+    DataSet = qryChecklistManutMObra
+    Left = 1619
+    Top = 744
+  end
+  object qryChecklistLubrificMObra: TFDQuery
+    IndexFieldNames = 'CODORDEMSERVICO'
+    MasterSource = dsChecklistLubrific
+    MasterFields = 'CODORDEMSERVICO'
+    Connection = FDConnSPMP3
+    SQL.Strings = (
+      'SELECT'
+      '    `ordemservicoequipemobrautil`.`CODIGO`'
+      '    , `ordemservicoequipemobrautil`.`CODEMPRESA`'
+      '    , `ordemservicoequipemobrautil`.`CODEQUIPE`'
+      '    , `ordemservicoequipemobrautil`.`CODORDEMSERVICO`'
+      '    , `ordemservicoequipemobrautil`.`CODCARGO`'
+      '    , `ordemservicoequipemobrautil`.`CODCALENDARIO`'
+      '    , `ordemservicoequipemobrautil`.`MATRICULA`'
+      '    , `ordemservicoequipemobrautil`.`NOME`'
+      '    , `ordemservicoequipemobrautil`.`TOTALHOMEMHORA`'
+      '    , `ordemservicoequipemobrautil`.`QTDEHENORMAL`'
+      '    , `ordemservicoequipemobrautil`.`QTDEHEFERIADO`'
+      '    , `ordemservicoequipemobrautil`.`ESPECIALISTA`'
+      '    , `ordemservicoequipemobrautil`.`FECHAMENTO`'
+      '    , `cargos`.`DESCRICAO` AS `CARGO`'
+      '    , `calendario`.`DESCRICAO` AS `CALENDARIO`'
+      '    , `calendario`.`HOFICIAIS`'
+      '    , `calendario`.`HENORMAL`'
+      '    , `calendario`.`HEFERIADO`'
+      '    , `funcionarios`.`OCUPADO`'
+      '    , `funcionarios`.`SALARIO`'
+      'FROM'
+      '    `ordemservicoequipemobrautil`'
+      '    INNER JOIN `cargos` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODCARGO` = `cargos`.' +
+        '`CODIGO`)'
+      '    INNER JOIN `calendario` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`CODCALENDARIO` = `cal' +
+        'endario`.`CODIGO`) AND (`ordemservicoequipemobrautil`.`CODEMPRES' +
+        'A` = `calendario`.`CODEMPRESA`)'
+      '    INNER JOIN `funcionarios` '
+      
+        '        ON (`ordemservicoequipemobrautil`.`MATRICULA` = `funcion' +
+        'arios`.`MATRICULA`) AND (`ordemservicoequipemobrautil`.`CODEMPRE' +
+        'SA` = `funcionarios`.`CODEMPRESA`)'
+      
+        ' WHERE (`ordemservicoequipemobrautil`.`CODORDEMSERVICO` = :codor' +
+        'demservico);')
+    Left = 1802
+    Top = 696
+    ParamData = <
+      item
+        Name = 'CODORDEMSERVICO'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryChecklistLubrificMObraCODIGO: TFDAutoIncField
+      FieldName = 'CODIGO'
+      Origin = 'CODIGO'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryChecklistLubrificMObraCODEMPRESA: TStringField
+      FieldName = 'CODEMPRESA'
+      Origin = 'CODEMPRESA'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+      Size = 9
+    end
+    object qryChecklistLubrificMObraCODEQUIPE: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODEQUIPE'
+      Origin = 'CODEQUIPE'
+    end
+    object qryChecklistLubrificMObraCODORDEMSERVICO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODORDEMSERVICO'
+      Origin = 'CODORDEMSERVICO'
+    end
+    object qryChecklistLubrificMObraCODCARGO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCARGO'
+      Origin = 'CODCARGO'
+      Size = 9
+    end
+    object qryChecklistLubrificMObraCODCALENDARIO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CODCALENDARIO'
+      Origin = 'CODCALENDARIO'
+      Size = 9
+    end
+    object qryChecklistLubrificMObraMATRICULA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULA'
+      Origin = 'MATRICULA'
+      Size = 9
+    end
+    object qryChecklistLubrificMObraNOME: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Size = 80
+    end
+    object qryChecklistLubrificMObraTOTALHOMEMHORA: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTALHOMEMHORA'
+      Origin = 'TOTALHOMEMHORA'
+      DisplayFormat = ',0.00'
+      Precision = 16
+      Size = 2
+    end
+    object qryChecklistLubrificMObraQTDEHENORMAL: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'QTDEHENORMAL'
+      Origin = 'QTDEHENORMAL'
+      Precision = 16
+      Size = 2
+    end
+    object qryChecklistLubrificMObraQTDEHEFERIADO: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'QTDEHEFERIADO'
+      Origin = 'QTDEHEFERIADO'
+      Precision = 16
+      Size = 2
+    end
+    object qryChecklistLubrificMObraESPECIALISTA: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ESPECIALISTA'
+      Origin = 'ESPECIALISTA'
+      Size = 1
+    end
+    object qryChecklistLubrificMObraFECHAMENTO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'FECHAMENTO'
+      Origin = 'FECHAMENTO'
+    end
+    object qryChecklistLubrificMObraCARGO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CARGO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryChecklistLubrificMObraCALENDARIO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'CALENDARIO'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object qryChecklistLubrificMObraHOFICIAIS: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HOFICIAIS'
+      Origin = 'HOFICIAIS'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryChecklistLubrificMObraHENORMAL: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HENORMAL'
+      Origin = 'HENORMAL'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryChecklistLubrificMObraHEFERIADO: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'HEFERIADO'
+      Origin = 'HEFERIADO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qryChecklistLubrificMObraOCUPADO: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'OCUPADO'
+      Origin = 'OCUPADO'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 1
+    end
+    object qryChecklistLubrificMObraSALARIO: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'SALARIO'
+      Origin = 'SALARIO'
+      ProviderFlags = []
+      ReadOnly = True
+      Precision = 16
+      Size = 2
+    end
+  end
+  object dsChecklistLubrificMObra: TDataSource
+    DataSet = qryChecklistLubrificMObra
+    Left = 1802
+    Top = 744
   end
 end
