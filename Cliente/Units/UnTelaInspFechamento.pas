@@ -232,6 +232,12 @@ PAuxiliares.Font.Color := clBlack;
 //                DM.qryAuxiliar.Open;
 //                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
 //                DM.qryAuxiliar.Close;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                DM.qryAuxiliar.Close;
               end;
 
 
@@ -402,6 +408,12 @@ PAuxiliares.Font.Color := clBlack;
 //                DM.qryAuxiliar.Open;
 //                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
 //                DM.qryAuxiliar.Close;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                DM.qryAuxiliar.Close;
               end;
 
               while not DM.qryLubrificPeriodicasItens.Eof = True do
@@ -585,6 +597,12 @@ PAuxiliares.Font.Color := clBlack;
 //                    DM.qryAuxiliar.Open;
 //                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
 //                    DM.qryAuxiliar.Close;
+
+                      DM.qryAuxiliar.Close;
+                      DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                      DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                      LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                      DM.qryAuxiliar.Close;
                   end;
 
                   while not DM.qryRotaPeriodicasManutItens.Eof do
