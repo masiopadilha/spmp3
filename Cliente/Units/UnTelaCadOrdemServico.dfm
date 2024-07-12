@@ -354,20 +354,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       ParentFont = False
       Visible = False
     end
-    object Label24: TLabel
-      Left = 657
-      Top = 65
-      Width = 6
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label25: TLabel
       Left = 322
       Top = 95
@@ -436,20 +422,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     object Label28: TLabel
       Left = 991
       Top = 66
-      Width = 6
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label30: TLabel
-      Left = 657
-      Top = 128
       Width = 6
       Height = 13
       Alignment = taRightJustify

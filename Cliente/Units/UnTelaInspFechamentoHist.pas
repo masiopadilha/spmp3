@@ -27,17 +27,23 @@ type
     Label3: TLabel;
     EdtData1: TJvDateTimePicker;
     EdtData2: TJvDateTimePicker;
+    Individual1: TMenuItem;
+    Completo1: TMenuItem;
+    Individual2: TMenuItem;
+    Completo2: TMenuItem;
     procedure BtnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure Manutencoes1Click(Sender: TObject);
     procedure BtnImprimirClick(Sender: TObject);
-    procedure Lubrificacoes1Click(Sender: TObject);
     procedure GrdManutencaoHistKeyPress(Sender: TObject; var Key: Char);
     procedure GrdLubrificacaoHistKeyPress(Sender: TObject; var Key: Char);
     procedure EdtFamiliaEquipDblClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CBConsSimplesChange(Sender: TObject);
+    procedure Completo1Click(Sender: TObject);
+    procedure Individual1Click(Sender: TObject);
+    procedure Completo2Click(Sender: TObject);
+    procedure Individual2Click(Sender: TObject);
   private
     procedure ConfigurarFiltros;
     { Private declarations }
@@ -236,10 +242,81 @@ if (Key = #13) then
   end;
 end;
 
+procedure TFrmTelaInspFechamentoHist.Individual1Click(Sender: TObject);
+begin
+  inherited;
+    if not Assigned(DmRelatorios) then
+      Application.CreateForm(TDmRelatorios, DmRelatorios);
+
+    DM.qryChecklistManut.Close;
+    DM.qryChecklistManut.Params[0].AsString := DM.qryManutPeriodicasHist.FieldByName('CODORDEMSERVICO').AsString;
+    DM.qryChecklistManut.Open;
+    if DM.qryChecklistManut.IsEmpty = False then
+    begin
+      DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
+      DM.qryChecklistManut.Close;
+      DM.qryChecklistManutPartes.Close;
+      DM.qryChecklistManutItens.Close;
+      DM.qryChecklistManutItensEsp.Close;
+      DM.qryChecklistManutMObra.Close;
+    end;
+end;
+
+procedure TFrmTelaInspFechamentoHist.Individual2Click(Sender: TObject);
+begin
+  inherited;
+   if not Assigned(DmRelatorios) then
+     Application.CreateForm(TDmRelatorios, DmRelatorios);
+
+    DM.qryChecklistLubrific.Close;
+    DM.qryChecklistLubrific.Params[0].AsString := DM.qryLubrificPeriodicasHist.FieldByName('CODORDEMSERVICO').AsString;
+    DM.qryChecklistLubrific.Open;
+
+    if DM.qryChecklistLubrific.IsEmpty = False then
+    begin
+      DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
+      DM.qryChecklistLubrific.Close;
+      DM.qryChecklistLubrificPartes.Close;
+      DM.qryChecklistLubrificItens.Close;
+      DM.qryChecklistLubrificItensEsp.Close;
+      DM.qryChecklistLubrificMObra.Close;
+    end;
+end;
+
 procedure TFrmTelaInspFechamentoHist.CBConsSimplesChange(Sender: TObject);
 begin
   inherited;
   BtnConsultar.OnClick(Sender);
+end;
+
+procedure TFrmTelaInspFechamentoHist.Completo1Click(Sender: TObject);
+begin
+  inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+if LCodEquipamento <> '' then
+  if DM.qryManutPeriodicasHist.Filter = '' then
+    begin
+      DM.qryManutPeriodicasHist.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(LCodEquipamento);
+      DM.qryManutPeriodicasHist.Filtered := True;
+    end;
+
+DmRelatorios.frxRManutPeriodicas.ShowReport();
+end;
+
+procedure TFrmTelaInspFechamentoHist.Completo2Click(Sender: TObject);
+begin
+  inherited;
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+if LCodEquipamento <> '' then
+  if DM.qryLubrificPeriodicas.Filter = '' then
+    begin
+      DM.qryLubrificPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(LCodEquipamento);
+      DM.qryLubrificPeriodicas.Filtered := True;
+    end;
+
+DmRelatorios.frxRLubrificPeriodicas.ShowReport();
 end;
 
 procedure TFrmTelaInspFechamentoHist.ConfigurarFiltros;
@@ -288,36 +365,6 @@ begin
   LCodFamilia := '';
   EdtFamiliaEquip.Text := '';
   ConfigurarFiltros;
-end;
-
-procedure TFrmTelaInspFechamentoHist.Lubrificacoes1Click(Sender: TObject);
-begin
-  inherited;
-if not Assigned(DmRelatorios) then
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
-if LCodEquipamento <> '' then
-  if DM.qryLubrificPeriodicas.Filter = '' then
-    begin
-      DM.qryLubrificPeriodicas.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(LCodEquipamento);
-      DM.qryLubrificPeriodicas.Filtered := True;
-    end;
-
-DmRelatorios.frxRLubrificPeriodicas.ShowReport();
-end;
-
-procedure TFrmTelaInspFechamentoHist.Manutencoes1Click(Sender: TObject);
-begin
-  inherited;
-if not Assigned(DmRelatorios) then
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
-if LCodEquipamento <> '' then
-  if DM.qryManutPeriodicasHist.Filter = '' then
-    begin
-      DM.qryManutPeriodicasHist.Filter := 'CODEQUIPAMENTO = ' + QuotedStr(LCodEquipamento);
-      DM.qryManutPeriodicasHist.Filtered := True;
-    end;
-
-DmRelatorios.frxRManutPeriodicas.ShowReport();
 end;
 
 end.

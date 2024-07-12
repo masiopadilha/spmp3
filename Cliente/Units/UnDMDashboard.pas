@@ -89,7 +89,8 @@ type
 
     LSolicitadas: array[1..12] of Integer;
     LFechadas: array[1..12] of Integer;
-    LTipoManutencao: array[1..7] of Integer;
+    LTipoManutencao: array[1..9] of Integer;
+    LTipoManutencaoFechadas: array[1..9] of Integer;
     LSituacaoOS: array[1..11] of Integer;
 
   public
@@ -315,7 +316,7 @@ begin
     if memFiltrosCODOFICINA.AsString <> '' then
       DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' AND o.`CODOFICINA` = '+QuotedStr(memFiltrosCODOFICINA.AsString);
 
-      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' LEFT JOIN `ordemservico` AS o2 ON o.`CODIGO` = o2.`CODIGO` GROUP BY TIPO.TIPO ORDER BY TIPO.TIPO;';
+      DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' LEFT JOIN `ordemservico` AS o2 ON (o.`CODIGO` = o2.`CODIGO`)  AND (o.`SITUACAO` = ''FECHADA'') GROUP BY TIPO.TIPO ORDER BY TIPO.TIPO;';
 
     DMDashboard.qryDashboard.Params[0].AsInteger := cbMes.ItemIndex + 1;
     DMDashboard.qryDashboard.Params[1].AsInteger := StrToInt(cbAno.Text);
@@ -340,8 +341,11 @@ begin
     begin
       while not DMDashboard.qryDashboard.Eof = True do
       begin
-        if DMDashboard.qryDashboard.FieldByName('TOTAL').AsInteger > 0 then
+      //  if DMDashboard.qryDashboard.FieldByName('TOTAL').AsInteger > 0 then
+        begin
           LTipoManutencao[DMDashboard.qryDashboard.RecNo] := DMDashboard.qryDashboard.FieldByName('TOTAL').AsInteger;
+          LTipoManutencaoFechadas[DMDashboard.qryDashboard.RecNo] := DMDashboard.qryDashboard.FieldByName('TOTALFECHADAS').AsInteger;
+        end;
 
         DMDashboard.qryDashboard.Next;
       end;
@@ -376,11 +380,15 @@ begin
           LColor := clWhite;
 
         if LTipoManutencao[DMDashboard.qryDashboard.RecNo] > 0 then
+        begin
           ChartTipoManutencao.Series[0].Add(LTipoManutencao[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('TIPO').AsString, LColor);
+          ChartTipoManutencao.Series[1].Add(LTipoManutencaoFechadas[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('TIPO').AsString, LColor);
+        end;
 
         DMDashboard.qryDashboard.Next;
       end;
       DMDashboard.qryDashboard.Close;
+
     end;
     //----------------------------SITUAÇÃO DAS OS---------------------------------------------------------------------------------------------------------------------------------
     if FrmTelaSplash <> nil then

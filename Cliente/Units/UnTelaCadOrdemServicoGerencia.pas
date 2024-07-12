@@ -954,34 +954,89 @@ begin
   inherited;
   if DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '' then
   begin
-    DM.qryChecklistManut.Close;
-    DM.qryChecklistManut.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
-    DM.qryChecklistManut.Open;
-    if DM.qryChecklistManut.IsEmpty = False then
-    begin
-      DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
-      DM.qryChecklistManut.Close;
-      DM.qryChecklistManutPartes.Close;
-      DM.qryChecklistManutItens.Close;
-      DM.qryChecklistManutItensEsp.Close;
-      DM.qryChecklistManutMObra.Close;
-    end;
+    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'EXECUCAO') and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'LIBERADA')
+      and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'FECHADA') then
+      begin
+        DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
+
+        DM.qryManutProgEquip.Close;
+        DM.qryManutProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString;
+        DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
+        DM.qryManutProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
+        DM.qryManutProgEquip.Open;
+
+        if DM.qryManutProgEquip.IsEmpty = False then
+        begin
+            DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
+            DM.qryManutProgEquip.Close;
+            DM.qryManutProgEquipPecas.Close;
+            DM.qryManutProgEquipRecursos.Close;
+            DM.qryManutProgEquipEquipe.Close;
+            DM.qryManutProgEquipEquipeMObra.Close;
+            DM.FCodOrdemServico := 0;
+        end;
+      end;
+
+    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'EXECUCAO') or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'LIBERADA')
+      or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'FECHADA') then
+      begin
+          DM.qryChecklistManut.Close;
+          DM.qryChecklistManut.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+          DM.qryChecklistManut.Open;
+          if DM.qryChecklistManut.IsEmpty = False then
+          begin
+            DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
+            DM.qryChecklistManut.Close;
+            DM.qryChecklistManutPartes.Close;
+            DM.qryChecklistManutItens.Close;
+            DM.qryChecklistManutItensEsp.Close;
+            DM.qryChecklistManutMObra.Close;
+          end;
+      end;
   end;
+
   if DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '' then
   begin
-    DM.qryChecklistLubrific.Close;
-    DM.qryChecklistLubrific.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
-    DM.qryChecklistLubrific.Open;
+    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'EXECUCAO') and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'LIBERADA')
+      and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'FECHADA') then
+      begin
+        DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
 
-    if DM.qryChecklistLubrific.IsEmpty = False then
-    begin
-      DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
-      DM.qryChecklistLubrific.Close;
-      DM.qryChecklistLubrificPartes.Close;
-      DM.qryChecklistLubrificItens.Close;
-      DM.qryChecklistLubrificItensEsp.Close;
-      DM.qryChecklistLubrificMObra.Close;
-    end;
+        DM.qryLubrificProgEquip.Close;
+        DM.qryLubrificProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString;
+        DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
+        DM.qryLubrificProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
+        DM.qryLubrificProgEquip.Open;
+
+        if DM.qryLubrificProgEquip.IsEmpty = False then
+        begin
+            DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
+            DM.qryLubrificProgEquip.Close;
+            DM.qryLubrificProgEquipPecas.Close;
+            DM.qryLubrificProgEquipRecursos.Close;
+            DM.qryLubrificProgEquipEquipe.Close;
+            DM.qryLubrificProgEquipEquipeMObra.Close;
+            DM.FCodOrdemServico := 0;
+        end;
+      end;
+
+    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'EXECUCAO') or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'LIBERADA')
+      or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'FECHADA') then
+      begin
+        DM.qryChecklistLubrific.Close;
+        DM.qryChecklistLubrific.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+        DM.qryChecklistLubrific.Open;
+
+        if DM.qryChecklistLubrific.IsEmpty = False then
+        begin
+          DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
+          DM.qryChecklistLubrific.Close;
+          DM.qryChecklistLubrificPartes.Close;
+          DM.qryChecklistLubrificItens.Close;
+          DM.qryChecklistLubrificItensEsp.Close;
+          DM.qryChecklistLubrificMObra.Close;
+        end;
+      end;
   end;
 end;
 

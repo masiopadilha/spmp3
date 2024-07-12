@@ -34008,6 +34008,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     TabOrder = 9
     OnKeyPress = cbOficinaKeyPress
+    ExplicitLeft = 829
   end
   object CBSolicitante: TDBLookupComboBox
     Left = 22
@@ -34056,6 +34057,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       'Novos Projetos'
       'Altera'#231#245'es'
       'Outras')
+    ExplicitLeft = 829
   end
   object MainMenuPrincipal: TMainMenu
     Left = 48
@@ -34740,14 +34742,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         end
         object FamliadeEquipamentos1: TMenuItem
           Caption = 'Fam'#237'lia de Equipamentos'
-          object ListaCompleta1: TMenuItem
-            Caption = 'Lista Completa'
-            OnClick = ListaCompleta1Click
-          end
-          object PorFamilia1: TMenuItem
-            Caption = 'Por Familia'
-            OnClick = PorFamilia1Click
-          end
+          OnClick = FamliadeEquipamentos1Click
         end
         object Area4: TMenuItem
           Caption = #193'rea'
@@ -34773,14 +34768,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         end
         object FamliadeEquipamentos2: TMenuItem
           Caption = 'Fam'#237'lia de Equipamentos'
-          object ListaCompleta4: TMenuItem
-            Caption = 'Lista Completa'
-            OnClick = ListaCompleta4Click
-          end
-          object PorFamilia2: TMenuItem
-            Caption = 'Por Familia'
-            OnClick = PorFamilia2Click
-          end
+          OnClick = FamliadeEquipamentos2Click
         end
         object Area5: TMenuItem
           Caption = #193'rea'

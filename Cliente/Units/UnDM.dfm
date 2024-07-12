@@ -9032,7 +9032,7 @@ object DM: TDM
         'permissoes_acesso`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usuario`' +
         '.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1451
+    Left = 1452
     Top = 480
     ParamData = <
       item
@@ -10138,7 +10138,7 @@ object DM: TDM
         'D `permissoes_alteracao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `us' +
         'uario`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1472
+    Left = 1484
     Top = 480
     ParamData = <
       item
@@ -11244,7 +11244,7 @@ object DM: TDM
         ' `permissoes_exclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1493
+    Left = 1517
     Top = 480
     ParamData = <
       item
@@ -12282,7 +12282,7 @@ object DM: TDM
         ' `permissoes_inclusao`.`CODNIVELACESSO` <> '#39'ADU-00001'#39' AND `usua' +
         'rio`.`CODEMPRESA` = :codempresa)'
       'ORDER BY `usuario`.`NOME`;')
-    Left = 1515
+    Left = 1549
     Top = 480
     ParamData = <
       item
@@ -21442,9 +21442,6 @@ object DM: TDM
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
       'Server='
-      'Database=sampcm84_spmp'
-      'User_Name=sampcm84_spmp'
-      'Password=Lml#24313#'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
@@ -31216,11 +31213,12 @@ object DM: TDM
         '        ON (`rotasequipamentoseq`.`CODROTA` = `rotasequipamento`' +
         '.`CODIGO`) AND (`rotasequipamentoseq`.`CODEMPRESA` = `rotasequip' +
         'amento`.`CODEMPRESA`)'
-      'WHERE (`manutprogequipamento`.`CODIGO` = :codigo'
-      '    AND `manutprogequipamento`.`CODEMPRESA` = :codempresa'
+      'WHERE (`manutprogequipamento`.`CODIGO` =   :codigo'
+      '    AND `manutprogequipamento`.`CODEMPRESA` =  :codempresa'
       
         '    AND `manutprogequipamento`.`CODEQUIPAMENTO` = :codequipament' +
-        'o)'
+        'o'
+      ')'
       
         'GROUP BY `manutprogequipamento`.`CODIGO`, `manutprogequipamento`' +
         '.`CODEMPRESA`;')
@@ -31544,12 +31542,14 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 9
-        Value = Null
+        Value = 'FMC.0001'
       end
       item
         Name = 'codmanutprogfamequip'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = 'INS.4845'
       end>
     object qryManutProgEquipItensCODIGO: TIntegerField
       AutoGenerateValue = arDefault
@@ -31666,11 +31666,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = 'FMC.0001'
       end
       item
         Name = 'CODIGO'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = 'ADD.1471'
       end>
     object qryManutProgEquipItensEspCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -38946,7 +38950,7 @@ object DM: TDM
         #9'`equipamentos`.`CODIGO` = :codigo AND `equipamentospecasrep`.`c' +
         'odempresa` = :codempresa '
       'ORDER BY `equipamentos`.`DESCRICAO` ASC')
-    Left = 1401
+    Left = 1393
     Top = 480
     ParamData = <
       item
@@ -40387,22 +40391,22 @@ object DM: TDM
   end
   object dsPermissoesAcesso: TDataSource
     DataSet = qryPermissoesAcesso
-    Left = 1387
+    Left = 1452
     Top = 531
   end
   object dsPermissoesAlteracao: TDataSource
     DataSet = qryPermissoesAlteracao
-    Left = 1408
+    Left = 1484
     Top = 531
   end
   object dsPermissoesExclusao: TDataSource
     DataSet = qryPermissoesExclusao
-    Left = 1429
+    Left = 1517
     Top = 531
   end
   object dsPermissoesInclusao: TDataSource
     DataSet = qryPermissoesInclusao
-    Left = 1451
+    Left = 1549
     Top = 531
   end
   object dsPlanoTrabalho: TDataSource
@@ -43196,11 +43200,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = 'FMC.0001'
       end
       item
         Name = 'CODMANUTPROGFAMEQUIP'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = 'INS.4845'
       end>
     object qryManutProgEquipPlanoTrabCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'

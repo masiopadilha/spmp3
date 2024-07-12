@@ -8,7 +8,8 @@ uses
   Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.ComCtrls, JvExComCtrls, JvComCtrls,
   Data.DB, Datasnap.DBClient, Winapi.Commctrl, Vcl.Grids, Vcl.DBGrids, FireDAC.Comp.Client, FireDAC.Stan.Param,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet;
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  System.Generics.Collections;
 
 type
   TFrmTelaCadNavegacaoGrafica = class(TFrmTelaPaiOkCancel)
@@ -69,6 +70,8 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    function EncontrarNoPorDescricao(TreeView: TTreeView; Descricao: string): TTreeNode;
+    procedure PreencherTreeView;
   public
     { Public declarations }
   end;
@@ -83,6 +86,101 @@ implementation
 uses UnTelaConsulta, UnTelaConsultaPeriodo, UnTelaCadEquipamentos,
   UnDM;
 
+
+function TFrmTelaCadNavegacaoGrafica.EncontrarNoPorDescricao(TreeView: TTreeView; Descricao: string): TTreeNode;
+var
+  Node: TTreeNode;
+begin
+  Result := nil;
+  Node := TreeView.Items.GetFirstNode;
+  while Node <> nil do
+  begin
+    if Node.Text = Descricao then
+    begin
+      Result := Node;
+      Exit;
+    end;
+    Node := Node.GetNext;
+  end;
+end;
+
+procedure TFrmTelaCadNavegacaoGrafica.PreencherTreeView;
+var
+  SQL: String;
+  Equipamentos: TDictionary<String, TTreeNode>;
+  EquipamentoNode, PrimarioNode: TTreeNode;
+  IdEquipamento, IdPrimario: String;
+  Node: TTreeNode;
+  Descricao: string;
+begin
+  SQL := ' SELECT'
+     + '    e.`CODIGO` AS id_equipamento,'
+     + '    e.`DESCRICAO` AS descricao_equipamento'
+     + ' FROM'
+     + '    equipamentos e'
+     + ' WHERE'
+     + '    e.`OPERANDO` = ''S'''
+     + ' AND e.`SECUNDARIO` <> ''S''';
+
+  Equipamentos := TDictionary<String, TTreeNode>.Create;
+  try
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Text := SQL;
+    DM.qryAuxiliar.Open;
+
+    DM.qryAuxiliar.First;
+    while not DM.qryAuxiliar.Eof do
+    begin
+      IdEquipamento := DM.qryAuxiliar.FieldByName('id_equipamento').AsString;
+
+      // Adiciona o nó do equipamento primário
+      EquipamentoNode := TVArvore.Items.AddChild(nil, IdEquipamento + ' - ' +DM.qryAuxiliar.FieldByName('descricao_equipamento').AsString);
+
+      DM.qryAuxiliar.Next;
+    end;
+  finally
+    DM.qryAuxiliar.Close;
+    Equipamentos.Free;
+  end;
+
+
+  SQL := 'SELECT'
+    + '    e.`CODIGO` AS id_equipamento,'
+    + '    e.`DESCRICAO` AS descricao_equipamento,'
+    + '    e.`SECUNDARIO` AS equipamento_secundario,'
+    + '    e.`CODEQUIPAMENTOPAI` AS codprimario,'
+    + '    ep.`CODIGO` AS id_equipamento_primario,'
+    + '    ep.`DESCRICAO` AS descricao_equipamento_primario'
+    + ' FROM'
+    + '    equipamentos e'
+    + ' LEFT JOIN'
+    + '    equipamentos ep ON e.`CODEQUIPAMENTOPAI` = ep.`CODIGO`'
+    + ' WHERE'
+    + '    e.`OPERANDO` = ''S'' AND e.`SECUNDARIO` = ''S''';
+
+  Equipamentos := TDictionary<String, TTreeNode>.Create;
+  try
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Text := SQL;
+    DM.qryAuxiliar.Open;
+
+    DM.qryAuxiliar.First;
+    while not DM.qryAuxiliar.Eof do
+    begin
+      Node := EncontrarNoPorDescricao(TVArvore, DM.qryAuxiliar.FieldByName('id_equipamento_primario').AsString + ' - ' + DM.qryAuxiliar.FieldByName('descricao_equipamento_primario').AsString);
+      if Node <> nil then
+      begin
+        TVArvore.Selected := Node;
+        Node.Expand(True);
+        EquipamentoNode := TVArvore.Items.AddChild(Node, DM.qryAuxiliar.FieldByName('id_equipamento').AsString + ' - ' + DM.qryAuxiliar.FieldByName('descricao_equipamento').AsString);
+      end;
+      DM.qryAuxiliar.Next;
+    end;
+  finally
+    DM.qryAuxiliar.Close;
+    Equipamentos.Free;
+  end;
+end;
 
 procedure TFrmTelaCadNavegacaoGrafica.BtnConsultarClick(Sender: TObject);
 var
@@ -240,96 +338,101 @@ end;
 procedure TFrmTelaCadNavegacaoGrafica.BtnConsultar1Click(Sender: TObject);
 begin
   inherited;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `CODIGO`, `CODEMPRESA`, `CODLOCALIZACAO`, `CODCELULA`, `CODLINHA`, `SEQUENCIA`, `CODEQUIPAMENTOPAI`, `DESCRICAO`, `SECUNDARIO`, `OPERANDO` FROM `equipamentos` WHERE (`SECUNDARIO` = ''N'') ORDER BY `DESCRICAO` ASC');
-DM.qryAuxiliar.Open;
+  PreencherTreeView;
+  TVArvore.FullExpand;
+  TVArvore.TopItem := TVArvore.Items.Item[0];
+  LocalizaNoNivel(DM.qryEquipamentosCODIGO.AsString + ' - ' + DM.qryEquipamentosDESCRICAO.AsString);
 
-FDMemTPrim.Close; FDMemTPrim.CreateDataSet; FDMemTPrim.Open;
-FDMemTPrim.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
-
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`CODLOCALIZACAO`, `equipamentos`.`CODCELULA`, `equipamentos`.`CODLINHA`, `equipamentos`.`SEQUENCIA`, `equipamentos`.`CODEQUIPAMENTOPAI`'
-                        + ' , `equipamentos`.`DESCRICAO`, `equipamentos`.`SECUNDARIO`, `equipamentos`.`OPERANDO`, `equipamentos_1`.`DESCRICAO` AS `DESCEQUIPAMENTOPAI`, `equipamentos`.`CODEQUIPAMENTOPAI`'
-                        + ' FROM `equipamentos`'
-                        + ' INNER JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
-                        + ' WHERE (`equipamentos`.`OPERANDO` = ''S'' AND `equipamentos`.`SECUNDARIO` = ''S'') ORDER BY `equipamentos`.`DESCRICAO`, `equipamentos`.`SEQUENCIA` ASC;');
-
-DM.qryAuxiliar.Open;
-
-FDMemTSec.Close; FDMemTSec.CreateDataSet; FDMemTSec.Open;
-FDMemTSecPrim.Close; FDMemTSecPrim.CreateDataSet; FDMemTSecPrim.Open;
-FDMemTSec.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
-FDMemTSecPrim.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
-
-with TVArvore.Items.AddFirst(nil, DM.FNomeEmpresa) do
-  begin
-    MakeVisible;
-    Selected := True;
-    LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
-
-    FDMemTPrim.First;
-    while not FDMemTPrim.Eof do
-      begin
-        TVArvore.Items.AddChild(LNoUnidade, FDMemTPrim.FieldByName('CODIGO').AsString + ' | ' + FDMemTPrim.FieldByName('DESCRICAO').AsString);
-
-    //    if xUnidadeAnt <> FDMemTPrim.FieldByName('CODIGO').AsString then
-    //      begin
-    //        ItemUltimaUnidade := TVArvore.Items.AddChild(Nil, FDMemTPrim.FieldByName('CODIGO').AsString + ' - ' + FDMemTPrim.FieldByName('DESCRICAO').AsString);
-    //      end;
-    //
-    //    if xCursoAnt <> FDMemTPrim.FieldByName('CODEQUIPAMENTOPAI').AsString then
-    //      begin
-    //        ItemUltiimoCurso := TVArvore.Items.AddChild(ItemUltimaUnidade, FDMemTPrim.FieldByName('DESCRICAO').AsString);
-    //      end;
-    //
-    //    xUnidadeAnt := FDMemTPrim.FieldByName('CODIGO').AsString;
-    //    xCursoAnt := FDMemTPrim.FieldByName('CODEQUIPAMENTOPAI').AsString;
-
-        FDMemTPrim.Next;
-      end;
-
-
-    FDMemTSec.First;
-    while not FDMemTSec.Eof do
-      begin
-        if LocalizaNoNivel(FDMemTSec.FieldByName('CODEQUIPAMENTOPAI').AsString + ' | ' + FDMemTSec.FieldByName('DESCEQUIPAMENTOPAI').AsString) = True then
-          begin
-            LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
-            TVArvore.Items.AddChild(LNoUnidade, FDMemTSec.FieldByName('CODIGO').AsString + ' | ' + FDMemTSec.FieldByName('DESCRICAO').AsString);
-
-            FDMemTSec.Delete;
-            FDMemTSec.First;
-          end;
-
-        if (FDMemTSec.RecordCount = 1) then
-          begin
-            if LocalizaNoNivel(FDMemTSec.FieldByName('CODEQUIPAMENTOPAI').AsString + ' | ' + FDMemTSec.FieldByName('DESCEQUIPAMENTOPAI').AsString) = True then
-              begin
-                LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
-                TVArvore.Items.AddChild(LNoUnidade, FDMemTSec.FieldByName('CODIGO').AsString + ' | ' + FDMemTSec.FieldByName('DESCRICAO').AsString);
-
-                FDMemTSec.Delete;
-              end;
-          end
-        else
-          FDMemTSec.Next;
-      end;
-  end;
-
-TVArvore.FullExpand;
-TVArvore.TopItem := TVArvore.Items.Item[0];
-
-if DM.qryEquipamentosCODIGO.AsString <> '' then
-  begin
-    LocalizaNoNivel(DM.qryEquipamentosCODIGO.AsString + ' | ' + DM.qryEquipamentosDESCRICAO.AsString)
-  end;
-
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
+//DM.qryAuxiliar.Close;
+//DM.qryAuxiliar.SQL.Clear;
+//DM.qryAuxiliar.SQL.Add('SELECT `CODIGO`, `CODEMPRESA`, `CODLOCALIZACAO`, `CODCELULA`, `CODLINHA`, `SEQUENCIA`, `CODEQUIPAMENTOPAI`, `DESCRICAO`, `SECUNDARIO`, `OPERANDO` FROM `equipamentos` WHERE (`SECUNDARIO` = ''N'') ORDER BY `DESCRICAO` ASC');
+//DM.qryAuxiliar.Open;
+//
+//FDMemTPrim.Close; FDMemTPrim.CreateDataSet; FDMemTPrim.Open;
+//FDMemTPrim.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
+//
+//DM.qryAuxiliar.Close;
+//DM.qryAuxiliar.SQL.Clear;
+//
+//DM.qryAuxiliar.Close;
+//DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`CODLOCALIZACAO`, `equipamentos`.`CODCELULA`, `equipamentos`.`CODLINHA`, `equipamentos`.`SEQUENCIA`, `equipamentos`.`CODEQUIPAMENTOPAI`'
+//                        + ' , `equipamentos`.`DESCRICAO`, `equipamentos`.`SECUNDARIO`, `equipamentos`.`OPERANDO`, `equipamentos_1`.`DESCRICAO` AS `DESCEQUIPAMENTOPAI`, `equipamentos`.`CODEQUIPAMENTOPAI`'
+//                        + ' FROM `equipamentos`'
+//                        + ' INNER JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+//                        + ' WHERE (`equipamentos`.`OPERANDO` = ''S'' AND `equipamentos`.`SECUNDARIO` = ''S'') ORDER BY `equipamentos`.`DESCRICAO`, `equipamentos`.`SEQUENCIA` ASC;');
+//
+//DM.qryAuxiliar.Open;
+//
+//FDMemTSec.Close; FDMemTSec.CreateDataSet; FDMemTSec.Open;
+//FDMemTSecPrim.Close; FDMemTSecPrim.CreateDataSet; FDMemTSecPrim.Open;
+//FDMemTSec.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
+//FDMemTSecPrim.CopyDataSet(DM.qryAuxiliar, [coRestart, coAppend]);
+//
+//with TVArvore.Items.AddFirst(nil, DM.FNomeEmpresa) do
+//  begin
+//    MakeVisible;
+//    Selected := True;
+//    LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
+//
+//    FDMemTPrim.First;
+//    while not FDMemTPrim.Eof do
+//      begin
+//        TVArvore.Items.AddChild(LNoUnidade, FDMemTPrim.FieldByName('CODIGO').AsString + ' | ' + FDMemTPrim.FieldByName('DESCRICAO').AsString);
+//
+//    //    if xUnidadeAnt <> FDMemTPrim.FieldByName('CODIGO').AsString then
+//    //      begin
+//    //        ItemUltimaUnidade := TVArvore.Items.AddChild(Nil, FDMemTPrim.FieldByName('CODIGO').AsString + ' - ' + FDMemTPrim.FieldByName('DESCRICAO').AsString);
+//    //      end;
+//    //
+//    //    if xCursoAnt <> FDMemTPrim.FieldByName('CODEQUIPAMENTOPAI').AsString then
+//    //      begin
+//    //        ItemUltiimoCurso := TVArvore.Items.AddChild(ItemUltimaUnidade, FDMemTPrim.FieldByName('DESCRICAO').AsString);
+//    //      end;
+//    //
+//    //    xUnidadeAnt := FDMemTPrim.FieldByName('CODIGO').AsString;
+//    //    xCursoAnt := FDMemTPrim.FieldByName('CODEQUIPAMENTOPAI').AsString;
+//
+//        FDMemTPrim.Next;
+//      end;
+//
+//
+//    FDMemTSec.First;
+//    while not FDMemTSec.Eof do
+//      begin
+//        if LocalizaNoNivel(FDMemTSec.FieldByName('CODEQUIPAMENTOPAI').AsString + ' | ' + FDMemTSec.FieldByName('DESCEQUIPAMENTOPAI').AsString) = True then
+//          begin
+//            LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
+//            TVArvore.Items.AddChild(LNoUnidade, FDMemTSec.FieldByName('CODIGO').AsString + ' | ' + FDMemTSec.FieldByName('DESCRICAO').AsString);
+//
+//            FDMemTSec.Delete;
+//            FDMemTSec.First;
+//          end;
+//
+//        if (FDMemTSec.RecordCount = 1) then
+//          begin
+//            if LocalizaNoNivel(FDMemTSec.FieldByName('CODEQUIPAMENTOPAI').AsString + ' | ' + FDMemTSec.FieldByName('DESCEQUIPAMENTOPAI').AsString) = True then
+//              begin
+//                LNoUnidade := TVArvore.Items.GetNode(HTreeItem(TVArvore.Selected.ItemId));
+//                TVArvore.Items.AddChild(LNoUnidade, FDMemTSec.FieldByName('CODIGO').AsString + ' | ' + FDMemTSec.FieldByName('DESCRICAO').AsString);
+//
+//                FDMemTSec.Delete;
+//              end;
+//          end
+//        else
+//          FDMemTSec.Next;
+//      end;
+//  end;
+//
+//TVArvore.FullExpand;
+//TVArvore.TopItem := TVArvore.Items.Item[0];
+//
+//if DM.qryEquipamentosCODIGO.AsString <> '' then
+//  begin
+//    LocalizaNoNivel(DM.qryEquipamentosCODIGO.AsString + ' | ' + DM.qryEquipamentosDESCRICAO.AsString)
+//  end;
+//
+//DM.qryAuxiliar.Close;
+//DM.qryAuxiliar.SQL.Clear;
 end;
 
 procedure TFrmTelaCadNavegacaoGrafica.CBTipoChange(Sender: TObject);

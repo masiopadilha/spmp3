@@ -35,9 +35,9 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 969
+      Left = 971
       TabOrder = 4
-      ExplicitLeft = 965
+      ExplicitLeft = 967
     end
     object BtnImprimir: TButton
       Left = 938
@@ -396,16 +396,12 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 100
-      Top = 7
       Visible = False
       ExplicitLeft = 100
-      ExplicitTop = 7
     end
     inherited BtnFechar: TButton
       Left = 465
-      Top = 7
       ExplicitLeft = 465
-      ExplicitTop = 7
     end
   end
   object PopupMenuRelat: TPopupMenu
@@ -413,11 +409,25 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     Top = 18
     object Manutencoes1: TMenuItem
       Caption = 'Manuten'#231#245'es'
-      OnClick = Manutencoes1Click
+      object Individual1: TMenuItem
+        Caption = 'Individual'
+        OnClick = Individual1Click
+      end
+      object Completo1: TMenuItem
+        Caption = 'Completo'
+        OnClick = Completo1Click
+      end
     end
     object Lubrificacoes1: TMenuItem
       Caption = 'Lubrifica'#231#245'es'
-      OnClick = Lubrificacoes1Click
+      object Individual2: TMenuItem
+        Caption = 'Individual'
+        OnClick = Individual2Click
+      end
+      object Completo2: TMenuItem
+        Caption = 'Completo'
+        OnClick = Completo2Click
+      end
     end
   end
 end

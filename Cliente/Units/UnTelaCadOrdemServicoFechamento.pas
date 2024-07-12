@@ -75,6 +75,9 @@ type
     Label30: TLabel;
     EdtResponsavel: TDBEdit;
     BtnResponsavel: TButton;
+    Label31: TLabel;
+    Label32: TLabel;
+    lblEmail: TDBText;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -425,7 +428,7 @@ var
   LSalario, LHOficiais, LHomemHora, LHENormal, LHEFeriado, LPercHENormal, LPercHEFeriado, LCusto, LTotalHH : Real;
   LEmail: String;
 begin
-if (DM.qryUsuarioPInclusao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPInclusao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
     PAuxiliares.Font.Color := clRed;
@@ -434,7 +437,7 @@ if (DM.qryUsuarioPInclusao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S')
     Exit;
   end;
 
-if (DM.qryUsuarioPAlteracao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPAlteracao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
     PAuxiliares.Font.Color := clRed;
@@ -443,41 +446,74 @@ if (DM.qryUsuarioPAlteracao.FieldByName('CADORDEMSERVICOFECHAR').AsString <> 'S'
     Exit;
   end;
 
-DM.qryOrdemServico.Edit;
-DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := edtDataInicioReal.DateTime;
-DM.qryOrdemServicoDATAFIMREAL.AsDateTime := edtDataFimReal.DateTime;
+  DM.qryOrdemServico.Edit;
+  DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := edtDataInicioReal.DateTime;
+  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := edtDataFimReal.DateTime;
 
-if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
+  if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O INÍCIO DA O.S.!'; EdtDataInicioReal.SetFocus; Exit;
   end;
-if DM.qryOrdemServicoDATAFIMREAL.IsNull = True then
+  if DM.qryOrdemServicoDATAFIMREAL.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O FIM DA O.S.!'; EdtDataFimReal.SetFocus; Exit;
   end;
-if (DateOf(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime) > DateOf(DM.FDataHoraServidor))
-  or (DM.qryOrdemServicoDATAINICIOREAL.AsDateTime >= DM.qryOrdemServicoDATAFIMREAL.AsDateTime) then
+  if (DateOf(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime) > DateOf(DM.FDataHoraServidor))
+    or (DM.qryOrdemServicoDATAINICIOREAL.AsDateTime >= DM.qryOrdemServicoDATAFIMREAL.AsDateTime) then
     begin
       PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'DATA INVÁLIDA!'; EdtDataInicioReal.SetFocus; Exit;
     end;
-if (DM.qryOrdemServicoDATAFIMREAL.AsDateTime <= DM.qryOrdemServicoDATAINICIOREAL.AsDateTime)
-  or (DateOf(DM.qryOrdemServicoDATAFIMREAL.AsDateTime) > DateOf(DM.FDataHoraServidor)) then
+  if (DM.qryOrdemServicoDATAFIMREAL.AsDateTime <= DM.qryOrdemServicoDATAINICIOREAL.AsDateTime)
+    or (DateOf(DM.qryOrdemServicoDATAFIMREAL.AsDateTime) > DateOf(DM.FDataHoraServidor)) then
     begin
       PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'DATA INVÁLIDA!'; EdtDataFimReal.SetFocus; Exit;
     end;
-if (DM.qryOrdemServicoDATAFIMREAL.AsDateTime > DM.FDataHoraServidor) then
-    begin
-      PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'DATA INVÁLIDA!'; EdtDataFimReal.SetFocus; Exit;
-    end;
-
-DM.MSGAguarde('');
-
-DM.qryOrdemServicoServExec.Edit;
-DM.qryOrdemServicoServExec.Post;
-
-//Localiza e atualiza o status da Solic. de Trab
-if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
+  if (DM.qryOrdemServicoDATAFIMREAL.AsDateTime > DM.FDataHoraServidor) then
   begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'DATA INVÁLIDA!'; EdtDataFimReal.SetFocus; Exit;
+  end;
+
+
+  if DM.qryOrdemServicoMATRICULA.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DA O.S.!'; EdtSolicitado.SetFocus; Exit;
+  end;
+
+  if DM.qryOrdemServicoNOMERESPONSAVEL.IsNull = True then
+  begin
+    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O RESPONSÁVEL DA O.S.!'; EdtResponsavel.SetFocus; Exit;
+  end;
+
+  DM.MSGAguarde('');
+
+  DM.qryOrdemServicoServExec.Edit;
+  DM.qryOrdemServicoServExec.Post;
+
+  //Localiza e atualiza o status da Solic. de Trab
+  if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
+  begin
+    if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA' then
+    begin
+      if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
+      begin
+        if Application.MessageBox('Deseja informar um endereço de e-mail para informar a conclusão da solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+        begin
+          LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
+          if LEmail <> '' then
+            if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+              LEmail := '';
+        end;
+      end else
+      begin
+        LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
+        if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+          LEmail := '';
+      end;
+
+      if LEmail <> '' then
+        DM.EnviarEmail('SOLICITAÇÃO CONCLUÍDA', LEmail, Format('%.*d', [6, DM.qryOrdemServicoCODIGO.AsInteger]));
+    end;
+
     DM.qrySolicitacaoTrab.Close;
     DM.qrySolicitacaoTrab.Params[0].AsString := DM.qryOrdemServicoCODSOLICITACAOTRAB.AsString;
     DM.qrySolicitacaoTrab.Params[1].AsString := DM.FCodEmpresa;
@@ -488,25 +524,6 @@ if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
         DM.qrySolicitacaoTrabSITUACAO.AsString := 'FECHADA';
         DM.qrySolicitacaoTrab.Post;
       end;
-
-    if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
-    begin
-      if Application.MessageBox('Deseja informar um endereço de e-mail para informar a conclusão da solicitação?', 'SPMP3', MB_YESNO) = IDYes then
-      begin
-        LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
-        if LEmail <> '' then
-          if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-            LEmail := '';
-      end;
-    end else
-    begin
-      LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
-      if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-        LEmail := '';
-    end;
-
-    if LEmail <> '' then
-      DM.EnviarEmail('SOLICITAÇÃO CONCLUÍDA', LEmail, Format('%.*d', [6, DM.qryOrdemServicoCODIGO.AsInteger]));
   end;
 
 //Cálculo dos custos da O.S.

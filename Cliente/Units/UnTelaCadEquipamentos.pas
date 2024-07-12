@@ -830,6 +830,7 @@ DM.qryEquipamentosRESERVA.AsString         := 'N';
 DM.qryEquipamentosSECUNDARIO.AsString      := 'N';
 DM.qryEquipamentosCALCULARCONF.AsString    := 'N';
 DM.qryEquipamentosCALCULADACONF.AsString   := 'N';
+DM.qryEquipamentosCALCINDIC.AsString       := 'N';
 
 EdtCodEquip.ReadOnly := False;
 EdtCodEquip.SetFocus;

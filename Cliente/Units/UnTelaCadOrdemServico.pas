@@ -57,7 +57,6 @@ type
     Label21: TLabel;
     Label22: TLabel;
     Label23: TLabel;
-    Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
     Label27: TLabel;
@@ -73,7 +72,6 @@ type
     BtnResponsavel: TButton;
     Label28: TLabel;
     DBGrid: TJvDBGrid;
-    Label30: TLabel;
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSalvarClick(Sender: TObject);
@@ -658,10 +656,10 @@ if DM.qryOrdemServicoCODCENTROCUSTO.IsNull = True then
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CENTRO DE CUSTO DA O.S.!'; EdtCentroCusto.SetFocus;
     Exit;
   end;
-if DM.qryOrdemServicoMATRICULA.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DA O.S.!'; EdtSolicitado.SetFocus; Exit;
-  end;
+//if DM.qryOrdemServicoMATRICULA.IsNull = True then
+//  begin
+//    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O SOLICITANTE DA O.S.!'; EdtSolicitado.SetFocus; Exit;
+//  end;
 if DM.qryOrdemServicoPRIORIDADEPARADA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME A PRIORIDADE DA O.S.!'; CBPrioridade.SetFocus; Exit;
@@ -674,10 +672,10 @@ if (DM.qryOrdemServicoTEMPOPREVISTO.AsFloat <= 0) and (DM.qryOrdemServicoCODOFIC
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O TEMPO PREVISTO DA O.S.!'; EdtTempoPrev.SetFocus; Exit;
   end;
-if DM.qryOrdemServicoNOMERESPONSAVEL.IsNull = True then
-  begin
-    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O RESPONSÁVEL DA O.S.!'; EdtResponsavel.SetFocus; Exit;
-  end;
+//if DM.qryOrdemServicoNOMERESPONSAVEL.IsNull = True then
+//  begin
+//    PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O RESPONSÁVEL DA O.S.!'; EdtResponsavel.SetFocus; Exit;
+//  end;
 
 if DM.qryOrdemServicoSOLICTRAB.IsNull then DM.qryOrdemServicoSOLICTRAB.AsString := 'N';
 

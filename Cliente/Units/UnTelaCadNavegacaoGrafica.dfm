@@ -16,7 +16,7 @@ inherited FrmTelaCadNavegacaoGrafica: TFrmTelaCadNavegacaoGrafica
     ExplicitWidth = 660
     inherited BtnAjuda: TButton
       Left = 627
-      ExplicitLeft = 627
+      ExplicitLeft = 623
     end
   end
   inherited PCentro: TPanel
