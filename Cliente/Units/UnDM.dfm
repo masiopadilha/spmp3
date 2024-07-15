@@ -55131,6 +55131,7 @@ object DM: TDM
         'L `manutprogequipamentohist`.`FREQUENCIA1` DAY) AS PROXINSP'
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
+      '    , `ordemservico`.`DATAFECHAMENTO`'
       '    , `ordemservico`.`SITUACAO`'
       '    ,  funcionarios_1.`NOME` SOLICITANTE'
       '    ,  funcionarios_2.`NOME` RESPONSAVEL'
@@ -55376,6 +55377,13 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistManutDATAFECHAMENTO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFECHAMENTO'
+      Origin = 'DATAFECHAMENTO'
+      ProviderFlags = []
+      ReadOnly = True
     end
     object qryChecklistManutSITUACAO: TStringField
       AutoGenerateValue = arDefault
@@ -56011,6 +56019,7 @@ object DM: TDM
         'P'
       '    , `ordemservico`.`DATAINICIOREAL`'
       '    , `ordemservico`.`DATAFIMREAL`'
+      '    , `ordemservico`.`DATAFECHAMENTO`'
       '    , `ordemservico`.`SITUACAO`'
       '    ,  funcionarios_1.`NOME` SOLICITANTE'
       '    ,  funcionarios_2.`NOME` RESPONSAVEL'
@@ -56255,6 +56264,13 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       DisplayFormat = 'dd/mm/yyyy hh:mm'
+    end
+    object qryChecklistLubrificDATAFECHAMENTO: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFECHAMENTO'
+      Origin = 'DATAFECHAMENTO'
+      ProviderFlags = []
+      ReadOnly = True
     end
     object qryChecklistLubrificSITUACAO: TStringField
       AutoGenerateValue = arDefault

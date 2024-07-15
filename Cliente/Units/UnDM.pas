@@ -5966,6 +5966,8 @@ type
     qryChecklistLubrificMObraHEFERIADO: TIntegerField;
     qryChecklistLubrificMObraOCUPADO: TStringField;
     qryChecklistLubrificMObraSALARIO: TBCDField;
+    qryChecklistManutDATAFECHAMENTO: TDateTimeField;
+    qryChecklistLubrificDATAFECHAMENTO: TDateTimeField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);

@@ -3,7 +3,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 712
+  ClientHeight = 717
   ClientWidth = 1012
   Color = 14671839
   TransparentColorValue = 4276545
@@ -11589,13 +11589,13 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   OnShow = FormShow
   DesignSize = (
     1012
-    712)
+    717)
   TextHeight = 16
   object imgBackground: TImage
     Left = 0
     Top = 0
     Width = 1012
-    Height = 677
+    Height = 682
     Align = alClient
     Center = True
     Picture.Data = {
@@ -32002,11 +32002,12 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       0049454E44AE426082}
     Stretch = True
     ExplicitTop = 17
+    ExplicitHeight = 677
   end
   object lblLicenca: TLabel
     AlignWithMargins = True
     Left = 1004
-    Top = 657
+    Top = 662
     Width = 3
     Height = 15
     Margins.Bottom = 50
@@ -32025,7 +32026,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Left = 0
     Top = 0
     Width = 1012
-    Height = 677
+    Height = 682
     Align = alClient
     Center = True
     ImageCollection = ImageCollection1
@@ -32034,6 +32035,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ImageIndex = 0
     ImageName = 'SPMP Background Max'
     ExplicitWidth = 1185
+    ExplicitHeight = 677
   end
   object ShapeEficiencia: TJvShape
     Left = 13
@@ -33214,7 +33216,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 693
+    Top = 698
     Width = 1012
     Height = 19
     Color = 14671839
@@ -33692,7 +33694,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 677
+    Top = 682
     Width = 1012
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
@@ -33743,7 +33745,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   object ChartSolicTrabalho: TChart
     AlignWithMargins = True
     Left = 13
-    Top = 446
+    Top = 451
     Width = 569
     Height = 222
     Margins.Left = 2
