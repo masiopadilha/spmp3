@@ -344,6 +344,11 @@ begin
         DM.qryAcessoPERIODO.AsInteger      := 0;
         DM.qryAcesso.Post;
 
+        if (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador de Unidade') and (DM.qryUsuarioNIVELACESSO.AsString <> 'Controlador de Manutenção')  and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+          DM.FMinutosInativo := DM.qryConfigstempomaxociosoB.AsInteger
+        else
+          DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
+
         if (DM.FNivelAcesso <> 'Administrador Corporativo') and (DM.FNivelAcesso <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
         begin
           DMAlertas.GerencOrdemServico.Enabled := False;

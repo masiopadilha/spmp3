@@ -412,11 +412,14 @@ begin
       begin
         if DM.qryManutConsCODIGO.AsString = '' then Exit;
 
-//        for I := 0 to GrdManut.SelectedRows.Count - 1 do
-//          begin
-//            DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
-//            LInsp := LInsp + IntToStr(DM.qryManutCons.RecNo) + 'º - ' + DM.qryManutCons.FieldByName('DESCRICAO').AsString + #13;
-//          end;
+        if GrdManut.SelectedRows.Count = 0 then
+          GrdManut.SelectedRows.CurrentRowSelected := True;
+
+        for I := 0 to GrdManut.SelectedRows.Count - 1 do
+          begin
+            DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
+            LInsp := LInsp + IntToStr(DM.qryManutCons.RecNo) + 'º - ' + DM.qryManutCons.FieldByName('DESCRICAO').AsString + #13;
+          end;
 
         LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?');
         if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
@@ -427,17 +430,13 @@ begin
             if DM.qryManutConsItensEsp.Active = False then DM.qryManutConsItensEsp.Open;
             if DM.qryManutConsPlanoTrab.Active = False then DM.qryManutConsPlanoTrab.Open;
 
-            FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
-            FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
-            FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
-            FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
-
             if GrdManut.SelectedRows.Count = 0 then
               GrdManut.SelectedRows.CurrentRowSelected := True;
 
             for I := 0 to GrdManut.SelectedRows.Count - 1 do
               begin
-//                DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
+                DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
+                GrdManut.SelectedRows.CurrentRowSelected := True;
 
                 if (DM.qryManutConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryManutConsRELATORIO.AsString = 'S') then
                   begin
@@ -687,6 +686,11 @@ begin
                 end;
 
                 //Carrega FdMemTable para o relatório
+                FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
+                FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
+                FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
+                FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
+
                 FDMemTManut.Append;
                 FDMemTManutCODIGO.AsString               := DM.qryManutConsCODIGO.AsString;
                 FDMemTManutDESCRICAO.AsString            := DM.qryManutConsDESCRICAO.AsString;
@@ -778,11 +782,18 @@ begin
                     DM.qryManutConsPlanoTrab.Next;
                   end;
 
+                DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
+                DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
+                DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
+                DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
+
+                DmRelatorios.frxRInspConsManut.ShowReport();
+
                 //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
                 if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryManutConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
+                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
                       DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
                     else
                       DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutConsDTAINICIO1.AsDateTime), DM.qryManutConsFREQUENCIA1.AsInteger);
@@ -800,13 +811,6 @@ begin
                   end;
                 DM.qryManutCons.FreeBookMark(bmQuery);
               end;
-
-            DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
-            DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
-            DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
-            DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
-
-            DmRelatorios.frxRInspConsManut.ShowReport();
 
             DM.qryManutCons.Post;
 
@@ -834,11 +838,14 @@ begin
       begin
         if DM.qryLubrificConsCODIGO.AsString = '' then Exit;
 
-  //      for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
-  //        begin
-  //          DM.qryLubrificCons.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
-  //          LInsp := LInsp + IntToStr(DM.qryLubrificCons.RecNo) + 'º - ' + DM.qryLubrificCons.FieldByName('DESCRICAO').AsString + #13;
-  //        end;
+        if GrdLubrific.SelectedRows.Count = 0 then
+          GrdLubrific.SelectedRows.CurrentRowSelected := True;
+
+        for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
+          begin
+            DM.qryLubrificCons.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
+            LInsp := LInsp + IntToStr(DM.qryLubrificCons.RecNo) + 'º - ' + DM.qryLubrificCons.FieldByName('DESCRICAO').AsString + #13;
+          end;
 
         LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?');
         if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
@@ -849,17 +856,10 @@ begin
             if DM.qryLubrificConsItensEsp.Active = False then DM.qryLubrificConsItensEsp.Open;
             if DM.qryLubrificConsPlanoTrab.Active = False then DM.qryLubrificConsPlanoTrab.Open;
 
-            FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
-            FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
-            FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
-            FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
-
-            if GrdLubrific.SelectedRows.Count = 0 then
-              GrdLubrific.SelectedRows.CurrentRowSelected := True;
-
             for I := 0 to GrdLubrific.SelectedRows.Count - 1 do
               begin
-//                GrdLubrific.DataSource.DataSet.GotoBookmark(GrdLubrific.SelectedRows.Items[i]);
+                DM.qryLubrificCons.GotoBookmark(GrdLubrific.SelectedRows.Items[I]);
+                GrdLubrific.SelectedRows.CurrentRowSelected := True;
 
                 if (DM.qryLubrificConsREPROGRAMAR1.AsString = 'Execução') and (DM.qryLubrificConsRELATORIO.AsString = 'S') then
                   begin
@@ -1108,6 +1108,11 @@ begin
                 end;
 
                 //Carrega FdMemTable para o relat�rio
+                FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
+                FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
+                FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
+                FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
+
                 FDMemTLubrific.Append;
                 FDMemTLubrificCODIGO.AsString               := DM.qryLubrificConsCODIGO.AsString;
                 FDMemTLubrificDESCRICAO.AsString            := DM.qryLubrificConsDESCRICAO.AsString;
@@ -1199,11 +1204,18 @@ begin
                     DM.qryLubrificConsPlanoTrab.Next;
                   end;
 
+                DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
+                DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
+                DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
+                DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
+
+                DmRelatorios.frxRInspConsLubrific.ShowReport();
+
                 //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou n�o.
                 if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryLubrificConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
+                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
                       DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
                     else
                       DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime), DM.qryLubrificConsFREQUENCIA1.AsInteger);
@@ -1222,13 +1234,6 @@ begin
 
                 DM.qryLubrificCons.FreeBookMark(bmQuery);
               end;
-
-            DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
-            DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
-            DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
-            DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
-
-            DmRelatorios.frxRInspConsLubrific.ShowReport();
 
             DM.qryLubrificCons.Post;
 
@@ -1256,6 +1261,9 @@ begin
       begin
         if DM.qryRotaConsCODIGO.AsString = '' then Exit;
 
+        if GrdRota.SelectedRows.Count = 0 then
+          GrdRota.SelectedRows.CurrentRowSelected := True;
+
         for I := 0 to GrdRota.SelectedRows.Count - 1 do
           begin
             DM.qryRotaCons.GotoBookmark(GrdRota.SelectedRows.Items[I]);
@@ -1274,20 +1282,13 @@ begin
             FDMemTRotaSeqManutItens.Close; FDMemTRotaSeqManutItens.CreateDataSet; FDMemTRotaSeqManutItens.Open;
             FDMemTRotaSeqManutItensEsp.Close; FDMemTRotaSeqManutItensEsp.CreateDataSet; FDMemTRotaSeqManutItensEsp.Open;
 
-            if DM.qryRotaConsSeq.Active = False then DM.qryRotaConsSeq.Open;
-            if DM.qryRotaConsSeqManut.Active = False then DM.qryRotaConsSeqManut.Open;
-            if DM.qryRotaConsSeqManutItens.Active = False then DM.qryRotaConsSeqManutItens.Open;
-            if DM.qryRotaConsSeqManutItensEsp.Active = False then DM.qryRotaConsSeqManutItensEsp.Open;
-            if DM.qryRotaConsSeqManutPecas.Active = False then DM.qryRotaConsSeqManutPecas.Open;
-            if DM.qryRotaConsSeqManutRecursos.Active = False then DM.qryRotaConsSeqManutRecursos.Open;
-
             if GrdRota.SelectedRows.Count = 0 then
               GrdRota.SelectedRows.CurrentRowSelected := True;
 
             for I := 0 to GrdRota.SelectedRows.Count - 1 do
               begin
-    //            bmQuery := GrdRota.SelectedRows.Items[I];
-    //            DM.qryRotaCons.GotoBookmark(bmQuery);
+                DM.qryRotaCons.GotoBookmark(GrdRota.SelectedRows.Items[I]);
+                GrdRota.SelectedRows.CurrentRowSelected := True;
 
                 if (DM.qryRotaConsREPROGRAMAR.AsString = 'Execução') and (DM.qryRotaConsRELATORIO.AsString = 'S') then
                   begin
@@ -1356,6 +1357,13 @@ begin
                 end;
 
                 //Carrega FdMemTable para o relatório
+                if DM.qryRotaConsSeq.Active = False then DM.qryRotaConsSeq.Open;
+                if DM.qryRotaConsSeqManut.Active = False then DM.qryRotaConsSeqManut.Open;
+                if DM.qryRotaConsSeqManutItens.Active = False then DM.qryRotaConsSeqManutItens.Open;
+                if DM.qryRotaConsSeqManutItensEsp.Active = False then DM.qryRotaConsSeqManutItensEsp.Open;
+                if DM.qryRotaConsSeqManutPecas.Active = False then DM.qryRotaConsSeqManutPecas.Open;
+                if DM.qryRotaConsSeqManutRecursos.Active = False then DM.qryRotaConsSeqManutRecursos.Open;
+
                 FDMemTRota.Append;
                 FDMemTRotaCODIGO.AsString             := DM.qryRotaConsCODIGO.AsString;
                 FDMemTRotaDESCRICAO.AsString          := DM.qryRotaConsDESCRICAO.AsString;
@@ -1458,7 +1466,7 @@ begin
                  begin
                    DM.qryRotaCons.Edit;
                    DM.qryRotaConsRELATORIO.AsString  := 'N';
-                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
+                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
                      DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
                    else
                      DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaConsDATAINICIO.AsDateTime), DM.qryRotaConsFREQUENCIA.AsInteger);
@@ -1481,6 +1489,14 @@ begin
                      DM.qryRotaConsSeq.Next;
                    end;
                  end;
+
+                DmRelatorios.frxDBInspConsRotas.DataSet := FDMemTRota;
+                DmRelatorios.frxDBInspConsRotasSeq.DataSet := FDMemTRotaSeq;
+                DmRelatorios.frxDBInspConsRotasSeqManut.DataSet := FDMemTRotaSeqManut;
+                DmRelatorios.frxDBInspConsRotasSeqManutItens.DataSet := FDMemTRotaSeqManutItens;
+                DmRelatorios.frxDBInspConsRotasSeqManutItensEsp.DataSet := FDMemTRotaSeqManutItensEsp;
+
+                DmRelatorios.frxRInspConsRotas.ShowReport();
 
                //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
                //a geração de outra manutenção mesmo que o per�odo vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
@@ -1509,14 +1525,6 @@ begin
 
                 DM.qryRotaCons.FreeBookMark(bmQuery);
               end;
-
-            DmRelatorios.frxDBInspConsRotas.DataSet := FDMemTRota;
-            DmRelatorios.frxDBInspConsRotasSeq.DataSet := FDMemTRotaSeq;
-            DmRelatorios.frxDBInspConsRotasSeqManut.DataSet := FDMemTRotaSeqManut;
-            DmRelatorios.frxDBInspConsRotasSeqManutItens.DataSet := FDMemTRotaSeqManutItens;
-            DmRelatorios.frxDBInspConsRotasSeqManutItensEsp.DataSet := FDMemTRotaSeqManutItensEsp;
-
-            DmRelatorios.frxRInspConsRotas.ShowReport();
 
             DM.qryRotaCons.Refresh;
 

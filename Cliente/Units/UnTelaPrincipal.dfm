@@ -3,7 +3,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   Left = 0
   Top = 0
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 717
+  ClientHeight = 722
   ClientWidth = 1012
   Color = 14671839
   TransparentColorValue = 4276545
@@ -11589,13 +11589,13 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   OnShow = FormShow
   DesignSize = (
     1012
-    717)
+    722)
   TextHeight = 16
   object imgBackground: TImage
     Left = 0
     Top = 0
     Width = 1012
-    Height = 682
+    Height = 687
     Align = alClient
     Center = True
     Picture.Data = {
@@ -32007,7 +32007,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   object lblLicenca: TLabel
     AlignWithMargins = True
     Left = 1004
-    Top = 662
+    Top = 667
     Width = 3
     Height = 15
     Margins.Bottom = 50
@@ -32026,7 +32026,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Left = 0
     Top = 0
     Width = 1012
-    Height = 682
+    Height = 687
     Align = alClient
     Center = True
     ImageCollection = ImageCollection1
@@ -32069,7 +32069,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Alignment = taRightJustify
     Caption = '0%'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clWhite
+    Font.Color = clSilver
     Font.Height = -35
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -32103,7 +32103,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     StyleElements = [seClient, seBorder]
   end
   object lblDisponibilidadeVal: TLabel
-    Left = 775
+    Left = 764
     Top = 224
     Width = 41
     Height = 34
@@ -32111,7 +32111,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Anchors = [akTop, akRight]
     Caption = '0%'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clWhite
+    Font.Color = clSilver
     Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -32745,7 +32745,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Anchors = [akTop, akRight]
     Caption = '00:00'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clWhite
+    Font.Color = clSilver
     Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -32776,7 +32776,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Anchors = [akTop, akRight]
     Caption = '00:00'
     Font.Charset = ANSI_CHARSET
-    Font.Color = clWhite
+    Font.Color = clSilver
     Font.Height = -29
     Font.Name = 'Arial'
     Font.Style = [fsBold]
@@ -33214,9 +33214,19 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     OnClick = btnFiltraManutencaoClick
   end
+  object JvGradientProgressBar1: TJvGradientProgressBar
+    Left = 386
+    Top = 407
+    Width = 386
+    Height = 20
+    BarColorFrom = 15329769
+    BarColorTo = clTeal
+    Max = 9
+    ParentColor = True
+  end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 698
+    Top = 703
     Width = 1012
     Height = 19
     Color = 14671839
@@ -33239,7 +33249,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       item
         Width = 15
       end>
-    ExplicitTop = 690
+    ExplicitTop = 700
     ExplicitWidth = 1008
   end
   object ChartOSOficina: TChart
@@ -33325,7 +33335,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 7241535
-    TabOrder = 7
+    TabOrder = 6
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33456,7 +33466,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 7241535
-    TabOrder = 3
+    TabOrder = 2
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33591,7 +33601,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 7241535
-    TabOrder = 4
+    TabOrder = 3
     Anchors = [akTop, akRight]
     ExplicitLeft = 319
     DefaultCanvas = 'TGDIPlusCanvas'
@@ -33694,7 +33704,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 682
+    Top = 687
     Width = 1012
     Height = 16
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
@@ -33712,7 +33722,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     TabOrder = 0
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 674
+    ExplicitTop = 684
     ExplicitWidth = 1008
     object LblTempoDesliga: TLabel
       AlignWithMargins = True
@@ -33734,18 +33744,10 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       ExplicitHeight = 13
     end
   end
-  object ProgressBar1: TProgressBar
-    Left = 371
-    Top = 414
-    Width = 281
-    Height = 25
-    TabOrder = 2
-    Visible = False
-  end
   object ChartSolicTrabalho: TChart
     AlignWithMargins = True
     Left = 13
-    Top = 451
+    Top = 456
     Width = 569
     Height = 222
     Margins.Left = 2
@@ -33797,7 +33799,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Legend.Title.Text.Strings = (
       'Realizadas')
     Legend.Title.TextAlignment = taRightJustify
-    Legend.TopPos = 4
+    Legend.TopPos = 5
     Legend.Transparent = True
     MarginBottom = 0
     MarginLeft = 0
@@ -33839,9 +33841,9 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Zoom.Allow = False
     BevelOuter = bvNone
     Color = 7241535
-    TabOrder = 8
+    TabOrder = 7
     Anchors = [akLeft, akBottom]
-    ExplicitTop = 443
+    ExplicitTop = 453
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -33944,7 +33946,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Font.Style = []
     ItemIndex = 9
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
     Text = '2024'
     Items.Strings = (
       '2015'
@@ -33973,7 +33975,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Font.Style = []
     ItemIndex = 1
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 5
     Text = 'Fevereiro'
     Items.Strings = (
       'Janeiro'
@@ -34008,7 +34010,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ListFieldIndex = -1
     ListSource = dsOficinas
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
     OnKeyPress = cbOficinaKeyPress
     ExplicitLeft = 829
   end
@@ -34029,7 +34031,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ListFieldIndex = -1
     ListSource = dsFuncionarios
     ParentFont = False
-    TabOrder = 10
+    TabOrder = 9
     OnKeyPress = CBSolicitanteKeyPress
   end
   object cbManutencao: TComboBox
@@ -34046,7 +34048,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Font.Style = []
     ItemIndex = 0
     ParentFont = False
-    TabOrder = 11
+    TabOrder = 10
     Text = 'Todas'
     StyleElements = [seFont, seClient]
     Items.Strings = (
@@ -34060,6 +34062,101 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       'Altera'#231#245'es'
       'Outras')
     ExplicitLeft = 829
+  end
+  object chbAtivarDBSolicTrab: TCheckBox
+    Left = 505
+    Top = 434
+    Width = 75
+    Height = 17
+    Alignment = taLeftJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Ativado'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 11
+    StyleElements = [seClient, seBorder]
+    OnClick = chbAtivarDBSolicTrabClick
+    ExplicitLeft = 501
+  end
+  object chbAtivarDBOficinas: TCheckBox
+    Left = 923
+    Top = 434
+    Width = 75
+    Height = 28
+    Alignment = taLeftJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Ativado'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 12
+    StyleElements = [seClient, seBorder]
+    OnClick = chbAtivarDBOficinasClick
+    ExplicitLeft = 919
+  end
+  object chbAtivarDBSituacaoOS: TCheckBox
+    Left = 236
+    Top = 188
+    Width = 75
+    Height = 28
+    Alignment = taLeftJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Ativado'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 13
+    StyleElements = [seClient, seBorder]
+    OnClick = chbAtivarDBSituacaoOSClick
+    ExplicitLeft = 232
+  end
+  object chbAtivarDBTipoManutOS: TCheckBox
+    Left = 546
+    Top = 188
+    Width = 75
+    Height = 28
+    Alignment = taLeftJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Ativado'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 14
+    StyleElements = [seClient, seBorder]
+    OnClick = chbAtivarDBTipoManutOSClick
+    ExplicitLeft = 542
+  end
+  object chbAtivarDBMTBFTRDisp: TCheckBox
+    Left = 732
+    Top = 14
+    Width = 75
+    Height = 28
+    Alignment = taLeftJustify
+    Anchors = [akTop, akRight]
+    Caption = 'Ativado'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 15
+    StyleElements = [seClient, seBorder]
+    OnClick = chbAtivarDBMTBFTRDispClick
+    ExplicitLeft = 728
   end
   object MainMenuPrincipal: TMainMenu
     Left = 48

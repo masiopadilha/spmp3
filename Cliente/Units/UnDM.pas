@@ -2467,7 +2467,6 @@ type
     qryEquipamentosCALENDARIOEQUIP: TStringField;
     qryEquipamentosAREA: TStringField;
     qryEquipamentosCELULA: TStringField;
-    qryEquipamentosLINHA: TStringField;
     qryEquipamentosDESCPAI: TStringField;
     qryEquipamentosFABRICANTE: TStringField;
     qryEquipamentosFORNECEDOR: TStringField;
@@ -4616,7 +4615,6 @@ type
     qryRecursosDadosREGISTRO12: TStringField;
     qryRecursosDadosINFORMACOES: TBlobField;
     qryHorasParadasEquip: TFDQuery;
-    qryConfigstempomaxocioso: TIntegerField;
     qryManutPeriodicasHistItens: TFDQuery;
     dsManutPeriodicasHistItens: TDataSource;
     qryManutPeriodicasHistItensEsp: TFDQuery;
@@ -5968,6 +5966,17 @@ type
     qryChecklistLubrificMObraSALARIO: TBCDField;
     qryChecklistManutDATAFECHAMENTO: TDateTimeField;
     qryChecklistLubrificDATAFECHAMENTO: TDateTimeField;
+    qryConfigsversao: TIntegerField;
+    qryConfigstempomaxocioso: TIntegerField;
+    qryConfigstempomaxociosoB: TIntegerField;
+    qryConfigsdbsolictrab: TBooleanField;
+    qryConfigsdboficinas: TBooleanField;
+    qryConfigsdbsituacaoos: TBooleanField;
+    qryConfigsdbmtbf: TBooleanField;
+    qryConfigsdbmttr: TBooleanField;
+    qryConfigsdbdisponibilidade: TBooleanField;
+    qryConfigsdbtipomanutos: TBooleanField;
+    qryEquipamentosLINHA_1: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -6079,8 +6088,10 @@ type
     FDataHoraServidor, FInstalacao, FDataConsultaMObra, FDataConsulta1,
     FDataConsulta2: TDateTime; FTempoNovaOS, FTempoSenhaUsu, FQtdeMinSenha,
     FQtdeLoginTent, FNumUsuarios, FCodOrdemServico, FTabela_auxiliar,
-    FDiasRestantes, FTotalOS, FMinutosInativo, FTotalParadasEquip,
-    FVersaoMaquina, FVersaoRepo, FVersaoBanco, FSegundosDesliga : Integer;
+    FDiasRestantes, FTotalOS, FMinutosInativo, FMinutosInativoB,FTotalParadasEquip,
+    FVersaoMaquina, FVersaoRepo, FVersaoBanco, FSegundosDesliga: Integer;
+    FSolicTrab, FOficinas, FSituacaoOS, FOSTipoManut, FMTBF, FMTTR,
+    FDisponibilidade: Boolean;
 
     FAcessoLiberado, FEmpTransf, FAlterando, FFecharForms, FAutoUpdate: Boolean;
 
@@ -9646,7 +9657,13 @@ begin
   DM.FTempoSenhaUsu  := DM.qryConfigstemposenhausu.AsInteger;
   DM.FQtdeMinSenha   := DM.qryConfigsqtdeminsenha.AsInteger;
   DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
-  DM.FMinutosInativo := DM.qryConfigstempomaxocioso.AsInteger;
+  DM.FSolicTrab      := DM.qryConfigsdbsolictrab.AsBoolean;
+  DM.FOficinas       := DM.qryConfigsdboficinas.AsBoolean;
+  DM.FSituacaoOS     := DM.qryConfigsdbsituacaoos.AsBoolean;
+  DM.FOSTipoManut    := DM.qryConfigsdbtipomanutos.AsBoolean;
+  DM.FMTBF           := DM.qryConfigsdbmtbf.AsBoolean;
+  DM.FMTTR           := DM.qryConfigsdbmttr.AsBoolean;
+  DM.FDisponibilidade:= DM.qryConfigsdbdisponibilidade.AsBoolean;
   DM.FVersaoBanco    := DM.qryConfigsversion.AsInteger;
   DM.FAutoUpdate     := DM.qryConfigsautoupdate.AsBoolean;
   DM._EMAIL          := DM.qryConfigsemail.AsString;

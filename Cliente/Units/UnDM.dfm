@@ -24029,13 +24029,6 @@ object DM: TDM
       ProviderFlags = []
       Size = 80
     end
-    object qryEquipamentosLINHA: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'LINHA'
-      Origin = 'DESCRICAO'
-      ProviderFlags = []
-      Size = 80
-    end
     object qryEquipamentosDESCPAI: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'DESCPAI'
@@ -24074,6 +24067,13 @@ object DM: TDM
     object qryEquipamentosFAMILIAEQUIP: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'FAMILIAEQUIP'
+      Origin = 'DESCRICAO'
+      ProviderFlags = []
+      Size = 80
+    end
+    object qryEquipamentosLINHA_1: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'LINHA_1'
       Origin = 'DESCRICAO'
       ProviderFlags = []
       Size = 80
@@ -39408,7 +39408,7 @@ object DM: TDM
       'WHERE (`recursoskititens`.`CODEMPRESA` = :codempresa'
       '    AND `recursoskititens`.`CODKIT` = :codigo)'
       'ORDER BY `recursos`.`DESCRICAO` ASC;')
-    Left = 761
+    Left = 776
     Top = 585
     ParamData = <
       item
@@ -40496,7 +40496,7 @@ object DM: TDM
   end
   object dsRecursoKitItens: TDataSource
     DataSet = qryRecursoKitItens
-    Left = 761
+    Left = 776
     Top = 636
   end
   object dsRecursos: TDataSource
@@ -48280,11 +48280,6 @@ object DM: TDM
       Origin = 'qtdelogintent'
       ProviderFlags = [pfInUpdate]
     end
-    object qryConfigstempomaxocioso: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'tempomaxocioso'
-      Origin = 'tempomaxocioso'
-    end
     object qryConfigsdataultalt: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'dataultalt'
@@ -48328,6 +48323,56 @@ object DM: TDM
       FieldName = 'smtp'
       Origin = 'smtp'
       Size = 80
+    end
+    object qryConfigsversao: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'versao'
+      Origin = 'versao'
+    end
+    object qryConfigstempomaxocioso: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'tempomaxocioso'
+      Origin = 'tempomaxocioso'
+    end
+    object qryConfigstempomaxociosoB: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'tempomaxociosoB'
+      Origin = 'tempomaxociosoB'
+    end
+    object qryConfigsdbsolictrab: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbsolictrab'
+      Origin = 'dbsolictrab'
+    end
+    object qryConfigsdboficinas: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dboficinas'
+      Origin = 'dboficinas'
+    end
+    object qryConfigsdbsituacaoos: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbsituacaoos'
+      Origin = 'dbsituacaoos'
+    end
+    object qryConfigsdbmtbf: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbmtbf'
+      Origin = 'dbmtbf'
+    end
+    object qryConfigsdbmttr: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbmttr'
+      Origin = 'dbmttr'
+    end
+    object qryConfigsdbdisponibilidade: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbdisponibilidade'
+      Origin = 'dbdisponibilidade'
+    end
+    object qryConfigsdbtipomanutos: TBooleanField
+      AutoGenerateValue = arDefault
+      FieldName = 'dbtipomanutos'
+      Origin = 'dbtipomanutos'
     end
   end
   object dsConfigs: TDataSource

@@ -19,8 +19,15 @@ type
     edtqtdeminsenha: TDBEdit;
     edtqtdelogintent: TDBEdit;
     Label5: TLabel;
-    edttempoocioso: TDBEdit;
-    DBCheckBox1: TDBCheckBox;
+    edttempoociosoA: TDBEdit;
+    Label6: TLabel;
+    edttempoociosoB: TDBEdit;
+    GBDashboard: TGroupBox;
+    chbSolicTrab: TDBCheckBox;
+    chbOficinas: TDBCheckBox;
+    chbSituacaoOS: TDBCheckBox;
+    chbOSTipoManut: TDBCheckBox;
+    chbMTBF: TDBCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure BtnOKClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);
@@ -76,7 +83,15 @@ end;
 procedure TFrmTelaOpcoes.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.qryConfigs.Edit;
+if  (DM.qryUsuarioNIVELACESSO.AsString <> 'Administrador de Unidade') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+begin
+  edttemposenhausu.Enabled := False;
+  edtqtdeminsenha.Enabled := False;
+  edtqtdelogintent.Enabled := False;
+  edtqtdelogintent.Enabled := False;
+end;
+
+ DM.qryConfigs.Edit;
 end;
 
 end.

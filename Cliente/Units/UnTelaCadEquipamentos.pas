@@ -228,7 +228,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryEquipamentosCODLOCALIZACAO.AsString := DM.FCodCombo;
         DM.qryEquipamentosAREA.AsString           := DM.FValorCombo;
         DM.qryEquipamentosCELULA.Clear;
-        DM.qryEquipamentosLINHA.Clear;
+        DM.qryEquipamentosLINHA_1.Clear;
       end;
   end
 else
@@ -351,7 +351,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         DM.qryEquipamentosCODCELULA.AsString := DM.FCodCombo;
         DM.qryEquipamentosCELULA.AsString    := DM.FValorCombo;
         DM.qryEquipamentosCODLINHA.AsString  := EmptyStr;
-        DM.qryEquipamentosLINHA.AsString     := EmptyStr;
+        DM.qryEquipamentosLINHA_1.AsString     := EmptyStr;
         DM.qryEquipamentosSEQUENCIA.AsString := EmptyStr;
         DM.qryEquipamentosSEQUENCIA.AsString := EmptyStr;
       end;
@@ -789,7 +789,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     if DM.ConsultarCombo <> EmptyStr then
       begin
         DM.qryEquipamentosCODLINHA.AsString     := DM.FCodCombo;
-        DM.qryEquipamentosLINHA.AsString        := DM.FValorCombo;
+        DM.qryEquipamentosLINHA_1.AsString        := DM.FValorCombo;
         DM.qryEquipamentosSEQUENCIA.AsString    := EmptyStr;
       end;
   end
@@ -1026,7 +1026,7 @@ begin
 
       DM.qryEquipamentosAREA.Clear;
       DM.qryEquipamentosCELULA.Clear;
-      DM.qryEquipamentosLINHA.Clear;
+      DM.qryEquipamentosLINHA_1.Clear;
     end;
 end else
 begin
@@ -1086,7 +1086,7 @@ begin
 
       DM.qryEquipamentosAREA.Clear;
       DM.qryEquipamentosCELULA.Clear;
-      DM.qryEquipamentosLINHA.Clear;
+      DM.qryEquipamentosLINHA_1.Clear;
     end;
 end;
 

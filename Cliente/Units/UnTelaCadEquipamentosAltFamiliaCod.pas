@@ -76,18 +76,18 @@ begin
     Exit;
   end;
 
-  DM.qryAuxiliar2.Close;
-  DM.qryAuxiliar2.SQL.Clear;
-  DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `familiaequipamento` WHERE CODIGO = :novocodfamilia';
-  DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
-  DM.qryAuxiliar2.Open;
-  if DM.qryAuxiliar2.IsEmpty = False then
-  begin
-    Mensagem := PChar('Novo código já cadastrado!');
-    Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
-    DM.qryAuxiliar2.Close;
-    Exit;
-  end;
+//  DM.qryAuxiliar2.Close;
+//  DM.qryAuxiliar2.SQL.Clear;
+//  DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `equipamentos` WHERE CODFAMILIAEQUIP = :novocodfamilia';
+//  DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
+//  DM.qryAuxiliar2.Open;
+//  if DM.qryAuxiliar2.IsEmpty = False then
+//  begin
+//    Mensagem := PChar('Novo código já cadastrado!');
+//    Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
+//    DM.qryAuxiliar2.Close;
+//    Exit;
+//  end;
 
   DM.qryAuxiliar2.Close;
   try

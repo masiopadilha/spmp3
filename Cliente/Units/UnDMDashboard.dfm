@@ -1,6 +1,6 @@
 object DMDashboard: TDMDashboard
-  Height = 406
-  Width = 338
+  Height = 438
+  Width = 320
   object qryDashboard: TFDQuery
     Connection = DM.FDConnSPMP3
     Left = 48
@@ -11,6 +11,7 @@ object DMDashboard: TDMDashboard
     SQL.Strings = (
       'SET @tipomanutencao := :calcmanut;'
       'SET @oficina := :calcoficina;'
+      ''
       ''
       '-- C'#225'lculo de MTBF M'#233'dio (TESTADA)'
       'SELECT'
@@ -57,7 +58,7 @@ object DMDashboard: TDMDashboard
       #9#9', COUNT(*)TOTALPARADAAS'
       
         #9#9', ROUND((IF(MIN(os.`DATAINICIOREAL`) < DATE(DATE_SUB(os.`DATAI' +
-        'NICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY)), '
+        'NICIOREAL`, INTERVAL DAYOFMONTH(os.`DATAINICIOREAL`)-1 DAY)), -'
       
         #9#9'    /*true*/  TIMESTAMPDIFF(MINUTE, DATE(DATE_SUB(os.`DATAFECH' +
         'AMENTO`, INTERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY)), os.`D' +
@@ -70,14 +71,16 @@ object DMDashboard: TDMDashboard
       #9'        `ordemservico` AS os'
       #9#9'INNER JOIN `equipamentos` AS e'
       
-        #9#9'    ON (e.`CODIGO` = `CODEQUIPAMENTO`) AND (e.`OPERANDO` = '#39'S'#39 +
-        ' ) AND (e.`SECUNDARIO` = '#39'N'#39')'
+        #9#9'    ON (e.`CODIGO` = os.`CODEQUIPAMENTO`) AND (e.`OPERANDO` = ' +
+        #39'S'#39' ) AND (e.`SECUNDARIO` = '#39'N'#39') AND (e.`CALCINDIC` = '#39'S'#39')'
       #9#9'INNER JOIN `calendarioequip` c'
       
-        #9'                   ON (c.`CODIGO` = e.`CODCALENDARIO`) AND (c.`' +
-        'CODEMPRESA` = e.CODEMPRESA)'
-      '                               LEFT JOIN `tipomanutencao` AS t '
-      #9'                   ON (os.`CODMANUTENCAO` = t.`CODIGO`)'
+        #9'            ON (c.`CODIGO` = e.`CODCALENDARIO`) AND (c.`CODEMPR' +
+        'ESA` = e.CODEMPRESA)'
+      '                INNER JOIN `tipomanutencao` AS t '
+      
+        #9'           ON (os.`CODMANUTENCAO` = t.`CODIGO`) AND (t.`TIPOMAN' +
+        'UTENCAO` = '#39'Manuten'#231#227'o Corretiva'#39')'
       ''
       '             WHERE (os.`CODEMPRESA` = :codempresa'
       
@@ -86,8 +89,8 @@ object DMDashboard: TDMDashboard
       
         #9#9' AND os.`DATAFIMREAL` >= DATE(DATE_SUB(os.`DATAFECHAMENTO`, IN' +
         'TERVAL DAYOFMONTH(os.`DATAFECHAMENTO`)-1 DAY))'
-      #9#9' AND os.`SITUACAO` <> '#39'CANCELADA'#39
-      #9#9' AND os.`EQUIPPARADO` = '#39'S'#39' AND e.`CALCINDIC` = '#39'S'#39
+      #9#9' AND os.`SITUACAO` = '#39'FECHADA'#39
+      #9#9' AND os.`EQUIPPARADO` = '#39'S'#39' '#9#9' '#9#9' '
       
         '                                 AND (IF(@tipomanutencao, t.`TIP' +
         'OMANUTENCAO` = '#39'Manuten'#231#227'o Corretiva'#39', t.`TIPOMANUTENCAO` LIKE '#39 +

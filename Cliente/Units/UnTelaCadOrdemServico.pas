@@ -705,13 +705,14 @@ begin
     DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
     DM.qryOrdemServico.Post;
 
-    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-      begin
-        DM.qryOrdemServicoGerencia.Edit;
-        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
-        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
-        DM.qryOrdemServicoGerencia.Post;
-      end;
+    if FrmTelaCadOrdemServicoGerencia <> nil  then
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+          DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+          DM.qryOrdemServicoGerencia.Post;
+        end;
 
     PSituacao.Caption := 'DETALHADA';
     PSituacao.Color := clYellow;
@@ -721,13 +722,14 @@ begin
     DM.qryOrdemServico.Edit;
     DM.qryOrdemServicoSITUACAO.AsString := 'CADASTRADA';
 
-    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-      begin
-        DM.qryOrdemServicoGerencia.Edit;
-        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
-        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
-        DM.qryOrdemServicoGerencia.Post;
-      end;
+    if FrmTelaCadOrdemServicoGerencia <> nil  then
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'CADASTRADA';
+          DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+          DM.qryOrdemServicoGerencia.Post;
+        end;
 
     PSituacao.Caption := 'CADASTRADA';
     PSituacao.Color := clYellow;
@@ -747,26 +749,28 @@ begin
     DM.qryOrdemServicoSITUACAO.AsString := 'DETALHADA';
     DM.qryOrdemServico.Post;
 
-    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-      begin
-        DM.qryOrdemServicoGerencia.Edit;
-        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
-        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
-        DM.qryOrdemServicoGerencia.Post;
-      end;
+    if FrmTelaCadOrdemServicoGerencia <> nil  then
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+        begin
+          DM.qryOrdemServicoGerencia.Edit;
+          DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+          DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+          DM.qryOrdemServicoGerencia.Post;
+        end;
 
     PSituacao.Caption := 'DETALHADA';
     PSituacao.Color := clYellow;
     PSituacao.Font.Color := clGreen;
   end else
   begin
-    if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
-    begin
-      DM.qryOrdemServicoGerencia.Edit;
-      DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
-      DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
-      DM.qryOrdemServicoGerencia.Post;
-    end;
+    if FrmTelaCadOrdemServicoGerencia <> nil  then
+      if DM.qryOrdemServicoGerencia.Locate('CODIGO', DM.qryOrdemServicoCODIGO.AsInteger,[]) = True then
+      begin
+        DM.qryOrdemServicoGerencia.Edit;
+        DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'DETALHADA';
+        DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString := DM.qryOrdemServicoCODMANUTENCAO.AsString;
+        DM.qryOrdemServicoGerencia.Post;
+      end;
   end;
   DM.qryOrdemServicoEquipe.Close;
   DM.qryOrdemServicoEquipeMObra.Close;
@@ -779,7 +783,8 @@ DM.MSGAguarde('');
 DM.qryOrdemServico.Params[0].AsString  := DM.FCodEmpresa;
 DM.qryOrdemServico.Params[1].AsInteger := DM.qryOrdemServicoCODIGO.AsInteger;
 
-DM.qryOrdemServicoGerencia.Refresh;
+if FrmTelaCadOrdemServicoGerencia <> nil  then
+  DM.qryOrdemServicoGerencia.Refresh;
 
 if DM.qryOrdemServicoServSolicCODORDEMSERVICO.AsInteger <= 0 then
   begin

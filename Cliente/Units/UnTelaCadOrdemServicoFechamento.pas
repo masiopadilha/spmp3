@@ -45,7 +45,6 @@ type
     Label11: TLabel;
     EdtFalha: TDBEdit;
     BtnFalha: TButton;
-    Label27: TLabel;
     Label12: TLabel;
     EdtCentroCusto: TDBEdit;
     BtnCentroCusto: TButton;
@@ -70,14 +69,14 @@ type
     Label29: TLabel;
     edtDescOrdemServico: TDBText;
     Label4: TLabel;
-    edtDataInicioReal: TDateTimePicker;
-    edtDataFimReal: TDateTimePicker;
     Label30: TLabel;
     EdtResponsavel: TDBEdit;
     BtnResponsavel: TButton;
     Label31: TLabel;
     Label32: TLabel;
     lblEmail: TDBText;
+    EdtDataInicioReal: TJvDBMaskEdit;
+    EdtDataFimReal: TJvDBMaskEdit;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -223,8 +222,8 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
-edtDataInicioReal.DateTime := DM.qryOrdemServicoDATAINICIOREAL.AsDateTime;
-edtDataFimReal.DateTime := DM.qryOrdemServicoDATAFIMREAL.AsDateTime;
+edtDataInicioReal.Text := DM.qryOrdemServicoDATAINICIOREAL.AsString;
+edtDataFimReal.Text := DM.qryOrdemServicoDATAFIMREAL.AsString;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamento.BtnFalhaClick(Sender: TObject);
@@ -447,8 +446,8 @@ begin
   end;
 
   DM.qryOrdemServico.Edit;
-  DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := edtDataInicioReal.DateTime;
-  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := edtDataFimReal.DateTime;
+  DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := StrToDateTime(edtDataInicioReal.Text);
+  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := StrToDateTime(edtDataFimReal.Text);
 
   if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
@@ -672,7 +671,7 @@ DM.qryOrdemServicoEquipe.Close;
 DM.qryOrdemServico.Edit;
 DM.qryOrdemServicoSITUACAO.AsString       := 'FECHADA';
 DM.qryOrdemServicoTEMPOEXECUTADO.AsFloat  := MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime)/60;
-//if DM.qryOrdemServicoDATAFECHAMENTO.IsNull = True then
+if DM.qryOrdemServicoDATAFECHAMENTO.IsNull = True then
   DM.qryOrdemServicoDATAFECHAMENTO.AsDateTime   := DateOf(DM.FDataHoraServidor);
 
 DM.qryOrdemServicoCustoSec.Close;
@@ -898,8 +897,8 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
 
-edtDataInicioReal.DateTime := DM.qryOrdemServicoDATAINICIOREAL.AsDateTime;
-edtDataFimReal.DateTime := DM.qryOrdemServicoDATAFIMREAL.AsDateTime;
+edtDataInicioReal.Text := DM.qryOrdemServicoDATAINICIOREAL.AsString;
+edtDataFimReal.TExt := DM.qryOrdemServicoDATAFIMREAL.AsString;
 
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin

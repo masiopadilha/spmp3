@@ -1533,7 +1533,7 @@ inherited FrmTelaCadEquipamentos: TFrmTelaCadEquipamentos
           Hint = 'D'#234' duplo-clique para excluir a informa'#231#227'o.'
           TabStop = False
           Color = clBtnFace
-          DataField = 'LINHA'
+          DataField = 'LINHA_1'
           DataSource = DM.dsEquipamentos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText

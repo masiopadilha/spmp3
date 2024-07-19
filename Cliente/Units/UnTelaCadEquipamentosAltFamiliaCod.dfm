@@ -6,14 +6,16 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
   TextHeight = 16
   inherited PTop: TPanel
     Width = 504
+    ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 514
-      ExplicitLeft = 510
+      Left = 463
     end
   end
   inherited PCentro: TPanel
     Width = 502
     Height = 165
+    ExplicitWidth = 502
+    ExplicitHeight = 165
     object pBase: TPanel
       AlignWithMargins = True
       Left = 4
@@ -131,14 +133,14 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
   inherited PAuxiliares: TPanel
     Top = 237
     Width = 504
+    ExplicitTop = 237
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 504
+    ExplicitTop = 264
     inherited BtnOK: TButton
-      Left = 173
       OnClick = BtnOKClick
-      ExplicitLeft = 173
     end
     inherited BtnFechar: TButton
       Left = 255

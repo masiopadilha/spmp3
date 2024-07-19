@@ -9,42 +9,47 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Visible = False
     end
     inherited pAlteracao: TPanel
-      Left = 661
+      Left = 649
       Top = 19
       Width = 380
-      ExplicitLeft = 657
+      ExplicitLeft = 645
       ExplicitTop = 19
       ExplicitWidth = 380
       inherited LCadastro: TLabel
-        Left = 65
+        Left = 124
         Height = 14
-        ExplicitLeft = 124
+        ExplicitLeft = 65
       end
       inherited LblDataAlt: TDBText
-        Left = 268
+        Left = 301
+        Width = 57
         Margins.Right = 22
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 301
+        ExplicitLeft = 268
         ExplicitTop = 3
-        ExplicitHeight = 14
+        ExplicitWidth = 57
+        ExplicitHeight = 16
       end
       inherited LAlteradoPor: TLabel
-        Left = 204
+        Left = 237
         ExplicitLeft = 241
         ExplicitHeight = 14
       end
       inherited LblDataCad: TDBText
-        Left = 103
+        Left = 162
+        Width = 64
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 129
+        ExplicitLeft = 103
+        ExplicitWidth = 64
+        ExplicitHeight = 16
       end
     end
     inherited pCadastro: TPanel
-      Left = 661
+      Left = 649
       Width = 380
-      ExplicitLeft = 657
+      ExplicitLeft = 645
       ExplicitWidth = 380
       inherited LCadastroPor: TLabel
         Left = 21
@@ -54,18 +59,18 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       inherited LblUsuCad: TDBText
         Left = 103
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 97
+        ExplicitLeft = 104
       end
       inherited LAlteracao: TLabel
         Left = 204
-        ExplicitLeft = 861
-        ExplicitTop = 24
+        ExplicitLeft = 205
+        ExplicitHeight = 14
       end
       inherited LblUsuAlt: TDBText
         Left = 268
         Margins.Right = 22
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 277
+        ExplicitLeft = 269
       end
     end
   end
@@ -90,7 +95,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Caption = 'In'#237'cio:'
     end
     object Label7: TLabel
-      Left = 267
+      Left = 255
       Top = 92
       Width = 26
       Height = 16
@@ -223,32 +228,32 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 2
       StyleElements = []
     end
-    object edtDataInicioReal: TDateTimePicker
-      Left = 125
+    object EdtDataInicioReal: TJvDBMaskEdit
+      Left = 127
       Top = 90
-      Width = 125
+      Width = 111
       Height = 24
-      Date = 45467.000000000000000000
-      Time = 0.406678553241363300
-      Kind = dtkDateTime
-      TabOrder = 1
+      DataField = 'DATAINICIOREAL'
+      DataSource = DM.dsOrdemServico
+      MaxLength = 16
+      TabOrder = 0
+      EditMask = '!99/99/0000 !90:00;1;'
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
     end
-    object edtDataFimReal: TDateTimePicker
-      Left = 301
+    object EdtDataFimReal: TJvDBMaskEdit
+      Left = 287
       Top = 90
-      Width = 125
+      Width = 111
       Height = 24
-      Date = 45467.000000000000000000
-      Time = 0.406705104163847900
-      Kind = dtkDateTime
-      TabOrder = 2
+      DataField = 'DATAFIMREAL'
+      DataSource = DM.dsOrdemServico
+      MaxLength = 16
+      TabOrder = 1
+      EditMask = '!99/99/0000 !90:00;1;_'
       OnExit = TabNextTab1AfterTabChange
-      OnKeyPress = FormKeyPress
     end
   end
   inherited PProgramacao: TPanel
@@ -421,20 +426,6 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Height = 16
       Alignment = taRightJustify
       Caption = 'Falha:'
-    end
-    object Label27: TLabel
-      Left = 991
-      Top = 34
-      Width = 6
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
     end
     object Label12: TLabel
       Left = 24
