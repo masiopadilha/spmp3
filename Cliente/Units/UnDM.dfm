@@ -35230,7 +35230,7 @@ object DM: TDM
       FieldName = 'DATAINICIOREAL'
       Origin = 'DATAINICIOREAL'
       ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yyyy hh:mm:ss'
     end
     object qryOrdemServicoDATAFIM: TDateTimeField
       AutoGenerateValue = arDefault
@@ -35244,7 +35244,7 @@ object DM: TDM
       FieldName = 'DATAFIMREAL'
       Origin = 'DATAFIMREAL'
       ProviderFlags = [pfInUpdate]
-      DisplayFormat = 'dd/mm/yyyy t'
+      DisplayFormat = 'dd/mm/yyyy hh:mm:ss'
     end
     object qryOrdemServicoDATAFECHAMENTO: TDateTimeField
       AutoGenerateValue = arDefault
