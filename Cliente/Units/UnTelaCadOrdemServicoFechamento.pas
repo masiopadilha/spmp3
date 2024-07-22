@@ -446,8 +446,9 @@ begin
   end;
 
   DM.qryOrdemServico.Edit;
-  DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := StrToDateTime(edtDataInicioReal.Text);
-  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := StrToDateTime(edtDataFimReal.Text);
+  //DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := StrToDateTime(edtDataInicioReal.Text);
+//  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := IncSecond(DM.qryOrdemServicoDATAFIMREAL.AsDateTime, 1);
+//  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := IncSecond(DM.qryOrdemServicoDATAFIMREAL.AsDateTime, -1);
 
   if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin

@@ -1,53 +1,49 @@
 inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
-  ClientHeight = 624
+  ClientHeight = 619
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
+    ExplicitWidth = 1008
     inherited BtnExcluir: TButton
       Visible = False
     end
     inherited pAlteracao: TPanel
-      Left = 649
+      Left = 645
       Top = 19
       Width = 380
       ExplicitLeft = 645
       ExplicitTop = 19
       ExplicitWidth = 380
       inherited LCadastro: TLabel
-        Left = 124
+        Left = 65
         Height = 14
-        ExplicitLeft = 65
+        ExplicitLeft = 124
       end
       inherited LblDataAlt: TDBText
-        Left = 301
-        Width = 57
+        Left = 268
         Margins.Right = 22
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 268
+        ExplicitLeft = 301
         ExplicitTop = 3
-        ExplicitWidth = 57
-        ExplicitHeight = 16
+        ExplicitHeight = 14
       end
       inherited LAlteradoPor: TLabel
-        Left = 237
+        Left = 204
         ExplicitLeft = 241
         ExplicitHeight = 14
       end
       inherited LblDataCad: TDBText
-        Left = 162
-        Width = 64
+        Left = 103
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 103
-        ExplicitWidth = 64
-        ExplicitHeight = 16
+        ExplicitLeft = 129
       end
     end
     inherited pCadastro: TPanel
-      Left = 649
+      Left = 645
       Width = 380
       ExplicitLeft = 645
       ExplicitWidth = 380
@@ -77,6 +73,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   inherited PIdentificacao: TPanel
     Width = 1008
     Height = 124
+    ExplicitWidth = 1002
     ExplicitHeight = 124
     object Label5: TLabel
       Left = 235
@@ -95,7 +92,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Caption = 'In'#237'cio:'
     end
     object Label7: TLabel
-      Left = 255
+      Left = 272
       Top = 92
       Width = 26
       Height = 16
@@ -234,25 +231,25 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     object EdtDataInicioReal: TJvDBMaskEdit
       Left = 127
       Top = 90
-      Width = 111
+      Width = 131
       Height = 24
       DataField = 'DATAINICIOREAL'
       DataSource = DM.dsOrdemServico
-      MaxLength = 16
+      MaxLength = 19
       TabOrder = 0
-      EditMask = '!99/99/0000 !90:00;1;'
+      EditMask = '!99/99/0000 !90:00:00;1;'
       OnExit = TabNextTab1AfterTabChange
     end
     object EdtDataFimReal: TJvDBMaskEdit
-      Left = 287
+      Left = 304
       Top = 90
-      Width = 111
+      Width = 131
       Height = 24
       DataField = 'DATAFIMREAL'
       DataSource = DM.dsOrdemServico
-      MaxLength = 16
+      MaxLength = 19
       TabOrder = 1
-      EditMask = '!99/99/0000 !90:00;1;_'
+      EditMask = '!99/99/0000 !90:00:00;1;_'
       OnExit = TabNextTab1AfterTabChange
     end
   end
@@ -261,6 +258,7 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     Width = 1008
     Height = 195
     ExplicitTop = 179
+    ExplicitWidth = 1002
     ExplicitHeight = 195
     inherited Label2: TLabel
       Width = 132
@@ -830,9 +828,10 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   inherited PDiversos: TPanel
     Top = 378
     Width = 1008
-    Height = 183
+    Height = 178
     ExplicitTop = 378
-    ExplicitHeight = 180
+    ExplicitWidth = 1008
+    ExplicitHeight = 178
     inherited Label3: TLabel
       Width = 199
       Caption = 'SERVI'#199'OS EXECUTADOS'
@@ -842,8 +841,8 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       AlignWithMargins = True
       Left = 5
       Top = 26
-      Width = 998
-      Height = 152
+      Width = 992
+      Height = 147
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -907,16 +906,22 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 600
     Width = 1012
+    ExplicitTop = 600
+    ExplicitWidth = 1006
   end
   inherited PAlertas: TPanel
-    Top = 563
+    Top = 558
     Width = 1012
+    ExplicitTop = 558
+    ExplicitWidth = 1006
   end
   inherited PBase: TPanel
-    Top = 565
+    Top = 560
     Width = 1008
+    ExplicitTop = 560
+    ExplicitWidth = 1002
     inherited Button1: TButton
       Hint = 'Fechamento da M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28
