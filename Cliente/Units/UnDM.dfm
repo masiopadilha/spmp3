@@ -2069,7 +2069,6 @@ object DM: TDM
     end
   end
   object qryDespMensalFuncPer: TFDQuery
-    Active = True
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -7256,7 +7255,6 @@ object DM: TDM
     end
   end
   object qryLubrificProgEquipItens: TFDQuery
-    Active = True
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGFAMEQUIP'
     AggregatesActive = True
     MasterSource = dsLubrificProgEquip
@@ -7378,7 +7376,6 @@ object DM: TDM
     end
   end
   object qryLubrificProgEquipItensEsp: TFDQuery
-    Active = True
     AfterInsert = qryLubrificProgEquipItensEspAfterInsert
     IndexFieldNames = 'CODEMPRESA;CODLUBRIFICPROGEQUIP'
     AggregatesActive = True
@@ -8906,6 +8903,8 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODIGO'
@@ -14729,8 +14728,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryPneusChassiPosicoesCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -15056,11 +15056,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODIGO'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryRotaEquipVencSeqCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -15207,16 +15211,21 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODEQUIPATUAL'
         DataType = ftString
         ParamType = ptInput
+        Size = 20
+        Value = Null
       end
       item
         Name = 'FREQUENCIA'
-        DataType = ftString
+        DataType = ftInteger
         ParamType = ptInput
+        Value = Null
       end>
     object qryRotaEquipVencSeqManutCODIGO: TStringField
       FieldName = 'CODIGO'
@@ -15369,6 +15378,7 @@ object DM: TDM
       end
       item
         Name = 'SITUACAO'
+        DataType = ftString
         ParamType = ptInput
       end>
     object qryRotaPeriodicasCODIGO: TStringField
@@ -15491,13 +15501,13 @@ object DM: TDM
       '    , `rotasequipamentoseq`.`CODROTA`'
       '    , `funcionarios`.`NOME` AS `FUNCIONARIOOS`'
       'FROM'
-      '    `spmpma_spmp`.`manutprogequipamentohist`'
-      '    INNER JOIN `spmpma_spmp`.`equipamentos` '
+      '    `manutprogequipamentohist`'
+      '    INNER JOIN `equipamentos` '
       
         '        ON (`manutprogequipamentohist`.`CODEQUIPAMENTO` = `equip' +
         'amentos`.`CODIGO`) AND (`manutprogequipamentohist`.`CODEMPRESA` ' +
         '= `equipamentos`.`CODEMPRESA`)'
-      '    INNER JOIN `spmpma_spmp`.`rotasequipamentoseq` '
+      '    INNER JOIN `rotasequipamentoseq` '
       
         '        ON (`equipamentos`.`CODEMPRESA` = `rotasequipamentoseq`.' +
         '`CODEMPRESA`) AND (`equipamentos`.`CODLOCALIZACAO` = `rotasequip' +
@@ -15527,8 +15537,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryRotaPeriodicasManutINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -15707,8 +15718,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryRotaPeriodicasManutItensINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -15882,8 +15894,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryRotaPeriodicasManutItensEspINDICE: TIntegerField
       AutoGenerateValue = arDefault
@@ -17176,11 +17189,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODCALENDARIOEQUIP'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryTotalEquipHoraSeqHoraCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -17534,12 +17551,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODCALENDARIO'
         DataType = ftString
         ParamType = ptInput
-        Value = '0'
+        Size = 9
+        Value = Null
       end>
     object qryTotalHomemHoraSeqHoraCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -21460,15 +21480,11 @@ object DM: TDM
   end
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
-      'Server=sampcm.com'
-      'Database=sampcm84_spmp'
-      'User_Name=sampcm84_spmp'
-      'Password=Lml#24313#'
+      'Server='
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
-    Connected = True
     LoginPrompt = False
     OnRecover = FDConnSPMP3Recover
     Left = 56
@@ -31177,7 +31193,6 @@ object DM: TDM
     Top = 424
   end
   object qryManutProgEquip: TFDQuery
-    Active = True
     OnCalcFields = qryManutProgEquipCalcFields
     Connection = FDConnSPMP3
     SQL.Strings = (
@@ -31569,7 +31584,6 @@ object DM: TDM
     end
   end
   object qryManutProgEquipItens: TFDQuery
-    Active = True
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGFAMEQUIP'
     AggregatesActive = True
     MasterSource = dsManutProgEquip
@@ -31692,7 +31706,6 @@ object DM: TDM
     end
   end
   object qryManutProgEquipItensEsp: TFDQuery
-    Active = True
     AfterInsert = qryManutProgEquipItensEspAfterInsert
     IndexFieldNames = 'CODEMPRESA;CODMANUTPROGEQUIP'
     AggregatesActive = True
@@ -31845,7 +31858,6 @@ object DM: TDM
     end
   end
   object qryEquipEmRota: TFDQuery
-    Active = True
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -32289,10 +32301,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODIGO'
+        DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryManutProgFamEquipPlanoTrabCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -32369,6 +32386,8 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODIGO'
@@ -32453,8 +32472,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryManutProgFamEquipItensCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -35664,9 +35684,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object qryOrdemServicoEquipeCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -35734,9 +35754,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object qryOrdemServicoEquipeMObraCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -35826,9 +35846,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object qryOrdemServicoEquipePecasCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -35923,9 +35943,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object qryOrdemServicoEquipeRecursosCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -36114,13 +36134,14 @@ object DM: TDM
         Name = 'CODEQUIPE'
         DataType = ftInteger
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end
       item
         Name = 'CODCARGO'
-        DataType = ftInteger
+        DataType = ftString
         ParamType = ptInput
-        Value = '0'
+        Size = 9
+        Value = Null
       end>
     object qryOrdemServicoEquipeMObraUtilCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -36289,8 +36310,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryOrdemServicoEquipePecasUtilCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -36396,9 +36418,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object qryOrdemServicoEquipeRecursosUtilCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -37898,8 +37920,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryOrdemServicoTercUnidMedicoesCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -39482,11 +39505,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODIGO'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryRecursoKitItensCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -39866,6 +39893,8 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODFAMILIARECURSOS'
@@ -52386,9 +52415,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object FDAutoIncField7: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -52679,9 +52708,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object FDAutoIncField8: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -52843,10 +52872,14 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 9
+        Value = Null
       end
       item
         Name = 'MATRICULA'
+        DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryOrdemServicoLocalizaMObraOSProgCODIGO: TFDAutoIncField
       Alignment = taCenter
@@ -53372,7 +53405,7 @@ object DM: TDM
         Name = 'CODIGO'
         DataType = ftInteger
         ParamType = ptInput
-        Value = '0'
+        Value = Null
       end>
     object FDAutoIncField9: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -54932,10 +54965,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'MATRICULA'
+        DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object qryOrdemServicoLocalizaMObraOSExecCODIGO: TIntegerField
       Alignment = taCenter
@@ -55616,11 +55654,17 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODEMPRESA'
+        DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODMANUTPROGFAMEQUIP'
+        DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object FDAutoIncField10: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -55713,8 +55757,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryChecklistManutItensINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -55916,8 +55961,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryChecklistManutItensEspINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -56095,11 +56141,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODMANUTPROGFAMEQUIP'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object FDAutoIncField12: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -56498,11 +56548,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODLUBRIFICPROGFAMEQUIP'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object FDAutoIncField13: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -56595,8 +56649,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryChecklistLubrificItensINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -56797,8 +56852,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'INDICE'
-        DataType = ftString
+        DataType = ftAutoInc
         ParamType = ptInput
+        Value = Null
       end>
     object qryChecklistLubrificItensEspINDICE: TFDAutoIncField
       FieldName = 'INDICE'
@@ -56976,11 +57032,15 @@ object DM: TDM
         Name = 'CODEMPRESA'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end
       item
         Name = 'CODLUBRIFICPROGFAMEQUIP'
         DataType = ftString
         ParamType = ptInput
+        Size = 9
+        Value = Null
       end>
     object FDAutoIncField15: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -57915,9 +57975,10 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODIGO'
-        DataType = ftInteger
+        DataType = ftString
         ParamType = ptInput
-        Value = '0'
+        Size = 9
+        Value = Null
       end>
     object qryRotaPeriodicasManutRecursosCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -59628,7 +59689,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
+        DataType = ftInteger
         ParamType = ptInput
+        Value = Null
       end>
     object FDAutoIncField11: TFDAutoIncField
       FieldName = 'CODIGO'
@@ -59821,8 +59884,9 @@ object DM: TDM
     ParamData = <
       item
         Name = 'CODORDEMSERVICO'
-        DataType = ftString
+        DataType = ftInteger
         ParamType = ptInput
+        Value = Null
       end>
     object qryChecklistLubrificMObraCODIGO: TFDAutoIncField
       FieldName = 'CODIGO'
