@@ -219,7 +219,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ReadOnly = True
             TabOrder = 0
