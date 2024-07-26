@@ -433,6 +433,12 @@ begin
             if GrdManut.SelectedRows.Count = 0 then
               GrdManut.SelectedRows.CurrentRowSelected := True;
 
+            //Carrega FdMemTable para o(s) relatório(s)
+            FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
+            FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
+            FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
+            FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
+
             for I := 0 to GrdManut.SelectedRows.Count - 1 do
               begin
                 DM.qryManutCons.GotoBookmark(GrdManut.SelectedRows.Items[I]);
@@ -444,25 +450,6 @@ begin
                     PAuxiliares.Caption := 'EXISTE UMA '+DM.qryManutConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
                     Exit;
                   end;
-
-
-//                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-//                DM.qryManutVencOSVenc.Close;
-//                DM.qryManutVencOSVenc.Params[0].AsString := DM.qryManutConsCODIGO.AsString;
-//                DM.qryManutVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-//                DM.qryManutVencOSVenc.Open;
-//                while not DM.qryManutVencOSVenc.Eof = True do
-//                begin
-//                  DM.qryAuxiliar.Close;
-//                  DM.qryAuxiliar.SQL.Clear;
-//                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';'
-//                                          + 'UPDATE `manutprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryManutVencOSVencCODORDEMSERVICO.AsString) + ';');
-//                  DM.qryAuxiliar.Execute;
-//
-//                  DM.qryManutVencOSVenc.Next;
-//                end;
-//                DM.qryAuxiliar.Close;
-//                DM.qryManutVencOSVenc.Close;
 
                 TotalTempoInsp:= 0;
                 if (DM.qryManutConsItenstempototal.IsNull = False) and (DM.qryManutConsItensEsptempototal.isNull = False) then
@@ -685,11 +672,11 @@ begin
                   DM.qryOrdemServicoEquipeRecursos.Close;
                 end;
 
-                //Carrega FdMemTable para o relatório
-                FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
-                FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
-                FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
-                FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
+//                //Carrega FdMemTable para o relatório
+//                FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
+//                FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
+//                FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
+//                FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
 
                 FDMemTManut.Append;
                 FDMemTManutCODIGO.AsString               := DM.qryManutConsCODIGO.AsString;
@@ -782,12 +769,12 @@ begin
                     DM.qryManutConsPlanoTrab.Next;
                   end;
 
-                DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
-                DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
-                DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
-                DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
-
-                DmRelatorios.frxRInspConsManut.ShowReport();
+//                DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
+//                DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
+//                DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
+//                DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
+//
+//                DmRelatorios.frxRInspConsManut.ShowReport();
 
                 //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
                 if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
@@ -816,9 +803,12 @@ begin
 
             DM.qryManutCons.Refresh;
 
-  //          DM.qryManutCons.Close;
-  //          DM.qryManutCons.Params[0].AsString := DM.FCodEmpresa;
-  //          DM.qryManutCons.Open;
+            DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
+            DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
+            DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
+            DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
+
+            DmRelatorios.frxRInspConsManut.ShowReport();
 
             FDMemTManut.Close;
             FDMemTManutItens.Close;
@@ -847,6 +837,12 @@ begin
             LInsp := LInsp + IntToStr(DM.qryLubrificCons.RecNo) + 'º - ' + DM.qryLubrificCons.FieldByName('DESCRICAO').AsString + #13;
           end;
 
+        //Carrega FdMemTable para o(s) relatório(s)
+        FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
+        FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
+        FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
+        FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
+
         LTexto := PChar('Deseja realmente executar a(s) inspeçõe(s) selecionada(s)?');
         if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
           begin
@@ -867,25 +863,6 @@ begin
                     PAuxiliares.Caption := 'EXISTE UMA '+DM.qryLubrificConsDESCRICAO.AsString+' QUE PRECISA SER FECHADA ANTES DE SER PROGRAMADA NOVAMENTE!';
                     Exit;
                   end;
-
-                //Verifica se existem OS vencidas dessa inspeção do tipo reprogramada pela 'Programação' e mudam o status da OS para VENCIDA
-//                DM.qryLubrificVencOSVenc.Close;
-//                DM.qryLubrificVencOSVenc.Params[0].AsString := DM.qryLubrificConsCODIGO.AsString;
-//                DM.qryLubrificVencOSVenc.Params[1].AsString := DM.FCodEmpresa;
-//                DM.qryLubrificVencOSVenc.Open;
-//                while not DM.qryLubrificVencOSVenc.Eof = True do
-//                begin
-//                  DM.qryAuxiliar.Close;
-//                  DM.qryAuxiliar.SQL.Clear;
-//                  DM.qryAuxiliar.SQL.Add('UPDATE `ordemservico` SET `SITUACAO` = ''VENCIDA'' WHERE `CODIGO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';'
-//                                          + 'UPDATE `lubrificprogequipamentohist` SET `SITUACAO` = ''VENCIDA'', `REALIZADA` = ''N'' WHERE `CODORDEMSERVICO` = ' + QuotedStr(DM.qryLubrificVencOSVencCODORDEMSERVICO.AsString) + ';');
-//                  DM.qryAuxiliar.Execute;
-//
-//                  DM.qryLubrificVencOSVenc.Next;
-//                end;
-//                DM.qryAuxiliar.Close;
-//                DM.qryLubrificVencOSVenc.Close;
-
 
                 TotalTempoInsp:= 0;
                 if (DM.qryLubrificConsItenstempototal.IsNull = False) and (DM.qryLubrificConsItensEsptempototal.isNull = False) then
@@ -1107,11 +1084,11 @@ begin
                   DM.qryOrdemServicoEquipeRecursos.Close;
                 end;
 
-                //Carrega FdMemTable para o relat�rio
-                FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
-                FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
-                FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
-                FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
+//                //Carrega FdMemTable para o relatório
+//                FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
+//                FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
+//                FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
+//                FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
 
                 FDMemTLubrific.Append;
                 FDMemTLubrificCODIGO.AsString               := DM.qryLubrificConsCODIGO.AsString;
@@ -1204,12 +1181,12 @@ begin
                     DM.qryLubrificConsPlanoTrab.Next;
                   end;
 
-                DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
-                DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
-                DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
-                DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
-
-                DmRelatorios.frxRInspConsLubrific.ShowReport();
+//                DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
+//                DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
+//                DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
+//                DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
+//
+//                DmRelatorios.frxRInspConsLubrific.ShowReport();
 
                 //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou n�o.
                 if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
@@ -1239,9 +1216,12 @@ begin
 
             DM.qryLubrificCons.Refresh;
 
-  //          DM.qryLubrificCons.Close;
-  //          DM.qryLubrificCons.Params[0].AsString := DM.FCodEmpresa;
-  //          DM.qryLubrificCons.Open;
+            DmRelatorios.frxDBInspConsLubrific.DataSet :=  FDMemTLubrific;
+            DmRelatorios.frxDBInspConsLubrificItens.DataSet :=  FDMemTLubrificItens;
+            DmRelatorios.frxDBInspConsLubrificItensEsp.DataSet :=  FDMemTLubrificItensEsp;
+            DmRelatorios.frxDBInspConsLubrificPlanoTrab.DataSet :=  FDMemTLubrificPlanoTrab;
+
+            DmRelatorios.frxRInspConsLubrific.ShowReport();
 
             FDMemTLubrific.Close;
             FDMemTLubrificItens.Close;
@@ -1490,14 +1470,6 @@ begin
                    end;
                  end;
 
-                DmRelatorios.frxDBInspConsRotas.DataSet := FDMemTRota;
-                DmRelatorios.frxDBInspConsRotasSeq.DataSet := FDMemTRotaSeq;
-                DmRelatorios.frxDBInspConsRotasSeqManut.DataSet := FDMemTRotaSeqManut;
-                DmRelatorios.frxDBInspConsRotasSeqManutItens.DataSet := FDMemTRotaSeqManutItens;
-                DmRelatorios.frxDBInspConsRotasSeqManutItensEsp.DataSet := FDMemTRotaSeqManutItensEsp;
-
-                DmRelatorios.frxRInspConsRotas.ShowReport();
-
                //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
                //a geração de outra manutenção mesmo que o per�odo vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
                if DM.qryRotaConsREPROGRAMAR.AsString = 'Execução' then
@@ -1528,9 +1500,13 @@ begin
 
             DM.qryRotaCons.Refresh;
 
-  //          DM.qryRotaCons.Close;
-  //          DM.qryRotaCons.Params[0].AsString := DM.FCodEmpresa;
-  //          DM.qryRotaCons.Open;
+            DmRelatorios.frxDBInspConsRotas.DataSet := FDMemTRota;
+            DmRelatorios.frxDBInspConsRotasSeq.DataSet := FDMemTRotaSeq;
+            DmRelatorios.frxDBInspConsRotasSeqManut.DataSet := FDMemTRotaSeqManut;
+            DmRelatorios.frxDBInspConsRotasSeqManutItens.DataSet := FDMemTRotaSeqManutItens;
+            DmRelatorios.frxDBInspConsRotasSeqManutItensEsp.DataSet := FDMemTRotaSeqManutItensEsp;
+
+            DmRelatorios.frxRInspConsRotas.ShowReport();
 
             FDMemTRota.Close;
             FDMemTRotaSeq.Close;
