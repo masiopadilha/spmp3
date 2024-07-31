@@ -294,7 +294,7 @@ PAuxiliares.Font.Color := clBlack;
                   LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
                                                                 , DM.qryManutPeriodicasCODEQUIPAMENTO.AsString, DM.qryManutPeriodicasCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                                 , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0'
-                                                                , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                                                , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, DM.qryManutPeriodicasCODORDEMSERVICO.AsString);
 
 
                   DM.qryManutPeriodicas.Edit;
@@ -469,7 +469,7 @@ PAuxiliares.Font.Color := clBlack;
                   LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificPeriodicasDESCRICAO.AsString + ' (CORRETIVA)'
                                                                 , DM.qryLubrificPeriodicasCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificPeriodicasCODIGO.AsString, EmptyStr, 'N'
                                                                 , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificPeriodicasCODCENTROCUSTO.AsString, EmptyStr, '0'
-                                                                , DM.qryLubrificProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                                                , DM.qryLubrificProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, DM.qryLubrificPeriodicasCODORDEMSERVICO.AsString);
 
                 DM.qryLubrificPeriodicas.Edit;
                 DM.qryLubrificPeriodicasGEROUOS.AsString          := 'S';
@@ -658,7 +658,7 @@ PAuxiliares.Font.Color := clBlack;
                       LCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryRotaPeriodicasManutDESCRICAO.AsString + ' (CORRETIVA)'
                                                                     , DM.qryRotaPeriodicasManutCODEQUIPAMENTO.AsString, DM.qryRotaPeriodicasManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                                     , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryRotaPeriodicasManutCODCENTROCUSTO.AsString, EmptyStr, '0'
-                                                                    , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr);
+                                                                    , DM.qryManutProgEquipCODOFICINA.AsString, LManutRetorno, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, DM.qryRotaPeriodicasManutCODORDEMSERVICO.AsString);
 
 
                       DM.qryRotaPeriodicasManut.Edit;

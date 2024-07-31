@@ -1,16 +1,11 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
-  ClientHeight = 624
-  ClientWidth = 1012
   OnShow = FormShow
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     inherited pAlteracao: TPanel
       ExplicitLeft = 654
-      inherited LCadastro: TLabel
-        Height = 14
-      end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsSolicitacaoTrab
         ExplicitLeft = 936
@@ -25,9 +20,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
     inherited pCadastro: TPanel
       ExplicitLeft = 654
-      inherited LCadastroPor: TLabel
-        Height = 14
-      end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsSolicitacaoTrab
         ExplicitLeft = 785
@@ -42,7 +34,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     object Label5: TLabel
       Left = 57
       Top = 32
@@ -227,8 +219,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 186
+    ExplicitWidth = 1008
     ExplicitHeight = 186
     inherited Label2: TLabel
       Width = 132
@@ -565,10 +557,10 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PDiversos: TPanel
     Top = 341
-    Width = 1008
-    Height = 220
+    Height = 204
     ExplicitTop = 341
-    ExplicitHeight = 217
+    ExplicitWidth = 1008
+    ExplicitHeight = 215
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -577,7 +569,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     object Chart1: TChart
       AlignWithMargins = True
       Left = 4
-      Top = 25
+      Top = 20
       Width = 1000
       Height = 191
       AllowPanning = pmNone
@@ -621,7 +613,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       Legend.TextStyle = ltsXAndValue
       Legend.Title.Alignment = taCenter
       Legend.Title.Font.Color = 9875024
-      Legend.Title.Font.Height = -13
       Legend.Title.Font.Name = 'Segoe UI Semibold'
       Legend.Title.Font.Style = []
       Legend.Title.Frame.Color = clWhite
@@ -648,7 +639,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BottomAxis.Axis.Width = 1
       BottomAxis.Grid.Visible = False
       BottomAxis.LabelsFormat.Font.Color = 10724259
-      BottomAxis.LabelsFormat.Font.Height = -13
       BottomAxis.LabelsFormat.Font.Name = 'Segoe UI'
       BottomAxis.LabelsFormat.Font.Style = [fsBold]
       BottomAxis.LabelsFormat.Frame.Visible = False
@@ -685,8 +675,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BevelOuter = bvNone
       Color = 16249832
       TabOrder = 0
-      ExplicitTop = 22
-      ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -807,18 +795,18 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 563
-    Width = 1012
+    Top = 547
     ExplicitTop = 560
+    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
-    Top = 563
-    Width = 1012
+    ExplicitTop = 563
+    ExplicitWidth = 1012
   end
   inherited PBase: TPanel
-    Top = 584
-    Width = 1008
+    Top = 568
     ExplicitTop = 581
+    ExplicitWidth = 1008
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 31
