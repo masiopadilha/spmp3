@@ -1,8 +1,8 @@
 inherited FrmTelaInspVenc: TFrmTelaInspVenc
   BorderIcons = []
   Caption = 'Inspe'#231#245'es Vencidas'
-  ClientHeight = 564
-  ClientWidth = 928
+  ClientHeight = 553
+  ClientWidth = 922
   Constraints.MaxHeight = 600
   Constraints.MaxWidth = 940
   Constraints.MinHeight = 600
@@ -13,7 +13,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
   ExplicitHeight = 600
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 924
+    Width = 918
     TabOrder = 1
     ExplicitWidth = 920
     inherited BtnAjuda: TButton
@@ -23,8 +23,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PCentro: TPanel
-    Width = 922
-    Height = 425
+    Width = 916
+    Height = 414
     TabOrder = 2
     ExplicitWidth = 918
     ExplicitHeight = 422
@@ -541,15 +541,15 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 497
-    Width = 924
+    Top = 486
+    Width = 918
     TabOrder = 3
     ExplicitTop = 494
     ExplicitWidth = 920
   end
   inherited PBotoes: TPanel
-    Top = 524
-    Width = 924
+    Top = 513
+    Width = 918
     TabOrder = 0
     ExplicitTop = 521
     ExplicitWidth = 920

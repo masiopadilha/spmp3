@@ -467,7 +467,7 @@ begin
                                                                               , DM.qrySolicitacaoTrabCODSOLICITANTE.AsString, CBPrioridade.Text, 'Para o Equipamento'
                                                                               , DM.qrySolicitacaoTrabCODCENTROCUSTO.AsString, DM.qrySolicitacaoTrabJUSTIFICATIVA.AsString
                                                                               , DM.qrySolicitacaoTrabTEMPOESTIMADO.AsString, DM.qrySolicitacaoTrabCODOFICINA.AsString
-                                                                              , EmptyStr, EmptyStr, LEmail);
+                                                                              , EmptyStr, EmptyStr, LEmail, EmptyStr);
       if LEmail <> '' then
       begin
         //EnviarEmail('SOLICITAÇÃO CRIADA');
