@@ -10725,6 +10725,8 @@ begin
 //  ltotalhorasparado :=  DM.HorasParadasEquipamento(codequip, 'Manutenção Corretiva', '', '');
   DM.HorasParadasEquipamento(codequip, 'Manutenção Corretiva', '', '');
 
+  if FTotalParadasEquip <= 0  then
+    FTotalParadasEquip := 1;
   Result := ltotalhorasdisp/FTotalParadasEquip;
 end;
 

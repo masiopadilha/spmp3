@@ -4,7 +4,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'SPMP3 - Acesso'
-  ClientHeight = 191
+  ClientHeight = 194
   ClientWidth = 431
   Color = 14671839
   Constraints.MaxHeight = 230
@@ -11594,6 +11594,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 419
     object Image1: TImage
       Left = 2
       Top = 2
@@ -12066,11 +12067,13 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Left = 3
     Top = 69
     Width = 425
-    Height = 119
+    Height = 122
     Align = alClient
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 419
+    ExplicitHeight = 111
     object Label1: TLabel
       Left = 120
       Top = 21

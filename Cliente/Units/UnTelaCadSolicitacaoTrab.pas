@@ -444,20 +444,28 @@ begin
 
   if DM.qrySolicitacaoTrabCODORDEMSERVICO.AsInteger <= 0 then
     begin
-      if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
-      begin
-        if Application.MessageBox('Deseja informar um endereço de e-mail para receber atualizações sobre a sua solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+      try
+        if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
         begin
-          LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
-          if LEmail <> '' then
-            if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-              LEmail := '';
+          if Application.MessageBox('Deseja informar um endereço de e-mail para receber atualizações sobre a sua solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+          begin
+            LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
+            if LEmail <> '' then
+              if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+                LEmail := '';
+          end;
+        end else
+        begin
+          LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
+          if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+            LEmail := '';
         end;
-      end else
-      begin
-        LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
-        if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-          LEmail := '';
+      except
+        on E: Exception do
+        begin
+          DM.GravaLog('Falha ao enviar o email. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+          Application.MessageBox('Falha ao enviar o email!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+        end;
       end;
 
       DM.qrySolicitacaoTrabSITUACAO_1.AsString       := 'SOLICITADA';

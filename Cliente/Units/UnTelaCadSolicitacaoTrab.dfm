@@ -1,11 +1,12 @@
 inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   Caption = 'Solicita'#231#227'o de Trabalho'
   OnShow = FormShow
+  ExplicitLeft = 3
+  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
-    ExplicitWidth = 1008
     inherited pAlteracao: TPanel
-      ExplicitLeft = 654
+      ExplicitLeft = 664
       inherited LblDataAlt: TDBText
         DataSource = DM.dsSolicitacaoTrab
         ExplicitLeft = 936
@@ -19,7 +20,7 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       end
     end
     inherited pCadastro: TPanel
-      ExplicitLeft = 654
+      ExplicitLeft = 664
       inherited LblUsuCad: TDBText
         DataSource = DM.dsSolicitacaoTrab
         ExplicitLeft = 785
@@ -34,7 +35,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited PIdentificacao: TPanel
-    ExplicitWidth = 1008
     object Label5: TLabel
       Left = 57
       Top = 32
@@ -220,7 +220,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PProgramacao: TPanel
     Height = 186
-    ExplicitWidth = 1008
     ExplicitHeight = 186
     inherited Label2: TLabel
       Width = 132
@@ -557,10 +556,9 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   end
   inherited PDiversos: TPanel
     Top = 341
-    Height = 204
+    Height = 215
     ExplicitTop = 341
-    ExplicitWidth = 1008
-    ExplicitHeight = 215
+    ExplicitHeight = 204
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
@@ -675,6 +673,8 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
       BevelOuter = bvNone
       Color = 16249832
       TabOrder = 0
+      ExplicitTop = 9
+      ExplicitWidth = 994
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -795,18 +795,12 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 547
-    ExplicitTop = 560
-    ExplicitWidth = 1012
-  end
-  inherited PAlertas: TPanel
-    ExplicitTop = 563
-    ExplicitWidth = 1012
+    Top = 558
+    ExplicitTop = 547
   end
   inherited PBase: TPanel
-    Top = 568
-    ExplicitTop = 581
-    ExplicitWidth = 1008
+    Top = 579
+    ExplicitTop = 568
   end
   inherited MainMenuPadrao: TMainMenu
     Top = 31

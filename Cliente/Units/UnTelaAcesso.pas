@@ -231,6 +231,7 @@ begin
         DM.GravaLog('Falha ao  realizar o login! ', E.ClassName, E.Message);
         Application.MessageBox('Falha ao  realizar o login!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
         DM.MSGAguarde('', False);
+        Exit;
       end;
     End;
 
