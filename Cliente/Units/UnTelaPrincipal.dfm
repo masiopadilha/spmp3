@@ -34578,6 +34578,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         end
         object AprovacoesOS1: TMenuItem
           Caption = 'Aprova'#231#245'es de Ordens de Servi'#231'o'
+          Visible = False
           OnClick = AprovacoesOS1Click
         end
       end

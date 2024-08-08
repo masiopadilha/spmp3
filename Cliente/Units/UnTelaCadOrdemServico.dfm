@@ -40,6 +40,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   end
   inherited PIdentificacao: TPanel
     Width = 1008
+    ExplicitWidth = 1002
     object Label4: TLabel
       Left = 91
       Top = 32
@@ -200,6 +201,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 160
+    ExplicitWidth = 1002
     ExplicitHeight = 160
     inherited Label2: TLabel
       Width = 132
@@ -762,6 +764,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     Width = 1008
     Height = 241
     ExplicitTop = 315
+    ExplicitWidth = 1002
     ExplicitHeight = 230
     inherited Label3: TLabel
       Top = 2
@@ -860,14 +863,20 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited StatusBar1: TStatusBar
     Top = 600
     Width = 1012
+    ExplicitTop = 589
+    ExplicitWidth = 1006
   end
   inherited PAlertas: TPanel
     Top = 558
     Width = 1012
+    ExplicitTop = 547
+    ExplicitWidth = 1006
   end
   inherited PBase: TPanel
     Top = 560
     Width = 1008
+    ExplicitTop = 549
+    ExplicitWidth = 1002
     inherited Button1: TButton
       Hint = 'M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

@@ -395,13 +395,13 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FParamAuxiliar[5] := '';
     if DM.ConsultarCombo <> EmptyStr then
     begin
-      if DM.FParamAuxiliar[5] <> '' then
+//      if DM.FParamAuxiliar[5] <> '' then
       begin
         DM.qryOrdemServicoRESPONSAVEL.AsString   := DM.FCodCombo;
         DM.qryOrdemServicoNOMERESPONSAVEL.AsString := DM.FValorCombo;
-      end else
-      begin
-        Application.MessageBox('O responsável não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
+//      end else
+//      begin
+//        Application.MessageBox('O responsável não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
       end;
     end;
   end
@@ -452,28 +452,25 @@ begin
     Exit;
   end;
 
-  if DM.qryOrdemServicoSTATUS1.AsInteger <> 2 then
-  begin
-    DM.FDataSetParam.Cancel;
-    PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'OS NÃO APROVADA PELO RESPONSÁVEL!';
-    DM.MSGAguarde('', False);
-    Exit;
-  end;
-
-  if DM.qryOrdemServicoSTATUS2.AsInteger <> 2 then
-  begin
-    DM.FDataSetParam.Cancel;
-    PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'OS NÃO APROVADA PELO SOLICITANTE!';
-    DM.MSGAguarde('', False);
-    Exit;
-  end;
+//  if DM.qryOrdemServicoSTATUS1.AsInteger <> 2 then
+//  begin
+//    DM.FDataSetParam.Cancel;
+//    PAuxiliares.Font.Color := clRed;
+//    PAuxiliares.Caption := 'OS NÃO APROVADA PELO RESPONSÁVEL!';
+//    DM.MSGAguarde('', False);
+//    Exit;
+//  end;
+//
+//  if DM.qryOrdemServicoSTATUS2.AsInteger <> 2 then
+//  begin
+//    DM.FDataSetParam.Cancel;
+//    PAuxiliares.Font.Color := clRed;
+//    PAuxiliares.Caption := 'OS NÃO APROVADA PELO SOLICITANTE!';
+//    DM.MSGAguarde('', False);
+//    Exit;
+//  end;
 
   DM.qryOrdemServico.Edit;
-  //DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := StrToDateTime(edtDataInicioReal.Text);
-//  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := IncSecond(DM.qryOrdemServicoDATAFIMREAL.AsDateTime, 1);
-//  DM.qryOrdemServicoDATAFIMREAL.AsDateTime := IncSecond(DM.qryOrdemServicoDATAFIMREAL.AsDateTime, -1);
 
   if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
@@ -751,13 +748,13 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FParamAuxiliar[5] := '';
     if DM.ConsultarCombo <> EmptyStr then
     begin
-      if DM.FParamAuxiliar[5] <> '' then
+//      if DM.FParamAuxiliar[5] <> '' then
       begin
         DM.qryOrdemServicoMATRICULA.AsString   := DM.FCodCombo;
         DM.qryOrdemServicoSOLICITANTE.AsString := DM.FValorCombo;
-      end else
-      begin
-        Application.MessageBox('O solicitante não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
+//      end else
+//      begin
+//        Application.MessageBox('O solicitante não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
       end;
     end;
   end
