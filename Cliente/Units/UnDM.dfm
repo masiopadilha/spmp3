@@ -21488,6 +21488,9 @@ object DM: TDM
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
       'Server='
+      'Database=spmpma_spmp'
+      'User_Name=spmpma_spmp'
+      'Password=luca1052'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
@@ -34017,7 +34020,12 @@ object DM: TDM
       '    , `funcionarios`.`NOME` AS FUNCIONARIO'
       '    , `tipomanutencao`.`TIPOMANUTENCAO` AS `TIPO`'
       '    , `ordemservico`.`DATACANCEL`'
-      '  '
+      '    , `usuario`.`NOME` LOGINSOLIC'
+      '    , usuario_1.`NOME` LOGINRESP'
+      '    , `ordemservico`.`RESPONSAVEL` MATRICULARESP'
+      '    , funcionarios_1.`NOME` AS RESPONSAVEL'
+      '    , `ordemservico`.`STATUS1`'
+      '    , `ordemservico`.`STATUS2`  '
       'FROM'
       '    `ordemservico`'
       '    LEFT JOIN `funcionarios`'
@@ -34025,7 +34033,11 @@ object DM: TDM
         '        ON (`ordemservico`.`MATRICULA` = `funcionarios`.`MATRICU' +
         'LA`) AND (`funcionarios`.`CODEMPRESA` = `funcionarios`.`CODEMPRE' +
         'SA`)'
-      '    LEFT JOIN `equipamentos` '
+      '    LEFT JOIN `funcionarios` AS funcionarios_1'
+      
+        '        ON (`ordemservico`.`RESPONSAVEL` = funcionarios_1.`MATRI' +
+        'CULA`) AND (`ordemservico`.`CODEMPRESA` = funcionarios_1.`CODEMP' +
+        'RESA`)    LEFT JOIN `equipamentos` '
       
         '        ON (`ordemservico`.`CODEQUIPAMENTO` = `equipamentos`.`CO' +
         'DIGO`) AND (`ordemservico`.`CODEMPRESA` = `equipamentos`.`CODEMP' +
@@ -34054,6 +34066,14 @@ object DM: TDM
       
         '        ON (`ordemservico`.`CODIGO` = `lubrificprogequipamentohi' +
         'st`.`CODORDEMSERVICO`)'
+      '    LEFT JOIN `usuario`'
+      
+        '        ON (`ordemservico`.`CODEMPRESA` = `usuario`.`CODEMPRESA`' +
+        ') AND (`ordemservico`.`MATRICULA` = `usuario`.`MATRICULA`)'
+      '    LEFT JOIN `usuario` AS `usuario_1`'
+      
+        '        ON (`ordemservico`.`CODEMPRESA` = `usuario_1`.`CODEMPRES' +
+        'A`) AND(`ordemservico`.`RESPONSAVEL` = `usuario_1`.`MATRICULA`)'
       ''
       'WHERE (`ordemservico`.`CODEMPRESA` = :codempresa'
       
@@ -34380,6 +34400,47 @@ object DM: TDM
       FieldName = 'DATACANCEL'
       Origin = 'DATACANCEL'
       Visible = False
+    end
+    object qryOrdemServicoGerenciaMATRICULARESP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'MATRICULARESP'
+      Origin = 'MATRICULA'
+      ProviderFlags = []
+      Size = 9
+    end
+    object qryOrdemServicoGerenciaRESPONSAVEL: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RESPONSAVEL'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 200
+    end
+    object qryOrdemServicoGerenciaLOGINSOLIC: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'LOGINSOLIC'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaLOGINRESP: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'LOGINRESP'
+      Origin = 'NOME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object qryOrdemServicoGerenciaSTATUS2: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'STATUS2'
+      Origin = 'STATUS2'
+    end
+    object qryOrdemServicoGerenciaSTATUS1: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'STATUS1'
+      Origin = 'STATUS1'
     end
     object qryOrdemServicoGerenciaHHTOTAL: TAggregateField
       FieldName = 'HHTOTAL'
@@ -34930,6 +34991,8 @@ object DM: TDM
       '    , `ordemservico`.`CUSTOEXTRADESC`'
       '    , `ordemservico`.`CUSTOSECUNDARIOS`'
       '    , `ordemservico`.`IMPPLANOTRAB`'
+      '    , `ordemservico`.`STATUS1`'
+      '    , `ordemservico`.`STATUS2`'
       '    , `ordemservico`.`DATACADASTRO`'
       '    , `ordemservico`.`CODUSUARIOCAD`'
       '    , `ordemservico`.`DATAULTALT`'
@@ -35429,6 +35492,16 @@ object DM: TDM
       Origin = 'IMPPLANOTRAB'
       ProviderFlags = [pfInUpdate]
       Size = 1
+    end
+    object qryOrdemServicoSTATUS1: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'STATUS1'
+      Origin = 'STATUS1'
+    end
+    object qryOrdemServicoSTATUS2: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'STATUS2'
+      Origin = 'STATUS2'
     end
     object qryOrdemServicoDATACADASTRO: TDateTimeField
       AutoGenerateValue = arDefault
@@ -58640,11 +58713,14 @@ object DM: TDM
       'SELECT'
       '    `ordemservicoequipemobrautil`.`CODORDEMSERVICO`'
       '    , `funcionarios`.`MATRICULA`    '
-      '    , `funcionarios`.`NOME`'
+      '    , TRIM(`funcionarios`.`NOME`)NOME'
       
         '    , SUM(`ordemservicoequipemobrautil`.`TOTALHOMEMHORA`) AS TOT' +
         'ALHOMEMHORA'
       '    , `ordemservico`.`DATAPROGINI`'
+      '    , `ordemservico`.`DATAPROGFIN`'
+      '    , `ordemservico`.`DATAINICIOREAL`'
+      '    , `ordemservico`.`DATAFIMREAL`'
       '    , `ordemservico`.`DATAFECHAMENTO`'
       '    , `areas`.`DESCRICAO` AS `AREA`'
       '    , `celulas`.`DESCRICAO` AS `CELULA`'
@@ -58676,13 +58752,14 @@ object DM: TDM
         ' (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMP' +
         'RESA` = `areas`.`CODEMPRESA`)'
       ''
-      'WHERE (`funcionarios`.`CODEMPRESA` = :codempresa)'
+      'WHERE (`funcionarios`.`CODEMPRESA` =  :codempresa'
+      ')'
       ''
       
         'GROUP BY `funcionarios`.`MATRICULA`, `ordemservicoequipemobrauti' +
         'l`.`CODORDEMSERVICO`'
       ''
-      'ORDER BY `funcionarios`.`NOME` ASC;')
+      'ORDER BY NOME ASC;')
     Left = 2466
     Top = 870
     ParamData = <
@@ -58721,10 +58798,25 @@ object DM: TDM
       FieldName = 'DATAPROGINI'
       Origin = 'DATAPROGINI'
     end
+    object qryFuncionarioHistSimplesDATAPROGFIN: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAPROGFIN'
+      Origin = 'DATAPROGFIN'
+    end
     object qryFuncionarioHistSimplesDATAFECHAMENTO: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'DATAFECHAMENTO'
       Origin = 'DATAFECHAMENTO'
+    end
+    object qryFuncionarioHistSimplesDATAINICIOREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAINICIOREAL'
+      Origin = 'DATAINICIOREAL'
+    end
+    object qryFuncionarioHistSimplesDATAFIMREAL: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATAFIMREAL'
+      Origin = 'DATAFIMREAL'
     end
     object qryFuncionarioHistSimplesAREA: TStringField
       AutoGenerateValue = arDefault

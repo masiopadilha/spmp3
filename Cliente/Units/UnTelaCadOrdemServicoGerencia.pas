@@ -126,6 +126,7 @@ type
     Button10: TBitBtn;
     DBNavigator1: TDBNavigator;
     NotificationCenter1: TNotificationCenter;
+    Aprovada1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure ConfigurarFiltros;
     procedure Button2Click(Sender: TObject);

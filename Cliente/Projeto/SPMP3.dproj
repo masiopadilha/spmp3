@@ -665,6 +665,10 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\Units\UnTelaCadOrdemServicoGerenciaValidacoes.pas">
+            <Form>FrmTelaCadOrdemServicoGerenciaValidacoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="..\updater.bat">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>

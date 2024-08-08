@@ -183,7 +183,8 @@ uses
   UnTelaCadLubrificProgFamEquipConsulta in '..\Units\UnTelaCadLubrificProgFamEquipConsulta.pas' {FrmTelaCadLubrificProgFamEquipConsulta},
   UnTelaCadSolicitacaoTrabCons in '..\Units\UnTelaCadSolicitacaoTrabCons.pas' {FrmTelaCadSolicitacaoTrabCons},
   unTelaOutrosIndicadores in '..\Units\unTelaOutrosIndicadores.pas' {FrmTelaOutrosIndicadores},
-  UnDMDashboard in '..\Units\UnDMDashboard.pas' {DMDashboard: TDataModule};
+  UnDMDashboard in '..\Units\UnDMDashboard.pas' {DMDashboard: TDataModule},
+  UnTelaCadOrdemServicoGerenciaValidacoes in '..\Units\UnTelaCadOrdemServicoGerenciaValidacoes.pas' {FrmTelaCadOrdemServicoGerenciaValidacoes};
 
 {$R *.res}
 begin
@@ -206,6 +207,7 @@ if (FindWindow(nil, PChar('SPMP3 - Acesso')) > 0) or (FindWindow(nil, PChar('Ins
   Application.CreateForm(TDMAlertas, DMAlertas);
   Application.CreateForm(TFrmTelaAcesso, FrmTelaAcesso);
   Application.CreateForm(TfrmSistemaOcioso, frmSistemaOcioso);
+  Application.CreateForm(TFrmTelaCadOrdemServicoGerenciaValidacoes, FrmTelaCadOrdemServicoGerenciaValidacoes);
   FrmTelaAcesso.ShowModal;
   if DM.FAcessoLiberado = True then
   begin

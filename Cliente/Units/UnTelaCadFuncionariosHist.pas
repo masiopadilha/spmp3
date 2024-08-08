@@ -293,14 +293,20 @@ begin
       FDMemTFuncSimplesExcel.FieldByName('NOME').Index                    := 2;
       FDMemTFuncSimplesExcel.FieldByName('TOTALHOMEMHORA').DisplayLabel   := 'HH';
       FDMemTFuncSimplesExcel.FieldByName('TOTALHOMEMHORA').Index          := 3;
-      FDMemTFuncSimplesExcel.FieldByName('DATAPROGINI').DisplayLabel      := 'Prog.';
+      FDMemTFuncSimplesExcel.FieldByName('DATAPROGINI').DisplayLabel      := 'Prog. Ini.';
       FDMemTFuncSimplesExcel.FieldByName('DATAPROGINI').Index             := 4;
+      FDMemTFuncSimplesExcel.FieldByName('DATAPROGFIN').DisplayLabel      := 'Prog. Fin.';
+      FDMemTFuncSimplesExcel.FieldByName('DATAPROGFIN').Index             := 5;
+      FDMemTFuncSimplesExcel.FieldByName('DATAINICIOREAL').DisplayLabel   := 'Início';
+      FDMemTFuncSimplesExcel.FieldByName('DATAINICIOREAL').Index          := 6;
+      FDMemTFuncSimplesExcel.FieldByName('DATAFIMREAL').DisplayLabel      := 'Fim';
+      FDMemTFuncSimplesExcel.FieldByName('DATAFIMREAL').Index             := 7;
       FDMemTFuncSimplesExcel.FieldByName('DATAFECHAMENTO').DisplayLabel   := 'Fecham.';
-      FDMemTFuncSimplesExcel.FieldByName('DATAFECHAMENTO').Index          := 5;
+      FDMemTFuncSimplesExcel.FieldByName('DATAFECHAMENTO').Index          := 8;
       FDMemTFuncSimplesExcel.FieldByName('AREA').DisplayLabel             := 'Área.';
-      FDMemTFuncSimplesExcel.FieldByName('AREA').Index                    := 6;
+      FDMemTFuncSimplesExcel.FieldByName('AREA').Index                    := 9;
       FDMemTFuncSimplesExcel.FieldByName('CELULA').DisplayLabel           := 'Célula';
-      FDMemTFuncSimplesExcel.FieldByName('CELULA').Index                  := 7;
+      FDMemTFuncSimplesExcel.FieldByName('CELULA').Index                  := 10;
 
       CopyDataSetToGrid(FDMemTFuncSimplesExcel, grid);
       caminho := caminho+'\Lista Simples do Histórico dos Funcionários.'+FormatDateTime('dd.mm.yyyy.hh.sss', now) + '.csv';

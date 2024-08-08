@@ -392,11 +392,18 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Funcionários';
     DM.qryOrdemServico.Edit;
     DM.FParamAuxiliar[1] := 'NOME';
+    DM.FParamAuxiliar[5] := '';
     if DM.ConsultarCombo <> EmptyStr then
+    begin
+      if DM.FParamAuxiliar[5] <> '' then
       begin
         DM.qryOrdemServicoRESPONSAVEL.AsString   := DM.FCodCombo;
         DM.qryOrdemServicoNOMERESPONSAVEL.AsString := DM.FValorCombo;
+      end else
+      begin
+        Application.MessageBox('O responsável não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
       end;
+    end;
   end
 else
   begin
@@ -441,6 +448,24 @@ begin
     DM.FDataSetParam.Cancel;
     PAuxiliares.Font.Color := clRed;
     PAuxiliares.Caption := 'SEM PERMISSÃO PARA ALTERAÇÃO!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+  if DM.qryOrdemServicoSTATUS1.AsInteger <> 2 then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'OS NÃO APROVADA PELO RESPONSÁVEL!';
+    DM.MSGAguarde('', False);
+    Exit;
+  end;
+
+  if DM.qryOrdemServicoSTATUS2.AsInteger <> 2 then
+  begin
+    DM.FDataSetParam.Cancel;
+    PAuxiliares.Font.Color := clRed;
+    PAuxiliares.Caption := 'OS NÃO APROVADA PELO SOLICITANTE!';
     DM.MSGAguarde('', False);
     Exit;
   end;
@@ -723,11 +748,18 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
     DM.FNomeConsulta := 'Funcionários';
     DM.qryOrdemServico.Edit;
     DM.FParamAuxiliar[1] := 'NOME';
+    DM.FParamAuxiliar[5] := '';
     if DM.ConsultarCombo <> EmptyStr then
+    begin
+      if DM.FParamAuxiliar[5] <> '' then
       begin
-        DM.qryOrdemServicoMATRICULA.AsString := DM.FCodCombo;
-        DM.qryOrdemServicoSOLICITANTE.AsString    := DM.FValorCombo;
+        DM.qryOrdemServicoMATRICULA.AsString   := DM.FCodCombo;
+        DM.qryOrdemServicoSOLICITANTE.AsString := DM.FValorCombo;
+      end else
+      begin
+        Application.MessageBox('O solicitante não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
       end;
+    end;
   end
 else
   begin

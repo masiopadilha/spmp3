@@ -13,7 +13,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PTop: TPanel
     Width = 1008
     Height = 62
-    ExplicitWidth = 1004
+    ExplicitWidth = 1002
     ExplicitHeight = 62
     inherited Image1: TImage
       Top = 4
@@ -54,9 +54,10 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       ParentFont = False
     end
     inherited BtnAjuda: TButton
-      Left = 970
+      Left = 971
+      Height = 30
       TabOrder = 3
-      ExplicitLeft = 966
+      ExplicitLeft = 965
     end
     object BtnConsultar: TButton
       Left = 603
@@ -136,13 +137,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     Width = 1006
     Height = 503
     ExplicitTop = 69
-    ExplicitWidth = 1002
-    ExplicitHeight = 500
+    ExplicitWidth = 1000
+    ExplicitHeight = 492
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 501
-      ExplicitWidth = 1000
-      ExplicitHeight = 498
+      ExplicitWidth = 998
+      ExplicitHeight = 490
     end
     object PFundo: TPanel
       AlignWithMargins = True
@@ -154,8 +155,8 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 994
-      ExplicitHeight = 492
+      ExplicitWidth = 992
+      ExplicitHeight = 484
       object GrdManutencoes: TDBGrid
         AlignWithMargins = True
         Left = 5
@@ -401,14 +402,14 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    ExplicitTop = 566
+    ExplicitWidth = 1002
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    ExplicitTop = 593
+    ExplicitWidth = 1002
     inherited BtnOK: TButton
       Left = 100
       Visible = False

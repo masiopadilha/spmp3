@@ -5978,6 +5978,17 @@ type
     qryConfigsdbtipomanutos: TBooleanField;
     qryEquipamentosLINHA_1: TStringField;
     qryGerarOSCODOSPRINCIPAL: TIntegerField;
+    qryOrdemServicoGerenciaSTATUS1: TSmallintField;
+    qryOrdemServicoGerenciaSTATUS2: TSmallintField;
+    qryOrdemServicoSTATUS1: TSmallintField;
+    qryOrdemServicoSTATUS2: TSmallintField;
+    qryFuncionarioHistSimplesDATAPROGFIN: TDateTimeField;
+    qryFuncionarioHistSimplesDATAINICIOREAL: TDateTimeField;
+    qryFuncionarioHistSimplesDATAFIMREAL: TDateTimeField;
+    qryOrdemServicoGerenciaMATRICULARESP: TStringField;
+    qryOrdemServicoGerenciaRESPONSAVEL: TStringField;
+    qryOrdemServicoGerenciaLOGINSOLIC: TStringField;
+    qryOrdemServicoGerenciaLOGINRESP: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -9745,7 +9756,19 @@ begin
       else if DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'EXECUCAO'      then
         StatusBar1.Panels[3].Text := 'Iniciada: '     + FormatDateTime('dd/mm/yy hh:mm', DM.qryOrdemServicoGerencia.FieldByName('DATAINICIOREAL').AsDateTime)
       else if DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'LIBERADA'      then
-        StatusBar1.Panels[3].Text := 'Finalizada: '   + FormatDateTime('dd/mm/yy', DM.qryOrdemServicoGerencia.FieldByName('DATAFIMREAL').AsDateTime)
+      begin
+        StatusBar1.Panels[3].Text := 'Finalizada: '   + FormatDateTime('dd/mm/yy', DM.qryOrdemServicoGerencia.FieldByName('DATAFIMREAL').AsDateTime);
+        case DM.qryOrdemServicoGerencia.FieldByName('STATUS1').AsInteger of
+          0: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Responsável: PENDENTE';
+          1: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Responsável: REPROVADA';
+          2: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Responsável: APROVADA';
+        end;
+        case DM.qryOrdemServicoGerencia.FieldByName('STATUS2').AsInteger of
+          0: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Solicitante: PENDENTE';
+          1: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Solicitante: REPROVADA';
+          2: StatusBar1.Panels[3].Text := StatusBar1.Panels[3].Text + '   Solicitante: APROVADA';
+        end;
+      end
       else if DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'FECHADA'       then
         StatusBar1.Panels[3].Text := 'Fechamento: '   + FormatDateTime('dd/mm/yy', DM.qryOrdemServicoGerencia.FieldByName('DATAFECHAMENTO').AsDateTime)
       else if DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'PARALISADA'    then

@@ -302,6 +302,7 @@ type
     chbAtivarDBSituacaoOS: TCheckBox;
     chbAtivarDBTipoManutOS: TCheckBox;
     chbAtivarDBMTBFTRDisp: TCheckBox;
+    AprovacoesOS1: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -480,6 +481,7 @@ type
     procedure chbAtivarDBSituacaoOSClick(Sender: TObject);
     procedure chbAtivarDBSolicTrabClick(Sender: TObject);
     procedure chbAtivarDBOficinasClick(Sender: TObject);
+    procedure AprovacoesOS1Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -546,7 +548,7 @@ uses UnTelaMenuParametros, UnTelaCadCentroCusto,
   UnTelaCadOrdemServicoFechamento, UnTelaCadEquipamentosAltFamiliaCod,
   UnTempoOcioso, UnTelaCadManutProgFamEquipConsulta,
   UnTelaCadLubrificProgFamEquipConsulta, UnTelaCadSolicitacaoTrabCons,
-  UnDMDashboard;
+  UnDMDashboard, UnTelaCadOrdemServicoGerenciaValidacoes;
 
 
 procedure TFrmTelaPrincipal.AppIdle(Sender: TObject; var Done: Boolean);
@@ -569,6 +571,21 @@ begin
           frmSistemaOcioso.Close;
     end;
   end;
+end;
+
+procedure TFrmTelaPrincipal.AprovacoesOS1Click(Sender: TObject);
+begin
+  Try
+    if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+    Application.CreateForm(TFrmTelaCadOrdemServicoGerenciaValidacoes, FrmTelaCadOrdemServicoGerenciaValidacoes);
+    FrmTelaCadOrdemServicoGerenciaValidacoes.ShowModal;
+  Finally
+    FreeAndNil(FrmTelaCadOrdemServicoGerenciaValidacoes);
+  End;
 end;
 
 procedure TFrmTelaPrincipal.Alertas2Click(Sender: TObject);

@@ -13,7 +13,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
-  TFrmTelaInspFechamento = class(TFrmTelaPaiOkCancel)
+  TFrmTelaInspFechamento = class(TFrmTelaPaiOKCancel)
     PBase: TPanel;
     BtnLimpar: TButton;
     RGFiltro: TRadioGroup;

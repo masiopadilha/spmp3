@@ -10,6 +10,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 768
   TextHeight = 16
@@ -703,7 +705,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           Width = 325
         end
         item
-          Width = 300
+          Width = 400
         end
         item
           Width = 200
@@ -1588,6 +1590,9 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     object DesafazerVencida1: TMenuItem
       Caption = 'Definir ordem de servi'#231'o como n'#227'o vencida'
       OnClick = DesafazerVencida1Click
+    end
+    object Aprovada1: TMenuItem
+      Caption = 'Valida'#231#245'es de ordens de servi'#231'o'
     end
   end
   object ImageList1: TImageList

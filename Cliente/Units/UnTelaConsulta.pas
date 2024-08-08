@@ -371,9 +371,12 @@ begin
       30, 300, 301://Funcionários
         begin
           if FrmTelaCadMonitMedicoes = nil then
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome')
-          else
-            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL` FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
+          begin
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL`, `usuario`.`NOME` LOGIN FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) LEFT JOIN `usuario`'
+                                 + ' ON (`funcionarios`.`MATRICULA` = `usuario`.`MATRICULA`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[1]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
+          end else
+            DM.qryAuxiliar.SQL.Add('SELECT `funcionarios`.`MATRICULA`, `funcionarios`.`NOME`, `cargos`.`DESCRICAO` AS `CARGO`, `funcionarios`.`EMAIL`, `usuario`.`NOME` LOGIN FROM funcionarios INNER JOIN `cargos` ON (`funcionarios`.`CODCARGO` = `cargos`.`CODIGO`) LEFT JOIN `usuario`'
+                                 + ' ON (`funcionarios`.`MATRICULA` = `usuario`.`MATRICULA`) WHERE (`funcionarios`.'+DM.FParamAuxiliar[9]+' LIKE :descricao AND `funcionarios`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `funcionarios`.nome');
         end;
       31://Equipamentos Primários
         begin
@@ -923,6 +926,7 @@ begin
           DM.qryAuxiliar.Fields[2].DisplayWidth := 20;
           DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
           DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
+          DM.qryAuxiliar.Fields[4].Visible := False;
         end;
       32, 33, 321, 331://Manutenção/Lubrificação Programada do Equipamento
         begin
@@ -1025,6 +1029,7 @@ begin
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
           DM.qryAuxiliar.Fields[3].DisplayWidth := 30;
           DM.qryAuxiliar.Fields[3].DisplayLabel := 'Email';
+          DM.qryAuxiliar.Fields[4].Visible := False;
         end;
       301://Funcionários Programados
         begin
@@ -1037,6 +1042,7 @@ begin
             GrdAuxiliar.Columns[1].Title.Font.Style := [fsBold];
           DM.qryAuxiliar.Fields[2].DisplayWidth := 15;
           DM.qryAuxiliar.Fields[2].DisplayLabel := 'Cargo';
+          DM.qryAuxiliar.Fields[3].Visible := False;
           DM.qryAuxiliar.Filter   := 'CARGO = '+ QuotedStr(DM.FParamAuxiliar[2]);
           DM.qryAuxiliar.Filtered := True;
         end;
@@ -1888,6 +1894,7 @@ begin
         DM.FCodCombo   := DM.DSAuxiliar.DataSet.Fields[0].AsString;
         DM.FValorCombo := DM.DSAuxiliar.DataSet.Fields[1].AsString;
         DM.FParamAuxiliar[4] := DM.DSAuxiliar.DataSet.Fields[3].AsString;
+        DM.FParamAuxiliar[5] := DM.DSAuxiliar.DataSet.Fields[4].AsString;
       end;
     32://Manutenção Programada de Equipamento
       begin
