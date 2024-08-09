@@ -8,7 +8,7 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
     Width = 504
     ExplicitWidth = 504
     inherited BtnAjuda: TButton
-      Left = 463
+      Left = 461
     end
   end
   inherited PCentro: TPanel
@@ -24,8 +24,8 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
       Height = 157
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 490
-      ExplicitHeight = 154
+      ExplicitWidth = 488
+      ExplicitHeight = 146
       object Label1: TLabel
         Left = 29
         Top = 64
@@ -134,12 +134,15 @@ inherited FrmTelaCadEquipamentosAltFamiliaCod: TFrmTelaCadEquipamentosAltFamilia
     Top = 237
     Width = 504
     ExplicitTop = 237
+    ExplicitWidth = 498
   end
   inherited PBotoes: TPanel
     Top = 264
     Width = 504
     ExplicitTop = 264
+    ExplicitWidth = 498
     inherited BtnOK: TButton
+      ModalResult = 0
       OnClick = BtnOKClick
     end
     inherited BtnFechar: TButton

@@ -51,7 +51,7 @@ procedure TFrmTelaCadEquipamentosAltFamiliaCod.BtnOKClick(Sender: TObject);
 var
  Mensagem: PChar;
 begin
-  inherited;
+//  inherited;
   if edtCodAntigo.Text = MaskEdit1.Text then
   begin
     edtCodAntigo.SetFocus;
@@ -62,11 +62,13 @@ begin
     edtNovoAntigo.SetFocus;
     Exit;
   end;
+
   if DM.FCodCombo = '' then Exit;
+
   DM.qryAuxiliar2.Close;
   DM.qryAuxiliar2.SQL.Clear;
   DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `familiaequipamento` WHERE CODIGO = :antigocodfamilia';
-  DM.qryAuxiliar2.Params[0].AsString := edtCodAntigo.Text;
+  DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
   DM.qryAuxiliar2.Open;
   if DM.qryAuxiliar2.IsEmpty = True then
   begin
@@ -76,18 +78,6 @@ begin
     Exit;
   end;
 
-//  DM.qryAuxiliar2.Close;
-//  DM.qryAuxiliar2.SQL.Clear;
-//  DM.qryAuxiliar2.SQL.Text := 'SELECT CODIGO FROM `equipamentos` WHERE CODFAMILIAEQUIP = :novocodfamilia';
-//  DM.qryAuxiliar2.Params[0].AsString := edtNovoAntigo.Text;
-//  DM.qryAuxiliar2.Open;
-//  if DM.qryAuxiliar2.IsEmpty = False then
-//  begin
-//    Mensagem := PChar('Novo código já cadastrado!');
-//    Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONINFORMATION);
-//    DM.qryAuxiliar2.Close;
-//    Exit;
-//  end;
 
   DM.qryAuxiliar2.Close;
   try
@@ -105,6 +95,11 @@ begin
       Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONERROR);
     end;
   end;
+
+  DM.qryAuxiliar2.Close;
+  DM.qryAuxiliar2.SQL.Clear;
+
+  Close;
 end;
 procedure TFrmTelaCadEquipamentosAltFamiliaCod.edtCodAntigoKeyPress(
   Sender: TObject; var Key: Char);
