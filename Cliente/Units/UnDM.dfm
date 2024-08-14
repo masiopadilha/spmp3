@@ -21488,9 +21488,6 @@ object DM: TDM
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
       'Server='
-      'Database=spmpma_spmp'
-      'User_Name=spmpma_spmp'
-      'Password=luca1052'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
