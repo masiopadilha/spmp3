@@ -9,35 +9,33 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       Visible = False
     end
     inherited pAlteracao: TPanel
-      Left = 653
+      Left = 644
       Top = 19
       Width = 380
-      ExplicitLeft = 647
+      ExplicitLeft = 644
       ExplicitTop = 19
       ExplicitWidth = 380
       inherited LCadastro: TLabel
-        Left = 124
+        Left = 91
         Height = 14
         ExplicitLeft = 65
       end
       inherited LblDataAlt: TDBText
-        Left = 301
-        Width = 57
+        Left = 268
         Margins.Right = 22
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 268
+        ExplicitLeft = 301
         ExplicitTop = 3
-        ExplicitWidth = 57
-        ExplicitHeight = 16
+        ExplicitHeight = 14
       end
       inherited LAlteradoPor: TLabel
-        Left = 237
+        Left = 204
         ExplicitLeft = 241
         ExplicitHeight = 14
       end
       inherited LblDataCad: TDBText
-        Left = 162
+        Left = 129
         Width = 64
         AutoSize = True
         DataSource = DM.dsOrdemServico
@@ -47,9 +45,9 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
       end
     end
     inherited pCadastro: TPanel
-      Left = 653
+      Left = 644
       Width = 380
-      ExplicitLeft = 647
+      ExplicitLeft = 644
       ExplicitWidth = 380
       inherited LCadastroPor: TLabel
         Left = 21
