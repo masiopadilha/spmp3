@@ -303,6 +303,8 @@ type
     chbAtivarDBTipoManutOS: TCheckBox;
     chbAtivarDBMTBFTRDisp: TCheckBox;
     AprovacoesOS1: TMenuItem;
+    Lista1: TMenuItem;
+    Ficha1: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -441,7 +443,6 @@ type
     procedure Pedidos1Click(Sender: TObject);
     procedure Viagens1Click(Sender: TObject);
     procedure Familia1Click(Sender: TObject);
-    procedure odos1Click(Sender: TObject);
     procedure Familia2Click(Sender: TObject);
     procedure Opcoes1Click(Sender: TObject);
     procedure Auditoria1Click(Sender: TObject);
@@ -482,6 +483,8 @@ type
     procedure chbAtivarDBSolicTrabClick(Sender: TObject);
     procedure chbAtivarDBOficinasClick(Sender: TObject);
     procedure AprovacoesOS1Click(Sender: TObject);
+    procedure Lista1Click(Sender: TObject);
+    procedure Ficha1Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -782,7 +785,7 @@ if DM.ConsultarCombo <> '' then
                            + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
                            + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
     DM.qryAuxiliar.Open;
-    DmRelatorios.frxREquipGeral.ShowReport();
+    DmRelatorios.frxREquipGeralLista.ShowReport();
   end;
 
 end;
@@ -2361,7 +2364,7 @@ if DM.ConsultarCombo <> '' then
                            + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
 
     DM.qryAuxiliar.Open;
-    DmRelatorios.frxREquipGeral.ShowReport();
+    DmRelatorios.frxREquipGeralLista.ShowReport();
   end;
 end;
 
@@ -2597,6 +2600,42 @@ begin
   Finally
     FreeAndNil(FrmTelaCadRecursosFerram);
   End;
+end;
+
+procedure TFrmTelaPrincipal.Ficha1Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.*, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT'
+                        + ', `calendarioequip`.`DESCRICAO` CALENDARIOEQUIP, `areas`.`DESCRICAO` AREA'
+                        + ', `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos_1`.`DESCRICAO` AS `DESCPAI`'
+                        + ', `fabricante`.`DESCRICAO` FABRICANTE, `fornecedor`.`DESCRICAO` FORNECEDOR, `centrocusto`.`DESCRICAO` CENTROCUSTO'
+                        + ', `classes`.`DESCRICAO` CLASSE, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
+                        + ' FROM `equipamentos`'
+                        + ' LEFT JOIN `usuario` ON (`equipamentos`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                        + ' LEFT JOIN `usuario` AS `usuario_1` ON (`equipamentos`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                        + ' LEFT JOIN `calendarioequip` ON (`equipamentos`.`CODCALENDARIO` = `calendarioequip`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `calendarioequip`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                        + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                        + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `fabricante` ON (`equipamentos`.`CODFABRICANTE` = `fabricante`.`CODIGO`) AND (`fabricante`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `fornecedor` ON (`equipamentos`.`CODFORNECEDOR` = `fornecedor`.`CODIGO`) AND (`fornecedor`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                        + ' LEFT JOIN `classes` ON (`equipamentos`.`CODCLASSE` = `classes`.`CODIGO`)'
+                        + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                        + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
+DM.qryAuxiliar.Tag := 1;
+DM.qryAuxiliar.Open;
+DmRelatorios.frxREquipGeralFicha.ShowReport();
+DM.qryAuxiliar.Tag := 0;
+DM.qryFamEquipamento.Close;
+DM.qryEquipamentosDados.Close;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
 end;
 
 procedure TFrmTelaPrincipal.FormatodeCdigos1Click(Sender: TObject);
@@ -3260,6 +3299,24 @@ begin
   End;
 end;
 
+procedure TFrmTelaPrincipal.Lista1Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA_1, `equipamentos`.`OPERANDO` FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
+DM.qryAuxiliar.Open;
+DmRelatorios.frxREquipGeralLista.ShowReport();
+
+end;
+
 procedure TFrmTelaPrincipal.ListaCompleta2Click(Sender: TObject);
 begin
 //if not Assigned(DmRelatorios) then
@@ -3787,23 +3844,6 @@ begin
   Finally
     FreeAndNil(FrmTelaConsultaPeriodo);
   End;
-end;
-
-procedure TFrmTelaPrincipal.odos1Click(Sender: TObject);
-begin
-if not Assigned(DmRelatorios) then
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
-DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
-DM.qryAuxiliar.Close;
-DM.qryAuxiliar.SQL.Clear;
-DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`OPERANDO` FROM `equipamentos`'
-                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
-                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
-                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
-DM.qryAuxiliar.Open;
-DmRelatorios.frxREquipGeral.ShowReport();
 end;
 
 procedure TFrmTelaPrincipal.Oficina1Click(Sender: TObject);

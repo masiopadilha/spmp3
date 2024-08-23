@@ -34814,7 +34814,14 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
         Caption = 'Equipamentos'
         object odos1: TMenuItem
           Caption = 'Todos'
-          OnClick = odos1Click
+          object Lista1: TMenuItem
+            Caption = 'Lista'
+            OnClick = Lista1Click
+          end
+          object Ficha1: TMenuItem
+            Caption = 'Ficha'
+            OnClick = Ficha1Click
+          end
         end
         object Familia2: TMenuItem
           Caption = 'Fam'#237'lia'

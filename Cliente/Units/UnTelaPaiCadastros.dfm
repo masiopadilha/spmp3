@@ -4,8 +4,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'SPMP - Sistema do Plano de Manuten'#231#227'o Programada'
-  ClientHeight = 624
-  ClientWidth = 1012
+  ClientHeight = 608
+  ClientWidth = 1006
   Color = 14671839
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
@@ -11596,7 +11596,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 2
-    Width = 1008
+    Width = 1002
     Height = 45
     Margins.Left = 2
     Margins.Top = 2
@@ -11606,9 +11606,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1004
     DesignSize = (
-      1008
+      1002
       45)
     object BtnNovo: TButton
       Left = 8
@@ -12270,19 +12269,20 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       Visible = False
     end
     object pAlteracao: TPanel
-      Left = 658
+      Left = 664
       Top = 20
       Width = 350
       Height = 20
       Anchors = [akTop, akRight]
       BevelOuter = bvNone
       TabOrder = 17
+      ExplicitLeft = 658
       object LCadastro: TLabel
         AlignWithMargins = True
         Left = 49
         Top = 3
         Width = 36
-        Height = 14
+        Height = 16
         Margins.Right = 2
         Align = alRight
         Alignment = taRightJustify
@@ -12293,8 +12293,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 3
-        ExplicitHeight = 16
       end
       object LblDataAlt: TDBText
         AlignWithMargins = True
@@ -12360,19 +12358,20 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
       end
     end
     object pCadastro: TPanel
-      Left = 658
+      Left = 664
       Top = 0
       Width = 350
       Height = 20
       Anchors = [akTop, akRight]
       BevelOuter = bvNone
       TabOrder = 18
+      ExplicitLeft = 658
       object LCadastroPor: TLabel
         AlignWithMargins = True
         Left = 5
         Top = 3
         Width = 80
-        Height = 14
+        Height = 16
         Margins.Right = 2
         Align = alRight
         Alignment = taRightJustify
@@ -12383,8 +12382,6 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 3
-        ExplicitHeight = 16
       end
       object LblUsuCad: TDBText
         AlignWithMargins = True
@@ -12452,7 +12449,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 51
-    Width = 1008
+    Width = 1002
     Height = 96
     Margins.Left = 2
     Margins.Top = 2
@@ -12486,7 +12483,7 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 151
-    Width = 1008
+    Width = 1002
     Height = 190
     Margins.Left = 2
     Margins.Top = 2
@@ -12520,8 +12517,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
     AlignWithMargins = True
     Left = 2
     Top = 345
-    Width = 1008
-    Height = 216
+    Width = 1002
+    Height = 200
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -12553,8 +12550,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 605
-    Width = 1012
+    Top = 589
+    Width = 1006
     Height = 19
     Color = 14671839
     Panels = <
@@ -12578,8 +12575,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   end
   object PAlertas: TPanel
     Left = 0
-    Top = 563
-    Width = 1012
+    Top = 547
+    Width = 1006
     Height = 0
     Hint = 'D'#234' duplo-clique para ativar ou desativar os alertas.'
     Margins.Left = 2
@@ -12611,8 +12608,8 @@ object FrmTelaPaiCadastros: TFrmTelaPaiCadastros
   object PBase: TPanel
     AlignWithMargins = True
     Left = 2
-    Top = 565
-    Width = 1008
+    Top = 549
+    Width = 1002
     Height = 38
     Margins.Left = 2
     Margins.Top = 2

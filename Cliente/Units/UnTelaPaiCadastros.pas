@@ -518,7 +518,7 @@ case DM.FTabela_auxiliar of
   25://Equipamento Geral
     begin
       FrmTelaAuxiliar.BtnConsultar.OnClick(Sender);
-      DmRelatorios.frxREquipGeral.ShowReport();
+      DmRelatorios.frxREquipGeralLista.ShowReport();
     end;
   30://Funcionários Geral
     begin

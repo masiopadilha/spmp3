@@ -193,7 +193,7 @@ type
     frxRDespMensalProdGeral: TfrxReport;
     frxRDespMensalProdIndividual: TfrxReport;
     frxRDispAdmissiveis: TfrxReport;
-    frxREquipGeral: TfrxReport;
+    frxREquipGeralLista: TfrxReport;
     frxREquipIndividual: TfrxReport;
     frxRFamEquipamento: TfrxReport;
     frxRFeriados: TfrxReport;
@@ -332,6 +332,7 @@ type
     frxDBChecklistLubrificMObra: TfrxDBDataset;
     frxRLubrificProgEquipGeral: TfrxReport;
     frxReport1: TfrxReport;
+    frxREquipGeralFicha: TfrxReport;
     procedure frxDBManutProgEquipGeralOpen(Sender: TObject);
     procedure frxDBLubrificProgEquipGeralOpen(Sender: TObject);
   private

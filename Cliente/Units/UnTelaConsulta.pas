@@ -546,7 +546,7 @@ begin
         end;
       47, 470://Pontos de Inspeção
         begin
-          DM.qryAuxiliar.SQL.Add('select p.`CODIGO`, p.`DESCRICAO`, f.`DESCRICAO` AS `FAMILIAEQUIP` FROM `pontosinspecao` p INNER JOIN familiaequipamento f ON (p.`CODFAMILIAEQUIP` = f.`CODIGO`) WHERE p.descricao like :descricao and p.codempresa = '+QuotedStr(DM.FCodEmpresa) + ' order by p.descricao');
+          DM.qryAuxiliar.SQL.Add('select p.`CODIGO`, p.`DESCRICAO`, f.`DESCRICAO` AS `FAMILIAEQUIP` FROM `pontosinspecao` p LEFT JOIN familiaequipamento f ON (p.`CODFAMILIAEQUIP` = f.`CODIGO`) WHERE p.descricao like :descricao and p.codempresa = '+QuotedStr(DM.FCodEmpresa) + ' order by p.descricao');
         end;
       48, 480://Contadores do Equipamento
         begin
@@ -732,7 +732,7 @@ begin
        end;
      87://Locais de Ponto de Inspeção
        begin
-          DM.qryAuxiliar.SQL.Add('SELECT `CODIGO`, `DESCRICAO` FROM `pontosinspecaoloc` WHERE `DESCRICAO` LIKE :descricao AND `CODPONTOINSP` = '+QuotedStr(DM.FParamAuxiliar[1])+' AND `CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' ORDER BY `DESCRICAO` DESC');
+          DM.qryAuxiliar.SQL.Add('SELECT `CODIGO`, `DESCRICAO`, `LIMINFMAX`, `LIMINFSEG`, `LIMSUPSEG`, `LIMSUPMAX`, `UNIDMEDIDA` FROM `pontosinspecaoloc` WHERE `DESCRICAO` LIKE :descricao AND `CODPONTOINSP` = '+QuotedStr(DM.FParamAuxiliar[1])+' AND `CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' ORDER BY `DESCRICAO` DESC');
        end;
      88://Equipamentos Monitorados (Pontos de Inspeção)
        begin
@@ -1280,6 +1280,31 @@ begin
           DM.qryAuxiliar.Fields[2].DisplayWidth    := 20;
           DM.qryAuxiliar.Fields[0].Visible         := False;
         end;
+      87:
+        begin
+          GrdAuxiliar.Columns[0].Title.Alignment := taCenter;
+          DM.qryAuxiliar.Fields[0].Alignment     := taCenter;
+          DM.qryAuxiliar.Fields[0].DisplayLabel  := 'Código';
+          DM.qryAuxiliar.Fields[0].DisplayWidth  := 12;
+          DM.qryAuxiliar.Fields[0].Alignment     := taCenter;
+          DM.qryAuxiliar.Fields[1].DisplayLabel  := 'Descrição';
+          DM.qryAuxiliar.Fields[1].DisplayWidth  := 45;
+          DM.qryAuxiliar.Fields[2].DisplayLabel  := 'Lim. Inf. Máx.';
+          DM.qryAuxiliar.Fields[2].DisplayWidth  := 20;
+          GrdAuxiliar.Columns[2].Title.Alignment := taCenter;
+          DM.qryAuxiliar.Fields[3].DisplayLabel  := 'Lim. Inf. Seg';
+          DM.qryAuxiliar.Fields[3].DisplayWidth  := 20;
+          GrdAuxiliar.Columns[3].Title.Alignment := taCenter;
+          DM.qryAuxiliar.Fields[4].DisplayLabel  := 'Lim. Sup. Seg.';
+          DM.qryAuxiliar.Fields[4].DisplayWidth  := 20;
+          GrdAuxiliar.Columns[4].Title.Alignment := taCenter;
+          DM.qryAuxiliar.Fields[5].DisplayLabel  := 'Lim. Sup. Máx.';
+          DM.qryAuxiliar.Fields[5].DisplayWidth  := 20;
+          GrdAuxiliar.Columns[5].Title.Alignment := taCenter;
+          DM.qryAuxiliar.Fields[6].DisplayLabel  := 'Unidade';
+          DM.qryAuxiliar.Fields[6].DisplayWidth  := 15;
+          GrdAuxiliar.Columns[6].Title.Alignment := taCenter;
+        end;
       88://Equipamentos Monitorados (Pontos de Inspeção)
         begin
           DM.qryAuxiliar.Fields[2].Visible         := False;
@@ -1474,6 +1499,9 @@ begin
   DM.FNomeConsulta := EmptyStr;
   DM.FPromptConsulta := EmptyStr;
   DM.qryAuxiliar.Close;
+  DM.qryAuxiliar.Fields.Clear;
+  DM.qryAuxiliar.SQL.Clear;
+
 end;
 
 procedure TFrmTelaAuxiliar.FormCreate(Sender: TObject);

@@ -5989,6 +5989,19 @@ type
     qryOrdemServicoGerenciaRESPONSAVEL: TStringField;
     qryOrdemServicoGerenciaLOGINSOLIC: TStringField;
     qryOrdemServicoGerenciaLOGINRESP: TStringField;
+    qryMonitEquipamentos: TFDQuery;
+    dsMonitEquipamentos: TDataSource;
+    qryMonitEquipamentosCODIGO: TStringField;
+    qryMonitEquipamentosDESCRICAO: TStringField;
+    qryMonitEquipamentosCODCONTADOR: TStringField;
+    qryMonitEquipamentosCODPONTOINSP: TStringField;
+    qryMonitEquipamentosCONTROLE: TStringField;
+    qryMonitEquipamentosTIPO: TStringField;
+    qryMonitEquipamentosLIMINFMAX: TBCDField;
+    qryMonitEquipamentosLIMINFSEG: TBCDField;
+    qryMonitEquipamentosLIMSUPSEG: TBCDField;
+    qryMonitEquipamentosLIMSUPMAX: TBCDField;
+    qryMonitEquipamentosCODCENTROCUSTO: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -6070,6 +6083,8 @@ type
     procedure qryChecklistManutItensEspCalcFields(DataSet: TDataSet);
     procedure qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
     procedure qryChecklistLubrificItensEspCalcFields(DataSet: TDataSet);
+    procedure qryMonitEquipamentosAfterScroll(DataSet: TDataSet);
+    procedure qryAuxiliarAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -6738,6 +6753,22 @@ begin
   qryAlertasCODEMPRESA.AsString := DM.FCodEmpresa;
 end;
 
+procedure TDM.qryAuxiliarAfterScroll(DataSet: TDataSet);
+begin
+  if qryAuxiliar.Tag = 1 then //Relatório Completo de Equipamentos (Ficha)
+  begin
+    qryFamEquipamento.Close;
+    qryFamEquipamento.Params[0].AsString := qryAuxiliar.FieldByName('CODFAMILIAEQUIP').AsString;
+    qryFamEquipamento.Open;
+
+    DM.qryEquipamentosDados.Close;
+    DM.qryEquipamentosDados.Params[0].AsString := DM.FCodEmpresa;
+    DM.qryEquipamentosDados.Params[1].AsString := qryFamEquipamentoCODIGO.AsString;
+    DM.qryEquipamentosDados.Params[2].AsString := qryAuxiliar.FieldByName('CODIGO').AsString;
+    DM.qryEquipamentosDados.Open;
+  end;
+end;
+
 procedure TDM.qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
 begin
 if qryChecklistLubrificItensEXECUTADO.AsString = 'S' then qryChecklistLubrificItensEXECUTADO_CHK.AsBoolean := True
@@ -7323,6 +7354,74 @@ if qryManutVencDTAINICIO1.AsDateTime > 0 then
   qryManutVencC_DIASATRASO.AsInteger := DaysBetween(DateOf(DM.FDataHoraServidor), DateOf(qryManutVencDTAINICIO1.AsDateTime))
 else
   qryManutVencC_DIASATRASO.AsInteger := 0;
+end;
+
+procedure TDM.qryMonitEquipamentosAfterScroll(DataSet: TDataSet);
+var
+  I: SmallInt;
+begin
+  if FrmTelaCadMonitoramento <> nil then
+    with FrmTelaCadMonitoramento do
+    begin
+      EdtLimInfMax.Text := qryMonitEquipamentosLIMINFMAX.AsString;
+      EdtLimInf.Text := qryMonitEquipamentosLIMINFSEG.AsString;
+      EdtLimSup.Text := qryMonitEquipamentosLIMSUPSEG.AsString;
+      EdtLimSupMax.Text := qryMonitEquipamentosLIMSUPMAX.AsString;
+
+      Chart.Series[0].Clear;
+
+      if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
+      begin
+        DM.qryMonitMedicoesPtosInsp.Close;
+        DM.qryMonitMedicoesPtosInsp.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryMonitMedicoesPtosInsp.Params[1].AsString := DM.qryMonitEquipamentosCODIGO.AsString;
+        DM.qryMonitMedicoesPtosInsp.Params[2].AsString := DM.qryMonitoramentoCODIGO.AsString;
+        DM.qryMonitMedicoesPtosInsp.Open;
+
+        DM.FParamAuxiliar[2] := DM.FCodCombo;
+
+//        Chart.LeftAxis.Maximum := DM.qryMonitMedicoesPtosInspLIMSUPMAX.AsFloat;
+        if DM.qryMonitMedicoesPtosInspMAXMEDICAO2.AsString = '' then
+          Chart.LeftAxis.Maximum := 0
+        else
+          Chart.LeftAxis.Maximum := StrToFloat(DM.qryMonitMedicoesPtosInspMAXMEDICAO2.AsString);
+      end else
+      if DM.qryMonitoramentoTIPOPONTO.AsString = 'Contador' then
+      begin
+        DM.qryMonitMedicoesCont.Close;
+        DM.qryMonitMedicoesCont.Params[0].AsString := DM.FCodEmpresa;
+        DM.qryMonitMedicoesCont.Params[1].AsString := DM.qryMonitEquipamentosCODIGO.AsString;
+        DM.qryMonitMedicoesCont.Params[2].AsString := DM.qryMonitoramentoCODIGO.AsString;
+        DM.qryMonitMedicoesCont.Open;
+
+        EdtLimInfMax.Text := '';
+        EdtLimInf.Text    := '';
+        EdtLimSup.Text    := '';
+        EdtLimSupMax.Text := '';
+
+        EdtLimInfMax.Color := clBtnFace; EdtLimInfMax.Font.Color := clBlack;
+        EdtLimInf.Color    := clBtnFace; EdtLimInf.Font.Color := clBlack;
+        EdtLimSup.Color    := clBtnFace; EdtLimSup.Font.Color := clBlack;
+        EdtLimSupMax.Color := clBtnFace; EdtLimSupMax.Font.Color := clBlack;
+
+        if DM.qryMonitMedicoesContMAXMEDICAO.AsString = '' then
+          Chart.LeftAxis.Maximum := 0
+        else
+          Chart.LeftAxis.Maximum := StrToFloat(DM.qryMonitMedicoesContMAXMEDICAO.AsString);
+      end;
+
+      GrdCadastro.DataSource.DataSet.Last;
+//    for I := 0 to 49 do
+    for I := 0 to GrdCadastro.DataSource.DataSet.RecordCount - 1 do
+      begin
+        if GrdCadastro.DataSource.DataSet.RecordCount - 1 >= I then
+          Chart.Series[0].Add(GrdCadastro.DataSource.DataSet.FieldByName('MEDICAO').AsFloat, IntToStr(I + 1))
+        else
+          Chart.Series[0].Add(0, IntToStr(I + 1));
+
+        GrdCadastro.DataSource.DataSet.Prior;
+      end;
+    end;
 end;
 
 procedure TDM.qryMonitMedicoesPtosInspAfterScroll(DataSet: TDataSet);
@@ -8233,7 +8332,8 @@ end;
 
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
-  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao, EquipParado, Email, OSPrincipal: String): Integer;
+  Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao,
+  EquipParado, Email, OSPrincipal: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;

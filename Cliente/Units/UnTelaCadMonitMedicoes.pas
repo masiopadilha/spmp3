@@ -107,17 +107,17 @@ DM.FDataSetParam.FieldByName('MATRICULA').AsString        := LCodFuncionario;
 DM.FDataSetParam.FieldByName('FUNCIONARIO').AsString      := LFuncionario;
 DM.FDataSetParam.FieldByName('DATAMEDICAO').AsString      := FormatDateTime('dd/mm/yyyy', EdtData.Date);
 DM.FDataSetParam.FieldByName('MEDICAO').AsString          := EdtMedicao.Text;
-DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString   := DM.FParamAuxiliar[2];
-DM.FDataSetParam.FieldByName('CODEQUIP').AsString         := DM.FParamAuxiliar[2];
-DM.FDataSetParam.FieldByName('EQUIPAMENTO').AsString      := DM.FParamAuxiliar[3];
+DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString   := DM.qryMonitEquipamentosCODIGO.AsString;
+DM.FDataSetParam.FieldByName('CODEQUIP').AsString         := DM.qryMonitEquipamentosCODIGO.AsString;
+DM.FDataSetParam.FieldByName('EQUIPAMENTO').AsString      := DM.qryMonitEquipamentosDESCRICAO.AsString;
 if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
   begin
     DM.FDataSetParam.FieldByName('PONTOINSP').AsString    := DM.qryMonitoramentoPONTOINSPECAO.AsString;
     DM.FDataSetParam.FieldByName('PONTOINSPLOC').AsString := DM.qryMonitoramentoPONTOINSPLOC.AsString;
-    DM.FDataSetParam.FieldByName('LIMINFSEG').AsString    := DM.FParamAuxiliar[4];
-    DM.FDataSetParam.FieldByName('LIMINFMAX').AsString    := DM.FParamAuxiliar[5];
-    DM.FDataSetParam.FieldByName('LIMSUPSEG').AsString    := DM.FParamAuxiliar[6];
-    DM.FDataSetParam.FieldByName('LIMSUPMAX').AsString    := DM.FParamAuxiliar[7];
+    DM.FDataSetParam.FieldByName('LIMINFSEG').AsString    := DM.qryMonitEquipamentosLIMINFSEG.AsString;
+    DM.FDataSetParam.FieldByName('LIMINFMAX').AsString    := DM.qryMonitEquipamentosLIMINFMAX.AsString;
+    DM.FDataSetParam.FieldByName('LIMSUPSEG').AsString    := DM.qryMonitEquipamentosLIMSUPSEG.AsString;
+    DM.FDataSetParam.FieldByName('LIMSUPMAX').AsString    := DM.qryMonitEquipamentosLIMSUPMAX.AsString;
 
     if DM.FDataSetParam.FieldByName('MEDICAO').AsFloat < DM.FDataSetParam.FieldByName('LIMINFSEG').AsFloat then
       begin
@@ -126,14 +126,14 @@ if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
             if DM.FDataSetParam.FieldByName('MEDICAO').AsFloat < DM.FDataSetParam.FieldByName('LIMINFMAX').AsFloat then
               begin
                 DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
-                                                                 , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.FDataSetParam.FieldByName('CODCENTROCUSTO').AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                                 , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
+                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
               end
             else
               begin
                 DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
-                                                                            , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                            , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.FDataSetParam.FieldByName('CODCENTROCUSTO').AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                                 , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
+                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
               end;
 
             DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
@@ -147,28 +147,20 @@ if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
     else
     if DM.FDataSetParam.FieldByName('MEDICAO').AsFloat > DM.FDataSetParam.FieldByName('LIMSUPSEG').AsFloat then
       begin
-        if Application.MessageBox('Será gerada uma ordem de serviço para verificação do equipamento, confirma a inclusão?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+        if DM.FDataSetParam.FieldByName('MEDICAO').AsFloat > DM.FDataSetParam.FieldByName('LIMSUPMAX').AsFloat then
           begin
-            if DM.FDataSetParam.FieldByName('MEDICAO').AsFloat > DM.FDataSetParam.FieldByName('LIMSUPMAX').AsFloat then
-              begin
-                DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
-                                                                            , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                            , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.FDataSetParam.FieldByName('CODCENTROCUSTO').AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
-              end
-            else
-              begin
-                DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
-                                                                            , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                            , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.FDataSetParam.FieldByName('CODCENTROCUSTO').AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
-              end;
-
-            DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
+            DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
+                                                                        , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
+                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
           end
         else
           begin
-            DM.qryMonitMedicoesPtosInsp.Cancel;
-            Exit;
+            DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
+                                                                        , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
+                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
           end;
+
+        DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
       end;
   end
 else
@@ -216,50 +208,43 @@ else
       DM.qryMonitMedicoesContManut.First;
       while not DM.qryMonitMedicoesContManut.Eof do
         begin
-          if Application.MessageBox('Será gerada uma ordem de serviço para verificação do equipamento, confirma a inclusão?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
-            begin
-              if ((DM.qryMonitMedicoesContMEDICAO.AsFloat >= DM.qryMonitMedicoesContManutLEITURA.AsFloat) and (DM.qryMonitMedicoesContManutREPROGRAMAR2.AsString = 'Programação'))
-                or ((DM.qryMonitMedicoesContMEDICAO.AsFloat >= DM.qryMonitMedicoesContManutLEITURA.AsFloat) and (DM.qryMonitMedicoesContManutREPROGRAMAR2.AsString = 'Execução') and ((DM.qryMonitMedicoesContManutRELATORIO.AsString = 'N') or (DM.qryMonitMedicoesContManutRELATORIO.AsString = EmptyStr))) then
-                  begin
-                    DM.qryMonitMedicoesContOSGERADA.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.qryMonitMedicoesContManutMANUTENCAO.AsString
-                                                                            , DM.qryMonitMedicoesContCODEQUIPAMENTO.AsString, DM.qryMonitMedicoesContManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                            , DM.qryMonitMedicoesContMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.FDataSetParam.FieldByName('CODCENTROCUSTO').AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
-                    DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
+      if ((DM.qryMonitMedicoesContMEDICAO.AsFloat >= DM.qryMonitMedicoesContManutLEITURA.AsFloat) and (DM.qryMonitMedicoesContManutREPROGRAMAR2.AsString = 'Programação'))
+        or ((DM.qryMonitMedicoesContMEDICAO.AsFloat >= DM.qryMonitMedicoesContManutLEITURA.AsFloat) and (DM.qryMonitMedicoesContManutREPROGRAMAR2.AsString = 'Execução') and ((DM.qryMonitMedicoesContManutRELATORIO.AsString = 'N') or (DM.qryMonitMedicoesContManutRELATORIO.AsString = EmptyStr))) then
+          begin
+            DM.qryMonitMedicoesContOSGERADA.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.qryMonitMedicoesContManutMANUTENCAO.AsString
+                                                                    , DM.qryMonitMedicoesContCODEQUIPAMENTO.AsString, DM.qryMonitMedicoesContManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
+                                                                    , DM.qryMonitMedicoesContMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+            DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
 
-                    DM.qryManutProgEquip.Close;
-                    DM.qryManutProgEquip.Params[0].AsString := DM.qryMonitMedicoesContManutCODIGO.AsString;
-                    DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
-                    DM.qryManutProgEquip.Params[2].AsString := DM.FParamAuxiliar[2];
-                    DM.qryManutProgEquip.Open;
+            DM.qryManutProgEquip.Close;
+            DM.qryManutProgEquip.Params[0].AsString := DM.qryMonitMedicoesContManutCODIGO.AsString;
+            DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
+            DM.qryManutProgEquip.Params[2].AsString := DM.qryMonitEquipamentosCODIGO.AsString;
+            DM.qryManutProgEquip.Open;
 
-                    //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
-                    if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
-                      begin
-                        DM.qryManutProgEquip.Edit;
-                        DM.qryManutProgEquipRELATORIO.AsString    := 'N';
-                        DM.qryManutProgEquipLEITURA.AsInteger     := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
-                        DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutProgEquipFREQUENCIA1.AsInteger);
-                        DM.qryManutProgEquip.Post;
-                      end;
+            //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
+            if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
+              begin
+                DM.qryManutProgEquip.Edit;
+                DM.qryManutProgEquipRELATORIO.AsString    := 'N';
+//                DM.qryManutProgEquipLEITURA.AsInteger     := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
+                DM.qryManutProgEquipLEITURA.AsInteger     := DM.qryMonitMedicoesContMEDICAO.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
+                DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutProgEquipFREQUENCIA1.AsInteger);
+                DM.qryManutProgEquip.Post;
+              end;
 
-                    //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
-                    //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
-                    if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Execução' then
-                      begin
-                        DM.qryManutProgEquip.Edit;
-                        DM.qryManutProgEquipRELATORIO.AsString    := 'S';
-                        DM.qryManutProgEquip.Post;
-                      end;
+            //Sendo a inspeção reprogramada pela execução, definir como manutenção em aberto até ser efetuado o fechamento, portanto não permitindo
+            //a geração de outra manutenção mesmo que o período vença novamente. Define a coluna 'RELATORIO = S' para impedir a geração de outra manutenção até ser fechada.
+            if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Execução' then
+              begin
+                DM.qryManutProgEquip.Edit;
+                DM.qryManutProgEquipRELATORIO.AsString    := 'S';
+                DM.qryManutProgEquip.Post;
+              end;
 
-//                    DM.qryManutProgEquip.Edit;
-//                    DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DM.qryManutProgEquipDTAINICIO1.AsDateTime, DM.qryManutProgEquipFREQUENCIA1.AsInteger);
-//                    DM.qryManutProgEquipLEITURA.AsFloat       := StrToFloat(EdtMedicao.Text) + DM.qryMonitMedicoesContManutFREQUENCIA2.AsFloat;
-//                    DM.qryManutProgEquipRELATORIO.AsString    := 'S';
-//                    DM.qryManutProgEquip.Post;
+            DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryMonitMedicoesContManutCODEQUIPAMENTO.AsString, DM.qryMonitMedicoesContManutCODIGO.AsString, DM.qryMonitMedicoesContOSGERADA.AsInteger);
+          end;
 
-                    DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryMonitMedicoesContManutCODEQUIPAMENTO.AsString, DM.qryMonitMedicoesContManutCODIGO.AsString, DM.qryMonitMedicoesContOSGERADA.AsInteger);
-                  end;
-            end;
 
           DM.qryMonitMedicoesContManut.Next;
         end;
@@ -314,29 +299,19 @@ procedure TFrmTelaCadMonitMedicoes.FormCreate(Sender: TObject);
 begin
   inherited;
 EdtData.Date      := DM.FDataHoraServidor;
-edtCodEquip.Text  := DM.FParamAuxiliar[2];
-edtDescEquip.Text := DM.FParamAuxiliar[3];
+edtCodEquip.Text  := DM.qryMonitEquipamentosCODIGO.AsString;
+edtDescEquip.Text := DM.qryMonitEquipamentosDESCRICAO.AsString;
 
 if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
   begin
     DM.FDataSetParam    := DM.qryMonitMedicoesPtosInsp;
     DM.FDataSourceParam := DM.DSMonitMedicoesPtosInsp;
-//    DM.qryMonitMedicoesPtosInsp.Close;
-//    DM.qryMonitMedicoesPtosInsp.Params[0].AsString := DM.FCodEmpresa;
-//    DM.qryMonitMedicoesPtosInsp.Params[1].AsString := DM.FParamAuxiliar[2];
-//    DM.qryMonitMedicoesPtosInsp.Params[2].AsString := DM.FParamAuxiliar[0];
-//    DM.qryMonitMedicoesPtosInsp.Open;
   end
 else
 if DM.qryMonitoramentoTIPOPONTO.AsString = 'Contador' then
   begin
     DM.FDataSetParam    := DM.qryMonitMedicoesCont;
     DM.FDataSourceParam := DM.DSMonitMedicoesCont;
-//    DM.qryMonitMedicoesCont.Close;
-//    DM.qryMonitMedicoesCont.Params[0].AsString := DM.FCodEmpresa;
-//    DM.qryMonitMedicoesCont.Params[1].AsString := DM.FParamAuxiliar[2];
-//    DM.qryMonitMedicoesCont.Params[2].AsString := DM.FParamAuxiliar[0];
-//    DM.qryMonitMedicoesCont.Open;
   end;
 GrdCadastro.DataSource := DM.FDataSourceParam;
 end;

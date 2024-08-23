@@ -1,7 +1,9 @@
 inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   Caption = 'Monitoramento'
-  ClientHeight = 624
+  ClientHeight = 619
   ClientWidth = 1012
+  KeyPreview = False
+  OnShow = FormShow
   TextHeight = 16
   object Label9: TLabel [0]
     Left = 33
@@ -14,6 +16,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   inherited PControle: TPanel
     Width = 1008
     inherited pAlteracao: TPanel
+      ExplicitLeft = 652
       inherited LCadastro: TLabel
         Height = 14
       end
@@ -25,6 +28,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       end
     end
     inherited pCadastro: TPanel
+      ExplicitLeft = 652
       inherited LCadastroPor: TLabel
         Height = 14
       end
@@ -38,11 +42,12 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    Height = 129
-    ExplicitHeight = 129
+    Height = 119
+    ExplicitWidth = 1008
+    ExplicitHeight = 119
     object Label4: TLabel
       Left = 62
-      Top = 62
+      Top = 59
       Width = 60
       Height = 16
       Alignment = taRightJustify
@@ -56,7 +61,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object Label17: TLabel
       Left = 494
-      Top = 62
+      Top = 59
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -140,7 +145,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object Label14: TLabel
       Left = 872
-      Top = 62
+      Top = 59
       Width = 12
       Height = 13
       Alignment = taRightJustify
@@ -154,7 +159,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object Label15: TLabel
       Left = 546
-      Top = 62
+      Top = 59
       Width = 57
       Height = 16
       Alignment = taRightJustify
@@ -168,7 +173,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object Label16: TLabel
       Left = 522
-      Top = 93
+      Top = 86
       Width = 81
       Height = 16
       Alignment = taRightJustify
@@ -182,7 +187,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object LblProgramacao: TDBText
       Left = 608
-      Top = 93
+      Top = 86
       Width = 104
       Height = 16
       AutoSize = True
@@ -197,7 +202,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object Label18: TLabel
       Left = 13
-      Top = 94
+      Top = 87
       Width = 109
       Height = 16
       Alignment = taRightJustify
@@ -211,7 +216,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object EdtDescricao: TDBEdit
       Left = 127
-      Top = 59
+      Top = 56
       Width = 362
       Height = 24
       Ctl3D = True
@@ -315,7 +320,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object BtnContador: TButton
       Left = 840
-      Top = 57
+      Top = 54
       Width = 28
       Height = 28
       DisabledImageIndex = 7
@@ -327,7 +332,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object EdtDescContador: TDBEdit
       Left = 608
-      Top = 59
+      Top = 56
       Width = 230
       Height = 24
       Color = clBtnFace
@@ -347,7 +352,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object edtPlanoTrab: TDBEdit
       Left = 127
-      Top = 91
+      Top = 84
       Width = 230
       Height = 24
       Color = clBtnFace
@@ -368,7 +373,7 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
     object BtnPlanoTrab: TButton
       Left = 359
-      Top = 89
+      Top = 82
       Width = 28
       Height = 28
       DisabledImageIndex = 7
@@ -380,44 +385,24 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
     end
   end
   inherited PProgramacao: TPanel
-    Top = 184
+    Top = 174
     Width = 1008
-    Height = 160
-    ExplicitTop = 184
-    ExplicitHeight = 160
+    Height = 212
+    ExplicitTop = 174
+    ExplicitWidth = 1008
+    ExplicitHeight = 212
     inherited Label2: TLabel
       Width = 86
       Caption = 'MEDI'#199#213'ES'
       ExplicitWidth = 86
     end
-    object Label7: TLabel
-      Left = 45
-      Top = 32
-      Width = 79
-      Height = 16
-      Alignment = taRightJustify
-      Caption = 'Equipamento:'
-    end
-    object Label20: TLabel
-      Left = 48
-      Top = 66
-      Width = 50
-      Height = 16
-      Caption = 'Limites:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object Label21: TLabel
-      Left = 56
-      Top = 86
-      Width = 95
+      Left = 477
+      Top = 8
+      Width = 78
       Height = 16
       Alignment = taRightJustify
-      Caption = 'Inferior M'#225'ximo:'
+      Caption = 'Inferior M'#225'x.:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -426,8 +411,8 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       ParentFont = False
     end
     object Label22: TLabel
-      Left = 104
-      Top = 116
+      Left = 477
+      Top = 60
       Width = 47
       Height = 16
       Alignment = taRightJustify
@@ -440,8 +425,8 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       ParentFont = False
     end
     object Label23: TLabel
-      Left = 310
-      Top = 86
+      Left = 477
+      Top = 112
       Width = 54
       Height = 16
       Alignment = taRightJustify
@@ -454,12 +439,12 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       ParentFont = False
     end
     object Label24: TLabel
-      Left = 261
-      Top = 116
-      Width = 103
+      Left = 477
+      Top = 164
+      Width = 85
       Height = 16
       Alignment = taRightJustify
-      Caption = 'Superior m'#225'ximo:'
+      Caption = 'Superior M'#225'x.:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -467,24 +452,12 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       Font.Style = []
       ParentFont = False
     end
-    object BtnEquipamento: TButton
-      Left = 439
-      Top = 30
-      Width = 28
-      Height = 28
-      DisabledImageIndex = 14
-      ImageAlignment = iaCenter
-      ImageIndex = 14
-      Images = DM.ImageListBotoes
-      TabOrder = 2
-      OnClick = BtnEquipamentoClick
-    end
     object GrdCadastro: TDBGrid
       AlignWithMargins = True
-      Left = 508
+      Left = 568
       Top = 5
-      Width = 495
-      Height = 150
+      Width = 435
+      Height = 202
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -493,29 +466,29 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       Color = clBtnFace
       DataSource = DM.dsMonitMedicoesPtosInsp
       DrawingStyle = gdsClassic
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ParentShowHint = False
       ReadOnly = True
       ShowHint = False
-      TabOrder = 7
+      TabOrder = 4
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -13
+      TitleFont.Height = -12
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnDblClick = GrdCadastroDblClick
       OnExit = TabNextTab1AfterTabChange
       OnKeyDown = GrdCadastroKeyDown
-      OnTitleClick = GrdCadastroTitleClick
       Columns = <
         item
           Expanded = False
           FieldName = 'DATAMEDICAO'
           Title.Alignment = taCenter
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = []
           Width = 85
           Visible = True
         end
@@ -523,11 +496,6 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
           Expanded = False
           FieldName = 'MEDICAO'
           Title.Alignment = taCenter
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = []
           Width = 93
           Visible = True
         end
@@ -536,49 +504,56 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
           FieldName = 'OSGERADA'
           Title.Alignment = taCenter
           Title.Caption = 'O.S.'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = []
           Width = 80
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'FUNCIONARIO'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -12
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = []
-          Width = 178
+          Width = 141
           Visible = True
         end>
     end
-    object edtCodEquip: TEdit
-      Left = 127
-      Top = 32
-      Width = 98
+    object EdtLimInfMax: TEdit
+      Left = 477
+      Top = 30
+      Width = 65
       Height = 24
-      CharCase = ecUpperCase
+      TabStop = False
+      Alignment = taRightJustify
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 0
+      StyleElements = [seBorder]
     end
-    object edtDescEquip: TEdit
-      Left = 226
-      Top = 32
-      Width = 212
+    object EdtLimInf: TEdit
+      Left = 477
+      Top = 81
+      Width = 65
       Height = 24
+      TabStop = False
+      Alignment = taRightJustify
       Color = clBtnFace
       ReadOnly = True
       TabOrder = 1
+      StyleElements = [seBorder]
     end
-    object EdtLimInfMax: TEdit
-      Left = 155
-      Top = 85
-      Width = 70
+    object EdtLimSup: TEdit
+      Left = 477
+      Top = 132
+      Width = 65
+      Height = 24
+      TabStop = False
+      Alignment = taRightJustify
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 2
+      StyleElements = [seBorder]
+    end
+    object EdtLimSupMax: TEdit
+      Left = 477
+      Top = 183
+      Width = 65
       Height = 24
       TabStop = False
       Alignment = taRightJustify
@@ -587,148 +562,239 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
       TabOrder = 3
       StyleElements = [seBorder]
     end
-    object EdtLimInf: TEdit
-      Left = 155
-      Top = 115
-      Width = 70
-      Height = 24
-      TabStop = False
-      Alignment = taRightJustify
+    object GridEquipamentos: TDBGrid
+      Left = 7
+      Top = 29
+      Width = 460
+      Height = 178
       Color = clBtnFace
-      ReadOnly = True
-      TabOrder = 4
-      StyleElements = [seBorder]
-    end
-    object EdtLimSup: TEdit
-      Left = 368
-      Top = 85
-      Width = 70
-      Height = 24
-      TabStop = False
-      Alignment = taRightJustify
-      Color = clBtnFace
+      DataSource = DM.dsMonitEquipamentos
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ReadOnly = True
       TabOrder = 5
-      StyleElements = [seBorder]
-    end
-    object EdtLimSupMax: TEdit
-      Left = 368
-      Top = 115
-      Width = 70
-      Height = 24
-      TabStop = False
-      Alignment = taRightJustify
-      Color = clBtnFace
-      ReadOnly = True
-      TabOrder = 6
-      StyleElements = [seBorder]
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = [fsBold]
+      StyleElements = [seFont, seBorder]
+      OnKeyPress = GridEquipamentosKeyPress
+      Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'CODIGO'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'digo'
+          Width = 85
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DESCRICAO'
+          Title.Caption = 'Descri'#231#227'o'
+          Width = 341
+          Visible = True
+        end>
     end
   end
   inherited PDiversos: TPanel
-    Top = 348
+    Top = 390
     Width = 1008
-    ExplicitTop = 348
-    ExplicitHeight = 210
+    Height = 166
+    ExplicitTop = 371
+    ExplicitWidth = 1008
+    ExplicitHeight = 185
     inherited Label3: TLabel
       Width = 75
       Caption = 'GR'#193'FICO'
       ExplicitWidth = 75
     end
-    object GrafMonit: TDBChart
+    object Chart: TChart
       AlignWithMargins = True
-      Left = 5
+      Left = 4
       Top = 26
-      Width = 998
-      Height = 182
-      Margins.Left = 4
+      Width = 1000
+      Height = 136
       Margins.Top = 25
-      Margins.Right = 4
-      Margins.Bottom = 4
       AllowPanning = pmNone
-      BackWall.Pen.Visible = False
-      BottomWall.Brush.Gradient.EndColor = clSilver
-      BottomWall.Brush.Gradient.StartColor = clGray
-      BottomWall.Brush.Gradient.Visible = True
-      BottomWall.Pen.Color = clGray
-      BottomWall.Size = 4
-      Gradient.Direction = gdFromTopLeft
-      Gradient.EndColor = 13619104
-      Gradient.Visible = True
-      LeftWall.Brush.Gradient.EndColor = clSilver
-      LeftWall.Brush.Gradient.StartColor = clGray
-      LeftWall.Brush.Gradient.Visible = True
-      LeftWall.Color = clWhite
-      LeftWall.Pen.Color = clGray
-      LeftWall.Size = 4
+      Border.Color = 7766572
+      Border.Width = 0
+      Border.Fill.Gradient.EndColor = 7766572
+      Border.Fill.Gradient.MidColor = 527860268
+      Border.Fill.Gradient.StartColor = 7766572
+      Border.Visible = True
+      BorderRound = 15
+      BottomWall.Pen.Visible = False
+      BottomWall.Visible = False
+      Gradient.Colors = <
+        item
+          Color = 7766572
+        end
+        item
+          Color = 8754226
+          Offset = 1.000000000000000000
+        end
+        item
+          Color = 9412405
+          Offset = 1.000000000000000000
+        end>
+      Gradient.EndColor = 9412405
+      Gradient.MidColor = 8754226
+      Gradient.StartColor = 7766572
+      LeftWall.Visible = False
+      Legend.Alignment = laTop
+      Legend.Color = 15657170
+      Legend.ColorWidth = 0
+      Legend.Font.Color = clWhite
+      Legend.Font.Name = 'Segoe UI'
+      Legend.Font.Style = [fsBold]
+      Legend.FontSeriesColor = True
+      Legend.Frame.Color = 15657170
+      Legend.RoundSize = 8
+      Legend.Shadow.Visible = False
+      Legend.ShapeStyle = fosRoundRectangle
+      Legend.Symbol.Width = 0
+      Legend.TextStyle = ltsXAndValue
+      Legend.Title.Alignment = taCenter
+      Legend.Title.Font.Color = 9875024
+      Legend.Title.Font.Name = 'Segoe UI Semibold'
+      Legend.Title.Font.Style = []
+      Legend.Title.Frame.Color = clWhite
+      Legend.Title.Margins.Left = 8
+      Legend.Title.Text.Strings = (
+        'Execu'#231#227'o')
+      Legend.Title.TextAlignment = taRightJustify
+      Legend.TopPos = 0
+      Legend.Visible = False
       MarginBottom = 0
       MarginLeft = 1
       MarginRight = 1
-      MarginTop = 5
-      Title.Font.Height = -12
-      Title.Font.Shadow.Color = clGray
-      Title.Font.Shadow.HorizSize = 1
-      Title.Font.Shadow.SmoothBlur = 2
-      Title.Font.Shadow.VertSize = 1
-      Title.Font.Shadow.Visible = False
+      MarginTop = 18
+      Title.Font.Charset = ANSI_CHARSET
+      Title.Font.Color = clGray
+      Title.Font.Height = -15
+      Title.Font.Name = 'Segoe UI'
+      Title.Font.Style = [fsBold]
       Title.Text.Strings = (
-        'TDBChart')
+        'TChart')
       Title.Visible = False
-      BottomAxis.Grid.Color = 14540253
-      BottomAxis.LabelsFormat.Font.Color = clGray
-      BottomAxis.LabelsFormat.Font.Height = -9
-      BottomAxis.LabelStyle = talText
-      Chart3DPercent = 100
-      ClipPoints = False
-      Frame.Visible = False
-      LeftAxis.Grid.Color = 11184810
-      LeftAxis.Grid.Width = 0
-      LeftAxis.Grid.SmallSpace = 1
-      LeftAxis.GridCentered = True
-      LeftAxis.LabelsFormat.Font.Color = clGray
-      LeftAxis.LabelsFormat.Font.Height = -9
-      LeftAxis.LabelStyle = talValue
-      Legend.Visible = False
+      Title.VertMargin = 2
+      BottomAxis.Axis.Color = 545292416
+      BottomAxis.Axis.Style = psDash
+      BottomAxis.Axis.Width = 1
+      BottomAxis.Grid.Visible = False
+      BottomAxis.LabelsFormat.Font.Color = 10724259
+      BottomAxis.LabelsFormat.Font.Name = 'Segoe UI'
+      BottomAxis.LabelsFormat.Font.Style = [fsBold]
+      BottomAxis.LabelsFormat.Frame.Visible = False
+      Hover.Visible = False
+      LeftAxis.Automatic = False
+      LeftAxis.AutomaticMaximum = False
+      LeftAxis.AutomaticMinimum = False
+      LeftAxis.Axis.Color = clGray
+      LeftAxis.Axis.Visible = False
+      LeftAxis.AxisValuesFormat = '0'
+      LeftAxis.Grid.Color = 2009120960
+      LeftAxis.LabelsFormat.Font.Color = 8421440
+      LeftAxis.LabelsFormat.Font.Name = 'Segoe UI'
+      LeftAxis.LabelsFormat.Font.Style = [fsBold]
+      LeftAxis.LabelsFormat.Frame.Color = clDefault
+      LeftAxis.Maximum = 28.000000000000000000
+      LeftAxis.TickLength = 5
+      LeftAxis.Title.Caption = 'HH Dispon'#237'vel'
+      LeftAxis.Title.Font.Color = 10724259
+      LeftAxis.Title.Font.Height = -12
+      LeftAxis.Title.Font.Name = 'Segoe UI'
+      LeftAxis.Title.Font.Style = [fsBold]
+      LeftAxis.Title.Visible = False
+      Panning.MouseWheel = pmwNone
+      RightAxis.Title.Visible = False
+      RightAxis.Visible = False
+      Shadow.Visible = False
+      TopAxis.Axis.Visible = False
+      TopAxis.Title.Visible = False
+      TopAxis.Visible = False
       View3D = False
-      View3DOptions.Elevation = 350
-      View3DOptions.Orthogonal = False
-      View3DOptions.Perspective = 55
-      View3DOptions.Zoom = 90
-      Zoom.Animated = True
-      Zoom.Pen.Mode = pmNotXor
+      View3DWalls = False
+      Zoom.Allow = False
       Align = alClient
+      BevelOuter = bvNone
+      Color = 16249832
       TabOrder = 0
-      ExplicitWidth = 994
-      ExplicitHeight = 179
+      ExplicitTop = 29
+      ExplicitHeight = 160
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
-        39
+        43
         15
-        39)
-      ColorPaletteIndex = 13
+        43)
+      ColorPaletteIndex = 20
       object Series1: TBarSeries
         HoverElement = []
-        Marks.Visible = False
-        SeriesColor = 4227072
-        MultiBar = mbStacked
+        Legend.Visible = False
+        BarPen.Color = clSilver
+        Marks.Font.Color = clGray
+        Marks.Font.Name = 'Segoe UI'
+        Marks.Font.Style = [fsBold]
+        Marks.Frame.Visible = False
+        Marks.Shadow.Color = 12303291
+        Marks.Shadow.HorizSize = 2
+        Marks.Shadow.VertSize = 2
+        Marks.Transparency = 1
+        Marks.Transparent = True
+        Marks.Margins.Left = 3
+        Marks.Margins.Right = 3
+        Marks.Margins.Bottom = 0
+        Marks.TextAlignment = taRightJustify
+        Marks.Style = smsValue
+        Marks.Arrow.Width = 0
+        Marks.Arrow.Visible = False
+        Marks.BackColor = 15461334
+        Marks.Callout.Arrow.Width = 0
+        Marks.Callout.Arrow.Visible = False
+        Marks.Callout.Length = 8
+        Marks.SoftClip = True
+        Marks.Symbol.Shadow.Visible = False
+        Marks.TextAlign = taRightJustify
+        Marks.Color = 15461334
+        RoundSize = 5
+        SeriesColor = 9875024
+        ShowInLegend = False
+        Title = 'Execu'#231#227'o'
+        BarStyle = bsRoundRectangle
         XValues.Name = 'X'
         XValues.Order = loAscending
         YValues.Name = 'Bar'
         YValues.Order = loNone
+        Data = {0000000000}
+        Detail = {0000000000}
       end
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 600
     Width = 1012
+    ExplicitTop = 589
+    ExplicitWidth = 1006
   end
   inherited PAlertas: TPanel
-    Top = 563
+    Top = 558
     Width = 1012
+    ExplicitTop = 547
+    ExplicitWidth = 1006
   end
   inherited PBase: TPanel
-    Top = 565
+    Top = 560
     Width = 1008
+    ExplicitTop = 549
+    ExplicitWidth = 1002
     inherited Button1: TButton
       Hint = 'Cadastrar leituras'
       DisabledImageIndex = 97
@@ -745,17 +811,5 @@ inherited FrmTelaCadMonitoramento: TFrmTelaCadMonitoramento
   end
   inherited ActionList1: TActionList
     Top = 11
-  end
-  object PopupMenuCons: TPopupMenu
-    Left = 458
-    Top = 251
-    object Codigo1: TMenuItem
-      Caption = 'C'#243'digo'
-      OnClick = Codigo1Click
-    end
-    object Descricao1: TMenuItem
-      Caption = 'Descri'#231#227'o'
-      OnClick = Descricao1Click
-    end
   end
 end

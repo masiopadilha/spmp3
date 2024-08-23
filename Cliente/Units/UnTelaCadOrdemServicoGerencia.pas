@@ -670,7 +670,7 @@ DM.qryOrdemServico.Post;
 
 DM.qryOrdemServicoGerencia.Edit;
 DM.qryOrdemServicoGerenciaSITUACAO.AsString := 'EXECUCAO';
-DM.qryOrdemServicoGerenciaDATAINICIOREAL.AsDateTime := DM.FDataHoraServidor;
+DM.qryOrdemServicoGerenciaDATAINICIOREAL.AsDateTime := DM.qryOrdemServicoDATAINICIOREAL.AsDateTime;
 DM.qryOrdemServicoGerencia.Post;
 
 //Localiza e atualiza o status da Solic. de Trab
