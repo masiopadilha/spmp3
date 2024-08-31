@@ -6,56 +6,72 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
+      Left = 514
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 510
     end
     inherited LAlteradoPor: TLabel
+      Left = 536
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 532
     end
     inherited LblDataAlt: TDBText
+      Left = 569
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCentroCusto
+      ExplicitLeft = 565
     end
     inherited LblDataCad: TDBText
+      Left = 445
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCentroCusto
+      ExplicitLeft = 445
     end
     inherited LblUsuAlt: TDBText
+      Left = 569
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCentroCusto
+      ExplicitLeft = 565
     end
     inherited LblUsuCad: TDBText
+      Left = 445
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCentroCusto
+      ExplicitLeft = 445
     end
     inherited LCadastro: TLabel
+      Left = 412
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 412
     end
     inherited LCadastroPor: TLabel
+      Left = 374
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      ExplicitLeft = 374
     end
   end
   inherited PCentro: TPanel
@@ -63,14 +79,14 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
     Height = 323
     object Label2: TLabel
       Left = 190
-      Top = 90
+      Top = 92
       Width = 44
       Height = 16
       Caption = 'C'#243'digo:'
     end
     object Label4: TLabel
       Left = 174
-      Top = 120
+      Top = 122
       Width = 60
       Height = 16
       Alignment = taRightJustify
@@ -79,7 +95,7 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
     object EdtCodigo: TDBEdit
       Tag = 555
       Left = 238
-      Top = 88
+      Top = 90
       Width = 125
       Height = 24
       CharCase = ecUpperCase
@@ -92,7 +108,7 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
     end
     object EdtDescricao: TDBEdit
       Left = 238
-      Top = 119
+      Top = 121
       Width = 230
       Height = 24
       DataField = 'DESCRICAO'
@@ -102,8 +118,8 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
       OnKeyPress = FormKeyPress
     end
     object ChbAtivoNF: TDBCheckBox
-      Left = 198
-      Top = 150
+      Left = 196
+      Top = 153
       Width = 57
       Height = 17
       Alignment = taLeftJustify
@@ -116,8 +132,8 @@ inherited FrmTelaCadCentroCusto: TFrmTelaCadCentroCusto
       OnExit = TabNextTab1AfterTabChange
     end
     object ChbVisivelNF: TDBCheckBox
-      Left = 299
-      Top = 150
+      Left = 297
+      Top = 153
       Width = 65
       Height = 17
       Alignment = taLeftJustify

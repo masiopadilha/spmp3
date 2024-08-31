@@ -10,19 +10,17 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
-  ExplicitLeft = 3
-  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 768
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1002
+    ExplicitWidth = 1004
     inherited Image1: TImage
-      Left = 2
-      Top = 2
+      Height = 47
       ExplicitLeft = 2
       ExplicitTop = 2
+      ExplicitHeight = 47
     end
     object Label9: TLabel [1]
       Left = 679
@@ -39,7 +37,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       Visible = False
     end
     object Label3: TLabel [2]
-      Left = 127
+      Left = 204
       Top = 35
       Width = 54
       Height = 13
@@ -53,7 +51,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       ParentFont = False
     end
     object Label4: TLabel [3]
-      Left = 294
+      Left = 371
       Top = 35
       Width = 7
       Height = 16
@@ -61,7 +59,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     end
     inherited BtnAjuda: TButton
       Left = 971
-      ExplicitLeft = 965
+      ExplicitLeft = 967
     end
     object CBPeriodo: TComboBox
       Left = 738
@@ -87,7 +85,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         #218'ltimos 18 meses')
     end
     object EdtData1: TJvDateTimePicker
-      Left = 185
+      Left = 262
       Top = 30
       Width = 105
       Height = 24
@@ -98,7 +96,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       DropDownDate = 44778.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 306
+      Left = 383
       Top = 30
       Width = 105
       Height = 24
@@ -109,7 +107,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       DropDownDate = 44771.000000000000000000
     end
     object BtnConsultar: TButton
-      Left = 413
+      Left = 490
       Top = 27
       Width = 28
       Height = 28
@@ -135,8 +133,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
     Margins.Bottom = 2
     ExplicitLeft = 2
     ExplicitTop = 66
-    ExplicitWidth = 1002
-    ExplicitHeight = 584
+    ExplicitWidth = 1004
+    ExplicitHeight = 592
     inherited RGTelas: TRadioGroup
       Top = 0
       Height = 0
@@ -157,7 +155,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 0
-      ExplicitWidth = 994
+      ExplicitWidth = 996
       object Button1: TBitBtn
         Left = 3
         Top = 6
@@ -371,7 +369,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 994
+      ExplicitWidth = 996
       object CheckBox1: TCheckBox
         Left = 8
         Top = 5
@@ -520,7 +518,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 994
+      ExplicitWidth = 996
       object Label6: TLabel
         Left = 7
         Top = 11
@@ -711,8 +709,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           Width = 200
         end>
       OnResize = StatusBar1Resize
-      ExplicitTop = 564
-      ExplicitWidth = 1000
+      ExplicitTop = 572
+      ExplicitWidth = 1002
     end
     object Panel10: TPanel
       AlignWithMargins = True
@@ -726,8 +724,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 6
-      ExplicitWidth = 994
-      ExplicitHeight = 451
+      ExplicitWidth = 996
+      ExplicitHeight = 459
       DesignSize = (
         1000
         462)
@@ -1097,7 +1095,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
         TabOrder = 2
         OnClick = CheckBox1Click
-        ExplicitLeft = 865
+        ExplicitLeft = 867
       end
       object chkParado: TCheckBox
         Left = 871
@@ -1115,7 +1113,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentFont = False
         TabOrder = 3
         OnClick = CheckBox1Click
-        ExplicitLeft = 865
+        ExplicitLeft = 867
       end
       object CBPrioridade: TComboBox
         Left = 873
@@ -1141,7 +1139,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           'At'#233' 1 Semana'
           'At'#233' 1 M'#234's'
           'Acima de 1 m'#234's')
-        ExplicitLeft = 867
+        ExplicitLeft = 869
       end
       object CBTipoManutencao: TComboBox
         Left = 873
@@ -1171,7 +1169,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
           'Novos Projetos'
           'Altera'#231#245'es'
           'Outras')
-        ExplicitLeft = 867
+        ExplicitLeft = 869
       end
       object Panel2: TPanel
         Left = 875
@@ -1184,7 +1182,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 6
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel1: TPanel
         Left = 875
@@ -1197,7 +1195,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 7
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel3: TPanel
         Left = 875
@@ -1210,7 +1208,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 8
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel4: TPanel
         Left = 875
@@ -1223,7 +1221,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 9
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel5: TPanel
         Left = 875
@@ -1236,7 +1234,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 10
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel6: TPanel
         Left = 875
@@ -1249,7 +1247,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 11
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel7: TPanel
         Left = 875
@@ -1262,7 +1260,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 12
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel8: TPanel
         Left = 875
@@ -1275,7 +1273,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 13
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object Panel9: TPanel
         Left = 875
@@ -1288,7 +1286,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ParentBackground = False
         TabOrder = 14
         StyleElements = []
-        ExplicitLeft = 869
+        ExplicitLeft = 871
       end
       object chkSolic: TCheckBox
         Left = 871
@@ -1308,7 +1306,7 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ShowHint = True
         TabOrder = 1
         OnClick = CheckBox1Click
-        ExplicitLeft = 865
+        ExplicitLeft = 867
       end
       object DBNavigator1: TDBNavigator
         AlignWithMargins = True
@@ -1324,22 +1322,22 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         Align = alBottom
         Flat = True
         TabOrder = 15
-        ExplicitTop = 428
-        ExplicitWidth = 857
+        ExplicitTop = 436
+        ExplicitWidth = 859
       end
     end
   end
   inherited PAuxiliares: TPanel
     Top = 665
     Width = 1008
-    ExplicitTop = 654
-    ExplicitWidth = 1002
+    ExplicitTop = 662
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 692
     Width = 1008
-    ExplicitTop = 681
-    ExplicitWidth = 1002
+    ExplicitTop = 689
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 100
       Visible = False
@@ -1592,7 +1590,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
       OnClick = DesafazerVencida1Click
     end
     object Aprovada1: TMenuItem
-      Caption = 'Valida'#231#245'es de ordens de servi'#231'o'
+      Caption = 'Validar Ordem de Servi'#231'o'
+      Visible = False
     end
   end
   object ImageList1: TImageList

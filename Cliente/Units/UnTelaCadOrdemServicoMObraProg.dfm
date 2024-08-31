@@ -14,7 +14,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
     Width = 542
     ExplicitWidth = 538
     object Label3: TLabel [1]
-      Left = 123
+      Left = 204
       Top = 39
       Width = 105
       Height = 16
@@ -27,7 +27,7 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       ParentFont = False
     end
     object LblTempoPrevisto: TLabel [2]
-      Left = 233
+      Left = 314
       Top = 39
       Width = 4
       Height = 16

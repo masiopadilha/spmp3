@@ -7,7 +7,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiCadastros, Vcl.ExtCtrls, Vcl.Menus, Vcl.ComCtrls, Vcl.DBCtrls,
   Vcl.StdCtrls, Data.DB, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, JvExMask, JvToolEdit,
   JvDBControls, System.Actions, Vcl.ActnList, Vcl.ExtActns, FireDAC.Stan.Param,
-  Vcl.Buttons;
+  Vcl.Buttons,
+  // Units necessarias na geracao do QR Code...
+  System.Math, System.UITypes, FMX.Graphics;
 
 type
   TFrmTelaCadEquipamentos = class(TFrmTelaPaiCadastros)
@@ -120,6 +122,7 @@ type
     PFundoDadosTecnicos: TPanel;
     Label32: TLabel;
     DBCheckBox1: TDBCheckBox;
+    QRCode1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
@@ -172,8 +175,10 @@ type
     procedure BtnImagemClick(Sender: TObject);
     procedure Area1Click(Sender: TObject);
     procedure Famlia1Click(Sender: TObject);
+    procedure QRCode1Click(Sender: TObject);
   private
     { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -194,6 +199,7 @@ uses UnTelaCadManutProgEquip, UnTelaCadLubrifictProgEquip,
   UnTelaCadFamiliaEquipamento, UnTelaCadFabricantes, UnTelaCadFornecedores,
   UnTelaCadCalendEquip, UnTelaCadClasses, UnTelaCadCentroCusto, UnTelaCadAreas,
   UnDmRelatorios, UnTelaCadEquipamentosImagens, UnDM;
+
 
 procedure TFrmTelaCadEquipamentos.Area1Click(Sender: TObject);
 begin
@@ -2029,6 +2035,41 @@ begin
     DM.FTabela_auxiliar := 25;
     DM.FAlterando := True;
   End;
+end;
+
+procedure TFrmTelaCadEquipamentos.QRCode1Click(Sender: TObject);
+begin
+  inherited;
+  if DM.qryEquipamentosCODIGO.AsString = '' then Exit;
+  if DM.qryEquipamentosOPERANDO.AsString = 'N' then
+  begin
+    Application.MessageBox('Equipamento não está operando.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+    Exit;
+  end;
+
+
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.qryEquipamentosQRCode.MasterSource := DM.dsAuxiliar;
+DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`DESCRICAO`'
+                        + ' FROM `equipamentos`'
+                        + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                        + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                        + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                        + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                        + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODIGO` =  '+QuotedStr(DM.qryEquipamentosCODIGO.AsString) + ')');
+DM.qryAuxiliar.Open;
+DM.qryEquipamentosQRCode.Open;
+DmRelatorios.frxREquipGeralQRCode.ShowReport();
+DM.qryEquipamentosQRCode.MasterSource := DM.dsEquipamentos;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryEquipamentosQRCode.Close;
 end;
 
 end.

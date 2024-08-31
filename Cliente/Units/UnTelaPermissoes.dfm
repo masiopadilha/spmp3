@@ -1,63 +1,64 @@
 inherited FrmTelaPermissoes: TFrmTelaPermissoes
   Caption = 'Permiss'#245'es de Usu'#225'rios'
-  ClientHeight = 641
+  ClientHeight = 644
   ClientWidth = 1008
   Constraints.MaxHeight = 700
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
   Constraints.MinWidth = 800
   OnCreate = FormCreate
-  ExplicitWidth = 1024
+  ExplicitWidth = 1020
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
     Width = 1004
-    ExplicitWidth = 880
+    ExplicitWidth = 1000
     inherited Image1: TImage
+      Left = 5
+      Height = 46
       Margins.Left = 4
-      Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
     end
     inherited BtnAjuda: TButton
-      Left = 972
-      ExplicitLeft = 844
+      Left = 967
+      ExplicitLeft = 963
     end
   end
   inherited PCentro: TPanel
     Left = 2
     Top = 66
     Width = 1004
-    Height = 504
+    Height = 507
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
     ExplicitLeft = 2
     ExplicitTop = 66
-    ExplicitWidth = 880
+    ExplicitWidth = 1000
     ExplicitHeight = 504
     inherited RGTelas: TRadioGroup
-      Width = 1006
+      Width = 1002
       Height = 505
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitWidth = 878
+      ExplicitWidth = 998
       ExplicitHeight = 502
     end
     object PBase: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 1000
+      Width = 996
       Height = 499
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 872
+      ExplicitWidth = 992
       ExplicitHeight = 496
       object GBTelas: TGroupBox
         AlignWithMargins = True
@@ -74,6 +75,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
+        ExplicitHeight = 486
         object TVTelas: TTreeView
           AlignWithMargins = True
           Left = 5
@@ -280,6 +282,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             006F006C0065002000640065002000460072006F00740061002E00340000005F
             0000005F000000FFFFFFFFFFFFFFFF5F0000000000000000000000010B520065
             006C0061007400F300720069006F0073002E00}
+          ExplicitHeight = 463
         end
       end
       object pBaseDireito: TPanel
@@ -287,19 +290,17 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
         Left = 326
         Top = 5
         Width = 665
-        Height = 486
+        Height = 489
         Margins.Left = 0
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 312
-        ExplicitTop = 32
-        ExplicitWidth = 185
-        ExplicitHeight = 41
+        ExplicitWidth = 661
+        ExplicitHeight = 486
         object rgNivelAcesso: TRadioGroup
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 661
+          Width = 657
           Height = 68
           Align = alTop
           Caption = 'Perfil:'
@@ -321,12 +322,13 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
           ParentFont = False
           TabOrder = 0
           OnClick = rgNivelAcessoClick
+          ExplicitWidth = 653
         end
         object GBPermissoes: TGroupBox
           AlignWithMargins = True
           Left = 4
           Top = 75
-          Width = 661
+          Width = 657
           Height = 410
           Margins.Top = 0
           Align = alClient
@@ -341,13 +343,13 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
           ParentColor = False
           ParentFont = False
           TabOrder = 1
-          ExplicitTop = 65
-          ExplicitHeight = 420
+          ExplicitWidth = 653
+          ExplicitHeight = 407
           object GrdPermissoes: TDBGrid
             AlignWithMargins = True
             Left = 5
             Top = 15
-            Width = 654
+            Width = 650
             Height = 341
             Hint = 'Tecle ENTER na coluna '#39'Usu'#225'rio'#39' para realizar a pesquisa.'
             Margins.Top = 0
@@ -378,13 +380,13 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             AlignWithMargins = True
             Left = 5
             Top = 362
-            Width = 651
+            Width = 647
             Height = 40
             Margins.Bottom = 6
             Align = alBottom
             TabOrder = 1
-            ExplicitTop = 401
-            ExplicitWidth = 659
+            ExplicitTop = 359
+            ExplicitWidth = 643
             object btnAtualizar: TButton
               AlignWithMargins = True
               Left = 4
@@ -406,7 +408,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
             end
             object BtnPadrao: TButton
               AlignWithMargins = True
-              Left = 478
+              Left = 474
               Top = 6
               Width = 82
               Height = 28
@@ -425,11 +427,11 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
               ShowHint = True
               TabOrder = 1
               OnClick = BtnPadraoClick
-              ExplicitLeft = 486
+              ExplicitLeft = 470
             end
             object BtnGrupo: TButton
               AlignWithMargins = True
-              Left = 566
+              Left = 562
               Top = 6
               Width = 81
               Height = 28
@@ -448,7 +450,7 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
               ShowHint = True
               TabOrder = 2
               OnClick = BtnGrupoClick
-              ExplicitLeft = 574
+              ExplicitLeft = 558
             end
           end
         end
@@ -456,16 +458,16 @@ inherited FrmTelaPermissoes: TFrmTelaPermissoes
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 574
+    Top = 577
     Width = 1004
     ExplicitTop = 574
-    ExplicitWidth = 880
+    ExplicitWidth = 1000
   end
   inherited PBotoes: TPanel
-    Top = 601
+    Top = 604
     Width = 1004
     ExplicitTop = 601
-    ExplicitWidth = 880
+    ExplicitWidth = 1000
     inherited BtnOK: TButton
       Left = 50
       Margins.Left = 4

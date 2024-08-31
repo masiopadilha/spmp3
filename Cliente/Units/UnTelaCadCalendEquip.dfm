@@ -6,52 +6,57 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
   inherited PControle: TPanel
     Width = 624
     inherited LAlteracao: TLabel
+      Left = 511
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 505
+      ExplicitLeft = 511
     end
     inherited LAlteradoPor: TLabel
+      Left = 533
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 527
+      ExplicitLeft = 533
     end
     inherited LblDataAlt: TDBText
+      Left = 566
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 560
+      ExplicitLeft = 566
     end
     inherited LblDataCad: TDBText
+      Left = 448
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 432
     end
     inherited LblUsuAlt: TDBText
+      Left = 566
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 560
+      ExplicitLeft = 566
     end
     inherited LblUsuCad: TDBText
+      Left = 448
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendEquip
-      ExplicitLeft = 432
     end
     inherited LCadastro: TLabel
+      Left = 415
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -59,6 +64,7 @@ inherited FrmTelaCadCalendEquip: TFrmTelaCadCalendEquip
       ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
+      Left = 377
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4

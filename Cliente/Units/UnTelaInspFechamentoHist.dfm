@@ -14,14 +14,14 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
     Width = 1008
     ExplicitWidth = 1004
     object Label1: TLabel [1]
-      Left = 324
+      Left = 391
       Top = 33
       Width = 7
       Height = 16
       Caption = 'a'
     end
     object Label3: TLabel [2]
-      Left = 137
+      Left = 204
       Top = 33
       Width = 73
       Height = 13
@@ -55,7 +55,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       OnClick = BtnImprimirClick
     end
     object BtnConsultar: TButton
-      Left = 443
+      Left = 510
       Top = 28
       Width = 28
       Height = 28
@@ -70,7 +70,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       OnClick = BtnConsultarClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 215
+      Left = 282
       Top = 29
       Width = 105
       Height = 24
@@ -80,7 +80,7 @@ inherited FrmTelaInspFechamentoHist: TFrmTelaInspFechamentoHist
       DropDownDate = 44778.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 336
+      Left = 403
       Top = 30
       Width = 105
       Height = 24

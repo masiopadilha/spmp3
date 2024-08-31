@@ -1,7 +1,7 @@
 inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   Caption = 'Informa'#231#245'es Gerenciais'
-  ClientHeight = 621
-  ClientWidth = 1008
+  ClientHeight = 624
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,16 +12,14 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1004
+    Width = 1008
     ExplicitWidth = 1004
     inherited Image1: TImage
-      Left = 2
-      Top = 2
       ExplicitLeft = 2
       ExplicitTop = 2
     end
     object Label8: TLabel [1]
-      Left = 124
+      Left = 206
       Top = 36
       Width = 48
       Height = 16
@@ -35,10 +33,10 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
     inherited BtnAjuda: TButton
       Left = 971
-      ExplicitLeft = 966
+      ExplicitLeft = 967
     end
     object CBPeriodo: TComboBox
-      Left = 175
+      Left = 257
       Top = 33
       Width = 134
       Height = 22
@@ -63,7 +61,7 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
         #218'ltimos 12 meses')
     end
     object ProgressBar1: TProgressBar
-      Left = 313
+      Left = 395
       Top = 33
       Width = 150
       Height = 22
@@ -88,8 +86,8 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PCentro: TPanel
-    Width = 1002
-    Height = 482
+    Width = 1006
+    Height = 485
     ExplicitWidth = 1002
     ExplicitHeight = 482
     inherited RGTelas: TRadioGroup
@@ -227,14 +225,14 @@ inherited FrmTelaInfGerenciais: TFrmTelaInfGerenciais
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 554
-    Width = 1004
+    Top = 557
+    Width = 1008
     ExplicitTop = 554
     ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
-    Top = 581
-    Width = 1004
+    Top = 584
+    Width = 1008
     ExplicitTop = 581
     ExplicitWidth = 1004
     inherited BtnOK: TButton

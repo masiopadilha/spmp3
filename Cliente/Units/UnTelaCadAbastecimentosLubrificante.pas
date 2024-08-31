@@ -166,6 +166,7 @@ if DM.qryAbastecimentosLubrificCODIGO.AsInteger <= 0 then
   begin
     DM.qryAbastecimentosLubrific.Edit;
     DM.qryAbastecimentosLubrificCODEMPRESA.AsString     := DM.FCodEmpresa;
+    DM.qryAbastecimentosLubrificCODCONTCOMBUSTIVEL.AsInteger := DM.qryAbastecimentosCODIGO.AsInteger;
     DM.qryAbastecimentosLubrificCODEQUIPAMENTO.AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
     DM.qryAbastecimentosLubrific.Post;
     DM.qryAbastecimentosLubrific.Edit;
@@ -200,10 +201,10 @@ procedure TFrmTelaCadAbastecimentosLubrificante.EdtMatriculaLubrificChange(
   Sender: TObject);
 begin
   inherited;
-if EdtRotaLubrific.Text = 'Rota' then
-  EdtRotaLubrific.Font.Color := clWindowFrame
+if EdtMatriculaLubrific.Text = 'Rota' then
+  EdtMatriculaLubrific.Font.Color := clWindowFrame
 else
-  EdtRotaLubrific.Font.Color := clBlack;
+  EdtMatriculaLubrific.Font.Color := clBlack;
 end;
 
 procedure TFrmTelaCadAbastecimentosLubrificante.EdtMatriculaLubrificKeyPress(
@@ -257,10 +258,10 @@ procedure TFrmTelaCadAbastecimentosLubrificante.EdtRotaLubrificChange(
   Sender: TObject);
 begin
   inherited;
-if EdtMatriculaLubrific.Text = 'Funcionário' then
-  EdtMatriculaLubrific.Font.Color := clWindowFrame
+if EdtRotaLubrific.Text = 'Rota' then
+  EdtRotaLubrific.Font.Color := clWindowFrame
 else
-  EdtMatriculaLubrific.Font.Color := clWindowText;
+  EdtRotaLubrific.Font.Color := clBlack;
 end;
 
 procedure TFrmTelaCadAbastecimentosLubrificante.EdtRotaLubrificKeyPress(

@@ -4057,7 +4057,6 @@ type
     qryMonitoramentoPlanoTrabOBSERVACOES: TBlobField;
     qryMonitoramentoPlanoTrabUSUARIOCAD: TStringField;
     qryMonitoramentoPlanoTrabUSUARIOALT: TStringField;
-    qryManutProgEquipPlanoTrab: TFDQuery;
     dsManutProgEquipPlanoTrab: TDataSource;
     qryManutProgEquipCODORDEMSERVICO: TIntegerField;
     qryManutProgEquipC_PROXINSP: TDateTimeField;
@@ -4724,12 +4723,6 @@ type
     qryEquipamentosConfOSServEQUIPPARADO: TStringField;
     qryEquipamentosConfOSServTEMPOEXECUCAO: TBCDField;
     qryUsuarioSENHAALTERADA: TStringField;
-    qryManutProgEquipPlanoTrabCODIGO: TFDAutoIncField;
-    qryManutProgEquipPlanoTrabCODEMPRESA: TStringField;
-    qryManutProgEquipPlanoTrabCODMANUTPROGFAMEQUIP: TStringField;
-    qryManutProgEquipPlanoTrabCODPLANOTRABALHO: TStringField;
-    qryManutProgEquipPlanoTrabPLANOTRABALHO: TStringField;
-    qryManutProgEquipPlanoTrabDETALHES: TBlobField;
     qryLubrificProgEquipPlanoTrabCODIGO: TFDAutoIncField;
     qryLubrificProgEquipPlanoTrabCODEMPRESA: TStringField;
     qryLubrificProgEquipPlanoTrabCODLUBRIFICPROGFAMEQUIP: TStringField;
@@ -6002,6 +5995,29 @@ type
     qryMonitEquipamentosLIMSUPSEG: TBCDField;
     qryMonitEquipamentosLIMSUPMAX: TBCDField;
     qryMonitEquipamentosCODCENTROCUSTO: TStringField;
+    qryEquipamentosQRCode: TFDQuery;
+    dsEquipamentosQRCode: TDataSource;
+    qryEquipamentosQRCodeCODIGO: TStringField;
+    qryEquipamentosQRCodeCODEMPRESA: TStringField;
+    qryEquipamentosQRCodeDESCRICAO: TStringField;
+    qryEquipamentosQRCodeFAMILIAEQUIP: TStringField;
+    qryEquipamentosQRCodeQRCODE: TStringField;
+    qryEquipamentosQRCodeAREA: TStringField;
+    qryEquipamentosQRCodeCELULA: TStringField;
+    qryEquipamentosQRCodeLINHA: TStringField;
+    qryEquipamentosQRCodeSEQUENCIA: TStringField;
+    qryEquipamentosQRCodeCENTROCUSTO: TStringField;
+    qryManutProgEquipPlanoTrab: TFDQuery;
+    qryManutProgEquipPlanoTrabCODIGO: TFDAutoIncField;
+    qryManutProgEquipPlanoTrabCODEMPRESA: TStringField;
+    qryManutProgEquipPlanoTrabCODMANUTPROGFAMEQUIP: TStringField;
+    qryManutProgEquipPlanoTrabCODPLANOTRABALHO: TStringField;
+    qryManutProgEquipPlanoTrabPLANOTRABALHO: TStringField;
+    qryManutProgEquipPlanoTrabDETALHES: TBlobField;
+    qryAbastecimentosCombustCODCONTCOMBUSTIVEL: TIntegerField;
+    qryAbastecimentosLubrificCODCONTCOMBUSTIVEL: TIntegerField;
+    qryManutConsMATRICULA: TStringField;
+    qryLubrificConsMATRICULA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -6085,6 +6101,10 @@ type
     procedure qryChecklistLubrificItensEspCalcFields(DataSet: TDataSet);
     procedure qryMonitEquipamentosAfterScroll(DataSet: TDataSet);
     procedure qryAuxiliarAfterScroll(DataSet: TDataSet);
+    procedure qryOrdemServicoDATAFIMREALGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure qryOrdemServicoDATAINICIOREALGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -6223,7 +6243,8 @@ uses UnTelaAguarde, UnTelaConsulta, UnTelaCadAlertas, UnTelaPrincipal,
   idText,
   idAttachmentFile,
   idExplicitTLSClientServerBase , UnTempoOcioso, UnDmAlertas, UnTelaSplash,
-  UnDMDashboard;
+  UnDMDashboard,
+  frxBarcode2D;
 
 
 {$R *.dfm}
@@ -6739,12 +6760,14 @@ end;
 procedure TDM.qryAbastecimentosCombustAfterInsert(DataSet: TDataSet);
 begin
   qryAbastecimentosCombustCODEMPRESA.AsString := DM.FCodEmpresa;
+  qryAbastecimentosCombustCODCONTCOMBUSTIVEL.AsInteger := DM.qryAbastecimentosCODIGO.AsInteger;
   qryAbastecimentosCombustCODEQUIPAMENTO.AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
 end;
 
 procedure TDM.qryAbastecimentosLubrificAfterInsert(DataSet: TDataSet);
 begin
   qryAbastecimentosLubrificCODEMPRESA.AsString := DM.FCodEmpresa;
+  qryAbastecimentosLubrificCODCONTCOMBUSTIVEL.AsInteger := DM.qryAbastecimentosCODIGO.AsInteger;
   qryAbastecimentosLubrificCODEQUIPAMENTO.AsString := DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
 end;
 
@@ -6767,6 +6790,7 @@ begin
     DM.qryEquipamentosDados.Params[2].AsString := qryAuxiliar.FieldByName('CODIGO').AsString;
     DM.qryEquipamentosDados.Open;
   end;
+
 end;
 
 procedure TDM.qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
@@ -7476,6 +7500,24 @@ if FrmTelaCadMonitoramento <> nil then
         end;
     end;
 
+end;
+
+procedure TDM.qryOrdemServicoDATAFIMREALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if not Sender.IsNull then
+    Text := FormatDateTime('dd/mm/yyyy hh:mm', Sender.AsDateTime)
+  else
+    Text := '';
+end;
+
+procedure TDM.qryOrdemServicoDATAINICIOREALGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+  if not Sender.IsNull then
+    Text := FormatDateTime('dd/mm/yyyy hh:mm', Sender.AsDateTime)
+  else
+    Text := '';
 end;
 
 procedure TDM.qryOrdemServicoEquipeAfterInsert(DataSet: TDataSet);

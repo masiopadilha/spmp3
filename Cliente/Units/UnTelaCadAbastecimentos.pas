@@ -418,7 +418,7 @@ begin
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso n�o permitido, contacte o setor respons�vel para solicitar a libera��o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadAbastecimentosCombustivel, FrmTelaCadAbastecimentosCombustivel);
@@ -433,7 +433,7 @@ begin
     DM.qryAbastecimentosCombustAbast.First;
     if DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
-        if Application.MessageBox('Contador superior ao �ltimo valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
+        if Application.MessageBox('Contador superior ao último valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
           begin
             DM.qryAbastecimentos.Edit;
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat;
@@ -462,11 +462,11 @@ begin
   Try
     if (DM.qryUsuarioPAcessoCADCONTROLEPNEUS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
       begin
-        Application.MessageBox('Acesso n�o permitido, contacte o setor respons�vel para solicitar a libera��o', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
     Application.CreateForm(TFrmTelaCadAbastecimentosLubrificante, FrmTelaCadAbastecimentosLubrificante);
-    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrifica��es do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
+    FrmTelaCadAbastecimentosLubrificante.Caption := 'Lubrificações do: '+ DM.qryAbastecimentosEQUIPAMENTO.AsString;
     FrmTelaCadAbastecimentosLubrificante.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadAbastecimentosCombustivel);
@@ -477,7 +477,7 @@ begin
     DM.qryAbastecimentosLubrificAbast.First;
     if DM.qryAbastecimentosLubrificAbastODOMETROLubrific.AsFloat > DM.qryAbastecimentosCONTADORATUAL.AsFloat then
       begin
-        if Application.MessageBox('Contador superior ao �ltimo valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
+        if Application.MessageBox('Contador superior ao último valor cadastrado, deseja substituir', 'SPMP3', MB_ICONQUESTION + MB_YESNO) = IDYes then
           begin
             DM.qryAbastecimentos.Edit;
             DM.qryAbastecimentosCONTADORATUAL.AsFloat := DM.qryAbastecimentosLubrificAbastODOMETROLUBRIFIC.AsFloat;

@@ -63,7 +63,7 @@ LHorasEntreDatas: SmallInt;
 LContadorAnt: Real;
 begin
   inherited;
-if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
     PAuxiliares.Font.Color := clRed;
@@ -72,7 +72,7 @@ if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase
     Exit;
   end;
 
-if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+  if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     DM.FDataSetParam.Cancel;
     PAuxiliares.Font.Color := clRed;
@@ -81,38 +81,38 @@ if (DM.qryUsuarioPAlteracao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCas
     Exit;
   end;
 
-//if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
-if DM.FDataSetParam.IsEmpty = True then Exit;
+  //if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
+  if DM.FDataSetParam.IsEmpty = True then Exit;
 
-PAuxiliares.Font.Color := clGreen;
-PAuxiliares.Caption := EmptyStr;
-GrdAbastCombust.SetFocus;
+  PAuxiliares.Font.Color := clGreen;
+  PAuxiliares.Caption := EmptyStr;
+  GrdAbastCombust.SetFocus;
 
-if DM.qryAbastecimentosCombustTIPOCOMBUSTIVEL.AsString = EmptyStr then
+  if DM.qryAbastecimentosCombustTIPOCOMBUSTIVEL.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O TIPO DO COMBUSTÍVEL!'; GrdCombustivel.SelectedIndex := 0; GrdCombustivel.SetFocus; Exit;
   end;
-if DM.qryAbastecimentosCombustCONSPOTENCIAL.AsString = EmptyStr then
+  if DM.qryAbastecimentosCombustCONSPOTENCIAL.AsString = EmptyStr then
   begin
     PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'INFORME O CONSUMO POTENCIAL!'; GrdCombustivel.SelectedIndex := 1; GrdCombustivel.SetFocus; Exit;
   end;
 
-if DM.qryAbastecimentosCombustCODIGO.IsNull = False then
+  if DM.qryAbastecimentosCombustCODIGO.IsNull = False then
   begin
     DM.qryAbastecimentosCombust.Edit;
     DM.qryAbastecimentosCombust.Post;
   end;
 
-if LRotaCombust = EmptyStr          then begin EdtRotaCombust.SetFocus;      Exit; end;
-if LMatriculaCombust = EmptyStr     then begin EdtMatriculaCombust.SetFocus; Exit; end;
-if EdtDataCombust.Date = 0          then begin EdtDataCombust.SetFocus;      Exit; end;
-if EdtQtdeCombust.Text = EmptyStr   then begin EdtQtdeCombust.SetFocus;      Exit; end;
-if EdtLeitorCombust.Text = EmptyStr then begin EdtLeitorCombust.SetFocus;    Exit; end;
-if EdtPrecoCombust.Text = EmptyStr  then begin EdtPrecoCombust.SetFocus;     Exit; end;
+  if LRotaCombust = EmptyStr          then begin EdtRotaCombust.SetFocus;      Exit; end;
+  if LMatriculaCombust = EmptyStr     then begin EdtMatriculaCombust.SetFocus; Exit; end;
+  if EdtDataCombust.Date = 0          then begin EdtDataCombust.SetFocus;      Exit; end;
+  if EdtQtdeCombust.Text = EmptyStr   then begin EdtQtdeCombust.SetFocus;      Exit; end;
+  if EdtLeitorCombust.Text = EmptyStr then begin EdtLeitorCombust.SetFocus;    Exit; end;
+  if EdtPrecoCombust.Text = EmptyStr  then begin EdtPrecoCombust.SetFocus;     Exit; end;
 
-if Application.MessageBox('A inclusão desses dados não poderá ser desfeita, deseja continuar?','SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = mrNo then Exit;
+  if Application.MessageBox('A inclusão desses dados não poderá ser desfeita, deseja continuar?','SPMP3', MB_ICONEXCLAMATION + MB_YESNO) = mrNo then Exit;
 
-if DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False then
+  if DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False then
   begin
     if (DM.qryAbastecimentosCombustAbastMAX_DATA.AsString <> '') then
       if (EdtDataCombust.Date < DateOf(StrToDateTime(DM.qryAbastecimentosCombustAbastMAX_DATA.AsString))) then
@@ -125,9 +125,9 @@ if DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False then
         PAuxiliares.Font.Color := clRed; PAuxiliares.Caption := 'VALOR SUPERIOR JÁ INFORMADO!'; EdtLeitorCombust.SetFocus; Exit;
       end;
   end;
-PAuxiliares.Caption := '';
-//--------------------------------------------------------------------------------------------------------------------------------------------
-if (DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False) and (DM.qryAbastecimentosCombustAbastLEITOR.AsString <> 'INATIVO') and (DM.qryAbastecimentosTIPO.AsString = 'Equipamento') then
+  PAuxiliares.Caption := '';
+  //--------------------------------------------------------------------------------------------------------------------------------------------
+  if (DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False) and (DM.qryAbastecimentosCombustAbastLEITOR.AsString <> 'INATIVO') and (DM.qryAbastecimentosTIPO.AsString = 'Equipamento') then
   begin
     DM.qryDataHoraServidor.Refresh;
     DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -148,41 +148,42 @@ if (DM.qryAbastecimentosCombustAbastCODIGO.IsNull = False) and (DM.qryAbastecime
         Exit;
       end;
   end;
-//--------------------------------------------------------------------------------------------------------------------------------------------
-DM.qryAbastecimentosCombustAbast.First;
-LContadorAnt :=DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat;
+  //--------------------------------------------------------------------------------------------------------------------------------------------
+  DM.qryAbastecimentosCombustAbast.First;
+  LContadorAnt :=DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsFloat;
 
-if DM.qryAbastecimentosCombustCODIGO.AsInteger <= 0 then
+  if DM.qryAbastecimentosCombustCODIGO.AsInteger <= 0 then
   begin
     DM.qryAbastecimentosCombust.Edit;
     DM.qryAbastecimentosCombustCODEMPRESA.AsString     := DM.FCodEmpresa;
+    DM.qryAbastecimentosCombustCODCONTCOMBUSTIVEL.AsInteger := DM.qryAbastecimentosCODIGO.AsInteger;
     DM.qryAbastecimentosCombustCODEQUIPAMENTO.AsString :=DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
     DM.qryAbastecimentosCombust.Post;
     DM.qryAbastecimentosCombust.Edit;
   end;
 
-DM.qryAbastecimentosCombustAbast.Append;
-DM.qryAbastecimentosCombustAbastCODCOMBUSTIVEL.AsInteger :=DM.qryAbastecimentosCombustCODIGO.AsInteger;
-DM.qryAbastecimentosCombustAbastCODEMPRESA.AsString      := DM.FCodEmpresa;
-DM.qryAbastecimentosCombustAbastCODEQUIPAMENTO.AsString  :=DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
-DM.qryAbastecimentosCombustAbastCODROTA.AsString         := LRotaCombust;
-DM.qryAbastecimentosCombustAbastDATACOMBUST.AsDateTime   := EdtDataCombust.Date;
-DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsString := EdtLeitorCombust.Text;
-DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsString     := EdtQtdeCombust.Text;
-DM.qryAbastecimentosCombustAbastPRECOCOMBUST.AsString    := EdtPrecoCombust.Text;
-DM.qryAbastecimentosCombustAbastMATRICULA.AsString       := LMatriculaCombust;
-DM.qryAbastecimentosCombustAbastROTA.AsString            := EdtRotaCombust.Text;
-DM.qryAbastecimentosCombustAbastNOME.AsString            := EdtMatriculaCombust.Text;
-DM.qryAbastecimentosCombustAbastVALORCOMBUST.AsFloat     :=DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsFloat *DM.qryAbastecimentosCombustAbastPRECOCOMBUST.AsFloat;
-DM.qryAbastecimentosCombustAbastLEITOR.AsString          := 'ATIVO';
-DM.qryAbastecimentosCombustAbastTIPOCOMBUSTIVEL.AsString :=DM.qryAbastecimentosCombustTIPOCOMBUSTIVEL.AsString;
-DM.qryAbastecimentosCombustAbastCONSPOTENCIAL.AsFloat    :=DM.qryAbastecimentosCombustCONSPOTENCIAL.AsFloat;
-if DM.qryAbastecimentosCombustAbast.RecordCount > 0 then
- DM.qryAbastecimentosCombustAbastCONSUMO.AsFloat        := (DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsInteger - LContadorAnt)/(DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsFloat);
+  DM.qryAbastecimentosCombustAbast.Append;
+  DM.qryAbastecimentosCombustAbastCODCOMBUSTIVEL.AsInteger :=DM.qryAbastecimentosCombustCODIGO.AsInteger;
+  DM.qryAbastecimentosCombustAbastCODEMPRESA.AsString      := DM.FCodEmpresa;
+  DM.qryAbastecimentosCombustAbastCODEQUIPAMENTO.AsString  :=DM.qryAbastecimentosCODEQUIPAMENTO.AsString;
+  DM.qryAbastecimentosCombustAbastCODROTA.AsString         := LRotaCombust;
+  DM.qryAbastecimentosCombustAbastDATACOMBUST.AsDateTime   := EdtDataCombust.Date;
+  DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsString := EdtLeitorCombust.Text;
+  DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsString     := EdtQtdeCombust.Text;
+  DM.qryAbastecimentosCombustAbastPRECOCOMBUST.AsString    := EdtPrecoCombust.Text;
+  DM.qryAbastecimentosCombustAbastMATRICULA.AsString       := LMatriculaCombust;
+  DM.qryAbastecimentosCombustAbastROTA.AsString            := EdtRotaCombust.Text;
+  DM.qryAbastecimentosCombustAbastNOME.AsString            := EdtMatriculaCombust.Text;
+  DM.qryAbastecimentosCombustAbastVALORCOMBUST.AsFloat     :=DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsFloat *DM.qryAbastecimentosCombustAbastPRECOCOMBUST.AsFloat;
+  DM.qryAbastecimentosCombustAbastLEITOR.AsString          := 'ATIVO';
+  DM.qryAbastecimentosCombustAbastTIPOCOMBUSTIVEL.AsString :=DM.qryAbastecimentosCombustTIPOCOMBUSTIVEL.AsString;
+  DM.qryAbastecimentosCombustAbastCONSPOTENCIAL.AsFloat    :=DM.qryAbastecimentosCombustCONSPOTENCIAL.AsFloat;
+  if DM.qryAbastecimentosCombustAbast.RecordCount > 0 then
+   DM.qryAbastecimentosCombustAbastCONSUMO.AsFloat        := (DM.qryAbastecimentosCombustAbastODOMETROCOMBUST.AsInteger - LContadorAnt)/(DM.qryAbastecimentosCombustAbastQTDECOMBUST.AsFloat);
 
-DM.qryAbastecimentosCombustAbast.Post;
+  DM.qryAbastecimentosCombustAbast.Post;
 
-EdtMatriculaCombust.SetFocus;
+  EdtMatriculaCombust.SetFocus;
 end;
 
 procedure TFrmTelaCadAbastecimentosCombustivel.BtnConsultarClick(

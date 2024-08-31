@@ -1,61 +1,62 @@
 inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
   Caption = 'Calend'#225'rios de M'#227'o de Obra'
+  ClientHeight = 424
+  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
     inherited LAlteracao: TLabel
-      Left = 505
+      Left = 511
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 505
+      ExplicitLeft = 511
     end
     inherited LAlteradoPor: TLabel
-      Left = 527
+      Left = 533
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      ExplicitLeft = 527
+      ExplicitLeft = 533
     end
     inherited LblDataAlt: TDBText
-      Left = 560
+      Left = 566
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendMObra
-      ExplicitLeft = 556
+      ExplicitLeft = 566
     end
     inherited LblDataCad: TDBText
-      Left = 432
+      Left = 448
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendMObra
-      ExplicitLeft = 428
     end
     inherited LblUsuAlt: TDBText
-      Left = 560
+      Left = 566
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendMObra
-      ExplicitLeft = 556
+      ExplicitLeft = 566
     end
     inherited LblUsuCad: TDBText
-      Left = 432
+      Left = 448
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
       DataSource = DM.dsCalendMObra
-      ExplicitLeft = 428
     end
     inherited LCadastro: TLabel
-      Left = 399
+      Left = 415
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -63,7 +64,7 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       ExplicitLeft = 399
     end
     inherited LCadastroPor: TLabel
-      Left = 361
+      Left = 377
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -72,6 +73,8 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
     end
   end
   inherited PCentro: TPanel
+    Width = 624
+    Height = 323
     object Label3: TLabel
       Left = 234
       Top = 114
@@ -655,6 +658,14 @@ inherited FrmTelaCadCalendMObra: TFrmTelaCadCalendMObra
       TabOrder = 14
       Visible = False
     end
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 405
+    Width = 628
+  end
+  inherited PAuxiliares: TPanel
+    Top = 378
+    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 358

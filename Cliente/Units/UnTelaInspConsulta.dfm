@@ -1,7 +1,7 @@
 inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   Caption = 'Consulta de Inspe'#231#245'es'
-  ClientHeight = 633
-  ClientWidth = 1006
+  ClientHeight = 644
+  ClientWidth = 1012
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -11,10 +11,14 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
   ExplicitHeight = 680
   TextHeight = 16
   inherited PTop: TPanel
-    Width = 1002
+    Width = 1008
     ExplicitWidth = 1004
+    inherited Image1: TImage
+      Height = 47
+      ExplicitHeight = 47
+    end
     object Label9: TLabel [1]
-      Left = 133
+      Left = 202
       Top = 36
       Width = 54
       Height = 16
@@ -46,7 +50,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       OnClick = BtnImprimirClick
     end
     object CBPeriodo: TComboBox
-      Left = 193
+      Left = 262
       Top = 33
       Width = 125
       Height = 22
@@ -67,8 +71,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PCentro: TPanel
-    Width = 1000
-    Height = 494
+    Width = 1006
+    Height = 505
     ExplicitWidth = 1002
     ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
@@ -219,7 +223,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ReadOnly = True
             TabOrder = 0
@@ -356,7 +360,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ReadOnly = True
             TabOrder = 0
@@ -404,7 +408,7 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
             Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ReadOnly = True
             TabOrder = 0
@@ -715,8 +719,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 566
-    Width = 1002
+    Top = 577
+    Width = 1008
     ExplicitTop = 574
     ExplicitWidth = 1004
     object chbTudo: TCheckBox
@@ -734,8 +738,8 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
     end
   end
   inherited PBotoes: TPanel
-    Top = 593
-    Width = 1002
+    Top = 604
+    Width = 1008
     ExplicitTop = 601
     ExplicitWidth = 1004
     inherited BtnOK: TButton

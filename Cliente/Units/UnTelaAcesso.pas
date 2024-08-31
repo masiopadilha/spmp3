@@ -11,7 +11,6 @@ uses
 type
   TFrmTelaAcesso = class(TForm)
     PTop: TPanel;
-    Image1: TImage;
     PCentro: TPanel;
     BtnSair: TButton;
     BtnEntrar: TButton;
@@ -22,6 +21,7 @@ type
     BtnConsultar: TButton;
     btnLicenca: TButton;
     LblVersao: TLabel;
+    Image2: TImage;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure BtnEntrarClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);

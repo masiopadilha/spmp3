@@ -13,9 +13,12 @@ inherited FrmTelaCadPneusChassiAtrelamento: TFrmTelaCadPneusChassiAtrelamento
   inherited PTop: TPanel
     Width = 784
     ExplicitWidth = 780
+    inherited Image1: TImage
+      Height = 47
+    end
     inherited BtnAjuda: TButton
-      Left = 749
-      ExplicitLeft = 749
+      Left = 747
+      ExplicitLeft = 743
     end
     object BtnImprimir: TButton
       Left = 717

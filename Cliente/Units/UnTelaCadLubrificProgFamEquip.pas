@@ -127,15 +127,17 @@ end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnExcluirClick(Sender: TObject);
 begin
+  DM.qryLubrificProgFamEquipPlanoTrab.Close;
   inherited;
   if DM.qryLubrificProgFamEquip.IsEmpty = True then
   begin
-    DM.qryLubrificProgFamEquipPlanoTrab.Close;
     DM.qryLubrificProgFamEquipItens.Close;
     DM.qryLubrificProgFamEquipItensTodos.Close;
-    DM.qryLubrificProgEquipItens.Close;
     DM.qryLubrificProgFamEquipPartes.Close;
-  end;
+    DM.qryLubrificProgEquipItens.Close;
+  end else
+    DM.qryLubrificProgFamEquipPlanoTrab.Open;
+
 end;
 
 procedure TFrmTelaCadLubrificProgFamEquip.BtnFamiliaClick(Sender: TObject);

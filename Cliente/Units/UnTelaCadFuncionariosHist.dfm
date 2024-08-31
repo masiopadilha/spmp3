@@ -13,14 +13,14 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PTop: TPanel
     Width = 1008
     Height = 62
-    ExplicitWidth = 1002
+    ExplicitWidth = 1004
     ExplicitHeight = 62
     inherited Image1: TImage
-      Top = 4
+      Height = 49
       ExplicitTop = 4
     end
     object Label3: TLabel [1]
-      Left = 126
+      Left = 203
       Top = 37
       Width = 46
       Height = 13
@@ -34,14 +34,14 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       ParentFont = False
     end
     object Label4: TLabel [2]
-      Left = 289
+      Left = 366
       Top = 37
       Width = 7
       Height = 16
       Caption = 'a'
     end
     object Label2: TLabel [3]
-      Left = 421
+      Left = 498
       Top = 38
       Width = 66
       Height = 13
@@ -57,10 +57,11 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       Left = 971
       Height = 30
       TabOrder = 3
-      ExplicitLeft = 965
+      ExplicitLeft = 967
+      ExplicitHeight = 30
     end
     object BtnConsultar: TButton
-      Left = 603
+      Left = 680
       Top = 31
       Width = 28
       Height = 28
@@ -75,7 +76,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       OnClick = BtnConsultarClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 178
+      Left = 255
       Top = 33
       Width = 104
       Height = 24
@@ -86,7 +87,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       DropDownDate = 44771.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 303
+      Left = 380
       Top = 33
       Width = 104
       Height = 24
@@ -97,7 +98,7 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       DropDownDate = 44771.000000000000000000
     end
     object CBConsSimples: TComboBox
-      Left = 493
+      Left = 570
       Top = 34
       Width = 107
       Height = 22
@@ -137,13 +138,13 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
     Width = 1006
     Height = 503
     ExplicitTop = 69
-    ExplicitWidth = 1000
-    ExplicitHeight = 492
+    ExplicitWidth = 1002
+    ExplicitHeight = 500
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 501
-      ExplicitWidth = 998
-      ExplicitHeight = 490
+      ExplicitWidth = 1000
+      ExplicitHeight = 498
     end
     object PFundo: TPanel
       AlignWithMargins = True
@@ -155,8 +156,8 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 992
-      ExplicitHeight = 484
+      ExplicitWidth = 994
+      ExplicitHeight = 492
       object GrdManutencoes: TDBGrid
         AlignWithMargins = True
         Left = 5
@@ -402,14 +403,14 @@ inherited FrmTelaCadFuncionariosHist: TFrmTelaCadFuncionariosHist
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 566
-    ExplicitWidth = 1002
+    ExplicitTop = 574
+    ExplicitWidth = 1004
   end
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 593
-    ExplicitWidth = 1002
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 100
       Visible = False

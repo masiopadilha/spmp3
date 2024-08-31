@@ -411,6 +411,9 @@ begin
     FrmTelaCadFuncionariosAusencias.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosAusencias);
+    DM.FDataSetParam := DM.qryFuncionarios;
+    DM.FDataSourceParam := DM.dsFuncionarios;
+    DM.FTabela_auxiliar  := 30;
   End;
 
 end;
@@ -434,6 +437,9 @@ begin
     FrmTelaCadFuncionariosHist.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosHist);
+    DM.FDataSetParam := DM.qryFuncionarios;
+    DM.FDataSourceParam := DM.dsFuncionarios;
+    DM.FTabela_auxiliar  := 30;
   End;
 end;
 
@@ -481,6 +487,9 @@ begin
     FrmTelaCadFuncionariosFerramentaria.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosFerramentaria);
+    DM.FDataSetParam := DM.qryFuncionarios;
+    DM.FDataSourceParam := DM.dsFuncionarios;
+    DM.FTabela_auxiliar  := 30;
   End;
 end;
 
@@ -528,6 +537,9 @@ begin
     FrmTelaCadFuncionariosCxaFerramInv.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramInv);
+    DM.FDataSetParam := DM.qryFuncionarios;
+    DM.FDataSourceParam := DM.dsFuncionarios;
+    DM.FTabela_auxiliar  := 30;
   End;
 end;
 
@@ -549,7 +561,11 @@ begin
     FrmTelaCadFuncionariosCxaFerramentas.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramentas);
+    DM.FDataSetParam := DM.qryFuncionarios;
+    DM.FDataSourceParam := DM.dsFuncionarios;
+    DM.FTabela_auxiliar  := 30;
   End;
+
 end;
 
 {LoadJPEGPictureFile}

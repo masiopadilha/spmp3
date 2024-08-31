@@ -344,46 +344,6 @@ begin
           ChartSolicTrabalho.Series[1].Add(LFechadas[I], 'Dez');
         end else
 
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Feb' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Fev');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Fev');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Apr' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Abr');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Abr');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'May' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Mai');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Mai');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Aug' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Ago');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Ago');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Sep' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Set');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Set');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Oct' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Out');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Out');
-//        end else
-//        if DMDashboard.qryDashboard.FieldByName('MES').AsString = 'Dec' then
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Dez');
-//          ChartSolicTrabalho.Series[1].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], 'Dez');
-//        end else
-//        begin
-//          ChartSolicTrabalho.Series[0].Add(LSolicitadas[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('MES').AsString);
-//          ChartSolicTrabalho.Series[1].Add(LFechadas[DMDashboard.qryDashboard.RecNo], DMDashboard.qryDashboard.FieldByName('MES').AsString);
-//        end;
-
         DMDashboard.qryDashboard.Next;
       end;
       DMDashboard.qryDashboard.Close;
@@ -565,7 +525,7 @@ begin
                                   + ' UNION ALL SELECT ''LIBERADA'' UNION ALL SELECT ''FECHADA'''
                                   + ' UNION ALL SELECT ''VENCIDA'') AS SITUACAO'
                                   + ' LEFT JOIN `ordemservico` AS o ON o.`SITUACAO` = SITUACAO.SITUACAO'
-                                  + ' AND MONTH(o.`DATACADASTRO`) = :mes AND YEAR(o.`DATACADASTRO`) = :ano';
+                                  + ' AND MONTH(o.`DATACADASTRO`) = :mes AND YEAR(o.`DATACADASTRO`) = :ano AND o.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa)+'';
 
       if cbManutencao.ItemIndex > 0 then
         DMDashboard.qryDashboard.SQL.Text := DMDashboard.qryDashboard.SQL.Text + ' LEFT JOIN `tipomanutencao` AS t ON t.`CODIGO` = o.`CODMANUTENCAO` WHERE t.`TIPOMANUTENCAO` LIKE :tipomanutencao';

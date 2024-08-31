@@ -14,25 +14,25 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
     Width = 1008
     ExplicitWidth = 1004
     object Label1: TLabel [1]
-      Left = 218
+      Left = 295
       Top = 36
       Width = 7
       Height = 16
       Caption = 'a'
     end
     object Label2: TLabel [2]
-      Left = 125
+      Left = 202
       Top = 15
       Width = 56
       Height = 16
       Caption = 'Cadastro:'
     end
     inherited BtnAjuda: TButton
-      Left = 970
-      ExplicitLeft = 966
+      Left = 971
+      ExplicitLeft = 967
     end
     object EdtData1: TDateTimePicker
-      Left = 124
+      Left = 201
       Top = 33
       Width = 90
       Height = 21
@@ -41,7 +41,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       TabOrder = 1
     end
     object EdtData2: TDateTimePicker
-      Left = 229
+      Left = 306
       Top = 33
       Width = 90
       Height = 21
@@ -50,7 +50,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       TabOrder = 2
     end
     object BtnConsultar: TButton
-      Left = 443
+      Left = 520
       Top = 30
       Width = 28
       Height = 28
@@ -80,7 +80,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       OnClick = BtnImprimirClick
     end
     object LEdtServico: TLabeledEdit
-      Left = 481
+      Left = 558
       Top = 33
       Width = 200
       Height = 24
@@ -95,7 +95,7 @@ inherited FrmTelaCadOrdemServicoHistorico: TFrmTelaCadOrdemServicoHistorico
       OnKeyPress = LEdtServicoKeyPress
     end
     object CBSituacao: TComboBox
-      Left = 321
+      Left = 398
       Top = 33
       Width = 119
       Height = 22

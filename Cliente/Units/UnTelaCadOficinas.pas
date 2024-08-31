@@ -82,7 +82,6 @@ else
   end;
 DM.FDataSetParam    := DM.qryOficinas;
 DM.FDataSourceParam := DM.dsOficinas;
-DM.FDataSetRelat    := DmRelatorios.frxDBOficina;
 DM.FTela            := 'CADOFICINAS';
 DM.FTabela_auxiliar := 20;
 end;

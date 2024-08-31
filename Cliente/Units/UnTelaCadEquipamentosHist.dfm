@@ -14,7 +14,7 @@
     Width = 1008
     ExplicitWidth = 1004
     object Label3: TLabel [1]
-      Left = 125
+      Left = 204
       Top = 33
       Width = 46
       Height = 13
@@ -28,7 +28,7 @@
       ParentFont = False
     end
     object Label5: TLabel [2]
-      Left = 284
+      Left = 363
       Top = 33
       Width = 7
       Height = 16
@@ -40,7 +40,7 @@
       ExplicitLeft = 967
     end
     object BtnConsultar: TButton
-      Left = 403
+      Left = 482
       Top = 28
       Width = 28
       Height = 28
@@ -74,7 +74,7 @@
       OnClick = BtnImprimirClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 175
+      Left = 254
       Top = 29
       Width = 105
       Height = 24
@@ -84,7 +84,7 @@
       DropDownDate = 44771.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 296
+      Left = 375
       Top = 30
       Width = 105
       Height = 24

@@ -14,10 +14,15 @@ inherited FrmTelaCadEquipamentosPecas: TFrmTelaCadEquipamentosPecas
     ExplicitTop = 3
     ExplicitWidth = 498
     inherited Image1: TImage
+      Left = 5
+      Height = 46
       Margins.Left = 4
-      Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+    end
+    inherited BtnAjuda: TButton
+      Left = 465
+      ExplicitLeft = 461
     end
   end
   inherited PCentro: TPanel

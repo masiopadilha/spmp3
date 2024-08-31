@@ -18,29 +18,33 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   end
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      ExplicitLeft = 467
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        Height = 14
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsFuncionarios
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 610
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsFuncionarios
+      end
     end
-    inherited LCadastroPor: TLabel
-      ExplicitLeft = 431
-    end
-    inherited LblDataCad: TDBText
-      DataSource = DM.dsFuncionarios
-    end
-    inherited LblUsuCad: TDBText
-      DataSource = DM.dsFuncionarios
-    end
-    inherited LAlteracao: TLabel
-      ExplicitLeft = 626
-    end
-    inherited LAlteradoPor: TLabel
-      ExplicitLeft = 610
-    end
-    inherited LblDataAlt: TDBText
-      DataSource = DM.dsFuncionarios
-    end
-    inherited LblUsuAlt: TDBText
-      DataSource = DM.dsFuncionarios
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        Height = 14
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsFuncionarios
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 626
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsFuncionarios
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -429,7 +433,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   end
   inherited PDiversos: TPanel
     Width = 1008
-    Height = 200
+    Height = 216
     object Label12: TLabel
       Left = 335
       Top = 34
@@ -667,7 +671,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       Left = 127
       Top = 126
       Width = 177
-      Height = 24
+      Height = 22
+      Style = csOwnerDrawFixed
       DataField = 'ESCOLARIDADE'
       DataSource = DM.dsFuncionarios
       Items.Strings = (
@@ -758,11 +763,11 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     Width = 1012
   end
   inherited PAlertas: TPanel
-    Top = 589
+    Top = 563
     Width = 1012
   end
   inherited PBase: TPanel
-    Top = 549
+    Top = 565
     Width = 1008
     inherited Button1: TButton
       Hint = 'Caixa de Ferramentas e Ferramentaria'

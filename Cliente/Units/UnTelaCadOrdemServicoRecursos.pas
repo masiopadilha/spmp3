@@ -114,7 +114,7 @@ procedure TFrmTelaCadOrdemServicoRecursos.GrdEquipeRecursosDblClick(
   Sender: TObject);
 begin
   inherited;
-if DM.qryOrdemServicoEquipeMObra.IsEmpty = True then Exit;
+if DM.qryOrdemServicoEquipeRecursos.IsEmpty = True then Exit;
 
 if (DM.qryOrdemServicoSITUACAO.AsString <> 'CADASTRADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'SOLICITADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DESPROGRAMADA') and (DM.qryOrdemServicoSITUACAO.AsString <> 'DETALHADA') then
   begin

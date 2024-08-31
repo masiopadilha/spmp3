@@ -1,42 +1,45 @@
 inherited FrmTelaCadRecursosKit: TFrmTelaCadRecursosKit
   Caption = 'Kit de Recursos'
-  ClientHeight = 424
-  ClientWidth = 628
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 624
     inherited LAlteracao: TLabel
-      Left = 513
+      Left = 517
+      ExplicitLeft = 513
     end
     inherited LAlteradoPor: TLabel
-      Left = 535
+      Left = 539
+      ExplicitLeft = 535
     end
     inherited LblDataAlt: TDBText
-      Left = 568
+      Left = 572
       DataSource = DM.dsRecursoKit
+      ExplicitLeft = 568
     end
     inherited LblDataCad: TDBText
-      Left = 440
+      Left = 444
       DataSource = DM.dsRecursoKit
+      ExplicitLeft = 440
     end
     inherited LblUsuAlt: TDBText
-      Left = 568
+      Left = 572
       DataSource = DM.dsRecursoKit
+      ExplicitLeft = 568
     end
     inherited LblUsuCad: TDBText
-      Left = 440
+      Left = 444
       DataSource = DM.dsRecursoKit
+      ExplicitLeft = 440
     end
     inherited LCadastro: TLabel
-      Left = 407
+      Left = 411
+      ExplicitLeft = 407
     end
     inherited LCadastroPor: TLabel
-      Left = 369
+      Left = 373
+      ExplicitLeft = 369
     end
   end
   inherited PCentro: TPanel
-    Width = 624
-    Height = 323
     object Label1: TLabel
       Left = 9
       Top = 10
@@ -177,14 +180,6 @@ inherited FrmTelaCadRecursosKit: TFrmTelaCadRecursosKit
           Visible = True
         end>
     end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 405
-    Width = 628
-  end
-  inherited PAuxiliares: TPanel
-    Top = 378
-    Width = 624
   end
   inherited MainMenuPadrao: TMainMenu
     Left = 406

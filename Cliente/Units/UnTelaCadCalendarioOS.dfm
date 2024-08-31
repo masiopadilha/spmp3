@@ -22,7 +22,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
     Width = 1008
     ExplicitWidth = 1004
     object Label1: TLabel [1]
-      Left = 128
+      Left = 203
       Top = 36
       Width = 79
       Height = 16
@@ -33,7 +33,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       ExplicitLeft = 967
     end
     object CBConsSimples: TComboBox
-      Left = 212
+      Left = 287
       Top = 34
       Width = 108
       Height = 22
@@ -77,7 +77,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       Width = 1004
       Height = 503
       ExplicitWidth = 1000
-      ExplicitHeight = 323
+      ExplicitHeight = 500
     end
     object GBTotalHomemHora: TGroupBox
       AlignWithMargins = True
@@ -93,7 +93,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
       Caption = 'Total Homem/Hora Programada e em Execu'#231#227'o para:'
       TabOrder = 1
       ExplicitWidth = 1000
-      ExplicitHeight = 321
+      ExplicitHeight = 498
       object CalendarGrid: TStringGrid
         AlignWithMargins = True
         Left = 5
@@ -127,7 +127,7 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
         OnDblClick = CalendarGridDblClick
         OnDrawCell = CalendarGridDrawCell
         ExplicitWidth = 990
-        ExplicitHeight = 277
+        ExplicitHeight = 275
       end
       object PPeriodo: TPanel
         Left = 398
@@ -289,7 +289,8 @@ inherited FrmTelaCadCalendarioOS: TFrmTelaCadCalendarioOS
         BevelOuter = bvNone
         Color = 16249832
         TabOrder = 2
-        ExplicitTop = 322
+        ExplicitTop = 320
+        ExplicitWidth = 990
         DefaultCanvas = 'TGDIPlusCanvas'
         PrintMargins = (
           15

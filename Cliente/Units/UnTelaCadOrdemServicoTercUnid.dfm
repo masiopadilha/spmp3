@@ -5,42 +5,76 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    ExplicitWidth = 1008
-    inherited LCadastro: TLabel
-      Left = 691
-      ExplicitLeft = 691
+    inherited BitBtn8: TBitBtn
+      Left = 602
+      Top = 14
+      ExplicitLeft = 602
+      ExplicitTop = 14
     end
-    inherited LCadastroPor: TLabel
-      Left = 647
-      ExplicitLeft = 647
+    inherited pAlteracao: TPanel
+      Left = 642
+      Width = 355
+      ExplicitLeft = 642
+      ExplicitWidth = 355
+      inherited LCadastro: TLabel
+        Left = 45
+        Height = 14
+        ExplicitLeft = 41
+        ExplicitHeight = 14
+      end
+      inherited LblDataAlt: TDBText
+        Left = 243
+        Width = 104
+        DataSource = DM.dsOrdemServicoTercUnid
+        ExplicitLeft = 244
+        ExplicitTop = 3
+        ExplicitWidth = 104
+        ExplicitHeight = 14
+      end
+      inherited LAlteradoPor: TLabel
+        Left = 179
+        ExplicitLeft = 824
+      end
+      inherited LblDataCad: TDBText
+        Left = 83
+        Width = 85
+        DataSource = DM.dsOrdemServicoTercUnid
+        ExplicitLeft = 82
+        ExplicitWidth = 85
+      end
     end
-    inherited LblDataCad: TDBText
-      Left = 734
-      DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 734
-    end
-    inherited LblUsuCad: TDBText
-      Left = 734
-      DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 734
-    end
-    inherited LAlteracao: TLabel
-      Left = 850
-      ExplicitLeft = 850
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 824
-      ExplicitLeft = 824
-    end
-    inherited LblDataAlt: TDBText
-      Left = 893
-      DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 893
-    end
-    inherited LblUsuAlt: TDBText
-      Left = 893
-      DataSource = DM.dsOrdemServicoTercUnid
-      ExplicitLeft = 893
+    inherited pCadastro: TPanel
+      Left = 642
+      Width = 356
+      ExplicitLeft = 642
+      ExplicitWidth = 356
+      inherited LCadastroPor: TLabel
+        Left = -8
+        Width = 89
+        Height = 14
+        ExplicitLeft = -12
+        ExplicitWidth = 89
+        ExplicitHeight = 14
+      end
+      inherited LblUsuCad: TDBText
+        Left = 83
+        Width = 85
+        DataSource = DM.dsOrdemServicoTercUnid
+        ExplicitLeft = 82
+        ExplicitWidth = 85
+      end
+      inherited LAlteracao: TLabel
+        Left = 179
+        ExplicitLeft = 180
+        ExplicitHeight = 14
+      end
+      inherited LblUsuAlt: TDBText
+        Left = 243
+        Width = 105
+        DataSource = DM.dsOrdemServicoTercUnid
+        ExplicitLeft = 244
+        ExplicitWidth = 105
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -235,7 +269,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       AlignWithMargins = True
       Left = 4
       Top = 26
-      Width = 996
+      Width = 1000
       Height = 181
       Margins.Top = 25
       Legend.CheckBoxesStyle = cbsRadio
@@ -250,6 +284,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 996
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -286,7 +321,7 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
     Width = 1008
     Height = 195
     ExplicitTop = 366
-    ExplicitHeight = 195
+    ExplicitHeight = 192
     inherited Label3: TLabel
       Width = 93
       Caption = 'CONTRATO'
@@ -525,8 +560,6 @@ inherited FrmTelaCadOrdemServicoTercUnid: TFrmTelaCadOrdemServicoTercUnid
   inherited PAlertas: TPanel
     Top = 563
     Width = 1012
-    ExplicitTop = 563
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 565

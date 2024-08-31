@@ -23,6 +23,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtnImprimirClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
+    procedure BtnCentroCustoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,12 +37,56 @@ implementation
 
 {$R *.dfm}
 
-uses UnDmRelatorios, UnDM;
+uses UnDmRelatorios, UnDM, UnTelaCadFuncionarios;
 
 procedure TFrmTelaCadCentroCusto.BtnCancelarClick(Sender: TObject);
 begin
   inherited;
 EdtCodigo.ReadOnly := True;
+end;
+
+procedure TFrmTelaCadCentroCusto.BtnCentroCustoClick(Sender: TObject);
+begin
+  inherited;
+//if DM.qryCentroCusto.Active = False then Exit;
+//if DM.qryCentroCusto.IsEmpty = True then Exit;
+//if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+//  begin
+//    DM.FTabela_auxiliar := 300;
+//    DM.FNomeConsulta := 'Funcionários';
+//    DM.qryOrdemServico.Edit;
+//    DM.FParamAuxiliar[1] := 'NOME';
+//    DM.FParamAuxiliar[5] := '';
+//    if DM.ConsultarCombo <> EmptyStr then
+//    begin
+////      if DM.FParamAuxiliar[5] <> '' then
+//      begin
+//        DM.qryCentroCustoRESPONSAVEL.AsString   := DM.FCodCombo;
+//        DM.qryCentroCustoNOMERESPONSAVEL.AsString := DM.FValorCombo;
+////      end else
+////      begin
+////        Application.MessageBox('O responsável não é usuario do sistema, não será possível aprovar a ordem de serviço!', 'SPMP3', MB_OK);
+//      end;
+//    end;
+//  end
+//else
+//  begin
+//    Try
+//      if (DM.qryUsuarioPAcessoCADFUNCIONARIOS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+//      begin
+//        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+//        Exit;
+//      end;
+//      Application.CreateForm(TFrmTelaCadFuncionarios,FrmTelaCadFuncionarios);
+//      FrmTelaCadFuncionarios.ShowModal;
+//    Finally
+//      FreeAndNil(FrmTelaCadFuncionarios);
+//    End;
+//  end;
+//DM.FDataSetParam    := DM.qryCentroCusto;
+//DM.FDataSourceParam := DM.dsCentroCusto;
+//DM.FTela := 'CADCENTROCUSTO';
+//DM.FTabela_auxiliar := 4;
 end;
 
 procedure TFrmTelaCadCentroCusto.BtnImprimirClick(Sender: TObject);

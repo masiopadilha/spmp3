@@ -424,7 +424,10 @@ begin
     end;
 
   Try
-    if (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Frontal') and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Trazeiro') and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Duplo') then
+    if (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Frontal')
+      and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Trazeiro')
+      and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/Diferencial Duplo')
+      and (DM.qryPneusChassiCHASSI.AsString <> 'Cavalo Mecânico C/2 Eixos C/Diferencial Frontal') then
       begin
         PAuxiliares.Font.Color := clRed;
         PAuxiliares.Caption := 'NÃO É UM CAVALO MECÂNICO!';

@@ -350,14 +350,14 @@ if DM.qryCalendMObraHEFERIADO.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed;
     PAuxiliares.Caption := 'INFORME O %HE FERIADO DO REGISTRO!';
-    EdtHENormal.SetFocus;
+    EdtHEFeriado.SetFocus;
     Exit;
   end;
 if DM.qryCalendMObraHOFICIAIS.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed;
     PAuxiliares.Caption := 'INFORME A QUANTIDADE DE HORAS OFICIAIS DO REGISTRO!';
-    EdtHENormal.SetFocus;
+    EdtHOficiais.SetFocus;
     Exit;
   end;
 

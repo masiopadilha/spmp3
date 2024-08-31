@@ -464,7 +464,7 @@ begin
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, FloatToStr(TotalTempoInsp)
+                                                              , DM.qryManutConsMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, FloatToStr(TotalTempoInsp)
                                                               , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr, EmptyStr);
 
                 //Verifica se existe mão de obra cadastrada na manutenção
@@ -682,7 +682,7 @@ begin
                 FDMemTManutCODIGO.AsString               := DM.qryManutConsCODIGO.AsString;
                 FDMemTManutDESCRICAO.AsString            := DM.qryManutConsDESCRICAO.AsString;
                 FDMemTManutFREQUENCIA1.AsInteger         := DM.qryManutConsFREQUENCIA1.AsInteger;
-                FDMemTManutDTAINICIO1.AsDateTime         := DM.qryManutConsDTAINICIO1.AsDateTime;
+                FDMemTManutDTAINICIO1.AsDateTime         := DateOf(DM.FDataHoraServidor);
                 FDMemTManutCODEQUIPAMENTO.AsString       := DM.qryManutConsCODEQUIPAMENTO.AsString;
                 FDMemTManutEQUIPAMENTO.AsString          := DM.qryManutConsEQUIPAMENTO.AsString;
                 FDMemTManutCODEMPRESA.AsString           := DM.qryManutConsCODEMPRESA.AsString;
@@ -780,10 +780,10 @@ begin
                 if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryManutConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
-                      DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
-                    else
-                      DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutConsDTAINICIO1.AsDateTime), DM.qryManutConsFREQUENCIA1.AsInteger);
+//                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
+//                      DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
+//                    else
+                    DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger);
                     if DM.qryManutConsREPROGRAMAR2.AsString = 'Programação' then
                       DM.qryManutConsLEITURA.AsInteger := DM.qryManutConsLEITURA.AsInteger + DM.qryManutConsFREQUENCIA2.AsInteger;
                   end;
@@ -876,7 +876,7 @@ begin
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr
+                                                              , DM.qryLubrificConsMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr
                                                               , FloatToStr(TotalTempoInsp), DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr, EmptyStr);
 
 
@@ -1094,7 +1094,7 @@ begin
                 FDMemTLubrificCODIGO.AsString               := DM.qryLubrificConsCODIGO.AsString;
                 FDMemTLubrificDESCRICAO.AsString            := DM.qryLubrificConsDESCRICAO.AsString;
                 FDMemTLubrificFREQUENCIA1.AsInteger         := DM.qryLubrificConsFREQUENCIA1.AsInteger;
-                FDMemTLubrificDTAINICIO1.AsDateTime         := DM.qryLubrificConsDTAINICIO1.AsDateTime;
+                FDMemTLubrificDTAINICIO1.AsDateTime         := DateOf(DM.FDataHoraServidor);
                 FDMemTLubrificCODEQUIPAMENTO.AsString       := DM.qryLubrificConsCODEQUIPAMENTO.AsString;
                 FDMemTLubrificEQUIPAMENTO.AsString          := DM.qryLubrificConsEQUIPAMENTO.AsString;
                 FDMemTLubrificCODEMPRESA.AsString           := DM.qryLubrificConsCODEMPRESA.AsString;
@@ -1192,10 +1192,10 @@ begin
                 if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryLubrificConsRELATORIO.AsString    := 'N';
-                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
-                      DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
-                    else
-                      DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime), DM.qryLubrificConsFREQUENCIA1.AsInteger);
+//                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
+//                      DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
+//                    else
+                    DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger);
                     if DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programação' then
                       DM.qryLubrificConsLEITURA.AsInteger := DM.qryLubrificConsLEITURA.AsInteger + DM.qryLubrificConsFREQUENCIA2.AsInteger;
                   end;
@@ -1348,7 +1348,7 @@ begin
                 FDMemTRotaCODIGO.AsString             := DM.qryRotaConsCODIGO.AsString;
                 FDMemTRotaDESCRICAO.AsString          := DM.qryRotaConsDESCRICAO.AsString;
                 FDMemTRotaFREQUENCIA.AsInteger        := DM.qryRotaConsFREQUENCIA.AsInteger;
-                FDMemTRotaDATAINICIO.AsDateTime       := DM.qryRotaConsDATAINICIO.AsDateTime;
+                FDMemTRotaDATAINICIO.AsDateTime       := DateOf(DM.FDataHoraServidor);
                 FDMemTRotaCODEMPRESA.AsString         := DM.qryRotaConsCODEMPRESA.AsString;
                 FDMemTRotaREPROGRAMAR.AsString        := DM.qryRotaConsREPROGRAMAR.AsString;
                 FDMemTRotaRELATORIO.AsString          := DM.qryRotaConsRELATORIO.AsString;
@@ -1446,10 +1446,10 @@ begin
                  begin
                    DM.qryRotaCons.Edit;
                    DM.qryRotaConsRELATORIO.AsString  := 'N';
-                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
-                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
-                   else
-                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaConsDATAINICIO.AsDateTime), DM.qryRotaConsFREQUENCIA.AsInteger);
+//                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
+//                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
+//                   else
+                   DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger);
                    DM.qryRotaCons.Post;
 
                    DM.qryRotaConsSeq.First;

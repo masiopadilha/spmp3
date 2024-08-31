@@ -13,8 +13,12 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
   inherited PTop: TPanel
     Width = 1008
     ExplicitWidth = 1004
+    inherited Image1: TImage
+      Height = 47
+      ExplicitHeight = 47
+    end
     object Label3: TLabel [1]
-      Left = 125
+      Left = 201
       Top = 33
       Width = 46
       Height = 13
@@ -28,18 +32,18 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       ParentFont = False
     end
     object Label1: TLabel [2]
-      Left = 284
+      Left = 360
       Top = 33
       Width = 7
       Height = 16
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 977
-      ExplicitLeft = 973
+      Left = 971
+      ExplicitLeft = 967
     end
     object BtnConsultar: TButton
-      Left = 404
+      Left = 480
       Top = 28
       Width = 28
       Height = 28
@@ -55,7 +59,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       OnClick = BtnConsultarClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 175
+      Left = 251
       Top = 29
       Width = 105
       Height = 24
@@ -65,7 +69,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
       DropDownDate = 44883.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 296
+      Left = 372
       Top = 30
       Width = 105
       Height = 24
@@ -217,6 +221,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
         ReadOnly = True
         ShowHint = True
         TabOrder = 4
+        Text = 'Funcion'#225'rio'
         TextHint = 'Funcion'#225'rio'
         StyleElements = [seBorder]
         OnChange = EdtMatriculaLubrificChange
@@ -255,7 +260,7 @@ inherited FrmTelaCadAbastecimentosLubrificante: TFrmTelaCadAbastecimentosLubrifi
         ReadOnly = True
         ShowHint = True
         TabOrder = 7
-        TextHint = 'Rota'
+        Text = 'Rota'
         StyleElements = [seBorder]
         OnChange = EdtRotaLubrificChange
         OnKeyPress = EdtRotaLubrificKeyPress

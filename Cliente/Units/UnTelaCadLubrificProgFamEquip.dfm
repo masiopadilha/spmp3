@@ -6,41 +6,43 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      Left = 766
-      ExplicitLeft = 742
+    inherited pAlteracao: TPanel
+      Left = 674
+      ExplicitLeft = 670
+      inherited LCadastro: TLabel
+        Height = 14
+        ExplicitLeft = 742
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsLubrificProgFamEquip
+        ExplicitLeft = 951
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 867
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsLubrificProgFamEquip
+        ExplicitLeft = 800
+      end
     end
-    inherited LCadastroPor: TLabel
-      Left = 722
-      ExplicitLeft = 698
-    end
-    inherited LblDataCad: TDBText
-      Left = 804
-      DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 800
-    end
-    inherited LblUsuCad: TDBText
-      Left = 804
-      DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 800
-    end
-    inherited LAlteracao: TLabel
-      Left = 917
-      ExplicitLeft = 893
-    end
-    inherited LAlteradoPor: TLabel
-      Left = 891
-      ExplicitLeft = 867
-    end
-    inherited LblDataAlt: TDBText
-      Left = 955
-      DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 951
-    end
-    inherited LblUsuAlt: TDBText
-      Left = 955
-      DataSource = DM.dsLubrificProgFamEquip
-      ExplicitLeft = 951
+    inherited pCadastro: TPanel
+      Left = 674
+      ExplicitLeft = 670
+      inherited LCadastroPor: TLabel
+        Height = 14
+        ExplicitLeft = 698
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsLubrificProgFamEquip
+        ExplicitLeft = 800
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 893
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsLubrificProgFamEquip
+        ExplicitLeft = 951
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -503,7 +505,6 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     Height = 134
     Align = alTop
     ExplicitTop = 247
-    ExplicitWidth = 1008
     ExplicitHeight = 134
     inherited Label3: TLabel
       Width = 179
@@ -530,7 +531,6 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
       TabOrder = 0
       OnExit = TabNextTab1AfterTabChange
       ExplicitLeft = 330
-      ExplicitHeight = 88
     end
     object GrdPlanoTrabalho: TDBGrid
       AlignWithMargins = True
@@ -583,14 +583,11 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     Top = 563
     Width = 1012
     TabOrder = 7
-    ExplicitTop = 560
-    ExplicitWidth = 1008
   end
   inherited PBase: TPanel
     Top = 565
     Width = 1008
     TabOrder = 5
-    ExplicitTop = 562
     inherited Button1: TButton
       Hint = 'Partes a Inspecionar'
       DisabledImageIndex = 85
@@ -617,7 +614,6 @@ inherited FrmTelaCadLubrificProgFamEquip: TFrmTelaCadLubrificProgFamEquip
     Height = 179
     Align = alTop
     TabOrder = 4
-    ExplicitTop = 365
     ExplicitWidth = 1002
     object Label4: TLabel
       Left = 7

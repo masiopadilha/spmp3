@@ -13,9 +13,9 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   TextHeight = 11
   inherited PTop: TPanel
     Width = 1008
-    ExplicitWidth = 1002
+    ExplicitWidth = 1004
     object Label11: TLabel [1]
-      Left = 130
+      Left = 204
       Top = 9
       Width = 58
       Height = 16
@@ -29,7 +29,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       ParentFont = False
     end
     object Label2: TLabel [2]
-      Left = 234
+      Left = 308
       Top = 9
       Width = 71
       Height = 16
@@ -43,7 +43,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
     inherited BtnAjuda: TButton
       Left = 971
-      ExplicitLeft = 965
+      ExplicitLeft = 967
     end
     object Button6: TButton
       Left = 940
@@ -66,7 +66,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       OnClick = Button6Click
     end
     object EdtExecucao: TJvDateEdit
-      Left = 130
+      Left = 204
       Top = 28
       Width = 95
       Height = 24
@@ -80,7 +80,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       TabOrder = 2
     end
     object EdtMatricula: TEdit
-      Left = 234
+      Left = 308
       Top = 28
       Width = 76
       Height = 24
@@ -97,7 +97,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       OnKeyPress = EdtMatriculaKeyPress
     end
     object EdtResponsavel: TEdit
-      Left = 312
+      Left = 386
       Top = 28
       Width = 185
       Height = 24
@@ -113,7 +113,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       StyleElements = [seFont, seClient]
     end
     object BtnFuncionario: TButton
-      Left = 499
+      Left = 573
       Top = 27
       Width = 26
       Height = 26
@@ -128,7 +128,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       OnClick = BtnFuncionarioClick
     end
     object rgStatus: TRadioGroup
-      Left = 560
+      Left = 634
       Top = 16
       Width = 152
       Height = 42
@@ -148,7 +148,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       OnClick = rgStatusClick
     end
     object BtnMaodeObra: TButton
-      Left = 529
+      Left = 603
       Top = 27
       Width = 26
       Height = 26
@@ -165,13 +165,13 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   inherited PCentro: TPanel
     Width = 1006
     Height = 505
-    ExplicitWidth = 1000
-    ExplicitHeight = 494
+    ExplicitWidth = 1002
+    ExplicitHeight = 502
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 503
-      ExplicitWidth = 998
-      ExplicitHeight = 492
+      ExplicitWidth = 1000
+      ExplicitHeight = 500
     end
     object PBase: TPanel
       AlignWithMargins = True
@@ -183,8 +183,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 992
-      ExplicitHeight = 486
+      ExplicitWidth = 994
+      ExplicitHeight = 494
       object RGFiltro: TRadioGroup
         Left = 679
         Top = 540
@@ -231,8 +231,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         ParentFont = False
         TabOrder = 2
         OnChange = PCInspecoesChange
-        ExplicitWidth = 982
-        ExplicitHeight = 476
+        ExplicitWidth = 984
+        ExplicitHeight = 484
         object TSManut: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencao: TJvDBGrid
@@ -1296,8 +1296,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   inherited PAuxiliares: TPanel
     Top = 577
     Width = 1008
-    ExplicitTop = 566
-    ExplicitWidth = 1002
+    ExplicitTop = 574
+    ExplicitWidth = 1004
     object Label1: TLabel
       Left = 991
       Top = 4
@@ -1309,8 +1309,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   inherited PBotoes: TPanel
     Top = 604
     Width = 1008
-    ExplicitTop = 593
-    ExplicitWidth = 1002
+    ExplicitTop = 601
+    ExplicitWidth = 1004
     inherited BtnOK: TButton
       Left = 416
       Top = 5

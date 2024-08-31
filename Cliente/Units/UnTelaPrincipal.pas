@@ -305,6 +305,13 @@ type
     AprovacoesOS1: TMenuItem;
     Lista1: TMenuItem;
     Ficha1: TMenuItem;
+    QRCode1: TMenuItem;
+    Lista2: TMenuItem;
+    Ficha2: TMenuItem;
+    QRCode2: TMenuItem;
+    Lista3: TMenuItem;
+    Ficha3: TMenuItem;
+    QRCode3: TMenuItem;
     procedure MenudeParmetros1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure Cadastro16Click(Sender: TObject);
@@ -443,7 +450,6 @@ type
     procedure Pedidos1Click(Sender: TObject);
     procedure Viagens1Click(Sender: TObject);
     procedure Familia1Click(Sender: TObject);
-    procedure Familia2Click(Sender: TObject);
     procedure Opcoes1Click(Sender: TObject);
     procedure Auditoria1Click(Sender: TObject);
     procedure DespesasdaManutencao1Click(Sender: TObject);
@@ -456,7 +462,6 @@ type
     procedure PorEquipamento3Click(Sender: TObject);
     procedure Area5Click(Sender: TObject);
     procedure AlterarFamilia1Click(Sender: TObject);
-    procedure Area6Click(Sender: TObject);
     procedure NaoProgramadas1Click(Sender: TObject);
     procedure NaoProgramadas2Click(Sender: TObject);
     procedure TimerOscioso2Timer(Sender: TObject);
@@ -485,6 +490,14 @@ type
     procedure AprovacoesOS1Click(Sender: TObject);
     procedure Lista1Click(Sender: TObject);
     procedure Ficha1Click(Sender: TObject);
+    procedure QRCode1Click(Sender: TObject);
+    procedure Lista2Click(Sender: TObject);
+    procedure Ficha2Click(Sender: TObject);
+    procedure QRCode2Click(Sender: TObject);
+    procedure Ficha3Click(Sender: TObject);
+    procedure Lista3Click(Sender: TObject);
+    procedure QRCode3Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
 
@@ -763,29 +776,6 @@ if DM.ConsultarCombo <> '' then
                            + ' WHERE (`lubrificprogequipamento`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' AND `areas`.`CODIGO` = '+QuotedStr(DM.FCodCombo) + ') ORDER BY `lubrificprogequipamento`.`DESCRICAO`');
     DM.qryAuxiliar.Open;
     DmRelatorios.frxRLubrificProgEquipGeral.ShowReport();
-  end;
-
-end;
-
-procedure TFrmTelaPrincipal.Area6Click(Sender: TObject);
-begin
-if not Assigned(DmRelatorios) then
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
-DM.FTabela_auxiliar := 150;
-DM.FNomeConsulta := 'Áreas';
-if DM.ConsultarCombo <> '' then
-  begin
-    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
-    DM.qryAuxiliar.Close;
-    DM.qryAuxiliar.SQL.Clear;
-    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`OPERANDO` FROM `equipamentos`'
-                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
-                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
-                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
-    DM.qryAuxiliar.Open;
-    DmRelatorios.frxREquipGeralLista.ShowReport();
   end;
 
 end;
@@ -1294,12 +1284,19 @@ begin
           FreeAndNil(FrmTelaAuxiliar);
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+        DM.qryFuncionarios.Close;
+        DM.qryFuncionarios.Params[0].AsString := DM.FParamAuxiliar[0];
+        DM.qryFuncionarios.Params[1].AsString := DM.FCodEmpresa;
+        DM.qryFuncionarios.Open;
       end;
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramentas, FrmTelaCadFuncionariosCxaFerramentas);
     FrmTelaCadFuncionariosCxaFerramentas.Caption := 'Caixa de Ferramentas de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosCxaFerramentas.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramentas);
+    DM.qryFuncionarios.Close;
+    DM.FParamAuxiliar[0] := EmptyStr;
+
   End;
 end;
 
@@ -2345,29 +2342,6 @@ if DM.ConsultarCombo <> '' then
   end;
 end;
 
-procedure TFrmTelaPrincipal.Familia2Click(Sender: TObject);
-begin
-if not Assigned(DmRelatorios) then
-  Application.CreateForm(TDmRelatorios, DmRelatorios);
-DM.FTabela_auxiliar := 600;
-DM.FNomeConsulta := 'Família de Equipamentos';
-if DM.ConsultarCombo <> '' then
-  begin
-    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
-    DM.qryAuxiliar.Close;
-    DM.qryAuxiliar.SQL.Clear;
-    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos`.`OPERANDO` FROM `equipamentos`'
-                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
-                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
-                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
-                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
-
-    DM.qryAuxiliar.Open;
-    DmRelatorios.frxREquipGeralLista.ShowReport();
-  end;
-end;
-
 procedure TFrmTelaPrincipal.FamliadeEquipamentos1Click(Sender: TObject);
 begin
 if not Assigned(DmRelatorios) then
@@ -2638,6 +2612,94 @@ DM.qryAuxiliar.Close;
 DM.qryAuxiliar.SQL.Clear;
 end;
 
+procedure TFrmTelaPrincipal.Ficha2Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 600;
+DM.FNomeConsulta := 'Família de Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.*, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT'
+                            + ', `calendarioequip`.`DESCRICAO` CALENDARIOEQUIP, `areas`.`DESCRICAO` AREA'
+                            + ', `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos_1`.`DESCRICAO` AS `DESCPAI`'
+                            + ', `fabricante`.`DESCRICAO` FABRICANTE, `fornecedor`.`DESCRICAO` FORNECEDOR, `centrocusto`.`DESCRICAO` CENTROCUSTO'
+                            + ', `classes`.`DESCRICAO` CLASSE, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
+                            + ' FROM `equipamentos`'
+                            + ' LEFT JOIN `usuario` ON (`equipamentos`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                            + ' LEFT JOIN `usuario` AS `usuario_1` ON (`equipamentos`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                            + ' LEFT JOIN `calendarioequip` ON (`equipamentos`.`CODCALENDARIO` = `calendarioequip`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `calendarioequip`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                            + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                            + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `fabricante` ON (`equipamentos`.`CODFABRICANTE` = `fabricante`.`CODIGO`) AND (`fabricante`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `fornecedor` ON (`equipamentos`.`CODFORNECEDOR` = `fornecedor`.`CODIGO`) AND (`fornecedor`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                            + ' LEFT JOIN `classes` ON (`equipamentos`.`CODCLASSE` = `classes`.`CODIGO`)'
+                            + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                            + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + 'and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Tag := 1;
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxREquipGeralFicha.ShowReport();
+    DM.qryAuxiliar.Tag := 0;
+    DM.qryFamEquipamento.Close;
+    DM.qryEquipamentosDados.Close;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+  end;
+end;
+
+procedure TFrmTelaPrincipal.Ficha3Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.*, `usuario`.`NOME` USUARIOCAD, `usuario_1`.`NOME`USUARIOALT'
+                            + ', `calendarioequip`.`DESCRICAO` CALENDARIOEQUIP, `areas`.`DESCRICAO` AREA'
+                            + ', `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA, `equipamentos_1`.`DESCRICAO` AS `DESCPAI`'
+                            + ', `fabricante`.`DESCRICAO` FABRICANTE, `fornecedor`.`DESCRICAO` FORNECEDOR, `centrocusto`.`DESCRICAO` CENTROCUSTO'
+                            + ', `classes`.`DESCRICAO` CLASSE, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP'
+                            + ' FROM `equipamentos`'
+                            + ' LEFT JOIN `usuario` ON (`equipamentos`.`CODUSUARIOCAD` = `usuario`.`CODIGO`)'
+                            + ' LEFT JOIN `usuario` AS `usuario_1` ON (`equipamentos`.`CODUSUARIOALT` = `usuario_1`.`CODIGO`)'
+                            + ' LEFT JOIN `calendarioequip` ON (`equipamentos`.`CODCALENDARIO` = `calendarioequip`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `calendarioequip`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                            + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                            + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `fabricante` ON (`equipamentos`.`CODFABRICANTE` = `fabricante`.`CODIGO`) AND (`fabricante`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `fornecedor` ON (`equipamentos`.`CODFORNECEDOR` = `fornecedor`.`CODIGO`) AND (`fornecedor`.`CODEMPRESA` = `equipamentos`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                            + ' LEFT JOIN `classes` ON (`equipamentos`.`CODCLASSE` = `classes`.`CODIGO`)'
+                            + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                            + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Tag := 1;
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxREquipGeralFicha.ShowReport();
+    DM.qryAuxiliar.Tag := 0;
+    DM.qryFamEquipamento.Close;
+    DM.qryEquipamentosDados.Close;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+  end;
+
+end;
+
+procedure TFrmTelaPrincipal.FormActivate(Sender: TObject);
+begin
+DM.MSGAguarde('', False);
+end;
+
 procedure TFrmTelaPrincipal.FormatodeCdigos1Click(Sender: TObject);
 begin
 if (DM.qryUsuarioPAcessoCADFORMATOCODIGO.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
@@ -2883,7 +2945,7 @@ begin
     if chbAtivarDBSolicTrab.Caption = 'Desativar' then
       chbAtivarDBSolicTrab.Left := chbAtivarDBSolicTrab.Width - 83;
 
-    ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.65);
+    ChartOSOficina.Width := Round((OriginalOSOficinaWidth * WidthRatio)/1.45);
     if ChartOSOficina.Width < 345 then ChartOSOficina.Width := 345;
     ChartOSOficina.Height := Round(OriginalOSOficinaHeight * HeightRatio);
     chbAtivarDBOficinas.Top := chbAtivarDBSolicTrab.Top;
@@ -3181,12 +3243,18 @@ begin
           FreeAndNil(FrmTelaAuxiliar);
         End;
         if DM.FParamAuxiliar[0] = EmptyStr then Exit;
+        DM.qryFuncionarios.Close;
+        DM.qryFuncionarios.Params[0].AsString := DM.FParamAuxiliar[0];
+        DM.qryFuncionarios.Params[1].AsString := DM.FCodEmpresa;
+        DM.qryFuncionarios.Open;
       end;
     Application.CreateForm(TFrmTelaCadFuncionariosCxaFerramInv, FrmTelaCadFuncionariosCxaFerramInv);
     FrmTelaCadFuncionariosCxaFerramInv.Caption := 'Caixa de Ferramentas de: '+ DM.FValorCombo;
     FrmTelaCadFuncionariosCxaFerramInv.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadFuncionariosCxaFerramInv);
+    DM.qryFuncionarios.Close;
+    DM.FParamAuxiliar[0] := EmptyStr;
   End;
 end;
 
@@ -3315,6 +3383,52 @@ DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICA
 DM.qryAuxiliar.Open;
 DmRelatorios.frxREquipGeralLista.ShowReport();
 
+end;
+
+procedure TFrmTelaPrincipal.Lista2Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 600;
+DM.FNomeConsulta := 'Família de Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA_1, `equipamentos`.`OPERANDO` FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxREquipGeralLista.ShowReport();
+  end;
+
+end;
+
+procedure TFrmTelaPrincipal.Lista3Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT `equipamentos`.`CODIGO`, `equipamentos`.`DESCRICAO`, `familiaequipamento`.`DESCRICAO` FAMILIAEQUIP, `areas`.`DESCRICAO` AREA, `celulas`.`DESCRICAO` CELULA, `linhas`.`DESCRICAO` LINHA_1, `equipamentos`.`OPERANDO` FROM `equipamentos`'
+                           + ' INNER JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                           + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO` AND `equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `celulas`.`CODAREA` AND `equipamentos`.`CODEMPRESA` = `celulas`.`CODEMPRESA`)'
+                           + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO` AND `equipamentos`.`CODLOCALIZACAO` = `linhas`.`CODAREA` AND `equipamentos`.`CODCELULA` = `linhas`.`CODCELULA` AND `equipamentos`.`CODEMPRESA` = `linhas`.`CODEMPRESA`)'
+                           + ' WHERE (`equipamentos`.`CODIGO` = `equipamentos`.`CODEMPRESA` = '+QuotedStr(DM.FCodEmpresa) + ' and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DmRelatorios.frxREquipGeralLista.ShowReport();
+  end;
 end;
 
 procedure TFrmTelaPrincipal.ListaCompleta2Click(Sender: TObject);
@@ -4305,6 +4419,95 @@ begin
   Finally
     FreeAndNil(FrmTelaCadArqTecnicoLiteraturaParam);
   End;
+end;
+
+procedure TFrmTelaPrincipal.QRCode1Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.qryEquipamentosQRCode.MasterSource := DM.dsAuxiliar;
+DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`DESCRICAO`'
+                        + ' FROM `equipamentos`'
+                        + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                        + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                        + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                        + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                        + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                        + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ') order by `equipamentos`.`DESCRICAO`');
+DM.qryAuxiliar.Open;
+DM.qryEquipamentosQRCode.Open;
+DmRelatorios.frxREquipGeralQRCode.ShowReport();
+DM.qryEquipamentosQRCode.MasterSource := DM.dsEquipamentos;
+DM.qryAuxiliar.Close;
+DM.qryAuxiliar.SQL.Clear;
+DM.qryEquipamentosQRCode.Close;
+end;
+
+procedure TFrmTelaPrincipal.QRCode2Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 600;
+DM.FNomeConsulta := 'Família de Equipamentos';
+if DM.ConsultarCombo <> '' then
+  begin
+    DM.qryEquipamentosQRCode.MasterSource := DM.dsAuxiliar;
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`DESCRICAO`'
+                            + ' FROM `equipamentos`'
+                            + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                            + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                            + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                            + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                            + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + 'and `equipamentos`.`CODFAMILIAEQUIP` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DM.qryEquipamentosQRCode.Open;
+    DmRelatorios.frxREquipGeralQRCode.ShowReport();
+    DM.qryEquipamentosQRCode.MasterSource := DM.dsEquipamentos;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryEquipamentosQRCode.Close;
+  end;
+end;
+
+procedure TFrmTelaPrincipal.QRCode3Click(Sender: TObject);
+begin
+if not Assigned(DmRelatorios) then
+  Application.CreateForm(TDmRelatorios, DmRelatorios);
+DM.FTabela_auxiliar := 150;
+DM.FNomeConsulta := 'Áreas';
+if DM.ConsultarCombo <> '' then
+  begin
+    DM.qryEquipamentosQRCode.MasterSource := DM.dsAuxiliar;
+    DmRelatorios.frxDBEquipGeral.DataSet := DM.qryAuxiliar;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryAuxiliar.SQL.Add('SELECT  `equipamentos`.`CODIGO`, `equipamentos`.`CODEMPRESA`, `equipamentos`.`DESCRICAO`'
+                            + ' FROM `equipamentos`'
+                            + ' LEFT JOIN `areas` ON (`equipamentos`.`CODLOCALIZACAO` = `areas`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `celulas` ON (`equipamentos`.`CODCELULA` = `celulas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`) AND (`celulas`.`CODAREA` = `areas`.`CODIGO`)'
+                            + ' LEFT JOIN `linhas` ON (`equipamentos`.`CODLINHA` = `linhas`.`CODIGO`) AND (`linhas`.`CODEMPRESA` = `celulas`.`CODEMPRESA`) AND (`linhas`.`CODAREA` = `celulas`.`CODAREA`) AND (`linhas`.`CODCELULA` = `celulas`.`CODIGO`)'
+                            + ' LEFT JOIN `equipamentos` AS `equipamentos_1` ON (`equipamentos`.`CODEQUIPAMENTOPAI` = `equipamentos_1`.`CODIGO`) AND (`equipamentos`.`CODEMPRESA` = `equipamentos_1`.`CODEMPRESA`)'
+                            + ' LEFT JOIN `centrocusto` ON (`equipamentos`.`CODCENTROCUSTO` = `centrocusto`.`CODIGO`)'
+                            + ' LEFT JOIN `familiaequipamento` ON (`equipamentos`.`CODFAMILIAEQUIP` = `familiaequipamento`.`CODIGO`)'
+                            + ' WHERE (`equipamentos`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + 'and `equipamentos`.`CODLOCALIZACAO` =  '+QuotedStr(DM.FCodCombo) + ') order by `equipamentos`.`DESCRICAO`');
+    DM.qryAuxiliar.Open;
+    DM.qryEquipamentosQRCode.Open;
+    DmRelatorios.frxREquipGeralQRCode.ShowReport();
+    DM.qryEquipamentosQRCode.MasterSource := DM.dsEquipamentos;
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Clear;
+    DM.qryEquipamentosQRCode.Close;
+  end;
+
 end;
 
 procedure TFrmTelaPrincipal.Viagens1Click(Sender: TObject);

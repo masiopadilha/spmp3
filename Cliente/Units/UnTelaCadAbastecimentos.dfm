@@ -1,8 +1,14 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
+  ClientHeight = 624
+  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 1008
     inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        Height = 14
+      end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsAbastecimentos
       end
@@ -11,6 +17,9 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       end
     end
     inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        Height = 14
+      end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsAbastecimentos
       end
@@ -20,6 +29,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PIdentificacao: TPanel
+    Width = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -292,6 +302,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PProgramacao: TPanel
+    Width = 1008
     Height = 194
     ExplicitHeight = 194
     inherited Label2: TLabel
@@ -324,9 +335,10 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Height = 196
+    Width = 1008
+    Height = 212
     ExplicitTop = 349
-    ExplicitHeight = 193
+    ExplicitHeight = 209
     inherited Label3: TLabel
       Width = 133
       Caption = 'LUBRIFICA'#199#213'ES'
@@ -337,7 +349,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       Left = 4
       Top = 25
       Width = 1000
-      Height = 167
+      Height = 183
       Margins.Top = 24
       Align = alClient
       Color = 14671839
@@ -355,7 +367,17 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       OnKeyDown = FormKeyDown
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 605
+    Width = 1012
+  end
+  inherited PAlertas: TPanel
+    Top = 563
+    Width = 1012
+  end
   inherited PBase: TPanel
+    Top = 565
+    Width = 1008
     inherited Button1: TButton
       Hint = 'Abastecimentos'
       DisabledImageIndex = 110

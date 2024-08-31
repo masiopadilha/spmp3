@@ -159,8 +159,7 @@ if BtnCarroceria1.Focused = True then
 
         DM.qryPneusChassiAtrelamento.Post;
         DM.qryPneusChassiAtrelamento.Close;
-        DM.qryPneusChassiAtrelamento.Params[0].AsString := DM.FCodEmpresa;
-        DM.qryPneusChassiAtrelamento.Params[1].AsString := DM.qryPneusChassiCODIGO.AsString;
+        DM.qryPneusChassiAtrelamento.Params[0].AsInteger := DM.qryPneusChassiCODIGO.AsInteger;
         DM.qryPneusChassiAtrelamento.Open;
 
         DM.qryPneusChassiImagens.Close;
@@ -199,8 +198,7 @@ if BtnCarroceria2.Focused = True then
 
         DM.qryPneusChassiAtrelamento.Post;
         DM.qryPneusChassiAtrelamento.Close;
-        DM.qryPneusChassiAtrelamento.Params[0].AsString := DM.FCodEmpresa;
-        DM.qryPneusChassiAtrelamento.Params[1].AsString := DM.qryPneusChassiCODIGO.AsString;
+        DM.qryPneusChassiAtrelamento.Params[0].AsInteger := DM.qryPneusChassiCODIGO.AsInteger;
         DM.qryPneusChassiAtrelamento.Open;
 
         DM.qryPneusChassiImagens.Close;
@@ -239,8 +237,7 @@ if BtnCarroceria3.Focused = True then
 
         DM.qryPneusChassiAtrelamento.Post;
         DM.qryPneusChassiAtrelamento.Close;
-        DM.qryPneusChassiAtrelamento.Params[0].AsString := DM.FCodEmpresa;
-        DM.qryPneusChassiAtrelamento.Params[1].AsString := DM.qryPneusChassiCODIGO.AsString;
+        DM.qryPneusChassiAtrelamento.Params[0].AsInteger := DM.qryPneusChassiCODIGO.AsInteger;
         DM.qryPneusChassiAtrelamento.Open;
 
         DM.qryPneusChassiImagens.Close;
@@ -297,6 +294,7 @@ if BtnCarroceria1.Focused = True then
     DM.qryPneusChassiAtrelamentoStatus.Execute;
 
     DM.qryPneusChassiAtrelamento.Edit;
+    DM.qryPneusChassiAtrelamentoCODEMPRESA.AsString       := DM.FCodEmpresa;
     DM.qryPneusChassiAtrelamentoCODCARROCERIA1.AsString       := EmptyStr;
     DM.qryPneusChassiAtrelamentoDESCEQUIPCARROCEIRA1.AsString := EmptyStr;
     DM.qryPneusChassiAtrelamento.Post;
@@ -337,6 +335,7 @@ if BtnCarroceria2.Focused = True then
     DM.qryPneusChassiAtrelamentoStatus.Execute;
 
     DM.qryPneusChassiAtrelamento.Edit;
+    DM.qryPneusChassiAtrelamentoCODEMPRESA.AsString       := DM.FCodEmpresa;
     DM.qryPneusChassiAtrelamentoCODCARROCERIA2.AsString       := EmptyStr;
     DM.qryPneusChassiAtrelamentoDESCEQUIPCARROCEIRA2.AsString := EmptyStr;
     DM.qryPneusChassiAtrelamento.Post;
@@ -373,6 +372,7 @@ if BtnCarroceria3.Focused = True then
     DM.qryPneusChassiAtrelamentoStatus.Execute;
 
     DM.qryPneusChassiAtrelamento.Edit;
+    DM.qryPneusChassiAtrelamentoCODEMPRESA.AsString       := DM.FCodEmpresa;
     DM.qryPneusChassiAtrelamentoCODCARROCERIA3.AsString       := EmptyStr;
     DM.qryPneusChassiAtrelamentoDESCEQUIPCARROCEIRA3.AsString := EmptyStr;
     DM.qryPneusChassiAtrelamento.Post;
@@ -387,6 +387,7 @@ end;
 procedure TFrmTelaCadPneusChassiAtrelamento.AlimentaHistorico(Operacao:string);
 begin
 DM.qryPneusChassiAtrelamentoHist.Append;
+DM.qryPneusChassiAtrelamentoHistCODEMPRESA.AsString := DM.FCodEmpresa;
 if BtnCarroceria1.Focused = True then
   begin
     DM.qryPneusChassiAtrelamentoHistPOSICAO.AsString       := '1° Carroceria';

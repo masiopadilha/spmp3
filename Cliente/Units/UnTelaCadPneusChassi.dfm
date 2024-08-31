@@ -2,32 +2,39 @@ inherited FrmTelaCadPneusChassi: TFrmTelaCadPneusChassi
   Caption = 'Montagem de Chassi'
   ClientHeight = 624
   ClientWidth = 1012
+  KeyPreview = False
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      ExplicitLeft = 467
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        Height = 14
+        ExplicitLeft = 467
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsPneusChassi
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 610
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsPneusChassi
+      end
     end
-    inherited LCadastroPor: TLabel
-      ExplicitLeft = 431
-    end
-    inherited LblDataCad: TDBText
-      DataSource = DM.dsPneusChassi
-    end
-    inherited LblUsuCad: TDBText
-      DataSource = DM.dsPneusChassi
-    end
-    inherited LAlteracao: TLabel
-      ExplicitLeft = 626
-    end
-    inherited LAlteradoPor: TLabel
-      ExplicitLeft = 610
-    end
-    inherited LblDataAlt: TDBText
-      DataSource = DM.dsPneusChassi
-    end
-    inherited LblUsuAlt: TDBText
-      DataSource = DM.dsPneusChassi
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        Height = 14
+        ExplicitLeft = 431
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsPneusChassi
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 626
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsPneusChassi
+      end
     end
   end
   inherited PIdentificacao: TPanel

@@ -1,11 +1,13 @@
 inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   Caption = 'Cadastro de Ordem de Servi'#231'o'
-  ClientHeight = 619
+  ClientHeight = 624
   ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
     inherited pAlteracao: TPanel
+      Left = 650
+      ExplicitLeft = 650
       inherited LCadastro: TLabel
         Height = 14
       end
@@ -22,6 +24,8 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       end
     end
     inherited pCadastro: TPanel
+      Left = 649
+      ExplicitLeft = 649
       inherited LCadastroPor: TLabel
         Height = 14
       end
@@ -40,7 +44,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   end
   inherited PIdentificacao: TPanel
     Width = 1008
-    ExplicitWidth = 1002
     object Label4: TLabel
       Left = 91
       Top = 32
@@ -201,7 +204,6 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited PProgramacao: TPanel
     Width = 1008
     Height = 160
-    ExplicitWidth = 1002
     ExplicitHeight = 160
     inherited Label2: TLabel
       Width = 132
@@ -762,10 +764,9 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
   inherited PDiversos: TPanel
     Top = 315
     Width = 1008
-    Height = 241
+    Height = 246
     ExplicitTop = 315
-    ExplicitWidth = 1002
-    ExplicitHeight = 230
+    ExplicitHeight = 243
     inherited Label3: TLabel
       Top = 2
       Width = 194
@@ -778,7 +779,7 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
       Left = 5
       Top = 26
       Width = 998
-      Height = 210
+      Height = 215
       Hint = 'D'#234' duplo-clique para excluir o registro.'
       Margins.Left = 4
       Margins.Top = 25
@@ -861,22 +862,16 @@ inherited FrmTelaCadOrdemServico: TFrmTelaCadOrdemServico
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 600
+    Top = 605
     Width = 1012
-    ExplicitTop = 589
-    ExplicitWidth = 1006
   end
   inherited PAlertas: TPanel
-    Top = 558
+    Top = 563
     Width = 1012
-    ExplicitTop = 547
-    ExplicitWidth = 1006
   end
   inherited PBase: TPanel
-    Top = 560
+    Top = 565
     Width = 1008
-    ExplicitTop = 549
-    ExplicitWidth = 1002
     inherited Button1: TButton
       Hint = 'M'#227'o de Obra da O.S.'
       DisabledImageIndex = 28

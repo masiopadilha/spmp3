@@ -220,29 +220,11 @@ PAuxiliares.Font.Color := clBlack;
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryManutPeriodicasItens.First;
 
-              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
-              begin
-                LManutRetorno := '';
-
-//                fdmInputBox.Close;
-//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-//
-//                DM.qryAuxiliar.Close;
-//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = 'Manutenção Corretiva') ORDER BY `DESCRICAO` ASC;';
-//                DM.qryAuxiliar.Open;
-//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-//                DM.qryAuxiliar.Close;
-
-                DM.qryAuxiliar.Close;
-                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
-                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
-                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
-                DM.qryAuxiliar.Close;
-              end;
-
 
               while not DM.qryManutPeriodicasItens.Eof = True do
                 begin
+                  LProblemaItem := True;
+
                   if (DM.qryManutPeriodicasItensRUIM.AsString = 'S') or (DM.qryManutPeriodicasItensREGULAR.AsString = 'S') then
                     begin
                       CDItensProb.Append;
@@ -267,6 +249,7 @@ PAuxiliares.Font.Color := clBlack;
               DM.qryManutPeriodicasItensEsp.First;
               while not DM.qryManutPeriodicasItensEsp.Eof = True do
                 begin
+                  LProblemaItem := True;
                   if DM.qryManutPeriodicasItensEspRUIM.AsString = 'S' then
                     begin
                       CDItensProb.Append;
@@ -287,6 +270,26 @@ PAuxiliares.Font.Color := clBlack;
                     end;
                   DM.qryManutPeriodicasItensEsp.Next;
                 end;
+
+              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+              begin
+                LManutRetorno := '';
+
+//                fdmInputBox.Close;
+//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                DM.qryAuxiliar.Close;
+//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = 'Manutenção Corretiva') ORDER BY `DESCRICAO` ASC;';
+//                DM.qryAuxiliar.Open;
+//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                DM.qryAuxiliar.Close;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                DM.qryAuxiliar.Close;
+              end;
 
               //Gerar OS com itens problemáticos
               if CDItensProb.RecordCount > 0 then
@@ -396,28 +399,9 @@ PAuxiliares.Font.Color := clBlack;
               CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
               DM.qryLubrificPeriodicasItens.First;
 
-              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
-              begin
-                LManutRetorno := '';
-
-//                fdmInputBox.Close;
-//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-//
-//                DM.qryAuxiliar.Close;
-//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
-//                DM.qryAuxiliar.Open;
-//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-//                DM.qryAuxiliar.Close;
-
-                DM.qryAuxiliar.Close;
-                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
-                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
-                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
-                DM.qryAuxiliar.Close;
-              end;
-
               while not DM.qryLubrificPeriodicasItens.Eof = True do
                 begin
+                  LProblemaItem := True;
                   if (DM.qryLubrificPeriodicasItensRUIM.AsString = 'S') or (DM.qryLubrificPeriodicasItensREGULAR.AsString = 'S') then
                     begin
                       CDItensProb.Append;
@@ -442,6 +426,7 @@ PAuxiliares.Font.Color := clBlack;
               DM.qryLubrificPeriodicasItensEsp.First;
               while not DM.qryLubrificPeriodicasItensEsp.Eof = True do
                 begin
+                  LProblemaItem := True;
                   if DM.qryLubrificPeriodicasItensEspRUIM.AsString = 'S' then
                     begin
                       CDItensProb.Append;
@@ -462,6 +447,26 @@ PAuxiliares.Font.Color := clBlack;
                     end;
                   DM.qryLubrificPeriodicasItensEsp.Next;
                 end;
+
+              if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+              begin
+                LManutRetorno := '';
+
+//                fdmInputBox.Close;
+//                fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                DM.qryAuxiliar.Close;
+//                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                DM.qryAuxiliar.Open;
+//                LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                DM.qryAuxiliar.Close;
+
+                DM.qryAuxiliar.Close;
+                DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                DM.qryAuxiliar.Close;
+              end;
 
             //Gerar OS com itens problemáticos
             if CDItensProb.RecordCount > 0 then
@@ -585,28 +590,9 @@ PAuxiliares.Font.Color := clBlack;
                   CDItensProb.Close; CDItensProb.CreateDataSet; CDItensProb.Open; CDItensProb.EmptyDataSet; CDItensProb.Edit;
                   DM.qryRotaPeriodicasManutItens.First;
 
-                  if (LProblemaItem = True) or (LProblemaItemEsp = True) then
-                  begin
-                    LManutRetorno := '';
-
-//                    fdmInputBox.Close;
-//                    fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
-//
-//                    DM.qryAuxiliar.Close;
-//                    DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
-//                    DM.qryAuxiliar.Open;
-//                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
-//                    DM.qryAuxiliar.Close;
-
-                      DM.qryAuxiliar.Close;
-                      DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
-                      DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
-                      LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
-                      DM.qryAuxiliar.Close;
-                  end;
-
                   while not DM.qryRotaPeriodicasManutItens.Eof do
                     begin
+                      LProblemaItem := True;
                       if (DM.qryRotaPeriodicasManutItensRUIM.AsString = 'S') or (DM.qryRotaPeriodicasManutItensREGULAR.AsString = 'S') then
                         begin
                           CDItensProb.Append;
@@ -631,6 +617,7 @@ PAuxiliares.Font.Color := clBlack;
                   DM.qryRotaPeriodicasManutItensEsp.First;
                   while not DM.qryRotaPeriodicasManutItensEsp.Eof do
                     begin
+                      LProblemaItem := True;
                       if DM.qryRotaPeriodicasManutItensEspRUIM.AsString = 'S' then
                         begin
                           CDItensProb.Append;
@@ -651,6 +638,26 @@ PAuxiliares.Font.Color := clBlack;
                         end;
                       DM.qryRotaPeriodicasManutItensEsp.Next;
                     end;
+
+                  if (LProblemaItem = True) or (LProblemaItemEsp = True) then
+                  begin
+                    LManutRetorno := '';
+
+//                    fdmInputBox.Close;
+//                    fdmInputBox.CreateDataSet; fdmInputBox.Open; fdmInputBox.Edit;
+//
+//                    DM.qryAuxiliar.Close;
+//                    DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'') ORDER BY `DESCRICAO` ASC;';
+//                    DM.qryAuxiliar.Open;
+//                    LManutRetorno := DM.LookUpInputBox('O.S de Retorno', 'Informe o tipo de manutenção:',  DM.dsAuxiliar, dsInputBox, 'DESCRICAO', 'CODIGO', fdmInputBoxCODIGO.FieldName);
+//                    DM.qryAuxiliar.Close;
+
+                      DM.qryAuxiliar.Close;
+                      DM.qryAuxiliar.SQL.Text := 'SELECT `CODIGO`, `DESCRICAO` FROM `tipomanutencao` WHERE (`ATIVO` = ''S'' AND `TIPOMANUTENCAO` = ''Manutenção Corretiva'' AND TRIM(LOWER(`DESCRICAO`)) LIKE ''%retorno%'') ORDER BY `DESCRICAO` ASC;';
+                      DM.qryAuxiliar.Open; DM.qryAuxiliar.First;
+                      LManutRetorno := DM.qryAuxiliar.FieldByName('CODIGO').AsString;
+                      DM.qryAuxiliar.Close;
+                  end;
 
                   //Gerar OS com itens problemáticos
                   if CDItensProb.RecordCount > 0 then

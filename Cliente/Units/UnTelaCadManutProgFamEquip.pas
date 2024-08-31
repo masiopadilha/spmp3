@@ -130,15 +130,16 @@ end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnExcluirClick(Sender: TObject);
 begin
+  DM.qryManutProgFamEquipPlanoTrab.Active := False;
   inherited;
   if DM.qryManutProgFamEquip.IsEmpty = True then
   begin
-    DM.qryManutProgFamEquipPlanoTrab.Close;
     DM.qryManutProgFamEquipItens.Close;
     DM.qryManutProgFamEquipItensTodos.Close;
     DM.qryManutProgEquipItens.Close;
     DM.qryManutProgFamEquipPartes.Close;
-  end;
+  end else
+    DM.qryManutProgFamEquipPlanoTrab.Active := True;
 end;
 
 procedure TFrmTelaCadManutProgFamEquip.BtnFamiliaClick(Sender: TObject);

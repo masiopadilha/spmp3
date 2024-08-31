@@ -3,9 +3,11 @@ unit UnTelaCadOrdemServicoFechamentoMObra;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UnTelaPaiOkCancel, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Imaging.pngimage, Vcl.DBCtrls, Data.DB, FireDAC.Stan.Param;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  UnTelaPaiOkCancel, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.DBCtrls, Data.DB, FireDAC.Stan.Param,
+  System.DateUtils;
 
 type
   TFrmTelaCadOrdemServicoFechamentoMObra = class(TFrmTelaPaiOkCancel)
@@ -125,9 +127,10 @@ begin
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamentoMObra.FormCreate(Sender: TObject);
+var
+  LTempoExecutado, LTotalHH: Real;
 begin
   inherited;
-//if DM.qryTotalHomemHora.Active = False then DM.qryTotalHomemHoraSeqHora.Open;
   if (DM.qryUsuarioPInclusao.FieldByName(DM.FTela).AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
   begin
     PAuxiliares.Font.Color := clRed;
@@ -151,19 +154,54 @@ begin
     Exit;
   end;
 
-DM.qryOrdemServicoEquipe.Open;
-DM.qryOrdemServicoEquipeMObra.Open;
-DM.qryOrdemServicoEquipeMObraMovim.Open;
-DM.qryOrdemServicoEquipeMObraUtil.Open;
-DM.qryOrdemServicoMObraDisp.Close;
-DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor);
-DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
-DM.qryOrdemServicoMObraDisp.Params[2].AsString := DM.FCodEmpresa;
-if DM.qryOrdemServicoEXECAUTONOMO.AsString = 'S' then
-  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'AUTÔNOMA'
-else
-  DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
-DM.qryOrdemServicoMObraDisp.Open;
+  DM.qryOrdemServicoEquipe.Open;
+  DM.qryOrdemServicoEquipeMObra.Open;
+  DM.qryOrdemServicoEquipeMObraMovim.Open;
+  DM.qryOrdemServicoEquipeMObraUtil.Open;
+  DM.qryOrdemServicoMObraDisp.Close;
+  DM.qryOrdemServicoMObraDisp.Params[0].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor);
+  DM.qryOrdemServicoMObraDisp.Params[1].AsString := FormatDateTime('yyyy/mm/dd', DM.FDataHoraServidor) + ' 23:59:59';
+  DM.qryOrdemServicoMObraDisp.Params[2].AsString := DM.FCodEmpresa;
+  if DM.qryOrdemServicoEXECAUTONOMO.AsString = 'S' then
+    DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'AUTÔNOMA'
+  else
+    DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
+  DM.qryOrdemServicoMObraDisp.Open;
+
+  LTempoExecutado := (MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime))/60;
+  LTotalHH := 0;
+  DM.qryOrdemServicoEquipeMObra.First;
+  while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+  begin
+    LTotalHH := DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
+
+    if LTotalHH < LTempoExecutado then
+    begin
+      DM.qryOrdemServicoEquipeMObra.Edit;
+      DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := LTempoExecutado;
+      DM.qryOrdemServicoEquipeMObra.Post;
+    end;
+
+    DM.qryOrdemServicoEquipeMObraUtil.First;
+    while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
+    begin
+      LTotalHH := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
+
+      if LTotalHH < LTempoExecutado then
+      begin
+        DM.qryOrdemServicoEquipeMObraUtil.Edit;
+        DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := LTempoExecutado;
+        DM.qryOrdemServicoEquipeMObraUtil.Post;
+      end;
+
+      DM.qryOrdemServicoEquipeMObraUtil.Next;
+    end;
+
+    DM.qryOrdemServicoEquipeMObra.Next;
+  end;
+
+  DM.qryOrdemServicoEquipeMObra.Edit;
+  DM.qryOrdemServicoEquipeMObraUtil.Edit;
 end;
 
 procedure TFrmTelaCadOrdemServicoFechamentoMObra.GrdEquipeDblClick(

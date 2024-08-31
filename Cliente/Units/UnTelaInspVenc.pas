@@ -246,7 +246,7 @@ case PCInspecoes.ActivePageIndex of
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                             , DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString
-                                            , EmptyStr, EmptyStr, 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                            , EmptyStr, EmptyStr, 'N', DM.qryManutProgEquipMATRICULA.AsString, 'Emergência', 'Para o Equipamento'
                                             , DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString
                                             , DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString
                                             , DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);
@@ -558,7 +558,7 @@ case PCInspecoes.ActivePageIndex of
 
           DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                             , DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, EmptyStr
-                                            , DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
+                                            , DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N', DM.qryLubrificProgEquipMATRICULA.AsString, 'Emergência', 'Para o Equipamento'
                                             , DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString
                                             , DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString
                                             , DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);

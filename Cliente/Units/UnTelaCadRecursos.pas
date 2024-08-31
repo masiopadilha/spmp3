@@ -590,11 +590,11 @@ end;
 procedure TFrmTelaCadRecursos.Button1Click(Sender: TObject);
 begin
   inherited;
-PopupMenuFerramentas.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
-DM.FDataSetParam    := DM.qryRecursos;
-DM.FDataSourceParam := DM.dsRecursos;
-DM.FTela := 'CADRECURSOS';
-DM.FTabela_auxiliar := 46;
+//PopupMenuFerramentas.Popup(Mouse.CursorPos.X,Mouse.CursorPos.Y);
+//DM.FDataSetParam    := DM.qryRecursos;
+//DM.FDataSourceParam := DM.dsRecursos;
+//DM.FTela := 'CADRECURSOS';
+//DM.FTabela_auxiliar := 46;
 end;
 
 procedure TFrmTelaCadRecursos.Completo1Click(Sender: TObject);
@@ -660,7 +660,7 @@ end;
 procedure TFrmTelaCadRecursos.KitdeRecursos1Click(Sender: TObject);
 begin
   inherited;
-DM.FParamAuxiliar[0] := DM.qryRecursosCODIGO.AsString;
+  DM.FParamAuxiliar[0] := DM.qryRecursosCODIGO.AsString;
 //if DM.FParamAuxiliar[0] = EmptyStr then Exit;
   Try
     if (DM.qryUsuarioPAcessoCADRECURSOSKIT.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
@@ -674,6 +674,10 @@ DM.FParamAuxiliar[0] := DM.qryRecursosCODIGO.AsString;
     FrmTelaCadRecursosKit.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadRecursosKit);
+    DM.FDataSetParam    := DM.qryRecursos;
+    DM.FDataSourceParam := DM.dsRecursos;
+    DM.FTela := 'CADRECURSOS';
+    DM.FTabela_auxiliar := 46;
   End;
 end;
 

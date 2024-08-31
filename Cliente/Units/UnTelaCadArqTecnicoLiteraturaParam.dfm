@@ -1,27 +1,45 @@
 inherited FrmTelaCadArqTecnicoLiteraturaParam: TFrmTelaCadArqTecnicoLiteraturaParam
   Caption = 'Par'#226'metro'
-  ClientHeight = 181
+  ClientHeight = 184
+  ClientWidth = 628
   Constraints.MaxHeight = 240
   Constraints.MinHeight = 240
   ExplicitHeight = 240
-  PixelsPerInch = 96
   TextHeight = 16
   inherited PControle: TPanel
+    Width = 624
+    inherited LAlteracao: TLabel
+      Left = 517
+    end
+    inherited LAlteradoPor: TLabel
+      Left = 539
+    end
     inherited LblDataAlt: TDBText
+      Left = 572
       DataSource = DM.dsArquivoTecnicoParam
     end
     inherited LblDataCad: TDBText
+      Left = 444
       DataSource = DM.dsArquivoTecnicoParam
     end
     inherited LblUsuAlt: TDBText
+      Left = 572
       DataSource = DM.dsArquivoTecnicoParam
     end
     inherited LblUsuCad: TDBText
+      Left = 444
       DataSource = DM.dsArquivoTecnicoParam
+    end
+    inherited LCadastro: TLabel
+      Left = 411
+    end
+    inherited LCadastroPor: TLabel
+      Left = 373
     end
   end
   inherited PCentro: TPanel
-    Height = 80
+    Width = 624
+    Height = 83
     ExplicitHeight = 80
     object Label4: TLabel
       Left = 190
@@ -44,11 +62,13 @@ inherited FrmTelaCadArqTecnicoLiteraturaParam: TFrmTelaCadArqTecnicoLiteraturaPa
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 162
+    Top = 165
+    Width = 628
     ExplicitTop = 162
   end
   inherited PAuxiliares: TPanel
-    Top = 135
+    Top = 138
+    Width = 624
     ExplicitTop = 135
   end
 end

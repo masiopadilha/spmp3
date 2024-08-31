@@ -163,7 +163,7 @@ end;
 procedure TFrmTelaCadRecursosKit.FormCreate(Sender: TObject);
 begin
   inherited;
-DM.FDataSetParam :=DM.qryRecursoKit;
+DM.FDataSetParam := DM.qryRecursoKit;
 DM.FDataSourceParam := DM.dsRecursoKit;
 DM.FTela := 'CADRECURSOSKIT';
 DM.FTabela_auxiliar := 50;

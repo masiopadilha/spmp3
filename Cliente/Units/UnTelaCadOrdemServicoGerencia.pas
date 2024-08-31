@@ -1662,7 +1662,7 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.FormResize(Sender: TObject);
 var
   i: Integer;
-  ButtonWidth, Spacing, CheckBoxWidth, TotalWidth, StartPos, AvailableWidth,
+  ButtonWidth, Spacing, CheckBoxWidth, TotalWidth, StartPos,
   ColumnWidth: Integer;
 begin
   inherited;
@@ -2008,15 +2008,18 @@ begin
   inherited;
   if (Key = #13) and (DBGrid.SelectedIndex = 1) then
     begin
+      TimerCheckOS.Enabled := False;
       LCampo := DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
       if LCampo <> EmptyStr then
         begin
           if DBGrid.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
             Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
         end;
+       TimerCheckOS.Enabled := True;
     end;
   if (Key = #13) and (DBGrid.SelectedIndex = 5) then
     begin
+      TimerCheckOS.Enabled := False;
       LCampo :=DM.CampoInputBox('SPMP3', 'Informe a descrição da ordem de serviço:');
       if LCampo <> EmptyStr then
         begin
@@ -2031,9 +2034,11 @@ begin
         end
       else
         ConfigurarFiltros;
+      TimerCheckOS.Enabled := True;
     end;
   if (Key = #13) and (DBGrid.SelectedIndex = 3) then
     begin
+      TimerCheckOS.Enabled := False;
       LEquipamento := EmptyStr;
       DM.FTabela_auxiliar := 250;
       DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -2046,6 +2051,7 @@ begin
         FreeAndNil(FrmTelaAuxiliar);
         ConfigurarFiltros;
       End;
+      TimerCheckOS.Enabled := True;
     end;
 end;
 
@@ -2159,11 +2165,11 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TimerCheckOSTimer(Sender: TObject);
 var
   hora_atual, diferenca: TDateTime;
-  df_hr: TTime;
-  dt_ini, dt_final: TDate;
-  LTemp, LFirstOS, LNewFirstOS:Integer;
+//  df_hr: TTime;
+//  dt_ini, dt_final: TDate;
+  LTemp:Integer;
   MyNotification: TNotification;
-//  codos: Integer;
+  LOSPoint, LFirstOS: Integer;
 begin
   inherited;
   TThread.CreateAnonymousThread(
@@ -2172,10 +2178,10 @@ begin
                                   hora_atual := Now;
                                   if (hora_atual < hora_futura) then
                                       begin
-                                          dt_ini := DateOf(hora_atual);
-                                          dt_final := DateOf(hora_futura);
+                                       //   dt_ini := DateOf(hora_atual);
+                                       //   dt_final := DateOf(hora_futura);
                                           diferenca := hora_futura - hora_atual;
-                                          df_hr := TimeOf(diferenca);
+                                       //   df_hr := TimeOf(diferenca);
                                           StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
                                          // Application.Title := Label1.Caption;
                                           Application.ProcessMessages;
@@ -2183,66 +2189,68 @@ begin
                                   else
                                     begin
                                       TThread.Synchronize(TThread.CurrentThread,
-                                              procedure
-                                              begin
-                                                 if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
-                                                   begin
-                                                     DM.MSGAguarde('ATUALIZANDO');
-                                                     Try
-                                                       DM.qryOrdemServicoGerencia.First;
-                                                       LFirstOS := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
+                                                            procedure
+                                                            begin
+                                                               if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
+                                                               begin
+                                                                 DM.MSGAguarde('ATUALIZANDO');
+                                                                 Try
+                                                                   LOSPoint := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
+                                                                   DM.qryOrdemServicoGerencia.First;
+                                                                   LFirstOS := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
 
-                                                       if not (DM.qryOrdemServicoGerencia.State in [dsBrowse]) then
-                                                         DM.qryOrdemServicoGerencia.Cancel;
-                                                       LTemp :=  DM.FSegundosDesliga;
+                                                                   if not (DM.qryOrdemServicoGerencia.State in [dsBrowse]) then
+                                                                     DM.qryOrdemServicoGerencia.Cancel;
+                                                                   LTemp :=  DM.FSegundosDesliga;
 
-                                                       DM.qryOrdemServicoGerencia.Refresh;
-                                                       DM.qryOrdemServicoGerencia.First;
+                                                                   DM.qryOrdemServicoGerencia.Refresh;
+                                                                   DM.qryOrdemServicoGerencia.First;
 
-                                                       if (LFirstOS <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)
-                                                         and ((TFDQuery(DBGrid.DataSource.DataSet).IndexName = '')
-                                                           or (TFDQuery(DBGrid.DataSource.DataSet).IndexName = 'CODIGO_DESC')) then
-                                                           begin
-                                                             MyNotification := NotificationCenter1.CreateNotification;
-                                                             try
-                                                               MyNotification.Name := 'SPMP3NewOSNotification';
-                                                               MyNotification.Title := 'SPMP3';
-                                                               MyNotification.AlertBody := 'Novas ordens de serviço foram emitidas!';
+                                                                   if (LFirstOS <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)
+                                                                     and ((TFDQuery(DBGrid.DataSource.DataSet).IndexName = '')
+                                                                       or (TFDQuery(DBGrid.DataSource.DataSet).IndexName = 'CODIGO_DESC')) then
+                                                                       begin
+                                                                         MyNotification := NotificationCenter1.CreateNotification;
+                                                                         try
+                                                                           MyNotification.Name := 'SPMP3NewOSNotification';
+                                                                           MyNotification.Title := 'SPMP3';
+                                                                           MyNotification.AlertBody := 'Novas ordens de serviço foram emitidas!';
 
-                                                               NotificationCenter1.PresentNotification(MyNotification);
-                                                             finally
-                                                               MyNotification.Free;
-                                                             end;
-                                                           end;
+                                                                           NotificationCenter1.PresentNotification(MyNotification);
+                                                                         finally
+                                                                           MyNotification.Free;
+                                                                         end;
+                                                                       end;
 
-                                                       hora_futura := IncMinute(Now, DM.FTempoNovaOS);
-                                                     Except
-                                                       DM.MSGAguarde('', False);
-                                                       Abort;
-                                                     End;
-                                                     Application.ProcessMessages;
-                                                     DM.MSGAguarde('', False);
-                                                     DM.FSegundosDesliga := LTemp;
-                                                  end;
-                                              end);
+                                                                   hora_futura := IncMinute(Now, DM.FTempoNovaOS);
+                                                                   DM.qryOrdemServicoGerencia.Locate('CODIGO', LOSPoint, []);
+                                                                 Except
+                                                                   DM.MSGAguarde('', False);
+                                                                   Abort;
+                                                                 End;
+                                                                 Application.ProcessMessages;
+                                                                 DM.MSGAguarde('', False);
+                                                                 DM.FSegundosDesliga := LTemp;
+                                                               end;
+                                                            end
+                                                         );
                                     end;
                                 end
                                ).Start;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.TimerUpdateTimer(Sender: TObject);
-var
-  hora_atual, diferenca: TDateTime;
-  df_hr: TTime;
-  dt_ini, dt_final: TDate;
-  LTemp, LFirstOS, LNewFirstOS:Integer;
+//var
+//  hora_atual: TDateTime;
+ // df_hr: TTime;
+ // dt_ini, dt_final: TDate;
 begin
   inherited;
-  hora_atual := Now;
-  dt_ini := DateOf(hora_atual);
-  dt_final := DateOf(hora_futura);
-  diferenca := hora_futura - hora_atual;
-  df_hr := TimeOf(diferenca);
+//  hora_atual := Now;
+//  dt_ini := DateOf(hora_atual);
+//  dt_final := DateOf(hora_futura);
+//  diferenca := hora_futura - hora_atual;
+//  df_hr := TimeOf(diferenca);
  // StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
   Application.ProcessMessages;
 
@@ -2251,11 +2259,10 @@ end;
 procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
-  if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString <> 'EXECUCAO') then Exit;
 
+  TimerCheckOS.Enabled := False;
   if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
-    TimerCheckOS.Enabled := False;
 
     DM.MSGAguarde('');
 
@@ -2271,6 +2278,8 @@ begin
         Open;
         Edit;
       end;
+
+    if DM.qryOrdemServicoSITUACAO.AsString <> 'EXECUCAO' then Exit;
 
     DM.qryOrdemServicoEquipe.Open;
     DM.qryOrdemServicoEquipeMObra.Open;
@@ -2354,9 +2363,8 @@ begin
     DM.qrySolicitacaoTrab.Close;
 
     DM.MSGAguarde('', False);
-
-    TimerCheckOS.Enabled := True;
   end;
+  TimerCheckOS.Enabled := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Vencida1Click(Sender: TObject);

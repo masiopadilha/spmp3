@@ -13,8 +13,11 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
   inherited PTop: TPanel
     Width = 1008
     ExplicitWidth = 1004
+    inherited Image1: TImage
+      Height = 47
+    end
     object Label3: TLabel [1]
-      Left = 125
+      Left = 204
       Top = 33
       Width = 46
       Height = 13
@@ -28,19 +31,19 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       ParentFont = False
     end
     object Label1: TLabel [2]
-      Left = 284
+      Left = 363
       Top = 33
       Width = 7
       Height = 16
       Caption = 'a'
     end
     inherited BtnAjuda: TButton
-      Left = 981
+      Left = 971
       TabOrder = 3
-      ExplicitLeft = 977
+      ExplicitLeft = 967
     end
     object BtnConsultar: TButton
-      Left = 403
+      Left = 482
       Top = 28
       Width = 28
       Height = 28
@@ -55,7 +58,7 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       OnClick = BtnConsultarClick
     end
     object EdtData1: TJvDateTimePicker
-      Left = 175
+      Left = 254
       Top = 29
       Width = 104
       Height = 24
@@ -65,7 +68,7 @@ inherited FrmTelaCadAbastecimentosCombustivel: TFrmTelaCadAbastecimentosCombusti
       DropDownDate = 44883.000000000000000000
     end
     object EdtData2: TJvDateTimePicker
-      Left = 296
+      Left = 375
       Top = 30
       Width = 104
       Height = 24

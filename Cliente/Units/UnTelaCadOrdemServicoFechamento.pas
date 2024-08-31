@@ -75,8 +75,8 @@ type
     Label31: TLabel;
     Label32: TLabel;
     lblEmail: TDBText;
-    EdtDataInicioReal: TJvDBMaskEdit;
-    EdtDataFimReal: TJvDBMaskEdit;
+    EdtDataFimReal: TDBEdit;
+    EdtDataInicioReal: TDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure BtnConsultarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -100,6 +100,8 @@ type
     procedure Button4Click(Sender: TObject);
     procedure ChbParcialClick(Sender: TObject);
     procedure BtnResponsavelClick(Sender: TObject);
+    procedure EdtDataFimRealKeyPress(Sender: TObject; var Key: Char);
+    procedure EdtDataInicioRealKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -471,6 +473,9 @@ begin
 //  end;
 
   DM.qryOrdemServico.Edit;
+
+  DM.qryOrdemServicoDATAINICIOREAL.AsString := EdtDataInicioReal.EditText;
+  DM.qryOrdemServicoDATAFIMREAL.AsString := EdtDataFimReal.EditText;
 
   if DM.qryOrdemServicoDATAINICIOREAL.IsNull = True then
   begin
@@ -901,6 +906,68 @@ begin
   BtnSalvar.ImageIndex := 115;
 end;
 
+procedure TFrmTelaCadOrdemServicoFechamento.EdtDataFimRealKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  Text: string;
+begin
+  // Permite apenas números, barra e espaço
+  if not (Key in ['0'..'9', '/', ' ', ':', #8]) then
+    Key := #0;
+  // Captura o texto atual do TDBEdit
+  Text := TDBEdit(Sender).Text;
+  // Auto-inserção das barras e dois-pontos
+  if (Length(Text) = 2) or (Length(Text) = 5) and (Key <> #8) then
+  begin
+    Text := Text + '/';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end
+  else if (Length(Text) = 10) and (Key <> #8) then
+  begin
+    Text := Text + ' ';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end
+  else if (Length(Text) = 13) and (Key <> #8) then
+  begin
+    Text := Text + ':';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end;
+end;
+
+procedure TFrmTelaCadOrdemServicoFechamento.EdtDataInicioRealKeyPress(
+  Sender: TObject; var Key: Char);
+var
+  Text: string;
+begin
+  // Permite apenas números, barra e espaço
+  if not (Key in ['0'..'9', '/', ' ', ':', #8]) then
+    Key := #0;
+  // Captura o texto atual do TDBEdit
+  Text := TDBEdit(Sender).Text;
+  // Auto-inserção das barras e dois-pontos
+  if (Length(Text) = 2) or (Length(Text) = 5) and (Key <> #8) then
+  begin
+    Text := Text + '/';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end
+  else if (Length(Text) = 10) and (Key <> #8) then
+  begin
+    Text := Text + ' ';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end
+  else if (Length(Text) = 13) and (Key <> #8) then
+  begin
+    Text := Text + ':';
+    TDBEdit(Sender).Text := Text;
+    TDBEdit(Sender).SelStart := Length(Text);
+  end;
+end;
+
 procedure TFrmTelaCadOrdemServicoFechamento.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -934,9 +1001,6 @@ if DM.qryOrdemServicoSITUACAO.AsString = 'FECHADA'       then begin PSituacao.Ca
 if DM.qryOrdemServicoSITUACAO.AsString = 'PARALISADA'    then begin PSituacao.Caption := 'PARALISADA';    PSituacao.Color := clRed;    PSituacao.Font.Color := clYellow; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'CANCELADA'     then begin PSituacao.Caption := 'CANCELADA';     PSituacao.Color := clBlack;  PSituacao.Font.Color := $00FF8000; end;
 if DM.qryOrdemServicoSITUACAO.AsString = 'VENCIDA'       then begin PSituacao.Caption := 'VENCIDA';       PSituacao.Color := clRed;    PSituacao.Color      := clWhite;  end;
-
-edtDataInicioReal.Text := DM.qryOrdemServicoDATAINICIOREAL.AsString;
-edtDataFimReal.TExt := DM.qryOrdemServicoDATAFIMREAL.AsString;
 
 if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin

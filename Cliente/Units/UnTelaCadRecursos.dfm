@@ -5,33 +5,37 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    inherited LCadastro: TLabel
-      ExplicitLeft = 499
-    end
-    inherited LCadastroPor: TLabel
-      ExplicitLeft = 461
-    end
-    inherited LblDataCad: TDBText
-      DataSource = DM.dsRecursos
-    end
-    inherited LblUsuCad: TDBText
-      DataSource = DM.dsRecursos
-    end
-    inherited LAlteracao: TLabel
-      ExplicitLeft = 662
-    end
-    inherited LAlteradoPor: TLabel
-      ExplicitLeft = 640
-    end
-    inherited LblDataAlt: TDBText
-      DataSource = DM.dsRecursos
-    end
-    inherited LblUsuAlt: TDBText
-      DataSource = DM.dsRecursos
-    end
     inherited BtnConsultar: TButton
       Left = 151
       ExplicitLeft = 151
+    end
+    inherited pAlteracao: TPanel
+      inherited LCadastro: TLabel
+        Height = 14
+      end
+      inherited LblDataAlt: TDBText
+        DataSource = DM.dsRecursos
+      end
+      inherited LAlteradoPor: TLabel
+        ExplicitLeft = 640
+      end
+      inherited LblDataCad: TDBText
+        DataSource = DM.dsRecursos
+      end
+    end
+    inherited pCadastro: TPanel
+      inherited LCadastroPor: TLabel
+        Height = 14
+      end
+      inherited LblUsuCad: TDBText
+        DataSource = DM.dsRecursos
+      end
+      inherited LAlteracao: TLabel
+        ExplicitLeft = 662
+      end
+      inherited LblUsuAlt: TDBText
+        DataSource = DM.dsRecursos
+      end
     end
   end
   inherited PIdentificacao: TPanel
@@ -1145,9 +1149,7 @@ inherited FrmTelaCadRecursos: TFrmTelaCadRecursos
     Top = 565
     Width = 1008
     inherited Button1: TButton
-      Hint = 'Ferramentas'
       DisabledImageIndex = 38
-      ImageIndex = 37
       OnClick = Button1Click
     end
   end
