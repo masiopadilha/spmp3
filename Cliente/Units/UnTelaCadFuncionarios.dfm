@@ -1,12 +1,12 @@
 inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   Caption = 'Funcion'#225'rios'
-  ClientHeight = 624
+  ClientHeight = 619
   ClientWidth = 1012
   TextHeight = 16
   object ImgFotoFunc: TImage [0]
-    Left = 769
+    Left = 776
     Top = 61
-    Width = 235
+    Width = 228
     Height = 235
     Margins.Left = 2
     Margins.Top = 2
@@ -19,6 +19,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   inherited PControle: TPanel
     Width = 1008
     inherited pAlteracao: TPanel
+      ExplicitLeft = 668
       inherited LCadastro: TLabel
         Height = 14
       end
@@ -33,6 +34,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       end
     end
     inherited pCadastro: TPanel
+      ExplicitLeft = 668
       inherited LCadastroPor: TLabel
         Height = 14
       end
@@ -51,7 +53,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     Width = 770
     Height = 128
     Margins.Right = 240
-    ExplicitWidth = 766
+    ExplicitWidth = 764
     ExplicitHeight = 128
     object Label4: TLabel
       Left = 67
@@ -225,7 +227,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     Height = 158
     Margins.Right = 240
     ExplicitTop = 183
-    ExplicitWidth = 766
+    ExplicitWidth = 764
     ExplicitHeight = 158
     inherited Label2: TLabel
       Width = 89
@@ -433,9 +435,11 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
   end
   inherited PDiversos: TPanel
     Width = 1008
-    Height = 216
+    Height = 211
+    ExplicitWidth = 1002
+    ExplicitHeight = 200
     object Label12: TLabel
-      Left = 335
+      Left = 337
       Top = 34
       Width = 6
       Height = 13
@@ -450,7 +454,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     object Label13: TLabel
       Left = 91
-      Top = 32
+      Top = 33
       Width = 33
       Height = 13
       Alignment = taRightJustify
@@ -464,7 +468,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     object Label16: TLabel
       Left = 69
-      Top = 64
+      Top = 69
       Width = 55
       Height = 13
       Alignment = taRightJustify
@@ -476,23 +480,9 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       Font.Style = []
       ParentFont = False
     end
-    object Label19: TLabel
-      Left = 335
-      Top = 65
-      Width = 6
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label22: TLabel
       Left = 91
-      Top = 96
+      Top = 141
       Width = 33
       Height = 13
       Alignment = taRightJustify
@@ -506,7 +496,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     object Label24: TLabel
       Left = 58
-      Top = 128
+      Top = 178
       Width = 64
       Height = 13
       Alignment = taRightJustify
@@ -519,10 +509,10 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       ParentFont = False
     end
     object Label25: TLabel
-      Left = 56
-      Top = 161
+      Left = 358
+      Top = 32
       Width = 66
-      Height = 13
+      Height = 15
       Alignment = taRightJustify
       Caption = 'M'#227'o de Obra:'
       Font.Charset = DEFAULT_CHARSET
@@ -533,8 +523,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       ParentFont = False
     end
     object Label26: TLabel
-      Left = 307
-      Top = 129
+      Left = 337
+      Top = 72
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -547,8 +537,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       ParentFont = False
     end
     object Label27: TLabel
-      Left = 307
-      Top = 163
+      Left = 570
+      Top = 32
       Width = 6
       Height = 13
       Alignment = taRightJustify
@@ -561,8 +551,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       ParentFont = False
     end
     object Label28: TLabel
-      Left = 362
-      Top = 32
+      Left = 377
+      Top = 69
       Width = 47
       Height = 13
       Alignment = taRightJustify
@@ -570,15 +560,43 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       Caption = 'Sal'#225'rio:'
     end
     object Label30: TLabel
-      Left = 528
+      Left = 598
       Top = 32
       Width = 118
-      Height = 16
+      Height = 15
       Alignment = taRightJustify
       Caption = 'Outras Informa'#231#245'es:'
     end
+    object Label23: TLabel
+      Left = 97
+      Top = 105
+      Width = 27
+      Height = 13
+      Alignment = taRightJustify
+      Caption = #193'rea:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 337
+      Top = 110
+      Width = 6
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object BtnCargo: TButton
-      Left = 305
+      Left = 307
       Top = 27
       Width = 28
       Height = 28
@@ -609,7 +627,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     object EdtCalendario: TDBEdit
       Left = 127
-      Top = 62
+      Top = 66
       Width = 177
       Height = 24
       Color = clBtnFace
@@ -623,8 +641,8 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       OnKeyPress = FormKeyPress
     end
     object BtnCalendario: TButton
-      Left = 305
-      Top = 59
+      Left = 307
+      Top = 66
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -639,7 +657,7 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
     end
     object EdtCelula: TDBEdit
       Left = 127
-      Top = 94
+      Top = 138
       Width = 177
       Height = 24
       Color = clBtnFace
@@ -647,14 +665,14 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       DataField = 'CELULA'
       DataSource = DM.dsFuncionarios
       ParentCtl3D = False
-      TabOrder = 4
+      TabOrder = 6
       StyleElements = [seFont, seClient]
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object BtnCelula: TButton
-      Left = 305
-      Top = 92
+      Left = 307
+      Top = 138
       Width = 28
       Height = 28
       Hint = 'Consultar/Cadastrar (Ctrl)'
@@ -664,12 +682,12 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       Images = DM.ImageListBotoes
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 7
       OnClick = BtnCelulaClick
     end
     object CBEscolaridade: TDBComboBox
       Left = 127
-      Top = 126
+      Top = 175
       Width = 177
       Height = 22
       Style = csOwnerDrawFixed
@@ -682,14 +700,14 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
         '2'#186' Grau Incompleto'
         '1'#186' Grau Completo'
         '1'#186' Grau Incompleto')
-      TabOrder = 6
+      TabOrder = 8
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object CBMaodeObra: TDBComboBox
-      Left = 127
-      Top = 159
-      Width = 177
+      Left = 429
+      Top = 30
+      Width = 135
       Height = 22
       Style = csOwnerDrawFixed
       DataField = 'MOBRA'
@@ -697,78 +715,130 @@ inherited FrmTelaCadFuncionarios: TFrmTelaCadFuncionarios
       Items.Strings = (
         'OPERACIONAL'
         'ADMINISTRATIVA'
-        'SOLICITANTE DE TRABALHO'
+        'SOLICITANTE'
         'AUT'#212'NOMA')
-      TabOrder = 7
+      TabOrder = 9
       OnChange = CBMaodeObraChange
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object EdtSalario: TDBEdit
-      Left = 412
-      Top = 30
-      Width = 97
+      Left = 429
+      Top = 66
+      Width = 135
       Height = 24
       DataField = 'SALARIO'
       DataSource = DM.dsFuncionarios
       MaxLength = 16
-      TabOrder = 8
+      TabOrder = 10
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object ChbUsuario: TDBCheckBox
-      Left = 358
-      Top = 64
-      Width = 71
+      Left = 373
+      Top = 105
+      Width = 74
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Usu'#225'rio:'
       DataField = 'USUARIO'
       DataSource = DM.dsFuncionarios
-      TabOrder = 9
+      TabOrder = 11
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object ChbAtivo: TDBCheckBox
-      Left = 373
-      Top = 96
-      Width = 56
+      Left = 390
+      Top = 141
+      Width = 58
       Height = 17
       Alignment = taLeftJustify
       Caption = 'Ativo:'
       DataField = 'ATIVO'
       DataSource = DM.dsFuncionarios
-      TabOrder = 10
+      TabOrder = 13
       ValueChecked = 'S'
       ValueUnchecked = 'N'
       OnExit = TabNextTab1AfterTabChange
       OnKeyPress = FormKeyPress
     end
     object MOutras: TDBMemo
-      Left = 529
+      Left = 598
       Top = 51
-      Width = 468
+      Width = 399
       Height = 131
       DataField = 'CURSOS'
       DataSource = DM.dsFuncionarios
       ScrollBars = ssVertical
-      TabOrder = 11
+      TabOrder = 14
       OnExit = TabNextTab1AfterTabChange
+    end
+    object EdtArea: TDBEdit
+      Left = 127
+      Top = 102
+      Width = 177
+      Height = 24
+      Color = clBtnFace
+      Ctl3D = True
+      DataField = 'AREA'
+      DataSource = DM.dsFuncionarios
+      ParentCtl3D = False
+      TabOrder = 4
+      StyleElements = [seFont, seClient]
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
+    end
+    object BtnArea: TButton
+      Left = 307
+      Top = 102
+      Width = 28
+      Height = 28
+      Hint = 'Consultar/Cadastrar (Ctrl)'
+      DisabledImageIndex = 14
+      ImageAlignment = iaCenter
+      ImageIndex = 14
+      Images = DM.ImageListBotoes
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = BtnAreaClick
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 373
+      Top = 178
+      Width = 156
+      Height = 15
+      Alignment = taLeftJustify
+      Caption = 'Respons'#225'vel da '#193'rea:'
+      DataField = 'RESPONSAVELAREA'
+      DataSource = DM.dsFuncionarios
+      TabOrder = 12
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+      WordWrap = True
+      OnExit = TabNextTab1AfterTabChange
+      OnKeyPress = FormKeyPress
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
+    Top = 600
     Width = 1012
+    ExplicitTop = 589
+    ExplicitWidth = 1006
   end
   inherited PAlertas: TPanel
-    Top = 563
+    Top = 558
     Width = 1012
+    ExplicitTop = 547
+    ExplicitWidth = 1006
   end
   inherited PBase: TPanel
-    Top = 565
+    Top = 560
     Width = 1008
+    ExplicitTop = 549
+    ExplicitWidth = 1002
     inherited Button1: TButton
       Hint = 'Caixa de Ferramentas e Ferramentaria'
       DisabledImageIndex = 38

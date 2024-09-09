@@ -558,7 +558,7 @@ begin
         begin
           DM.qryAuxiliar.SQL.Add('SELECT `celulas`.`CODIGO`, `celulas`.`DESCRICAO`, `celulas`.`TIPO`, `areas`.`CODIGO` AS `CODAREA`, `areas`.`DESCRICAO` AS `AREA` FROM `celulas`'
                                   +  ' INNER JOIN `areas` ON (`celulas`.`CODAREA` = `areas`.`CODIGO`) AND (`celulas`.`CODEMPRESA` = `areas`.`CODEMPRESA`)'
-                                  +  ' WHERE (`celulas`.`descricao` like :descricao AND `celulas`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' AND LENGTH(`celulas`.`DESCRICAO`)  > 1)'
+                                  +  ' WHERE (`celulas`.`descricao` like :descricao AND `celulas`.`CODAREA` = '+QuotedStr(DM.FParamAuxiliar[1])+' AND `celulas`.`CODEMPRESA` = ' + QuotedStr(DM.FCodEmpresa) + ' AND LENGTH(`celulas`.`DESCRICAO`)  > 1)'
                                   +  ' ORDER BY `celulas`.`DESCRICAO` ASC;')
         end;
       50, 5000://Kit de Recursos

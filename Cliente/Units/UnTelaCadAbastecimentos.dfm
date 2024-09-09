@@ -1,14 +1,9 @@
 inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   Caption = 'Controle de Abastecimentos'
-  ClientHeight = 624
-  ClientWidth = 1012
   TextHeight = 16
   inherited PControle: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     inherited pAlteracao: TPanel
-      inherited LCadastro: TLabel
-        Height = 14
-      end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsAbastecimentos
       end
@@ -17,9 +12,6 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
       end
     end
     inherited pCadastro: TPanel
-      inherited LCadastroPor: TLabel
-        Height = 14
-      end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsAbastecimentos
       end
@@ -29,7 +21,7 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PIdentificacao: TPanel
-    Width = 1008
+    ExplicitWidth = 1008
     object Label5: TLabel
       Left = 45
       Top = 33
@@ -302,8 +294,8 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited PProgramacao: TPanel
-    Width = 1008
     Height = 194
+    ExplicitWidth = 1008
     ExplicitHeight = 194
     inherited Label2: TLabel
       Width = 153
@@ -335,9 +327,9 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
   end
   inherited PDiversos: TPanel
     Top = 349
-    Width = 1008
-    Height = 212
+    Height = 196
     ExplicitTop = 349
+    ExplicitWidth = 1008
     ExplicitHeight = 209
     inherited Label3: TLabel
       Width = 133
@@ -368,16 +360,16 @@ inherited FrmTelaCadAbastecimentos: TFrmTelaCadAbastecimentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 605
-    Width = 1012
+    ExplicitTop = 605
+    ExplicitWidth = 1012
   end
   inherited PAlertas: TPanel
-    Top = 563
-    Width = 1012
+    ExplicitTop = 563
+    ExplicitWidth = 1012
   end
   inherited PBase: TPanel
-    Top = 565
-    Width = 1008
+    ExplicitTop = 565
+    ExplicitWidth = 1008
     inherited Button1: TButton
       Hint = 'Abastecimentos'
       DisabledImageIndex = 110

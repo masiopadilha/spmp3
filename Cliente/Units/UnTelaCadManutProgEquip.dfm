@@ -51,9 +51,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Margins.Bottom = 4
     end
     inherited pAlteracao: TPanel
-      inherited LCadastro: TLabel
-        ExplicitLeft = 103
-      end
+      ExplicitLeft = 680
       inherited LblDataAlt: TDBText
         DataSource = DM.dsManutProgEquip
         ExplicitLeft = 289
@@ -71,9 +69,7 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       end
     end
     inherited pCadastro: TPanel
-      inherited LCadastroPor: TLabel
-        ExplicitLeft = 69
-      end
+      ExplicitLeft = 680
       inherited LblUsuCad: TDBText
         DataSource = DM.dsManutProgEquip
         ExplicitLeft = 119
@@ -591,9 +587,9 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
-    Height = 283
+    Height = 278
     ExplicitTop = 278
-    ExplicitHeight = 280
+    ExplicitHeight = 267
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -608,29 +604,29 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 253
+      Height = 248
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 996
-      ExplicitHeight = 250
+      ExplicitWidth = 994
+      ExplicitHeight = 237
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 222
+          Height = 217
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 988
-          ExplicitHeight = 219
+          ExplicitWidth = 986
+          ExplicitHeight = 206
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 220
+            Height = 215
             Align = alClient
             Color = 14671839
             DataSource = DM.dsManutProgEquipItens
@@ -706,14 +702,14 @@ inherited FrmTelaCadManutProgEquip: TFrmTelaCadManutProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 222
+          Height = 217
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 220
+            Height = 215
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839

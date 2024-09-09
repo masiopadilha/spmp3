@@ -465,7 +465,7 @@ begin
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutConsDESCRICAO.AsString
                                                               , DM.qryManutConsCODEQUIPAMENTO.AsString, DM.qryManutConsCODIGO.AsString, EmptyStr, EmptyStr, 'N'
                                                               , DM.qryManutConsMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryManutConsCODCENTROCUSTO.AsString, EmptyStr, FloatToStr(TotalTempoInsp)
-                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                                              , DM.qryManutConsCODOFICINA.AsString, DM.qryManutConsCODMANUTENCAO.AsString, DM.qryManutConsEQUIPPARADO.AsString, EmptyStr, EmptyStr, DM.qryManutConsMATRICULARESPONSAVELAREA.AsString);
 
                 //Verifica se existe mão de obra cadastrada na manutenção
                 if DM.qryManutConsEquipe.IsEmpty = False then
@@ -877,7 +877,8 @@ begin
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificConsDESCRICAO.AsString
                                                               , DM.qryLubrificConsCODEQUIPAMENTO.AsString, EmptyStr, DM.qryLubrificConsCODIGO.AsString, EmptyStr, 'N'
                                                               , DM.qryLubrificConsMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryLubrificConsCODCENTROCUSTO.AsString, EmptyStr
-                                                              , FloatToStr(TotalTempoInsp), DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString, DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                                              , FloatToStr(TotalTempoInsp), DM.qryLubrificConsCODOFICINA.AsString, DM.qryLubrificConsCODMANUTENCAO.AsString
+                                                              , DM.qryLubrificConsEQUIPPARADO.AsString, EmptyStr, EmptyStr, DM.qryLubrificConsMATRICULARESPONSAVELAREA.AsString);
 
 
                 //Verifica se existe mão de obra cadastrada na lubrificação
@@ -1282,7 +1283,7 @@ begin
                                                   , EmptyStr, 'S', 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
                                                   , DM.qryRotaConsSeqManutCODCENTROCUSTO.AsString, EmptyStr, DM.qryRotaConsTEMPOTOTALITENS.AsString
                                                   , DM.qryRotaConsSeqManutCODOFICINA.AsString, DM.qryRotaConsSeqManutCODMANUTENCAO.AsString
-                                                  , DM.qryRotaConsSeqManutEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                                  , DM.qryRotaConsSeqManutEQUIPPARADO.AsString, EmptyStr, EmptyStr, EmptyStr);
 
 
 

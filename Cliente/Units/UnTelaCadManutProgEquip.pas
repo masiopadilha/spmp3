@@ -605,9 +605,21 @@ end;
 
 procedure TFrmTelaCadManutProgEquip.Completo1Click(Sender: TObject);
 begin
-DM.FDataSetRelat    := DmRelatorios.frxDBManutProgEquipGeral;
+DM.FDataSetRelat := DmRelatorios.frxDBManutProgEquipGeral;
+DM.qryManutProgEquipItens.MasterSource := DM.dsAuxiliar;
+DM.qryManutProgEquipItensEsp.MasterSource := DM.dsAuxiliar;
+DM.qryManutProgEquipPlanoTrab.MasterSource := DM.dsAuxiliar;
+DM.qryManutProgEquipItens.Open;
+DM.qryManutProgEquipItensEsp.Open;
+DM.qryManutProgEquipPlanoTrab.Open;
 DM.FTabela_auxiliar := 32;
   inherited;
+DM.qryManutProgEquipItens.MasterSource := DM.dsManutProgEquip;
+DM.qryManutProgEquipItensEsp.MasterSource := DM.dsManutProgEquip;
+DM.qryManutProgEquipPlanoTrab.MasterSource := DM.dsManutProgEquip;
+DM.qryManutProgEquipItens.Close; DM.qryManutProgEquipItens.Open;
+DM.qryManutProgEquipItensEsp.Close;
+DM.qryManutProgEquipPlanoTrab.Close;
 
 end;
 

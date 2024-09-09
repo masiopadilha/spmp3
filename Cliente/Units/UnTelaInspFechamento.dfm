@@ -1,7 +1,7 @@
 inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   Caption = 'Fechamento das Inspe'#231#245'es'
-  ClientHeight = 644
-  ClientWidth = 1012
+  ClientHeight = 633
+  ClientWidth = 1006
   Constraints.MaxHeight = 680
   Constraints.MaxWidth = 1024
   Constraints.MinHeight = 680
@@ -12,8 +12,12 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
   ExplicitHeight = 680
   TextHeight = 11
   inherited PTop: TPanel
-    Width = 1008
-    ExplicitWidth = 1004
+    Width = 1002
+    ExplicitWidth = 1002
+    inherited Image1: TImage
+      Height = 47
+      ExplicitHeight = 47
+    end
     object Label11: TLabel [1]
       Left = 204
       Top = 9
@@ -43,7 +47,7 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
     inherited BtnAjuda: TButton
       Left = 971
-      ExplicitLeft = 967
+      ExplicitLeft = 965
     end
     object Button6: TButton
       Left = 940
@@ -163,15 +167,15 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PCentro: TPanel
-    Width = 1006
-    Height = 505
-    ExplicitWidth = 1002
-    ExplicitHeight = 502
+    Width = 1000
+    Height = 494
+    ExplicitWidth = 1000
+    ExplicitHeight = 494
     inherited RGTelas: TRadioGroup
       Width = 1004
       Height = 503
-      ExplicitWidth = 1000
-      ExplicitHeight = 500
+      ExplicitWidth = 998
+      ExplicitHeight = 492
     end
     object PBase: TPanel
       AlignWithMargins = True
@@ -183,8 +187,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 994
-      ExplicitHeight = 494
+      ExplicitWidth = 992
+      ExplicitHeight = 486
       object RGFiltro: TRadioGroup
         Left = 679
         Top = 540
@@ -231,8 +235,8 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
         ParentFont = False
         TabOrder = 2
         OnChange = PCInspecoesChange
-        ExplicitWidth = 984
-        ExplicitHeight = 484
+        ExplicitWidth = 982
+        ExplicitHeight = 476
         object TSManut: TTabSheet
           Caption = 'Manuten'#231#245'es'
           object GrdManutencao: TJvDBGrid
@@ -1294,10 +1298,10 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 577
-    Width = 1008
-    ExplicitTop = 574
-    ExplicitWidth = 1004
+    Top = 566
+    Width = 1002
+    ExplicitTop = 566
+    ExplicitWidth = 1002
     object Label1: TLabel
       Left = 991
       Top = 4
@@ -1307,10 +1311,10 @@ inherited FrmTelaInspFechamento: TFrmTelaInspFechamento
     end
   end
   inherited PBotoes: TPanel
-    Top = 604
-    Width = 1008
-    ExplicitTop = 601
-    ExplicitWidth = 1004
+    Top = 593
+    Width = 1002
+    ExplicitTop = 604
+    ExplicitWidth = 1008
     inherited BtnOK: TButton
       Left = 416
       Top = 5

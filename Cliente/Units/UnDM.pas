@@ -6018,6 +6018,16 @@ type
     qryAbastecimentosLubrificCODCONTCOMBUSTIVEL: TIntegerField;
     qryManutConsMATRICULA: TStringField;
     qryLubrificConsMATRICULA: TStringField;
+    qryGerarOSRESPONSAVEL: TStringField;
+    qryFuncionariosRESPONSAVELAREA: TStringField;
+    qryLubrificProgEquipMATRICULARESPONSAVELAREA: TStringField;
+    qryLubrificProgEquipNOMERESPONSAVELAREA: TStringField;
+    qryManutProgEquipMATRICULARESPONSAVELAREA: TStringField;
+    qryManutProgEquipNOMERESPONSAVELAREA: TStringField;
+    qryManutConsMATRICULARESPONSAVELAREA: TStringField;
+    qryManutConsNOMERESPONSAVELAREA: TStringField;
+    qryLubrificConsMATRICULARESPONSAVELAREA: TStringField;
+    qryLubrificConsNOMERESPONSAVELAREA: TStringField;
     procedure ApplicationEventsSPMPException(Sender: TObject; E: Exception);
     procedure qryManutVencAfterGetRecords(DataSet: TFDDataSet);
     procedure qryManutVencCalcFields(DataSet: TDataSet);
@@ -6105,6 +6115,8 @@ type
       var Text: string; DisplayText: Boolean);
     procedure qryOrdemServicoDATAINICIOREALGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure qryChecklistLubrificCalcFields(DataSet: TDataSet);
+    procedure qryChecklistManutCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     var caminhoArquivo: string;
@@ -6172,7 +6184,8 @@ type
     function GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
                      Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
                      Criticidade, CentroCusto, Observacoes, tempototal, Oficina,
-                     TipoManutencao, EquipParado, Email, OSPrincipal: String): Integer;
+                     TipoManutencao, EquipParado, Email, OSPrincipal,
+                     Responsavel: String): Integer;
     function CampoInputBox(const ACaption, APrompt:string): string;
     function LookUpInputBox(const ACaption, APrompt:string; AListSource, ADataSource: TDataSource; AListField, AKeyField, ADataField: String): string;
     function VerificaDuplo(Valor: String): Boolean;
@@ -6793,6 +6806,14 @@ begin
 
 end;
 
+procedure TDM.qryChecklistLubrificCalcFields(DataSet: TDataSet);
+begin
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryChecklistLubrificREMIPRESSAO.AsString := 'S';
+  end;
+end;
+
 procedure TDM.qryChecklistLubrificItensCalcFields(DataSet: TDataSet);
 begin
 if qryChecklistLubrificItensEXECUTADO.AsString = 'S' then qryChecklistLubrificItensEXECUTADO_CHK.AsBoolean := True
@@ -6815,6 +6836,14 @@ if qryChecklistLubrificItensEspREGULAR.AsString = 'S' then qryChecklistLubrificI
 else qryChecklistLubrificItensEspREGULAR_CHK.AsBoolean := False;
 if qryChecklistLubrificItensEspRUIM.AsString = 'S' then qryChecklistLubrificItensEspRUIM_CHK.AsBoolean := True
 else qryChecklistLubrificItensEspRUIM_CHK.AsBoolean := False;
+end;
+
+procedure TDM.qryChecklistManutCalcFields(DataSet: TDataSet);
+begin
+if (FrmTelaCadOrdemServicoGerencia <> nil)  then
+  begin
+    qryChecklistManutREMIPRESSAO.AsString := 'S';
+  end;
 end;
 
 procedure TDM.qryChecklistManutItensCalcFields(DataSet: TDataSet);
@@ -8375,7 +8404,7 @@ end;
 function TDM.GerarOS(CodUsuario, CodEmpresa, Descricao, CodEquip, Manutencao,
   Lubrificacao, Rota, SolicTrab, Matricula, Prioridade,
   Criticidade, CentroCusto, Observacoes, tempototal, Oficina, TipoManutencao,
-  EquipParado, Email, OSPrincipal: String): Integer;
+  EquipParado, Email, OSPrincipal, Responsavel: String): Integer;
 begin
 DM.qryDataHoraServidor.Refresh;
 DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
@@ -8411,6 +8440,7 @@ if TipoManutencao <> EmptyStr        then qryGerarOSCODMANUTENCAO.AsString      
 if EquipParado  <> EmptyStr          then qryGerarOSEQUIPPARADO.AsString          := EquipParado;
 if Email        <> EmptyStr          then qryGerarOSEMAIL.AsString                := Email;
 if OSPrincipal  <> EmptyStr          then qryGerarOSCODOSPRINCIPAL.AsString       := OSPrincipal;
+if Responsavel  <> EmptyStr          then qryGerarOSRESPONSAVEL.AsString          := Responsavel;
 qryGerarOSCODEMPRESA.AsString        := CodEmpresa;
 qryGerarOSDESCRICAO.AsString         := Descricao;
 qryGerarOSATIVO.AsString             := 'S';
@@ -10413,7 +10443,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryManutProgEquipDESCRICAO.AsString
                                                               , DM.qryManutProgEquipEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString, DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString, DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr, EmptyStr);
 
                 if DM.qryManutProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(0, DM.FCodEmpresa, DM.qryManutProgEquipCODEQUIPAMENTO.AsString, DM.qryManutProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -10467,7 +10497,7 @@ if (Indice = 0) or (Indice = 1) then
 
                 DM.FCodOrdemServico := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, DM.qryLubrificProgEquipDESCRICAO.AsString
                                                               , DM.qryLubrificProgEquipEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                                              , EmptyStr, 'Emergência', 'Para o Equipamento', DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString, DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString, DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr, EmptyStr);
 
                 if DM.qryLubrificProgEquip.IsEmpty = False then
                   DM.HistoricoInspecoes(1, DM.FCodEmpresa, DM.qryLubrificProgEquipCODEQUIPAMENTO.AsString, DM.qryLubrificProgEquipCODIGO.AsString, DM.FCodOrdemServico);
@@ -10927,7 +10957,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -10972,7 +11002,7 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);
@@ -11017,7 +11047,8 @@ begin
                       if C < 90 then
                         begin
                           OS := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Manutenção por confiabilidade', DM.qryEquipamentosConfCODIGO.AsString,
-                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString, EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                            EmptyStr, EmptyStr, EmptyStr, 'N', EmptyStr, 'Até 1 Mês', 'Para o Equipamento', DM.qryEquipamentosConfCODCENTROCUSTO.AsString,
+                                            EmptyStr, '0', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
 
                           DM.qryEquipamentosConf.Edit;
                           DM.qryEquipamentosConfDATAINICIOCONF.AsDateTime := DateOf(DM.FDataHoraServidor);

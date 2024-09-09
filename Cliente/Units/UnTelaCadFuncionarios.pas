@@ -50,7 +50,6 @@ type
     Label16: TLabel;
     EdtCalendario: TDBEdit;
     BtnCalendario: TButton;
-    Label19: TLabel;
     Label22: TLabel;
     EdtCelula: TDBEdit;
     BtnCelula: TButton;
@@ -77,6 +76,11 @@ type
     ChbAutonomo: TDBCheckBox;
     Ferramentaria1: TMenuItem;
     ImgFotoFunc: TImage;
+    Label23: TLabel;
+    EdtArea: TDBEdit;
+    BtnArea: TButton;
+    DBCheckBox1: TDBCheckBox;
+    Label19: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
@@ -101,6 +105,7 @@ type
     procedure BtnCelulaClick(Sender: TObject);
     procedure TabNextTab1AfterTabChange(Sender: TObject);
     procedure CBMaodeObraChange(Sender: TObject);
+    procedure BtnAreaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -144,6 +149,51 @@ if OPDFoto.Execute then
         DM.qryFuncionariosIMAGEM.Clear;
       end;
   end;
+end;
+
+procedure TFrmTelaCadFuncionarios.BtnAreaClick(Sender: TObject);
+begin
+  inherited;
+if DM.qryFuncionarios.Active = False then Exit;
+if DM.qryFuncionarios.IsEmpty = True then Exit;
+if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
+  begin
+    DM.FTabela_auxiliar := 150;
+    DM.FNomeConsulta := 'Áreas';
+    DM.qryFuncionarios.Edit;
+    if DM.ConsultarCombo <> EmptyStr then
+      begin
+        DM.qryFuncionariosCODAREA.AsString := DM.FCodCombo;
+        DM.qryFuncionariosAREA.AsString    := DM.FValorCombo;
+        DM.qryFuncionariosCODCELULA.Clear;
+        DM.qryFuncionariosCELULA.Clear;
+      end;
+  end
+else
+  begin
+    Try
+      if (DM.qryUsuarioPAcessoCADAREAS.AsString <> 'S') and (LowerCase(DM.FNomeUsuario) <> 'sam_spmp') then
+      begin
+        Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
+        Exit;
+      end;
+      if DM.AplicarMascara(DM.qryAreasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+      if DM.AplicarMascara(DM.qryCelulasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+      if DM.FEmpTransf = True then
+        begin
+          if DM.AplicarMascara(DM.qryLinhasCODIGO, DM.qryFormatoCodigoAREAS, FrmTelaCadAreas) = False then exit;
+        end;
+      Application.CreateForm(TFrmTelaCadAreas, FrmTelaCadAreas);
+      FrmTelaCadAreas.ShowModal;
+    Finally
+      FreeAndNil(FrmTelaCadAreas);
+    End;
+  end;
+DM.FDataSetParam     := DM.qryFuncionarios;
+DM.FDataSourceParam  := DM.dsFuncionarios;
+DM.FTela             := 'CADFUNCIONARIOS';
+DM.FParamAuxiliar[1] := 'NOME';
+DM.FTabela_auxiliar  := 30;
 end;
 
 procedure TFrmTelaCadFuncionarios.BtnCalendarioClick(Sender: TObject);
@@ -237,6 +287,7 @@ if DM.qryFuncionarios.IsEmpty = True then Exit;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
     DM.FTabela_auxiliar := 49;
+    DM.FParamAuxiliar[1] := DM.qryFuncionariosCODAREA.AsString;
     DM.FNomeConsulta := 'Células';
     DM.qryFuncionarios.Edit;
     if DM.ConsultarCombo <> EmptyStr then
@@ -304,6 +355,7 @@ DM.qryFuncionariosUSUARIO.AsString         := 'N';
 DM.qryFuncionariosATIVO.AsString           := 'S';
 DM.qryFuncionariosTERCEIRO.AsString        := 'N';
 DM.qryFuncionariosAUTONOMO.AsString        := 'N';
+DM.qryFuncionariosRESPONSAVELAREA.AsString := 'N';
 DM.qryFuncionariosOCUPADO.AsString         := 'N';
 DM.qryFuncionariosPROGRAMADO.AsString      := 'N';
 DM.qryFuncionariosCODEMPRESA.AsString      := DM.FCodEmpresa;
@@ -354,13 +406,13 @@ if DM.qryFuncionariosCODCALENDARIO.IsNull = True then
     EdtCalendario.SetFocus;
     Exit;
   end;
-{if DM.qryFuncionariosCODCELULA.IsNull = True then
+if DM.qryFuncionariosCODAREA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed;
-    PAuxiliares.Caption := 'INFORME A CÉLULA DO FUNCIONÁRIO!';
-    EdtCelula.SetFocus;
+    PAuxiliares.Caption := 'INFORME A ÁREA DO FUNCIONÁRIO!';
+    EdtArea.SetFocus;
     Exit;
-  end;}
+  end;
 if DM.qryFuncionariosMOBRA.IsNull = True then
   begin
     PAuxiliares.Font.Color := clRed;
@@ -368,12 +420,17 @@ if DM.qryFuncionariosMOBRA.IsNull = True then
     CBMaodeObra.SetFocus;
     Exit;
   end;
+if DM.qryFuncionariosRESPONSAVELAREA.AsString = 'S' then
+  begin
+    DM.qryAuxiliar.Close;
+    DM.qryAuxiliar.SQL.Text := 'UPDATE funcionarios SET RESPONSAVELAREA = ''N'' WHERE CODAREA = ' + QuotedStr(DM.qryFuncionariosCODAREA.AsString) + ' AND MATRICULA <> ' + QuotedStr(DM.qryFuncionariosMATRICULA.AsString);
+    DM.qryAuxiliar.ExecSQL;
+  end;
 if DM.qryFuncionariosSALARIO.IsNull = True then
   begin
     DM.qryFuncionarios.Edit;
     DM.qryFuncionariosSALARIO.AsFloat := 0;
   end;
-
 DM.MSGAguarde('');
 
 EdtMatricula.ReadOnly := True;

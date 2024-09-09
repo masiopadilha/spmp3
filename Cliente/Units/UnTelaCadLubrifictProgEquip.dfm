@@ -55,10 +55,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Margins.Bottom = 4
     end
     inherited pAlteracao: TPanel
-      ExplicitLeft = 654
-      inherited LCadastro: TLabel
-        ExplicitLeft = 49
-      end
       inherited LblDataAlt: TDBText
         DataSource = DM.dsLubrificProgEquip
         ExplicitLeft = 285
@@ -71,10 +67,6 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       end
     end
     inherited pCadastro: TPanel
-      ExplicitLeft = 654
-      inherited LCadastroPor: TLabel
-        ExplicitLeft = 5
-      end
       inherited LblUsuCad: TDBText
         DataSource = DM.dsLubrificProgEquip
         ExplicitLeft = 156
@@ -572,9 +564,9 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
   end
   inherited PDiversos: TPanel
     Top = 278
-    Height = 283
+    Height = 278
     ExplicitTop = 278
-    ExplicitHeight = 280
+    ExplicitHeight = 267
     inherited Label3: TLabel
       Width = 93
       Margins.Left = 5
@@ -589,29 +581,29 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
       Left = 4
       Top = 26
       Width = 1000
-      Height = 253
+      Height = 248
       Margins.Top = 25
       ActivePage = TSItens
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 996
-      ExplicitHeight = 250
+      ExplicitWidth = 994
+      ExplicitHeight = 237
       object TSItens: TTabSheet
         Caption = 'Itens'
         object PItens: TPanel
           Left = 0
           Top = 0
           Width = 992
-          Height = 222
+          Height = 217
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 988
-          ExplicitHeight = 219
+          ExplicitWidth = 986
+          ExplicitHeight = 206
           object GrdItens: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 220
+            Height = 215
             Align = alClient
             Color = 14671839
             DataSource = DM.dsLubrificProgEquipItens
@@ -687,14 +679,14 @@ inherited FrmTelaCadLubrificProgEquip: TFrmTelaCadLubrificProgEquip
           Left = 0
           Top = 0
           Width = 992
-          Height = 222
+          Height = 217
           Align = alClient
           TabOrder = 0
           object GrdItensEsp: TDBGrid
             Left = 1
             Top = 1
             Width = 990
-            Height = 220
+            Height = 215
             Hint = 'D'#234' duplo-clique para excluir o registro.'
             Align = alClient
             Color = 14671839

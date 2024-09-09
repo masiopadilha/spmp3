@@ -15,29 +15,30 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
   inherited PTop: TPanel
     Width = 924
     TabOrder = 1
-    ExplicitWidth = 920
+    ExplicitWidth = 918
     inherited Image1: TImage
       Height = 47
+      ExplicitHeight = 47
     end
     inherited BtnAjuda: TButton
       Left = 887
       Visible = False
-      ExplicitLeft = 883
+      ExplicitLeft = 881
     end
   end
   inherited PCentro: TPanel
     Width = 922
     Height = 425
     TabOrder = 2
-    ExplicitWidth = 918
-    ExplicitHeight = 422
+    ExplicitWidth = 916
+    ExplicitHeight = 414
     inherited RGTelas: TRadioGroup
       Top = 40
       Width = 920
       Height = 384
       ExplicitTop = 40
-      ExplicitWidth = 916
-      ExplicitHeight = 381
+      ExplicitWidth = 914
+      ExplicitHeight = 373
     end
     object PCInspecoes: TPageControl
       AlignWithMargins = True
@@ -50,8 +51,8 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       TabOrder = 1
       OnChange = PCInspecoesChange
       OnChanging = PCInspecoesChanging
-      ExplicitWidth = 910
-      ExplicitHeight = 375
+      ExplicitWidth = 908
+      ExplicitHeight = 367
       object TSManut: TTabSheet
         Caption = 'Manuten'#231#245'es'
         object GrdManut: TJvDBGrid
@@ -451,7 +452,7 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitWidth = 910
+      ExplicitWidth = 908
       object Label6: TLabel
         Left = 7
         Top = 9
@@ -547,15 +548,15 @@ inherited FrmTelaInspVenc: TFrmTelaInspVenc
     Top = 497
     Width = 924
     TabOrder = 3
-    ExplicitTop = 494
-    ExplicitWidth = 920
+    ExplicitTop = 486
+    ExplicitWidth = 918
   end
   inherited PBotoes: TPanel
     Top = 524
     Width = 924
     TabOrder = 0
-    ExplicitTop = 521
-    ExplicitWidth = 920
+    ExplicitTop = 513
+    ExplicitWidth = 918
     inherited BtnOK: TButton
       Left = 382
       Caption = 'Executar'

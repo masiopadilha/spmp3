@@ -575,8 +575,20 @@ end;
 procedure TFrmTelaCadLubrificProgEquip.Completo1Click(Sender: TObject);
 begin
 DM.FDataSetRelat    := DmRelatorios.frxDBLubrificProgEquipGeral;
+DM.qryLubrificProgEquipItens.MasterSource := DM.dsAuxiliar;
+DM.qryLubrificProgEquipItensEsp.MasterSource := DM.dsAuxiliar;
+DM.qryLubrificProgEquipPlanoTrab.MasterSource := DM.dsAuxiliar;
+DM.qryLubrificProgEquipItens.Open;
+DM.qryLubrificProgEquipItensEsp.Open;
+DM.qryLubrificProgEquipPlanoTrab.Open;
 DM.FTabela_auxiliar  := 33;
   inherited;
+DM.qryLubrificProgEquipItens.MasterSource := DM.dsLubrificProgEquip;
+DM.qryLubrificProgEquipItensEsp.MasterSource := DM.dsLubrificProgEquip;
+DM.qryLubrificProgEquipPlanoTrab.MasterSource := DM.dsLubrificProgEquip;
+DM.qryLubrificProgEquipItens.Close; DM.qryLubrificProgEquipItens.Open;
+DM.qryLubrificProgEquipItensEsp.Close;
+DM.qryLubrificProgEquipPlanoTrab.Close;
 end;
 procedure TFrmTelaCadLubrificProgEquip.DBCheckBox1Click(Sender: TObject);
 begin

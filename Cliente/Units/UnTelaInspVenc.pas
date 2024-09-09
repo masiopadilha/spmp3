@@ -249,7 +249,7 @@ case PCInspecoes.ActivePageIndex of
                                             , EmptyStr, EmptyStr, 'N', DM.qryManutProgEquipMATRICULA.AsString, 'Emergência', 'Para o Equipamento'
                                             , DM.qryManutProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryManutProgEquiptempototal.AsString
                                             , DM.qryManutProgEquipCODOFICINA.AsString, DM.qryManutProgEquipCODMANUTENCAO.AsString
-                                            , DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                            , DM.qryManutProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr, DM.qryManutProgEquipMATRICULARESPONSAVELAREA.AsString);
 
           //Verifica se existe mão de obra cadastrada na manutenção
           if DM.qryManutProgEquipEquipe.IsEmpty = False then
@@ -561,7 +561,7 @@ case PCInspecoes.ActivePageIndex of
                                             , DM.qryLubrificProgEquipCODIGO.AsString, EmptyStr, 'N', DM.qryLubrificProgEquipMATRICULA.AsString, 'Emergência', 'Para o Equipamento'
                                             , DM.qryLubrificProgEquipCODCENTROCUSTO.AsString, EmptyStr, DM.qryLubrificProgEquiptempototal.AsString
                                             , DM.qryLubrificProgEquipCODOFICINA.AsString, DM.qryLubrificProgEquipCODMANUTENCAO.AsString
-                                            , DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                            , DM.qryLubrificProgEquipEQUIPPARADO.AsString, EmptyStr, EmptyStr, DM.qryLubrificProgEquipMATRICULARESPONSAVELAREA.AsString);
 
 
           //Verifica se existe mão de obra cadastrada na manutenção
@@ -850,7 +850,7 @@ case PCInspecoes.ActivePageIndex of
                                             , EmptyStr, 'S', 'N', EmptyStr, 'Emergência', 'Para o Equipamento'
                                             , DM.qryRotaEquipVencSeqManutCODCENTROCUSTO.AsString, EmptyStr, DM.qryRotaEquipVencTEMPOTOTALITENS.AsString
                                             , DM.qryRotaEquipVencSeqManutCODOFICINA.AsString, DM.qryRotaEquipVencSeqManutCODMANUTENCAO.AsString
-                                            , DM.qryRotaEquipVencSeqManutEQUIPPARADO.AsString, EmptyStr, EmptyStr);
+                                            , DM.qryRotaEquipVencSeqManutEQUIPPARADO.AsString, EmptyStr, EmptyStr, EmptyStr);
 
 
           if DM.qryRotaEquipVenc.IsEmpty = False then

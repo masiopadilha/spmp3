@@ -127,13 +127,13 @@ if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
               begin
                 DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
                                                                                  , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
               end
             else
               begin
                 DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
                                                                                  , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                                 , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
               end;
 
             DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
@@ -151,13 +151,13 @@ if DM.qryMonitoramentoTIPOPONTO.AsString = 'Ponto de Inspeção' then
           begin
             DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
                                                                         , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
           end
         else
           begin
             DM.FDataSetParam.FieldByName('OSGERADA').AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.FDataSetParam.FieldByName('PONTOINSP').AsString + ': '+EdtMedicao.Text
                                                                         , DM.FDataSetParam.FieldByName('CODEQUIPAMENTO').AsString, EmptyStr, EmptyStr, EmptyStr, 'N'
-                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                        , DM.FDataSetParam.FieldByName('MATRICULA').AsString, 'Até 1 Mês', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
           end;
 
         DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
@@ -213,7 +213,7 @@ else
           begin
             DM.qryMonitMedicoesContOSGERADA.AsInteger := DM.GerarOS(DM.FCodUsuario, DM.FCodEmpresa, 'Verificar '+DM.qryMonitMedicoesContManutMANUTENCAO.AsString
                                                                     , DM.qryMonitMedicoesContCODEQUIPAMENTO.AsString, DM.qryMonitMedicoesContManutCODIGO.AsString, EmptyStr, EmptyStr, 'N'
-                                                                    , DM.qryMonitMedicoesContMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
+                                                                    , DM.qryMonitMedicoesContMATRICULA.AsString, 'Emergência', 'Para o Equipamento', DM.qryMonitEquipamentosCODCENTROCUSTO.AsString, EmptyStr, '1', EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr, EmptyStr);
             DM.FDataSetParam.FieldByName('SITUACAOOS').AsString := 'CADASTRADA';
 
             DM.qryManutProgEquip.Close;
