@@ -1325,6 +1325,15 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         ExplicitTop = 428
         ExplicitWidth = 857
       end
+      object Button11: TButton
+        Left = 296
+        Top = 56
+        Width = 75
+        Height = 25
+        Caption = 'Button11'
+        TabOrder = 16
+        OnClick = Button11Click
+      end
     end
   end
   inherited PAuxiliares: TPanel

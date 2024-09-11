@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SPMP3.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -671,6 +671,10 @@
         </DCCReference>
         <DCCReference Include="..\Units\UnTelaCadOrdemServicoGerenciaValidacoes.pas">
             <Form>FrmTelaCadOrdemServicoGerenciaValidacoes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Units\unTempoAtualizaOS.pas">
+            <Form>frmTempoAtualizaOS</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <RcItem Include="..\updater.bat">

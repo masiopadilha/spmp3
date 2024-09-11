@@ -22121,8 +22121,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       item
         Width = 15
       end>
-    ExplicitTop = 700
-    ExplicitWidth = 1008
+    ExplicitTop = 692
+    ExplicitWidth = 1006
   end
   object ChartOSOficina: TChart
     AlignWithMargins = True
@@ -22470,7 +22470,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Color = 7241535
     TabOrder = 3
     Anchors = [akTop, akRight]
-    ExplicitLeft = 319
+    ExplicitLeft = 317
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -22589,8 +22589,8 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ShowHint = True
     TabOrder = 0
     OnDblClick = PAlertasDblClick
-    ExplicitTop = 684
-    ExplicitWidth = 1008
+    ExplicitTop = 676
+    ExplicitWidth = 1006
     object LblTempoDesliga: TLabel
       AlignWithMargins = True
       Left = 1006
@@ -22709,7 +22709,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     Color = 7241535
     TabOrder = 7
     Anchors = [akLeft, akBottom]
-    ExplicitTop = 453
+    ExplicitTop = 445
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -22825,7 +22825,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       '2022'
       '2023'
       '2024')
-    ExplicitLeft = 875
+    ExplicitLeft = 873
   end
   object cbMes: TComboBox
     Left = 879
@@ -22856,7 +22856,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       'Outubro'
       'Novembro'
       'Dezembro')
-    ExplicitLeft = 875
+    ExplicitLeft = 873
   end
   object cbOficina: TDBLookupComboBox
     Left = 833
@@ -22878,7 +22878,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     ParentFont = False
     TabOrder = 8
     OnKeyPress = cbOficinaKeyPress
-    ExplicitLeft = 829
+    ExplicitLeft = 827
   end
   object CBSolicitante: TDBLookupComboBox
     Left = 22
@@ -22927,7 +22927,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
       'Novos Projetos'
       'Altera'#231#245'es'
       'Outras')
-    ExplicitLeft = 829
+    ExplicitLeft = 827
   end
   object chbAtivarDBSolicTrab: TCheckBox
     Left = 505
@@ -22946,7 +22946,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TabOrder = 11
     StyleElements = [seClient, seBorder]
     OnClick = chbAtivarDBSolicTrabClick
-    ExplicitLeft = 501
+    ExplicitLeft = 499
   end
   object chbAtivarDBOficinas: TCheckBox
     Left = 923
@@ -22965,7 +22965,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TabOrder = 12
     StyleElements = [seClient, seBorder]
     OnClick = chbAtivarDBOficinasClick
-    ExplicitLeft = 919
+    ExplicitLeft = 917
   end
   object chbAtivarDBSituacaoOS: TCheckBox
     Left = 236
@@ -22984,7 +22984,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TabOrder = 13
     StyleElements = [seClient, seBorder]
     OnClick = chbAtivarDBSituacaoOSClick
-    ExplicitLeft = 232
+    ExplicitLeft = 230
   end
   object chbAtivarDBTipoManutOS: TCheckBox
     Left = 546
@@ -23003,7 +23003,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TabOrder = 14
     StyleElements = [seClient, seBorder]
     OnClick = chbAtivarDBTipoManutOSClick
-    ExplicitLeft = 542
+    ExplicitLeft = 540
   end
   object chbAtivarDBMTBFTRDisp: TCheckBox
     Left = 732
@@ -23022,7 +23022,7 @@ object FrmTelaPrincipal: TFrmTelaPrincipal
     TabOrder = 15
     StyleElements = [seClient, seBorder]
     OnClick = chbAtivarDBMTBFTRDispClick
-    ExplicitLeft = 728
+    ExplicitLeft = 726
   end
   object MainMenuPrincipal: TMainMenu
     Left = 48

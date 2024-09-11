@@ -190,6 +190,7 @@ procedure TFrmTelaGerenciador.BtnGravarClick(Sender: TObject);
 var
   Ini: TIniFile;
   Registro:TRegistry;
+  Mensagem: PChar;
 begin
   if edtUserName.Text = '' then
     begin
@@ -252,6 +253,21 @@ begin
 //      Exit;
 //    end;
 
+  Try
+    DM.FDConnSPMP3.Params.Values['Database'] := edtDatabaseName.Text;
+    DM.FDConnSPMP3.Params.Values['User_Name'] := edtUserName.Text;
+    DM.FDConnSPMP3.Params.Values['Server']   := EdtHostName.Text;
+    DM.FDConnSPMP3.Params.Values['Port']     := EdtPorta.Text;
+    DM.FDConnSPMP3.Params.Values['Password'] := EdtSenha.Text;
+    DM.FDConnSPMP3.Connected := True;
+    DM.FDConnSPMP3.Connected := False;
+  Except on E: Exception do
+    begin
+      Mensagem := PChar('Não foi possível a conexão com o banco de dados!' + #13 + 'Erro: ' + E.Message);
+      Application.MessageBox(Mensagem, 'SPMP3', MB_OK + MB_ICONERROR);
+      Exit;
+    end;
+  End;
 
   DeleteFile('C:\SPMP3\Gerenciador.exe');
   DeleteFile('C:\SPMP3\checkupdate.exe');

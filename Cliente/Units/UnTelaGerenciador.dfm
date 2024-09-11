@@ -17,23 +17,26 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
   TextHeight = 15
   inherited PTop: TPanel
     Width = 434
-    ExplicitWidth = 430
+    ExplicitWidth = 428
+    inherited Image1: TImage
+      Height = 47
+    end
     inherited BtnAjuda: TButton
       Left = 397
       Visible = False
-      ExplicitLeft = 393
+      ExplicitLeft = 391
     end
   end
   inherited PCentro: TPanel
     Width = 432
     Height = 201
-    ExplicitWidth = 428
-    ExplicitHeight = 198
+    ExplicitWidth = 426
+    ExplicitHeight = 190
     inherited RGTelas: TRadioGroup
       Width = 430
       Height = 199
-      ExplicitWidth = 426
-      ExplicitHeight = 196
+      ExplicitWidth = 424
+      ExplicitHeight = 188
     end
     object Panel1: TPanel
       AlignWithMargins = True
@@ -45,8 +48,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 420
-      ExplicitHeight = 190
+      ExplicitWidth = 418
+      ExplicitHeight = 182
       object Label1: TLabel
         Left = 352
         Top = 6
@@ -308,8 +311,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     Height = 0
     Visible = False
     ExplicitLeft = 0
-    ExplicitTop = 268
-    ExplicitWidth = 434
+    ExplicitTop = 260
+    ExplicitWidth = 432
     ExplicitHeight = 0
   end
   inherited PBotoes: TPanel
@@ -318,8 +321,8 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     Height = 44
     BevelInner = bvRaised
     BevelOuter = bvLowered
-    ExplicitTop = 270
-    ExplicitWidth = 430
+    ExplicitTop = 262
+    ExplicitWidth = 428
     ExplicitHeight = 44
     inherited BtnOK: TButton
       Left = 0

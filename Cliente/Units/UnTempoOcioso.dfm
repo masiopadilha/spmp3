@@ -14,7 +14,7 @@ object frmSistemaOcioso: TfrmSistemaOcioso
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  Position = poDefault
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
@@ -23,7 +23,7 @@ object frmSistemaOcioso: TfrmSistemaOcioso
     Left = 13
     Top = 3
     Width = 413
-    Height = 29
+    Height = 30
     Alignment = taCenter
     Caption = 'O sistema ser'#225' desligado em 30 segundos.'
     Font.Charset = DEFAULT_CHARSET
