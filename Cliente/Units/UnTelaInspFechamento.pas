@@ -10,7 +10,7 @@ uses
   Vcl.ImgList, Datasnap.DBClient, Vcl.ComCtrls, System.ImageList, FireDAC.Stan.Param,
   Vcl.Menus, JvExDBGrids, JvDBGrid, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.Threading;
 
 type
   TFrmTelaInspFechamento = class(TFrmTelaPaiOKCancel)
@@ -2677,67 +2677,125 @@ var
   LTemp:Integer;
 begin
   inherited;
-  TThread.CreateAnonymousThread(
-                                procedure
-                                begin
-                                  hora_atual := Now;
+  TTask.Run(
+            procedure
+            begin
+              try
+                hora_atual := Now;
+                if (hora_atual < hora_futura) then
+                begin
+                  dt_ini := DateOf(hora_atual);
+                  dt_final := DateOf(hora_futura);
 
-                                  if (hora_atual < hora_futura) then
-                                      begin
-                                          dt_ini := DateOf(hora_atual);
-                                          dt_final := DateOf(hora_futura);
+                  diferenca := hora_futura - hora_atual;
+                  df_hr := TimeOf(diferenca);
 
-                                          diferenca := hora_futura - hora_atual;
-                                          df_hr := TimeOf(diferenca);
+                  Application.ProcessMessages;
+                end else
+                begin
+                   if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+                   begin
+                     DM.MSGAguarde('ATUALIZANDO');
+                     Application.ProcessMessages;
+                     Try
+                       LTemp :=  DM.FSegundosDesliga;
 
-//                                          label1.Caption := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
-//                                          Application.Title := Label1.Caption;
+                       DM.qryManutPeriodicas.Close;
+                       DM.qryManutPeriodicasItens.Close;
+                       DM.qryManutPeriodicasItensEsp.Close;
+                       DM.qryManutPeriodicas.Params[0].AsString := DM.FCodEmpresa;
+                       DM.qryManutPeriodicas.Params[1].AsString := 'ABERTA';
+                       DM.qryManutPeriodicas.Open;
+                       DM.qryManutPeriodicasItens.Open;
+                       DM.qryManutPeriodicasItensEsp.Open;
 
-                                          Application.ProcessMessages;
-                                      end
-                                  else
-                                    begin
-                                      TThread.Synchronize(TThread.CurrentThread,
-                                              procedure
-                                              begin
-                                                if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
-                                                  begin
-                                                    DM.MSGAguarde('ATUALIZANDO');
-                                                    BtnOK.Enabled := False;
+                       TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+                       GrdManutencao.SelectedRows.CurrentRowSelected := True;
+                       hora_futura := IncMinute(Now, 5);
+                     Except
+                       DM.MSGAguarde('', False);
+                       Abort;
+                     End;
+                     Application.ProcessMessages;
+                     DM.MSGAguarde('', False);
+                     DM.FSegundosDesliga := LTemp;
+                   end;
+                end;
+              except
+                on E: Exception do
+                  TThread.Synchronize(nil,
+                    procedure
+                    begin
+                     // ShowMessage('Erro ao executar consulta: ' + E.Message);
+                    end);
+              end;
+            end
+           );
 
-                                                    Try
-                                                      LTemp :=  DM.FSegundosDesliga;
 
-                                                      DM.qryManutPeriodicas.Close;
-                                                      DM.qryManutPeriodicasItens.Close;
-                                                      DM.qryManutPeriodicasItensEsp.Close;
-                                                      DM.qryManutPeriodicas.Params[0].AsString := DM.FCodEmpresa;
-                                                      DM.qryManutPeriodicas.Params[1].AsString := 'ABERTA';
-//                                                      DM.qryManutPeriodicas.Params[2].AsString := 'FECHADA';
-                                                      DM.qryManutPeriodicas.Open;
-                                                      DM.qryManutPeriodicasItens.Open;
-                                                      DM.qryManutPeriodicasItensEsp.Open;
 
-                                                      TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
-                                                      GrdManutencao.SelectedRows.CurrentRowSelected := True;
-                                                      hora_futura := IncMinute(Now, 5);
-                                                    Except
-                                                      DM.MSGAguarde('', False);
-                                                      BtnOK.Enabled := True;
-                                                      Abort;
-                                                    End;
 
-                                                    Application.ProcessMessages;
-
-                                                    DM.MSGAguarde('', False);
-                                                    BtnOK.Enabled := True;
-                                                    DM.FSegundosDesliga := LTemp;
-                                                  end;
-
-                                              end);
-                                    end;
-                                end
-                               ).Start;
+//  TThread.CreateAnonymousThread(
+//                                procedure
+//                                begin
+//                                  hora_atual := Now;
+//
+//                                  if (hora_atual < hora_futura) then
+//                                      begin
+//                                          dt_ini := DateOf(hora_atual);
+//                                          dt_final := DateOf(hora_futura);
+//
+//                                          diferenca := hora_futura - hora_atual;
+//                                          df_hr := TimeOf(diferenca);
+//
+////                                          label1.Caption := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
+////                                          Application.Title := Label1.Caption;
+//
+//                                          Application.ProcessMessages;
+//                                      end
+//                                  else
+//                                    begin
+//                                      TThread.Synchronize(TThread.CurrentThread,
+//                                              procedure
+//                                              begin
+//                                                if (DM.qryUsuarioPAcessoCADMANUTPROG.AsString = 'S') or (LowerCase(DM.FNomeUsuario) = 'sam_spmp') then
+//                                                  begin
+//                                                    DM.MSGAguarde('ATUALIZANDO');
+//                                                    BtnOK.Enabled := False;
+//
+//                                                    Try
+//                                                      LTemp :=  DM.FSegundosDesliga;
+//
+//                                                      DM.qryManutPeriodicas.Close;
+//                                                      DM.qryManutPeriodicasItens.Close;
+//                                                      DM.qryManutPeriodicasItensEsp.Close;
+//                                                      DM.qryManutPeriodicas.Params[0].AsString := DM.FCodEmpresa;
+//                                                      DM.qryManutPeriodicas.Params[1].AsString := 'ABERTA';
+////                                                      DM.qryManutPeriodicas.Params[2].AsString := 'FECHADA';
+//                                                      DM.qryManutPeriodicas.Open;
+//                                                      DM.qryManutPeriodicasItens.Open;
+//                                                      DM.qryManutPeriodicasItensEsp.Open;
+//
+//                                                      TSManut.Caption := 'Manutenções ('+IntToStr(DM.qryManutPeriodicas.RecordCount)+')';
+//                                                      GrdManutencao.SelectedRows.CurrentRowSelected := True;
+//                                                      hora_futura := IncMinute(Now, 5);
+//                                                    Except
+//                                                      DM.MSGAguarde('', False);
+//                                                      BtnOK.Enabled := True;
+//                                                      Abort;
+//                                                    End;
+//
+//                                                    Application.ProcessMessages;
+//
+//                                                    DM.MSGAguarde('', False);
+//                                                    BtnOK.Enabled := True;
+//                                                    DM.FSegundosDesliga := LTemp;
+//                                                  end;
+//
+//                                              end);
+//                                    end;
+//                                end
+//                               ).Start;
 end;
 
 end.
