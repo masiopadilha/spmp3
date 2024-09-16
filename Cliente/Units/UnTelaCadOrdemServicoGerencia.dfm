@@ -10,6 +10,8 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
   OnCreate = FormCreate
   OnResize = FormResize
   OnShow = FormShow
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 1024
   ExplicitHeight = 768
   TextHeight = 16
@@ -1324,15 +1326,6 @@ inherited FrmTelaCadOrdemServicoGerencia: TFrmTelaCadOrdemServicoGerencia
         TabOrder = 15
         ExplicitTop = 428
         ExplicitWidth = 857
-      end
-      object Button11: TButton
-        Left = 296
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Button11'
-        TabOrder = 16
-        OnClick = Button11Click
       end
     end
   end

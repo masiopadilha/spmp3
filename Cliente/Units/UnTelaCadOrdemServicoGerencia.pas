@@ -129,7 +129,6 @@ type
     DBNavigator1: TDBNavigator;
     NotificationCenter1: TNotificationCenter;
     Aprovada1: TMenuItem;
-    Button11: TButton;
     procedure FormCreate(Sender: TObject);
     procedure ConfigurarFiltros;
     procedure Button2Click(Sender: TObject);
@@ -182,7 +181,6 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure TimerUpdateTimer(Sender: TObject);
     procedure EdtData1KeyPress(Sender: TObject; var Key: Char);
-    procedure Button11Click(Sender: TObject);
   private
     { Private declarations }
     Ascending:boolean;
@@ -779,27 +777,6 @@ PAuxiliares.Caption := EmptyStr;
     FreeAndNil(FrmTelaCadOrdemServicoHistorico);
     TimerCheckOS.Enabled := True;
   End;
-end;
-
-procedure TFrmTelaCadOrdemServicoGerencia.Button11Click(Sender: TObject);
-begin
-  inherited;
-  TTask.Run(
-            procedure
-            begin
-              try
-                DM.qryOrdemServicoGerencia.Refresh;
-                DM.qryOrdemServicoGerencia.First;
-              except
-                on E: Exception do
-                  TThread.Synchronize(nil,
-                    procedure
-                    begin
-                      ShowMessage('Erro ao executar consulta: ' + E.Message);
-                    end);
-              end;
-            end
-           );
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Button7Click(Sender: TObject);
