@@ -11594,7 +11594,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 421
+    ExplicitWidth = 419
     object Image2: TImage
       AlignWithMargins = True
       Left = 4
@@ -11954,8 +11954,8 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 421
-    ExplicitHeight = 119
+    ExplicitWidth = 419
+    ExplicitHeight = 111
     object Label1: TLabel
       Left = 120
       Top = 21

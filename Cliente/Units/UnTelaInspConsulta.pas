@@ -270,6 +270,7 @@ type
     FDMemTLubrificItensEspTotalHH: TAggregateField;
     FDMemTRotaSeqManutItensTotalHH: TAggregateField;
     FDMemTRotaSeqManutItensEspTotalHH: TAggregateField;
+    chbAntecipar: TCheckBox;
     procedure BtnOKClick(Sender: TObject);
     procedure GrdManutDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -672,17 +673,20 @@ begin
                   DM.qryOrdemServicoEquipeRecursos.Close;
                 end;
 
-//                //Carrega FdMemTable para o relatório
-//                FDMemTManut.Close; FDMemTManut.CreateDataSet; FDMemTManut.Open;
-//                FDMemTManutItens.Close; FDMemTManutItens.CreateDataSet; FDMemTManutItens.Open;
-//                FDMemTManutItensEsp.Close; FDMemTManutItensEsp.CreateDataSet; FDMemTManutItensEsp.Open;
-//                FDMemTManutPlanoTrab.Close; FDMemTManutPlanoTrab.CreateDataSet; FDMemTManutPlanoTrab.Open;
-
                 FDMemTManut.Append;
                 FDMemTManutCODIGO.AsString               := DM.qryManutConsCODIGO.AsString;
                 FDMemTManutDESCRICAO.AsString            := DM.qryManutConsDESCRICAO.AsString;
                 FDMemTManutFREQUENCIA1.AsInteger         := DM.qryManutConsFREQUENCIA1.AsInteger;
-                FDMemTManutDTAINICIO1.AsDateTime         := DateOf(DM.FDataHoraServidor);
+                if chbAntecipar.Checked = True then
+                begin
+                  FDMemTManutDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+                end else
+                begin
+                  if (DateOf(DM.qryManutConsDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                    FDMemTManutDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+                  else
+                    FDMemTManutDTAINICIO1.AsDateTime := DM.qryManutConsDTAINICIO1.AsDateTime;
+                end;
                 FDMemTManutCODEQUIPAMENTO.AsString       := DM.qryManutConsCODEQUIPAMENTO.AsString;
                 FDMemTManutEQUIPAMENTO.AsString          := DM.qryManutConsEQUIPAMENTO.AsString;
                 FDMemTManutCODEMPRESA.AsString           := DM.qryManutConsCODEMPRESA.AsString;
@@ -769,21 +773,22 @@ begin
                     DM.qryManutConsPlanoTrab.Next;
                   end;
 
-//                DmRelatorios.frxDBInspConsManut.DataSet :=  FDMemTManut;
-//                DmRelatorios.frxDBInspConsManutItens.DataSet :=  FDMemTManutItens;
-//                DmRelatorios.frxDBInspConsManutItensEsp.DataSet :=  FDMemTManutItensEsp;
-//                DmRelatorios.frxDBInspConsManutPlanoTrab.DataSet :=  FDMemTManutPlanoTrab;
-//
-//                DmRelatorios.frxRInspConsManut.ShowReport();
-
                 //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou não.
                 if DM.qryManutConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryManutConsRELATORIO.AsString    := 'N';
-//                    if DateOf(DM.qryManutConsDTAINICIO1.AsDateTime) <> DateOf(DM.FDataHoraServidor) then
-//                      DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
-//                    else
-                    DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger);
+
+                    if chbAntecipar.Checked = True then
+                    begin
+                      DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger);
+                    end else
+                    begin
+                      if (DateOf(DM.qryManutConsDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                        DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
+                      else
+                        DM.qryManutConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutConsDTAINICIO1.AsDateTime), DM.qryManutConsFREQUENCIA1.AsInteger)
+                    end;
+
                     if DM.qryManutConsREPROGRAMAR2.AsString = 'Programação' then
                       DM.qryManutConsLEITURA.AsInteger := DM.qryManutConsLEITURA.AsInteger + DM.qryManutConsFREQUENCIA2.AsInteger;
                   end;
@@ -820,6 +825,8 @@ begin
             CBPeriodo.OnChange(Sender);
 
             chbTudo.Checked := False;
+
+            chbAntecipar.Checked := False;
 
             TSManut.Caption := 'Manutenções ('+ IntToStr(DM.qryManutCons.RecordCount)+')';
           end;
@@ -1085,17 +1092,20 @@ begin
                   DM.qryOrdemServicoEquipeRecursos.Close;
                 end;
 
-//                //Carrega FdMemTable para o relatório
-//                FDMemTLubrific.Close; FDMemTLubrific.CreateDataSet; FDMemTLubrific.Open;
-//                FDMemTLubrificItens.Close; FDMemTLubrificItens.CreateDataSet; FDMemTLubrificItens.Open;
-//                FDMemTLubrificItensEsp.Close; FDMemTLubrificItensEsp.CreateDataSet; FDMemTLubrificItensEsp.Open;
-//                FDMemTLubrificPlanoTrab.Close; FDMemTLubrificPlanoTrab.CreateDataSet; FDMemTLubrificPlanoTrab.Open;
-
                 FDMemTLubrific.Append;
                 FDMemTLubrificCODIGO.AsString               := DM.qryLubrificConsCODIGO.AsString;
                 FDMemTLubrificDESCRICAO.AsString            := DM.qryLubrificConsDESCRICAO.AsString;
                 FDMemTLubrificFREQUENCIA1.AsInteger         := DM.qryLubrificConsFREQUENCIA1.AsInteger;
-                FDMemTLubrificDTAINICIO1.AsDateTime         := DateOf(DM.FDataHoraServidor);
+                if chbAntecipar.Checked = True then
+                begin
+                  FDMemTLubrificDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+                end else
+                begin
+                  if (DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                    FDMemTLubrificDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+                  else
+                    FDMemTLubrificDTAINICIO1.AsDateTime := DM.qryLubrificConsDTAINICIO1.AsDateTime;
+                end;
                 FDMemTLubrificCODEQUIPAMENTO.AsString       := DM.qryLubrificConsCODEQUIPAMENTO.AsString;
                 FDMemTLubrificEQUIPAMENTO.AsString          := DM.qryLubrificConsEQUIPAMENTO.AsString;
                 FDMemTLubrificCODEMPRESA.AsString           := DM.qryLubrificConsCODEMPRESA.AsString;
@@ -1193,10 +1203,18 @@ begin
                 if DM.qryLubrificConsREPROGRAMAR1.AsString = 'Programação' then
                   begin
                     DM.qryLubrificConsRELATORIO.AsString    := 'N';
-//                    if DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
-//                      DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
-//                    else
-                    DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger);
+
+                    if chbAntecipar.Checked = True then
+                    begin
+                      DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger);
+                    end else
+                    begin
+                      if (DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                        DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
+                      else
+                        DM.qryLubrificConsDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificConsDTAINICIO1.AsDateTime), DM.qryLubrificConsFREQUENCIA1.AsInteger)
+                    end;
+
                     if DM.qryLubrificConsREPROGRAMAR2.AsString = 'Programação' then
                       DM.qryLubrificConsLEITURA.AsInteger := DM.qryLubrificConsLEITURA.AsInteger + DM.qryLubrificConsFREQUENCIA2.AsInteger;
                   end;
@@ -1234,6 +1252,8 @@ begin
             CBPeriodo.OnChange(Sender);
 
             chbTudo.Checked := False;
+
+            chbAntecipar.Checked := False;
 
             TSLubrific.Caption := 'Lubrificações ('+ IntToStr(DM.qryLubrificCons.RecordCount)+')';
           end;
@@ -1349,7 +1369,16 @@ begin
                 FDMemTRotaCODIGO.AsString             := DM.qryRotaConsCODIGO.AsString;
                 FDMemTRotaDESCRICAO.AsString          := DM.qryRotaConsDESCRICAO.AsString;
                 FDMemTRotaFREQUENCIA.AsInteger        := DM.qryRotaConsFREQUENCIA.AsInteger;
-                FDMemTRotaDATAINICIO.AsDateTime       := DateOf(DM.FDataHoraServidor);
+                if chbAntecipar.Checked = True then
+                begin
+                  FDMemTRotaDATAINICIO.AsDateTime := DateOf(DM.FDataHoraServidor)
+                end else
+                begin
+                  if (DateOf(DM.qryRotaConsDATAINICIO.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                    FDMemTRotaDATAINICIO.AsDateTime := DateOf(DM.FDataHoraServidor)
+                  else
+                    FDMemTRotaDATAINICIO.AsDateTime := DM.qryRotaConsDATAINICIO.AsDateTime;
+                end;
                 FDMemTRotaCODEMPRESA.AsString         := DM.qryRotaConsCODEMPRESA.AsString;
                 FDMemTRotaREPROGRAMAR.AsString        := DM.qryRotaConsREPROGRAMAR.AsString;
                 FDMemTRotaRELATORIO.AsString          := DM.qryRotaConsRELATORIO.AsString;
@@ -1447,10 +1476,16 @@ begin
                  begin
                    DM.qryRotaCons.Edit;
                    DM.qryRotaConsRELATORIO.AsString  := 'N';
-//                   if DateOf(DM.qryRotaConsDATAINICIO.AsDateTime) <= DateOf(DM.FDataHoraServidor) then
-//                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
-//                   else
-                   DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger);
+                   if chbAntecipar.Checked = True then
+                   begin
+                     DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger);
+                   end else
+                   begin
+                     if (DateOf(DM.qryManutConsDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                       DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaConsFREQUENCIA.AsInteger)
+                     else
+                       DM.qryRotaConsDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaConsDATAINICIO.AsDateTime), DM.qryRotaConsFREQUENCIA.AsInteger)
+                   end;
                    DM.qryRotaCons.Post;
 
                    DM.qryRotaConsSeq.First;
@@ -1521,6 +1556,8 @@ begin
 
             chbTudo.Checked := False;
 
+            chbAntecipar.Checked := False;
+
             TSRotas.Caption := 'Rotas ('+ IntToStr(FDMemTRota.RecordCount)+')';
           end;
       end;
@@ -1549,6 +1586,8 @@ begin
   Case CBPeriodo.ItemIndex of
     0: //Vencidas
       Begin
+        chbAntecipar.Enabled := False;
+
         GrdManut.DataSource.DataSet.Filtered := False;
         GrdManut.DataSource.DataSet.Filter   := EmptyStr;
         GrdManut.DataSource.DataSet.Filter   := 'DTAINICIO1 <= '+QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor));
@@ -1626,6 +1665,8 @@ begin
     //---------------------------------------------------------------------------------------------------------------------------------------
     1,2,3,4,5,6,7: //Futuras
       Begin
+        chbAntecipar.Enabled := True;
+
         DM.MSGAguarde();
         GrdManut.DataSource.DataSet.Filtered := False;
         GrdManut.DataSource.DataSet.Filter   := EmptyStr;
@@ -1666,9 +1707,12 @@ begin
               GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
           end;
         if GrdManut.DataSource.DataSet.Filter = '' then
-          GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+//          GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+          GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
-          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+//          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND ' + QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+
         GrdManut.DataSource.DataSet.Filtered := True;
         GrdManut.DataSource.DataSet.First;
         TSManut.Caption := 'Manutenções ('+ IntToStr(GrdManut.DataSource.DataSet.RecordCount)+')';
@@ -1701,10 +1745,14 @@ begin
             else
               GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
           end;
-                 if GrdLubrific.DataSource.DataSet.Filter = '' then
-          GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
-        else
-          GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+
+         if GrdLubrific.DataSource.DataSet.Filter = '' then
+//           GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+           GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+         else
+//           GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+           GrdLubrific.DataSource.DataSet.Filter := 'AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+
         GrdLubrific.DataSource.DataSet.Filtered := True;
         GrdLubrific.DataSource.DataSet.First;
         TSLubrific.Caption := 'Lubrificações ('+ IntToStr(GrdLubrific.DataSource.DataSet.RecordCount)+')';
@@ -1717,9 +1765,11 @@ begin
         GrdRota.DataSource.DataSet.Filter   := EmptyStr;
         DM.qryRotaCons.First;
         if DM.qryRotaCons.Filter = '' then
-          DM.qryRotaCons.Filter := 'DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+//          DM.qryRotaCons.Filter := 'DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
+          GrdRota.DataSource.DataSet.Filter := 'DATAINICIO > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
-          DM.qryRotaCons.Filter := DM.qryRotaCons.Filter + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+//          DM.qryRotaCons.Filter := DM.qryRotaCons.Filter + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdRota.DataSource.DataSet.Filter := 'AND DATAINICIO > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
         GrdRota.DataSource.DataSet.Filtered := True;
         GrdRota.DataSource.DataSet.First;
         TSRotas.Caption := 'Rotas ('+ IntToStr(GrdRota.DataSource.DataSet.RecordCount)+')';

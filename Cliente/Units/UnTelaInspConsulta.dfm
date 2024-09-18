@@ -736,6 +736,18 @@ inherited FrmTelaInspConsulta: TFrmTelaInspConsulta
       OnClick = chbTudoClick
       ExplicitLeft = 893
     end
+    object chbAntecipar: TCheckBox
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 85
+      Height = 15
+      Align = alLeft
+      Alignment = taLeftJustify
+      Caption = 'Antecipar'
+      Enabled = False
+      TabOrder = 1
+    end
   end
   inherited PBotoes: TPanel
     Top = 604
