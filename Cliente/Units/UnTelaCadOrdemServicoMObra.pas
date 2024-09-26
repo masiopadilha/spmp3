@@ -14,6 +14,7 @@ type
     procedure GrdEquipeDblClick(Sender: TObject);
     procedure GrdEquipeMObraDblClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);
+    procedure GrdEquipeExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +40,12 @@ begin
         DM.qryOrdemServicoEquipeMObra.First;
         while not DM.qryOrdemServicoEquipeMObra.Eof = True do
         begin
+          if DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat < DM.qryOrdemServicoEquipeTEMPO.AsFloat then
+          begin
+            DM.qryOrdemServicoEquipeMObra.Edit;
+            DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+            DM.qryOrdemServicoEquipeMObra.Post;
+          end;
           DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
           DM.qryOrdemServicoEquipeMObra.Next;
         end;
@@ -142,6 +149,13 @@ else
     //DM.qryOrdemServicoEquipeRecursos.Close;
   end;
 end;
+procedure TFrmTelaCadOrdemServicoMObra.GrdEquipeExit(Sender: TObject);
+begin
+  inherited;
+DM.qryOrdemServicoEquipe.Edit;
+DM.qryOrdemServicoEquipe.Post;
+end;
+
 procedure TFrmTelaCadOrdemServicoMObra.GrdEquipeMObraDblClick(Sender: TObject);
 begin
   inherited;
@@ -202,14 +216,12 @@ if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
       Application.CreateForm(TFrmTelaAuxiliar, FrmTelaAuxiliar);
       FrmTelaAuxiliar.ShowModal;
     Finally
+      //DM.qryOrdemServicoEquipe.Post;
       DM.qryOrdemServicoEquipeMObra.Edit;
       if DM.FCodCombo <> EmptyStr then
         begin
           if DM.qryOrdemServicoEquipeMObra.Locate('CODCARGO', DM.FCodCombo, []) = False then
             begin
-              DM.qryOrdemServicoEquipe.Edit;
-              DM.qryOrdemServicoEquipe.Post;
-              DM.qryOrdemServicoEquipe.Edit;
               DM.qryOrdemServicoEquipeMObra.Append;
               DM.qryOrdemServicoEquipeMObraCODEQUIPE.AsInteger      := DM.qryOrdemServicoEquipeCODIGO.AsInteger;
               DM.qryOrdemServicoEquipeMObraCODEMPRESA.AsString      := DM.FCodEmpresa;
@@ -218,6 +230,8 @@ if (Key = #13) and (GrdEquipeMObra.SelectedIndex = 0) then
               DM.qryOrdemServicoEquipeMObraCODCARGO.AsString        := DM.FCodCombo;
               DM.qryOrdemServicoEquipeMObraCARGO.AsString           := DM.FValorCombo;
               DM.qryOrdemServicoEquipeMObra.Post;
+              DM.qryOrdemServicoEquipeMObra.Edit;
+
               GrdEquipeMObra.SelectedIndex := 1;
             end;
         end;

@@ -1706,12 +1706,13 @@ begin
             else
               GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND CODOFICINA = '+ QuotedStr(LCodOficina);
           end;
+
         if GrdManut.DataSource.DataSet.Filter = '' then
 //          GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
           GrdManut.DataSource.DataSet.Filter := 'DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
 //          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
-          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND ' + QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdManut.DataSource.DataSet.Filter := GrdManut.DataSource.DataSet.Filter + ' AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= ' + QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
 
         GrdManut.DataSource.DataSet.Filtered := True;
         GrdManut.DataSource.DataSet.First;
@@ -1751,7 +1752,7 @@ begin
            GrdLubrific.DataSource.DataSet.Filter := 'DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
          else
 //           GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
-           GrdLubrific.DataSource.DataSet.Filter := 'AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+           GrdLubrific.DataSource.DataSet.Filter := GrdLubrific.DataSource.DataSet.Filter + ' AND DTAINICIO1 > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DTAINICIO1 <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
 
         GrdLubrific.DataSource.DataSet.Filtered := True;
         GrdLubrific.DataSource.DataSet.First;
@@ -1769,7 +1770,7 @@ begin
           GrdRota.DataSource.DataSet.Filter := 'DATAINICIO > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima))
         else
 //          DM.qryRotaCons.Filter := DM.qryRotaCons.Filter + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
-          GrdRota.DataSource.DataSet.Filter := 'AND DATAINICIO > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
+          GrdRota.DataSource.DataSet.Filter := GrdRota.DataSource.DataSet.Filter + ' AND DATAINICIO > ' + QuotedStr(FormatDateTime('dd/mm/yyyy', DM.FDataHoraServidor)) + ' AND DATAINICIO <= '+ QuotedStr(FormatDateTime('dd/mm/yyyy', LDataMaxima));
         GrdRota.DataSource.DataSet.Filtered := True;
         GrdRota.DataSource.DataSet.First;
         TSRotas.Caption := 'Rotas ('+ IntToStr(GrdRota.DataSource.DataSet.RecordCount)+')';

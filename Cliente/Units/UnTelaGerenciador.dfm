@@ -20,6 +20,7 @@ inherited FrmTelaGerenciador: TFrmTelaGerenciador
     ExplicitWidth = 428
     inherited Image1: TImage
       Height = 47
+      ExplicitHeight = 47
     end
     inherited BtnAjuda: TButton
       Left = 397

@@ -354,6 +354,27 @@ begin
   DM.FDConnSPMP3.Params.Values['Server']    := DM.FHost;
   DM.FDConnSPMP3.Params.Values['Port']      := DM.FPort;
 
+  //Buscar informações de configuração
+  DM.qryConfigs.Close;
+  DM.qryConfigs.Open;
+  DM.FTempoNovaOS    := DM.qryConfigstempoconsos.AsInteger;
+  DM.FTempoSenhaUsu  := DM.qryConfigstemposenhausu.AsInteger;
+  DM.FQtdeMinSenha   := DM.qryConfigsqtdeminsenha.AsInteger;
+  DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
+  DM.FSolicTrab      := DM.qryConfigsdbsolictrab.AsBoolean;
+  DM.FOficinas       := DM.qryConfigsdboficinas.AsBoolean;
+  DM.FSituacaoOS     := DM.qryConfigsdbsituacaoos.AsBoolean;
+  DM.FOSTipoManut    := DM.qryConfigsdbtipomanutos.AsBoolean;
+  DM.FMTBF           := DM.qryConfigsdbmtbf.AsBoolean;
+  DM.FMTTR           := DM.qryConfigsdbmttr.AsBoolean;
+  DM.FDisponibilidade:= DM.qryConfigsdbdisponibilidade.AsBoolean;
+  DM.FVersaoBanco    := DM.qryConfigsversion.AsInteger;
+  DM.FAutoUpdate     := DM.qryConfigsautoupdate.AsBoolean;
+  DM._EMAIL          := DM.qryConfigsemail.AsString;
+  DM._SENHA          := DM.qryConfigssenhaemail.AsString;
+  DM._PORTA          := DM.qryConfigsportaemail.AsString;
+  DM._SMTP           := DM.qryConfigssmtp.AsString;
+
   Application.MessageBox('Dados gravados com sucesso!!', 'SPMP',MB_OK + MB_ICONINFORMATION);
 end;
 

@@ -21523,8 +21523,6 @@ object DM: TDM
   end
   object FDConnSPMP3: TFDConnection
     Params.Strings = (
-      'Server='
-      'Port=3305'
       'DriverID=MySQL')
     FetchOptions.AssignedValues = [evRowsetSize]
     ResourceOptions.AssignedValues = [rvAutoReconnect]
@@ -34553,6 +34551,7 @@ object DM: TDM
       FieldName = 'MATRICULARESP'
       Origin = 'MATRICULA'
       ProviderFlags = []
+      Visible = False
       Size = 9
     end
     object qryOrdemServicoGerenciaRESPONSAVEL: TStringField
@@ -34561,6 +34560,7 @@ object DM: TDM
       Origin = 'NOME'
       ProviderFlags = []
       ReadOnly = True
+      Visible = False
       Size = 200
     end
     object qryOrdemServicoGerenciaLOGINSOLIC: TStringField
@@ -34569,6 +34569,7 @@ object DM: TDM
       Origin = 'NOME'
       ProviderFlags = []
       ReadOnly = True
+      Visible = False
       Size = 40
     end
     object qryOrdemServicoGerenciaLOGINRESP: TStringField
@@ -34577,17 +34578,20 @@ object DM: TDM
       Origin = 'NOME'
       ProviderFlags = []
       ReadOnly = True
+      Visible = False
       Size = 40
     end
     object qryOrdemServicoGerenciaSTATUS2: TSmallintField
       AutoGenerateValue = arDefault
       FieldName = 'STATUS2'
       Origin = 'STATUS2'
+      Visible = False
     end
     object qryOrdemServicoGerenciaSTATUS1: TSmallintField
       AutoGenerateValue = arDefault
       FieldName = 'STATUS1'
       Origin = 'STATUS1'
+      Visible = False
     end
     object qryOrdemServicoGerenciaHHTOTAL: TAggregateField
       FieldName = 'HHTOTAL'
@@ -35897,6 +35901,7 @@ object DM: TDM
     IndexFieldNames = 'CODORDEMSERVICO'
     MasterSource = dsOrdemServico
     MasterFields = 'CODIGO'
+    DetailFields = 'CODORDEMSERVICO'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'
@@ -35950,9 +35955,9 @@ object DM: TDM
     end
   end
   object qryOrdemServicoEquipeMObra: TFDQuery
-    IndexFieldNames = 'CODEQUIPE'
     MasterSource = dsOrdemServicoEquipe
     MasterFields = 'CODIGO'
+    DetailFields = 'CODEQUIPE'
     Connection = FDConnSPMP3
     SQL.Strings = (
       'SELECT'

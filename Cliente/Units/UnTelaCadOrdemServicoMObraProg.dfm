@@ -12,7 +12,10 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
   TextHeight = 16
   inherited PTop: TPanel
     Width = 542
-    ExplicitWidth = 538
+    ExplicitWidth = 536
+    inherited Image1: TImage
+      Height = 47
+    end
     object Label3: TLabel [1]
       Left = 204
       Top = 39
@@ -34,19 +37,19 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
     end
     inherited BtnAjuda: TButton
       Left = 505
-      ExplicitLeft = 501
+      ExplicitLeft = 499
     end
   end
   inherited PCentro: TPanel
     Width = 540
     Height = 305
-    ExplicitWidth = 536
-    ExplicitHeight = 302
+    ExplicitWidth = 534
+    ExplicitHeight = 294
     inherited RGTelas: TRadioGroup
       Width = 538
       Height = 303
-      ExplicitWidth = 534
-      ExplicitHeight = 300
+      ExplicitWidth = 532
+      ExplicitHeight = 292
     end
     object PBase: TPanel
       AlignWithMargins = True
@@ -58,8 +61,8 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 528
-      ExplicitHeight = 294
+      ExplicitWidth = 526
+      ExplicitHeight = 286
       object Label1: TLabel
         Left = 16
         Top = 9
@@ -395,14 +398,14 @@ inherited FrmTelaCadOrdemServicoMObraProg: TFrmTelaCadOrdemServicoMObraProg
   inherited PAuxiliares: TPanel
     Top = 377
     Width = 542
-    ExplicitTop = 374
-    ExplicitWidth = 538
+    ExplicitTop = 366
+    ExplicitWidth = 536
   end
   inherited PBotoes: TPanel
     Top = 404
     Width = 542
-    ExplicitTop = 401
-    ExplicitWidth = 538
+    ExplicitTop = 393
+    ExplicitWidth = 536
     inherited BtnOK: TButton
       Left = 100
       ModalResult = 0

@@ -137,6 +137,7 @@ begin
     DM.FCodInclusao := '0';
     DM.FNivelAcesso := 'ADU-00001';
     DM.FAcessoLiberado := True;
+    DM.FMinutosInativo := 180;
 
     //Descobrir IPLocal
     wVersionRequested := MAKEWORD(1, 1); WSAStartup(wVersionRequested, wsaData); GetHostName(@s, 128); p := GetHostByName(@s); WSACleanup;

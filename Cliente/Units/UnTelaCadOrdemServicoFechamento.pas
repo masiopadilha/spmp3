@@ -519,35 +519,35 @@ begin
   //Localiza e atualiza o status da Solic. de Trab
   if DM.qryOrdemServicoSOLICTRAB.AsString = 'S' then
   begin
-    if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA' then
-    begin
-      try
-        if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
-        begin
-          if Application.MessageBox('Deseja informar um endereço de e-mail para informar a conclusão da solicitação?', 'SPMP3', MB_YESNO) = IDYes then
-          begin
-            LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
-            if LEmail <> '' then
-              if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-                LEmail := '';
-          end;
-        end else
-        begin
-          LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
-          if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
-            LEmail := '';
-        end;
-      except
-        on E: Exception do
-        begin
-          DM.GravaLog('Falha ao enviar o email. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
-          Application.MessageBox('Falha ao enviar o email!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
-        end;
-      end;
-
-      if LEmail <> '' then
-        DM.EnviarEmail('SOLICITAÇÃO CONCLUÍDA', LEmail, Format('%.*d', [6, DM.qryOrdemServicoCODIGO.AsInteger]));
-    end;
+//    if DM.qryOrdemServicoSITUACAO.AsString = 'LIBERADA' then
+//    begin
+//      try
+//        if DM.qrySolicitacaoTrabEMAIL.AsString = '' then
+//        begin
+//          if Application.MessageBox('Deseja informar um endereço de e-mail para informar a conclusão da solicitação?', 'SPMP3', MB_YESNO) = IDYes then
+//          begin
+//            LEmail := DM.CampoInputBox('SPMP', 'Informe o email do funcionário:');
+//            if LEmail <> '' then
+//              if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+//                LEmail := '';
+//          end;
+//        end else
+//        begin
+//          LEmail := DM.qrySolicitacaoTrabEMAIL.AsString;
+//          if TRegEx.IsMatch(LEmail, EmailRegexPattern) = False then
+//            LEmail := '';
+//        end;
+//      except
+//        on E: Exception do
+//        begin
+//          DM.GravaLog('Falha ao enviar o email. ' + Screen.ActiveForm.Name + ' ', E.ClassName, E.Message);
+//          Application.MessageBox('Falha ao enviar o email!, entre em contato com o suporte.', 'SPMP3', MB_OK + MB_ICONERROR);
+//        end;
+//      end;
+//
+//      if LEmail <> '' then
+//        DM.EnviarEmail('SOLICITAÇÃO CONCLUÍDA', LEmail, Format('%.*d', [6, DM.qryOrdemServicoCODIGO.AsInteger]));
+//    end;
 
     DM.qrySolicitacaoTrab.Close;
     DM.qrySolicitacaoTrab.Params[0].AsString := DM.qryOrdemServicoCODSOLICITACAOTRAB.AsString;
@@ -582,7 +582,6 @@ if DM.qryOrdemServicoEquipeMObra.Active = True then
   begin
     LTotalHH := 0;
     LCusto   := 0;
-
 
     DM.qryOrdemServicoEquipe.First;
     while not DM.qryOrdemServicoEquipe.Eof = True do

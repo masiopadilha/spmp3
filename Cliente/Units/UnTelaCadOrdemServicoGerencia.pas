@@ -62,24 +62,6 @@ type
     grid: TJvStringGrid;
     DSOSSimplesExcel: TDataSource;
     FDMemTOSSimplesExcel: TFDMemTable;
-    FDMemTable1: TFDMemTable;
-    IntegerField2: TIntegerField;
-    StringField9: TStringField;
-    DateTimeField7: TDateTimeField;
-    DateTimeField8: TDateTimeField;
-    DateTimeField9: TDateTimeField;
-    DateTimeField10: TDateTimeField;
-    DateTimeField11: TDateTimeField;
-    DateTimeField12: TDateTimeField;
-    StringField10: TStringField;
-    StringField11: TStringField;
-    BCDField3: TBCDField;
-    BCDField4: TBCDField;
-    StringField12: TStringField;
-    StringField13: TStringField;
-    StringField14: TStringField;
-    StringField15: TStringField;
-    StringField16: TStringField;
     CheckBox9: TCheckBox;
     PopupMenuOS: TPopupMenu;
     Vencida1: TMenuItem;
@@ -185,10 +167,14 @@ type
     { Private declarations }
     Ascending:boolean;
     hora_futura: TDateTime;
+    ThreadRunning: Boolean;
+    MinhaThread: TThread;
 
     procedure LimpaGrid(Grid: TStringGrid);
     procedure CopyDataSetToGrid(Query: TFDMemTable; StringGrid: TStringGrid);
     procedure CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
+
+    procedure IniciarThreadAnonima;
   public
     { Public declarations }
   end;
@@ -277,13 +263,15 @@ PAuxiliares.Caption := EmptyStr;
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
 
     Application.CreateForm(TFrmTelaCadOrdemServico, FrmTelaCadOrdemServico);
     FrmTelaCadOrdemServico.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServico);
-    TimerCheckOS.Enabled := True;
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   End;
 end;
 
@@ -337,7 +325,8 @@ if DM.qryOrdemServicoGerenciaCODMANUTENCAO.AsString = EmptyStr Then
 
 if Application.MessageBox('Deseja realmente executar a O.S.?', 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDNo then Exit;
 
-TimerCheckOS.Enabled := False;
+//TimerCheckOS.Enabled := False;
+//ThreadRunning := False;
 
 DM.MSGAguarde('');
 
@@ -531,105 +520,214 @@ if LSemEstoque = False then
     DM.qryOrdemServicoEquipeLubrificantesUtil.Close;
   end;
 
+if DM.qryOrdemServicoEquipe.IsEmpty = False then
+begin
+  DM.qryOrdemServicoEquipe.First;
+  while not DM.qryOrdemServicoEquipe.Eof do
+  begin
+    DM.qryOrdemServicoEquipeMObra.First;
+    while not DM.qryOrdemServicoEquipeMObra.Eof do
+    begin
+      DM.qryOrdemServicoMObraProg.First;
+      while not DM.qryOrdemServicoMObraProg.Eof = True do
+      begin
+        if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA', DM.qryOrdemServicoMObraProgMATRICULA.AsString, []) = True then
+        begin
+          if DM.qryOrdemServicoMObraProgOCUPADO.AsString = 'S' then
+          begin
+            LTexto := PChar(DM.qryOrdemServicoMObraProgNOME.AsString + ' está ocupado em outro serviço, confirma a inclusão?');
+            if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Append;
+              DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
+              DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
+
+              DM.qryOrdemServicoMObraExec.Append;
+              DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
+              DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
+              DM.qryOrdemServicoMObraExec.Post;
+
+              //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
+              DM.qryAuxiliar.Close;
+              DM.qryAuxiliar.SQL.Clear;
+              DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
+                                      +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
+              DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
+              DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
+              DM.qryAuxiliar.Open;
+              DM.qryOrdemServicoMObraDisp.Edit;
+              DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
+              if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
+              DM.qryOrdemServicoMObraDisp.Post;
+            end;
+          end else
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Append;
+              DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
+              DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
+
+              DM.qryOrdemServicoMObraExec.Append;
+              DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
+              DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
+              DM.qryOrdemServicoMObraExec.Post;
+
+              //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
+              DM.qryAuxiliar.Close;
+              DM.qryAuxiliar.SQL.Clear;
+              DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
+                                      +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
+              DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
+              DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
+              DM.qryAuxiliar.Open;
+              DM.qryOrdemServicoMObraDisp.Edit;
+              DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
+              if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
+              DM.qryOrdemServicoMObraDisp.Post;
+            end;
+        end;
+
+        DM.qryOrdemServicoMObraProg.Next;
+      end;
+
+      DM.qryOrdemServicoEquipeMObra.Next;
+    end;
+
+    DM.qryOrdemServicoEquipe.Next;
+  end;
+
+end;
+
 if DM.qryOrdemServicoMObraProg.IsEmpty = False then
   begin
     while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+    begin
+      while not DM.qryOrdemServicoMObraProg.Eof = True do
       begin
-        while not DM.qryOrdemServicoMObraProg.Eof = True do
+        if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA', DM.qryOrdemServicoMObraProgMATRICULA.AsString, []) = True then
+        begin
+          if DM.qryOrdemServicoMObraProgOCUPADO.AsString = 'S' then
           begin
-            if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA', DM.qryOrdemServicoMObraProgMATRICULA.AsString, []) = True then
-              begin
-                if DM.qryOrdemServicoMObraProgOCUPADO.AsString = 'S' then
-                  begin
-                    LTexto := PChar(DM.qryOrdemServicoMObraProgNOME.AsString + ' está ocupado em outro serviço, confirma a inclusão?');
-                    if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
-                      begin
-                        DM.qryOrdemServicoEquipeMObraUtil.Append;
-                        DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
-                        DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
-                        DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
-                        DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
-                        DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
-                        DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
-                        DM.qryOrdemServicoEquipeMObraUtil.Post;
+            LTexto := PChar(DM.qryOrdemServicoMObraProgNOME.AsString + ' está ocupado em outro serviço, confirma a inclusão?');
+            if Application.MessageBox(LTexto, 'SPMP3', MB_YESNO + MB_ICONQUESTION) = IDYes then
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Append;
+              DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
+              DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
 
-                        DM.qryOrdemServicoMObraExec.Append;
-                        DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
-                        DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
-                        DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
-                        DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
-                        DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                        DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
-                        DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
-                        DM.qryOrdemServicoMObraExec.Post;
+              DM.qryOrdemServicoMObraExec.Append;
+              DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
+              DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
+              DM.qryOrdemServicoMObraExec.Post;
 
-                        //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
-                        DM.qryAuxiliar.Close;
-                        DM.qryAuxiliar.SQL.Clear;
-                        DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
-                                                +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
-                        DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
-                        DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                        DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
-                        DM.qryAuxiliar.Open;
-                        DM.qryOrdemServicoMObraDisp.Edit;
-                        DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
-                        if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
-                        DM.qryOrdemServicoMObraDisp.Post;
-                      end;
-                  end
-                else
-                  begin
-                    DM.qryOrdemServicoEquipeMObraUtil.Append;
-                    DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
-                    DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
-                    DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
-                    DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
-                    DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
-                    DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
-                    DM.qryOrdemServicoEquipeMObraUtil.Post;
+              //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
+              DM.qryAuxiliar.Close;
+              DM.qryAuxiliar.SQL.Clear;
+              DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
+                                      +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
+              DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
+              DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
+              DM.qryAuxiliar.Open;
+              DM.qryOrdemServicoMObraDisp.Edit;
+              DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
+              if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
+              DM.qryOrdemServicoMObraDisp.Post;
+            end;
+          end else
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Append;
+              DM.qryOrdemServicoEquipeMObraUtilCODEMPRESA.AsString       := DM.FCodEmpresa;
+              DM.qryOrdemServicoEquipeMObraUtilCODEQUIPE.AsString        := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODORDEMSERVICO.AsInteger := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoEquipeMObraUtilCODCARGO.AsString         := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilCODCALENDARIO.AsString    := DM.qryOrdemServicoEquipeMObraCODCALENDARIO.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString        := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilNOME.AsString             := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat    := DM.qryOrdemServicoMObraProgTOTALHOMEMHORA.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat      := DM.qryOrdemServicoMObraProgQTDEHENORMAL.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat     := DM.qryOrdemServicoMObraProgQTDEHEFERIADO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtilESPECIALISTA.AsString     := DM.qryOrdemServicoMObraProgESPECIALISTA.AsString;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
 
-                    DM.qryOrdemServicoMObraExec.Append;
-                    DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
-                    DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
-                    DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
-                    DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
-                    DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                    DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
-                    DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
-                    DM.qryOrdemServicoMObraExec.Post;
+              DM.qryOrdemServicoMObraExec.Append;
+              DM.qryOrdemServicoMObraExecCODEMPRESA.AsString        := DM.FCodEmpresa;
+              DM.qryOrdemServicoMObraExecCODORDEMSERVICO.AsInteger  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsInteger;
+              DM.qryOrdemServicoMObraExecCODEQUIPE.AsString         := DM.qryOrdemServicoMObraProgCODEQUIPE.AsString;
+              DM.qryOrdemServicoMObraExecCODCARGO.AsString          := DM.qryOrdemServicoMObraProgCODCARGO.AsString;
+              DM.qryOrdemServicoMObraExecMATRICULA.AsString         := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryOrdemServicoMObraExecNOME.AsString              := DM.qryOrdemServicoMObraProgNOME.AsString;
+              DM.qryOrdemServicoMObraExecENTRADA.AsDateTime         := DM.FDataHoraServidor;
+              DM.qryOrdemServicoMObraExec.Post;
 
-                    //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
-                    DM.qryAuxiliar.Close;
-                    DM.qryAuxiliar.SQL.Clear;
-                    DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
-                                            +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
-                    DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
-                    DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
-                    DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
-                    DM.qryAuxiliar.Open;
-                    DM.qryOrdemServicoMObraDisp.Edit;
-                    DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
-                    if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
-                    DM.qryOrdemServicoMObraDisp.Post;
-                  end;
-              end;
-            DM.qryOrdemServicoMObraProg.Next;
-          end;
-        DM.qryOrdemServicoEquipeMObra.Next;
+              //Verifica se a mão de obra não está programada em outra OS, se não estiver define status de Programada = NÃO
+              DM.qryAuxiliar.Close;
+              DM.qryAuxiliar.SQL.Clear;
+              DM.qryAuxiliar.SQL.Add('SELECT OMF.MATRICULA FROM `ordemservico` O, `ordemservicoequipemobrafunc` OMF WHERE OMF.CODORDEMSERVICO = O.CODIGO'
+                                      +  ' AND O.SITUACAO = ''PROGRAMADA'' AND O.CODEMPRESA = :CODEMPRESA AND OMF.MATRICULA = :MATRICULA AND O.CODIGO <> :CODORDEMSERVICO');
+              DM.qryAuxiliar.Params.ParamByName('CODEMPRESA').AsString := DM.FCodEmpresa;
+              DM.qryAuxiliar.Params.ParamByName('MATRICULA').AsString  := DM.qryOrdemServicoMObraProgMATRICULA.AsString;
+              DM.qryAuxiliar.Params.ParamByName('CODORDEMSERVICO').AsString  := DM.qryOrdemServicoMObraProgCODORDEMSERVICO.AsString;
+              DM.qryAuxiliar.Open;
+              DM.qryOrdemServicoMObraDisp.Edit;
+              DM.qryOrdemServicoMObraDispOCUPADO.AsString := 'S';
+              if DM.qryAuxiliar.IsEmpty = True then DM.qryOrdemServicoMObraDispPROGRAMADO.AsString := 'N';
+              DM.qryOrdemServicoMObraDisp.Post;
+            end;
+        end;
+        DM.qryOrdemServicoMObraProg.Next;
       end;
+      DM.qryOrdemServicoEquipeMObra.Next;
+    end;
   end;
 
+DM.qryOrdemServicoEquipe.First;
 while not DM.qryOrdemServicoEquipe.Eof do
   begin
     while not DM.qryOrdemServicoEquipeRecursos.Eof do
@@ -711,7 +809,8 @@ DM.qryRecursos.Close;
 DM.qrySolicitacaoTrab.Close;
 DM.qryAuxiliar.Close;
 
-TimerCheckOS.Enabled := True;
+//TimerCheckOS.Enabled := True;
+//ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.BtnFamiliaEquipClick(Sender: TObject);
@@ -719,7 +818,9 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
+
     DM.FTabela_auxiliar := 600;
     DM.FNomeConsulta := 'Famílias de Equipamentos';
     if DM.ConsultarCombo <> EmptyStr then
@@ -728,7 +829,9 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         EdtFamiliaEquip.Text := DM.FValorCombo;
         ConfigurarFiltros;
       end;
-    TimerCheckOS.Enabled := True;
+
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   end;
 end;
 
@@ -754,12 +857,14 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'LIBERADA')
           Edit;
         end;
       Try
-        TimerCheckOS.Enabled := False;
+//        TimerCheckOS.Enabled := False;
+//        ThreadRunning := False;
         Application.CreateForm(TFrmTelaCadOrdemServicoFechamento, FrmTelaCadOrdemServicoFechamento);
         FrmTelaCadOrdemServicoFechamento.ShowModal;
       Finally
         FreeAndNil(FrmTelaCadOrdemServicoFechamento);
-        TimerCheckOS.Enabled := True;
+//        TimerCheckOS.Enabled := True;
+//        ThreadRunning := True;
       End;
     end;
 end;
@@ -770,12 +875,14 @@ begin
 PAuxiliares.Font.Color := clGray;
 PAuxiliares.Caption := EmptyStr;
   Try
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
     Application.CreateForm(TFrmTelaCadOrdemServicoHistorico, FrmTelaCadOrdemServicoHistorico);
     FrmTelaCadOrdemServicoHistorico.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoHistorico);
-    TimerCheckOS.Enabled := True;
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   End;
 end;
 
@@ -785,7 +892,8 @@ begin
 if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'VENCIDA')
   or (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CANCELADA') Then Exit;
 
-TimerCheckOS.Enabled := False;
+//TimerCheckOS.Enabled := False;
+//ThreadRunning := False;
 
 if not Assigned(DmRelatorios) then
   Application.CreateForm(TDmRelatorios, DmRelatorios);
@@ -832,7 +940,8 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
     DM.FTabela_auxiliar := 200;
     DM.FNomeConsulta := 'Oficinas';
     if DM.ConsultarCombo <> EmptyStr then
@@ -841,7 +950,8 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         EdtOficina.Text := DM.FValorCombo;
         ConfigurarFiltros;
       end;
-    TimerCheckOS.Enabled := True;
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   end;
 end;
 
@@ -867,13 +977,15 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'EXECUCAO') or 
             Edit;
           end;
       Try
-        TimerCheckOS.Enabled := False;
+//        TimerCheckOS.Enabled := False;
+//        ThreadRunning := False;
         Application.CreateForm(TFrmTelaCadOrdemServicoParalisacao, FrmTelaCadOrdemServicoParalisacao);
         FrmTelaCadOrdemServicoParalisacao.Caption := 'Paralisações da O.S.: '+ FormatFloat('#000000', DM.qryOrdemServicoCODIGO.Asfloat);
         FrmTelaCadOrdemServicoParalisacao.ShowModal;
       Finally
         FreeAndNil(FrmTelaCadOrdemServicoParalisacao);
-        TimerCheckOS.Enabled := True;
+//        TimerCheckOS.Enabled := True;
+//        ThreadRunning := True;
       End;
     end;
 end;
@@ -913,12 +1025,14 @@ if (DBGrid.DataSource.DataSet.FieldByName('SITUACAO').AsString = 'CADASTRADA')
                 Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
                 Exit;
               end;
-              TimerCheckOS.Enabled := False;
+//              TimerCheckOS.Enabled := False;
+//              ThreadRunning := False;
               Application.CreateForm(TFrmTelaCadOrdemServicoMObraProg, FrmTelaCadOrdemServicoMObraProg);
               FrmTelaCadOrdemServicoMObraProg.ShowModal;
             Finally
               FreeAndNil(FrmTelaCadOrdemServicoMObraProg);
-              TimerCheckOS.Enabled := True;
+//              TimerCheckOS.Enabled := True;
+//              ThreadRunning := True;
             End;
           end
       else
@@ -932,7 +1046,8 @@ begin
   inherited;
 if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
   begin
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
     DM.FTabela_auxiliar := 300;
     DM.FNomeConsulta := 'Solicitantes';
     DM.FParamAuxiliar[1] := 'NOME';
@@ -943,6 +1058,7 @@ if (GetKeyState(VK_CONTROL) and 128 > 0) = False then
         ConfigurarFiltros;
       end;
     TimerCheckOS.Enabled := True;
+    ThreadRunning := True;
   end;
 end;
 
@@ -957,91 +1073,38 @@ begin
   inherited;
   if DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString <> '' then
   begin
-//    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'EXECUCAO') and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'LIBERADA')
-//      and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'FECHADA') then
-//      begin
-//        DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-//
-//        DM.qryManutProgEquip.Close;
-//        DM.qryManutProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODMANUTPROGEQUIP.AsString;
-//        DM.qryManutProgEquip.Params[1].AsString := DM.FCodEmpresa;
-//        DM.qryManutProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
-//        DM.qryManutProgEquip.Open;
-//
-//        if DM.qryManutProgEquip.IsEmpty = False then
-//        begin
-//            DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
-//            DM.qryManutProgEquip.Close;
-//            DM.qryManutProgEquipPecas.Close;
-//            DM.qryManutProgEquipRecursos.Close;
-//            DM.qryManutProgEquipEquipe.Close;
-//            DM.qryManutProgEquipEquipeMObra.Close;
-//            DM.FCodOrdemServico := 0;
-//        end;
-//      end;
-//
-//    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'EXECUCAO') or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'LIBERADA')
-//      or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'FECHADA') then
-//      begin
-          DM.qryChecklistManut.Close;
-          DM.qryChecklistManut.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
-          DM.qryChecklistManut.Open;
-          if DM.qryChecklistManut.IsEmpty = False then
-          begin
-            DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
-            DM.qryChecklistManut.Close;
-            DM.qryChecklistManutPartes.Close;
-            DM.qryChecklistManutItens.Close;
-            DM.qryChecklistManutItensEsp.Close;
-            DM.qryChecklistManutMObra.Close;
-          end;
-//      end;
+    DM.qryChecklistManut.Close;
+    DM.qryChecklistManut.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+    DM.qryChecklistManut.Open;
+    if DM.qryChecklistManut.IsEmpty = False then
+    begin
+      DmRelatorios.frxRChecklistManutProgEquip.ShowReport();
+      DM.qryChecklistManut.Close;
+      DM.qryChecklistManutPartes.Close;
+      DM.qryChecklistManutItens.Close;
+      DM.qryChecklistManutItensEsp.Close;
+      DM.qryChecklistManutMObra.Close;
+    end;
   end;
 
   if DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString <> '' then
   begin
-//    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'EXECUCAO') and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'LIBERADA')
-//      and (DM.qryOrdemServicoGerenciaSITUACAO.AsString <> 'FECHADA') then
-//      begin
-//        DM.FCodOrdemServico := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-//
-//        DM.qryLubrificProgEquip.Close;
-//        DM.qryLubrificProgEquip.Params[0].AsString := DM.qryOrdemServicoGerenciaCODLUBRIFICPROGEQUIP.AsString;
-//        DM.qryLubrificProgEquip.Params[1].AsString := DM.FCodEmpresa;
-//        DM.qryLubrificProgEquip.Params[2].AsString := DM.qryOrdemServicoGerenciaCODEQUIPAMENTO.AsString;
-//        DM.qryLubrificProgEquip.Open;
-//
-//        if DM.qryLubrificProgEquip.IsEmpty = False then
-//        begin
-//            DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-//            DM.qryLubrificProgEquip.Close;
-//            DM.qryLubrificProgEquipPecas.Close;
-//            DM.qryLubrificProgEquipRecursos.Close;
-//            DM.qryLubrificProgEquipEquipe.Close;
-//            DM.qryLubrificProgEquipEquipeMObra.Close;
-//            DM.FCodOrdemServico := 0;
-//        end;
-//      end;
-//
-//    if (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'EXECUCAO') or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'LIBERADA')
-//      or (DM.qryOrdemServicoGerenciaSITUACAO.AsString = 'FECHADA') then
-//      begin
-        DM.qryChecklistLubrific.Close;
-        DM.qryChecklistLubrific.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
-        DM.qryChecklistLubrific.Open;
+    DM.qryChecklistLubrific.Close;
+    DM.qryChecklistLubrific.Params[0].AsString := DM.qryOrdemServicoGerenciaCODIGO.AsString;
+    DM.qryChecklistLubrific.Open;
 
-        if DM.qryChecklistLubrific.IsEmpty = False then
-        begin
-          DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
-          DM.qryChecklistLubrific.Close;
-          DM.qryChecklistLubrificPartes.Close;
-          DM.qryChecklistLubrificItens.Close;
-          DM.qryChecklistLubrificItensEsp.Close;
-          DM.qryChecklistLubrificMObra.Close;
-        end;
-//      end;
+    if DM.qryChecklistLubrific.IsEmpty = False then
+    begin
+      DmRelatorios.frxRChecklistLubrificProgEquip.ShowReport();
+      DM.qryChecklistLubrific.Close;
+      DM.qryChecklistLubrificPartes.Close;
+      DM.qryChecklistLubrificItens.Close;
+      DM.qryChecklistLubrificItensEsp.Close;
+      DM.qryChecklistLubrificMObra.Close;
+    end;
   end;
 TimerCheckOS.Enabled := True;
+ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.CheckBox1Click(Sender: TObject);
@@ -1060,12 +1123,14 @@ begin
         Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
         Exit;
       end;
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
     Application.CreateForm(TFrmTelaCadOrdemServicoLocalizaMObra, FrmTelaCadOrdemServicoLocalizaMObra);
     FrmTelaCadOrdemServicoLocalizaMObra.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoLocalizaMObra);
-    TimerCheckOS.Enabled := True;
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   End;
 end;
 
@@ -1082,7 +1147,8 @@ begin
   DM.qryOrdemServicoGerenciaRelatMObraUtil.Close;
   DM.qryOrdemServicoGerenciaRelatManut.Close;
   DM.qryOrdemServicoGerenciaRelatLubrific.Close;
-  TimerCheckOS.Enabled := True;
+//  TimerCheckOS.Enabled := True;
+//  ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.ConfigurarFiltros;
@@ -1553,6 +1619,11 @@ begin
       FDMemTOSSimplesExcel.FieldByName('REPROGRAMAR').Visible           := False;
       FDMemTOSSimplesExcel.FieldByName('SOLICTRAB').Visible             := False;
       FDMemTOSSimplesExcel.FieldByName('IMPORTANCIA').Visible           := False;
+      FDMemTOSSimplesExcel.FieldByName('FUNCIONARIO').Visible          := False;
+      FDMemTOSSimplesExcel.FieldByName('STATUS1').Visible               := False;
+      FDMemTOSSimplesExcel.FieldByName('STATUS2').Visible               := False;
+      FDMemTOSSimplesExcel.FieldByName('DESCINSPECAO_1').Visible        := False;
+      FDMemTOSSimplesExcel.FieldByName('DESCINSPECAO_2').Visible        := False;
 
       CopyDataSetToGrid(FDMemTOSSimplesExcel, grid);
       caminho := caminho+'\Lista Simples das Ordens de Serviço.'+FormatDateTime('dd.mm.yyyy.hh.sss', now) + '.csv';
@@ -1562,7 +1633,8 @@ begin
 //      PAuxiliares.Caption := 'Exportação concluída!';
 //      Sleep(3);
       PAuxiliares.Caption := '';
-      TimerCheckOS.Enabled := True;
+//      TimerCheckOS.Enabled := True;
+//      ThreadRunning := True;
     end;
 end;
 
@@ -1585,6 +1657,9 @@ DM.qryOrdemServicoUltParalisacao.Close;
 DM.qryAuxiliar.Close;
 DBGrid.DataSource.DataSet.Filtered := False;
 DBGrid.DataSource.DataSet.Filter := EmptyStr;
+ThreadRunning := False;
+if Assigned(MinhaThread) then
+  MinhaThread := nil;
 Close;
 end;
 
@@ -1597,11 +1672,6 @@ begin
 
   EdtData1.Date := IncMonth(DateOf(DM.FDataHoraServidor), -1);
   EdtData2.Date := DateOf(DM.FDataHoraServidor);
-
-  TimerCheckOS.Enabled := True;
-
-
-  hora_futura := IncMinute(Now, DM.FTempoNovaOS);
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.FormKeyDown(Sender: TObject;
@@ -1750,6 +1820,12 @@ begin
       Application.MessageBox('Acesso não permitido, contacte o setor responsável para solicitar a liberação', 'SPMP3', MB_OK + MB_ICONINFORMATION);
       Exit;
     end;
+
+  IniciarThreadAnonima;
+
+  TimerCheckOS.Enabled := True;
+
+  hora_futura := IncMinute(Now, DM.FTempoNovaOS);
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.CliqueNoTitulo(Column: TColumn; FDQuery: TFDQuery; IndiceDefault: String);
@@ -1811,7 +1887,8 @@ begin
   DM.qryOrdemServicoGerenciaRelatLubrific.Filtered := False;
   DM.qryOrdemServicoGerenciaRelatManut.Close;
   DM.qryOrdemServicoGerenciaRelatLubrific.Close;
-  TimerCheckOS.Enabled := True;
+//  TimerCheckOS.Enabled := True;
+//  ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.DBGridDblClick(Sender: TObject);
@@ -2010,18 +2087,21 @@ begin
   inherited;
   if (Key = #13) and (DBGrid.SelectedIndex = 1) then
     begin
-      TimerCheckOS.Enabled := False;
+//      TimerCheckOS.Enabled := False;
+//      ThreadRunning := False;
       LCampo := DM.CampoInputBox('SPMP3', 'Informe o código da ordem de serviço:');
       if LCampo <> EmptyStr then
         begin
           if DBGrid.DataSource.DataSet.Locate('CODIGO', LCampo, [loPartialKey, loCaseInsensitive]) = False then
             Application.MessageBox('Ordem de serviço não localizada.','SPMP', MB_OK + MB_ICONINFORMATION);
         end;
-       TimerCheckOS.Enabled := True;
+//       TimerCheckOS.Enabled := True;
+//       ThreadRunning := True;
     end;
   if (Key = #13) and (DBGrid.SelectedIndex = 5) then
     begin
-      TimerCheckOS.Enabled := False;
+//      TimerCheckOS.Enabled := False;
+//      ThreadRunning := False;
       LCampo :=DM.CampoInputBox('SPMP3', 'Informe a descrição da ordem de serviço:');
       if LCampo <> EmptyStr then
         begin
@@ -2036,11 +2116,13 @@ begin
         end
       else
         ConfigurarFiltros;
-      TimerCheckOS.Enabled := True;
+//      TimerCheckOS.Enabled := True;
+//      ThreadRunning := True;
     end;
   if (Key = #13) and (DBGrid.SelectedIndex = 3) then
     begin
-      TimerCheckOS.Enabled := False;
+//      TimerCheckOS.Enabled := False;
+//      ThreadRunning := False;
       LEquipamento := EmptyStr;
       DM.FTabela_auxiliar := 250;
       DM.FParamAuxiliar[1] := 'DESCRICAO';
@@ -2053,7 +2135,8 @@ begin
         FreeAndNil(FrmTelaAuxiliar);
         ConfigurarFiltros;
       End;
-      TimerCheckOS.Enabled := True;
+//      TimerCheckOS.Enabled := True;
+//      ThreadRunning := True;
     end;
 end;
 
@@ -2100,6 +2183,7 @@ DM.qryOrdemServicoEquipePlanoTrab.Open;
 //  end;
 DmRelatorios.frxROrdemServico.ShowReport();
 TimerCheckOS.Enabled := True;
+ThreadRunning := True;
 //masio-temp
 //DmRelatorios.frxReport2.ShowReport();
 //
@@ -2110,7 +2194,8 @@ DM.qryOrdemServicoEquipeRecursosUtil.Close;
 DM.qryOrdemServicoEquipePecasUtil.Close;
 DM.qryOrdemServicoEquipePlanoTrab.Close;
 //DM.qryOrdemServicoEquipeImagens.Close;
-TimerCheckOS.Enabled := True;
+//TimerCheckOS.Enabled := True;
+//ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.ParcialClick(Sender: TObject);
@@ -2128,14 +2213,16 @@ begin
       Edit;
     end;
 
-    TimerCheckOS.Enabled := False;
+//    TimerCheckOS.Enabled := False;
+//    ThreadRunning := False;
 
     Application.CreateForm(TFrmTelaCadOrdemServicoMObraExec, FrmTelaCadOrdemServicoMObraExec);
     FrmTelaCadOrdemServicoMObraExec.ShowModal;
   Finally
     FreeAndNil(FrmTelaCadOrdemServicoMObraExec);
 
-    TimerCheckOS.Enabled := True;
+//    TimerCheckOS.Enabled := True;
+//    ThreadRunning := True;
   End;
 end;
 
@@ -2154,7 +2241,8 @@ begin
   Dm.FDMTOrdemServicoGerenciaRelat.CopyFields(DM.qryOrdemServicoGerencia);
   Dm.FDMTOrdemServicoGerenciaRelat.CopyDataSet(DM.qryOrdemServicoGerencia, [coStructure, coRestart, coAppend, coCalcFields]);
   DmRelatorios.frxROrdemServicoGeral.ShowReport();
-  TimerCheckOS.Enabled := True;
+//  TimerCheckOS.Enabled := True;
+//  ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.StatusBar1Resize(Sender: TObject);
@@ -2164,144 +2252,117 @@ begin
 //  DM.dsOrdemServicoGerenciaDataChange(nil, nil);
 end;
 
+procedure TFrmTelaCadOrdemServicoGerencia.IniciarThreadAnonima;
+var
+  MyNotification: TNotification;
+begin
+  ThreadRunning := True;
+  MinhaThread := TThread.CreateAnonymousThread(
+    procedure
+    var
+      Query: TFDQuery;
+      i: Integer;
+    begin
+      Query := TFDQuery.Create(nil);
+      try
+        Query.Connection := DM.FDConnSPMP3; // Atribua sua conexão FireDAC aqui
+
+        // Espera inicial antes de executar a primeira consulta
+        for i := 1 to (DM.FTempoNovaOS * 60) do  // Multiplica minutos por 60 para obter segundos
+        begin
+          if not ThreadRunning then Break; // Se ThreadRunning for False, sai do loop
+          Sleep(1000); // Dorme por 1 segundo e verifica novamente
+        end;
+
+        while ThreadRunning do
+        begin
+          try
+            DM.qryDataHoraServidor.Refresh;
+            DM.FDataHoraServidor := DM.qryDataHoraServidordatahoraservidor.AsDateTime;
+            // Executa a consulta de novos registros
+            Query.SQL.Text := 'SELECT COUNT(*) FROM ordemservico WHERE datacadastro > :ultimaConsulta';
+//            Query.ParamByName('ultimaConsulta').AsDateTime := DM.FDataHoraServidor - (DM.FTempoNovaOS / 1440); // Últimos 10 minutos
+            Query.ParamByName('ultimaConsulta').AsDateTime := IncMinute(DM.FDataHoraServidor, (DM.FTempoNovaOS * (-1))); // Últimos 10 minutos
+            Query.Open;
+
+            if Query.Fields[0].AsInteger > 0 then
+            begin
+              TThread.Synchronize(nil,
+                procedure
+                begin
+//                  DM.qryOrdemServicoGerencia.Refresh;
+                  MyNotification := NotificationCenter1.CreateNotification;
+                  try
+                    MyNotification.Name := 'SPMP3NewOSNotification';
+                    MyNotification.Title := 'SPMP3';
+                    MyNotification.AlertBody := 'Novas ordens de serviço foram emitidas. Por favor, atualize a consulta pressionando F5 para visualizá-las.';
+
+                    NotificationCenter1.PresentNotification(MyNotification);
+                  finally
+                    MyNotification.Free;
+                  end;
+                end
+              );
+            end;
+
+          except
+            on E: Exception do
+            begin
+              TThread.Synchronize(nil,
+                procedure
+                begin
+                  DM.GravaLog('Falha ao atualizar ordens de serviço. ', E.ClassName, E.Message);
+                end
+              );
+            end;
+          end;
+
+          // Espera pelo tempo configurado em minutos, verificando a cada segundo
+          for i := 1 to (DM.FTempoNovaOS * 60) do // Multiplica o intervalo em minutos por 60 para obter segundos
+          begin
+            if not ThreadRunning then Break; // Se ThreadRunning for False, sai do loop
+            Sleep(1000); // Dorme por 1 segundo e verifica novamente
+          end;
+          if not ThreadRunning then // Sai do loop principal se ThreadRunning for False
+            Break;
+        end;
+      finally
+        Query.Free;
+      end;
+    end
+  );
+  MinhaThread.Start;
+end;
+
 procedure TFrmTelaCadOrdemServicoGerencia.TimerCheckOSTimer(Sender: TObject);
 var
   hora_atual, diferenca: TDateTime;
-  LTemp:Integer;
-  MyNotification: TNotification;
-  LOSPoint, LFirstOS: Integer;
+//  LTemp:Integer;
+//  MyNotification: TNotification;
+//  LOSPoint, LFirstOS: Integer;
 begin
   inherited;
-  TTask.Run(
-            procedure
-            begin
-              try
-                hora_atual := Now;
-                if (hora_atual < hora_futura) then
-                begin
-                  diferenca := hora_futura - hora_atual;
-                  StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
-
-                  Application.ProcessMessages;
-                end else
-                begin
-                   if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
-                   begin
-                   //  DM.MSGAguarde('ATUALIZANDO');
-                     StatusBar1.Panels[4].Text := 'Atualizando...';
-                     Application.ProcessMessages;
-                     Try
-                       LOSPoint := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-                       DM.qryOrdemServicoGerencia.First;
-                       LFirstOS := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-
-                       if not (DM.qryOrdemServicoGerencia.State in [dsBrowse]) then
-                         DM.qryOrdemServicoGerencia.Cancel;
-                       LTemp :=  DM.FSegundosDesliga;
-
-                       DM.qryOrdemServicoGerencia.Refresh;
-                       DM.qryOrdemServicoGerencia.First;
-
-                       if (LFirstOS <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)
-                         and ((TFDQuery(DBGrid.DataSource.DataSet).IndexName = '')
-                           or (TFDQuery(DBGrid.DataSource.DataSet).IndexName = 'CODIGO_DESC')) then
-                           begin
-                             MyNotification := NotificationCenter1.CreateNotification;
-                             try
-                               MyNotification.Name := 'SPMP3NewOSNotification';
-                               MyNotification.Title := 'SPMP3';
-                               MyNotification.AlertBody := 'Novas ordens de serviço foram emitidas!';
-
-                               NotificationCenter1.PresentNotification(MyNotification);
-                             finally
-                               MyNotification.Free;
-                             end;
-                           end;
-
-                       hora_futura := IncMinute(Now, DM.FTempoNovaOS);
-                       DM.qryOrdemServicoGerencia.Locate('CODIGO', LOSPoint, []);
-                     Except
-                       DM.MSGAguarde('', False);
-                       Abort;
-                     End;
-                     Application.ProcessMessages;
-                     DM.MSGAguarde('', False);
-                     DM.FSegundosDesliga := LTemp;
-                   end;
-                end;
-              except
-                on E: Exception do
-                  TThread.Synchronize(nil,
-                    procedure
-                    begin
-                     // ShowMessage('Erro ao executar consulta: ' + E.Message);
-                    end);
-              end;
-            end
-           );
-
-//  TThread.CreateAnonymousThread(
-//                                procedure
-//                                begin
-//                                  hora_atual := Now;
-//                                  if (hora_atual < hora_futura) then
-//                                      begin
-//                                        diferenca := hora_futura - hora_atual;
-//                                        StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
-//
-//                                        Application.ProcessMessages;
-//                                      end
-//                                  else
-//                                    begin
-//                                      TThread.Synchronize(TThread.CurrentThread,
-//                                                            procedure
-//                                                            begin
-//                                                               if (DM.qryUsuarioPAcessoCADORDEMSERVICO.AsString = 'S') or (DM.FNomeUsuario = 'sam_spmp') then
-//                                                               begin
-//                                                                 DM.MSGAguarde('ATUALIZANDO');
-//                                                                 Try
-//                                                                   LOSPoint := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-//                                                                   DM.qryOrdemServicoGerencia.First;
-//                                                                   LFirstOS := DM.qryOrdemServicoGerenciaCODIGO.AsInteger;
-//
-//                                                                   if not (DM.qryOrdemServicoGerencia.State in [dsBrowse]) then
-//                                                                     DM.qryOrdemServicoGerencia.Cancel;
-//                                                                   LTemp :=  DM.FSegundosDesliga;
-//
-//                                                                   DM.qryOrdemServicoGerencia.Refresh;
-//                                                                   DM.qryOrdemServicoGerencia.First;
-//
-//                                                                   if (LFirstOS <> DM.qryOrdemServicoGerenciaCODIGO.AsInteger)
-//                                                                     and ((TFDQuery(DBGrid.DataSource.DataSet).IndexName = '')
-//                                                                       or (TFDQuery(DBGrid.DataSource.DataSet).IndexName = 'CODIGO_DESC')) then
-//                                                                       begin
-//                                                                         MyNotification := NotificationCenter1.CreateNotification;
-//                                                                         try
-//                                                                           MyNotification.Name := 'SPMP3NewOSNotification';
-//                                                                           MyNotification.Title := 'SPMP3';
-//                                                                           MyNotification.AlertBody := 'Novas ordens de serviço foram emitidas!';
-//
-//                                                                           NotificationCenter1.PresentNotification(MyNotification);
-//                                                                         finally
-//                                                                           MyNotification.Free;
-//                                                                         end;
-//                                                                       end;
-//
-//                                                                   hora_futura := IncMinute(Now, DM.FTempoNovaOS);
-//                                                                   DM.qryOrdemServicoGerencia.Locate('CODIGO', LOSPoint, []);
-//                                                                 Except
-//                                                                   DM.MSGAguarde('', False);
-//                                                                   Abort;
-//                                                                 End;
-//                                                                 Application.ProcessMessages;
-//                                                                 DM.MSGAguarde('', False);
-//                                                                 DM.FSegundosDesliga := LTemp;
-//                                                               end;
-//                                                            end
-//                                                         );
-//                                    end;
-//                                end
-//                               ).Start;
+  TThread.CreateAnonymousThread(
+                                procedure
+                                begin
+                                  hora_atual := Now;
+                                  if (hora_atual < hora_futura) then
+                                      begin
+                                        diferenca := hora_futura - hora_atual;
+                                        StatusBar1.Panels[4].Text := 'Atualiza em ' +FormatDateTime('nn:ss', diferenca);
+                                        Application.ProcessMessages;
+                                      end
+                                  else
+                                    begin
+                                      TThread.Synchronize(TThread.CurrentThread,
+                                                            procedure
+                                                            begin
+                                                              hora_futura := IncMinute(Now, DM.FTempoNovaOS);
+                                                            end
+                                                         );
+                                    end;
+                                end
+                               ).Start;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.TimerUpdateTimer(Sender: TObject);
@@ -2325,7 +2386,8 @@ procedure TFrmTelaCadOrdemServicoGerencia.TotalClick(Sender: TObject);
 begin
   inherited;
 
-  TimerCheckOS.Enabled := False;
+//  TimerCheckOS.Enabled := False;
+//  ThreadRunning := False;
   if (Application.MessageBox('Deseja realmente liberar toda a mão de obra e os recursos da OS?','SPMP', MB_YESNO + MB_ICONQUESTION))= IDYes then
   begin
 
@@ -2377,7 +2439,15 @@ begin
     DM.qryOrdemServico.Edit;
     DM.qryOrdemServicoDATAFIM.AsDateTime     := DM.FDataHoraServidor;
     DM.qryOrdemServicoDATAFIMREAL.AsDateTime := DM.FDataHoraServidor;
-    DM.qryOrdemServicoTEMPOEXECUTADO.AsFloat := (MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime)) DIV 60;
+    if (DM.qryOrdemServicoDATAINICIOREAL.AsDateTime <= 0) then
+    begin
+      DM.qryOrdemServicoDATAINICIO.AsDateTime := DM.FDataHoraServidor;
+      DM.qryOrdemServicoDATAINICIOREAL.AsDateTime := DM.FDataHoraServidor;
+    end;
+    if (DM.qryOrdemServicoDATAINICIOREAL.AsDateTime > 0) and (DM.qryOrdemServicoDATAFIMREAL.AsDateTime > 0) then
+      DM.qryOrdemServicoTEMPOEXECUTADO.AsFloat := (MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime)) / 60
+    else
+      DM.qryOrdemServicoTEMPOEXECUTADO.AsFloat :=  0;
     DM.qryOrdemServicoSITUACAO.AsString      := 'LIBERADA';
     DM.qryOrdemServicoDATAFIMREAL.AsDateTime := DM.FDataHoraServidor;
     DM.qryOrdemServico.Post;
@@ -2429,7 +2499,8 @@ begin
 
     DM.MSGAguarde('', False);
   end;
-  TimerCheckOS.Enabled := True;
+//  TimerCheckOS.Enabled := True;
+//  ThreadRunning := True;
 end;
 
 procedure TFrmTelaCadOrdemServicoGerencia.Vencida1Click(Sender: TObject);
@@ -2481,13 +2552,17 @@ var
 LTempoExec: Real;
 LDataConsulta: TDateTime;
 begin
+DM.qryOrdemServicoEquipe.First;
 while not DM.qryOrdemServicoEquipe.Eof = True do
   begin
+    DM.qryOrdemServicoEquipeMObra.First;
     while not DM.qryOrdemServicoEquipeMObra.Eof = True do
       begin
+        DM.qryOrdemServicoEquipeMObraUtil.First;
         while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
           begin
             LTempoExec := 0;
+            DM.qryOrdemServicoEquipeMObraMovim.First;
             while not DM.qryOrdemServicoEquipeMObraMovim.Eof = True do
               begin
                 if DM.qryOrdemServicoEquipeMObraMovimSAIDA.IsNull = True then
@@ -2496,18 +2571,23 @@ while not DM.qryOrdemServicoEquipe.Eof = True do
                     DM.qryOrdemServicoEquipeMObraMovimSAIDA.AsDateTime := DM.FDataHoraServidor;
                     DM.qryOrdemServicoEquipeMObraMovim.Post;
                   end;
-                LDataConsulta := DM.qryOrdemServicoEquipeMObraMovimENTRADA.AsDatetime;
-                //Calcula a hora útil trabalhada
-                while LDataConsulta <= DM.qryOrdemServicoEquipeMObraMovimSAIDA.AsDatetime do
-                  begin
-                    if DM.TotalHomemHoraDisp(LDataConsulta, DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString, EmptyStr) > 0 then
-                      LTempoExec := LTempoExec + 1;
-                    LDataConsulta := IncHour(LDataConsulta, 1);
-                  end;
-                LTempoExec := (LTempoExec/60) + DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
-                DM.qryOrdemServicoEquipeMObraUtil.Edit;
-                DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat + LTempoExec;
-                DM.qryOrdemServicoEquipeMObraUtil.Post;
+
+//                //Calcula a hora útil trabalhada
+//                LDataConsulta := DM.qryOrdemServicoEquipeMObraMovimENTRADA.AsDatetime;
+//                while LDataConsulta <= DM.qryOrdemServicoEquipeMObraMovimSAIDA.AsDatetime do
+//                  begin
+//                    if DM.TotalHomemHoraDisp(LDataConsulta, DM.qryOrdemServicoEquipeMObraUtilMATRICULA.AsString, EmptyStr) > 0 then
+//                      LTempoExec := LTempoExec + 1;
+//
+//                    LDataConsulta := IncHour(LDataConsulta, 1);
+//                  end;
+//                LTempoExec := (LTempoExec/60) + DM.qryOrdemServicoEquipeMObraUtilQTDEHENORMAL.AsFloat + DM.qryOrdemServicoEquipeMObraUtilQTDEHEFERIADO.AsFloat;
+
+//                DM.qryOrdemServicoEquipeMObraUtil.Edit;
+////                DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat + LTempoExec;
+//                DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := LTempoExec;
+//                DM.qryOrdemServicoEquipeMObraUtil.Post;
+
                 if DM.qryOrdemServicoMObraDisp.Locate('MATRICULA', DM.qryOrdemServicoEquipeMObraMovimMATRICULA.AsString, []) = True then
                   begin
                     DM.qryOrdemServicoMObraDisp.Edit;
@@ -2553,7 +2633,8 @@ begin
   DM.qryOrdemServicoGerenciaRelatMObraUtil.Close;
   DM.qryOrdemServicoGerenciaRelatMObraProg.Filtered := False;
   DM.qryOrdemServicoGerenciaRelatMObraProg.Close;
-  TimerCheckOS.Enabled := True;
+//  TimerCheckOS.Enabled := True;
+//  ThreadRunning := True;
 end;
 
 

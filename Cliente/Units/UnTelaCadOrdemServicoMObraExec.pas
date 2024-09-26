@@ -24,6 +24,7 @@ type
     procedure GrdMovimenKeyPress(Sender: TObject; var Key: Char);
     procedure GrdEquipeMObraUtilDblClick(Sender: TObject);
     procedure GrdEquipeMObraUtilKeyPress(Sender: TObject; var Key: Char);
+    procedure BtnFecharClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -230,6 +231,55 @@ if ((GrdEquipeMObraUtil.SelectedIndex = 0) or (GrdEquipeMObraUtil.SelectedIndex 
           end;
       FreeAndNil(FrmTelaCadOrdemServicoMObraDisp);
     End;
+  end;
+
+end;
+
+procedure TFrmTelaCadOrdemServicoMObraExec.BtnFecharClick(Sender: TObject);
+begin
+  inherited;
+  DM.qryOrdemServico.Edit;
+  DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+
+  DM.qryOrdemServicoEquipe.First;
+  if DM.qryOrdemServicoEquipe.IsEmpty = False then
+  begin
+    while not DM.qryOrdemServicoEquipe.Eof = True do
+    begin
+      if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
+      begin
+        DM.qryOrdemServicoEquipeMObra.First;
+        while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+        begin
+          if DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat < DM.qryOrdemServicoEquipeTEMPO.AsFloat then
+          begin
+            DM.qryOrdemServicoEquipeMObra.Edit;
+            DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+            DM.qryOrdemServicoEquipeMObra.Post;
+          end;
+
+          DM.qryOrdemServicoEquipeMObraUtil.First;
+          while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
+          begin
+            if DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat > DM.qryOrdemServicoEquipeTEMPO.AsFloat then
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Edit;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
+            end;
+
+            DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
+            DM.qryOrdemServicoEquipeMObraUtil.Next
+          end;
+          DM.qryOrdemServicoEquipeMObra.Next;
+        end;
+      end else
+      begin
+        DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+      end;
+
+      DM.qryOrdemServicoEquipe.Next;
+    end;
   end;
 
 end;

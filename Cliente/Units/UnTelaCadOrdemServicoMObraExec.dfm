@@ -12,23 +12,26 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   TextHeight = 16
   inherited PTop: TPanel
     Width = 769
-    ExplicitWidth = 765
+    ExplicitWidth = 763
+    inherited Image1: TImage
+      Height = 47
+    end
     inherited BtnAjuda: TButton
-      Left = 733
-      ExplicitLeft = 733
+      Left = 732
+      ExplicitLeft = 726
     end
   end
   inherited PCentro: TPanel
     Width = 767
     Height = 250
-    ExplicitWidth = 763
-    ExplicitHeight = 247
+    ExplicitWidth = 761
+    ExplicitHeight = 239
     inherited RGTelas: TRadioGroup
       Width = 439
       Height = 248
       TabOrder = 4
-      ExplicitWidth = 435
-      ExplicitHeight = 245
+      ExplicitWidth = 433
+      ExplicitHeight = 237
     end
     object GrdEquipe: TDBGrid
       AlignWithMargins = True
@@ -309,26 +312,23 @@ inherited FrmTelaCadOrdemServicoMObraExec: TFrmTelaCadOrdemServicoMObraExec
   inherited PAuxiliares: TPanel
     Top = 322
     Width = 769
-    ExplicitTop = 319
-    ExplicitWidth = 765
+    ExplicitTop = 311
+    ExplicitWidth = 763
   end
   inherited PBotoes: TPanel
     Top = 349
     Width = 769
-    ExplicitTop = 346
-    ExplicitWidth = 765
+    ExplicitTop = 338
+    ExplicitWidth = 763
     inherited BtnOK: TButton
       Left = 179
-      Top = 7
       Visible = False
       ExplicitLeft = 179
-      ExplicitTop = 7
     end
     inherited BtnFechar: TButton
       Left = 347
-      Top = 7
+      OnClick = BtnFecharClick
       ExplicitLeft = 347
-      ExplicitTop = 7
     end
   end
 end

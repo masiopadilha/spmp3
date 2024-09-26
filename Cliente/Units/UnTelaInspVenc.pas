@@ -460,8 +460,6 @@ case PCInspecoes.ActivePageIndex of
           DM.qryManutProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
           DM.qryManutProgEquip.Post;
 
-          DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
-
 //          DmRelatorios.frxPDFExport1.DefaultPath := ExtractFilePath(Application.ExeName)+'Relatórios';
 //          DmRelatorios.frxPDFExport1.FileName    := DM.qryManutProgEquipCODORDEMSERVICO.AsString +'_'+DM.qryManutVencDESCRICAO.AsString +'.PDF';
 //          DmRelatorios.frxPDFExport1.ShowDialog  := False;
@@ -473,13 +471,14 @@ case PCInspecoes.ActivePageIndex of
           begin
             DM.qryManutProgEquip.Edit;
             DM.qryManutProgEquipRELATORIO.AsString    := 'N';
-            if DateOf(DM.qryManutProgEquipDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
-              DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutProgEquipFREQUENCIA1.AsInteger)
+            if (DateOf(DM.qryManutProgEquipDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+              DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
             else
               DM.qryManutProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryManutProgEquipDTAINICIO1.AsDateTime), DM.qryManutProgEquipFREQUENCIA1.AsInteger);
             if DM.qryManutProgEquipREPROGRAMAR2.AsString = 'Programação' then
               DM.qryManutProgEquipLEITURA.AsInteger := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
             DM.qryManutProgEquip.Post;
+
             DM.qryManutVenc.Edit;
             DM.qryManutVencDTAINICIO1.AsDateTime := DM.qryManutProgEquipDTAINICIO1.AsDateTime;
             DM.qryManutVenc.Post;
@@ -495,6 +494,8 @@ case PCInspecoes.ActivePageIndex of
               DM.qryManutProgEquipLEITURA.AsInteger := DM.qryManutProgEquipLEITURA.AsInteger + DM.qryManutProgEquipFREQUENCIA2.AsInteger;
             DM.qryManutProgEquip.Post;
           end;
+
+          DmRelatorios.frxRManutProgEquipIndividual.ShowReport();
         end;
 
         DM.qryManutProgEquip.Close;
@@ -771,15 +772,13 @@ case PCInspecoes.ActivePageIndex of
           DM.qryLubrificProgEquipCODORDEMSERVICO.AsInteger := DM.FCodOrdemServico;
           DM.qryLubrificProgEquip.Post;
 
-          DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
-
           //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou n�o.
           if DM.qryLubrificProgEquipREPROGRAMAR1.AsString = 'Programação' then
           begin
             DM.qryLubrificProgEquip.Edit;
             DM.qryLubrificProgEquipRELATORIO.AsString    := 'N';
-            if DateOf(DM.qryLubrificProgEquipDTAINICIO1.AsDateTime) < DateOf(DM.FDataHoraServidor) then
-              DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificProgEquipFREQUENCIA1.AsInteger)
+            if (DateOf(DM.qryLubrificProgEquipDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+              DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryLubrificConsFREQUENCIA1.AsInteger)
             else
               DM.qryLubrificProgEquipDTAINICIO1.AsDateTime := IncDay(DateOf(DM.qryLubrificProgEquipDTAINICIO1.AsDateTime), DM.qryLubrificProgEquipFREQUENCIA1.AsInteger);
             if DM.qryLubrificProgEquipREPROGRAMAR2.AsString = 'Programação' then
@@ -800,6 +799,8 @@ case PCInspecoes.ActivePageIndex of
               DM.qryLubrificProgEquipLEITURA.AsInteger := DM.qryLubrificProgEquipLEITURA.AsInteger + DM.qryLubrificProgEquipFREQUENCIA2.AsInteger;
             DM.qryLubrificProgEquip.Post;
           end;
+
+          DmRelatorios.frxRLubrificProgEquipIndividual.ShowReport();
         end;
 
         DM.qryLubrificProgEquip.Close;
@@ -903,15 +904,13 @@ case PCInspecoes.ActivePageIndex of
             DM.qryOrdemServicoEquipeRecursos.Close;
           end;
 
-          DmRelatorios.frxRRotaIndividual.ShowReport();
-
           //Sendo a inspeção reprogramada pela 'programação', programa a próxima inspeção independente se a manutenção foi fechada ou n�o.
           if DM.qryRotaEquipVencREPROGRAMAR.AsString = 'Programação' then
           begin
             DM.qryRotaEquipVenc.Edit;
             DM.qryRotaEquipVencRELATORIO.AsString  := 'N';
-            if DateOf(DM.qryRotaEquipVencDATAINICIO.AsDateTime) < DateOf(DM.FDataHoraServidor) then
-              DM.qryRotaEquipVencDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryRotaEquipVencFREQUENCIA.AsInteger)
+            if (DateOf(DM.qryRotaEquipVencDATAINICIO.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+              DM.qryRotaEquipVencDATAINICIO.AsDateTime := IncDay(DateOf(DM.FDataHoraServidor), DM.qryManutConsFREQUENCIA1.AsInteger)
             else
               DM.qryRotaEquipVencDATAINICIO.AsDateTime := IncDay(DateOf(DM.qryRotaEquipVencDATAINICIO.AsDateTime), DM.qryRotaEquipVencFREQUENCIA.AsInteger);
             DM.qryRotaEquipVenc.Post;
@@ -958,6 +957,8 @@ case PCInspecoes.ActivePageIndex of
               DM.qryRotaEquipVencSeq.Next;
             end;
           end;
+
+          DmRelatorios.frxRRotaIndividual.ShowReport();
         end;
 
         DM.qryRotaEquipVenc.Refresh;

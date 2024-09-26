@@ -9,17 +9,24 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   TextHeight = 16
   inherited PTop: TPanel
     Width = 504
+    ExplicitWidth = 498
     inherited Image1: TImage
       Height = 47
+      ExplicitHeight = 47
+    end
+    inherited BtnAjuda: TButton
+      ExplicitLeft = 461
     end
   end
   inherited PCentro: TPanel
     Width = 502
     Height = 235
-    ExplicitHeight = 235
+    ExplicitWidth = 496
+    ExplicitHeight = 224
     inherited RGTelas: TRadioGroup
       Height = 233
-      ExplicitHeight = 233
+      ExplicitWidth = 494
+      ExplicitHeight = 222
     end
     object Panel1: TPanel
       AlignWithMargins = True
@@ -31,8 +38,8 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
       Color = 14671839
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 490
-      ExplicitHeight = 224
+      ExplicitWidth = 488
+      ExplicitHeight = 216
       object RadioGroup1: TRadioGroup
         Left = 166
         Top = 1
@@ -44,7 +51,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
         Margins.Bottom = 2
         Align = alClient
         TabOrder = 3
-        ExplicitHeight = 98
+        ExplicitHeight = 90
       end
       object GrdEquipe: TDBGrid
         AlignWithMargins = True
@@ -248,12 +255,14 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
   inherited PAuxiliares: TPanel
     Top = 307
     Width = 504
-    ExplicitTop = 307
+    ExplicitTop = 296
+    ExplicitWidth = 498
   end
   inherited PBotoes: TPanel
     Top = 334
     Width = 504
-    ExplicitTop = 334
+    ExplicitTop = 323
+    ExplicitWidth = 498
     inherited BtnOK: TButton
       Left = 100
       Visible = False
@@ -261,6 +270,7 @@ inherited FrmTelaCadOrdemServicoFechamentoMObra: TFrmTelaCadOrdemServicoFechamen
     end
     inherited BtnFechar: TButton
       Left = 212
+      OnClick = BtnFecharClick
       ExplicitLeft = 212
     end
   end

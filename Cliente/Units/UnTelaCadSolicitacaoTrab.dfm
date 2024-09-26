@@ -3,8 +3,6 @@ inherited FrmTelaCadSolicitacaoTrab: TFrmTelaCadSolicitacaoTrab
   ClientHeight = 619
   ClientWidth = 1012
   OnShow = FormShow
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008

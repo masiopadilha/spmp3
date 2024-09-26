@@ -8496,7 +8496,10 @@ begin
             qryManutPeriodicasREPROGRAMAR1.AsString         := qryManutProgEquipREPROGRAMAR1.AsString;
             qryManutPeriodicasFREQUENCIA1.AsString          := qryManutProgEquipFREQUENCIA1.AsString;
             qryManutPeriodicasCODEQUIPAMENTO.AsString       := qryManutProgEquipCODEQUIPAMENTO.AsString;
-            qryManutPeriodicasDTAINICIO1.AsString           := qryManutProgEquipDTAINICIO1.AsString;
+            if (DateOf(qryManutProgEquipDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+              qryManutPeriodicasDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+            else
+              qryManutPeriodicasDTAINICIO1.AsDateTime := qryManutProgEquipDTAINICIO1.AsDateTime;
             qryManutPeriodicasCODORDEMSERVICO.AsInteger     := CodOrdemServico;
             qryManutPeriodicasCODMONITORAMENTO.AsString     := qryManutProgEquipCODMONITORAMENTO.AsString;
             qryManutPeriodicasSITUACAO.AsString             := 'ABERTA';
@@ -8591,7 +8594,10 @@ begin
             qryLubrificPeriodicasREPROGRAMAR1.AsString         := qryLubrificProgEquipREPROGRAMAR1.AsString;
             qryLubrificPeriodicasFREQUENCIA1.AsString          := qryLubrificProgEquipFREQUENCIA1.AsString;
             qryLubrificPeriodicasCODEQUIPAMENTO.AsString       := qryLubrificProgEquipCODEQUIPAMENTO.AsString;
-            qryLubrificPeriodicasDTAINICIO1.AsString           := qryLubrificProgEquipDTAINICIO1.AsString;
+            if (DateOf(qryLubrificProgEquipDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+              qryLubrificPeriodicasDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+            else
+              qryLubrificPeriodicasDTAINICIO1.AsDateTime := qryLubrificProgEquipDTAINICIO1.AsDateTime;
             qryLubrificPeriodicasCODORDEMSERVICO.AsInteger     := CodOrdemServico;
             qryLubrificPeriodicasCODMONITORAMENTO.AsString     := qryLubrificProgEquipCODMONITORAMENTO.AsString;
             qryLubrificPeriodicasSITUACAO.AsString             := 'ABERTA';
@@ -8699,7 +8705,10 @@ begin
                 qryManutPeriodicasREPROGRAMAR1.AsString         := qryRotasSequenciaInspREPROGRAMAR1.AsString;
                 qryManutPeriodicasFREQUENCIA1.AsString          := qryRotasSequenciaInspFREQUENCIA.AsString;
                 qryManutPeriodicasCODEQUIPAMENTO.AsString       := qryRotasSequenciaInspCODEQUIPAMENTO.AsString;
-                qryManutPeriodicasDTAINICIO1.AsString           := qryRotasDATAINICIO.AsString;
+                if (DateOf(qryManutProgEquipDTAINICIO1.AsDateTime)) < (DateOf(DM.FDataHoraServidor))then
+                  qryManutPeriodicasDTAINICIO1.AsDateTime := DateOf(DM.FDataHoraServidor)
+                else
+                  qryManutPeriodicasDTAINICIO1.AsDateTime := qryRotasDATAINICIO.AsDateTime;
                 qryManutPeriodicasCODORDEMSERVICO.AsInteger     := CodOrdemServico;
                 qryManutPeriodicasSITUACAO.AsString             := 'ABERTA';
                 qryManutPeriodicasREALIZADA.AsString            := 'N';

@@ -25,6 +25,7 @@ type
       Shift: TShiftState);
     procedure GrdEquipeDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BtnFecharClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,6 +42,55 @@ implementation
 uses UnTelaConsulta, UnTelaCadOrdemServicoMObraExecDisp,
   UnTelaCadOrdemServicoFechamento, UnDM;
 
+procedure TFrmTelaCadOrdemServicoFechamentoMObra.BtnFecharClick(
+  Sender: TObject);
+begin
+  inherited;
+  DM.qryOrdemServico.Edit;
+  DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+
+  DM.qryOrdemServicoEquipe.First;
+  if DM.qryOrdemServicoEquipe.IsEmpty = False then
+  begin
+    while not DM.qryOrdemServicoEquipe.Eof = True do
+    begin
+      if DM.qryOrdemServicoEquipeMObra.IsEmpty = False then
+      begin
+        DM.qryOrdemServicoEquipeMObra.First;
+        while not DM.qryOrdemServicoEquipeMObra.Eof = True do
+        begin
+          if DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat < DM.qryOrdemServicoEquipeTEMPO.AsFloat then
+          begin
+            DM.qryOrdemServicoEquipeMObra.Edit;
+            DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+            DM.qryOrdemServicoEquipeMObra.Post;
+          end;
+
+          DM.qryOrdemServicoEquipeMObraUtil.First;
+          while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
+          begin
+            if DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat > DM.qryOrdemServicoEquipeTEMPO.AsFloat then
+            begin
+              DM.qryOrdemServicoEquipeMObraUtil.Edit;
+              DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := DM.qryOrdemServicoEquipeTEMPO.AsFloat;
+              DM.qryOrdemServicoEquipeMObraUtil.Post;
+            end;
+
+            DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat + DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
+            DM.qryOrdemServicoEquipeMObraUtil.Next
+          end;
+          DM.qryOrdemServicoEquipeMObra.Next;
+        end;
+      end else
+      begin
+        DM.qryOrdemServicoTEMPOHOMEMHORA.AsFloat := 0;
+      end;
+
+      DM.qryOrdemServicoEquipe.Next;
+    end;
+  end;
+end;
+
 procedure TFrmTelaCadOrdemServicoFechamentoMObra.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
@@ -55,6 +105,9 @@ begin
   begin
     LTotalHH := 0;
     LCusto   := 0;
+
+    DM.qryOrdemServicoEquipeMObraUtil.Edit;
+    DM.qryOrdemServicoEquipeMObraUtil.Post;
 
     DM.qryOrdemServicoEquipe.First;
     while not DM.qryOrdemServicoEquipe.Eof = True do
@@ -154,6 +207,8 @@ begin
     Exit;
   end;
 
+  LTempoExecutado := 0;
+
   DM.qryOrdemServicoEquipe.Open;
   DM.qryOrdemServicoEquipeMObra.Open;
   DM.qryOrdemServicoEquipeMObraMovim.Open;
@@ -168,36 +223,45 @@ begin
     DM.qryOrdemServicoMObraDisp.Params[3].AsString := 'OPERACIONAL';
   DM.qryOrdemServicoMObraDisp.Open;
 
-  LTempoExecutado := (MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime))/60;
+  if (DM.qryOrdemServicoDATAINICIOREAL.AsDateTime > 0) and (DM.qryOrdemServicoDATAFIMREAL.AsDateTime > 0) then
+    LTempoExecutado := (MinutesBetween(DM.qryOrdemServicoDATAINICIOREAL.AsDateTime, DM.qryOrdemServicoDATAFIMREAL.AsDateTime))/60;
+
   LTotalHH := 0;
   DM.qryOrdemServicoEquipeMObra.First;
-  while not DM.qryOrdemServicoEquipeMObra.Eof = True do
-  begin
-    LTotalHH := DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat;
 
-    if LTotalHH < LTempoExecutado then
+  DM.qryOrdemServicoEquipe.First;
+  while not DM.qryOrdemServicoEquipe.Eof = True do
+  begin
+    if LTempoExecutado > 0 then
     begin
-      DM.qryOrdemServicoEquipeMObra.Edit;
-      DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := LTempoExecutado;
-      DM.qryOrdemServicoEquipeMObra.Post;
+      DM.qryOrdemServicoEquipe.Edit;
+      DM.qryOrdemServicoEquipeTEMPO.AsFloat := LTempoExecutado;
+      DM.qryOrdemServicoEquipe.Post;
     end;
 
-    DM.qryOrdemServicoEquipeMObraUtil.First;
-    while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
+    DM.qryOrdemServicoEquipeMObra.First;
+    while not DM.qryOrdemServicoEquipeMObra.Eof = True do
     begin
-      LTotalHH := DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat;
-
-      if LTotalHH < LTempoExecutado then
+      LTotalHH := 0;
+      while not DM.qryOrdemServicoEquipeMObraUtil.Eof = True do
       begin
+        LTotalHH := LTotalHH + LTempoExecutado;
+
         DM.qryOrdemServicoEquipeMObraUtil.Edit;
         DM.qryOrdemServicoEquipeMObraUtilTOTALHOMEMHORA.AsFloat := LTempoExecutado;
         DM.qryOrdemServicoEquipeMObraUtil.Post;
+
+        DM.qryOrdemServicoEquipeMObraUtil.Next;
       end;
 
-      DM.qryOrdemServicoEquipeMObraUtil.Next;
+      DM.qryOrdemServicoEquipeMObra.Edit;
+      DM.qryOrdemServicoEquipeMObraTOTALHOMEMHORA.AsFloat := LTotalHH;
+      DM.qryOrdemServicoEquipeMObra.Post;
+
+      DM.qryOrdemServicoEquipeMObra.Next;
     end;
 
-    DM.qryOrdemServicoEquipeMObra.Next;
+    DM.qryOrdemServicoEquipe.Next;
   end;
 
   DM.qryOrdemServicoEquipeMObra.Edit;

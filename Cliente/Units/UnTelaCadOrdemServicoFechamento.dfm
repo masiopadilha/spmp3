@@ -2,26 +2,23 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
   Caption = 'Fechamento de Ordem de Servi'#231'o'
   ClientHeight = 619
   ClientWidth = 1012
-  ExplicitLeft = 3
-  ExplicitTop = 3
   TextHeight = 16
   inherited PControle: TPanel
     Width = 1008
-    ExplicitWidth = 1008
     inherited BtnExcluir: TButton
       Visible = False
     end
     inherited pAlteracao: TPanel
-      Left = 643
+      Left = 651
       Top = 19
       Width = 380
-      ExplicitLeft = 637
+      ExplicitLeft = 645
       ExplicitTop = 19
       ExplicitWidth = 380
       inherited LCadastro: TLabel
         Left = 124
         Height = 14
-        ExplicitLeft = 65
+        ExplicitLeft = 124
       end
       inherited LblDataAlt: TDBText
         Left = 301
@@ -29,14 +26,15 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
         Margins.Right = 22
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 268
+        ExplicitLeft = 301
         ExplicitTop = 3
         ExplicitWidth = 57
         ExplicitHeight = 16
       end
       inherited LAlteradoPor: TLabel
         Left = 237
-        ExplicitLeft = 241
+        ExplicitLeft = 237
+        ExplicitTop = 4
         ExplicitHeight = 14
       end
       inherited LblDataCad: TDBText
@@ -44,15 +42,15 @@ inherited FrmTelaCadOrdemServicoFechamento: TFrmTelaCadOrdemServicoFechamento
         Width = 64
         AutoSize = True
         DataSource = DM.dsOrdemServico
-        ExplicitLeft = 103
+        ExplicitLeft = 162
         ExplicitWidth = 64
         ExplicitHeight = 16
       end
     end
     inherited pCadastro: TPanel
-      Left = 643
+      Left = 651
       Width = 380
-      ExplicitLeft = 637
+      ExplicitLeft = 645
       ExplicitWidth = 380
       inherited LCadastroPor: TLabel
         Left = 21

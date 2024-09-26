@@ -1,47 +1,52 @@
 inherited FrmTelaOpcoes: TFrmTelaOpcoes
   BorderStyle = bsDialog
   Caption = 'Op'#231#245'es'
-  ClientHeight = 414
+  ClientHeight = 469
   ClientWidth = 573
-  Constraints.MaxHeight = 450
+  Constraints.MaxHeight = 505
   Constraints.MaxWidth = 585
-  Constraints.MinHeight = 445
+  Constraints.MinHeight = 450
   Constraints.MinWidth = 585
   OnCreate = FormCreate
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 585
-  ExplicitHeight = 450
+  ExplicitHeight = 505
   TextHeight = 16
   inherited PTop: TPanel
     Width = 569
-    ExplicitWidth = 565
+    ExplicitWidth = 563
+    inherited Image1: TImage
+      Height = 47
+    end
     inherited BtnAjuda: TButton
       Left = 532
-      ExplicitLeft = 528
+      ExplicitLeft = 526
     end
   end
   inherited PCentro: TPanel
     Width = 567
-    Height = 275
-    ExplicitWidth = 563
-    ExplicitHeight = 272
+    Height = 330
+    ExplicitWidth = 561
+    ExplicitHeight = 264
     inherited RGTelas: TRadioGroup
       Width = 565
-      Height = 273
-      ExplicitWidth = 561
-      ExplicitHeight = 270
+      Height = 328
+      ExplicitWidth = 559
+      ExplicitHeight = 262
     end
     object PFundo: TPanel
       AlignWithMargins = True
       Left = 4
       Top = 4
       Width = 559
-      Height = 267
+      Height = 322
       Align = alClient
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 1
-      ExplicitWidth = 555
-      ExplicitHeight = 264
+      ExplicitWidth = 553
+      ExplicitHeight = 256
       object Label1: TLabel
         Left = 12
         Top = 10
@@ -90,6 +95,38 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
         Caption = 'Tempo ocioso B (min):'
         WordWrap = True
       end
+      object Label7: TLabel
+        Left = 12
+        Top = 264
+        Width = 36
+        Height = 16
+        Caption = 'Email:'
+        WordWrap = True
+      end
+      object Label8: TLabel
+        Left = 223
+        Top = 264
+        Width = 41
+        Height = 16
+        Caption = 'Senha:'
+        WordWrap = True
+      end
+      object Label9: TLabel
+        Left = 363
+        Top = 264
+        Width = 35
+        Height = 16
+        Caption = 'Porta:'
+        WordWrap = True
+      end
+      object Label10: TLabel
+        Left = 418
+        Top = 264
+        Width = 38
+        Height = 16
+        Caption = 'SMTP:'
+        WordWrap = True
+      end
       object edttempoconsos: TDBEdit
         Left = 11
         Top = 30
@@ -115,7 +152,7 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
         Height = 24
         DataField = 'qtdeminsenha'
         DataSource = DM.dsConfigs
-        TabOrder = 2
+        TabOrder = 3
       end
       object edtqtdelogintent: TDBEdit
         Left = 295
@@ -124,7 +161,7 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
         Height = 24
         DataField = 'qtdelogintent'
         DataSource = DM.dsConfigs
-        TabOrder = 3
+        TabOrder = 4
       end
       object edttempoociosoA: TDBEdit
         Left = 11
@@ -133,7 +170,7 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
         Height = 24
         DataField = 'tempomaxocioso'
         DataSource = DM.dsConfigs
-        TabOrder = 4
+        TabOrder = 2
       end
       object edttempoociosoB: TDBEdit
         Left = 295
@@ -202,19 +239,56 @@ inherited FrmTelaOpcoes: TFrmTelaOpcoes
           TabOrder = 4
         end
       end
+      object edtEmail: TDBEdit
+        Left = 12
+        Top = 283
+        Width = 205
+        Height = 24
+        DataField = 'email'
+        DataSource = DM.dsConfigs
+        TabOrder = 7
+      end
+      object edtSenhaEmail: TDBEdit
+        Left = 223
+        Top = 283
+        Width = 134
+        Height = 24
+        DataField = 'senhaemail'
+        DataSource = DM.dsConfigs
+        PasswordChar = '*'
+        TabOrder = 8
+      end
+      object edtPortaEmail: TDBEdit
+        Left = 363
+        Top = 283
+        Width = 48
+        Height = 24
+        DataField = 'portaemail'
+        DataSource = DM.dsConfigs
+        TabOrder = 9
+      end
+      object edtSMTP: TDBEdit
+        Left = 418
+        Top = 283
+        Width = 127
+        Height = 24
+        DataField = 'smtp'
+        DataSource = DM.dsConfigs
+        TabOrder = 10
+      end
     end
   end
   inherited PAuxiliares: TPanel
-    Top = 347
+    Top = 402
     Width = 569
-    ExplicitTop = 344
-    ExplicitWidth = 565
+    ExplicitTop = 336
+    ExplicitWidth = 563
   end
   inherited PBotoes: TPanel
-    Top = 374
+    Top = 429
     Width = 569
-    ExplicitTop = 371
-    ExplicitWidth = 565
+    ExplicitTop = 363
+    ExplicitWidth = 563
     inherited BtnOK: TButton
       Left = 206
       OnClick = BtnOKClick

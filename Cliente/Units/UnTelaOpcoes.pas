@@ -28,6 +28,14 @@ type
     chbSituacaoOS: TDBCheckBox;
     chbOSTipoManut: TDBCheckBox;
     chbMTBF: TDBCheckBox;
+    Label7: TLabel;
+    edtEmail: TDBEdit;
+    Label8: TLabel;
+    edtSenhaEmail: TDBEdit;
+    Label9: TLabel;
+    edtPortaEmail: TDBEdit;
+    Label10: TLabel;
+    edtSMTP: TDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure BtnOKClick(Sender: TObject);
     procedure BtnFecharClick(Sender: TObject);
@@ -62,10 +70,23 @@ DM.qryConfigsdataultalt.AsDateTime  := DM.FDataHoraServidor;
 DM.qryConfigscodusuarioalt.AsString := DM.FCodUsuario;
 DM.qryConfigs.Post;
 
-DM.FTempoNovaOS   := DM.qryConfigstempoconsos.AsInteger;
-DM.FTempoSenhaUsu := DM.qryConfigstemposenhausu.AsInteger;
-DM.FQtdeMinSenha  := DM.qryConfigsqtdeminsenha.AsInteger;
-DM.FQtdeLoginTent := DM.qryConfigsqtdelogintent.AsInteger;
+//Buscar informações de configuração
+DM.FTempoNovaOS    := DM.qryConfigstempoconsos.AsInteger;
+DM.FTempoSenhaUsu  := DM.qryConfigstemposenhausu.AsInteger;
+DM.FQtdeMinSenha   := DM.qryConfigsqtdeminsenha.AsInteger;
+DM.FQtdeLoginTent  := DM.qryConfigsqtdelogintent.AsInteger;
+DM.FSolicTrab      := DM.qryConfigsdbsolictrab.AsBoolean;
+DM.FOficinas       := DM.qryConfigsdboficinas.AsBoolean;
+DM.FSituacaoOS     := DM.qryConfigsdbsituacaoos.AsBoolean;
+DM.FOSTipoManut    := DM.qryConfigsdbtipomanutos.AsBoolean;
+DM.FMTBF           := DM.qryConfigsdbmtbf.AsBoolean;
+DM.FMTTR           := DM.qryConfigsdbmttr.AsBoolean;
+DM.FDisponibilidade:= DM.qryConfigsdbdisponibilidade.AsBoolean;
+DM._EMAIL          := DM.qryConfigsemail.AsString;
+DM._SENHA          := DM.qryConfigssenhaemail.AsString;
+DM._PORTA          := DM.qryConfigsportaemail.AsString;
+DM._SMTP           := DM.qryConfigssmtp.AsString;
+
 
 Application.MessageBox('Será necessário reiniciar o sistema para que as alterações tenham efeito.', 'SPMP3', MB_OK + MB_ICONINFORMATION);
   inherited;
