@@ -4,7 +4,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'SPMP3 - Acesso'
-  ClientHeight = 183
+  ClientHeight = 194
   ClientWidth = 425
   Color = 14671839
   Constraints.MaxHeight = 230
@@ -11594,12 +11594,13 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Color = 14671839
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 413
     object Image2: TImage
       AlignWithMargins = True
       Left = 4
       Top = 9
       Width = 190
-      Height = 45
+      Height = 47
       Margins.Top = 8
       Margins.Right = 4
       Align = alLeft
@@ -11908,9 +11909,10 @@ object FrmTelaAcesso: TFrmTelaAcesso
         003E11235D6F1A13FC44887A03270A9708AE1701ECCF42D06A02F896F609E0C7
         8FFFC180FFBF5094604CCB3510300000000049454E44AE426082}
       ExplicitTop = 6
+      ExplicitHeight = 45
     end
     object BtnConsultar: TButton
-      Left = 393
+      Left = 382
       Top = 16
       Width = 30
       Height = 30
@@ -11926,7 +11928,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       OnClick = BtnConsultarClick
     end
     object btnLicenca: TButton
-      Left = 360
+      Left = 349
       Top = 16
       Width = 30
       Height = 30
@@ -11947,11 +11949,13 @@ object FrmTelaAcesso: TFrmTelaAcesso
     Left = 3
     Top = 69
     Width = 419
-    Height = 111
+    Height = 122
     Align = alClient
     Color = 14671839
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 413
+    ExplicitHeight = 111
     object Label1: TLabel
       Left = 120
       Top = 21
@@ -11969,7 +11973,7 @@ object FrmTelaAcesso: TFrmTelaAcesso
       Caption = 'Senha:'
     end
     object LblVersao: TLabel
-      Left = 396
+      Left = 382
       Top = 106
       Width = 29
       Height = 11

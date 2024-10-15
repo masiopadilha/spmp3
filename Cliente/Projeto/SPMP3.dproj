@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>SPMP3.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -115,11 +115,11 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=SAM - Serviços de Apoio à Manutenção LTDA.;FileDescription=SPMP3;FileVersion=3.5.2.24;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=SPMP - Sistema do Plano de Manutenção Programada;ProductVersion=3.5;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=SAM - Serviços de Apoio à Manutenção LTDA.;FileDescription=SPMP3;FileVersion=3.5.2.27;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=SPMP - Sistema do Plano de Manutenção Programada;ProductVersion=3.5;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
         <Icon_MainIcon>..\..\..\..\imagens\spmp3.ico</Icon_MainIcon>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_Build>24</VerInfo_Build>
+        <VerInfo_Build>27</VerInfo_Build>
         <VerInfo_AutoIncVersion>false</VerInfo_AutoIncVersion>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -144,13 +144,13 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=SAM - Serviços de Apoio à Manutenção LTDA.;FileVersion=3.5.2.24;InternalName=SPMP3;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=SPMP - Sistema do Plano de Manutenção Programada;ProductVersion=3.5;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=SPMP3 - Aplicação cliente;SpecialBuild=;PrivateBuild=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=SAM - Serviços de Apoio à Manutenção LTDA.;FileVersion=3.5.2.25;InternalName=SPMP3;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=SPMP - Sistema do Plano de Manutenção Programada;ProductVersion=3.5;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=SPMP3 - Aplicação cliente;SpecialBuild=;PrivateBuild=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <BT_BuildType>Debug</BT_BuildType>
         <Icon_MainIcon>..\..\..\..\imagens\spmp3.ico</Icon_MainIcon>
         <VerInfo_AutoIncVersion>false</VerInfo_AutoIncVersion>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
-        <VerInfo_Build>24</VerInfo_Build>
+        <VerInfo_Build>25</VerInfo_Build>
         <UWP_DelphiLogo44>..\..\..\..\imagens\spmp3_44.png</UWP_DelphiLogo44>
         <DCC_ExeOutput>C:\SPMP3\</DCC_ExeOutput>
         <UWP_DelphiLogo150>..\..\..\..\imagens\spmp3_150.png</UWP_DelphiLogo150>

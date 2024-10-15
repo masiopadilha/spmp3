@@ -6360,7 +6360,7 @@ begin
   LFileSaveName := ExtractFilePath(ParamStr(0))+'SPMP3.zip';
   LMemoryStream := TMemoryStream.Create;
   //Creating URL for the last version
-  LUrl := 'https://github.com/masiopadilha/spmp/releases/download/'+IntToStr(GetVersionRepo)+ '/SPMP3.zip';
+  LUrl := 'https://github.com/masiopadilha/spmp3/releases/download/'+IntToStr(GetVersionRepo)+ '/SPMP3.zip';
   //Download last update file
   IdHTTP.Get(LUrl, LMemoryStream);
   //Saving file
@@ -9866,7 +9866,7 @@ begin
   DM._SMTP           := DM.qryConfigssmtp.AsString;
 
   //Consulta as versões da máquina e no repositório
-  DM.FUrlSPMPBuilder := 'https://github.com/masiopadilha/spmp/releases/latest';
+  DM.FUrlSPMPBuilder := 'https://github.com/masiopadilha/spmp3/releases/latest';
   DM.GetVersionLocal(Application.ExeName);
   DM.FVersaoRepo := DM.GetVersionRepo;
 

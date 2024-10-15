@@ -334,6 +334,9 @@ if Application.MessageBox('Deseja realmente excluir o registro?', 'SPMP3', MB_YE
               PSituacao.Caption := 'CANCELADA';
               PSituacao.Color := clBlack;
               PSituacao.Font.Color := $00FF8000;
+
+              DM.FParamAuxiliar[2] := EmptyStr;
+              DM.FParamAuxiliar[3] := EmptyStr;
             end;
         Except
           on E: Exception do
@@ -360,6 +363,9 @@ if not (DM.FDataSetParam.State in [dsInsert, dsEdit]) then Exit;
 PIdentificacao.Enabled  := True;
 PProgramacao.Enabled    := True;
 PDiversos.Enabled       := True;
+
+DM.FParamAuxiliar[2] := EmptyStr;
+DM.FParamAuxiliar[3] := EmptyStr;
 
 DM.qrySolicitacaoTrabCODEMPRESA.AsString      := DM.FCodEmpresa;
 DM.qrySolicitacaoTrabDATACADASTRO.AsDateTime  := DM.FDataHoraServidor;
@@ -492,6 +498,8 @@ begin
   DM.qrySolicitacaoTrab.Params[1].AsString  := DM.FCodEmpresa;
 
   DM.MSGAguarde('', False);
+  DM.FParamAuxiliar[2] := EmptyStr;
+  DM.FParamAuxiliar[3] := EmptyStr;
 end;
 
 procedure TFrmTelaCadSolicitacaoTrab.BtnSolicitanteClick(Sender: TObject);
